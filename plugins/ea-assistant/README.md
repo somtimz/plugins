@@ -80,4 +80,4 @@ EA-projects/
 
 ## License
 
-MIT
+[MIT](./LICENSE)
