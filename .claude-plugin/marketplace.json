@@ -1,0 +1,20 @@
+{
+    "owner": {
+    "name": "Costa Pissaris",
+    "email": "cpissaris@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "ea-assistant",
+      "description": "End-to-end Enterprise Architecture engagement management. Supports TOGAF 10, Zachman, and ArchiMate.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Costa Pissaris",
+        "email": "cpissaris@gmail.com"
+      },
+      "source": "./plugins/ea-assistant",
+      "category": "development",
+      "strict": false
+    }
+  ]
+}
