@@ -1,0 +1,6 @@
+# EA engagement project data
+EA-projects/
+
+# OS artifacts
+.DS_Store
+Thumbs.db
