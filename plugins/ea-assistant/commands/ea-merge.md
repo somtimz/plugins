@@ -2,7 +2,7 @@
 name: ea-merge
 description: Merge all EA artifacts into a single consolidated architecture document
 argument-hint: "[markdown|word|both]"
-allowed-tools: Read, Write, Bash
+allowed-tools: [Read, Write, Bash]
 ---
 
 Merge all artifacts for the active engagement into a single consolidated document.

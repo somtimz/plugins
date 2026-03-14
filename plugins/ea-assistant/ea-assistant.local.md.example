@@ -1,0 +1,26 @@
+---
+engagement_name: "Acme Retail Transformation"
+organization: "Acme Corporation"
+architect_name: "Jane Smith"
+architecture_scope: "Retail and Supply Chain domains"
+start_date: "2025-01"
+current_phase: "Phase A"
+completed_phases: []
+requirements_repo_path: ""
+---
+
+# EA Assistant — Local Project Context
+
+Copy this file to `ea-assistant.local.md` in your project root and fill in the fields above.
+Claude will load this context automatically when you use `/ea-open`.
+
+## Configuration Fields
+
+- **engagement_name** — The name of the EA engagement (used in artifact headers and reports)
+- **organization** — Client or organisation name
+- **architect_name** — Lead architect's name (appears in artifact footers)
+- **architecture_scope** — Brief description of what domains/systems are in scope
+- **start_date** — Engagement start date (YYYY-MM format)
+- **current_phase** — Active ADM phase (Prelim, Req, A, B, C, D, E, F, G, or H)
+- **completed_phases** — List of phases already completed, e.g. `["Prelim", "Req"]`
+- **requirements_repo_path** — Optional path to an external requirements file or repo to sync from

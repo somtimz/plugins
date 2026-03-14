@@ -1,0 +1,13 @@
+{
+  "SessionStart": [
+    {
+      "matcher": "",
+      "hooks": [
+        {
+          "type": "prompt",
+          "prompt": "Check if a TOGAF ADM project context file exists at .claude/togaf-adm.local.md. If it exists, read it and silently load the project context (project name, organisation, current phase, completed phases). Then greet the user with a brief one-line status: 'TOGAF project: [project_name] | Phase: [current_phase] | Ready.' If no context file exists, say nothing — do not prompt the user to create one unless they initiate a togaf command."
+        }
+      ]
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 name: ea-artifact
 description: Create, view, or list EA artifacts for the active engagement
 argument-hint: "[create|list|view] [artifact-name]"
-allowed-tools: Read, Write, Bash
+allowed-tools: [Read, Write, Bash]
 ---
 
 Manage EA artifacts for the active engagement.
@@ -34,7 +34,7 @@ Offer: create a missing artifact, view an existing one, start an interview.
 
 ### Mode: `create [artifact-name]`
 
-1. Match the artifact name to a template in `plugins/ea-assistant/templates/`
+1. Match the artifact name to a template in the plugin's `templates/` directory
 2. If ambiguous, show a numbered list of matching templates
 3. Copy the template to `EA-projects/{slug}/artifacts/{artifact-id}.md`
 4. Pre-populate known fields from `engagement.json` (name, sponsor, organisation, date)

@@ -2,7 +2,7 @@
 name: ea-requirements
 description: Manage architecture requirements — capture, view, sync from repo, and trace to artifacts
 argument-hint: "[list|add|sync|trace]"
-allowed-tools: Read, Write, Bash
+allowed-tools: [Read, Write, Bash]
 ---
 
 Manage architecture requirements for the active engagement.

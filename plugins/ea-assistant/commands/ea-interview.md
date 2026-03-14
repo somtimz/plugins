@@ -2,7 +2,7 @@
 name: ea-interview
 description: Start, export, import, or resume a stakeholder interview about an EA artifact
 argument-hint: "[start|export|import|resume] [artifact-name]"
-allowed-tools: Read, Write, Bash
+allowed-tools: [Read, Write, Bash]
 ---
 
 Conduct or manage a stakeholder interview for an EA artifact.

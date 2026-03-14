@@ -2,7 +2,7 @@
 name: ea-new
 description: Create a new EA engagement project
 argument-hint: "[engagement-name]"
-allowed-tools: Read, Write, Bash
+allowed-tools: [Read, Write, Bash]
 ---
 
 Create a new EA engagement project under `EA-projects/`.

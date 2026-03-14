@@ -2,7 +2,7 @@
 name: ea-open
 description: Open or switch between EA engagements
 argument-hint: "[engagement-name-or-slug]"
-allowed-tools: Read, Write, Bash
+allowed-tools: [Read, Write, Bash]
 ---
 
 Display a picklist of all EA engagements and allow the user to open one.

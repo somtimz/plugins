@@ -1,7 +1,7 @@
 ---
 name: ea-status
 description: Show a dashboard of all EA engagements and their progress
-allowed-tools: Read, Bash
+allowed-tools: [Read, Bash]
 ---
 
 Display a comprehensive status dashboard for all EA engagements.

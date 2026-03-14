@@ -6,7 +6,7 @@ version: 0.1.0
 
 # EA Artifact Templates
 
-All EA artifacts are created from templates stored in `plugins/ea-assistant/templates/`. Templates use a consistent structure with clearly marked guidance, placeholder tokens, and answer state markers.
+All EA artifacts are created from templates stored in the plugin's `templates/` directory. Templates use a consistent structure with clearly marked guidance, placeholder tokens, and answer state markers.
 
 ## Template Conventions
 
@@ -61,7 +61,7 @@ lastModified: {{YYYY-MM-DD}}
 
 ## Artifact Catalogue
 
-All TOGAF artifacts are in scope. Templates are stored in `plugins/ea-assistant/templates/`:
+All TOGAF artifacts are in scope. Templates are stored in the plugin's `templates/` directory:
 
 | Template File | Artifact | ADM Phase |
 |---|---|---|
