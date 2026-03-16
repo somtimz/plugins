@@ -1,5 +1,5 @@
 {
-    "owner": {
+  "owner": {
     "name": "Costa Pissaris",
     "email": "cpissaris@gmail.com"
   },
@@ -13,6 +13,18 @@
         "email": "cpissaris@gmail.com"
       },
       "source": "./plugins/ea-assistant",
+      "category": "development",
+      "strict": false
+    },
+    {
+      "name": "rag-plugin",
+      "description": "Local RAG pipeline for Claude Code. Ingests documents into a ChromaDB vector store and provides a conversational web UI for cited Q&A, ingestion management, and registry exploration.",
+      "version": "0.1.0",
+      "author": {
+        "name": "somtimz",
+        "email": ""
+      },
+      "source": "./plugins/rag-plugin",
       "category": "development",
       "strict": false
     }

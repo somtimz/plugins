@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.rag-plugin.toml-spare
+
+# RAG pipeline runtime artifacts
+.rag-store/
+.rag-registry.db
+.rag-pipeline.log
+
+# Environment
+.env
+*.env
+
+# Universal
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+.vscode/
+.idea/

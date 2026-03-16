@@ -1,0 +1,10 @@
+# Runtime
+openai
+chromadb
+pypdf
+python-docx
+Office365-REST-Python-Client
+
+# Dev
+pytest
+pytest-cov
