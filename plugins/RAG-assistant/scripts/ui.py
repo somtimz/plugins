@@ -19,6 +19,8 @@ import datetime
 from pathlib import Path
 from typing import Optional
 
+import anthropic
+
 # Ensure scripts/ is on sys.path so `lib.*` imports work.
 sys.path.insert(0, str(Path(__file__).parent))
 
@@ -31,6 +33,12 @@ from lib.logger import init_logger
 from lib.registry import open_registry
 from lib.store import get_or_create_collection, check_model_consistency, ModelMismatchError
 from lib.pipeline import run_ingestion, SourceResult, IngestionEvent
+from lib.ingest_tool import (
+    TOOL_SCHEMAS,
+    execute_ingest_documents,
+    execute_query_registry,
+    execute_search_knowledge_base,
+)
 
 app = Flask(__name__, template_folder="templates")
 
@@ -455,6 +463,209 @@ def put_config():
         return jsonify({"error": "write_failed", "message": str(exc)}), 500
 
     return jsonify({"ok": True})
+
+
+# ---------------------------------------------------------------------------
+# Chat endpoints (Feature 003)
+# ---------------------------------------------------------------------------
+
+_MAX_CHAT_MESSAGE_LEN = 4000
+_MAX_HISTORY_MESSAGES = 20  # 10 turns × 2 messages each
+
+
+@app.get("/api/chat/preflight")
+def chat_preflight():
+    """Check whether the LLM API key is available.
+
+    Returns:
+        200 {"ok": true, "model": "<model>"} — key is set
+        412 {"ok": false, "reason": "..."} — key not set or config missing
+    """
+    try:
+        cfg = load_config(_DEFAULT_CONFIG)
+    except ConfigError:
+        return jsonify({"ok": False, "reason": "Configuration file invalid or missing"}), 412
+
+    api_key = os.environ.get(cfg.llm.api_key_env)
+    if not api_key:
+        return jsonify({
+            "ok": False,
+            "reason": f"Environment variable {cfg.llm.api_key_env!r} is not set.",
+        }), 412
+
+    return jsonify({"ok": True, "model": cfg.llm.model})
+
+
+@app.post("/api/chat")
+def chat():
+    """Conversational RAG endpoint. Streams SSE events."""
+    data = request.get_json(silent=True) or {}
+    message = data.get("message", "")
+    history = data.get("history", [])
+
+    if not isinstance(message, str) or len(message) > _MAX_CHAT_MESSAGE_LEN:
+        return jsonify({
+            "error": "message_too_long",
+            "message": f"Message exceeds {_MAX_CHAT_MESSAGE_LEN} character limit.",
+        }), 400
+
+    # Trim history server-side as a safety measure
+    if len(history) > _MAX_HISTORY_MESSAGES:
+        history = history[-_MAX_HISTORY_MESSAGES:]
+
+    try:
+        cfg = load_config(_DEFAULT_CONFIG)
+    except ConfigError as exc:
+        return jsonify({"error": "config_invalid", "message": str(exc)}), 422
+
+    return Response(
+        stream_with_context(_chat_stream(message, history, cfg)),
+        content_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+    )
+
+
+def _chat_stream(message: str, history: list, cfg):
+    """Generator that yields SSE events for a conversational RAG exchange.
+
+    SSE event types:
+        text_delta   — streaming text token from Claude
+        tool_start   — Claude is invoking a tool
+        tool_result  — tool execution completed
+        citations    — source documents retrieved (search only)
+        error        — an error occurred
+        done         — stream is complete (always emitted in finally)
+    """
+    api_key = os.environ.get(cfg.llm.api_key_env, "")
+
+    def _sse(payload: dict) -> str:
+        return f"data: {json.dumps(payload)}\n\n"
+
+    try:
+        client = anthropic.Anthropic(api_key=api_key)
+
+        # Build Anthropic messages list
+        messages = list(history) + [{"role": "user", "content": message}]
+
+        # --- First stream pass ---
+        with client.messages.stream(
+            model=cfg.llm.model,
+            max_tokens=4096,
+            tools=TOOL_SCHEMAS,
+            messages=messages,
+        ) as stream:
+            for text in stream.text_stream:
+                yield _sse({"event": "text_delta", "text": text})
+
+            final_msg = stream.get_final_message()
+
+        # Tool use loop — may repeat for chained tool calls
+        while final_msg.stop_reason == "tool_use":
+            tool_use_blocks = [b for b in final_msg.content if b.type == "tool_use"]
+            tool_results_for_api = []
+
+            for tool_block in tool_use_blocks:
+                yield _sse({"event": "tool_start", "name": tool_block.name, "id": tool_block.id})
+
+                tool_input = tool_block.input or {}
+                result_str = ""
+
+                if tool_block.name == "search_knowledge_base":
+                    query = tool_input.get("query", "")
+                    n_results = tool_input.get("n_results", cfg.pipeline.top_k)
+                    # Load ChromaDB for search
+                    try:
+                        chroma_client = chromadb.PersistentClient(path=cfg.vector_store.path)
+                        collection = get_or_create_collection(
+                            chroma_client, cfg.vector_store.collection, cfg.embedding.model
+                        )
+                        result_str, chunks = execute_search_knowledge_base(
+                            query=query,
+                            n_results=n_results,
+                            embedding_cfg=cfg.embedding,
+                            collection=collection,
+                        )
+                        if chunks:
+                            sources = [
+                                {"source_name": c.source_name, "origin_path": c.origin_path}
+                                for c in chunks
+                            ]
+                            yield _sse({"event": "citations", "sources": sources})
+                    except Exception as exc:
+                        result_str = f"ERROR: Search failed: {exc}"
+
+                elif tool_block.name == "ingest_documents":
+                    path = tool_input.get("path", "")
+                    try:
+                        reg_conn = open_registry(cfg.pipeline.registry_path)
+                        chroma_client = chromadb.PersistentClient(path=cfg.vector_store.path)
+                        collection = get_or_create_collection(
+                            chroma_client, cfg.vector_store.collection, cfg.embedding.model
+                        )
+                        logger = init_logger(cfg.pipeline.log_path)
+                        result_str = execute_ingest_documents(
+                            path=path,
+                            cfg=cfg,
+                            chroma_client=chroma_client,
+                            collection=collection,
+                            reg_conn=reg_conn,
+                            run_lock=_run_lock,
+                            logger=logger,
+                        )
+                        reg_conn.close()
+                    except Exception as exc:
+                        result_str = f"ERROR: Ingestion failed: {exc}"
+
+                elif tool_block.name == "query_registry":
+                    query = tool_input.get("query") or None
+                    limit = int(tool_input.get("limit", 50))
+                    try:
+                        reg_conn = open_registry(cfg.pipeline.registry_path)
+                        result_str = execute_query_registry(
+                            query=query,
+                            limit=limit,
+                            reg_conn=reg_conn,
+                        )
+                        reg_conn.close()
+                    except Exception as exc:
+                        result_str = f"ERROR: Registry query failed: {exc}"
+
+                else:
+                    result_str = f"ERROR: Unknown tool {tool_block.name!r}"
+
+                yield _sse({"event": "tool_result", "name": tool_block.name, "result": result_str})
+                tool_results_for_api.append({
+                    "type": "tool_result",
+                    "tool_use_id": tool_block.id,
+                    "content": result_str,
+                })
+
+            # Build messages for continuation stream
+            assistant_content = [
+                {"type": b.type, "id": b.id, "name": b.name, "input": b.input}
+                for b in final_msg.content
+            ]
+            messages = messages + [
+                {"role": "assistant", "content": assistant_content},
+                {"role": "user", "content": tool_results_for_api},
+            ]
+
+            # Continuation stream
+            with client.messages.stream(
+                model=cfg.llm.model,
+                max_tokens=4096,
+                tools=TOOL_SCHEMAS,
+                messages=messages,
+            ) as stream:
+                for text in stream.text_stream:
+                    yield _sse({"event": "text_delta", "text": text})
+                final_msg = stream.get_final_message()
+
+    except Exception as exc:
+        yield _sse({"event": "error", "message": str(exc)})
+
+    finally:
+        yield _sse({"event": "done"})
 
 
 # ---------------------------------------------------------------------------

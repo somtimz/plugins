@@ -41,6 +41,13 @@ class PipelineConfig:
     registry_path: str = ".rag-registry.db"
     log_path: str = ".rag-pipeline.log"
     max_file_size_mb: int = 100
+    top_k: int = 5
+
+
+@dataclass
+class LlmConfig:
+    model: str = "claude-sonnet-4-6"
+    api_key_env: str = "ANTHROPIC_API_KEY"
 
 
 @dataclass
@@ -72,6 +79,7 @@ class Config:
     vector_store: VectorStoreConfig
     pipeline: PipelineConfig
     sources: list[SourceConfig]
+    llm: LlmConfig = field(default_factory=LlmConfig)
 
 
 # ---------------------------------------------------------------------------
@@ -188,6 +196,19 @@ def _parse_sharepoint_source(s: dict) -> SharePointSourceConfig:
     )
 
 
+def _parse_llm(raw: dict) -> LlmConfig:
+    if "llm" not in raw:
+        return LlmConfig()
+    l = raw["llm"]
+    model = str(l.get("model", "claude-sonnet-4-6"))
+    if not model.strip():
+        raise ConfigError("llm.model must be a non-empty string")
+    api_key_env = str(l.get("api_key_env", "ANTHROPIC_API_KEY"))
+    if not api_key_env.strip():
+        raise ConfigError("llm.api_key_env must be a non-empty string")
+    return LlmConfig(model=model, api_key_env=api_key_env)
+
+
 def _parse_sources(raw: dict) -> list[SourceConfig]:
     raw_sources = raw.get("sources", [])
     sources: list[SourceConfig] = []
@@ -232,10 +253,12 @@ def load_config(path: str) -> Config:
     vector_store = _parse_vector_store(raw)
     pipeline = _parse_pipeline(raw)
     sources = _parse_sources(raw)
+    llm = _parse_llm(raw)
 
     return Config(
         embedding=embedding,
         vector_store=vector_store,
         pipeline=pipeline,
         sources=sources,
+        llm=llm,
     )

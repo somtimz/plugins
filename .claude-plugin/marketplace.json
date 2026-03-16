@@ -17,14 +17,14 @@
       "strict": false
     },
     {
-      "name": "rag-plugin",
-      "description": "Local RAG pipeline for Claude Code. Ingests documents into a ChromaDB vector store and provides a conversational web UI for cited Q&A, ingestion management, and registry exploration.",
+      "name": "RAG-assistant",
+      "description": "Conversational RAG assistant — ingests local and SharePoint documents into a ChromaDB vector store and exposes a web UI for natural-language Q&A, document management, and pipeline control.",
       "version": "0.1.0",
       "author": {
-        "name": "somtimz",
-        "email": ""
+        "name": "Costa Pissaris",
+        "email": "cpissaris@gmail.com"
       },
-      "source": "./plugins/rag-plugin",
+      "source": "./plugins/RAG-assistant",
       "category": "development",
       "strict": false
     }

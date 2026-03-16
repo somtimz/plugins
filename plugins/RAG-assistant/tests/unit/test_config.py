@@ -8,7 +8,7 @@ from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
 
-from lib.config import load_config, ConfigError
+from lib.config import load_config, ConfigError, LlmConfig
 
 
 VALID_TOML = textwrap.dedent("""\
@@ -245,3 +245,67 @@ class TestSharePointSource:
         """)
         with pytest.raises(ConfigError, match="max_depth must be a non-negative integer"):
             load_config(write_toml(tmp_path, toml))
+
+
+# ---------------------------------------------------------------------------
+# T002 — LlmConfig tests
+# ---------------------------------------------------------------------------
+
+class TestLlmConfig:
+    """Tests for LlmConfig dataclass and optional [llm] section parsing."""
+
+    def test_defaults_when_llm_section_absent(self, tmp_path, monkeypatch):
+        """LlmConfig uses defaults when [llm] section is absent from TOML."""
+        monkeypatch.setenv("TEST_API_KEY", "key")
+        cfg = load_config(write_toml(tmp_path, VALID_TOML))
+        assert cfg.llm.model == "claude-sonnet-4-6"
+        assert cfg.llm.api_key_env == "ANTHROPIC_API_KEY"
+
+    def test_custom_model_and_api_key_env(self, tmp_path, monkeypatch):
+        """LlmConfig reads model and api_key_env from [llm] section when present."""
+        monkeypatch.setenv("TEST_API_KEY", "key")
+        toml = VALID_TOML + textwrap.dedent("""\
+            [llm]
+            model = "claude-opus-4-6"
+            api_key_env = "MY_CLAUDE_KEY"
+        """)
+        cfg = load_config(write_toml(tmp_path, toml))
+        assert cfg.llm.model == "claude-opus-4-6"
+        assert cfg.llm.api_key_env == "MY_CLAUDE_KEY"
+
+    def test_empty_model_raises(self, tmp_path, monkeypatch):
+        """Empty model string in [llm] section raises ConfigError."""
+        monkeypatch.setenv("TEST_API_KEY", "key")
+        toml = VALID_TOML + textwrap.dedent("""\
+            [llm]
+            model = ""
+        """)
+        with pytest.raises(ConfigError, match="llm.model"):
+            load_config(write_toml(tmp_path, toml))
+
+    def test_empty_api_key_env_raises(self, tmp_path, monkeypatch):
+        """Empty api_key_env string in [llm] section raises ConfigError."""
+        monkeypatch.setenv("TEST_API_KEY", "key")
+        toml = VALID_TOML + textwrap.dedent("""\
+            [llm]
+            api_key_env = ""
+        """)
+        with pytest.raises(ConfigError, match="llm.api_key_env"):
+            load_config(write_toml(tmp_path, toml))
+
+    def test_llm_config_dataclass_defaults(self):
+        """LlmConfig dataclass has correct field defaults."""
+        llm = LlmConfig()
+        assert llm.model == "claude-sonnet-4-6"
+        assert llm.api_key_env == "ANTHROPIC_API_KEY"
+
+    def test_partial_llm_section_uses_defaults_for_missing_fields(self, tmp_path, monkeypatch):
+        """When [llm] has only model set, api_key_env defaults to ANTHROPIC_API_KEY."""
+        monkeypatch.setenv("TEST_API_KEY", "key")
+        toml = VALID_TOML + textwrap.dedent("""\
+            [llm]
+            model = "claude-haiku-4-5-20251001"
+        """)
+        cfg = load_config(write_toml(tmp_path, toml))
+        assert cfg.llm.model == "claude-haiku-4-5-20251001"
+        assert cfg.llm.api_key_env == "ANTHROPIC_API_KEY"

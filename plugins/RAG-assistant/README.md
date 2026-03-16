@@ -95,13 +95,47 @@ A browser-based interface for running ingestion, browsing the document registry,
 
 Then open **http://localhost:7842** in your browser.
 
-The UI provides three tabs:
+The UI provides four tabs:
 
 - **Ingestion** — trigger a pipeline run and watch live SSE progress events; view run history
 - **Registry** — search and sort all ingested documents with chunk/version counts
 - **Config** — view and edit pipeline configuration; saved back to `.rag-plugin.toml`
+- **Chat** — conversational RAG interface (see below)
 
 The server is single-user and binds to `0.0.0.0:7842` (port fixed per FR-012).
+
+### Chat Tab
+
+The Chat tab provides a natural language interface for RAG Q&A, document ingestion, and registry exploration powered by the Anthropic Claude API.
+
+**Requirements:**
+
+Set the `ANTHROPIC_API_KEY` environment variable before starting the server:
+
+```bash
+export ANTHROPIC_API_KEY=sk-ant-...
+.venv/bin/python scripts/ui.py
+```
+
+**Usage examples:**
+
+```
+Ask a question:    "What does the onboarding policy say about remote work?"
+Ingest documents:  "ingest ./docs"  or  "add ./reports to the knowledge base"
+List documents:    "what documents do you know about?"
+```
+
+The Chat tab streams responses progressively. Citations appear below each answer as collapsible source references. Ctrl+Enter submits a message.
+
+**Optional `[llm]` config section** in `.rag-plugin.toml`:
+
+```toml
+[llm]
+model = "claude-sonnet-4-6"    # default
+api_key_env = "ANTHROPIC_API_KEY"  # env var name for the API key
+```
+
+Conversation history is maintained in the browser for the current session (up to 10 turns). History is lost on page reload.
 
 ## Usage
 

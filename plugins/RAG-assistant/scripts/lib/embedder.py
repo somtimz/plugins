@@ -71,6 +71,28 @@ def embed_chunks(chunks, config, logger: logging.Logger) -> list[EmbeddedChunk]:
     return results
 
 
+def embed_query(text: str, embedding_cfg) -> list[float]:
+    """Embed a single query string and return its vector.
+
+    Parameters
+    ----------
+    text:
+        The query text to embed.
+    embedding_cfg:
+        An object with ``api_base``, ``api_key_env``, and ``model`` attributes.
+
+    Returns
+    -------
+    list[float]
+        The embedding vector for *text*.
+    """
+    import logging as _logging
+    dummy_logger = _logging.getLogger(__name__)
+    chunk = Chunk(chunk_id="q", chunk_index=0, text=text, char_start=0, char_end=len(text))
+    results = embed_chunks([chunk], embedding_cfg, dummy_logger)
+    return results[0].vector
+
+
 def _embed_with_retry(client, chunk: Chunk, model: str, logger: logging.Logger):
     """Call the embeddings API with exponential-backoff retry on rate limits."""
     last_exc: Exception | None = None

@@ -252,6 +252,133 @@
       display: none;
     }
     .empty-state { color: #888; font-size: 0.88rem; padding: 1rem 0; }
+
+    /* ── Chat tab ────────────────────────────────────────────── */
+    #tab-chat {
+      display: none;
+      flex-direction: column;
+      height: calc(100vh - 200px);
+      min-height: 400px;
+    }
+    #tab-chat.active { display: flex; }
+
+    #chat-preflight-banner {
+      background: #fef9c3;
+      color: #854d0e;
+      border-radius: 6px;
+      padding: 0.6rem 1rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.85rem;
+      display: none;
+    }
+    #chat-preflight-banner.visible { display: flex; justify-content: space-between; align-items: center; }
+
+    #chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .chat-bubble {
+      max-width: 80%;
+      padding: 0.65rem 0.9rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .chat-bubble.user {
+      align-self: flex-end;
+      background: #1a1a2e;
+      color: #fff;
+      border-bottom-right-radius: 2px;
+    }
+    .chat-bubble.assistant {
+      align-self: flex-start;
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-bottom-left-radius: 2px;
+    }
+    .chat-bubble.tool-notification {
+      align-self: flex-start;
+      background: #f0f4ff;
+      border: 1px solid #c7d2fe;
+      font-size: 0.82rem;
+      color: #3730a3;
+    }
+    .chat-bubble.incomplete::after {
+      content: " [incomplete]";
+      color: #999;
+      font-style: italic;
+    }
+
+    .chat-citations {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+    }
+    .chat-citations summary {
+      cursor: pointer;
+      color: #555;
+      user-select: none;
+    }
+    .chat-citations ul {
+      margin: 0.4rem 0 0 1rem;
+      padding: 0;
+      list-style: disc;
+      color: #444;
+    }
+    .chat-citations li { margin-bottom: 0.2rem; }
+
+    #chat-input-area {
+      border-top: 1px solid #e0e0e0;
+      padding-top: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    #chat-input-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-end;
+    }
+    #chat-input {
+      flex: 1;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      resize: vertical;
+      min-height: 44px;
+      max-height: 180px;
+      font-family: inherit;
+    }
+    #chat-input:focus { outline: 2px solid #1a1a2e; outline-offset: 1px; }
+    #chat-send {
+      padding: 0.55rem 1.2rem;
+      background: #1a1a2e;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    #chat-send:hover:not(:disabled) { background: #2d2d5e; }
+    #chat-send:disabled { background: #999; cursor: not-allowed; }
+
+    #chat-input-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #chat-char-count { font-size: 0.75rem; color: #888; }
+    #chat-char-count.over-limit { color: #c00; font-weight: 600; }
+    #chat-error { font-size: 0.8rem; color: #c00; }
   </style>
 </head>
 <body>
@@ -265,6 +392,7 @@
   <button class="active" data-tab="ingestion">Ingestion</button>
   <button data-tab="registry">Registry</button>
   <button data-tab="config">Config</button>
+  <button id="btn-chat-tab" data-tab="chat">Chat</button>
 </nav>
 
 <main>
@@ -412,6 +540,33 @@
     </form>
   </div>
 
+  <!-- ── Chat tab ───────────────────────────────────────────── -->
+  <div id="tab-chat" class="tab-panel">
+    <div id="chat-preflight-banner">
+      <span id="chat-preflight-msg"></span>
+      <button id="chat-preflight-dismiss" style="background:none;border:none;cursor:pointer;font-size:1rem;">✕</button>
+    </div>
+
+    <div id="chat-messages" role="log" aria-live="polite" aria-label="Chat messages"></div>
+
+    <div id="chat-input-area">
+      <div id="chat-input-row">
+        <textarea
+          id="chat-input"
+          maxlength="4000"
+          placeholder="Ask a question or type 'ingest ./path' to add documents…"
+          rows="2"
+          aria-label="Chat message input"
+        ></textarea>
+        <button id="chat-send" type="button">Send</button>
+      </div>
+      <div id="chat-input-meta">
+        <span id="chat-error" role="alert"></span>
+        <span id="chat-char-count">0 / 4000</span>
+      </div>
+    </div>
+  </div>
+
 </main>
 
 <script>
@@ -429,6 +584,7 @@ document.querySelectorAll("nav button").forEach(function(btn) {
 
     if (btn.dataset.tab === "registry") loadRegistry();
     if (btn.dataset.tab === "config") loadConfig();
+    if (btn.dataset.tab === "chat") chatPreflight();
   });
 });
 
@@ -887,6 +1043,265 @@ document.getElementById("cfg-form").addEventListener("submit", function(ev) {
     })
     .catch(function(e) { showBanner("cfg-error", "Network error: " + e.message); });
 });
+
+// ── Chat (Feature 003) ───────────────────────────────────────────────────────
+
+var conversationHistory = [];
+var currentModel = "";
+var _currentAssistantBubble = null;
+var _currentAssistantText = "";
+
+// T013 — chatPreflight
+function chatPreflight() {
+  fetch("/api/chat/preflight")
+    .then(function(r) { return r.json().then(function(d) { return { status: r.status, body: d }; }); })
+    .then(function(res) {
+      var banner = document.getElementById("chat-preflight-banner");
+      var msg = document.getElementById("chat-preflight-msg");
+      if (res.status !== 200) {
+        msg.textContent = "LLM API key not configured. " + (res.body.reason || "");
+        banner.classList.add("visible");
+      } else {
+        currentModel = res.body.model || "";
+        banner.classList.remove("visible");
+      }
+    })
+    .catch(function() {
+      var banner = document.getElementById("chat-preflight-banner");
+      var msg = document.getElementById("chat-preflight-msg");
+      msg.textContent = "Could not reach server to check LLM configuration.";
+      banner.classList.add("visible");
+    });
+}
+
+document.getElementById("chat-preflight-dismiss").addEventListener("click", function() {
+  document.getElementById("chat-preflight-banner").classList.remove("visible");
+});
+
+// T014 — sendMessage + readStream + Ctrl+Enter
+function _appendUserBubble(message) {
+  var messages = document.getElementById("chat-messages");
+  var bubble = document.createElement("div");
+  bubble.className = "chat-bubble user";
+  bubble.textContent = message;
+  messages.appendChild(bubble);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function _newAssistantBubble() {
+  var messages = document.getElementById("chat-messages");
+  var bubble = document.createElement("div");
+  bubble.className = "chat-bubble assistant";
+  messages.appendChild(bubble);
+  messages.scrollTop = messages.scrollHeight;
+  return bubble;
+}
+
+function sendMessage() {
+  var input = document.getElementById("chat-input");
+  var sendBtn = document.getElementById("chat-send");
+  var errEl = document.getElementById("chat-error");
+  var message = input.value;
+
+  if (!message.trim()) return;
+  if (message.length > 4000) {
+    errEl.textContent = "Message exceeds 4,000 character limit.";
+    return;
+  }
+
+  errEl.textContent = "";
+  input.value = "";
+  document.getElementById("chat-char-count").textContent = "0 / 4000";
+  input.disabled = true;
+  sendBtn.disabled = true;
+
+  _appendUserBubble(message);
+  _currentAssistantBubble = _newAssistantBubble();
+  _currentAssistantText = "";
+
+  fetch("/api/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: message, history: conversationHistory }),
+  })
+    .then(function(response) {
+      if (!response.ok && response.status !== 200) {
+        return response.json().then(function(d) {
+          throw new Error(d.message || ("HTTP " + response.status));
+        });
+      }
+      return readStream(response, message);
+    })
+    .catch(function(err) {
+      if (_currentAssistantBubble) {
+        _currentAssistantBubble.textContent = "Error: " + err.message;
+        _currentAssistantBubble.classList.add("incomplete");
+      }
+      input.disabled = false;
+      sendBtn.disabled = false;
+    });
+}
+
+function readStream(response, originalMessage) {
+  var reader = response.body.getReader();
+  var decoder = new TextDecoder();
+  var buffer = "";
+
+  function pump() {
+    return reader.read().then(function(result) {
+      if (result.done) {
+        _finaliseStream(originalMessage);
+        return;
+      }
+      buffer += decoder.decode(result.value, { stream: true });
+      var lines = buffer.split("\n");
+      buffer = lines.pop(); // keep partial line
+      lines.forEach(function(line) {
+        if (line.startsWith("data: ")) {
+          try {
+            var payload = JSON.parse(line.slice(6));
+            _dispatchEvent(payload, originalMessage);
+          } catch (e) { /* ignore malformed */ }
+        }
+      });
+      return pump();
+    }).catch(function(err) {
+      // T022 — streaming interruption
+      if (_currentAssistantBubble) {
+        _currentAssistantBubble.classList.add("incomplete");
+      }
+      _enableInput();
+    });
+  }
+
+  return pump();
+}
+
+function _dispatchEvent(payload, originalMessage) {
+  var messages = document.getElementById("chat-messages");
+  switch (payload.event) {
+    case "text_delta":
+      appendTextDelta(payload.text || "");
+      break;
+    case "tool_start":
+      appendToolResult(payload.name, "Running…");
+      break;
+    case "tool_result":
+      appendToolResult(payload.name, payload.result || "");
+      break;
+    case "citations":
+      appendCitations(payload.sources || []);
+      break;
+    case "error":
+      if (_currentAssistantBubble) {
+        _currentAssistantBubble.textContent = "Error: " + (payload.message || "Unknown error");
+        _currentAssistantBubble.classList.add("incomplete");
+      }
+      break;
+    case "done":
+      _finaliseStream(originalMessage);
+      break;
+  }
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function _finaliseStream(originalMessage) {
+  // Append turn to history; trim to last 20 messages
+  if (originalMessage) {
+    conversationHistory.push({ role: "user", content: originalMessage });
+  }
+  if (_currentAssistantText) {
+    conversationHistory.push({ role: "assistant", content: _currentAssistantText });
+  }
+  if (conversationHistory.length > 20) {
+    conversationHistory = conversationHistory.slice(conversationHistory.length - 20);
+  }
+  _currentAssistantBubble = null;
+  _currentAssistantText = "";
+  _enableInput();
+}
+
+function _enableInput() {
+  document.getElementById("chat-input").disabled = false;
+  document.getElementById("chat-send").disabled = false;
+  document.getElementById("chat-input").focus();
+}
+
+// T015 — appendTextDelta, appendCitations, history management
+function appendTextDelta(text) {
+  if (!_currentAssistantBubble) {
+    _currentAssistantBubble = _newAssistantBubble();
+  }
+  _currentAssistantText += text;
+  _currentAssistantBubble.textContent += text;
+}
+
+function appendCitations(sources) {
+  if (!sources || sources.length === 0) return;
+  if (!_currentAssistantBubble) return;
+
+  var details = document.createElement("details");
+  details.className = "chat-citations";
+
+  var summary = document.createElement("summary");
+  summary.textContent = sources.length + " source" + (sources.length !== 1 ? "s" : "");
+  details.appendChild(summary);
+
+  var ul = document.createElement("ul");
+  sources.forEach(function(src) {
+    var li = document.createElement("li");
+    var name = document.createElement("strong");
+    name.textContent = src.source_name || "Unknown";
+    li.appendChild(name);
+    li.appendChild(document.createTextNode(" — " + (src.origin_path || "")));
+    ul.appendChild(li);
+  });
+  details.appendChild(ul);
+  _currentAssistantBubble.appendChild(details);
+}
+
+// T018 — appendToolResult
+function appendToolResult(name, summary) {
+  var messages = document.getElementById("chat-messages");
+  var bubble = document.createElement("div");
+  bubble.className = "chat-bubble tool-notification";
+  var label = document.createElement("strong");
+  label.textContent = name + ": ";
+  bubble.appendChild(label);
+  bubble.appendChild(document.createTextNode(summary));
+  messages.appendChild(bubble);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+// Character counter and send button state
+document.getElementById("chat-input").addEventListener("input", function() {
+  var len = this.value.length;
+  var counter = document.getElementById("chat-char-count");
+  counter.textContent = len + " / 4000";
+  var errEl = document.getElementById("chat-error");
+  var sendBtn = document.getElementById("chat-send");
+  if (len > 4000) {
+    counter.classList.add("over-limit");
+    sendBtn.disabled = true;
+    errEl.textContent = "Message exceeds 4,000 character limit.";
+  } else {
+    counter.classList.remove("over-limit");
+    sendBtn.disabled = false;
+    errEl.textContent = "";
+  }
+});
+
+// Ctrl+Enter submits; Enter inserts newline
+document.getElementById("chat-input").addEventListener("keydown", function(e) {
+  if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+    e.preventDefault();
+    if (!document.getElementById("chat-send").disabled) {
+      sendMessage();
+    }
+  }
+});
+
+document.getElementById("chat-send").addEventListener("click", sendMessage);
 </script>
 
 </body>
