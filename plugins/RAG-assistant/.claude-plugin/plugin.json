@@ -1,0 +1,10 @@
+{
+  "name": "RAG-assistant",
+  "version": "0.1.0",
+  "description": "Conversational RAG assistant — ingests local and SharePoint documents into a ChromaDB vector store and exposes a web UI for natural-language Q&A, document management, and pipeline control.",
+  "author": {
+    "name": "Costa Pissaris",
+    "email": "cpissaris@gmail.com"
+  },
+  "keywords": ["rag", "retrieval", "vector-store", "chromadb", "ingestion", "knowledge-base", "claude-skill"]
+}

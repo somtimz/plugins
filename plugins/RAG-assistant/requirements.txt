@@ -1,0 +1,12 @@
+# Runtime
+anthropic
+openai
+chromadb
+pypdf
+python-docx
+tomli_w
+Office365-REST-Python-Client
+
+# Dev
+pytest
+pytest-cov

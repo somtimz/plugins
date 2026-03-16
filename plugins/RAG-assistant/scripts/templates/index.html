@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAG Ingestion Pipeline</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #f5f5f5;
+      color: #222;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    header h1 { font-size: 1.1rem; font-weight: 600; letter-spacing: 0.02em; }
+    header .badge {
+      font-size: 0.7rem;
+      background: #4a4a8a;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+    }
+
+    nav {
+      background: #fff;
+      border-bottom: 2px solid #e0e0e0;
+      display: flex;
+      gap: 0;
+    }
+    nav button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: #666;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    nav button:hover { color: #333; }
+    nav button.active { color: #1a1a2e; border-bottom-color: #1a1a2e; font-weight: 600; }
+
+    main { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Ingestion tab ───────────────────────────────────────── */
+    .run-bar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+    #btn-run {
+      padding: 0.55rem 1.4rem;
+      background: #1a1a2e;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    #btn-run:hover:not(:disabled) { background: #2d2d5e; }
+    #btn-run:disabled { background: #999; cursor: not-allowed; }
+
+    #run-status { font-size: 0.9rem; color: #555; }
+
+    .log-box {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      border-radius: 8px;
+      padding: 1rem;
+      min-height: 200px;
+      max-height: 380px;
+      overflow-y: auto;
+      font-family: 'Cascadia Code', 'Consolas', monospace;
+      font-size: 0.82rem;
+      line-height: 1.55;
+    }
+    .log-box .log-line { display: flex; gap: 0.6rem; }
+    .log-box .log-ts { color: #666; flex-shrink: 0; }
+    .log-box .ev-run_started  { color: #7dd3fc; }
+    .log-box .ev-run_complete { color: #86efac; }
+    .log-box .ev-run_error    { color: #fca5a5; }
+    .log-box .ev-source_complete { color: #c4b5fd; }
+    .log-box .ev-document_processed.ok      { color: #d4d4d4; }
+    .log-box .ev-document_processed.skipped { color: #94a3b8; }
+    .log-box .ev-document_processed.failed  { color: #fca5a5; }
+
+    .section-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #888;
+      margin: 1.5rem 0 0.6rem;
+    }
+
+    /* ── Run history ─────────────────────────────────────────── */
+    .history-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .history-table th, .history-table td {
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .history-table th { background: #f0f0f0; font-weight: 600; color: #555; }
+    .history-table tbody tr:hover { background: #fafafa; }
+
+    .pill {
+      display: inline-block;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .pill-ok       { background: #dcfce7; color: #166534; }
+    .pill-failed   { background: #fee2e2; color: #991b1b; }
+    .pill-running  { background: #fef9c3; color: #854d0e; }
+
+    /* ── Registry tab ────────────────────────────────────────── */
+    .toolbar {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .toolbar input[type=search] {
+      flex: 1;
+      min-width: 200px;
+      padding: 0.45rem 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 0.88rem;
+    }
+    .toolbar select {
+      padding: 0.45rem 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      background: #fff;
+    }
+    #btn-refresh {
+      padding: 0.45rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: #fff;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+    #btn-refresh:hover { background: #f5f5f5; }
+
+    #reg-count { font-size: 0.85rem; color: #666; margin-bottom: 0.75rem; }
+
+    .reg-table-wrap { overflow-x: auto; }
+    .reg-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .reg-table th, .reg-table td {
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid #e8e8e8;
+      white-space: nowrap;
+    }
+    .reg-table th {
+      background: #f0f0f0;
+      font-weight: 600;
+      color: #555;
+      cursor: pointer;
+      user-select: none;
+    }
+    .reg-table th:hover { background: #e5e5e5; }
+    .reg-table td.path-cell {
+      font-family: monospace;
+      font-size: 0.78rem;
+      color: #555;
+      max-width: 320px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .reg-table tbody tr:hover { background: #fafafa; }
+    .sort-indicator { font-size: 0.75rem; margin-left: 0.25rem; color: #888; }
+
+    /* ── Config tab ──────────────────────────────────────────── */
+    .config-form { max-width: 640px; }
+    .field-group {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .field-group legend {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #333;
+      margin-bottom: 0.75rem;
+    }
+    .field-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      margin-bottom: 0.75rem;
+    }
+    .field-row:last-child { margin-bottom: 0; }
+    .field-row label { font-size: 0.82rem; color: #555; font-weight: 500; }
+    .field-row input, .field-row select, .field-row textarea {
+      padding: 0.45rem 0.65rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      width: 100%;
+    }
+    .field-row input:focus, .field-row select:focus { outline: 2px solid #1a1a2e; outline-offset: 1px; }
+    .field-error { font-size: 0.78rem; color: #c00; margin-top: 0.2rem; }
+
+    .cfg-actions { display: flex; gap: 0.75rem; align-items: center; margin-top: 0.5rem; }
+    #btn-save-cfg {
+      padding: 0.55rem 1.4rem;
+      background: #1a1a2e;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    #btn-save-cfg:hover { background: #2d2d5e; }
+    #cfg-msg { font-size: 0.85rem; }
+    .msg-ok  { color: #166534; }
+    .msg-err { color: #991b1b; }
+
+    /* ── Error banner ─────────────────────────────────────────── */
+    .error-banner {
+      background: #fee2e2;
+      color: #991b1b;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.88rem;
+      display: none;
+    }
+    .empty-state { color: #888; font-size: 0.88rem; padding: 1rem 0; }
+
+    /* ── Chat tab ────────────────────────────────────────────── */
+    #tab-chat {
+      display: none;
+      flex-direction: column;
+      height: calc(100vh - 200px);
+      min-height: 400px;
+    }
+    #tab-chat.active { display: flex; }
+
+    #chat-preflight-banner {
+      background: #fef9c3;
+      color: #854d0e;
+      border-radius: 6px;
+      padding: 0.6rem 1rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.85rem;
+      display: none;
+    }
+    #chat-preflight-banner.visible { display: flex; justify-content: space-between; align-items: center; }
+
+    #chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .chat-bubble {
+      max-width: 80%;
+      padding: 0.65rem 0.9rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .chat-bubble.user {
+      align-self: flex-end;
+      background: #1a1a2e;
+      color: #fff;
+      border-bottom-right-radius: 2px;
+    }
+    .chat-bubble.assistant {
+      align-self: flex-start;
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-bottom-left-radius: 2px;
+    }
+    .chat-bubble.tool-notification {
+      align-self: flex-start;
+      background: #f0f4ff;
+      border: 1px solid #c7d2fe;
+      font-size: 0.82rem;
+      color: #3730a3;
+    }
+    .chat-bubble.incomplete::after {
+      content: " [incomplete]";
+      color: #999;
+      font-style: italic;
+    }
+
+    .chat-citations {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+    }
+    .chat-citations summary {
+      cursor: pointer;
+      color: #555;
+      user-select: none;
+    }
+    .chat-citations ul {
+      margin: 0.4rem 0 0 1rem;
+      padding: 0;
+      list-style: disc;
+      color: #444;
+    }
+    .chat-citations li { margin-bottom: 0.2rem; }
+
+    #chat-input-area {
+      border-top: 1px solid #e0e0e0;
+      padding-top: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    #chat-input-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-end;
+    }
+    #chat-input {
+      flex: 1;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      resize: vertical;
+      min-height: 44px;
+      max-height: 180px;
+      font-family: inherit;
+    }
+    #chat-input:focus { outline: 2px solid #1a1a2e; outline-offset: 1px; }
+    #chat-send {
+      padding: 0.55rem 1.2rem;
+      background: #1a1a2e;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    #chat-send:hover:not(:disabled) { background: #2d2d5e; }
+    #chat-send:disabled { background: #999; cursor: not-allowed; }
+
+    #chat-input-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #chat-char-count { font-size: 0.75rem; color: #888; }
+    #chat-char-count.over-limit { color: #c00; font-weight: 600; }
+    #chat-error { font-size: 0.8rem; color: #c00; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>RAG Ingestion Pipeline</h1>
+  <span class="badge">local</span>
+</header>
+
+<nav>
+  <button class="active" data-tab="ingestion">Ingestion</button>
+  <button data-tab="registry">Registry</button>
+  <button data-tab="config">Config</button>
+  <button id="btn-chat-tab" data-tab="chat">Chat</button>
+</nav>
+
+<main>
+
+  <!-- ── Ingestion tab ──────────────────────────────────────── -->
+  <div id="tab-ingestion" class="tab-panel active">
+    <div class="run-bar">
+      <button id="btn-run">Run Ingestion</button>
+      <span id="run-status"></span>
+    </div>
+    <div id="run-error" class="error-banner"></div>
+
+    <div class="log-box" id="log-box">
+      <div class="log-line"><span class="log-ts">--:--:--</span><span>Waiting to start…</span></div>
+    </div>
+
+    <div class="section-title">Run History</div>
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th>Run ID</th>
+          <th>Started</th>
+          <th>Completed</th>
+          <th>Status</th>
+          <th>Discovered</th>
+          <th>Succeeded</th>
+          <th>Skipped</th>
+          <th>Failed</th>
+        </tr>
+      </thead>
+      <tbody id="history-tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- ── Registry tab ───────────────────────────────────────── -->
+  <div id="tab-registry" class="tab-panel">
+    <div class="toolbar">
+      <input type="search" id="reg-search" placeholder="Search source name or path…">
+      <select id="reg-sort">
+        <option value="last_ingested">Sort: Last Ingested</option>
+        <option value="source_name">Sort: Source Name</option>
+        <option value="origin_path">Sort: Path</option>
+        <option value="chunk_count">Sort: Chunks</option>
+        <option value="version_count">Sort: Versions</option>
+      </select>
+      <select id="reg-order">
+        <option value="desc">Descending</option>
+        <option value="asc">Ascending</option>
+      </select>
+      <button id="btn-refresh">Refresh</button>
+    </div>
+    <div id="reg-error" class="error-banner"></div>
+    <div id="reg-count"></div>
+    <div class="reg-table-wrap">
+      <table class="reg-table">
+        <thead>
+          <tr>
+            <th data-col="source_name">Source <span class="sort-indicator" id="si-source_name"></span></th>
+            <th data-col="origin_path">Path <span class="sort-indicator" id="si-origin_path"></span></th>
+            <th data-col="chunk_count">Chunks <span class="sort-indicator" id="si-chunk_count"></span></th>
+            <th data-col="version_count">Versions <span class="sort-indicator" id="si-version_count"></span></th>
+            <th data-col="last_ingested">Last Ingested <span class="sort-indicator" id="si-last_ingested">▼</span></th>
+          </tr>
+        </thead>
+        <tbody id="reg-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── Config tab ─────────────────────────────────────────── -->
+  <div id="tab-config" class="tab-panel">
+    <div id="cfg-error" class="error-banner"></div>
+    <form class="config-form" id="cfg-form" autocomplete="off">
+
+      <fieldset class="field-group">
+        <legend>Embedding</legend>
+        <div class="field-row">
+          <label for="emb-provider">Provider</label>
+          <input type="text" id="emb-provider" name="emb-provider" placeholder="openai-compatible">
+          <div class="field-error" id="err-emb-provider"></div>
+        </div>
+        <div class="field-row">
+          <label for="emb-model">Model</label>
+          <input type="text" id="emb-model" name="emb-model" placeholder="text-embedding-3-small">
+          <div class="field-error" id="err-emb-model"></div>
+        </div>
+        <div class="field-row">
+          <label for="emb-api-base">API Base URL</label>
+          <input type="text" id="emb-api-base" name="emb-api-base" placeholder="https://api.openai.com/v1">
+          <div class="field-error" id="err-emb-api-base"></div>
+        </div>
+        <div class="field-row">
+          <label for="emb-api-key-env">API Key Env Var</label>
+          <input type="text" id="emb-api-key-env" name="emb-api-key-env" placeholder="RAG_EMBEDDING_API_KEY">
+          <div class="field-error" id="err-emb-api-key-env"></div>
+        </div>
+      </fieldset>
+
+      <fieldset class="field-group">
+        <legend>Vector Store</legend>
+        <div class="field-row">
+          <label for="vs-provider">Provider</label>
+          <input type="text" id="vs-provider" name="vs-provider" placeholder="chroma">
+        </div>
+        <div class="field-row">
+          <label for="vs-path">Storage Path</label>
+          <input type="text" id="vs-path" name="vs-path" placeholder=".rag-store">
+        </div>
+        <div class="field-row">
+          <label for="vs-collection">Collection</label>
+          <input type="text" id="vs-collection" name="vs-collection" placeholder="documents">
+        </div>
+      </fieldset>
+
+      <fieldset class="field-group">
+        <legend>Pipeline</legend>
+        <div class="field-row">
+          <label for="pl-chunk-size">Chunk Size (tokens)</label>
+          <input type="number" id="pl-chunk-size" name="pl-chunk-size" min="100" step="100" placeholder="1000">
+          <div class="field-error" id="err-pl-chunk-size"></div>
+        </div>
+        <div class="field-row">
+          <label for="pl-chunk-overlap">Chunk Overlap (tokens)</label>
+          <input type="number" id="pl-chunk-overlap" name="pl-chunk-overlap" min="0" step="50" placeholder="200">
+          <div class="field-error" id="err-pl-chunk-overlap"></div>
+        </div>
+        <div class="field-row">
+          <label for="pl-max-mb">Max File Size (MB)</label>
+          <input type="number" id="pl-max-mb" name="pl-max-mb" min="1" placeholder="20">
+        </div>
+        <div class="field-row">
+          <label for="pl-registry">Registry Path</label>
+          <input type="text" id="pl-registry" name="pl-registry" placeholder=".rag-registry.db">
+        </div>
+        <div class="field-row">
+          <label for="pl-log">Log Path</label>
+          <input type="text" id="pl-log" name="pl-log" placeholder=".rag-pipeline.log">
+        </div>
+      </fieldset>
+
+      <div class="cfg-actions">
+        <button type="submit" id="btn-save-cfg">Save Config</button>
+        <span id="cfg-msg"></span>
+      </div>
+    </form>
+  </div>
+
+  <!-- ── Chat tab ───────────────────────────────────────────── -->
+  <div id="tab-chat" class="tab-panel">
+    <div id="chat-preflight-banner">
+      <span id="chat-preflight-msg"></span>
+      <button id="chat-preflight-dismiss" style="background:none;border:none;cursor:pointer;font-size:1rem;">✕</button>
+    </div>
+
+    <div id="chat-messages" role="log" aria-live="polite" aria-label="Chat messages"></div>
+
+    <div id="chat-input-area">
+      <div id="chat-input-row">
+        <textarea
+          id="chat-input"
+          maxlength="4000"
+          placeholder="Ask a question or type 'ingest ./path' to add documents…"
+          rows="2"
+          aria-label="Chat message input"
+        ></textarea>
+        <button id="chat-send" type="button">Send</button>
+      </div>
+      <div id="chat-input-meta">
+        <span id="chat-error" role="alert"></span>
+        <span id="chat-char-count">0 / 4000</span>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+"use strict";
+
+// ── Tab switching ────────────────────────────────────────────────────────────
+
+document.querySelectorAll("nav button").forEach(function(btn) {
+  btn.addEventListener("click", function() {
+    document.querySelectorAll("nav button").forEach(function(b) { b.classList.remove("active"); });
+    document.querySelectorAll(".tab-panel").forEach(function(p) { p.classList.remove("active"); });
+    btn.classList.add("active");
+    var panel = document.getElementById("tab-" + btn.dataset.tab);
+    if (panel) panel.classList.add("active");
+
+    if (btn.dataset.tab === "registry") loadRegistry();
+    if (btn.dataset.tab === "config") loadConfig();
+    if (btn.dataset.tab === "chat") chatPreflight();
+  });
+});
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+
+function elt(tag, cls) {
+  var e = document.createElement(tag);
+  if (cls) e.className = cls;
+  return e;
+}
+
+function txt(str) {
+  return document.createTextNode(str == null ? "" : String(str));
+}
+
+function fmtTime(iso) {
+  if (!iso) return "—";
+  try {
+    return new Date(iso).toLocaleTimeString();
+  } catch (e) {
+    return iso;
+  }
+}
+
+function fmtDateTime(iso) {
+  if (!iso) return "—";
+  try {
+    return new Date(iso).toLocaleString();
+  } catch (e) {
+    return iso;
+  }
+}
+
+function showBanner(id, msg) {
+  var el = document.getElementById(id);
+  el.textContent = msg;
+  el.style.display = msg ? "block" : "none";
+}
+
+// ── SSE stream ───────────────────────────────────────────────────────────────
+
+var _es = null;
+
+function ensureStream() {
+  if (_es) return;
+  _es = new EventSource("/api/ingest/stream");
+  _es.onmessage = function(ev) {
+    try {
+      handleSseEvent(JSON.parse(ev.data));
+    } catch (e) { /* ignore parse errors */ }
+  };
+  _es.onerror = function() {
+    appendLog("stream", "Connection lost — will reconnect…");
+  };
+}
+
+function appendLog(evtName, message, extraCls) {
+  var box = document.getElementById("log-box");
+
+  // Clear placeholder on first real message
+  if (box.dataset.hasContent !== "1") {
+    box.textContent = "";
+    box.dataset.hasContent = "1";
+  }
+
+  var line = elt("div", "log-line");
+
+  var ts = elt("span", "log-ts");
+  ts.appendChild(txt(new Date().toLocaleTimeString()));
+  line.appendChild(ts);
+
+  var msgSpan = elt("span", "ev-" + evtName + (extraCls ? " " + extraCls : ""));
+  msgSpan.appendChild(txt(message));
+  line.appendChild(msgSpan);
+
+  box.appendChild(line);
+  box.scrollTop = box.scrollHeight;
+}
+
+function handleSseEvent(data) {
+  var ev = data.event || "unknown";
+
+  if (ev === "run_started") {
+    showBanner("run-error", "");
+    appendLog(ev, "Run started  [" + (data.run_id || "").slice(0, 8) + "...]");
+    setRunning(true);
+  } else if (ev === "document_processed") {
+    var st = data.status || "ok";
+    var label = st === "ok" ? "ok" : (st.startsWith("skipped") ? "skipped" : "failed");
+    var msg = st + "  " + (data.file_path || "");
+    if (data.reason) msg += "  (" + data.reason + ")";
+    appendLog(ev, msg, label);
+  } else if (ev === "source_complete") {
+    appendLog(ev,
+      "Source [" + (data.source_name || "") + "]" +
+      "  discovered=" + (data.discovered || 0) +
+      "  succeeded=" + (data.succeeded || 0) +
+      "  skipped=" + (data.skipped || 0) +
+      "  failed=" + (data.failed || 0)
+    );
+  } else if (ev === "run_complete") {
+    appendLog(ev,
+      "Run complete" +
+      "  succeeded=" + (data.total_succeeded || 0) +
+      "  skipped=" + (data.total_skipped || 0) +
+      "  failed=" + (data.total_failed || 0)
+    );
+    setRunning(false);
+    loadHistory();
+  } else if (ev === "run_error") {
+    appendLog(ev, "ERROR: " + (data.error_message || "unknown error"));
+    setRunning(false);
+    loadHistory();
+  }
+}
+
+// ── Ingestion tab ────────────────────────────────────────────────────────────
+
+function setRunning(isRunning) {
+  var btn = document.getElementById("btn-run");
+  var status = document.getElementById("run-status");
+  btn.disabled = isRunning;
+  btn.textContent = isRunning ? "Running…" : "Run Ingestion";
+  status.textContent = isRunning ? "Ingestion in progress…" : "";
+}
+
+document.getElementById("btn-run").addEventListener("click", function() {
+  showBanner("run-error", "");
+  fetch("/api/ingest/run", { method: "POST" })
+    .then(function(r) { return r.json().then(function(d) { return { status: r.status, body: d }; }); })
+    .then(function(res) {
+      if (res.status === 202) {
+        setRunning(true);
+        ensureStream();
+      } else if (res.status === 409) {
+        showBanner("run-error", "A run is already in progress (run_id: " + (res.body.run_id || "unknown") + ")");
+      } else if (res.status === 412) {
+        showBanner("run-error", "Preflight failed: " + (res.body.reason || "check config"));
+      } else {
+        showBanner("run-error", "Error: " + (res.body.message || res.body.error || "unknown"));
+      }
+    })
+    .catch(function(e) { showBanner("run-error", "Network error: " + e.message); });
+});
+
+function loadHistory() {
+  fetch("/api/ingest/runs")
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var tbody = document.getElementById("history-tbody");
+      // Clear existing rows safely
+      while (tbody.firstChild) tbody.removeChild(tbody.firstChild);
+
+      var runs = (data.runs || []).slice();
+      if (data.active_run) runs.unshift(data.active_run);
+
+      if (runs.length === 0) {
+        var row = document.createElement("tr");
+        var cell = document.createElement("td");
+        cell.setAttribute("colspan", "8");
+        cell.className = "empty-state";
+        cell.appendChild(txt("No runs yet"));
+        row.appendChild(cell);
+        tbody.appendChild(row);
+        return;
+      }
+
+      runs.forEach(function(run) {
+        var row = document.createElement("tr");
+
+        function addCell(value, cls) {
+          var td = document.createElement("td");
+          if (cls) td.className = cls;
+          td.appendChild(txt(value));
+          row.appendChild(td);
+        }
+
+        addCell((run.run_id || "").slice(0, 8) + "…");
+        addCell(fmtDateTime(run.started_at));
+        addCell(run.completed_at ? fmtDateTime(run.completed_at) : "—");
+
+        // Status pill
+        var tdStatus = document.createElement("td");
+        var pill = elt("span", "pill pill-" + (run.status === "completed" ? "ok" : run.status || "running"));
+        pill.appendChild(txt(run.status || "running"));
+        tdStatus.appendChild(pill);
+        row.appendChild(tdStatus);
+
+        var summ = run.summary || {};
+        addCell(summ.total_discovered != null ? String(summ.total_discovered) : "—");
+        addCell(summ.total_succeeded  != null ? String(summ.total_succeeded)  : "—");
+        addCell(summ.total_skipped    != null ? String(summ.total_skipped)    : "—");
+        addCell(summ.total_failed     != null ? String(summ.total_failed)     : "—");
+
+        tbody.appendChild(row);
+      });
+    })
+    .catch(function() { /* silently fail */ });
+}
+
+loadHistory();
+ensureStream();
+
+// ── Page-load config preflight (FR-011) ──────────────────────────────────────
+// Runs once on DOMContentLoaded — shows banner BEFORE user clicks any tab.
+(function checkConfigOnLoad() {
+  fetch("/api/config")
+    .then(function(r) { return r.json().then(function(d) { return { status: r.status, body: d }; }); })
+    .then(function(res) {
+      if (res.status === 404) {
+        showPageBanner(
+          "Configuration file not found.",
+          "Create Config",
+          function() {
+            document.querySelectorAll("nav button").forEach(function(b) { b.classList.remove("active"); });
+            document.querySelectorAll(".tab-panel").forEach(function(p) { p.classList.remove("active"); });
+            document.querySelector("nav button[data-tab='config']").classList.add("active");
+            document.getElementById("tab-config").classList.add("active");
+            loadConfig();
+          }
+        );
+      } else if (res.status === 422) {
+        showPageBanner(
+          "Configuration file is invalid: " + ((res.body && res.body.message) || "unknown error"),
+          null, null
+        );
+      }
+    })
+    .catch(function() { /* server not ready — silent */ });
+})();
+
+function showPageBanner(msg, actionLabel, actionFn) {
+  var banner = elt("div", "error-banner");
+  banner.style.display = "block";
+  banner.style.margin = "1rem 1.5rem 0";
+  banner.appendChild(txt(msg + " "));
+  if (actionLabel && actionFn) {
+    var btn = document.createElement("button");
+    btn.style.cssText = "background:none;border:none;color:inherit;font-weight:700;" +
+                        "cursor:pointer;text-decoration:underline;padding:0;font-size:inherit;";
+    btn.appendChild(txt(actionLabel));
+    btn.addEventListener("click", function() {
+      banner.parentNode && banner.parentNode.removeChild(banner);
+      actionFn();
+    });
+    banner.appendChild(btn);
+  }
+  // Dismiss on click anywhere on the banner (except the action button)
+  banner.addEventListener("click", function(e) {
+    if (e.target === banner || e.target.classList.contains("error-banner")) {
+      banner.parentNode && banner.parentNode.removeChild(banner);
+    }
+  });
+  var mainEl = document.querySelector("main");
+  mainEl.insertBefore(banner, mainEl.firstChild);
+}
+
+// ── Registry tab ─────────────────────────────────────────────────────────────
+
+var _regSort = "last_ingested";
+var _regOrder = "desc";
+
+function loadRegistry() {
+  var search = document.getElementById("reg-search").value;
+  var sort = document.getElementById("reg-sort").value;
+  var order = document.getElementById("reg-order").value;
+
+  _regSort = sort;
+  _regOrder = order;
+
+  // Update sort indicators
+  ["source_name","origin_path","chunk_count","version_count","last_ingested"].forEach(function(col) {
+    var si = document.getElementById("si-" + col);
+    if (si) si.textContent = col === sort ? (order === "asc" ? "▲" : "▼") : "";
+  });
+
+  var url = "/api/registry?sort=" + encodeURIComponent(sort) + "&order=" + encodeURIComponent(order);
+  if (search) url += "&search=" + encodeURIComponent(search);
+
+  fetch(url)
+    .then(function(r) { return r.json().then(function(d) { return { status: r.status, body: d }; }); })
+    .then(function(res) {
+      showBanner("reg-error", "");
+      if (res.status !== 200) {
+        showBanner("reg-error", res.body.message || "Failed to load registry");
+        return;
+      }
+      var records = res.body.records || [];
+      var count = document.getElementById("reg-count");
+      count.textContent = records.length + " record" + (records.length !== 1 ? "s" : "");
+
+      var tbody = document.getElementById("reg-tbody");
+      while (tbody.firstChild) tbody.removeChild(tbody.firstChild);
+
+      if (records.length === 0) {
+        var row = document.createElement("tr");
+        var cell = document.createElement("td");
+        cell.setAttribute("colspan", "5");
+        cell.className = "empty-state";
+        cell.appendChild(txt("No records found"));
+        row.appendChild(cell);
+        tbody.appendChild(row);
+        return;
+      }
+
+      records.forEach(function(rec) {
+        var row = document.createElement("tr");
+
+        function addCell(value, cls) {
+          var td = document.createElement("td");
+          if (cls) td.className = cls;
+          td.appendChild(txt(value == null ? "" : String(value)));
+          row.appendChild(td);
+        }
+
+        addCell(rec.source_name);
+        addCell(rec.origin_path, "path-cell");
+        addCell(rec.chunk_count);
+        addCell(rec.version_count);
+        addCell(fmtDateTime(rec.last_ingested));
+
+        tbody.appendChild(row);
+      });
+    })
+    .catch(function(e) { showBanner("reg-error", "Network error: " + e.message); });
+}
+
+document.getElementById("btn-refresh").addEventListener("click", loadRegistry);
+document.getElementById("reg-search").addEventListener("input", debounce(loadRegistry, 350));
+document.getElementById("reg-sort").addEventListener("change", loadRegistry);
+document.getElementById("reg-order").addEventListener("change", loadRegistry);
+
+document.querySelectorAll(".reg-table th[data-col]").forEach(function(th) {
+  th.addEventListener("click", function() {
+    var col = th.dataset.col;
+    if (_regSort === col) {
+      _regOrder = _regOrder === "asc" ? "desc" : "asc";
+    } else {
+      _regSort = col;
+      _regOrder = "desc";
+    }
+    document.getElementById("reg-sort").value = _regSort;
+    document.getElementById("reg-order").value = _regOrder;
+    loadRegistry();
+  });
+});
+
+function debounce(fn, ms) {
+  var t;
+  return function() {
+    clearTimeout(t);
+    t = setTimeout(fn, ms);
+  };
+}
+
+// ── Config tab ───────────────────────────────────────────────────────────────
+
+function loadConfig() {
+  showBanner("cfg-error", "");
+  document.getElementById("cfg-msg").textContent = "";
+
+  fetch("/api/config")
+    .then(function(r) { return r.json().then(function(d) { return { status: r.status, body: d }; }); })
+    .then(function(res) {
+      if (res.status !== 200) {
+        showBanner("cfg-error", res.body.message || "Config not found");
+        return;
+      }
+      var d = res.body;
+      var emb = d.embedding || {};
+      var vs  = d.vector_store || {};
+      var pl  = d.pipeline || {};
+
+      document.getElementById("emb-provider").value  = emb.provider  || "";
+      document.getElementById("emb-model").value     = emb.model     || "";
+      document.getElementById("emb-api-base").value  = emb.api_base  || "";
+      document.getElementById("emb-api-key-env").value = emb.api_key_env || "";
+
+      document.getElementById("vs-provider").value   = vs.provider   || "";
+      document.getElementById("vs-path").value       = vs.path       || "";
+      document.getElementById("vs-collection").value = vs.collection || "";
+
+      document.getElementById("pl-chunk-size").value    = pl.chunk_size    != null ? String(pl.chunk_size) : "";
+      document.getElementById("pl-chunk-overlap").value = pl.chunk_overlap != null ? String(pl.chunk_overlap) : "";
+      document.getElementById("pl-max-mb").value        = pl.max_file_size_mb != null ? String(pl.max_file_size_mb) : "";
+      document.getElementById("pl-registry").value      = pl.registry_path || "";
+      document.getElementById("pl-log").value           = pl.log_path      || "";
+    })
+    .catch(function(e) { showBanner("cfg-error", "Network error: " + e.message); });
+}
+
+function clearFieldErrors() {
+  document.querySelectorAll(".field-error").forEach(function(el) { el.textContent = ""; });
+}
+
+document.getElementById("cfg-form").addEventListener("submit", function(ev) {
+  ev.preventDefault();
+  clearFieldErrors();
+  document.getElementById("cfg-msg").textContent = "";
+  showBanner("cfg-error", "");
+
+  var payload = {
+    embedding: {
+      provider:    document.getElementById("emb-provider").value.trim(),
+      model:       document.getElementById("emb-model").value.trim(),
+      api_base:    document.getElementById("emb-api-base").value.trim(),
+      api_key_env: document.getElementById("emb-api-key-env").value.trim(),
+    },
+    vector_store: {
+      provider:   document.getElementById("vs-provider").value.trim(),
+      path:       document.getElementById("vs-path").value.trim(),
+      collection: document.getElementById("vs-collection").value.trim(),
+    },
+    pipeline: {
+      chunk_size:       parseInt(document.getElementById("pl-chunk-size").value,    10) || null,
+      chunk_overlap:    parseInt(document.getElementById("pl-chunk-overlap").value, 10) || null,
+      max_file_size_mb: parseInt(document.getElementById("pl-max-mb").value,        10) || null,
+      registry_path:    document.getElementById("pl-registry").value.trim(),
+      log_path:         document.getElementById("pl-log").value.trim(),
+    },
+  };
+
+  // Preserve existing sources (not editable in this form)
+  fetch("/api/config")
+    .then(function(r) { return r.json(); })
+    .then(function(existing) {
+      payload.sources = existing.sources || [];
+      return fetch("/api/config", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+    })
+    .then(function(r) { return r.json().then(function(d) { return { status: r.status, body: d }; }); })
+    .then(function(res) {
+      if (res.status === 200) {
+        var msg = document.getElementById("cfg-msg");
+        msg.className = "msg-ok";
+        msg.textContent = "Config saved.";
+      } else if (res.status === 422 && res.body.fields) {
+        res.body.fields.forEach(function(f) {
+          var fieldMap = {
+            "pipeline.chunk_overlap": "err-pl-chunk-overlap",
+            "pipeline.chunk_size":    "err-pl-chunk-size",
+            "embedding.api_key_env":  "err-emb-api-key-env",
+          };
+          var errId = fieldMap[f.field];
+          if (errId) {
+            var errEl = document.getElementById(errId);
+            if (errEl) errEl.textContent = f.message;
+          }
+        });
+      } else {
+        showBanner("cfg-error", res.body.message || "Save failed");
+      }
+    })
+    .catch(function(e) { showBanner("cfg-error", "Network error: " + e.message); });
+});
+
+// ── Chat (Feature 003) ───────────────────────────────────────────────────────
+
+var conversationHistory = [];
+var currentModel = "";
+var _currentAssistantBubble = null;
+var _currentAssistantText = "";
+
+// T013 — chatPreflight
+function chatPreflight() {
+  fetch("/api/chat/preflight")
+    .then(function(r) { return r.json().then(function(d) { return { status: r.status, body: d }; }); })
+    .then(function(res) {
+      var banner = document.getElementById("chat-preflight-banner");
+      var msg = document.getElementById("chat-preflight-msg");
+      if (res.status !== 200) {
+        msg.textContent = "LLM API key not configured. " + (res.body.reason || "");
+        banner.classList.add("visible");
+      } else {
+        currentModel = res.body.model || "";
+        banner.classList.remove("visible");
+      }
+    })
+    .catch(function() {
+      var banner = document.getElementById("chat-preflight-banner");
+      var msg = document.getElementById("chat-preflight-msg");
+      msg.textContent = "Could not reach server to check LLM configuration.";
+      banner.classList.add("visible");
+    });
+}
+
+document.getElementById("chat-preflight-dismiss").addEventListener("click", function() {
+  document.getElementById("chat-preflight-banner").classList.remove("visible");
+});
+
+// T014 — sendMessage + readStream + Ctrl+Enter
+function _appendUserBubble(message) {
+  var messages = document.getElementById("chat-messages");
+  var bubble = document.createElement("div");
+  bubble.className = "chat-bubble user";
+  bubble.textContent = message;
+  messages.appendChild(bubble);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function _newAssistantBubble() {
+  var messages = document.getElementById("chat-messages");
+  var bubble = document.createElement("div");
+  bubble.className = "chat-bubble assistant";
+  messages.appendChild(bubble);
+  messages.scrollTop = messages.scrollHeight;
+  return bubble;
+}
+
+function sendMessage() {
+  var input = document.getElementById("chat-input");
+  var sendBtn = document.getElementById("chat-send");
+  var errEl = document.getElementById("chat-error");
+  var message = input.value;
+
+  if (!message.trim()) return;
+  if (message.length > 4000) {
+    errEl.textContent = "Message exceeds 4,000 character limit.";
+    return;
+  }
+
+  errEl.textContent = "";
+  input.value = "";
+  document.getElementById("chat-char-count").textContent = "0 / 4000";
+  input.disabled = true;
+  sendBtn.disabled = true;
+
+  _appendUserBubble(message);
+  _currentAssistantBubble = _newAssistantBubble();
+  _currentAssistantText = "";
+
+  fetch("/api/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: message, history: conversationHistory }),
+  })
+    .then(function(response) {
+      if (!response.ok && response.status !== 200) {
+        return response.json().then(function(d) {
+          throw new Error(d.message || ("HTTP " + response.status));
+        });
+      }
+      return readStream(response, message);
+    })
+    .catch(function(err) {
+      if (_currentAssistantBubble) {
+        _currentAssistantBubble.textContent = "Error: " + err.message;
+        _currentAssistantBubble.classList.add("incomplete");
+      }
+      input.disabled = false;
+      sendBtn.disabled = false;
+    });
+}
+
+function readStream(response, originalMessage) {
+  var reader = response.body.getReader();
+  var decoder = new TextDecoder();
+  var buffer = "";
+
+  function pump() {
+    return reader.read().then(function(result) {
+      if (result.done) {
+        _finaliseStream(originalMessage);
+        return;
+      }
+      buffer += decoder.decode(result.value, { stream: true });
+      var lines = buffer.split("\n");
+      buffer = lines.pop(); // keep partial line
+      lines.forEach(function(line) {
+        if (line.startsWith("data: ")) {
+          try {
+            var payload = JSON.parse(line.slice(6));
+            _dispatchEvent(payload, originalMessage);
+          } catch (e) { /* ignore malformed */ }
+        }
+      });
+      return pump();
+    }).catch(function(err) {
+      // T022 — streaming interruption
+      if (_currentAssistantBubble) {
+        _currentAssistantBubble.classList.add("incomplete");
+      }
+      _enableInput();
+    });
+  }
+
+  return pump();
+}
+
+function _dispatchEvent(payload, originalMessage) {
+  var messages = document.getElementById("chat-messages");
+  switch (payload.event) {
+    case "text_delta":
+      appendTextDelta(payload.text || "");
+      break;
+    case "tool_start":
+      appendToolResult(payload.name, "Running…");
+      break;
+    case "tool_result":
+      appendToolResult(payload.name, payload.result || "");
+      break;
+    case "citations":
+      appendCitations(payload.sources || []);
+      break;
+    case "error":
+      if (_currentAssistantBubble) {
+        _currentAssistantBubble.textContent = "Error: " + (payload.message || "Unknown error");
+        _currentAssistantBubble.classList.add("incomplete");
+      }
+      break;
+    case "done":
+      _finaliseStream(originalMessage);
+      break;
+  }
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function _finaliseStream(originalMessage) {
+  // Append turn to history; trim to last 20 messages
+  if (originalMessage) {
+    conversationHistory.push({ role: "user", content: originalMessage });
+  }
+  if (_currentAssistantText) {
+    conversationHistory.push({ role: "assistant", content: _currentAssistantText });
+  }
+  if (conversationHistory.length > 20) {
+    conversationHistory = conversationHistory.slice(conversationHistory.length - 20);
+  }
+  _currentAssistantBubble = null;
+  _currentAssistantText = "";
+  _enableInput();
+}
+
+function _enableInput() {
+  document.getElementById("chat-input").disabled = false;
+  document.getElementById("chat-send").disabled = false;
+  document.getElementById("chat-input").focus();
+}
+
+// T015 — appendTextDelta, appendCitations, history management
+function appendTextDelta(text) {
+  if (!_currentAssistantBubble) {
+    _currentAssistantBubble = _newAssistantBubble();
+  }
+  _currentAssistantText += text;
+  _currentAssistantBubble.textContent += text;
+}
+
+function appendCitations(sources) {
+  if (!sources || sources.length === 0) return;
+  if (!_currentAssistantBubble) return;
+
+  var details = document.createElement("details");
+  details.className = "chat-citations";
+
+  var summary = document.createElement("summary");
+  summary.textContent = sources.length + " source" + (sources.length !== 1 ? "s" : "");
+  details.appendChild(summary);
+
+  var ul = document.createElement("ul");
+  sources.forEach(function(src) {
+    var li = document.createElement("li");
+    var name = document.createElement("strong");
+    name.textContent = src.source_name || "Unknown";
+    li.appendChild(name);
+    li.appendChild(document.createTextNode(" — " + (src.origin_path || "")));
+    ul.appendChild(li);
+  });
+  details.appendChild(ul);
+  _currentAssistantBubble.appendChild(details);
+}
+
+// T018 — appendToolResult
+function appendToolResult(name, summary) {
+  var messages = document.getElementById("chat-messages");
+  var bubble = document.createElement("div");
+  bubble.className = "chat-bubble tool-notification";
+  var label = document.createElement("strong");
+  label.textContent = name + ": ";
+  bubble.appendChild(label);
+  bubble.appendChild(document.createTextNode(summary));
+  messages.appendChild(bubble);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+// Character counter and send button state
+document.getElementById("chat-input").addEventListener("input", function() {
+  var len = this.value.length;
+  var counter = document.getElementById("chat-char-count");
+  counter.textContent = len + " / 4000";
+  var errEl = document.getElementById("chat-error");
+  var sendBtn = document.getElementById("chat-send");
+  if (len > 4000) {
+    counter.classList.add("over-limit");
+    sendBtn.disabled = true;
+    errEl.textContent = "Message exceeds 4,000 character limit.";
+  } else {
+    counter.classList.remove("over-limit");
+    sendBtn.disabled = false;
+    errEl.textContent = "";
+  }
+});
+
+// Ctrl+Enter submits; Enter inserts newline
+document.getElementById("chat-input").addEventListener("keydown", function(e) {
+  if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+    e.preventDefault();
+    if (!document.getElementById("chat-send").disabled) {
+      sendMessage();
+    }
+  }
+});
+
+document.getElementById("chat-send").addEventListener("click", sendMessage);
+</script>
+
+</body>
+</html>
