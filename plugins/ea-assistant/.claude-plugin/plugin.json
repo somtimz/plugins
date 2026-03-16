@@ -1,7 +1,7 @@
 {
   "name": "ea-assistant",
   "version": "0.1.0",
-  "description": "End-to-end Enterprise Architecture engagement management. Supports TOGAF 10, Zachman, and ArchiMate across the full ADM lifecycle — from engagement setup through artifact generation, stakeholder interviews, requirements management, and consolidated reporting.",
+  "description": "End-to-end Enterprise Architecture engagement management. Supports TOGAF 10, Zachman, and ArchiMate.",
   "author": {
     "name": "Costa Pissaris",
     "email": "cpissaris@gmail.com"

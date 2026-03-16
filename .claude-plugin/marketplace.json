@@ -27,6 +27,17 @@
       "source": "./plugins/RAG-assistant",
       "category": "development",
       "strict": false
+    },
+    {
+      "name": "togaf-adm",
+      "description": "TOGAF 10 ADM companion for enterprise architects — guides ADM phases, generates artifacts, conducts stakeholder interviews, and produces Word, PowerPoint, and Mermaid deliverables.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Enterprise Architecture Team"
+      },
+      "source": "./plugins/togaf-adm",
+      "category": "development",
+      "strict": false
     }
   ]
 }

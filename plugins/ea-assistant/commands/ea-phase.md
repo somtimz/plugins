@@ -2,7 +2,7 @@
 name: ea-phase
 description: Start, edit, or resume any TOGAF ADM phase for the active engagement
 argument-hint: "[phase: Prelim|Req|A|B|C|D|E|F|G|H]"
-allowed-tools: Read, Write, Bash
+allowed-tools: [Read, Write, Bash]
 ---
 
 Navigate to a specific TOGAF ADM phase for the active engagement.

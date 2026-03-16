@@ -2,7 +2,7 @@
 name: ea-review
 description: Open an artifact for review and assessment, track review state and comments
 argument-hint: "[artifact-name]"
-allowed-tools: Read, Write, Bash
+allowed-tools: [Read, Write, Bash]
 ---
 
 Open an EA artifact for formal review and assessment.

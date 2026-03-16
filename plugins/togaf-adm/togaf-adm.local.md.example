@@ -1,0 +1,43 @@
+---
+project_name: "My Enterprise Architecture"
+organization: "Acme Corporation"
+architect_name: "Jane Smith"
+architecture_scope: "Finance and HR domains"
+start_date: "2025-03"
+current_phase: "Phase A"
+completed_phases: []
+---
+
+# TOGAF ADM Project Context
+
+## Requirements Register
+
+| ID | Requirement | Type | Priority | ADM Phase | Status | Source |
+|----|-------------|------|----------|-----------|--------|--------|
+
+## Stakeholder Map
+
+| Stakeholder | Role | Concerns | Involvement | Engagement |
+|-------------|------|----------|-------------|------------|
+
+## Business Capability Map
+
+(Populated during Phase B)
+
+## Application Portfolio
+
+| App ID | Application Name | Business Owner | Functions Supported | Platform | Lifecycle |
+|--------|-----------------|----------------|--------------------|---------| ---------|
+
+## Gap Analysis
+
+| ID | Baseline | Target | Gap Type | Disposition | Action | Priority |
+|----|----------|--------|----------|-------------|--------|----------|
+
+## Generated Artifacts
+
+(List of artifacts generated with format and file path)
+
+## Open Gaps and Follow-up Items
+
+(Items identified as missing from document loads or interviews)

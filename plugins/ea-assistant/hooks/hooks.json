@@ -1,8 +1,1 @@
-{
-  "SessionStart": [
-    {
-      "type": "prompt",
-      "prompt": "Check if there are any EA engagements in EA-projects/ by looking for engagement.json files. If engagements exist, silently load the most recently modified one into context: read its engagement.json, note the engagement name, current phase, and artifact statuses. Do not announce this unless the user asks about EA work. If no EA-projects/ folder exists, do nothing."
-    }
-  ]
-}
+{}
