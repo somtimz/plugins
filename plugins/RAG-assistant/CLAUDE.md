@@ -1,38 +1,103 @@
-# RAG-plugin Development Guidelines
+# RAG-assistant Development Guidelines
 
-Auto-generated from all feature plans. Last updated: 2026-03-15
+Last updated: 2026-03-17
 
 ## Active Technologies
-- Python 3.11+ (pipeline scripts); Markdown + YAML frontmatter (skill) + `openai` (embedding API client), `chromadb` (local vector store), `tomllib` (stdlib, config parsing), `pypdf` (PDF text extraction), `python-docx` (Word .docx extraction) (001-doc-ingestion-pipeline)
-- ChromaDB local filesystem store (path configured in `.rag-plugin.toml`) (001-doc-ingestion-pipeline)
-- Python 3.11+ (pipeline scripts); Markdown + YAML frontmatter (skill) + `openai` (embeddings), `chromadb` (vector store), `tomllib` (config), `pypdf` (PDF), `python-docx` (Word), `Office365-REST-Python-Client` (SharePoint), `msal` (SharePoint OAuth2 — transitive via Office365 lib) (001-doc-ingestion-pipeline)
-- Python 3.11+ (pipeline scripts); Markdown + YAML frontmatter (skill) + `openai`, `chromadb`, `tomllib` (stdlib), `pypdf`, `python-docx`, `Office365-REST-Python-Client`, `msal` (transitive), `sqlite3` (stdlib) (001-doc-ingestion-pipeline)
-- ChromaDB local filesystem store; SQLite document registry (`.rag-registry.db`) (001-doc-ingestion-pipeline)
-- Python 3.11+ (pipeline scripts); Markdown + YAML frontmatter (skill) + `openai`, `chromadb`, `tomllib` (stdlib), `pypdf`, `python-docx`, `Office365-REST-Python-Client`, `msal` (transitive), `sqlite3` (stdlib), `logging` (stdlib) (001-doc-ingestion-pipeline)
-- ChromaDB local filesystem store; SQLite document registry (`.rag-registry.db`); log file (`.rag-pipeline.log`) (001-doc-ingestion-pipeline)
 
-- Python 3.11+ (pipeline scripts); Markdown + YAML frontmatter (skill) + `openai` (embedding API client), `chromadb` (local vector store), `tomllib` (stdlib, config parsing) (001-doc-ingestion-pipeline)
+- **Runtime**: Python 3.11+
+- **Embedding**: `openai` (OpenAI-compatible API client)
+- **Vector store**: `chromadb` (local filesystem, `PersistentClient`)
+- **Config**: `tomllib` (stdlib read), `tomli_w` (write)
+- **Document extraction**: `pypdf` (PDF), `python-docx` (Word .docx)
+- **SharePoint**: `Office365-REST-Python-Client`, `msal` (transitive)
+- **Web UI**: `flask` + vanilla JS (single `index.html`), SSE for real-time progress
+- **Chat**: `anthropic` (Claude API, streaming)
+- **Registry**: `sqlite3` (stdlib)
+- **Logging**: `logging` (stdlib)
 
 ## Project Structure
 
 ```text
-src/
+.claude-plugin/plugin.json     plugin manifest
+skills/
+└── doc-ingestion-pipeline/
+    └── SKILL.md               auto-activation skill
+
+scripts/
+├── ingest.py                  CLI entrypoint: python scripts/ingest.py [--source PATH] [--config PATH]
+├── ui.py                      Web UI entrypoint: python scripts/ui.py  →  http://localhost:7842
+├── load-corpus.py             utility: load a corpus from the command line
+├── templates/
+│   └── index.html             single-page web UI (4 tabs: Ingestion, Registry, Config, Chat)
+└── lib/
+    ├── config.py              load_config(path) → Config dataclass; raises ConfigError
+    ├── sources.py             discover_local(), discover_sharepoint()
+    ├── reader.py              read_document(path, max_mb) → str; raises UnreadableError / EmptyDocumentError
+    ├── chunker.py             chunk_text(text, size, overlap) → list[Chunk]
+    ├── embedder.py            embed_chunks(chunks, cfg) → list[EmbeddedChunk]; retry/backoff
+    ├── store.py               ChromaDB helpers; check_model_consistency(); delete_by_document()
+    ├── registry.py            SQLite registry: open_registry(), lookup/insert/update, RunDedupSet
+    ├── logger.py              init_logger(path) → logging.Logger
+    ├── pipeline.py            run_ingestion(sources, cfg, logger, progress_callback) → list[SourceResult]
+    ├── searcher.py            vector similarity search helpers
+    └── ingest_tool.py         Claude/OpenAI tool schemas + execute_* functions for chat tool use
+
 tests/
+├── unit/                      one test file per lib module
+└── integration/               end-to-end tests (in-memory ChromaDB + tmp SQLite)
+
+specs/
+├── 001-doc-ingestion-pipeline/  ingestion pipeline spec, plan, tasks, contracts
+├── 002-ingestion-web-ui/        web UI spec, plan, tasks, contracts
+└── 003-conversational-rag-ui/   chat UI spec
+
+docs/                           sample documents for testing
+requirements.txt                runtime + dev dependencies
+.rag-plugin.toml                runtime config (not committed — contains env var references)
+.rag-registry.db                SQLite document registry (generated)
+.rag-store/                     ChromaDB vector store (generated)
+.rag-pipeline.log               structured log file (generated)
 ```
 
 ## Commands
 
-cd src [ONLY COMMANDS FOR ACTIVE TECHNOLOGIES][ONLY COMMANDS FOR ACTIVE TECHNOLOGIES] pytest [ONLY COMMANDS FOR ACTIVE TECHNOLOGIES][ONLY COMMANDS FOR ACTIVE TECHNOLOGIES] ruff check .
+Run from the project root (`plugins/RAG-assistant/`):
+
+```bash
+# Install dependencies
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+
+# Run ingestion pipeline (CLI)
+python3 scripts/ingest.py
+python3 scripts/ingest.py --source ./docs/
+python3 scripts/ingest.py --source ./report.pdf --config .rag-plugin.toml
+
+# Start the web UI
+python3 scripts/ui.py          # → http://localhost:7842
+
+# Run tests
+python3 -m pytest tests/
+python3 -m pytest tests/unit/
+python3 -m pytest tests/integration/
+
+# Lint
+ruff check scripts/ tests/
+```
 
 ## Code Style
 
-Python 3.11+ (pipeline scripts); Markdown + YAML frontmatter (skill): Follow standard conventions
+- Python 3.11+ — use `tomllib` (stdlib) for reads, `tomli_w` for writes
+- No global logger — pass logger via parameter injection
+- Credentials always from environment variables, never in config files or code
+- Atomic registry + vector store writes: if the vector store write fails, roll back the registry transaction
+- Never expose API key values in API responses — only the env var name (`embedding_key_env` / `llm_key_env`)
 
-## Recent Changes
-- 001-doc-ingestion-pipeline: Added Python 3.11+ (pipeline scripts); Markdown + YAML frontmatter (skill) + `openai`, `chromadb`, `tomllib` (stdlib), `pypdf`, `python-docx`, `Office365-REST-Python-Client`, `msal` (transitive), `sqlite3` (stdlib), `logging` (stdlib)
-- 001-doc-ingestion-pipeline: Added Python 3.11+ (pipeline scripts); Markdown + YAML frontmatter (skill) + `openai`, `chromadb`, `tomllib` (stdlib), `pypdf`, `python-docx`, `Office365-REST-Python-Client`, `msal` (transitive), `sqlite3` (stdlib)
-- 001-doc-ingestion-pipeline: Added Python 3.11+ (pipeline scripts); Markdown + YAML frontmatter (skill) + `openai` (embeddings), `chromadb` (vector store), `tomllib` (config), `pypdf` (PDF), `python-docx` (Word), `Office365-REST-Python-Client` (SharePoint), `msal` (SharePoint OAuth2 — transitive via Office365 lib)
+## Implemented Features
 
+| Feature | Status | Spec |
+|---------|--------|------|
+| 001 — Document ingestion pipeline | Implemented | specs/001-doc-ingestion-pipeline/ |
+| 002 — Ingestion web UI | Implemented | specs/002-ingestion-web-ui/ |
+| 003 — Conversational RAG chat UI | Implemented | specs/003-conversational-rag-ui/ |
 
-<!-- MANUAL ADDITIONS START -->
-<!-- MANUAL ADDITIONS END -->
+SharePoint source (feature 001 phase 6, tasks T023–T025) is deferred — local and device_flow auth scaffolding exists but SharePoint tests are skipped.

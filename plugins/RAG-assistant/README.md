@@ -1,15 +1,17 @@
-# RAG Plugin
+# RAG-assistant
 
-A Claude Code plugin that ingests documents into a ChromaDB vector store for Retrieval-Augmented Generation (RAG). Supports local files and directories, incremental re-ingestion, and a persistent document registry.
+A Claude Code plugin that ingests documents into a ChromaDB vector store for Retrieval-Augmented Generation (RAG). Supports local files and directories, SharePoint Online, incremental re-ingestion, a persistent document registry, and a conversational web UI powered by Claude.
 
 ## Features
 
-- Ingest `.txt`, `.md`, `.pdf`, and `.docx` files
+- Ingest `.txt`, `.md`, `.pdf`, and `.docx` files from local paths or SharePoint Online
 - Chunked embedding via any OpenAI-compatible API
 - Incremental re-ingestion — only new or changed files are re-embedded
 - SQLite document registry tracking chunk counts, versions, and timestamps
 - Structured logging to `.rag-pipeline.log`
 - Model mismatch detection on startup
+- Browser-based web UI with live ingestion progress, registry browser, and config editor
+- Conversational chat UI — ask questions, trigger ingestion, and explore the registry in natural language via Claude
 
 ## Requirements
 
@@ -22,23 +24,19 @@ A Claude Code plugin that ingests documents into a ChromaDB vector store for Ret
 
 ```bash
 git clone <repo-url>
-cd RAG-plugin
+cd RAG-assistant
 ```
 
 **2. Create a virtual environment and install dependencies**
 
 ```bash
 python3 -m venv .venv
-.venv/bin/pip install openai chromadb pypdf python-docx flask tomli-w
+.venv/bin/pip install -r requirements.txt
 ```
 
 ## Configuration
 
-**1. Copy the example config**
-
-```bash
-cp .rag-plugin.toml.example .rag-plugin.toml
-```
+**1. Create `.rag-plugin.toml`** in the project root
 
 **2. Edit `.rag-plugin.toml`**
 
@@ -47,7 +45,7 @@ cp .rag-plugin.toml.example .rag-plugin.toml
 provider = "openai-compatible"
 model = "text-embedding-3-small"
 api_base = "https://api.openai.com/v1"
-api_key_env = "RAG_EMBEDDING_API_KEY"   # name of your API key env var
+embedding_key_env = "RAG_EMBEDDING_API_KEY"   # name of your API key env var
 
 [vector_store]
 provider = "chroma"
@@ -72,7 +70,7 @@ For **Ollama**, change the embedding section:
 provider = "openai-compatible"
 model = "nomic-embed-text"
 api_base = "http://localhost:11434/v1"
-api_key_env = "RAG_EMBEDDING_API_KEY"   # set to any non-empty value
+embedding_key_env = "RAG_EMBEDDING_API_KEY"   # set to any non-empty value
 ```
 
 **3. Export your API key**
@@ -125,14 +123,22 @@ Ingest documents:  "ingest ./docs"  or  "add ./reports to the knowledge base"
 List documents:    "what documents do you know about?"
 ```
 
-The Chat tab streams responses progressively. Citations appear below each answer as collapsible source references. Ctrl+Enter submits a message.
+The Chat tab streams responses progressively. Ctrl+Enter submits a message.
+
+**Transparent Search** — When the assistant retrieves documents to answer a question, a chunk panel appears above the answer showing:
+
+- Numbered chunk cards (`[1]`, `[2]`, ...) with source name, file path, similarity score (3 decimal places), and a 300-character excerpt
+- "Show full text" toggle on each card to expand the complete chunk
+- "(file no longer on disk)" indicator when the source file has been moved or deleted
+
+The assistant's answer uses inline citations (e.g. `[1]`, `[2]`) matching the chunk numbers. An "Inspect prompt" panel beneath each answer lets you expand and copy the exact augmented prompt sent to the LLM, including the system instruction, all numbered context entries, and your original question.
 
 **Optional `[llm]` config section** in `.rag-plugin.toml`:
 
 ```toml
 [llm]
 model = "claude-sonnet-4-6"    # default
-api_key_env = "ANTHROPIC_API_KEY"  # env var name for the API key
+llm_key_env = "ANTHROPIC_API_KEY"  # env var name for the API key
 ```
 
 Conversation history is maintained in the browser for the current session (up to 10 turns). History is lost on page reload.
@@ -283,6 +289,5 @@ sqlite3 .rag-registry.db \
 ## Running Tests
 
 ```bash
-.venv/bin/pip install pytest pytest-cov
 .venv/bin/python -m pytest tests/
 ```

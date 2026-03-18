@@ -30,10 +30,11 @@ from flask import Flask, Response, jsonify, render_template, request, stream_wit
 
 from lib.config import load_config, ConfigError, LocalSourceConfig
 from lib.logger import init_logger
-from lib.registry import open_registry
+from lib.registry import open_registry, create_schema
 from lib.store import get_or_create_collection, check_model_consistency, ModelMismatchError
 from lib.pipeline import run_ingestion, SourceResult, IngestionEvent
 from lib.ingest_tool import (
+    RAG_SYSTEM_INSTRUCTION,
     TOOL_SCHEMAS,
     execute_ingest_documents,
     execute_query_registry,
@@ -261,11 +262,11 @@ def ingest_run():
         return jsonify({"error": "config_invalid", "message": str(exc)}), 422
 
     # Step 2: preflight — check API key env var before full config validation
-    api_key_env = raw.get("embedding", {}).get("api_key_env", "")
-    if api_key_env and not os.environ.get(api_key_env):
+    embedding_key_env = raw.get("embedding", {}).get("embedding_key_env", "")
+    if embedding_key_env and not os.environ.get(embedding_key_env):
         return jsonify({
             "error": "preflight_failed",
-            "reason": f"Environment variable {api_key_env} is not set",
+            "reason": f"Environment variable {embedding_key_env} is not set",
         }), 412
 
     # Step 3: full config validation (validates URLs, chunk sizes, etc.)
@@ -349,6 +350,7 @@ def registry():
         return jsonify({"error": "registry_missing", "message": f"{registry_path} not found"}), 404
 
     conn = open_registry(registry_path)
+    create_schema(conn)
     try:
         if search:
             rows = conn.execute(
@@ -395,7 +397,7 @@ def get_config():
             "provider": cfg.embedding.provider,
             "model": cfg.embedding.model,
             "api_base": cfg.embedding.api_base,
-            "api_key_env": cfg.embedding.api_key_env,
+            "embedding_key_env": cfg.embedding.embedding_key_env,
         },
         "vector_store": {
             "provider": cfg.vector_store.provider,
@@ -434,8 +436,8 @@ def put_config():
             errors.append({"field": "pipeline.chunk_size", "message": "must be an integer"})
 
     embedding = data.get("embedding", {})
-    if not embedding.get("api_key_env", "").strip():
-        errors.append({"field": "embedding.api_key_env", "message": "must not be empty"})
+    if not embedding.get("embedding_key_env", "").strip():
+        errors.append({"field": "embedding.embedding_key_env", "message": "must not be empty"})
 
     sources = data.get("sources", [])
     if not sources:
@@ -486,11 +488,11 @@ def chat_preflight():
     except ConfigError:
         return jsonify({"ok": False, "reason": "Configuration file invalid or missing"}), 412
 
-    api_key = os.environ.get(cfg.llm.api_key_env)
+    api_key = os.environ.get(cfg.llm.llm_key_env)
     if not api_key:
         return jsonify({
             "ok": False,
-            "reason": f"Environment variable {cfg.llm.api_key_env!r} is not set.",
+            "reason": f"Environment variable {cfg.llm.llm_key_env!r} is not set.",
         }), 412
 
     return jsonify({"ok": True, "model": cfg.llm.model})
@@ -536,12 +538,30 @@ def _chat_stream(message: str, history: list, cfg):
         error        — an error occurred
         done         — stream is complete (always emitted in finally)
     """
-    api_key = os.environ.get(cfg.llm.api_key_env, "")
+    api_key = os.environ.get(cfg.llm.llm_key_env, "")
 
     def _sse(payload: dict) -> str:
         return f"data: {json.dumps(payload)}\n\n"
 
     try:
+        # FR-008: Check for empty knowledge base before any API calls
+        try:
+            chroma_client = chromadb.PersistentClient(path=cfg.vector_store.path)
+            collection = get_or_create_collection(
+                chroma_client, cfg.vector_store.collection, cfg.embedding.model
+            )
+            if collection.count() == 0:
+                yield _sse({
+                    "event": "error",
+                    "message": (
+                        "No documents in knowledge base. Please ingest documents "
+                        "first using the Ingestion tab or by typing 'ingest ./path' in chat."
+                    ),
+                })
+                return
+        except Exception:
+            pass  # Let the normal flow handle errors
+
         client = anthropic.Anthropic(api_key=api_key)
 
         # Build Anthropic messages list
@@ -573,13 +593,12 @@ def _chat_stream(message: str, history: list, cfg):
                 if tool_block.name == "search_knowledge_base":
                     query = tool_input.get("query", "")
                     n_results = tool_input.get("n_results", cfg.pipeline.top_k)
-                    # Load ChromaDB for search
                     try:
                         chroma_client = chromadb.PersistentClient(path=cfg.vector_store.path)
                         collection = get_or_create_collection(
                             chroma_client, cfg.vector_store.collection, cfg.embedding.model
                         )
-                        result_str, chunks = execute_search_knowledge_base(
+                        result_str, chunks, augmented_prompt = execute_search_knowledge_base(
                             query=query,
                             n_results=n_results,
                             embedding_cfg=cfg.embedding,
@@ -591,6 +610,23 @@ def _chat_stream(message: str, history: list, cfg):
                                 for c in chunks
                             ]
                             yield _sse({"event": "citations", "sources": sources})
+                            # Feature 001: Emit detailed chunk metadata
+                            chunk_payload = []
+                            for i, c in enumerate(chunks, 1):
+                                chunk_payload.append({
+                                    "number": i,
+                                    "source_name": c.source_name,
+                                    "origin_path": c.origin_path,
+                                    "similarity_score": round(c.similarity_score, 3),
+                                    "excerpt": c.text[:300],
+                                    "full_text": c.text,
+                                    "file_exists": os.path.exists(c.origin_path),
+                                })
+                            yield _sse({"event": "chunks", "chunks": chunk_payload})
+                            # Feature 001: Emit augmented prompt for inspect panel
+                            yield _sse({"event": "augmented_prompt", "prompt": augmented_prompt})
+                        else:
+                            yield _sse({"event": "chunks", "chunks": []})
                     except Exception as exc:
                         result_str = f"ERROR: Search failed: {exc}"
 
