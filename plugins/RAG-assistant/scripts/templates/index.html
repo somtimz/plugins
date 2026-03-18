@@ -316,6 +316,107 @@
       font-style: italic;
     }
 
+    /* ── Chunk panel (feature 001) ───────────────────────────── */
+    .chunk-panel {
+      align-self: flex-start;
+      width: 80%;
+      margin-bottom: 0.5rem;
+    }
+    .chunk-panel-header {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 0.4rem;
+    }
+    .chunk-card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 0.4rem;
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+    .chunk-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.3rem;
+    }
+    .chunk-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 50%;
+      background: #1a1a2e;
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .chunk-source { font-weight: 600; color: #333; }
+    .chunk-path { color: #888; font-family: monospace; font-size: 0.75rem; }
+    .chunk-path .deleted-note { color: #c00; font-style: italic; }
+    .chunk-score {
+      margin-left: auto;
+      background: #f0f4ff;
+      color: #3730a3;
+      padding: 0.1rem 0.45rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .chunk-excerpt { color: #444; }
+    .chunk-expand { margin-top: 0.3rem; font-size: 0.8rem; }
+    .chunk-expand summary {
+      cursor: pointer;
+      color: #3730a3;
+      user-select: none;
+      font-weight: 500;
+    }
+    .chunk-expand p {
+      margin: 0.3rem 0 0;
+      white-space: pre-wrap;
+      color: #333;
+    }
+    .chunk-note { font-size: 0.78rem; color: #888; margin-top: 0.3rem; font-style: italic; }
+    .chunk-empty {
+      background: #fef9c3;
+      color: #854d0e;
+      border-radius: 6px;
+      padding: 0.6rem 0.8rem;
+      font-size: 0.85rem;
+    }
+
+    /* ── Inspect prompt panel (feature 001) ────────────────── */
+    .inspect-prompt {
+      align-self: flex-start;
+      width: 80%;
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+    }
+    .inspect-prompt summary {
+      cursor: pointer;
+      color: #555;
+      user-select: none;
+      font-weight: 500;
+    }
+    .inspect-prompt pre {
+      margin: 0.4rem 0 0;
+      background: #1e1e1e;
+      color: #d4d4d4;
+      border-radius: 6px;
+      padding: 0.8rem;
+      overflow-x: auto;
+      font-size: 0.78rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
     .chat-citations {
       margin-top: 0.5rem;
       font-size: 0.8rem;
@@ -961,7 +1062,7 @@ function loadConfig() {
       document.getElementById("emb-provider").value  = emb.provider  || "";
       document.getElementById("emb-model").value     = emb.model     || "";
       document.getElementById("emb-api-base").value  = emb.api_base  || "";
-      document.getElementById("emb-api-key-env").value = emb.api_key_env || "";
+      document.getElementById("emb-api-key-env").value = emb.embedding_key_env || "";
 
       document.getElementById("vs-provider").value   = vs.provider   || "";
       document.getElementById("vs-path").value       = vs.path       || "";
@@ -991,7 +1092,7 @@ document.getElementById("cfg-form").addEventListener("submit", function(ev) {
       provider:    document.getElementById("emb-provider").value.trim(),
       model:       document.getElementById("emb-model").value.trim(),
       api_base:    document.getElementById("emb-api-base").value.trim(),
-      api_key_env: document.getElementById("emb-api-key-env").value.trim(),
+      embedding_key_env: document.getElementById("emb-api-key-env").value.trim(),
     },
     vector_store: {
       provider:   document.getElementById("vs-provider").value.trim(),
@@ -1029,7 +1130,7 @@ document.getElementById("cfg-form").addEventListener("submit", function(ev) {
           var fieldMap = {
             "pipeline.chunk_overlap": "err-pl-chunk-overlap",
             "pipeline.chunk_size":    "err-pl-chunk-size",
-            "embedding.api_key_env":  "err-emb-api-key-env",
+            "embedding.embedding_key_env":  "err-emb-api-key-env",
           };
           var errId = fieldMap[f.field];
           if (errId) {
@@ -1050,6 +1151,7 @@ var conversationHistory = [];
 var currentModel = "";
 var _currentAssistantBubble = null;
 var _currentAssistantText = "";
+var _currentAugmentedPrompt = "";
 
 // T013 — chatPreflight
 function chatPreflight() {
@@ -1118,6 +1220,7 @@ function sendMessage() {
   _appendUserBubble(message);
   _currentAssistantBubble = _newAssistantBubble();
   _currentAssistantText = "";
+  _currentAugmentedPrompt = "";
 
   fetch("/api/chat", {
     method: "POST",
@@ -1192,6 +1295,12 @@ function _dispatchEvent(payload, originalMessage) {
     case "citations":
       appendCitations(payload.sources || []);
       break;
+    case "chunks":
+      appendChunkPanel(payload.chunks || []);
+      break;
+    case "augmented_prompt":
+      _currentAugmentedPrompt = payload.prompt || "";
+      break;
     case "error":
       if (_currentAssistantBubble) {
         _currentAssistantBubble.textContent = "Error: " + (payload.message || "Unknown error");
@@ -1206,6 +1315,20 @@ function _dispatchEvent(payload, originalMessage) {
 }
 
 function _finaliseStream(originalMessage) {
+  // T008: Render inspect prompt panel if augmented prompt was received
+  if (_currentAugmentedPrompt && _currentAssistantBubble) {
+    var details = document.createElement("details");
+    details.className = "inspect-prompt";
+    var summary = document.createElement("summary");
+    summary.textContent = "Inspect prompt";
+    details.appendChild(summary);
+    var pre = document.createElement("pre");
+    pre.textContent = _currentAugmentedPrompt;
+    details.appendChild(pre);
+    _currentAssistantBubble.appendChild(details);
+  }
+  _currentAugmentedPrompt = "";
+
   // Append turn to history; trim to last 20 messages
   if (originalMessage) {
     conversationHistory.push({ role: "user", content: originalMessage });
@@ -1258,6 +1381,88 @@ function appendCitations(sources) {
   });
   details.appendChild(ul);
   _currentAssistantBubble.appendChild(details);
+}
+
+// T005 — appendChunkPanel (Feature 001: Transparent RAG Search)
+function appendChunkPanel(chunks) {
+  var messages = document.getElementById("chat-messages");
+  var panel = document.createElement("div");
+  panel.className = "chunk-panel";
+
+  if (!chunks || chunks.length === 0) {
+    var empty = document.createElement("div");
+    empty.className = "chunk-empty";
+    empty.textContent = "No relevant content found \u2014 try rephrasing your question or ingesting more documents.";
+    panel.appendChild(empty);
+    messages.appendChild(panel);
+    messages.scrollTop = messages.scrollHeight;
+    return;
+  }
+
+  var header = document.createElement("div");
+  header.className = "chunk-panel-header";
+  header.textContent = "Retrieved Chunks";
+  panel.appendChild(header);
+
+  chunks.forEach(function(chunk) {
+    var card = document.createElement("div");
+    card.className = "chunk-card";
+
+    var cardHeader = document.createElement("div");
+    cardHeader.className = "chunk-card-header";
+
+    var number = document.createElement("span");
+    number.className = "chunk-number";
+    number.textContent = "[" + chunk.number + "]";
+    cardHeader.appendChild(number);
+
+    var source = document.createElement("span");
+    source.className = "chunk-source";
+    source.textContent = chunk.source_name;
+    cardHeader.appendChild(source);
+
+    var score = document.createElement("span");
+    score.className = "chunk-score";
+    score.textContent = chunk.similarity_score.toFixed(3);
+    cardHeader.appendChild(score);
+
+    card.appendChild(cardHeader);
+
+    var path = document.createElement("div");
+    path.className = "chunk-path";
+    path.textContent = chunk.origin_path;
+    if (!chunk.file_exists) {
+      path.textContent += " (file no longer on disk)";
+    }
+    card.appendChild(path);
+
+    var excerpt = document.createElement("div");
+    excerpt.className = "chunk-excerpt";
+    excerpt.textContent = chunk.excerpt;
+    card.appendChild(excerpt);
+
+    var details = document.createElement("details");
+    details.className = "chunk-expand";
+    var summary = document.createElement("summary");
+    summary.textContent = "Show full text";
+    details.appendChild(summary);
+    var fullText = document.createElement("p");
+    fullText.textContent = chunk.full_text;
+    details.appendChild(fullText);
+    card.appendChild(details);
+
+    panel.appendChild(card);
+  });
+
+  if (chunks.length < 5) {
+    var note = document.createElement("div");
+    note.className = "chunk-note";
+    note.textContent = "(" + chunks.length + " of 5 chunks available)";
+    panel.appendChild(note);
+  }
+
+  messages.appendChild(panel);
+  messages.scrollTop = messages.scrollHeight;
 }
 
 // T018 — appendToolResult

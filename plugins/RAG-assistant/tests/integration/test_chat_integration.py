@@ -59,7 +59,7 @@ def valid_config(tmp_path, monkeypatch):
         'provider = "openai-compatible"\n'
         'model = "text-embedding-3-small"\n'
         'api_base = "https://api.openai.com/v1"\n'
-        'api_key_env = "TEST_EMBEDDING_KEY"\n\n'
+        'embedding_key_env = "TEST_EMBEDDING_KEY"\n\n'
         "[vector_store]\n"
         'provider = "chroma"\n'
         f'path = "{store}"\n'
@@ -119,6 +119,16 @@ def _parse_sse(data: bytes) -> list[dict]:
     return events
 
 
+def _mock_chromadb_non_empty():
+    """Return a patch for chromadb.PersistentClient with a non-empty collection."""
+    mock_collection = MagicMock()
+    mock_collection.count.return_value = 10
+    mock_chroma = MagicMock()
+    mock_chroma.get_or_create_collection.return_value = mock_collection
+    return patch("ui.chromadb.PersistentClient", return_value=mock_chroma), \
+           patch("ui.get_or_create_collection", return_value=mock_collection)
+
+
 # ---------------------------------------------------------------------------
 # T008 — GET /api/chat/preflight tests
 # ---------------------------------------------------------------------------
@@ -141,7 +151,7 @@ class TestChatPreflight:
         assert resp.status_code == 412
 
     def test_returns_412_when_config_has_custom_key_env_and_not_set(self, client, tmp_path, monkeypatch):
-        """Preflight uses api_key_env from config, not hardcoded ANTHROPIC_API_KEY."""
+        """Preflight uses llm_key_env from config, not hardcoded ANTHROPIC_API_KEY."""
         reg = tmp_path / "registry.db"
         store = tmp_path / ".rag-store"
         log = tmp_path / "pipeline.log"
@@ -151,10 +161,10 @@ class TestChatPreflight:
             'provider = "openai-compatible"\n'
             'model = "text-embedding-3-small"\n'
             'api_base = "https://api.openai.com/v1"\n'
-            'api_key_env = "TEST_EMBEDDING_KEY"\n\n'
+            'embedding_key_env = "TEST_EMBEDDING_KEY"\n\n'
             "[llm]\n"
             'model = "claude-sonnet-4-6"\n'
-            'api_key_env = "MY_CUSTOM_CLAUDE_KEY"\n\n'
+            'llm_key_env = "MY_CUSTOM_CLAUDE_KEY"\n\n'
             "[vector_store]\n"
             'provider = "chroma"\n'
             f'path = "{store}"\n'
@@ -197,8 +207,9 @@ class TestChatEndpoint:
         """POST /api/chat with valid message returns 200 text/event-stream."""
         monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-test")
         stream_cm = _make_stream_cm(text_chunks=["Hello", " world"])
+        chroma_patch, coll_patch = _mock_chromadb_non_empty()
 
-        with patch("ui.anthropic") as mock_anthropic:
+        with patch("ui.anthropic") as mock_anthropic, chroma_patch, coll_patch:
             mock_client = MagicMock()
             mock_anthropic.Anthropic.return_value = mock_client
             mock_client.messages.stream.return_value = stream_cm
@@ -225,8 +236,9 @@ class TestChatEndpoint:
         """POST /api/chat with empty history array succeeds."""
         monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-test")
         stream_cm = _make_stream_cm(text_chunks=["OK"])
+        chroma_patch, coll_patch = _mock_chromadb_non_empty()
 
-        with patch("ui.anthropic") as mock_anthropic:
+        with patch("ui.anthropic") as mock_anthropic, chroma_patch, coll_patch:
             mock_client = MagicMock()
             mock_anthropic.Anthropic.return_value = mock_client
             mock_client.messages.stream.return_value = stream_cm
@@ -242,8 +254,9 @@ class TestChatEndpoint:
         """POST /api/chat response always includes a 'done' SSE event."""
         monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-test")
         stream_cm = _make_stream_cm(text_chunks=["Hello"])
+        chroma_patch, coll_patch = _mock_chromadb_non_empty()
 
-        with patch("ui.anthropic") as mock_anthropic:
+        with patch("ui.anthropic") as mock_anthropic, chroma_patch, coll_patch:
             mock_client = MagicMock()
             mock_anthropic.Anthropic.return_value = mock_client
             mock_client.messages.stream.return_value = stream_cm
@@ -261,8 +274,9 @@ class TestChatEndpoint:
         """POST /api/chat emits text_delta SSE events for streamed text."""
         monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-test")
         stream_cm = _make_stream_cm(text_chunks=["Hello", " world"])
+        chroma_patch, coll_patch = _mock_chromadb_non_empty()
 
-        with patch("ui.anthropic") as mock_anthropic:
+        with patch("ui.anthropic") as mock_anthropic, chroma_patch, coll_patch:
             mock_client = MagicMock()
             mock_anthropic.Anthropic.return_value = mock_client
             mock_client.messages.stream.return_value = stream_cm
@@ -293,9 +307,11 @@ class TestChatEndpoint:
             source_name="docs", origin_path="/docs/file.pdf",
             similarity_score=0.9,
         )
+        chroma_patch, coll_patch = _mock_chromadb_non_empty()
 
         with patch("ui.anthropic") as mock_anthropic, \
-             patch("ui.execute_search_knowledge_base", return_value=("Found 1 chunk", [mock_chunk])):
+             patch("ui.execute_search_knowledge_base", return_value=("Found 1 chunk", [mock_chunk], "System\n\n[1] chunk\n\nQuestion: test")), \
+             chroma_patch, coll_patch:
             mock_client = MagicMock()
             mock_anthropic.Anthropic.return_value = mock_client
             mock_client.messages.stream.side_effect = [first_cm, second_cm]
@@ -313,8 +329,9 @@ class TestChatEndpoint:
     def test_done_emitted_on_api_error(self, client, valid_config, monkeypatch):
         """'done' SSE event is emitted even when the Anthropic API raises an exception."""
         monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-test")
+        chroma_patch, coll_patch = _mock_chromadb_non_empty()
 
-        with patch("ui.anthropic") as mock_anthropic:
+        with patch("ui.anthropic") as mock_anthropic, chroma_patch, coll_patch:
             mock_client = MagicMock()
             mock_anthropic.Anthropic.return_value = mock_client
             mock_anthropic.APIError = Exception
@@ -360,9 +377,11 @@ class TestSC002CanonicalPhrasings:
         tool_block = _make_tool_use_block("ingest_documents", "toolu_01", {"path": "./docs"})
         first_cm = _make_stream_cm(text_chunks=[], stop_reason="tool_use", tool_blocks=[tool_block])
         second_cm = _make_stream_cm(text_chunks=["Ingestion complete."])
+        chroma_patch, coll_patch = _mock_chromadb_non_empty()
 
         with patch("ui.anthropic") as mock_anthropic, \
-             patch("ui.execute_ingest_documents", return_value="Ingested 1 file."):
+             patch("ui.execute_ingest_documents", return_value="Ingested 1 file."), \
+             chroma_patch, coll_patch:
             mock_client = MagicMock()
             mock_anthropic.Anthropic.return_value = mock_client
             mock_client.messages.stream.side_effect = [first_cm, second_cm]
@@ -417,20 +436,24 @@ class TestIngestDocumentsToolPath:
         tool_block = _make_tool_use_block("ingest_documents", "toolu_01", {"path": "./docs"})
         first_cm = _make_stream_cm(stop_reason="tool_use", tool_blocks=[tool_block])
         second_cm = _make_stream_cm(text_chunks=["Another run is in progress."])
+        chroma_patch, coll_patch = _mock_chromadb_non_empty()
 
         ui._run_lock.acquire()
+        events = []
         try:
-            with patch("ui.anthropic") as mock_anthropic:
+            with patch("ui.anthropic") as mock_anthropic, chroma_patch, coll_patch:
                 mock_client = MagicMock()
                 mock_anthropic.Anthropic.return_value = mock_client
                 mock_client.messages.stream.side_effect = [first_cm, second_cm]
 
                 resp = client.post("/api/chat", json={"message": "ingest ./docs", "history": []})
+                # Consume resp.data inside the patch+lock context: the SSE generator resumes
+                # lazily when resp.data is accessed, so the lock must still be held and
+                # ui.anthropic must still be patched when that happens.
+                events = _parse_sse(resp.data)
         finally:
             if ui._run_lock.locked():
                 ui._run_lock.release()
-
-        events = _parse_sse(resp.data)
         tool_results = [e for e in events if e.get("event") == "tool_result"]
         assert len(tool_results) >= 1
         assert any(
@@ -447,8 +470,9 @@ class TestIngestDocumentsToolPath:
         tool_block = _make_tool_use_block("ingest_documents", "toolu_01", {"path": "/nonexistent/xyz"})
         first_cm = _make_stream_cm(stop_reason="tool_use", tool_blocks=[tool_block])
         second_cm = _make_stream_cm(text_chunks=["Path not found."])
+        chroma_patch, coll_patch = _mock_chromadb_non_empty()
 
-        with patch("ui.anthropic") as mock_anthropic:
+        with patch("ui.anthropic") as mock_anthropic, chroma_patch, coll_patch:
             mock_client = MagicMock()
             mock_anthropic.Anthropic.return_value = mock_client
             mock_client.messages.stream.side_effect = [first_cm, second_cm]
@@ -466,9 +490,11 @@ class TestIngestDocumentsToolPath:
         tool_block = _make_tool_use_block("ingest_documents", "toolu_01", {"path": "./docs"})
         first_cm = _make_stream_cm(stop_reason="tool_use", tool_blocks=[tool_block])
         second_cm = _make_stream_cm(text_chunks=["Ingested the docs folder."])
+        chroma_patch, coll_patch = _mock_chromadb_non_empty()
 
         with patch("ui.anthropic") as mock_anthropic, \
-             patch("ui.execute_ingest_documents", return_value="Succeeded: 1"):
+             patch("ui.execute_ingest_documents", return_value="Succeeded: 1"), \
+             chroma_patch, coll_patch:
             mock_client = MagicMock()
             mock_anthropic.Anthropic.return_value = mock_client
             mock_client.messages.stream.side_effect = [first_cm, second_cm]
@@ -493,9 +519,11 @@ class TestQueryRegistryToolPath:
         tool_block = _make_tool_use_block("query_registry", "toolu_02", {"query": None, "limit": 50})
         first_cm = _make_stream_cm(stop_reason="tool_use", tool_blocks=[tool_block])
         second_cm = _make_stream_cm(text_chunks=["I have 2 documents."])
+        chroma_patch, coll_patch = _mock_chromadb_non_empty()
 
         with patch("ui.anthropic") as mock_anthropic, \
-             patch("ui.execute_query_registry", return_value='[{"source_name":"hr"}]'):
+             patch("ui.execute_query_registry", return_value='[{"source_name":"hr"}]'), \
+             chroma_patch, coll_patch:
             mock_client = MagicMock()
             mock_anthropic.Anthropic.return_value = mock_client
             mock_client.messages.stream.side_effect = [first_cm, second_cm]
@@ -513,9 +541,11 @@ class TestQueryRegistryToolPath:
         tool_block = _make_tool_use_block("query_registry", "toolu_02", {})
         first_cm = _make_stream_cm(stop_reason="tool_use", tool_blocks=[tool_block])
         second_cm = _make_stream_cm(text_chunks=["No documents found."])
+        chroma_patch, coll_patch = _mock_chromadb_non_empty()
 
         with patch("ui.anthropic") as mock_anthropic, \
-             patch("ui.execute_query_registry", return_value="[]"):
+             patch("ui.execute_query_registry", return_value="[]"), \
+             chroma_patch, coll_patch:
             mock_client = MagicMock()
             mock_anthropic.Anthropic.return_value = mock_client
             mock_client.messages.stream.side_effect = [first_cm, second_cm]
@@ -535,9 +565,11 @@ class TestQueryRegistryToolPath:
         tool_block = _make_tool_use_block("query_registry", "toolu_02", {"query": "hr"})
         first_cm = _make_stream_cm(stop_reason="tool_use", tool_blocks=[tool_block])
         second_cm = _make_stream_cm(text_chunks=["Here are the HR docs."])
+        chroma_patch, coll_patch = _mock_chromadb_non_empty()
 
         with patch("ui.anthropic") as mock_anthropic, \
-             patch("ui.execute_query_registry", return_value='[{"source_name":"hr"}]'):
+             patch("ui.execute_query_registry", return_value='[{"source_name":"hr"}]'), \
+             chroma_patch, coll_patch:
             mock_client = MagicMock()
             mock_anthropic.Anthropic.return_value = mock_client
             mock_client.messages.stream.side_effect = [first_cm, second_cm]

@@ -89,6 +89,37 @@ TOOL_SCHEMAS: list[dict] = [
 
 
 # ---------------------------------------------------------------------------
+# RAG system instruction (hardcoded for v1 — FR-005)
+# ---------------------------------------------------------------------------
+
+RAG_SYSTEM_INSTRUCTION = (
+    "You are a knowledge base assistant. Answer questions using ONLY the "
+    "provided context chunks below.\n"
+    "Rules:\n"
+    "- Cite your sources using numbered inline citations like [1], [2] that "
+    "match the chunk numbers.\n"
+    "- If the context does not contain enough information to answer, say so "
+    "explicitly.\n"
+    "- Do not fabricate information not present in the context."
+)
+
+
+def build_augmented_prompt(query: str, chunks: list[RetrievedChunk]) -> str:
+    """Assemble the full augmented prompt from system instruction, chunks, and query.
+
+    Returns the exact string that will be shown in the "Inspect prompt" panel.
+    """
+    parts = [RAG_SYSTEM_INSTRUCTION, "\n\nContext:\n"]
+    for i, chunk in enumerate(chunks, 1):
+        parts.append(
+            f"\n[{i}] ({chunk.source_name} \u2014 {chunk.origin_path}):\n"
+            f"{chunk.text}\n"
+        )
+    parts.append(f"\nQuestion: {query}")
+    return "".join(parts)
+
+
+# ---------------------------------------------------------------------------
 # Executor functions
 # ---------------------------------------------------------------------------
 
@@ -191,7 +222,7 @@ def execute_search_knowledge_base(
     n_results: int,
     embedding_cfg,
     collection,
-) -> tuple[str, list]:
+) -> tuple[str, list[RetrievedChunk], str]:
     """Embed the query and search ChromaDB for relevant chunks.
 
     Parameters
@@ -201,14 +232,14 @@ def execute_search_knowledge_base(
     n_results:
         Number of chunks to retrieve.
     embedding_cfg:
-        EmbeddingConfig-like object with api_base, api_key_env, model.
+        EmbeddingConfig-like object with api_base, embedding_key_env, model.
     collection:
         ChromaDB collection to query.
 
     Returns
     -------
-    tuple[str, list[RetrievedChunk]]
-        (formatted_summary_string, list_of_retrieved_chunks)
+    tuple[str, list[RetrievedChunk], str]
+        (formatted_summary_string, list_of_retrieved_chunks, augmented_prompt)
     """
     query_vector = embed_query(query, embedding_cfg)
     chunks = search_similar(collection, query_vector, n_results=n_results)
@@ -218,6 +249,7 @@ def execute_search_knowledge_base(
             "No relevant documents found in the knowledge base for this query. "
             "Consider ingesting documents first.",
             [],
+            "",
         )
 
     lines = [f"Found {len(chunks)} relevant chunk(s):\n"]
@@ -227,4 +259,5 @@ def execute_search_knowledge_base(
             f"(score: {chunk.similarity_score:.3f})\n{chunk.text[:200]}"
         )
 
-    return "\n".join(lines), chunks
+    augmented_prompt = build_augmented_prompt(query, chunks)
+    return "\n".join(lines), chunks, augmented_prompt

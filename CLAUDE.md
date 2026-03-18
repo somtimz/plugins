@@ -72,3 +72,10 @@ fix(plugin-name): correct ...
 docs(plugin-name): update ...
 chore: ...
 ```
+
+## Active Technologies
+- Python 3.11+ + Flask, anthropic, chromadb, openai (embedding client) (001-rag-search-transparency)
+- ChromaDB (vector store), SQLite (registry) (001-rag-search-transparency)
+
+## Recent Changes
+- 001-rag-search-transparency: Added Python 3.11+ + Flask, anthropic, chromadb, openai (embedding client)
