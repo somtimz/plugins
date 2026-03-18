@@ -23,7 +23,7 @@ class EmbeddingConfig:
     provider: str
     model: str
     api_base: str
-    api_key_env: str
+    embedding_key_env: str
 
 
 @dataclass
@@ -47,7 +47,7 @@ class PipelineConfig:
 @dataclass
 class LlmConfig:
     model: str = "claude-sonnet-4-6"
-    api_key_env: str = "ANTHROPIC_API_KEY"
+    llm_key_env: str = "ANTHROPIC_API_KEY"
 
 
 @dataclass
@@ -109,13 +109,13 @@ def _parse_embedding(raw: dict) -> EmbeddingConfig:
     model = str(_require(e, "model", "embedding"))
     api_base = str(_require(e, "api_base", "embedding"))
     _validate_url(api_base, "embedding.api_base")
-    api_key_env = str(_require(e, "api_key_env", "embedding"))
-    if not os.environ.get(api_key_env):
+    embedding_key_env = str(_require(e, "embedding_key_env", "embedding"))
+    if not os.environ.get(embedding_key_env):
         raise ConfigError(
-            f"Environment variable {api_key_env!r} is not set. "
+            f"Environment variable {embedding_key_env!r} is not set. "
             f"Export it before running the pipeline."
         )
-    return EmbeddingConfig(provider=provider, model=model, api_base=api_base, api_key_env=api_key_env)
+    return EmbeddingConfig(provider=provider, model=model, api_base=api_base, embedding_key_env=embedding_key_env)
 
 
 def _parse_vector_store(raw: dict) -> VectorStoreConfig:
@@ -203,10 +203,10 @@ def _parse_llm(raw: dict) -> LlmConfig:
     model = str(l.get("model", "claude-sonnet-4-6"))
     if not model.strip():
         raise ConfigError("llm.model must be a non-empty string")
-    api_key_env = str(l.get("api_key_env", "ANTHROPIC_API_KEY"))
-    if not api_key_env.strip():
-        raise ConfigError("llm.api_key_env must be a non-empty string")
-    return LlmConfig(model=model, api_key_env=api_key_env)
+    llm_key_env = str(l.get("llm_key_env", "ANTHROPIC_API_KEY"))
+    if not llm_key_env.strip():
+        raise ConfigError("llm.llm_key_env must be a non-empty string")
+    return LlmConfig(model=model, llm_key_env=llm_key_env)
 
 
 def _parse_sources(raw: dict) -> list[SourceConfig]:

@@ -50,7 +50,7 @@ def valid_config_toml(tmp_path):
     cfg = tmp_path / ".rag-plugin.toml"
     cfg.write_text(
         '[embedding]\nprovider = "openai-compatible"\nmodel = "text-embedding-3-small"\n'
-        'api_base = "https://api.openai.com/v1"\napi_key_env = "TEST_API_KEY"\n\n'
+        'api_base = "https://api.openai.com/v1"\nembedding_key_env = "TEST_API_KEY"\n\n'
         '[vector_store]\nprovider = "chroma"\npath = ".rag-store"\ncollection = "docs"\n\n'
         '[pipeline]\nchunk_size = 1000\nchunk_overlap = 200\n'
         'supported_formats = ["txt", "md"]\n\n'
@@ -186,7 +186,7 @@ class TestRegistry:
         self._make_registry(str(reg))
         cfg_path = tmp_path / ".rag-plugin.toml"
         cfg_path.write_text(
-            '[embedding]\nprovider="x"\nmodel="m"\napi_base="http://x"\napi_key_env="K"\n'
+            '[embedding]\nprovider="x"\nmodel="m"\napi_base="http://x"\nembedding_key_env="K"\n'
             '[vector_store]\nprovider="chroma"\npath=".s"\ncollection="c"\n'
             f'[pipeline]\nchunk_size=1000\nchunk_overlap=200\nregistry_path="{reg}"\n'
             '[[sources]]\nname="s"\ntype="local"\npath="."\n'
@@ -203,7 +203,7 @@ class TestRegistry:
         self._make_registry(str(reg))
         cfg_path = tmp_path / ".rag-plugin.toml"
         cfg_path.write_text(
-            '[embedding]\nprovider="x"\nmodel="m"\napi_base="http://x"\napi_key_env="K"\n'
+            '[embedding]\nprovider="x"\nmodel="m"\napi_base="http://x"\nembedding_key_env="K"\n'
             '[vector_store]\nprovider="chroma"\npath=".s"\ncollection="c"\n'
             f'[pipeline]\nchunk_size=1000\nchunk_overlap=200\nregistry_path="{reg}"\n'
             '[[sources]]\nname="s"\ntype="local"\npath="."\n'
@@ -219,7 +219,7 @@ class TestRegistry:
         self._make_registry(str(reg))
         cfg_path = tmp_path / ".rag-plugin.toml"
         cfg_path.write_text(
-            '[embedding]\nprovider="x"\nmodel="m"\napi_base="http://x"\napi_key_env="K"\n'
+            '[embedding]\nprovider="x"\nmodel="m"\napi_base="http://x"\nembedding_key_env="K"\n'
             '[vector_store]\nprovider="chroma"\npath=".s"\ncollection="c"\n'
             f'[pipeline]\nchunk_size=1000\nchunk_overlap=200\nregistry_path="{reg}"\n'
             '[[sources]]\nname="s"\ntype="local"\npath="."\n'
@@ -233,7 +233,7 @@ class TestRegistry:
     def test_404_when_registry_missing(self, client, tmp_path):
         cfg_path = tmp_path / ".rag-plugin.toml"
         cfg_path.write_text(
-            '[embedding]\nprovider="x"\nmodel="m"\napi_base="http://x"\napi_key_env="K"\n'
+            '[embedding]\nprovider="x"\nmodel="m"\napi_base="http://x"\nembedding_key_env="K"\n'
             '[vector_store]\nprovider="chroma"\npath=".s"\ncollection="c"\n'
             '[pipeline]\nchunk_size=1000\nchunk_overlap=200\n'
             f'registry_path="{tmp_path / "noexist.db"}"\n'
@@ -260,7 +260,7 @@ class TestConfig:
         assert "pipeline" in data
         assert "sources" in data
         # API key value must NOT be exposed
-        assert "api_key" not in json.dumps(data).lower() or "api_key_env" in data["embedding"]
+        assert "api_key" not in json.dumps(data).lower() or "embedding_key_env" in data["embedding"]
 
     def test_get_config_404_when_missing(self, client, tmp_path):
         with patch("ui._DEFAULT_CONFIG", str(tmp_path / "missing.toml")):
@@ -272,7 +272,7 @@ class TestConfig:
         cfg_path = tmp_path / ".rag-plugin.toml"
         payload = {
             "embedding": {"provider": "openai-compatible", "model": "m",
-                          "api_base": "http://x", "api_key_env": "MY_KEY"},
+                          "api_base": "http://x", "embedding_key_env": "MY_KEY"},
             "vector_store": {"provider": "chroma", "path": ".s", "collection": "c"},
             "pipeline": {"chunk_size": 500, "chunk_overlap": 50,
                          "supported_formats": ["txt"], "registry_path": ".r.db",
@@ -289,7 +289,7 @@ class TestConfig:
         cfg_path = tmp_path / ".rag-plugin.toml"
         payload = {
             "embedding": {"provider": "openai-compatible", "model": "m",
-                          "api_base": "http://x", "api_key_env": "MY_KEY"},
+                          "api_base": "http://x", "embedding_key_env": "MY_KEY"},
             "vector_store": {"provider": "chroma", "path": ".s", "collection": "c"},
             "pipeline": {"chunk_size": 200, "chunk_overlap": 200},
             "sources": [{"name": "s", "type": "local", "path": "."}],
@@ -308,7 +308,7 @@ class TestConfig:
         cfg_path = tmp_path / ".rag-plugin.toml"
         payload = {
             "embedding": {"provider": "x", "model": "m", "api_base": "http://x",
-                          "api_key_env": "K"},
+                          "embedding_key_env": "K"},
             "vector_store": {"provider": "chroma", "path": ".s", "collection": "c"},
             "pipeline": {"chunk_size": 1000, "chunk_overlap": 200},
             "sources": [],
@@ -318,11 +318,11 @@ class TestConfig:
         assert resp.status_code == 422
         assert not cfg_path.exists()
 
-    def test_put_config_422_when_api_key_env_empty(self, client, tmp_path):
+    def test_put_config_422_when_embedding_key_env_empty(self, client, tmp_path):
         cfg_path = tmp_path / ".rag-plugin.toml"
         payload = {
             "embedding": {"provider": "x", "model": "m", "api_base": "http://x",
-                          "api_key_env": ""},
+                          "embedding_key_env": ""},
             "vector_store": {"provider": "chroma", "path": ".s", "collection": "c"},
             "pipeline": {"chunk_size": 1000, "chunk_overlap": 200},
             "sources": [{"name": "s", "type": "local", "path": "."}],

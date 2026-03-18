@@ -60,7 +60,7 @@ def full_config(tmp_path):
         'provider = "openai-compatible"\n'
         'model = "text-embedding-3-small"\n'
         'api_base = "https://api.openai.com/v1"\n'
-        'api_key_env = "TEST_API_KEY"\n\n'
+        'embedding_key_env = "TEST_API_KEY"\n\n'
         "[vector_store]\n"
         'provider = "chroma"\n'
         f'path = "{store}"\n'
@@ -261,7 +261,7 @@ class TestConfigRoundTrip:
 
         cfg_path = tmp_path / ".rag-plugin.toml"
         cfg_path.write_text(
-            '[embedding]\nprovider="x"\nmodel="m"\napi_base="http://x"\napi_key_env="K"\n'
+            '[embedding]\nprovider="x"\nmodel="m"\napi_base="http://x"\nembedding_key_env="K"\n'
             '[vector_store]\nprovider="chroma"\npath=".s"\ncollection="c"\n'
             f'[pipeline]\nchunk_size=1000\nchunk_overlap=200\nregistry_path="{reg}"\n'
             '[[sources]]\nname="s"\ntype="local"\npath="."\n'
@@ -284,7 +284,7 @@ class TestConfigRoundTrip:
                 "provider": "openai-compatible",
                 "model": "text-embedding-3-small",
                 "api_base": "https://api.openai.com/v1",
-                "api_key_env": "MY_KEY",
+                "embedding_key_env": "MY_KEY",
             },
             "vector_store": {
                 "provider": "chroma",

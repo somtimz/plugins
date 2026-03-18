@@ -19,6 +19,10 @@ htmlcov/
 .rag-store/
 .rag-registry.db
 .rag-pipeline.log
+.rag-plugin.toml
+
+# Brainstorm/superpowers artifacts
+.superpowers/
 
 # Environment
 .env

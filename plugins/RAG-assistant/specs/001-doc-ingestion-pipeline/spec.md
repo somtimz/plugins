@@ -2,7 +2,7 @@
 
 **Feature Branch**: `001-doc-ingestion-pipeline`
 **Created**: 2026-03-15
-**Status**: Draft
+**Status**: Implemented
 **Input**: User description: "Add a skill that enables the user to create a data pipeline that reads one or more documents, creates an embedding and stores the documents in a vector based repository"
 
 ## User Scenarios & Testing *(mandatory)*

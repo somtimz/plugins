@@ -31,7 +31,7 @@ Create `.rag-plugin.toml` in your project root:
 provider = "openai-compatible"
 model = "text-embedding-3-small"
 api_base = "https://api.openai.com/v1"
-api_key_env = "RAG_EMBEDDING_API_KEY"
+embedding_key_env = "RAG_EMBEDDING_API_KEY"
 
 [vector_store]
 provider = "chroma"
@@ -52,7 +52,7 @@ supported_formats = ["txt", "md", "pdf", "docx"]
 provider = "openai-compatible"
 model = "nomic-embed-text"
 api_base = "http://localhost:11434/v1"
-api_key_env = "RAG_EMBEDDING_API_KEY"  # set to "local" or any value
+embedding_key_env = "RAG_EMBEDDING_API_KEY"  # set to "local" or any value
 ```
 
 ## Step 1b: Add a SharePoint source (optional)

@@ -106,7 +106,7 @@ PipelineConfig
 │   ├── provider: str        (e.g. "openai-compatible")
 │   ├── model: str           (e.g. "text-embedding-3-small")
 │   ├── api_base: str        (e.g. "https://api.openai.com/v1")
-│   └── api_key_env: str     (name of the env var, not the key itself)
+│   └── embedding_key_env: str     (name of the env var, not the key itself)
 ├── vector_store: VectorStoreConfig
 │   ├── provider: str        (e.g. "chroma")
 │   ├── path: str            (e.g. ".rag-store")
@@ -124,11 +124,11 @@ PipelineConfig
 
 **Validation rules**:
 - `chunk_overlap` must be < `chunk_size` (FR-010)
-- `api_key_env` must be a non-empty string
+- `embedding_key_env` must be a non-empty string
 - `sources` must have at least one entry
 - Source `path` must be a non-empty string
 
-**Note**: The API key value is never exposed via any endpoint. Only `api_key_env` (the env var name) is shown.
+**Note**: The API key value is never exposed via any endpoint. Only `embedding_key_env` (the env var name) is shown.
 
 ---
 

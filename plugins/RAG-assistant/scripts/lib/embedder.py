@@ -33,7 +33,7 @@ def embed_chunks(chunks, config, logger: logging.Logger) -> list[EmbeddedChunk]:
     chunks:
         Iterable of :class:`~lib.chunker.Chunk` objects to embed.
     config:
-        An object with ``api_base``, ``api_key_env``, and ``model`` attributes.
+        An object with ``api_base``, ``embedding_key_env``, and ``model`` attributes.
     logger:
         A standard :class:`logging.Logger` used for diagnostic messages.
 
@@ -52,7 +52,7 @@ def embed_chunks(chunks, config, logger: logging.Logger) -> list[EmbeddedChunk]:
 
     client = openai.OpenAI(
         base_url=config.api_base,
-        api_key=os.environ.get(config.api_key_env, ""),
+        api_key=os.environ.get(config.embedding_key_env, ""),
     )
 
     results: list[EmbeddedChunk] = []
@@ -79,7 +79,7 @@ def embed_query(text: str, embedding_cfg) -> list[float]:
     text:
         The query text to embed.
     embedding_cfg:
-        An object with ``api_base``, ``api_key_env``, and ``model`` attributes.
+        An object with ``api_base``, ``embedding_key_env``, and ``model`` attributes.
 
     Returns
     -------

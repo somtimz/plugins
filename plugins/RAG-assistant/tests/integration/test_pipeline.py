@@ -65,7 +65,7 @@ def cfg(tmp_path):
             provider="openai-compatible",
             model=MODEL,
             api_base="https://api.openai.com/v1",
-            api_key_env="TEST_API_KEY",
+            embedding_key_env="TEST_API_KEY",
         ),
         vector_store=VectorStoreConfig(
             provider="chroma",

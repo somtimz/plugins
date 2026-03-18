@@ -20,14 +20,14 @@ from lib.chunker import Chunk
 @dataclass
 class EmbeddingConfig:
     api_base: str
-    api_key_env: str
+    embedding_key_env: str
     model: str
 
 
 def _make_config() -> EmbeddingConfig:
     return EmbeddingConfig(
         api_base="https://api.openai.com/v1",
-        api_key_env="TEST_OPENAI_KEY",
+        embedding_key_env="TEST_OPENAI_KEY",
         model="text-embedding-3-small",
     )
 
@@ -278,7 +278,7 @@ class TestNonRetryableErrors:
 class TestApiKeyHandling:
     def test_openai_client_constructed_with_key_from_env(self, logger, monkeypatch):
         config = _make_config()
-        monkeypatch.setenv(config.api_key_env, "sk-env-secret-key")
+        monkeypatch.setenv(config.embedding_key_env, "sk-env-secret-key")
         chunk = _make_chunk(0)
         vector = [0.1]
 

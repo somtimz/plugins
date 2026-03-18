@@ -9,8 +9,7 @@ description: >
   registry inspection, or troubleshooting the document pipeline.
 
   Do NOT activate for: querying the vector store, answering questions from documents,
-  or any retrieval/search task (those are handled by a separate retrieval skill).
-version: 1.0.0
+  or any retrieval/search task (use the rag-chat skill for those).
 ---
 
 ## Document Ingestion Pipeline Skill
@@ -30,7 +29,7 @@ logging, and a persistent document registry.
 provider = "openai-compatible"
 model = "text-embedding-3-small"
 api_base = "https://api.openai.com/v1"
-api_key_env = "RAG_EMBEDDING_API_KEY"
+embedding_key_env = "RAG_EMBEDDING_API_KEY"
 
 [vector_store]
 provider = "chroma"
@@ -53,13 +52,13 @@ path = "./docs"
 export RAG_EMBEDDING_API_KEY="sk-..."
 ```
 
-**3. Run the pipeline:**
+**3. Run the pipeline** (from the project root):
 ```bash
 # Ingest all configured sources
-python "$CLAUDE_PLUGIN_ROOT/scripts/ingest.py"
+python3 scripts/ingest.py
 
 # Or ingest a specific path (overrides [[sources]])
-python "$CLAUDE_PLUGIN_ROOT/scripts/ingest.py" --source ./docs/
+python3 scripts/ingest.py --source ./docs/
 ```
 
 ---
@@ -84,7 +83,7 @@ initial run time). Only new or modified documents are processed. Changed documen
 their old embeddings deleted before re-ingestion — no stale chunks remain.
 
 ```bash
-python "$CLAUDE_PLUGIN_ROOT/scripts/ingest.py"
+python3 scripts/ingest.py
 ```
 
 ---

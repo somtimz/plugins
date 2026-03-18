@@ -28,7 +28,7 @@ Returns the current `.rag-plugin.toml` contents as a JSON object.
     "provider": "openai-compatible",
     "model": "text-embedding-3-small",
     "api_base": "https://api.openai.com/v1",
-    "api_key_env": "RAG_EMBEDDING_API_KEY"
+    "embedding_key_env": "RAG_EMBEDDING_API_KEY"
   },
   "vector_store": {
     "provider": "chroma",

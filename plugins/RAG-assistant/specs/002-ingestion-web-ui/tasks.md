@@ -50,7 +50,7 @@
 
 ### Implementation for User Story 1
 
-- [X] T010 [US1] Implement `POST /api/ingest/run` in `scripts/ui.py` — preflight check: load config (return `422` on missing/invalid), check `os.environ.get(cfg.embedding.api_key_env)` (return `412` if unset); acquire `_run_lock` non-blocking (return `409` if locked); start `threading.Thread(target=_run_pipeline, args=(run_id,), daemon=True)`; set `_active_run`; return `202 {"run_id": run_id}`
+- [X] T010 [US1] Implement `POST /api/ingest/run` in `scripts/ui.py` — preflight check: load config (return `422` on missing/invalid), check `os.environ.get(cfg.embedding.embedding_key_env)` (return `412` if unset); acquire `_run_lock` non-blocking (return `409` if locked); start `threading.Thread(target=_run_pipeline, args=(run_id,), daemon=True)`; set `_active_run`; return `202 {"run_id": run_id}`
 - [X] T011 [US1] Implement `_run_pipeline(run_id)` background function in `scripts/ui.py` — loads config and logger; defines `progress_callback` that calls `_announcer.announce(format_sse(event_dict))`; calls `lib.pipeline.run_ingestion()`; on completion builds `RunSummary`; appends to `_run_history` (trim to 5); clears `_active_run`; releases `_run_lock`; announces `run_complete` or `run_error` SSE event
 - [X] T012 [US1] Implement `GET /api/ingest/stream` SSE endpoint in `scripts/ui.py` — calls `_announcer.listen()`; returns `Response(stream_with_context(generate()), mimetype="text/event-stream", headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})`; `generate()` blocks on `q.get()` and yields each message
 - [X] T013 [US1] Implement `GET /api/ingest/runs` endpoint in `scripts/ui.py` — returns `{"runs": _run_history, "active_run": _active_run}`
@@ -94,7 +94,7 @@
 
 - [X] T020 [US3] Implement `GET /api/config` endpoint in `scripts/ui.py` — attempt `lib.config.load_config(config_path)`; on `FileNotFoundError` return `{"error": "config_missing", "message": "..."}` with `404`; on `ConfigError` return `{"error": "config_invalid", "message": str(e)}` with `422`; on success serialize config dataclasses to dict and return `200`
 - [X] T021 [US3] Implement `PUT /api/config` endpoint in `scripts/ui.py` — deserialize request JSON; run inline validation (check `chunk_overlap < chunk_size`, required string fields non-empty, at least one source); on failure return `422 {"error": "validation_failed", "fields": [...]}` without writing; on pass serialize to TOML using `tomli_w.dumps()` and write to `.rag-plugin.toml`; return `200 {"ok": true}`
-- [X] T022 [US3] Implement config tab in `scripts/templates/index.html` — fetch `GET /api/config` on tab activation; render sections (Embedding, Vector Store, Pipeline, Sources) as labeled form fields with current values; "Save" button submits `PUT /api/config` with form data as JSON; show per-field inline validation errors from `422` response `fields` array; show success toast on `200`; do NOT expose API key value — display only `api_key_env` name
+- [X] T022 [US3] Implement config tab in `scripts/templates/index.html` — fetch `GET /api/config` on tab activation; render sections (Embedding, Vector Store, Pipeline, Sources) as labeled form fields with current values; "Save" button submits `PUT /api/config` with form data as JSON; show per-field inline validation errors from `422` response `fields` array; show success toast on `200`; do NOT expose API key value — display only `embedding_key_env` name
 
 ---
 
@@ -113,9 +113,9 @@
 ```
 Phase 1 (Setup)
     └── Phase 2 (Foundational: pipeline refactor + ui.py scaffold)
-            ├── Phase 3 (US1: Ingestion trigger + SSE)
-            │       └── Phase 4 (US2: Registry view) ← depends on working server
-            │               └── Phase 5 (US3: Config view/edit) ← depends on working server
+            ├── Phase 3 (US1: Ingestion trigger + SSE)  ← needs T003–T007
+            ├── Phase 4 (US2: Registry view)            ← needs T007 only; parallel with Phase 3
+            ├── Phase 5 (US3: Config view/edit)         ← needs T007 only; parallel with Phase 3
             └── Phase 6 (Polish) ← depends on all stories complete
 ```
 
@@ -176,5 +176,5 @@ Developer C: Phase 5 (US3) — T019–T022 (only needs T007 Flask scaffold)
 - All tasks modify files in `scripts/` (PEP 8 snake_case filenames) or `tests/` — no kebab-case conflicts
 - The `[P]` marker on test tasks (T006, T008, T009, T016, T019, T024) means they can be written in parallel with other [P] tasks; they are test-first but the suite is not gated before implementation starts
 - `scripts/ingest.py` changes in T005 must not alter CLI behavior — run `pytest tests/` after T005 to confirm
-- Never expose the API key value in any endpoint — only `api_key_env` (the env var name) is serialized
+- Never expose the API key value in any endpoint — only `embedding_key_env` (the env var name) is serialized
 - `tomli_w` (with underscore) is the correct package name for `pip install tomli-w`

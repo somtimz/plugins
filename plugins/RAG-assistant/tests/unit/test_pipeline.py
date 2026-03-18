@@ -39,7 +39,7 @@ def _make_cfg(tmp_path):
     cfg.pipeline.registry_path = str(tmp_path / "registry.db")
     cfg.embedding.model = "test-model"
     cfg.embedding.api_base = "http://localhost"
-    cfg.embedding.api_key_env = "TEST_KEY"
+    cfg.embedding.embedding_key_env = "TEST_KEY"
     return cfg
 
 

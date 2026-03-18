@@ -63,7 +63,7 @@ dotfile (`.rag-plugin.toml`) follows the convention of project-scoped config fil
 provider = "openai-compatible"
 model = "text-embedding-3-small"
 api_base = "https://api.openai.com/v1"
-api_key_env = "RAG_EMBEDDING_API_KEY"
+embedding_key_env = "RAG_EMBEDDING_API_KEY"
 
 [vector_store]
 provider = "chroma"

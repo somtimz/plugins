@@ -1,0 +1,70 @@
+SharePoint Integration Setup Guide
+===================================
+
+This guide explains how to configure the RAG pipeline to ingest documents
+from a SharePoint Online site.
+
+PREREQUISITES
+-------------
+- An Azure AD app registration with the following API permissions:
+    Sites.Read.All (Microsoft Graph)
+    Files.Read.All (Microsoft Graph)
+- The app must be granted admin consent in your Azure AD tenant.
+
+AUTHENTICATION MODES
+--------------------
+
+1. Device Flow (recommended for interactive sessions)
+   The pipeline opens a browser window and prompts you to sign in with
+   your Microsoft 365 account. The token is valid for the session.
+
+   Required environment variables:
+     SP_TENANT_ID     - Azure AD tenant ID (GUID)
+     SP_CLIENT_ID     - App registration client ID (GUID)
+
+2. Client Credentials (recommended for automation / CI)
+   The pipeline authenticates as the app itself (no user interaction).
+   Requires a client secret to be created in the app registration.
+
+   Required environment variables:
+     SP_TENANT_ID       - Azure AD tenant ID (GUID)
+     SP_CLIENT_ID       - App registration client ID (GUID)
+     SP_CLIENT_SECRET   - App registration client secret value
+
+CONFIGURATION EXAMPLE
+---------------------
+
+Add to .rag-plugin.toml:
+
+  [[sources]]
+  name = "sharepoint-policies"
+  type = "sharepoint"
+  site_url = "https://mycompany.sharepoint.com/sites/policies"
+  folder = "/Shared Documents"
+  auth_type = "client_credentials"
+  tenant_id_env = "SP_TENANT_ID"
+  client_id_env = "SP_CLIENT_ID"
+  client_secret_env = "SP_CLIENT_SECRET"
+  max_depth = 3
+
+SUPPORTED FILE TYPES
+--------------------
+Only files matching the pipeline's supported_formats list will be
+downloaded and processed (.txt, .md, .pdf, .docx by default).
+All other file types (images, spreadsheets, etc.) are silently skipped.
+
+TROUBLESHOOTING
+---------------
+- "AADSTS700016: Application not found"
+    Check SP_CLIENT_ID and SP_TENANT_ID are correct.
+
+- "Access denied" on folder listing
+    Ensure Sites.Read.All has admin consent and the app has access
+    to the specific site collection.
+
+- Device flow re-authenticates on every run
+    Token caching is not supported in v1. Use client_credentials for
+    unattended runs.
+
+- Files downloaded but not ingested
+    Check that the file extension is in supported_formats in your config.

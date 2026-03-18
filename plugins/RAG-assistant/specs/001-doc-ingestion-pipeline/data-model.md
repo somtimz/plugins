@@ -178,7 +178,7 @@ Sources are now defined as an array of tables.
 provider = "openai-compatible"
 model = "text-embedding-3-small"
 api_base = "https://api.openai.com/v1"
-api_key_env = "RAG_EMBEDDING_API_KEY"
+embedding_key_env = "RAG_EMBEDDING_API_KEY"
 
 [vector_store]
 provider = "chroma"
@@ -226,7 +226,7 @@ client_secret_env = "SP_CLIENT_SECRET"
 - `local` sources: `path` MUST be present
 - `sharepoint` sources: `site_url`, `folder`, `auth_type`, `tenant_id_env`, `client_id_env` MUST be present
 - `client_credentials` sources: `client_secret_env` MUST also be present
-- `embedding.api_key_env` MUST be set and the referenced env var MUST be non-empty at runtime
+- `embedding.embedding_key_env` MUST be set and the referenced env var MUST be non-empty at runtime
 - `pipeline.chunk_overlap` MUST be less than `pipeline.chunk_size`
 
 ---

@@ -2,7 +2,7 @@
 
 **Feature Branch**: `002-ingestion-web-ui`
 **Created**: 2026-03-15
-**Status**: Draft
+**Status**: Implemented
 **Input**: User description: "Build a web UI for the ingestion pipeline"
 
 ## User Scenarios & Testing *(mandatory)*
@@ -59,7 +59,7 @@ A user opens a configuration view that displays the current `.rag-plugin.toml` s
 ### Edge Cases
 
 - If `.rag-plugin.toml` is missing on initial page load, a top-level dismissible error banner is shown immediately (before any tab is clicked) with a "Create config" button that switches to the Config tab pre-filled with default values. The check runs once on `DOMContentLoaded`. If it exists but is invalid, a validation error describing the failure is shown.
-- What happens if a second ingestion run is triggered while one is already in progress?
+- If a second ingestion run is triggered while one is already in progress, the "Run Ingestion" button is disabled and a "run in progress" message is shown. The API returns `409 Conflict`. (Covered by FR-005, US1 acceptance scenario 4.)
 - If the vector store (`.rag-store/`) or registry (`.rag-registry.db`) is deleted while the server is running, the next ingestion run will recreate them automatically (ChromaDB + registry auto-create on open). Detecting and surfacing a mid-session deletion in the UI is out of scope for v1.
 - How does the UI handle a large registry (hundreds or thousands of documents)?
 - If the embedding API key env var is not set when ingestion is triggered, a pre-flight check blocks the run and immediately shows an actionable error message before any processing begins.
@@ -78,7 +78,7 @@ A user opens a configuration view that displays the current `.rag-plugin.toml` s
 - **FR-007**: The registry table MUST support real-time text search filtering.
 - **FR-008**: The registry table MUST support sorting by any column.
 - **FR-009**: The UI MUST display the current configuration in a readable structured form.
-- **FR-010**: The UI MUST allow users to edit and save configuration values with inline validation before writing to disk.
+- **FR-010**: The UI MUST allow users to edit and save configuration values with server-side inline validation before writing to disk. The `PUT /api/config` endpoint returns `422` with a `fields` array on validation failure; the frontend renders per-field error messages from this response. No client-side pre-validation is required in v1.
 - **FR-011**: When `.rag-plugin.toml` is missing on load, the UI MUST show an error banner with a "Create config" button that opens a pre-filled config editor. When the config exists but is invalid, the UI MUST show a clear error describing the validation failure.
 - **FR-012**: The UI MUST be accessible at `http://localhost:7842` after running `python scripts/ui.py`. The port is fixed at 7842 and is not configurable in v1.
 - **FR-013**: The UI server MUST be started via a dedicated top-level command (`python scripts/ui.py`) that is separate from the ingestion script.
@@ -96,10 +96,10 @@ A user opens a configuration view that displays the current `.rag-plugin.toml` s
 ### Measurable Outcomes
 
 - **SC-001**: A user with no command-line experience can trigger a full ingestion run and read the results within 2 minutes of opening the UI.
-- **SC-002**: Progress updates appear on screen within 1 second of each document being processed.
-- **SC-003**: The registry view loads and renders up to 1,000 documents in under 2 seconds on a local developer machine.
+- **SC-002**: Progress updates appear on screen within 1 second of each document being processed. *Verification*: In `test_ui_integration.py`, assert elapsed time between `progress_callback` call and SSE `document_processed` event receipt is < 1.0s using mock timestamps.
+- **SC-003**: The registry view loads and renders up to 1,000 documents in under 2 seconds on a local developer machine. *Verification*: In `test_ui_api.py`, seed registry with 1,000 rows, assert `GET /api/registry` responds in < 2s. Virtualization/pagination deferred to v2 (>1,000 rows is out of scope).
 - **SC-004**: Configuration changes are saved and take effect on the next ingestion run without restarting the server.
-- **SC-005**: The UI correctly reflects ingestion state after a page reload — no phantom "running" status when the server is idle.
+- **SC-005**: The UI correctly reflects ingestion state after a page reload — no phantom "running" status when the server is idle. *Verification*: In `test_ui_api.py`, assert `GET /api/ingest/runs` returns `{"active_run": null}` after a run completes (i.e., `_active_run` is cleared in `_run_pipeline`).
 
 ## Clarifications
 

@@ -2,7 +2,7 @@
 
 **Feature Branch**: `003-conversational-rag-ui`
 **Created**: 2026-03-16
-**Status**: Draft
+**Status**: Implemented
 **Input**: User description: "Create a conversational web UI that accepts natural language from the user for managing data ingestion, data retrieval and conversational response"
 
 ## User Scenarios & Testing *(mandatory)*
@@ -61,7 +61,8 @@ A user types "what documents do I have about onboarding?" or "show me files inge
 
 - What happens when the user's message is ambiguous between retrieval and ingestion intent? Claude, via tool_use reasoning, either selects the most appropriate tool or responds with a clarifying question before invoking any tool.
 - What if the knowledge base is empty when the user asks a question? Return an informative message with a suggestion to ingest documents first.
-- What if the LLM API is unreachable or returns an error? Display a clear error message; do not lose the conversation history.
+- What if the LLM API is unreachable or returns an error? Display a clear error message; do not lose the conversation history. Claude API calls MUST have a 30-second timeout; on timeout the spinner is dismissed and the error is surfaced as an inline message.
+- What if the Claude API returns `429 Too Many Requests`? Show an inline error message ("Rate limit reached — please wait and try again"); no automatic retry. The user re-sends manually.
 - What if the user sends an extremely long message or pastes a large block of text? Messages exceeding 4,000 characters are rejected with a clear error; the input is not submitted.
 - What if a cited source document has been deleted from disk since ingestion? The citation still references the registry record; no crash occurs.
 - What happens if streaming is interrupted mid-response? The partial response is marked as incomplete and the input box re-enables.
@@ -72,10 +73,10 @@ A user types "what documents do I have about onboarding?" or "show me files inge
 
 - **FR-001**: The UI MUST provide a persistent chat input where users can type natural language messages and submit them with a button or keyboard shortcut. Messages exceeding 4,000 characters MUST be rejected with an inline error before submission.
 - **FR-002**: The system MUST perform vector similarity search over the ingested knowledge base to retrieve relevant document chunks for each retrieval-intent message.
-- **FR-003**: Answers MUST cite the source documents used, including at minimum the source name and file path, displayed as collapsible references beneath each response.
+- **FR-003**: Answers MUST cite the source documents used, including at minimum the source name and file path, displayed as collapsible references beneath each response. Citations MUST be collapsed by default behind a "Sources (N)" toggle that expands on click. A maximum of 5 citations are shown per response, matching the default chunk retrieval count (FR-014).
 - **FR-004**: The system MUST stream responses progressively so the user sees content as it is generated.
-- **FR-005**: The system MUST maintain conversation context within a session so follow-up questions are understood in relation to prior turns (minimum last 10 turns).
-- **FR-006**: The system MUST expose an `ingest_documents` tool schema (defined in `lib/ingest_tool.py`) in each Claude API call. When Claude returns a `tool_use` block invoking `ingest_documents`, the server MUST execute the ingestion pipeline for the specified path and return results as a `tool_result` message, without requiring the user to navigate to a separate tab.
+- **FR-005**: The system MUST maintain conversation context within a session so follow-up questions are understood in relation to prior turns. History uses a sliding window: the most recent 20 turns are sent with each request; turns beyond that are silently dropped. The 20-turn window satisfies the minimum-10-turns requirement.
+- **FR-006**: The system MUST expose an `ingest_documents` tool schema (defined in `lib/ingest_tool.py`) in each Claude API call. When Claude returns a `tool_use` block invoking `ingest_documents`, the server MUST execute the ingestion pipeline for the specified path and return results as a `tool_result` message, without requiring the user to navigate to a separate tab. While the tool is executing (between the `tool_use` block and the `tool_result` being sent), the UI MUST display a generic loading spinner; no inline status text is required.
 - **FR-007**: Ingestion progress and completion summary triggered via chat MUST appear inline in the conversation thread.
 - **FR-008**: The system MUST expose a `query_registry` tool schema (defined in `lib/ingest_tool.py`) in each Claude API call. When Claude returns a `tool_use` block invoking `query_registry`, the server MUST query the document registry and return a `tool_result` containing matching records, which Claude then summarises for the user.
 - **FR-009**: The system MUST respond with a clear, actionable message when no relevant documents are found rather than generating an unsupported answer.
@@ -99,13 +100,21 @@ A user types "what documents do I have about onboarding?" or "show me files inge
 
 ### Measurable Outcomes
 
-- **SC-001**: A user can ask a question about ingested content and receive a cited, streaming answer — first token appears within 3 seconds of pressing send on a local network.
+- **SC-001**: A user can ask a question about ingested content and receive a cited, streaming answer — first token appears within 3 seconds of pressing send on a local network. If no response begins within 30 seconds, the request times out, the spinner is dismissed, and a clear error message is shown.
 - **SC-002**: Claude correctly invokes the `ingest_documents` tool for ingestion-intent messages (e.g., "ingest X", "add X to knowledge base") with no false negatives on the 10 canonical phrasings defined in the acceptance test suite.
 - **SC-003**: Conversation context is maintained for at least the last 10 turns within a session without degradation in answer coherence.
 - **SC-004**: A user with no prior experience can ask a question and receive a grounded, cited answer within 3 minutes of opening the UI for the first time.
 - **SC-005**: The chat UI correctly handles an empty knowledge base, an unreachable LLM, and a concurrent ingestion block — all three error states produce a visible, actionable message rather than a silent failure or crash.
 
 ## Clarifications
+
+### Session 2026-03-18
+
+- Q: How should conversation history be truncated when a session grows long? → A: Sliding window — keep the most recent 20 turns, silently drop the oldest.
+- Q: What UI state should the user see while the server executes a tool (between tool_use and tool_result)? → A: Generic loading spinner only; no inline status text.
+- Q: What is the timeout for Claude API calls? → A: 30 seconds; on timeout dismiss spinner and show inline error.
+- Q: How should citations be displayed — collapsed or expanded by default, and is there a cap? → A: Collapsed by default behind "Sources (N)" toggle; maximum 5 citations per response.
+- Q: What should happen when the Claude API returns 429 Too Many Requests? → A: Show inline error message; no automatic retry.
 
 ### Session 2026-03-16
 

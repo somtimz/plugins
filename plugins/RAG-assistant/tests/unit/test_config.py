@@ -16,7 +16,7 @@ VALID_TOML = textwrap.dedent("""\
     provider = "openai-compatible"
     model = "text-embedding-3-small"
     api_base = "https://api.openai.com/v1"
-    api_key_env = "TEST_API_KEY"
+    embedding_key_env = "TEST_API_KEY"
 
     [vector_store]
     provider = "chroma"
@@ -52,7 +52,7 @@ class TestValidConfig:
         assert cfg.embedding.provider == "openai-compatible"
         assert cfg.embedding.model == "text-embedding-3-small"
         assert cfg.embedding.api_base == "https://api.openai.com/v1"
-        assert cfg.embedding.api_key_env == "TEST_API_KEY"
+        assert cfg.embedding.embedding_key_env == "TEST_API_KEY"
 
     def test_loads_vector_store(self, tmp_path):
         cfg = load_config(write_toml(tmp_path, VALID_TOML))
@@ -160,7 +160,7 @@ class TestValidationErrors:
         with pytest.raises(ConfigError, match="path is required for local sources"):
             load_config(write_toml(tmp_path, toml))
 
-    def test_api_key_env_not_set(self, tmp_path, monkeypatch):
+    def test_embedding_key_env_not_set(self, tmp_path, monkeypatch):
         monkeypatch.delenv("TEST_API_KEY", raising=False)
         with pytest.raises(ConfigError, match="TEST_API_KEY"):
             load_config(write_toml(tmp_path, VALID_TOML))
@@ -259,19 +259,19 @@ class TestLlmConfig:
         monkeypatch.setenv("TEST_API_KEY", "key")
         cfg = load_config(write_toml(tmp_path, VALID_TOML))
         assert cfg.llm.model == "claude-sonnet-4-6"
-        assert cfg.llm.api_key_env == "ANTHROPIC_API_KEY"
+        assert cfg.llm.llm_key_env == "ANTHROPIC_API_KEY"
 
-    def test_custom_model_and_api_key_env(self, tmp_path, monkeypatch):
-        """LlmConfig reads model and api_key_env from [llm] section when present."""
+    def test_custom_model_and_llm_key_env(self, tmp_path, monkeypatch):
+        """LlmConfig reads model and llm_key_env from [llm] section when present."""
         monkeypatch.setenv("TEST_API_KEY", "key")
         toml = VALID_TOML + textwrap.dedent("""\
             [llm]
             model = "claude-opus-4-6"
-            api_key_env = "MY_CLAUDE_KEY"
+            llm_key_env = "MY_CLAUDE_KEY"
         """)
         cfg = load_config(write_toml(tmp_path, toml))
         assert cfg.llm.model == "claude-opus-4-6"
-        assert cfg.llm.api_key_env == "MY_CLAUDE_KEY"
+        assert cfg.llm.llm_key_env == "MY_CLAUDE_KEY"
 
     def test_empty_model_raises(self, tmp_path, monkeypatch):
         """Empty model string in [llm] section raises ConfigError."""
@@ -283,24 +283,24 @@ class TestLlmConfig:
         with pytest.raises(ConfigError, match="llm.model"):
             load_config(write_toml(tmp_path, toml))
 
-    def test_empty_api_key_env_raises(self, tmp_path, monkeypatch):
-        """Empty api_key_env string in [llm] section raises ConfigError."""
+    def test_empty_llm_key_env_raises(self, tmp_path, monkeypatch):
+        """Empty llm_key_env string in [llm] section raises ConfigError."""
         monkeypatch.setenv("TEST_API_KEY", "key")
         toml = VALID_TOML + textwrap.dedent("""\
             [llm]
-            api_key_env = ""
+            llm_key_env = ""
         """)
-        with pytest.raises(ConfigError, match="llm.api_key_env"):
+        with pytest.raises(ConfigError, match="llm.llm_key_env"):
             load_config(write_toml(tmp_path, toml))
 
     def test_llm_config_dataclass_defaults(self):
         """LlmConfig dataclass has correct field defaults."""
         llm = LlmConfig()
         assert llm.model == "claude-sonnet-4-6"
-        assert llm.api_key_env == "ANTHROPIC_API_KEY"
+        assert llm.llm_key_env == "ANTHROPIC_API_KEY"
 
     def test_partial_llm_section_uses_defaults_for_missing_fields(self, tmp_path, monkeypatch):
-        """When [llm] has only model set, api_key_env defaults to ANTHROPIC_API_KEY."""
+        """When [llm] has only model set, llm_key_env defaults to ANTHROPIC_API_KEY."""
         monkeypatch.setenv("TEST_API_KEY", "key")
         toml = VALID_TOML + textwrap.dedent("""\
             [llm]
@@ -308,4 +308,4 @@ class TestLlmConfig:
         """)
         cfg = load_config(write_toml(tmp_path, toml))
         assert cfg.llm.model == "claude-haiku-4-5-20251001"
-        assert cfg.llm.api_key_env == "ANTHROPIC_API_KEY"
+        assert cfg.llm.llm_key_env == "ANTHROPIC_API_KEY"

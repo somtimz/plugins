@@ -24,7 +24,7 @@ model = "text-embedding-3-small"
 api_base = "https://api.openai.com/v1"
 
 # Required. Env var name holding the API key. Set to "DUMMY" for keyless providers.
-api_key_env = "RAG_EMBEDDING_API_KEY"
+embedding_key_env = "RAG_EMBEDDING_API_KEY"
 
 [vector_store]
 # Required. Only "chroma" is supported in the initial version.
@@ -95,7 +95,7 @@ client_secret_env = "SP_CLIENT_SECRET"  # Required for client_credentials only.
 | `embedding.provider` | MUST equal `"openai-compatible"` | "Unsupported embedding provider: {value}" |
 | `embedding.model` | MUST be non-empty string | "embedding.model is required" |
 | `embedding.api_base` | MUST be valid https:// or http:// URL | "embedding.api_base must be a valid URL" |
-| `embedding.api_key_env` | MUST be non-empty; referenced env var MUST be set | "Environment variable {api_key_env} is not set" |
+| `embedding.embedding_key_env` | MUST be non-empty; referenced env var MUST be set | "Environment variable {embedding_key_env} is not set" |
 | `vector_store.provider` | MUST equal `"chroma"` | "Unsupported vector_store provider: {value}" |
 | `vector_store.collection` | MUST be non-empty string | "vector_store.collection is required" |
 | `pipeline.chunk_overlap` | MUST be less than `pipeline.chunk_size` | "chunk_overlap must be less than chunk_size" |

@@ -1,0 +1,72 @@
+Vector Search Concepts
+======================
+
+WHAT IS A VECTOR EMBEDDING?
+----------------------------
+An embedding is a fixed-length array of floating-point numbers that
+represents the semantic meaning of a piece of text. Texts with similar
+meaning produce vectors that are close together in high-dimensional space,
+even if they use completely different words.
+
+Example:
+  "The cat sat on the mat"   -> [0.12, -0.34, 0.78, ...]
+  "A feline rested on a rug" -> [0.11, -0.31, 0.80, ...]  (very similar)
+  "The quarterly results"    -> [-0.55, 0.22, -0.10, ...]  (very different)
+
+SIMILARITY METRICS
+------------------
+Three common distance metrics for comparing vectors:
+
+1. Cosine Similarity
+   Measures the angle between two vectors. Range: -1 to 1.
+   Most commonly used for text embeddings because it is invariant to
+   vector magnitude (document length).
+
+2. Euclidean Distance (L2)
+   Measures straight-line distance between two points in vector space.
+   Sensitive to magnitude — longer documents may have larger-magnitude
+   vectors, which can bias results.
+
+3. Dot Product
+   Fast to compute. Equivalent to cosine similarity when vectors are
+   L2-normalised. Used by OpenAI's text-embedding-3 models by default.
+
+APPROXIMATE NEAREST NEIGHBOUR (ANN) SEARCH
+-------------------------------------------
+Exact nearest-neighbour search requires comparing the query vector against
+every stored vector — O(n) per query. For large indexes this is too slow.
+
+ANN algorithms (HNSW, IVF, ScaNN) trade a small amount of recall accuracy
+for orders-of-magnitude speed improvement. ChromaDB uses HNSW by default.
+
+Key HNSW parameters:
+  M          - number of bi-directional links per node (default: 16)
+               Higher = better recall, more memory
+  ef_construction - size of dynamic candidate list during index build
+               Higher = better index quality, slower build time
+  ef_search  - candidate list size at query time
+               Higher = better recall, slower queries
+
+CHUNKING AND RETRIEVAL QUALITY
+-------------------------------
+Because embedding models have a token limit (typically 8192 tokens),
+long documents must be split into smaller chunks before embedding.
+
+Chunking strategies:
+- Fixed-size character chunking (simplest, used by this pipeline)
+- Sentence-boundary chunking (better semantic coherence)
+- Paragraph-boundary chunking (best for structured documents)
+- Hierarchical chunking (stores both parent and child chunks)
+
+After retrieval, the top-k chunks are passed to the LLM. Typical k=3-10.
+Too few chunks risks missing relevant context; too many dilutes signal.
+
+RE-RANKING
+----------
+A two-stage retrieval pipeline first retrieves a large candidate set
+(e.g., top-50 via ANN), then re-ranks using a more accurate cross-encoder
+model that jointly encodes the query and each candidate. This improves
+precision at the cost of additional inference latency.
+
+This pipeline does not include re-ranking in v1 — it returns the top-k
+ANN results directly.
