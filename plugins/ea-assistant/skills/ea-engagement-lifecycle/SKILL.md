@@ -34,7 +34,10 @@ EA-projects/
   "organisation": "",
   "scope": "",
   "startDate": "YYYY-MM-DD",
+  "targetEndDate": "YYYY-MM-DD or null",
   "status": "Active",
+  "engagementType": "Greenfield | Brownfield | Assessment-only | Migration",
+  "architectureDomains": ["Business", "Data", "Application", "Technology"],
   "currentPhase": "Prelim",
   "requirementsRepoPath": "",
   "lastModified": "YYYY-MM-DDTHH:MM:SSZ",
@@ -55,7 +58,40 @@ EA-projects/
 }
 ```
 
-Phase status values: `Not Started` | `In Progress` | `Complete` | `On Hold`
+**New fields** (added in v0.2.0):
+- `engagementType`: Classification of the engagement. Defaults to `null` for legacy engagements without this field.
+- `architectureDomains`: Array of selected domains. Defaults to all four if absent.
+- `targetEndDate`: Optional target completion date. Defaults to `null` if absent.
+
+Existing engagements created before v0.2.0 will not have these fields. All commands MUST handle missing fields gracefully by applying the defaults above.
+
+Phase status values: `Not Started` | `In Progress` | `Complete` | `On Hold` | `Not Applicable`
+
+`Not Applicable` is used when a phase is excluded based on engagement type and domain selection. For example, if the Data domain is deselected, C-Data is set to "Not Applicable". Assessment-only engagements set phases E–H to "Not Applicable" because they focus on current-state review without implementation planning.
+
+## Engagement Types
+
+Each engagement is classified by type, which determines ADM phase emphasis and default applicability. See `references/engagement-patterns.md` for detailed tailoring guidance.
+
+| Type | Description | ADM Focus |
+|------|-------------|-----------|
+| Greenfield | Building a new capability, business unit, or system from scratch. No baseline architecture. | Full ADM; emphasis on Phase A (Vision) and Phases B–D (target state) |
+| Brownfield | Transforming existing systems, processes, or data while keeping the business running. | Full ADM; emphasis on baseline documentation in B–D and transition planning in E–F |
+| Assessment-only | Current-state review of existing architecture without planning implementation changes. | Prelim, Requirements, A, and domain phases only; E–H are Not Applicable |
+| Migration | Re-platforming or re-hosting workloads (e.g., cloud migration, data centre move). | Full ADM; emphasis on Phase D (Technology) and E–F (migration planning) |
+
+## Architecture Domains
+
+Users select which architecture domains are in scope when creating an engagement. At least one domain MUST be selected. Default: all four.
+
+| Domain | ADM Phase | Description |
+|--------|-----------|-------------|
+| Business | B | Business processes, capabilities, organisation, functions |
+| Data | C-Data | Data entities, data components, data management |
+| Application | C-App | Application components, interfaces, application services |
+| Technology | D | Technology components, platforms, infrastructure |
+
+Deselecting a domain sets its corresponding ADM phase to "Not Applicable" and excludes domain-specific artifacts from scaffolding.
 
 ## ADM Phase Map
 
@@ -79,12 +115,14 @@ Phases can be started, edited, or resumed in any order. Navigation is non-linear
 
 ### Starting a New Engagement
 
-1. Collect required fields: Name, Description, Sponsor, Organisation, Scope, Start Date, Status
-2. Create slug: lowercase, hyphens, no spaces (e.g. `acme-retail-2026`)
-3. Create folder structure under `EA-projects/{slug}/`
-4. Write `engagement.json` with all fields and phase defaults
-5. Set `currentPhase` to `Prelim`
-6. Confirm engagement created and offer to begin the Preliminary phase
+1. Collect required fields: Name, Description, Sponsor, Organisation, Scope, Engagement Type, Architecture Domains, Start Date, Target End Date (optional), Status
+2. Create slug: lowercase, hyphens, no spaces, max 60 chars (e.g. `acme-retail-2026`)
+3. Display confirmation summary; allow user to edit fields or cancel
+4. Create folder structure under `EA-projects/{slug}/`
+5. Write `engagement.json` with all fields, set phase applicability based on engagement type and domain selection (see `references/scaffolding-map.md`)
+6. Scaffold Preliminary phase artifacts from templates (see `references/scaffolding-map.md`)
+7. Set `currentPhase` to `Prelim`
+8. Confirm engagement created, list scaffolded artifacts, and offer to begin the Preliminary phase
 
 ### Opening an Existing Engagement
 
@@ -167,3 +205,4 @@ Store the path in `engagement.json` under `requirementsRepoPath` at engagement c
 
 - **`references/adm-phase-guide.md`** — Detailed inputs, outputs, and steps for each ADM phase
 - **`references/engagement-patterns.md`** — Common engagement patterns and anti-patterns
+- **`references/scaffolding-map.md`** — Engagement type/domain to artifact scaffolding mapping

@@ -43,7 +43,7 @@ requirementsRepoPath: /path/to/shared/requirements-folder
 
 | Command | Description |
 |---|---|
-| `/ea-new` | Create a new EA engagement |
+| `/ea-new` | Create a new EA engagement with guided setup, engagement type selection, domain scoping, and Preliminary phase scaffolding |
 | `/ea-open` | Open or switch between engagements (picklist) |
 | `/ea-status` | Dashboard of all engagements and their progress |
 | `/ea-phase [phase]` | Start, edit, or resume an ADM phase |
@@ -52,6 +52,15 @@ requirementsRepoPath: /path/to/shared/requirements-folder
 | `/ea-review [artifact]` | Open an artifact for review and assessment |
 | `/ea-requirements [action]` | Manage architecture requirements |
 | `/ea-merge` | Merge all artifacts into a consolidated document |
+
+## Engagement Setup
+
+When creating a new engagement with `/ea-new`, you configure:
+
+- **Engagement type**: Greenfield, Brownfield, Assessment-only, or Migration — determines which ADM phases are applicable
+- **Architecture domains**: Business, Data, Application, Technology — select which domains are in scope (default: all four)
+- **Confirmation summary**: Review and edit all fields before creating the engagement
+- **Automatic scaffolding**: Preliminary phase artifacts (Architecture Principles, Stakeholder Map) are generated from templates
 
 ## Project Storage
 
