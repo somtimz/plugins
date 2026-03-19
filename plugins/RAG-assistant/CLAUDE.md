@@ -1,6 +1,6 @@
 # RAG-assistant Development Guidelines
 
-Last updated: 2026-03-17
+Last updated: 2026-03-19
 
 ## Active Technologies
 
@@ -20,8 +20,10 @@ Last updated: 2026-03-17
 ```text
 .claude-plugin/plugin.json     plugin manifest
 skills/
-└── doc-ingestion-pipeline/
-    └── SKILL.md               auto-activation skill
+├── doc-ingestion-pipeline/
+│   └── SKILL.md               auto-activation skill (ingestion)
+└── rag-chat/
+    └── SKILL.md               auto-activation skill (chat Q&A)
 
 scripts/
 ├── ingest.py                  CLI entrypoint: python scripts/ingest.py [--source PATH] [--config PATH]
@@ -99,5 +101,6 @@ ruff check scripts/ tests/
 | 001 — Document ingestion pipeline | Implemented | specs/001-doc-ingestion-pipeline/ |
 | 002 — Ingestion web UI | Implemented | specs/002-ingestion-web-ui/ |
 | 003 — Conversational RAG chat UI | Implemented | specs/003-conversational-rag-ui/ |
+| 001 — Transparent RAG search | Implemented | specs/001-rag-search-transparency/ |
 
 SharePoint source (feature 001 phase 6, tasks T023–T025) is deferred — local and device_flow auth scaffolding exists but SharePoint tests are skipped.

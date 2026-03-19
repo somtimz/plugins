@@ -65,11 +65,23 @@ List all documents ingested from the hr-source.
 
 ---
 
-### Citations
+### Transparent Search
 
-Each answer shows collapsible source references below the response — source name and
-file path for every chunk used. If no relevant content is found, Claude says so rather
-than fabricating an answer.
+When Claude retrieves documents, a **chunk panel** appears above the answer showing:
+
+- Numbered chunk cards (`[1]`, `[2]`, ...) with source name, file path, similarity score (3 decimal places), and a 300-character excerpt
+- "Show full text" toggle on each card to expand the complete chunk text
+- "(file no longer on disk)" indicator when the source file has been moved or deleted
+- "(N of 5 chunks available)" note when fewer than 5 chunks are returned
+
+Claude's answer uses **inline citations** (e.g. `[1]`, `[2]`) matching the chunk numbers.
+
+An **"Inspect prompt"** panel beneath each answer lets you expand and copy the exact
+augmented prompt sent to the LLM — including the system instruction, all numbered
+context entries, and the original question.
+
+If the knowledge base is empty, an error message directs you to ingest documents first.
+If no relevant content is found, Claude says so rather than fabricating an answer.
 
 ---
 

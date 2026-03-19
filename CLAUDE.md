@@ -74,8 +74,8 @@ chore: ...
 ```
 
 ## Active Technologies
-- Python 3.11+ + Flask, anthropic, chromadb, openai (embedding client) (001-rag-search-transparency)
-- ChromaDB (vector store), SQLite (registry) (001-rag-search-transparency)
+- Python 3.11+ + Flask, anthropic, chromadb, openai (embedding client) (RAG-assistant)
+- ChromaDB (vector store), SQLite (registry) (RAG-assistant)
 
 ## Recent Changes
-- 001-rag-search-transparency: Added Python 3.11+ + Flask, anthropic, chromadb, openai (embedding client)
+- RAG-assistant/001-rag-search-transparency: Added transparent RAG search — chunk panel, inspect prompt, inline citations
