@@ -1,7 +1,7 @@
 ---
 name: ea-interview
 description: Start, export, import, or resume a stakeholder interview about an EA artifact
-argument-hint: "[start|export|import|resume] [artifact-name]"
+argument-hint: "[start|export|import|resume] [artifact|phase] [name]"
 allowed-tools: [Read, Write, Bash]
 ---
 
@@ -32,6 +32,40 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
 5. On interview completion:
    - Save dated notes to `interviews/interview-{artifact-id}-{YYYY-MM-DD}-v{N}.md`
    - Update the artifact file with confirmed answers
+   - Update `lastModified` in `engagement.json`
+
+---
+
+### Mode: `start phase [phase-name]`
+
+1. Identify the target phase. If not specified, use the `currentPhase` from `engagement.json`. If no current phase, show a list:
+   ```
+   Select phase for interview:
+   1. Preliminary
+   2. Phase A — Architecture Vision
+   3. Phase B — Business Architecture
+   4. Phase C — Information Systems
+   5. Phase D — Technology Architecture
+   6. Phase E/F — Opportunities & Roadmap
+   7. Phase G — Implementation Governance
+   8. Phase H — Architecture Change Management
+   9. Requirements Management
+   ```
+
+2. Load the question bank from `skills/ea-artifact-templates/references/phase-interview-questions.md` for the selected phase.
+
+3. Load any existing interview notes for this phase from `interviews/interview-phase-{phase}-*`. If notes exist, ask: "Previous phase interview notes found (v{N}, {date}). Resume from these, or start fresh?"
+
+4. Hand off to the `ea-interviewer` agent in **phase mode** with:
+   - The phase name
+   - The question list from the question bank
+   - The output routing table for this phase
+   - Any pre-existing answers from previous sessions
+   - All artifacts that this phase's routing table targets
+
+5. On interview completion:
+   - Save dated notes to `interviews/interview-phase-{phase}-{YYYY-MM-DD}-v{N}.md`
+   - Update target artifacts with confirmed answers (per output routing)
    - Update `lastModified` in `engagement.json`
 
 ---

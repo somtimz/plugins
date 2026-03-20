@@ -271,3 +271,5 @@ Store the path in `engagement.json` under `requirementsRepoPath` at engagement c
 - **`references/adm-phase-guide.md`** — Detailed inputs, outputs, and steps for each ADM phase
 - **`references/engagement-patterns.md`** — Common engagement patterns and anti-patterns
 - **`references/scaffolding-map.md`** — Engagement type/domain to artifact scaffolding mapping
+- **`references/phase-inputs-outputs.md`** — Detailed input/output tables per ADM phase with quality gates
+- **`references/adm-tailoring.md`** — Tailoring the ADM for agile, programme, capability-based, and security contexts

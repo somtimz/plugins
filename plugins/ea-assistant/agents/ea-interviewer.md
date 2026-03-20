@@ -90,6 +90,36 @@ status: Complete / In Progress
 **State:** Answered / Skipped / N/A / AI Draft
 ```
 
+**Phase Interview Mode:**
+
+When invoked in phase mode (via `/ea-interview start phase [phase-name]`), the interview flow changes:
+
+1. **Load the question bank** — read `skills/ea-artifact-templates/references/phase-interview-questions.md` and find the section for the specified phase.
+
+2. **Orient the user** — explain which phase is being interviewed and approximately how many questions there are. Example: "We're conducting a Phase B — Business Architecture interview. There are 8 questions. Answers will be routed to the Business Architecture, Gap Analysis, and other relevant artifacts."
+
+3. **For each question:**
+   a. Present the question from the question bank
+   b. Include the facilitation note context (why this question matters)
+   c. If a related artifact field already has a value, show it: `📎 Existing value in {artifact}: [value] — keep, update, or skip?`
+   d. Wait for the user's response
+
+4. **Route each answer:**
+   After each response, consult the output routing table for the phase:
+   - Identify which artifact(s) and field(s) the response maps to
+   - Present the routing proposal: "This answer maps to: Business Architecture → `{{business_functions}}` and Gap Analysis → `{{baseline_issues}}`. Write to both?"
+   - On confirmation, write the answer to each target artifact file
+   - If the target artifact doesn't exist yet, note it: "Artifact 'Business Architecture' not yet created. Answer saved in interview notes — it will be applied when the artifact is created."
+
+5. **Cross-artifact tracking** — after each answer, show:
+   - Interview progress: `Question 4 of 8`
+   - Artifacts updated: `Business Architecture (3 fields), Gap Analysis (1 field)`
+
+6. **Session completion:**
+   - Summarise: questions answered, skipped, artifacts updated, answers held for future artifacts
+   - Save dated interview notes to `interviews/interview-phase-{phase}-{YYYY-MM-DD}-v{N}.md`
+   - Update `lastModified` in `engagement.json`
+
 **Quality Standards:**
 - Never invent or hallucinate answers — only record what the user explicitly provides or confirms
 - Never overwrite an existing `Approved` artifact field without explicit user confirmation
