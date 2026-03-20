@@ -7,7 +7,8 @@ A curated collection of Claude Code plugins maintained by [@somtimz](https://git
 | Plugin | Description | Version |
 |---|---|---|
 | [ea-assistant](./plugins/ea-assistant/) | End-to-end Enterprise Architecture engagement management (TOGAF 10, Zachman, ArchiMate) | 0.1.0 |
-| [rag-plugin](./plugins/rag-plugin/) | Local RAG pipeline — ingest documents into ChromaDB, conversational web UI for cited Q&A and ingestion management | 0.1.0 |
+| [RAG-assistant](./plugins/RAG-assistant/) | Conversational RAG assistant — ingests documents into ChromaDB, web UI for cited Q&A and ingestion management | 0.1.0 |
+| [togaf-adm](./plugins/togaf-adm/) | TOGAF 10 ADM companion — guides ADM phases, generates artifacts, conducts interviews, produces Word/PowerPoint/Mermaid deliverables | 0.1.0 |
 
 ## Installation
 

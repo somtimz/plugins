@@ -76,6 +76,8 @@ chore: ...
 ## Active Technologies
 - Python 3.11+ + Flask, anthropic, chromadb, openai (embedding client) (RAG-assistant)
 - ChromaDB (vector store), SQLite (registry) (RAG-assistant)
+- Markdown (Claude Code plugin instruction files) + Claude Code plugin framework (commands/, skills/, agents/) (002-ea-project-management)
+- JSON files (`engagement.json`) and directory structure (`EA-projects/`) (002-ea-project-management)
 
 ## Recent Changes
 - RAG-assistant/001-rag-search-transparency: Added transparent RAG search — chunk panel, inspect prompt, inline citations

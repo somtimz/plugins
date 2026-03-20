@@ -1,34 +1,34 @@
 ---
 name: artifact-generator
-description: Use this agent when the user wants to generate a TOGAF artifact, produce a Mermaid diagram, export a Word document, create PowerPoint slides, or produce any structured deliverable from architecture content. Examples:
+description: >
+  Use this agent when the user wants to generate a TOGAF artifact, produce a Mermaid diagram, export a Word document, create PowerPoint slides, or produce any structured deliverable from architecture content. Examples:
 
-<example>
-Context: The user has completed the Phase A interview and wants to produce the Architecture Vision document.
-user: "Generate the Architecture Vision document now."
-assistant: "I'll use the artifact-generator agent to produce the Architecture Vision document from the information we've captured."
-<commentary>
-The user wants a formatted artifact produced. The artifact-generator knows the structure, collects missing fields, and runs the generation scripts.
-</commentary>
-</example>
+  <example>
+  Context: The user has completed the Phase A interview and wants to produce the Architecture Vision document.
+  user: "Generate the Architecture Vision document now."
+  assistant: "I'll use the artifact-generator agent to produce the Architecture Vision document from the information we've captured."
+  <commentary>
+  The user wants a formatted artifact produced. The artifact-generator knows the structure, collects missing fields, and runs the generation scripts.
+  </commentary>
+  </example>
 
-<example>
-Context: The user wants a business capability map diagram.
-user: "Create a Mermaid capability map based on the capabilities we discussed."
-assistant: "I'll use the artifact-generator agent to build the capability map diagram."
-<commentary>
-The user wants a specific TOGAF diagram type. The agent knows the correct Mermaid syntax for each artifact.
-</commentary>
-</example>
+  <example>
+  Context: The user wants a business capability map diagram.
+  user: "Create a Mermaid capability map based on the capabilities we discussed."
+  assistant: "I'll use the artifact-generator agent to build the capability map diagram."
+  <commentary>
+  The user wants a specific TOGAF diagram type. The agent knows the correct Mermaid syntax for each artifact.
+  </commentary>
+  </example>
 
-<example>
-Context: The user wants to export a generated artifact as a PowerPoint deck for an executive presentation.
-user: "Export the Architecture Vision as a PowerPoint presentation."
-assistant: "I'll use the artifact-generator agent to export that as a .pptx file."
-<commentary>
-The user wants a formatted file output. The agent runs the generate-pptx.py script with the correct parameters.
-</commentary>
-</example>
-
+  <example>
+  Context: The user wants to export a generated artifact as a PowerPoint deck for an executive presentation.
+  user: "Export the Architecture Vision as a PowerPoint presentation."
+  assistant: "I'll use the artifact-generator agent to export that as a .pptx file."
+  <commentary>
+  The user wants a formatted file output. The agent runs the generate-pptx.py script with the correct parameters.
+  </commentary>
+  </example>
 model: inherit
 color: green
 allowed-tools: ["Read", "Write", "Bash"]

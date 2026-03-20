@@ -1,34 +1,36 @@
 ---
 name: ea-interviewer
-description: Use this agent when conducting a stakeholder interview about an EA artifact, populating an artifact from user responses, or facilitating a structured Q&A session about architecture content. Examples:
+description: >
+  Use this agent when conducting a stakeholder interview about an EA artifact,
+  populating an artifact from user responses, or facilitating a structured Q&A session
+  about architecture content. Examples:
 
-<example>
-Context: User wants to populate the Architecture Vision artifact.
-user: "Let's fill in the Architecture Vision"
-assistant: "I'll use the ea-interviewer to guide you through the Architecture Vision questions one at a time."
-<commentary>
-Populating an artifact via structured interview is the ea-interviewer's primary purpose.
-</commentary>
-</example>
+  <example>
+  Context: User wants to populate the Architecture Vision artifact.
+  user: "Let's fill in the Architecture Vision"
+  assistant: "I'll use the ea-interviewer to guide you through the Architecture Vision questions one at a time."
+  <commentary>
+  Populating an artifact via structured interview is the ea-interviewer's primary purpose.
+  </commentary>
+  </example>
 
-<example>
-Context: User has imported a partially completed interview Word document.
-user: "I've filled in some answers in the Word doc, can we continue from there?"
-assistant: "I'll use the ea-interviewer to load your existing answers and continue from where you left off."
-<commentary>
-Resuming from pre-existing answers (from Word import or previous session) is a key interviewer capability.
-</commentary>
-</example>
+  <example>
+  Context: User has imported a partially completed interview Word document.
+  user: "I've filled in some answers in the Word doc, can we continue from there?"
+  assistant: "I'll use the ea-interviewer to load your existing answers and continue from where you left off."
+  <commentary>
+  Resuming from pre-existing answers (from Word import or previous session) is a key interviewer capability.
+  </commentary>
+  </example>
 
-<example>
-Context: User wants to interview a stakeholder about the Business Architecture.
-user: "I need to interview the business owner about the business architecture"
-assistant: "I'll use the ea-interviewer to facilitate that conversation, one question at a time."
-<commentary>
-Facilitating stakeholder interviews with structured questions is a core use case.
-</commentary>
-</example>
-
+  <example>
+  Context: User wants to interview a stakeholder about the Business Architecture.
+  user: "I need to interview the business owner about the business architecture"
+  assistant: "I'll use the ea-interviewer to facilitate that conversation, one question at a time."
+  <commentary>
+  Facilitating stakeholder interviews with structured questions is a core use case.
+  </commentary>
+  </example>
 model: inherit
 color: cyan
 tools: ["Read", "Write", "Glob"]

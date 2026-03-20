@@ -1,5 +1,6 @@
 ---
 name: RAG Chat
+version: 0.1.0
 description: >
   Use this skill when the user wants to ask natural-language questions about their
   ingested documents, search the knowledge base, or interact with their document

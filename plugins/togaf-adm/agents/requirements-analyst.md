@@ -1,34 +1,34 @@
 ---
 name: requirements-analyst
-description: Use this agent when the user loads a document for analysis, wants to extract architecture requirements from an existing file, needs requirements mapped to TOGAF ADM phases, wants a requirements register built from a document, or asks to analyse a business case, strategy document, or existing architecture. Examples:
+description: >
+  Use this agent when the user loads a document for analysis, wants to extract architecture requirements from an existing file, needs requirements mapped to TOGAF ADM phases, wants a requirements register built from a document, or asks to analyse a business case, strategy document, or existing architecture. Examples:
 
-<example>
-Context: The user has loaded a business strategy PDF and wants to extract architecture inputs from it.
-user: "Analyse this strategy document and pull out the architecture requirements."
-assistant: "I'll use the requirements-analyst agent to extract and map all architecture-relevant information from the document."
-<commentary>
-The user wants structured extraction from a loaded document. The agent extracts requirements, maps them to TOGAF phases and artifacts, and populates the requirements register.
-</commentary>
-</example>
+  <example>
+  Context: The user has loaded a business strategy PDF and wants to extract architecture inputs from it.
+  user: "Analyse this strategy document and pull out the architecture requirements."
+  assistant: "I'll use the requirements-analyst agent to extract and map all architecture-relevant information from the document."
+  <commentary>
+  The user wants structured extraction from a loaded document. The agent extracts requirements, maps them to TOGAF phases and artifacts, and populates the requirements register.
+  </commentary>
+  </example>
 
-<example>
-Context: The user has provided a requirements specification document.
-user: "Load requirements.md and build a requirements register from it."
-assistant: "I'll use the requirements-analyst agent to read the file, extract requirements, and produce a structured TOGAF requirements register."
-<commentary>
-The user wants a requirements register generated from a file. The agent reads the file, classifies each requirement, and outputs a structured register.
-</commentary>
-</example>
+  <example>
+  Context: The user has provided a requirements specification document.
+  user: "Load requirements.md and build a requirements register from it."
+  assistant: "I'll use the requirements-analyst agent to read the file, extract requirements, and produce a structured TOGAF requirements register."
+  <commentary>
+  The user wants a requirements register generated from a file. The agent reads the file, classifies each requirement, and outputs a structured register.
+  </commentary>
+  </example>
 
-<example>
-Context: The user wants to know what ADM phases are addressed by an existing document.
-user: "What ADM phases does this existing architecture document cover?"
-assistant: "I'll use the requirements-analyst agent to analyse the document and map its content to ADM phases."
-<commentary>
-The user wants ADM coverage analysis. The agent maps document content to phases and identifies what is missing.
-</commentary>
-</example>
-
+  <example>
+  Context: The user wants to know what ADM phases are addressed by an existing document.
+  user: "What ADM phases does this existing architecture document cover?"
+  assistant: "I'll use the requirements-analyst agent to analyse the document and map its content to ADM phases."
+  <commentary>
+  The user wants ADM coverage analysis. The agent maps document content to phases and identifies what is missing.
+  </commentary>
+  </example>
 model: inherit
 color: cyan
 allowed-tools: ["Read", "Write", "Bash"]

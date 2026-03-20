@@ -8,7 +8,7 @@ EA Assistant supports the full EA engagement lifecycle using **TOGAF 10** as the
 
 ## Features
 
-- **Multi-engagement management** — create, open, and track multiple EA projects
+- **Multi-engagement management** — create, open, track, edit, archive, and delete EA projects
 - **Full ADM lifecycle** — start, edit, or resume any TOGAF ADM phase (Prelim, A–H)
 - **Architecture Requirements** — manage requirements locally with a reference to a shared requirements repository
 - **Artifact generation** — all TOGAF artifacts from templates, guided by interviews
@@ -43,9 +43,9 @@ requirementsRepoPath: /path/to/shared/requirements-folder
 
 | Command | Description |
 |---|---|
-| `/ea-new` | Create a new EA engagement |
-| `/ea-open` | Open or switch between engagements (picklist) |
-| `/ea-status` | Dashboard of all engagements and their progress |
+| `/ea-new` | Create a new EA engagement with guided setup, engagement type selection, domain scoping, and Preliminary phase scaffolding |
+| `/ea-open` | Open an engagement with full details, edit metadata/phases/artifacts, archive or delete |
+| `/ea-status` | Portfolio dashboard with type, domains, phase progress, artifact counts, and archive management |
 | `/ea-phase [phase]` | Start, edit, or resume an ADM phase |
 | `/ea-artifact [action]` | Create or list artifacts for the active engagement |
 | `/ea-interview [mode]` | Start, export, import, or resume a stakeholder interview |
@@ -53,19 +53,35 @@ requirementsRepoPath: /path/to/shared/requirements-folder
 | `/ea-requirements [action]` | Manage architecture requirements |
 | `/ea-merge` | Merge all artifacts into a consolidated document |
 
+## Engagement Management
+
+After creating an engagement, use `/ea-open` to:
+
+- **View full details** — metadata, phase-by-phase progress, artifact list
+- **Edit metadata** — update name, description, sponsor, dates, status (Active/On Hold/Planning/Completed)
+- **Edit phase status** — manually advance or adjust any ADM phase with automatic timestamp tracking
+- **Edit artifact status** — update artifact and review status without opening files
+- **Archive** — move completed engagements to `.archive/` to declutter your portfolio
+- **Delete** — permanently remove engagements (requires slug confirmation)
+
+Use `/ea-status` for a portfolio-level dashboard showing all engagements with type, domains, progress, and artifact counts.
+
 ## Project Storage
 
 All engagement data is stored in `EA-projects/` relative to your working directory:
 
 ```
 EA-projects/
-└── engagement-name/
-    ├── engagement.json       # metadata, ADM phase, settings
-    ├── requirements/         # local architecture requirements
-    ├── artifacts/            # generated artifacts + review files
-    ├── diagrams/             # Mermaid, Graphviz, Draw.io files
-    ├── uploads/              # source documents and diagrams
-    └── interviews/           # dated, versioned interview notes
+├── engagement-name/
+│   ├── engagement.json       # metadata, ADM phase, settings
+│   ├── requirements/         # local architecture requirements
+│   ├── artifacts/            # generated artifacts + review files
+│   ├── diagrams/             # Mermaid, Graphviz, Draw.io files
+│   ├── uploads/              # source documents and diagrams
+│   └── interviews/           # dated, versioned interview notes
+└── .archive/                 # archived engagements (hidden)
+    └── old-engagement/
+        └── engagement.json
 ```
 
 ## Artifact Content Policy
