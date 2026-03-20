@@ -26,6 +26,8 @@ If no engagement is active in context, prompt the user to run `/ea-open` first.
 2. Ask: "Include Draft artifacts? (yes/no)"
 3. Ask: "Exclude any specific artifacts? (enter numbers to exclude, or press Enter to include all)"
 
+> **Tip:** To export a single artifact as Word, PowerPoint, or Mermaid, use `/ea-generate [artifact-name] [format]` instead.
+
 ### Step 2: Determine Output Format
 
 - If argument is `markdown` — Markdown only
