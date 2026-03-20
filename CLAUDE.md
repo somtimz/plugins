@@ -76,8 +76,10 @@ chore: ...
 ## Active Technologies
 - Python 3.11+ + Flask, anthropic, chromadb, openai (embedding client) (RAG-assistant)
 - ChromaDB (vector store), SQLite (registry) (RAG-assistant)
-- Markdown (Claude Code plugin instruction files) + Claude Code plugin framework (commands/, skills/, agents/) (002-ea-project-management)
-- JSON files (`engagement.json`) and directory structure (`EA-projects/`) (002-ea-project-management)
+- Python 3.11+ + python-docx, python-pptx (ea-assistant artifact generation scripts)
+- Markdown (Claude Code plugin instruction files) + Claude Code plugin framework (commands/, skills/, agents/) (ea-assistant, RAG-assistant, ITIL-assistant)
+- JSON files (`engagement.json`) and directory structure (`EA-projects/`) (ea-assistant)
 
 ## Recent Changes
+- ea-assistant/togaf-enrichment: Added artifact generation (Word/PPTX/Mermaid), phase interview question bank, requirements analyst agent, ADM reference material; togaf-adm plugin retired and merged into ea-assistant (v0.4.0)
 - RAG-assistant/001-rag-search-transparency: Added transparent RAG search — chunk panel, inspect prompt, inline citations
