@@ -1,9 +1,0 @@
-{
-  "name": "togaf-adm",
-  "version": "0.1.0",
-  "description": "TOGAF 10 ADM companion for enterprise architects — guides ADM phases, generates artifacts, conducts stakeholder interviews, and produces Word, PowerPoint, and Mermaid deliverables.",
-  "author": {
-    "name": "Enterprise Architecture Team"
-  },
-  "keywords": ["togaf", "enterprise-architecture", "adm", "architecture", "ea"]
-}

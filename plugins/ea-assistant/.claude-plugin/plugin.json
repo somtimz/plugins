@@ -1,6 +1,6 @@
 {
   "name": "ea-assistant",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "End-to-end Enterprise Architecture engagement management. Supports TOGAF 10, Zachman, and ArchiMate.",
   "author": {
     "name": "Costa Pissaris",
