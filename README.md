@@ -1,6 +1,6 @@
 # Claude Plugins
 
-A curated collection of Claude Code plugins maintained by [@somtimz](https://github.com/somtimz).
+A curated collection of plugins for Claude Code and OpenCode maintained by [@somtimz](https://github.com/somtimz).
 
 ## Plugins
 
@@ -12,11 +12,49 @@ A curated collection of Claude Code plugins maintained by [@somtimz](https://git
 
 ## Installation
 
-Install any plugin directly in Claude Code:
+### Claude Code — add as marketplace
+
+In Claude Code, add this repo as a marketplace to browse and install all plugins:
+
+```
+/marketplace add https://github.com/somtimz/plugins
+```
+
+Or install a single plugin directly:
 
 ```bash
 /plugin install https://github.com/somtimz/plugins/tree/main/plugins/<plugin-name>
 ```
+
+### OpenCode — install skills
+
+OpenCode has no marketplace mechanism, but all 12 skills are format-compatible. Clone the repo and run the install script to symlink skills into OpenCode's discovery path:
+
+```bash
+git clone https://github.com/somtimz/plugins.git
+cd plugins
+bash install-opencode.sh
+# Uninstall: bash install-opencode.sh --uninstall
+```
+
+The script symlinks all skills into `~/.config/opencode/skills/`. Set `OPENCODE_SKILLS_DIR` to override the target directory. Restart OpenCode after installing.
+
+**Skills available for OpenCode:**
+
+| Skill | Plugin |
+|---|---|
+| `archimate-notation` | ea-assistant |
+| `ea-artifact-templates` | ea-assistant |
+| `ea-document-ingestion` | ea-assistant |
+| `ea-engagement-lifecycle` | ea-assistant |
+| `ea-requirements-management` | ea-assistant |
+| `zachman-framework` | ea-assistant |
+| `doc-ingestion-pipeline` | RAG-assistant |
+| `rag-chat` | RAG-assistant |
+| `togaf-adm-phases` | togaf-adm |
+| `togaf-artifacts` | togaf-adm |
+| `togaf-generation` | togaf-adm |
+| `togaf-interview-techniques` | togaf-adm |
 
 ## Repository Structure
 
