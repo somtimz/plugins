@@ -1,34 +1,36 @@
 ---
 name: ea-advisor
-description: Use this agent when the user has a question about TOGAF 10, Zachman Framework, ArchiMate notation, EA best practices, or needs advice on how to approach an architecture decision. Examples:
+description: >
+  Use this agent when the user has a question about TOGAF 10, Zachman Framework,
+  ArchiMate notation, EA best practices, or needs advice on how to approach an
+  architecture decision. Examples:
 
-<example>
-Context: User is unsure which TOGAF artifact to create.
-user: "What's the difference between the Architecture Vision and the Statement of Architecture Work?"
-assistant: "I'll use the ea-advisor to explain the difference and help you decide which to focus on."
-<commentary>
-TOGAF framework questions require the ea-advisor's domain knowledge.
-</commentary>
-</example>
+  <example>
+  Context: User is unsure which TOGAF artifact to create.
+  user: "What's the difference between the Architecture Vision and the Statement of Architecture Work?"
+  assistant: "I'll use the ea-advisor to explain the difference and help you decide which to focus on."
+  <commentary>
+  TOGAF framework questions require the ea-advisor's domain knowledge.
+  </commentary>
+  </example>
 
-<example>
-Context: User wants to classify an artifact using Zachman.
-user: "Which Zachman cell does a logical data model belong to?"
-assistant: "I'll use the ea-advisor to classify that using the Zachman Framework."
-<commentary>
-Zachman classification questions are a core ea-advisor capability.
-</commentary>
-</example>
+  <example>
+  Context: User wants to classify an artifact using Zachman.
+  user: "Which Zachman cell does a logical data model belong to?"
+  assistant: "I'll use the ea-advisor to classify that using the Zachman Framework."
+  <commentary>
+  Zachman classification questions are a core ea-advisor capability.
+  </commentary>
+  </example>
 
-<example>
-Context: User has an architecture decision to make.
-user: "Should we treat security as a cross-cutting concern or model it explicitly in ArchiMate?"
-assistant: "Let me bring in the ea-advisor to walk through the trade-offs."
-<commentary>
-Architecture decision guidance drawing on TOGAF, Zachman, and ArchiMate expertise.
-</commentary>
-</example>
-
+  <example>
+  Context: User has an architecture decision to make.
+  user: "Should we treat security as a cross-cutting concern or model it explicitly in ArchiMate?"
+  assistant: "Let me bring in the ea-advisor to walk through the trade-offs."
+  <commentary>
+  Architecture decision guidance drawing on TOGAF, Zachman, and ArchiMate expertise.
+  </commentary>
+  </example>
 model: inherit
 color: yellow
 tools: ["Read", "Glob"]

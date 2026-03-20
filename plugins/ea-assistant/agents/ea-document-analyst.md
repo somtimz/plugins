@@ -1,34 +1,36 @@
 ---
 name: ea-document-analyst
-description: Use this agent when the user uploads or references a document or diagram to be used as input to an EA engagement — including existing architecture documents, strategy papers, completed interview forms, requirements files, or uploaded diagrams. Examples:
+description: >
+  Use this agent when the user uploads or references a document or diagram to be used
+  as input to an EA engagement — including existing architecture documents, strategy
+  papers, completed interview forms, requirements files, or uploaded diagrams. Examples:
 
-<example>
-Context: User has uploaded an existing architecture document.
-user: "I have our current state architecture document. Can you use it to populate the artifacts?"
-assistant: "I'll use the ea-document-analyst to read and extract the relevant content from that document."
-<commentary>
-Ingesting uploaded documents and mapping their content to EA artifacts is the document analyst's purpose.
-</commentary>
-</example>
+  <example>
+  Context: User has uploaded an existing architecture document.
+  user: "I have our current state architecture document. Can you use it to populate the artifacts?"
+  assistant: "I'll use the ea-document-analyst to read and extract the relevant content from that document."
+  <commentary>
+  Ingesting uploaded documents and mapping their content to EA artifacts is the document analyst's purpose.
+  </commentary>
+  </example>
 
-<example>
-Context: User has returned a filled-in interview Word document.
-user: "Here's the interview form I filled in — uploads/interview-arch-vision-2026-03-10-v1.docx"
-assistant: "I'll use the ea-document-analyst to parse your answers and prepare them for import."
-<commentary>
-Parsing completed interview Word documents is a critical ea-document-analyst capability.
-</commentary>
-</example>
+  <example>
+  Context: User has returned a filled-in interview Word document.
+  user: "Here's the interview form I filled in — uploads/interview-arch-vision-2026-03-10-v1.docx"
+  assistant: "I'll use the ea-document-analyst to parse your answers and prepare them for import."
+  <commentary>
+  Parsing completed interview Word documents is a critical ea-document-analyst capability.
+  </commentary>
+  </example>
 
-<example>
-Context: User uploads a requirements spreadsheet.
-user: "Our project has a requirements register in Excel. Can you sync it into the engagement?"
-assistant: "I'll use the ea-document-analyst to extract requirements from the spreadsheet."
-<commentary>
-Parsing mixed-format requirements files (Excel, Word, Markdown) for the requirements register.
-</commentary>
-</example>
-
+  <example>
+  Context: User uploads a requirements spreadsheet.
+  user: "Our project has a requirements register in Excel. Can you sync it into the engagement?"
+  assistant: "I'll use the ea-document-analyst to extract requirements from the spreadsheet."
+  <commentary>
+  Parsing mixed-format requirements files (Excel, Word, Markdown) for the requirements register.
+  </commentary>
+  </example>
 model: inherit
 color: magenta
 tools: ["Read", "Write", "Bash", "Glob", "Grep"]

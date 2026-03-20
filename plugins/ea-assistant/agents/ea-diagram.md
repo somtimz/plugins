@@ -1,34 +1,35 @@
 ---
 name: ea-diagram
-description: Use this agent when creating, editing, or interpreting architecture diagrams in Mermaid, Graphviz (.dot), Draw.io (.drawio), or ArchiMate notation. Examples:
+description: >
+  Use this agent when creating, editing, or interpreting architecture diagrams in
+  Mermaid, Graphviz (.dot), Draw.io (.drawio), or ArchiMate notation. Examples:
 
-<example>
-Context: User wants to create an application architecture diagram.
-user: "Create an ArchiMate application layer diagram for the order management system"
-assistant: "I'll use the ea-diagram agent to generate that ArchiMate diagram in Mermaid format."
-<commentary>
-Creating an ArchiMate diagram is the core use case for the ea-diagram agent.
-</commentary>
-</example>
+  <example>
+  Context: User wants to create an application architecture diagram.
+  user: "Create an ArchiMate application layer diagram for the order management system"
+  assistant: "I'll use the ea-diagram agent to generate that ArchiMate diagram in Mermaid format."
+  <commentary>
+  Creating an ArchiMate diagram is the core use case for the ea-diagram agent.
+  </commentary>
+  </example>
 
-<example>
-Context: User has uploaded a Draw.io file and wants to understand it.
-user: "Can you explain what's in this .drawio file?"
-assistant: "I'll use the ea-diagram agent to read and interpret the Draw.io diagram."
-<commentary>
-Interpreting uploaded diagram files is a key ea-diagram capability.
-</commentary>
-</example>
+  <example>
+  Context: User has uploaded a Draw.io file and wants to understand it.
+  user: "Can you explain what's in this .drawio file?"
+  assistant: "I'll use the ea-diagram agent to read and interpret the Draw.io diagram."
+  <commentary>
+  Interpreting uploaded diagram files is a key ea-diagram capability.
+  </commentary>
+  </example>
 
-<example>
-Context: User wants a business process flow.
-user: "Create a Mermaid diagram showing the customer onboarding process"
-assistant: "I'll use the ea-diagram agent to create that business process flow in Mermaid."
-<commentary>
-Creating process flow diagrams for EA engagement artifacts is within scope.
-</commentary>
-</example>
-
+  <example>
+  Context: User wants a business process flow.
+  user: "Create a Mermaid diagram showing the customer onboarding process"
+  assistant: "I'll use the ea-diagram agent to create that business process flow in Mermaid."
+  <commentary>
+  Creating process flow diagrams for EA engagement artifacts is within scope.
+  </commentary>
+  </example>
 model: inherit
 color: green
 tools: ["Read", "Write", "Bash", "Glob"]

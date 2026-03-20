@@ -1,34 +1,36 @@
 ---
 name: ea-consistency-checker
-description: Use this agent when the user wants to check that all EA artifacts in an engagement are consistent with each other, when an artifact has been updated and related artifacts may need review, or when preparing for a review or merge of all artifacts. Examples:
+description: >
+  Use this agent when the user wants to check that all EA artifacts in an engagement
+  are consistent with each other, when an artifact has been updated and related artifacts
+  may need review, or when preparing for a review or merge of all artifacts. Examples:
 
-<example>
-Context: User has just approved the Business Architecture and wants to check consistency.
-user: "Check that all my artifacts are consistent with the Business Architecture"
-assistant: "I'll use the ea-consistency-checker to cross-check all artifacts for contradictions and gaps."
-<commentary>
-Cross-artifact consistency checking is this agent's primary purpose.
-</commentary>
-</example>
+  <example>
+  Context: User has just approved the Business Architecture and wants to check consistency.
+  user: "Check that all my artifacts are consistent with the Business Architecture"
+  assistant: "I'll use the ea-consistency-checker to cross-check all artifacts for contradictions and gaps."
+  <commentary>
+  Cross-artifact consistency checking is this agent's primary purpose.
+  </commentary>
+  </example>
 
-<example>
-Context: User is about to merge all artifacts.
-user: "Before I merge everything, can you check for any inconsistencies?"
-assistant: "I'll run the ea-consistency-checker across all artifacts before we proceed with the merge."
-<commentary>
-Pre-merge consistency check is a natural trigger for this agent.
-</commentary>
-</example>
+  <example>
+  Context: User is about to merge all artifacts.
+  user: "Before I merge everything, can you check for any inconsistencies?"
+  assistant: "I'll run the ea-consistency-checker across all artifacts before we proceed with the merge."
+  <commentary>
+  Pre-merge consistency check is a natural trigger for this agent.
+  </commentary>
+  </example>
 
-<example>
-Context: A key requirement has been updated.
-user: "I've updated REQ-001. Which artifacts reference it and might need updating?"
-assistant: "I'll use the ea-consistency-checker to find all artifacts that reference REQ-001."
-<commentary>
-Tracing impact of a change through dependent artifacts is a consistency checker task.
-</commentary>
-</example>
-
+  <example>
+  Context: A key requirement has been updated.
+  user: "I've updated REQ-001. Which artifacts reference it and might need updating?"
+  assistant: "I'll use the ea-consistency-checker to find all artifacts that reference REQ-001."
+  <commentary>
+  Tracing impact of a change through dependent artifacts is a consistency checker task.
+  </commentary>
+  </example>
 model: inherit
 color: red
 tools: ["Read", "Grep", "Glob"]

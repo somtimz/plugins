@@ -1,34 +1,36 @@
 ---
 name: ea-facilitator
-description: Use this agent when the user wants to be guided through a TOGAF ADM phase, needs help advancing an EA engagement, asks what to do next in their architecture work, or needs facilitation of architecture activities. Examples:
+description: >
+  Use this agent when the user wants to be guided through a TOGAF ADM phase, needs
+  help advancing an EA engagement, asks what to do next in their architecture work,
+  or needs facilitation of architecture activities. Examples:
 
-<example>
-Context: User has opened an engagement currently in Phase A.
-user: "Let's work on the Architecture Vision"
-assistant: "I'll use the ea-facilitator agent to guide you through Phase A step by step."
-<commentary>
-The user wants to be guided through a specific ADM phase — this is the facilitator's core purpose.
-</commentary>
-</example>
+  <example>
+  Context: User has opened an engagement currently in Phase A.
+  user: "Let's work on the Architecture Vision"
+  assistant: "I'll use the ea-facilitator agent to guide you through Phase A step by step."
+  <commentary>
+  The user wants to be guided through a specific ADM phase — this is the facilitator's core purpose.
+  </commentary>
+  </example>
 
-<example>
-Context: User has just created a new engagement.
-user: "Where do we start?"
-assistant: "I'll use the ea-facilitator to walk you through the Preliminary phase and get the engagement set up."
-<commentary>
-User needs direction on starting an EA engagement — the facilitator provides structured ADM guidance.
-</commentary>
-</example>
+  <example>
+  Context: User has just created a new engagement.
+  user: "Where do we start?"
+  assistant: "I'll use the ea-facilitator to walk you through the Preliminary phase and get the engagement set up."
+  <commentary>
+  User needs direction on starting an EA engagement — the facilitator provides structured ADM guidance.
+  </commentary>
+  </example>
 
-<example>
-Context: User is mid-engagement and unsure of next steps.
-user: "We've finished the business architecture. What comes next?"
-assistant: "Let me bring in the ea-facilitator to review what's complete and guide you into Phase C."
-<commentary>
-Navigating between ADM phases and deciding what comes next is a facilitation task.
-</commentary>
-</example>
-
+  <example>
+  Context: User is mid-engagement and unsure of next steps.
+  user: "We've finished the business architecture. What comes next?"
+  assistant: "Let me bring in the ea-facilitator to review what's complete and guide you into Phase C."
+  <commentary>
+  Navigating between ADM phases and deciding what comes next is a facilitation task.
+  </commentary>
+  </example>
 model: inherit
 color: blue
 tools: ["Read", "Write", "Glob", "Grep"]

@@ -1,34 +1,34 @@
 ---
 name: adm-guide
-description: Use this agent when the user wants to be guided through a TOGAF ADM phase, asks what to do next in an architecture engagement, wants to understand what inputs are needed for a phase, or needs step-by-step facilitation through the Architecture Development Method. Examples:
+description: >
+  Use this agent when the user wants to be guided through a TOGAF ADM phase, asks what to do next in an architecture engagement, wants to understand what inputs are needed for a phase, or needs step-by-step facilitation through the Architecture Development Method. Examples:
 
-<example>
-Context: The user is starting a new enterprise architecture engagement and wants to begin the TOGAF ADM cycle.
-user: "I need to start a TOGAF architecture engagement for my organisation. Where do I begin?"
-assistant: "I'll use the adm-guide agent to walk you through the process step by step."
-<commentary>
-The user wants structured guidance through the ADM. The adm-guide agent is purpose-built for this facilitation role.
-</commentary>
-</example>
+  <example>
+  Context: The user is starting a new enterprise architecture engagement and wants to begin the TOGAF ADM cycle.
+  user: "I need to start a TOGAF architecture engagement for my organisation. Where do I begin?"
+  assistant: "I'll use the adm-guide agent to walk you through the process step by step."
+  <commentary>
+  The user wants structured guidance through the ADM. The adm-guide agent is purpose-built for this facilitation role.
+  </commentary>
+  </example>
 
-<example>
-Context: The user is mid-engagement and unsure what to do after completing Phase A.
-user: "We've finished the Architecture Vision. What should we tackle next?"
-assistant: "Let me use the adm-guide agent to determine your next steps and guide you into Phase B."
-<commentary>
-The user needs ADM progression guidance. The agent knows phase sequencing, inputs required, and what to do next.
-</commentary>
-</example>
+  <example>
+  Context: The user is mid-engagement and unsure what to do after completing Phase A.
+  user: "We've finished the Architecture Vision. What should we tackle next?"
+  assistant: "Let me use the adm-guide agent to determine your next steps and guide you into Phase B."
+  <commentary>
+  The user needs ADM progression guidance. The agent knows phase sequencing, inputs required, and what to do next.
+  </commentary>
+  </example>
 
-<example>
-Context: The user wants to work through a specific phase interactively.
-user: "Let's work through Phase B — Business Architecture together."
-assistant: "I'll use the adm-guide agent to guide you through Phase B, collecting inputs one at a time."
-<commentary>
-The user wants interactive phase facilitation. The adm-guide agent conducts the structured interview and tracks outputs.
-</commentary>
-</example>
-
+  <example>
+  Context: The user wants to work through a specific phase interactively.
+  user: "Let's work through Phase B — Business Architecture together."
+  assistant: "I'll use the adm-guide agent to guide you through Phase B, collecting inputs one at a time."
+  <commentary>
+  The user wants interactive phase facilitation. The adm-guide agent conducts the structured interview and tracks outputs.
+  </commentary>
+  </example>
 model: inherit
 color: blue
 allowed-tools: ["Read", "Write"]

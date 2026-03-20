@@ -1,5 +1,6 @@
 ---
 name: Document Ingestion Pipeline
+version: 0.1.0
 description: >
   Use this skill when the user wants to ingest, embed, or index documents into a vector
   store for RAG (Retrieval-Augmented Generation). Activates when the user mentions:

@@ -8,42 +8,95 @@ Display a comprehensive status dashboard for all EA engagements.
 
 ## Instructions
 
-1. Scan for all `EA-projects/*/engagement.json` files.
-
-2. For each engagement, read:
-   - Name, status, currentPhase, lastModified
-   - Count of artifacts by review status (Draft / In Review / Approved / Needs Revision)
-   - Phase completion summary
-
-3. Display a dashboard:
+1. **Scan for engagements.** Find all `EA-projects/*/engagement.json` files. The glob pattern `EA-projects/*/` excludes dotdirs like `.archive/`, so archived engagements are not included in the default view. If no engagements exist, display:
 
    ```
-   ═══════════════════════════════════════════════════
+   No EA engagements found.
+
+   Get started by creating your first engagement: /ea-new
+   ```
+
+2. **Read each engagement.** For each `engagement.json`, extract:
+   - `name`, `status`, `currentPhase`, `lastModified`
+   - `engagementType` (display "—" if field is missing or null)
+   - `architectureDomains` (default to all four if field is missing)
+   - `startDate`, `targetEndDate` (display "—" if missing or null)
+   - Count artifacts by status: Draft, In Review, Approved, Needs Revision
+   - Each phase status from the `phases` object
+
+   **Backward compatibility**: If `engagementType`, `architectureDomains`, or `targetEndDate` fields are missing (pre-v0.2.0 engagements), apply defaults: type = null (display "—"), domains = all four, targetEndDate = null (display "—").
+
+3. **Display the dashboard.** For each engagement, show:
+
+   ```
+   ═══════════════════════════════════════════════════════════════
    EA ENGAGEMENT DASHBOARD
-   ═══════════════════════════════════════════════════
+   ═══════════════════════════════════════════════════════════════
 
-   📁 Acme Retail Transformation          [ACTIVE]
-      Current Phase : Phase B — Business Architecture
-      Artifacts     : 4 total (2 Draft, 1 In Review, 1 Approved)
-      ADM Progress  : Prelim ✅ | Req ✅ | A ✅ | B 🔄 | C ⬜ | D ⬜ | E ⬜ | F ⬜ | G ⬜ | H ⬜
-      Last Modified : 2026-03-10
+   📁 {name}          [{STATUS}]     {engagementType or "—"}
+      Domains       : {comma-separated domains}
+      Current Phase : {currentPhase} — {phase name}
+      Artifacts     : {total} total ({n} Draft, {n} In Review, {n} Approved, {n} Needs Revision)
+      ADM Progress  : Prelim {i} | Req {i} | A {i} | B {i} | C-Data {i} | C-App {i} | D {i} | E {i} | F {i} | G {i} | H {i}
+      Dates         : {startDate} → {targetEndDate or "—"}
+      Last Modified : {lastModified}
 
-   📁 Finance Modernisation 2026          [ON HOLD]
-      Current Phase : Phase A — Architecture Vision
-      Artifacts     : 1 total (1 Draft)
-      ADM Progress  : Prelim ✅ | Req ⬜ | A 🔄 | ...
-      Last Modified : 2026-02-28
+   [repeat for each engagement]
 
-   ═══════════════════════════════════════════════════
-   Total engagements: 2 | Active: 1 | On Hold: 1
-   ═══════════════════════════════════════════════════
+   ═══════════════════════════════════════════════════════════════
+   Total: {n} | Active: {n} | On Hold: {n} | Planning: {n} | Completed: {n}
+   ═══════════════════════════════════════════════════════════════
    ```
 
-   Legend: ✅ Complete | 🔄 In Progress | ⏸ On Hold | ⬜ Not Started
+   **Phase status indicators** — use these symbols for each phase in the ADM Progress line:
+   - ✅ Complete
+   - 🔄 In Progress
+   - ⏸ On Hold
+   - ⬜ Not Started
+   - ➖ Not Applicable
 
-4. If a specific engagement is currently open (active in context), highlight it with ► marker.
+   **Progress calculation**: Exclude "Not Applicable" phases from both the total and completed count. For example, an Assessment-only engagement with 5 applicable phases (3 complete) shows progress as 3/5, not 3/11.
 
-5. Offer options:
-   - Open an engagement (`/ea-open`)
-   - Create a new one (`/ea-new`)
-   - View artifacts for an engagement (`/ea-artifact`)
+   If a specific engagement is currently open (active in conversation context), highlight it with a ► marker before its name.
+
+4. **Display portfolio summary.** After all engagements, show the total count and breakdown by engagement status (Active, On Hold, Planning, Completed).
+
+5. **Display legend and options.**
+
+   ```
+   Legend: ✅ Complete | 🔄 In Progress | ⏸ On Hold | ⬜ Not Started | ➖ Not Applicable
+
+   Options:
+   1. Open an engagement (/ea-open)
+   2. Create a new engagement (/ea-new)
+   3. Show archived engagements
+   ```
+
+6. **Show archived engagements** (when user selects option 3). Scan `EA-projects/.archive/*/engagement.json` files. If `.archive/` doesn't exist or contains no engagements, display "No archived engagements found." Otherwise display:
+
+   ```
+   ───────────────────────────────────────────────────────────────
+   ARCHIVED ENGAGEMENTS
+   ───────────────────────────────────────────────────────────────
+
+   📦 {name}          [{STATUS}]     {engagementType or "—"}
+      Last Modified : {lastModified}
+
+   [repeat for each archived engagement]
+
+   Options:
+   1. Restore an archived engagement
+   2. Delete an archived engagement
+   3. Return to active dashboard
+   ```
+
+7. **Restore an archived engagement** (when user selects restore from archived section). Display a numbered list of archived engagements. After user selects one:
+   - Check if `EA-projects/{slug}/` already exists. If so, warn: "Cannot restore: an active engagement with slug '{slug}' already exists. Rename or delete the active engagement first." and stop.
+   - Move the directory from `EA-projects/.archive/{slug}/` to `EA-projects/{slug}/`.
+   - Confirm: "Restored: {name}. Now visible in /ea-status and /ea-open."
+
+8. **Delete an archived engagement** (when user selects delete from archived section). Display a numbered list of archived engagements. After user selects one:
+   - Display warning: "DELETE '{name}'? This will PERMANENTLY remove EA-projects/.archive/{slug}/ including all artifacts, interviews, diagrams, and engagement data. This action cannot be undone."
+   - Require user to type the engagement slug to confirm.
+   - If slug matches, remove the directory. Confirm: "Deleted: {name}."
+   - If slug doesn't match, cancel the deletion.
