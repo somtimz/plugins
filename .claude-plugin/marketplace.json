@@ -1,4 +1,6 @@
 {
+  "name": "somtimz-plugins",
+  "description": "Enterprise Architecture and RAG plugins for Claude Code",
   "owner": {
     "name": "Costa Pissaris",
     "email": "cpissaris@gmail.com"
