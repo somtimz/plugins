@@ -14,6 +14,8 @@ import { useState, useEffect, useRef } from "react";
 //     defaultAnswer: string | null,
 //     existingAnswer: string | null,     // from previous session / imported doc
 //     brainstormNote: string | null,     // relevant thought from brainstorm notes
+//     options: Array<string> | null,     // if set, renders as a checklist/radio list
+//     allowMultiple: boolean,            // true = checkboxes (default), false = radio (select one)
 //   }>
 
 const INTERVIEW_DATA = {
@@ -28,6 +30,8 @@ const INTERVIEW_DATA = {
       defaultAnswer: null,
       existingAnswer: null,
       brainstormNote: null,
+      options: null,
+      allowMultiple: true,
     },
   ],
 };
@@ -77,15 +81,65 @@ function ProgressBar({ answered, total }) {
   );
 }
 
-function QuestionCard({ q, qNum, total, onAnswer, inputVal, setInputVal, onBack, onJumpToReview }) {
+function OptionSelector({ options, allowMultiple, checked, onChange }) {
+  function toggle(opt) {
+    if (allowMultiple) {
+      if (checked.includes(opt)) onChange(checked.filter(o => o !== opt));
+      else onChange([...checked, opt]);
+    } else {
+      onChange(checked.includes(opt) ? [] : [opt]);
+    }
+  }
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 14 }}>
+      {options.map(opt => {
+        const isChecked = checked.includes(opt);
+        return (
+          <label key={opt} style={{
+            display: "flex", alignItems: "flex-start", gap: 10, cursor: "pointer",
+            padding: "9px 12px", borderRadius: 8,
+            border: `1.5px solid ${isChecked ? "#6366F1" : "#E5E7EB"}`,
+            background: isChecked ? "#EEF2FF" : "#fff",
+            transition: "border-color 0.15s, background 0.15s",
+          }}>
+            <input
+              type={allowMultiple ? "checkbox" : "radio"}
+              checked={isChecked}
+              onChange={() => toggle(opt)}
+              style={{ marginTop: 2, accentColor: "#6366F1", flexShrink: 0 }}
+            />
+            <span style={{ fontSize: 14, color: "#374151", lineHeight: 1.4 }}>{opt}</span>
+          </label>
+        );
+      })}
+    </div>
+  );
+}
+
+function QuestionCard({ q, qNum, total, onAnswer, inputVal, setInputVal, checkedVals, onCheckChange, onBack, onJumpToReview }) {
   const textareaRef = useRef(null);
+  const hasOptions = q.options && q.options.length > 0;
 
   useEffect(() => {
-    textareaRef.current?.focus();
+    if (!hasOptions) textareaRef.current?.focus();
   }, [qNum]);
 
+  function buildAnswerValue() {
+    if (hasOptions) {
+      const parts = [];
+      if (checkedVals.length > 0) parts.push(checkedVals.join(", "));
+      if (inputVal.trim()) parts.push(`Notes: ${inputVal.trim()}`);
+      return parts.join(" — ");
+    }
+    return inputVal.trim();
+  }
+
+  const canSubmit = hasOptions
+    ? (checkedVals.length > 0 || inputVal.trim().length > 0)
+    : inputVal.trim().length > 0;
+
   const submit = () => {
-    const v = inputVal.trim();
+    const v = buildAnswerValue();
     if (v) onAnswer(v, "answered");
   };
 
@@ -135,34 +189,61 @@ function QuestionCard({ q, qNum, total, onAnswer, inputVal, setInputVal, onBack,
           </div>
         )}
 
-        {/* Answer input */}
-        <textarea
-          ref={textareaRef}
-          style={{
-            width: "100%", minHeight: 90, padding: "10px 12px",
-            border: "1.5px solid #E5E7EB", borderRadius: 8,
-            fontSize: 14, fontFamily: "inherit", color: "#111827",
-            resize: "vertical", outline: "none", boxSizing: "border-box",
-            transition: "border-color 0.15s",
-          }}
-          placeholder="Type your answer… (Ctrl+Enter to submit)"
-          value={inputVal}
-          onChange={e => setInputVal(e.target.value)}
-          onFocus={e => { e.target.style.borderColor = "#6366F1"; }}
-          onBlur={e => { e.target.style.borderColor = "#E5E7EB"; }}
-          onKeyDown={e => { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) submit(); }}
-        />
+        {/* Checklist or free-text input */}
+        {hasOptions ? (
+          <>
+            <OptionSelector
+              options={q.options}
+              allowMultiple={q.allowMultiple !== false}
+              checked={checkedVals}
+              onChange={onCheckChange}
+            />
+            <textarea
+              ref={textareaRef}
+              style={{
+                width: "100%", minHeight: 60, padding: "10px 12px",
+                border: "1.5px solid #E5E7EB", borderRadius: 8,
+                fontSize: 14, fontFamily: "inherit", color: "#111827",
+                resize: "vertical", outline: "none", boxSizing: "border-box",
+                transition: "border-color 0.15s",
+              }}
+              placeholder="Additional notes (optional)"
+              value={inputVal}
+              onChange={e => setInputVal(e.target.value)}
+              onFocus={e => { e.target.style.borderColor = "#6366F1"; }}
+              onBlur={e => { e.target.style.borderColor = "#E5E7EB"; }}
+              onKeyDown={e => { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) submit(); }}
+            />
+          </>
+        ) : (
+          <textarea
+            ref={textareaRef}
+            style={{
+              width: "100%", minHeight: 90, padding: "10px 12px",
+              border: "1.5px solid #E5E7EB", borderRadius: 8,
+              fontSize: 14, fontFamily: "inherit", color: "#111827",
+              resize: "vertical", outline: "none", boxSizing: "border-box",
+              transition: "border-color 0.15s",
+            }}
+            placeholder="Type your answer… (Ctrl+Enter to submit)"
+            value={inputVal}
+            onChange={e => setInputVal(e.target.value)}
+            onFocus={e => { e.target.style.borderColor = "#6366F1"; }}
+            onBlur={e => { e.target.style.borderColor = "#E5E7EB"; }}
+            onKeyDown={e => { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) submit(); }}
+          />
+        )}
 
         {/* Action buttons */}
         <div style={{ display: "flex", gap: 8, marginTop: 10, flexWrap: "wrap", alignItems: "center" }}>
           <button
             onClick={submit}
-            disabled={!inputVal.trim()}
+            disabled={!canSubmit}
             style={{
               padding: "9px 18px", borderRadius: 8, border: "none",
-              background: inputVal.trim() ? "#6366F1" : "#E5E7EB",
-              color: inputVal.trim() ? "#fff" : "#9CA3AF",
-              fontSize: 14, fontWeight: 600, cursor: inputVal.trim() ? "pointer" : "default",
+              background: canSubmit ? "#6366F1" : "#E5E7EB",
+              color: canSubmit ? "#fff" : "#9CA3AF",
+              fontSize: 14, fontWeight: 600, cursor: canSubmit ? "pointer" : "default",
               transition: "background 0.15s",
             }}
           >
@@ -336,6 +417,7 @@ export default function InterviewApp() {
   const [answers, setAnswers] = useState({});
   const [idx, setIdx] = useState(0);
   const [inputVal, setInputVal] = useState("");
+  const [checkedVals, setCheckedVals] = useState({}); // { [qId]: string[] }
   const [screen, setScreen] = useState("questions"); // "questions" | "review"
 
   // Sync input field when navigating
@@ -354,6 +436,13 @@ export default function InterviewApp() {
     } else {
       setScreen("review");
     }
+  }
+
+  const currentQ = questions[idx];
+  const currentChecked = checkedVals[currentQ?.id] || [];
+
+  function handleCheckChange(newChecked) {
+    setCheckedVals(prev => ({ ...prev, [currentQ.id]: newChecked }));
   }
 
   const answeredCount = Object.keys(answers).length;
@@ -375,11 +464,13 @@ export default function InterviewApp() {
 
       {screen === "questions" ? (
         <QuestionCard
-          q={questions[idx]}
+          q={currentQ}
           qNum={idx + 1}
           total={questions.length}
           inputVal={inputVal}
           setInputVal={setInputVal}
+          checkedVals={currentChecked}
+          onCheckChange={handleCheckChange}
           onAnswer={recordAnswer}
           onBack={() => { setIdx(i => i - 1); }}
           onJumpToReview={() => setScreen("review")}

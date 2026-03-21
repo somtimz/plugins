@@ -11,6 +11,8 @@ version: 0.1.0
 
 Provides two interactive UI apps for EA interview sessions and brainstorming.
 
+**This skill is only invoked when the user selects Web mode.** The default interview mode is Text (chat Q&A). Only load this skill when `mode = "web"` has been explicitly chosen.
+
 **Runtime detection — choose the delivery mode before proceeding:**
 
 | Runtime | Delivery mode |
@@ -27,7 +29,7 @@ Both apps are stateless — all state lives in React `useState`. A page refresh 
 
 ## App 1 — Interview App
 
-**When to use:** At the start of every `ea-interviewer` session, in place of the plain-text Q&A loop.
+**When to use:** When the user selects **Web mode** for an interview session. Not used for Text or Display modes.
 
 ### Mode A: React artifact (Claude Code / Cowork)
 
@@ -47,11 +49,15 @@ const INTERVIEW_DATA = {
       defaultAnswer: "<suggested default, or null>",
       existingAnswer: "<value from previous session, or null>",
       brainstormNote: "<relevant thought from brainstorm-notes.md, or null>",
+      options: ["<option 1>", "<option 2>"],  // or null — for checklist questions
+      allowMultiple: true,  // false for single-select (radio); omit if options is null
     },
     // ... one entry per question
   ],
 };
 ```
+
+Set `options` when the question bank has enumerated choices (e.g. constraint types, data migration approaches, cut-over approaches). Set `allowMultiple: false` for single-select questions (radio buttons).
 
 3. Present the modified JSX as a **React artifact**.
 

@@ -10,7 +10,13 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 
 **Key questions:**
 1. What are the top three strategic goals for your organisation over the next three years?
-2. What constraints apply to this engagement — regulatory, financial, or technical?
+2. What constraints apply to this engagement? (select all that apply)
+   - [ ] Regulatory — compliance obligations, legal requirements, data residency rules
+   - [ ] Financial — budget cap, cost reduction target, limited investment capacity
+   - [ ] Technical — existing platform lock-in, skills gap, mandated standards
+   - [ ] Organisational — headcount limits, change capacity, political constraints
+   - [ ] Time — fixed deadline, regulatory timeline, or programme dependency
+   - [ ] Other: ___
 3. Who are the key decision-makers for IT investment in your organisation?
 4. Does an existing architecture governance body or process exist? If so, how does it operate?
 5. What does good architecture practice look like in your organisation?
@@ -142,7 +148,14 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 3. Which applications are considered strategic investments, and which are candidates for replacement?
 4. Where do you have data duplication or inconsistency problems across systems?
 5. What are the critical integration points between applications?
-6. Are there regulatory requirements governing specific data (e.g., privacy, retention, classification)?
+6. Are there regulatory requirements governing specific data? (select all that apply)
+   - [ ] Privacy — GDPR, CCPA, LGPD, or equivalent
+   - [ ] Data retention — legal hold, archiving, or disposal obligations
+   - [ ] Data classification — sensitivity labels and handling requirements
+   - [ ] Data sovereignty / residency — data must remain in-country or in-region
+   - [ ] Sector-specific — HIPAA, PCI-DSS, SOX, ISO 27001, or similar
+   - [ ] None identified
+   - [ ] Other: ___
 7. Who owns each application and each major data domain?
 8. What is the single biggest challenge you face with your data and application landscape today?
 9. *(If Data direction not yet defined)* Capture Data direction using the three-type model:
@@ -271,8 +284,20 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 1. How should the work packages be grouped into delivery waves — what natural groupings exist based on dependency, risk, or business value?
 2. For each wave, what resources and skills are required, and are they available within the planned timeframe?
 3. What is the organisation's capacity for change — how much disruption can be absorbed per wave without affecting business operations?
-4. How will data be migrated for each wave — ETL, replication, dual-write, or manual?
-5. What is the cut-over approach — hard cut-over, phased rollout, parallel running, or feature flags?
+4. How will data be migrated for each wave? (select all that apply)
+   - [ ] ETL — batch extract, transform, and load jobs
+   - [ ] Replication — continuous sync from source to target system
+   - [ ] Dual-write — application writes to both old and new systems simultaneously
+   - [ ] API-based migration — programmatic data transfer via APIs
+   - [ ] Manual — human-led data entry or copy
+   - [ ] Other: ___
+5. What is the cut-over approach? (select one)
+   - [ ] Hard cut-over — all users switch at once on a fixed date
+   - [ ] Phased rollout — groups of users migrated in waves
+   - [ ] Parallel running — old and new systems operate simultaneously for a period
+   - [ ] Feature flags — gradual activation controlled by configuration
+   - [ ] Strangler fig — new functionality incrementally replaces old
+   - [ ] Other: ___
 6. What are the rollback triggers and procedures for each wave — if something goes wrong, how quickly can you revert and who makes that call?
 7. How will legacy systems be decommissioned once replacement capabilities are live?
 8. What are the entry and exit criteria for each wave — what must be true before a wave begins and before the next one starts?
