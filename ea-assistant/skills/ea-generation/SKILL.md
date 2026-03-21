@@ -318,6 +318,6 @@ python ${CLAUDE_PLUGIN_ROOT}/scripts/generate-pptx.py \
 
 ## Troubleshooting
 
-- **python-docx not found:** Run `pip3 install python-docx` and verify your Python environment is active.
-- **python-pptx not found:** Run `pip3 install python-pptx` and verify your Python environment is active.
+- **python-docx not found:** Run `pip3 install python-docx` (Linux/macOS) or `pip install python-docx` (Windows) and verify your Python environment is active.
+- **python-pptx not found:** Run `pip3 install python-pptx` (Linux/macOS) or `pip install python-pptx` (Windows) and verify your Python environment is active.
 - **Script not found:** Verify the plugin root path is set correctly. Check that `${CLAUDE_PLUGIN_ROOT}` resolves to the plugin installation directory and that the `scripts/` subdirectory exists.

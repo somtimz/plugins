@@ -1,6 +1,6 @@
 {
   "name": "somtimz-plugins",
-  "description": "Enterprise Architecture and RAG plugins for Claude Code",
+  "description": "Enterprise Architecture, RAG, and ITIL plugins for Claude Code",
   "owner": {
     "name": "Costa Pissaris",
     "email": "cpissaris@gmail.com"
@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "ea-assistant",
-      "description": "End-to-end Enterprise Architecture engagement management. Supports TOGAF 10, Zachman, and ArchiMate.",
+      "description": "End-to-end Enterprise Architecture engagement management with artifact generation, phase interviews, and requirements analysis. Supports TOGAF 10, Zachman, and ArchiMate.",
       "version": "0.4.0",
       "author": {
         "name": "Costa Pissaris",

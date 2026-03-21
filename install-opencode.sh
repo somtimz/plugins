@@ -18,6 +18,8 @@ SKILLS=(
   plugins/ea-assistant/skills/zachman-framework
   plugins/RAG-assistant/skills/doc-ingestion-pipeline
   plugins/RAG-assistant/skills/rag-chat
+  plugins/ITIL-assistant/skills/itil-change-request
+  plugins/ITIL-assistant/skills/cab-review
 )
 
 if [[ "${1:-}" == "--uninstall" ]]; then

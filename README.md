@@ -28,7 +28,7 @@ Or install a single plugin directly:
 
 ### OpenCode — install skills
 
-OpenCode has no marketplace mechanism, but all 9 skills are format-compatible. Clone the repo and run the install script to symlink skills into OpenCode's discovery path:
+OpenCode has no marketplace mechanism, but all 11 skills are format-compatible. Clone the repo and run the install script to symlink skills into OpenCode's discovery path:
 
 ```bash
 git clone https://github.com/somtimz/plugins.git
@@ -52,6 +52,8 @@ The script symlinks all skills into `~/.config/opencode/skills/`. Set `OPENCODE_
 | `zachman-framework` | ea-assistant |
 | `doc-ingestion-pipeline` | RAG-assistant |
 | `rag-chat` | RAG-assistant |
+| `itil-change-request` | ITIL-assistant |
+| `cab-review` | ITIL-assistant |
 
 ## Repository Structure
 

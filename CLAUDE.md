@@ -79,6 +79,8 @@ chore: ...
 - Python 3.11+ + python-docx, python-pptx (ea-assistant artifact generation scripts)
 - Markdown (Claude Code plugin instruction files) + Claude Code plugin framework (commands/, skills/, agents/) (ea-assistant, RAG-assistant, ITIL-assistant)
 - JSON files (`engagement.json`) and directory structure (`EA-projects/`) (ea-assistant)
+- Markdown (plugin instruction files) + React JSX (artifact apps) + Node.js (docx export scripts) + Claude Code plugin framework (auto-discovery), React (artifact runtime), `docx` npm package (Word export) (003-cr-workflow)
+- `window.storage` (key-value, JSON-serialized) — browser-side persistence in Claude's artifact viewer (003-cr-workflow)
 
 ## Recent Changes
 - ea-assistant/togaf-enrichment: Added artifact generation (Word/PPTX/Mermaid), phase interview question bank, requirements analyst agent, ADM reference material; togaf-adm plugin retired and merged into ea-assistant (v0.4.0)

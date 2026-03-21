@@ -97,6 +97,8 @@ python3 ${CLAUDE_PLUGIN_ROOT}/scripts/generate-docx.py \
   --engagement EA-projects/{slug}/engagement.json
 ```
 
+> **Windows:** Use `python` instead of `python3` if `python3` is not available.
+
 **For pptx:**
 
 - Build a content JSON object from the artifact content and engagement metadata.
@@ -110,6 +112,8 @@ python3 ${CLAUDE_PLUGIN_ROOT}/scripts/generate-pptx.py \
   --output EA-projects/{slug}/artifacts/{artifact-id}.pptx \
   --engagement EA-projects/{slug}/engagement.json
 ```
+
+> **Windows:** Use `python` instead of `python3` if `python3` is not available.
 
 If the script exits with a non-zero status, display the error output and stop. Do not update the engagement.
 

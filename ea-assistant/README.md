@@ -6,6 +6,10 @@ A Claude Code plugin for managing Enterprise Architecture engagements from start
 
 EA Assistant supports the full EA engagement lifecycle using **TOGAF 10** as the process backbone, **Zachman** as the classification framework, and **ArchiMate 3.x** as the notation language. It manages multiple concurrent engagements, generates and reviews artifacts, facilitates stakeholder interviews, and produces consolidated architecture reports.
 
+## Platform Support
+
+EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All plugin components — commands, skills, agents, and Python scripts — use cross-platform paths and standard libraries.
+
 ## Features
 
 - **Multi-engagement management** — create, open, track, edit, archive, and delete EA projects
@@ -25,8 +29,12 @@ EA Assistant supports the full EA engagement lifecycle using **TOGAF 10** as the
 ## Prerequisites
 
 - Claude Code with plugin support
-- `pandoc` (for Word document export) — install via `brew install pandoc` or `apt install pandoc`
-- `python3` with `python-docx` and `python-pptx` packages (for `/ea-generate` Word/PPTX export) — install via `pip install python-docx python-pptx`
+- `pandoc` (for Word document export)
+  - **Linux/macOS:** `brew install pandoc` or `apt install pandoc`
+  - **Windows:** `winget install pandoc` or download from [pandoc.org](https://pandoc.org/installing.html)
+- Python 3.11+ with `python-docx` and `python-pptx` packages (for `/ea-generate` Word/PPTX export)
+  - **Linux/macOS:** `pip3 install python-docx python-pptx`
+  - **Windows:** `pip install python-docx python-pptx`
 
 ## Installation
 
