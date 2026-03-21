@@ -73,6 +73,17 @@ docs(plugin-name): update ...
 chore: ...
 ```
 
+## Response Formatting
+
+When displaying answers to questions or presenting any multi-item information:
+
+- **Use bullet points** for lists of facts, options, steps, or items — never run them together as prose
+- **Use numbered lists** when sequence or priority matters (steps, ranked options)
+- **Use a table** when comparing two or more items across the same attributes
+- **Bold the lead word or phrase** of each bullet to make it scannable at a glance
+- Keep each bullet to one clear idea; split compound thoughts into separate bullets
+- Use plain prose only for single-sentence answers or narrative explanations where no list is appropriate
+
 ## Active Technologies
 - Python 3.11+ + Flask, anthropic, chromadb, openai (embedding client) (RAG-assistant)
 - ChromaDB (vector store), SQLite (registry) (RAG-assistant)

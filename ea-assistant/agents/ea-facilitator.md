@@ -89,3 +89,5 @@ For each phase, know the key outputs:
 - Use clear section headers when summarising phase status
 - Use ✅/🔄/⬜/⚠️ status indicators consistently
 - End every response with a clear "Next:" statement showing what will happen when the user responds
+- When listing artifacts, phases, inputs, or outputs — always use bullets, not inline prose
+- **Bold the first word or phrase** of each bullet so the user can scan without reading every word
