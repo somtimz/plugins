@@ -229,9 +229,9 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 
 ---
 
-## Phase E/F — Opportunities and Roadmap Interview
+## Phase E — Opportunities and Solutions Interview
 
-**Goal:** Prioritise work packages and build the roadmap
+**Goal:** Prioritise work packages and build the initial architecture roadmap
 
 **Key questions:**
 1. Which capability gaps identified in earlier phases are the highest priority to close?
@@ -248,20 +248,60 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 |---|---|---|
 | Priority capability gaps | Architecture Roadmap | `{{priority_gaps}}` |
 | In-flight projects | Architecture Roadmap | `{{existing_projects}}` |
-| Investment budget | Migration Plan | `{{investment_budget}}` |
+| Investment budget | Architecture Roadmap | `{{investment_budget}}` |
 | Target timeline | Architecture Roadmap | `{{delivery_timeline}}` |
 | Sequencing dependencies | Architecture Roadmap | `{{sequencing_dependencies}}` |
-| Migration Plan dependencies | Migration Plan | `{{migration_dependencies}}` |
-| Acceptable transition states | Migration Plan | `{{transition_states}}` |
+| Acceptable transition states | Architecture Roadmap | `{{transition_states}}` |
 | Minimum viable delivery | Architecture Roadmap | `{{minimum_viable_scope}}` |
 | Delivery risks | Architecture Roadmap | `{{delivery_risks}}` |
-| Migration Plan risks | Migration Plan | `{{migration_risks}}` |
 
 **Facilitation Notes:**
 - The "halved budget" question is the most powerful prioritisation tool in this phase — it forces genuine trade-off decisions rather than keeping everything on the roadmap as "high priority."
 - In-flight project alignment is frequently underestimated; request a project portfolio list before the session and map conflicts in advance.
 - Sequencing questions work well as a group exercise where participants physically order work packages — disagreements in the room are better surfaced now than during delivery.
 - Acceptable transition states define architecture checkpoints; if the organisation cannot articulate them, the roadmap will lack governance anchors.
+
+---
+
+## Phase F — Migration Planning Interview
+
+**Goal:** Define the practical wave plan, resourcing, cut-over approach, and rollback strategy for delivering the architecture roadmap
+
+**Key questions:**
+1. How should the work packages be grouped into delivery waves — what natural groupings exist based on dependency, risk, or business value?
+2. For each wave, what resources and skills are required, and are they available within the planned timeframe?
+3. What is the organisation's capacity for change — how much disruption can be absorbed per wave without affecting business operations?
+4. How will data be migrated for each wave — ETL, replication, dual-write, or manual?
+5. What is the cut-over approach — hard cut-over, phased rollout, parallel running, or feature flags?
+6. What are the rollback triggers and procedures for each wave — if something goes wrong, how quickly can you revert and who makes that call?
+7. How will legacy systems be decommissioned once replacement capabilities are live?
+8. What are the entry and exit criteria for each wave — what must be true before a wave begins and before the next one starts?
+9. How will user transition and change management be handled across each wave?
+10. What dependencies exist with third-party vendors, regulators, or external systems that constrain the migration sequence?
+
+**Output Routing:**
+
+| Response Topic | Target Artifact | Target Field |
+|---|---|---|
+| Wave groupings | Migration Plan | `{{wave_1_name}}` / `{{wave_2_name}}` |
+| Resource requirements per wave | Migration Plan | `{{migration_overview}}` |
+| Organisational change capacity | Migration Plan | `{{migration_overview}}` |
+| Data migration approach | Migration Plan | `{{data_migration_approach}}` |
+| Cut-over approach | Migration Plan | `{{cutover_approach}}` |
+| Rollback triggers | Migration Plan | `{{trigger_1}}` / `{{trigger_2}}` |
+| Rollback procedures | Migration Plan | `{{procedure_1}}` / `{{procedure_2}}` |
+| Decommissioning approach | Migration Plan | `{{decommissioning_approach}}` |
+| Wave entry/exit criteria | Migration Plan | `{{wave_1_entry_criteria}}` / `{{wave_1_exit_criteria}}` |
+| User transition approach | Migration Plan | `{{user_transition_approach}}` |
+| External dependencies | Migration Plan | `{{wave_1_dependencies}}` / `{{wave_2_dependencies}}` |
+| Migration risks | Migration Plan | `{{description}}` / `{{mitigation}}` (risk register rows) |
+
+**Facilitation Notes:**
+- Run wave planning as a visual exercise — use sticky notes or a whiteboard to group work packages; verbal discussion alone rarely produces a coherent wave structure.
+- Change capacity is frequently overestimated by leadership; ask operational managers separately to get a realistic picture of how much disruption the organisation can absorb.
+- Rollback planning is often skipped under time pressure — treat it as mandatory; a rollback that has not been rehearsed is not a rollback.
+- Data migration approach must be agreed with data owners and the DBA/data engineering team before the Migration Plan is finalised; late surprises here cause the most delivery delays.
+- External dependencies (regulatory approvals, vendor upgrade windows, third-party API changes) are frequently on the critical path; surface them early and track them explicitly.
 
 ---
 

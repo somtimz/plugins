@@ -73,9 +73,9 @@ For each phase, know the key outputs:
 - **Phase B:** Business Architecture document
 - **Phase C:** Data Architecture, Application Architecture
 - **Phase D:** Technology Architecture
-- **Phase E:** Architecture Roadmap, Implementation Proposals
-- **Phase F:** Migration Plan, updated Roadmap
-- **Phase G:** Architecture Contracts, Compliance Assessments
+- **Phase E:** Architecture Roadmap, Transition Architectures, Work Package definitions, Implementation and Migration Strategy
+- **Phase F:** Migration Plan, Finalised Architecture Definition Document, Finalised Architecture Requirements Specification, Updated Transition Architectures, Architecture Contracts, Updated Roadmap
+- **Phase G:** Architecture Contracts (signed), Compliance Assessments, Change Requests
 - **Phase H:** Change Requests, updated Architecture documents
 
 **Quality Standards:**
