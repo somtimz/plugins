@@ -63,7 +63,12 @@ Navigate to a specific TOGAF ADM phase for the active engagement.
    - Create a missing artifact → `/ea-artifact create [artifact-name]`
    - Continue an in-progress artifact interview → `/ea-interview resume`
    - View phase guidance → loads the `ea-engagement-lifecycle` skill and use the `ea-facilitator` agent
+   - **Brainstorm about this phase** → opens a phase-scoped brainstorm session
    - Mark phase complete → verify all required artifacts exist first
+
+   When the user selects "Brainstorm about this phase":
+   - Invoke `/ea-brainstorm phase [phase]` (e.g. `/ea-brainstorm phase B` for Business Architecture).
+   - The phase argument is already known from step 2 — pass it directly so the brainstorm command opens with the correct phase scope and session header.
 
 6. When marking a phase complete:
    - Check all required artifacts for the phase exist in `artifacts/`

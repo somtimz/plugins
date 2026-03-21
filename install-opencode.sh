@@ -16,6 +16,7 @@ SKILLS=(
   plugins/ea-assistant/skills/ea-generation
   plugins/ea-assistant/skills/ea-requirements-management
   plugins/ea-assistant/skills/zachman-framework
+  plugins/ea-assistant/skills/ea-interview-ui
   plugins/RAG-assistant/skills/doc-ingestion-pipeline
   plugins/RAG-assistant/skills/rag-chat
   plugins/ITIL-assistant/skills/itil-change-request

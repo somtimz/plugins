@@ -72,6 +72,7 @@ You have existing engagements. Common next steps:
 | `/ea-phase [phase]` | Start, edit, or resume an ADM phase |
 | `/ea-artifact [action]` | Create or list artifacts |
 | `/ea-interview [mode]` | Stakeholder interviews (artifact or phase mode) |
+| `/ea-brainstorm [phase]` | Capture freeform thoughts and context for use during interviews |
 | `/ea-generate [artifact] [format]` | Export artifact as Word, PPTX, or Mermaid |
 | `/ea-review [artifact]` | Review and assess an artifact |
 | `/ea-requirements [action]` | Manage architecture requirements |
@@ -80,6 +81,9 @@ You have existing engagements. Common next steps:
 
 ### Tips
 
+• Run `/ea-brainstorm` before or during interviews — the interviewer
+  will reference your notes as it asks questions. You can also brainstorm
+  inline by typing "brainstorm" at any interview prompt.
 • Use `/ea-interview start phase [name]` for guided phase interviews
   with output routing to the right artifacts.
 • Use `/ea-generate` to export individual artifacts; `/ea-publish` for

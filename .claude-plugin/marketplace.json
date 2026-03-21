@@ -8,8 +8,8 @@
   "plugins": [
     {
       "name": "ea-assistant",
-      "description": "End-to-end Enterprise Architecture engagement management with artifact generation, phase interviews, and requirements analysis. Supports TOGAF 10, Zachman, and ArchiMate.",
-      "version": "0.4.0",
+      "description": "End-to-end Enterprise Architecture engagement management with artifact generation, phase interviews, brainstorming, and requirements analysis. Supports TOGAF 10, Zachman, and ArchiMate.",
+      "version": "0.5.0",
       "author": {
         "name": "Costa Pissaris",
         "email": "cpissaris@gmail.com"
