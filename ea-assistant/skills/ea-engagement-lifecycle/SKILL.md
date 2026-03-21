@@ -1,7 +1,7 @@
 ---
 name: EA Engagement Lifecycle
 description: This skill should be used when the user asks to "start an EA engagement", "manage an EA project", "set up a new architecture engagement", "what phase are we in", "advance the ADM", "continue the engagement", "resume an EA project", or when working within any TOGAF ADM phase. Provides end-to-end lifecycle guidance for Enterprise Architecture engagements using TOGAF 10 as the backbone.
-version: 0.3.0
+version: 0.4.0
 ---
 
 # EA Engagement Lifecycle
@@ -44,6 +44,43 @@ EA-projects/
   "currentPhase": "Prelim",
   "requirementsRepoPath": "",
   "lastModified": "YYYY-MM-DDTHH:MM:SSZ",
+  "direction": {
+    "Business": {
+      "goals": [
+        { "id": "BG-001", "statement": "", "priority": "High | Medium | Low" }
+      ],
+      "objectives": [
+        { "id": "BO-001", "statement": "", "measure": "", "target": "", "deadline": "", "priority": "High | Medium | Low" }
+      ],
+      "strategies": [
+        { "id": "BS-001", "statement": "", "supports": ["BG-001"], "priority": "High | Medium | Low" }
+      ]
+    },
+    "Data": { "goals": [], "objectives": [], "strategies": [] },
+    "Application": { "goals": [], "objectives": [], "strategies": [] },
+    "Technology": { "goals": [], "objectives": [], "strategies": [] }
+  },
+  "metrics": {
+    "Business": [
+      {
+        "id": "BM-001",
+        "name": "",
+        "type": "outcome | performance | activity",
+        "description": "",
+        "measure": "",
+        "baseline": "",
+        "target": "",
+        "deadline": "",
+        "frequency": "Daily | Weekly | Monthly | Quarterly",
+        "source": "",
+        "supports": ["BG-001"],
+        "status": "Not Established | On Track | At Risk | Behind | Achieved"
+      }
+    ],
+    "Data": [],
+    "Application": [],
+    "Technology": []
+  },
   "phases": {
     "Prelim": { "status": "Not Started", "startedAt": null, "completedAt": null },
     "Requirements": { "status": "Not Started", "startedAt": null, "completedAt": null },
@@ -66,7 +103,52 @@ EA-projects/
 - `architectureDomains`: Array of selected domains. Defaults to all four if absent.
 - `targetEndDate`: Optional target completion date. Defaults to `null` if absent.
 
-Existing engagements created before v0.2.0 will not have these fields. All commands MUST handle missing fields gracefully by applying the defaults above.
+**New fields** (added in v0.4.0):
+- `direction`: Domain-scoped direction object. Keys match selected `architectureDomains`. Each domain has three sub-arrays — `goals`, `objectives`, `strategies` — with the following schemas:
+  - **Goal** `{ id, statement, priority }` — high-level desired outcome (WHERE). IDs: `BG-`, `DG-`, `AG-`, `TG-`
+  - **Objective** `{ id, statement, measure, target, deadline, priority }` — specific measurable target (HOW FAR, BY WHEN). IDs: `BO-`, `DO-`, `AO-`, `TO-`
+  - **Strategy** `{ id, statement, supports: [id,...], priority }` — course of action (HOW). IDs: `BS-`, `DS-`, `AS-`, `TS-`
+  - `supports` links a strategy to the goal or objective IDs it serves.
+  - Items with an empty `statement` are placeholders and MUST NOT be referenced in artifacts.
+  - Only domains in `architectureDomains` are populated — unused domains are omitted.
+
+**Direction vs. Goals vs. Objectives vs. Strategies — definitions commands MUST use:**
+
+| Term | Answers | Characteristics | Example |
+|------|---------|-----------------|---------|
+| **Direction** | *Why are we doing this?* | Superset of all three below; the complete performance expectation and constraint set | "Transform our data capability to support real-time decision-making" |
+| **Goal** | *Where do we want to be?* | Qualitative, long-term, not directly measurable | "Become the most trusted financial services provider in the region" |
+| **Objective** | *How far, by when?* | Specific, measurable, time-bound; testable | "Reduce customer onboarding from 5 days to 1 day by Q4 2026" |
+| **Strategy** | *How will we get there?* | Course of action; choice of approach; not an outcome | "Adopt API-first integration to enable real-time data access" |
+
+When capturing direction from a user, ALWAYS classify what they say before writing it. If a user says something that could be any of the three, ask a clarifying question rather than guessing. Common confusions:
+- A goal stated with a number in it is usually an objective (e.g. "achieve 99.9% availability" → objective, not goal).
+- A strategy stated as an outcome is usually a goal or objective (e.g. "move to the cloud" is a strategy; "have 80% of workloads on cloud by 2027" is an objective).
+- "We want to improve data quality" is a goal; "reduce duplicate customer records by 90% by June 2026" is the corresponding objective.
+
+Existing engagements created before v0.4.0 will not have the `direction` field. All commands MUST handle a missing `direction` field gracefully by treating each domain as `{ goals: [], objectives: [], strategies: [] }`.
+
+**New fields** (added in v0.5.0):
+- `metrics`: Domain-scoped metrics array. Each metric tracks the performance of one or more direction items (goals, objectives, or strategies) via its `supports` array of direction IDs. Metric `type` determines what it tracks:
+
+| Metric type | Tracks | Linked to | Example |
+|-------------|--------|-----------|---------|
+| `outcome` | Whether a **goal** is being approached | `BG-`, `DG-`, `AG-`, `TG-` | Customer satisfaction score trending toward target |
+| `performance` | Whether an **objective** is on track | `BO-`, `DO-`, `AO-`, `TO-` | Onboarding time: baseline 5 days → target 1 day |
+| `activity` | Whether a **strategy** is being executed | `BS-`, `DS-`, `AS-`, `TS-` | % of new workloads containerised |
+
+Metric status values: `Not Established` | `On Track` | `At Risk` | `Behind` | `Achieved`
+
+ID patterns: `BM-` (Business), `DM-` (Data), `AM-` (Application), `TM-` (Technology).
+
+Metrics with an empty `name` or `measure` are placeholders and MUST NOT be displayed in artifacts.
+
+**Metrics vs. Objectives — avoid confusion:**
+- An **objective** defines the commitment: *what* will be achieved and *by when*.
+- A **metric** defines the instrument: *how* progress will be measured, *how often*, and *from what source*.
+- Every objective should have at least one metric. A metric without a linked direction item is an orphan — flag it for the user to link or remove.
+
+Existing engagements before v0.5.0 will not have `metrics`. Handle gracefully as empty arrays per domain.
 
 ### Engagement Status Values
 
@@ -149,12 +231,27 @@ Phases can be started, edited, or resumed in any order. Navigation is non-linear
 
 1. Collect required fields: Name, Description, Sponsor, Organisation, Scope, Engagement Type, Architecture Domains, Start Date, Target End Date (optional), Status
 2. Create slug: lowercase, hyphens, no spaces, max 60 chars (e.g. `acme-retail-2026`)
-3. Display confirmation summary; allow user to edit fields or cancel
-4. Create folder structure under `EA-projects/{slug}/`
-5. Write `engagement.json` with all fields, set phase applicability based on engagement type and domain selection (see `references/scaffolding-map.md`)
-6. Scaffold Preliminary phase artifacts from templates (see `references/scaffolding-map.md`)
-7. Set `currentPhase` to `Prelim`
-8. Confirm engagement created, list scaffolded artifacts, and offer to begin the Preliminary phase
+3. **Capture direction per selected domain.** For each domain in `architectureDomains`, work through goals, objectives, and strategies in order. Before capturing, briefly explain the distinction:
+
+   > "For each architecture domain I'll capture three types of direction:
+   > - **Goals** — where you want to be (qualitative, long-term)
+   > - **Objectives** — specific measurable targets with a deadline
+   > - **Strategies** — the approaches you'll take to get there"
+
+   For each domain:
+   - Ask: "What are the **goals** for the **{Domain}** architecture?" Capture each; assign IDs (`BG-001`, `DG-001`, etc.)
+   - Ask: "What **objectives** do you have — specific, measurable targets with a deadline?" Capture statement, measure, target value, deadline; assign IDs (`BO-001`, `DO-001`, etc.)
+   - Ask: "What **strategies** will you use — the approaches or courses of action?" For each, ask which goal(s) or objective(s) it supports; assign IDs (`BS-001`, `DS-001`, etc.)
+   - If the user gives something that could be any of the three, classify it and confirm: "That sounds like a [goal/objective/strategy] — I'll record it as one. Does that sound right?"
+   - Direction may be skipped at creation time — user can add it later via Edit engagement metadata
+   - After capturing direction, ask: "Do you want to define metrics now to track these goals, objectives, and strategies?" If yes, for each direction item prompt: metric name, what will be measured (measure), baseline value, target value, frequency, and data source. Classify metric type automatically from what it supports (outcome for goals, performance for objectives, activity for strategies). Metrics may also be added later.
+
+4. Display confirmation summary of all fields including direction and metrics (grouped by domain); allow user to edit or cancel
+5. Create folder structure under `EA-projects/{slug}/`
+6. Write `engagement.json` with all fields including `direction` and `metrics`, set phase applicability based on engagement type and domain selection (see `references/scaffolding-map.md`)
+7. Scaffold Preliminary phase artifacts from templates (see `references/scaffolding-map.md`)
+8. Set `currentPhase` to `Prelim`
+9. Confirm engagement created, list scaffolded artifacts and captured direction summary, and offer to begin the Preliminary phase
 
 ### Opening an Existing Engagement
 
@@ -182,7 +279,34 @@ All editing flows are accessed through `/ea-open` next actions menu after openin
 8. Archive engagement
 9. Delete engagement
 
-**Edit engagement metadata**: Prompts for which field to edit, shows current value, accepts new value, validates, writes to `engagement.json`, updates `lastModified`. Editable fields: name (display only — slug unchanged), description, sponsor, organisation, scope, status, start date, target end date. Non-editable after creation: `engagementType`, `architectureDomains` (changing these would invalidate phase applicability).
+**Edit engagement metadata**: Prompts for which field to edit, shows current value, accepts new value, validates, writes to `engagement.json`, updates `lastModified`. Editable fields: name (display only — slug unchanged), description, sponsor, organisation, scope, status, start date, target end date, direction. Non-editable after creation: `engagementType`, `architectureDomains` (changing these would invalidate phase applicability).
+
+**Edit metrics**: Accessible via Edit engagement metadata → Metrics. Shows all metrics grouped by domain with status indicators:
+
+```
+Business Metrics
+  BM-001  Customer Onboarding Time     [Performance → BO-001]  On Track   5d → 1d by Q4 2026
+  BM-002  Customer Satisfaction Score  [Outcome → BG-001]      At Risk    72 → 85 by Q2 2026
+  BM-003  API-first adoption rate      [Activity → BS-001]     On Track   0% → 100% by Q3 2026
+```
+
+User may: add a new metric (select the direction item(s) it supports — type is inferred automatically), edit an existing metric (any field including status), or remove a metric. When adding, always confirm the `supports` link — a metric without a linked direction item is an orphan and should not be saved. After saving, offer to update the status field for metrics where current data is available.
+
+**Edit direction**: Accessible via Edit engagement metadata → Direction. Shows all current direction items grouped by domain and type (Goals / Objectives / Strategies). Displays:
+
+```
+Business Direction
+  Goals:      BG-001  Become the most trusted provider in the region        [High]
+  Objectives: BO-001  Reduce onboarding from 5 days to 1 day by Q4 2026    [High]
+  Strategies: BS-001  Adopt API-first integration                           [High]  → supports BG-001
+```
+
+User may: add a new item (selecting type first), edit an existing item, or remove an item. IDs are never reused after deletion. When adding, always confirm the type with the user using the definitions:
+- **Goal** = where you want to be (qualitative, no number required)
+- **Objective** = how far and by when (must have a measure, a target value, and a deadline)
+- **Strategy** = how you'll get there (a course of action, not an outcome)
+
+After saving, offer to propagate updated direction to the relevant domain artifacts (Architecture Vision for cross-domain direction; Business/Data/Application/Technology Architecture artifacts for domain-specific direction).
 
 **Edit phase status**: Shows all 11 phases with current status, user selects phase and new status. Timestamp rules applied automatically per the Phase Status State Transitions table above. When a phase is marked Complete, suggest advancing `currentPhase` to the next applicable phase.
 
@@ -204,7 +328,7 @@ All editing flows are accessed through `/ea-open` next actions menu after openin
 4. Reference plugin components for phase-specific guidance:
    - Phase facilitation: use the `ea-facilitator` agent
    - Artifact creation and population: use the `ea-artifact-templates` skill
-   - Document export (Word/Markdown): use the `ea-merge` command
+   - Document export (Word/Markdown): use the `ea-publish` command
    - Interviews: use the `ea-interviewer` agent via the `ea-interview` command
 
 ### Completing a Phase

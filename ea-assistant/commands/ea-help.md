@@ -29,7 +29,7 @@ Zachman Framework, and ArchiMate 3.x.
 3. `/ea-interview`     → Run a stakeholder interview
 4. `/ea-artifact`      → Generate an architecture artifact
 5. `/ea-review`        → Review and assess an artifact
-6. `/ea-merge`         → Produce a consolidated report
+6. `/ea-publish`         → Produce a consolidated report
 
 ### Typical Workflow
 
@@ -75,17 +75,21 @@ You have existing engagements. Common next steps:
 | `/ea-generate [artifact] [format]` | Export artifact as Word, PPTX, or Mermaid |
 | `/ea-review [artifact]` | Review and assess an artifact |
 | `/ea-requirements [action]` | Manage architecture requirements |
-| `/ea-merge` | Merge artifacts into a consolidated report |
+| `/ea-publish` | Merge artifacts into a consolidated report |
 | `/ea-help` | This guide |
 
 ### Tips
 
 • Use `/ea-interview start phase [name]` for guided phase interviews
   with output routing to the right artifacts.
-• Use `/ea-generate` to export individual artifacts; `/ea-merge` for
+• Use `/ea-generate` to export individual artifacts; `/ea-publish` for
   a full consolidated document.
 • Upload documents to `EA-projects/{name}/uploads/` and the
   requirements analyst agent will extract structured requirements.
+• Ask "how does architecture governance work" for a full explanation of
+  the governance structure, cascade, roles, and TOGAF tool mapping.
 ```
 
-4. **Do not add any content beyond what is specified above.** Keep the output clean and scannable.
+4. **If the user asks about architecture governance** (e.g. "how does governance work", "explain the ARB", "what is the governance cascade", "governance roles", "Phase G governance"), read `skills/ea-engagement-lifecycle/references/governance-framework.md` and present it in full. The file contains two images (`images/governance-structure.png` and `images/governance-cascade.png`) — display both inline at the points where they are referenced in the document. Do not summarise — present the full reference.
+
+5. **Otherwise, do not add any content beyond what is specified above.** Keep the output clean and scannable.

@@ -6,7 +6,7 @@ version: 0.1.0
 
 # EA Artifact Generation — Word, PowerPoint, and Mermaid
 
-This skill governs how to produce formatted output files from individual EA artifacts within an engagement. Three formats are supported: Mermaid diagrams (embedded in Markdown or rendered as images), Word documents (.docx), and PowerPoint presentations (.pptx). For consolidated reports merging all artifacts across an engagement, use `/ea-merge` instead.
+This skill governs how to produce formatted output files from individual EA artifacts within an engagement. Three formats are supported: Mermaid diagrams (embedded in Markdown or rendered as images), Word documents (.docx), and PowerPoint presentations (.pptx). For consolidated reports merging all artifacts across an engagement, use `/ea-publish` instead.
 
 ## Format Selection Guide
 

@@ -1,0 +1,10 @@
+{
+  "name": "ITIL-assistant",
+  "version": "0.1.0",
+  "description": "ITIL v4 Change Management assistant — create, manage, and review Change Requests with CAB approval workflow.",
+  "author": {
+    "name": "Costa Pissaris",
+    "email": "cpissaris@gmail.com"
+  },
+  "keywords": ["itil", "change-management", "cab", "change-request", "itsm"]
+}

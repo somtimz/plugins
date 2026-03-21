@@ -65,7 +65,7 @@ requirementsRepoPath: /path/to/shared/requirements-folder
 | `/ea-generate [artifact] [format]` | Export an artifact as Word (.docx), PowerPoint (.pptx), or Mermaid diagram |
 | `/ea-review [artifact]` | Open an artifact for review and assessment |
 | `/ea-requirements [action]` | Manage architecture requirements |
-| `/ea-merge` | Merge all artifacts into a consolidated document |
+| `/ea-publish` | Merge all artifacts into a consolidated document |
 
 ## Engagement Management
 

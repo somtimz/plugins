@@ -41,7 +41,7 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 
 ## Phase A — Architecture Vision Interview
 
-**Goal:** Define scope, concerns, and high-level target
+**Goal:** Define scope, concerns, high-level target, and cross-domain goals
 
 **Key questions:**
 1. What is the business problem or opportunity driving this engagement?
@@ -52,6 +52,13 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 6. What existing architecture assets, decisions, or documents are relevant?
 7. What is the desired timeline for completing this work?
 8. What are the biggest risks that could derail this engagement?
+9. *(If direction was not captured at engagement creation)* Let's capture the direction for this engagement. I'll distinguish between three types — and it matters which one we use:
+   - **Goals** answer "where do we want to be?" — qualitative, long-term (e.g. "become the most trusted provider")
+   - **Objectives** answer "how far, and by when?" — measurable and time-bound (e.g. "reduce onboarding from 5 days to 1 day by Q4 2026")
+   - **Strategies** answer "how will we get there?" — courses of action, not outcomes (e.g. "adopt API-first integration")
+
+   Ask: "What are the goals for this engagement?" → classify each response; if it contains a number or deadline, it is likely an objective. If it describes an approach rather than an outcome, it is likely a strategy. Confirm classification before recording.
+10. *(After direction is captured)* For each objective captured, ask: "How will you measure progress toward this? What is the current baseline, and where does the data come from?" Capture as a performance metric linked to the objective. For each goal, ask if there is a leading indicator that would signal progress — capture as an outcome metric. For each strategy, ask if there is an activity measure (e.g., % adoption, number of systems migrated) — capture as an activity metric.
 
 **Output Routing:**
 
@@ -69,6 +76,8 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 | Existing architecture assets | Architecture Vision | `{{existing_assets}}` |
 | Timeline | Statement of Architecture Work | `{{timeline}}` |
 | Key risks | Architecture Vision | `{{key_risks}}` |
+| Cross-domain direction (goals, objectives, strategies) | engagement.json + Architecture Vision | `direction.*` + `{{direction_summary}}` |
+| Cross-domain metrics | engagement.json + Architecture Vision | `metrics.*` + `{{metrics_summary}}` |
 
 **Facilitation Notes:**
 - The "what does success look like" question is the most important in this phase — get a concrete, measurable answer rather than accepting vague aspirations.
@@ -80,7 +89,7 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 
 ## Phase B — Business Architecture Interview
 
-**Goal:** Define business capabilities, processes, and gaps
+**Goal:** Define business capabilities, processes, gaps, and business goals
 
 **Key questions:**
 1. What are the primary business functions performed by the organisation or the area in scope?
@@ -91,6 +100,13 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 6. What are the priority business outcomes this architecture must support?
 7. What does the business need to look like in three to five years?
 8. How is performance measured today — what KPIs or metrics matter most?
+9. *(If Business direction not yet defined or needs refinement)* Let's capture Business direction. Remind the user of the distinction:
+   - **Goal** = where the business wants to be (qualitative; no number required)
+   - **Objective** = how far and by when (must have a measure, a target, and a deadline)
+   - **Strategy** = how you'll get there (a chosen approach, not an outcome)
+
+   Ask for goals first, then objectives for each goal, then strategies. If a response has a target number or deadline, classify it as an objective. If it describes an approach (e.g. "use agile delivery"), classify it as a strategy.
+10. For each Business objective captured, ask: "How will you measure this — what is the unit of measure, and where does the data come from? What is the current baseline?" Capture as a `performance` metric (`BM-`) linked to the objective. For goals, ask for a leading indicator — capture as an `outcome` metric. For strategies, ask for an activity measure — capture as an `activity` metric.
 
 **Output Routing:**
 
@@ -105,6 +121,8 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 | Priority business outcomes | Business Architecture | `{{business_outcomes}}` |
 | Future state description | Business Architecture | `{{future_state}}` |
 | KPIs and metrics | Business Architecture | `{{performance_metrics}}` |
+| Business direction (goals, objectives, strategies) | engagement.json + Business Capability Map | `direction.Business` + `{{business_direction}}` |
+| Business metrics | engagement.json + Business Capability Map | `metrics.Business` + `{{business_metrics}}` |
 
 **Facilitation Notes:**
 - Run a capability mapping workshop using a whiteboard or collaborative tool — asking participants to place capabilities on a heat map (invest/maintain/retire) surfaces priorities faster than questions alone.
@@ -116,7 +134,7 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 
 ## Phase C — Information Systems Interview
 
-**Goal:** Understand data entities and application portfolio
+**Goal:** Understand data entities, application portfolio, and data/application goals
 
 **Key questions:**
 1. What are the key data domains in your organisation — the major categories of information you manage?
@@ -127,6 +145,15 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 6. Are there regulatory requirements governing specific data (e.g., privacy, retention, classification)?
 7. Who owns each application and each major data domain?
 8. What is the single biggest challenge you face with your data and application landscape today?
+9. *(If Data direction not yet defined)* Capture Data direction using the three-type model:
+   - **Data goal** example: "Have a single source of truth for customer data" (qualitative, no deadline)
+   - **Data objective** example: "Reduce duplicate customer records by 90% by June 2026" (measurable + deadline)
+   - **Data strategy** example: "Implement a master data management platform" (approach, not outcome)
+
+10. *(If Application direction not yet defined)* Capture Application direction using the three-type model:
+    - **Application goal** example: "Operate a modern, composable application landscape"
+    - **Application objective** example: "Decommission 3 legacy systems by Q2 2027"
+    - **Application strategy** example: "Adopt SaaS-first for commodity capabilities"
 
 **Output Routing:**
 
@@ -144,6 +171,10 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 | Application ownership | Application Architecture | `{{application_ownership}}` |
 | Data domain ownership | Data Architecture | `{{data_ownership}}` |
 | Key data/app challenge | Gap Analysis | `{{key_challenge}}` |
+| Data direction (goals, objectives, strategies) | engagement.json + Logical Data Model | `direction.Data` + `{{data_direction}}` |
+| Data metrics | engagement.json + Logical Data Model | `metrics.Data` + `{{data_metrics}}` |
+| Application direction (goals, objectives, strategies) | engagement.json + Application Portfolio Catalogue | `direction.Application` + `{{application_direction}}` |
+| Application metrics | engagement.json + Application Portfolio Catalogue | `metrics.Application` + `{{application_metrics}}` |
 
 **Facilitation Notes:**
 - Bring an application inventory template to the session pre-populated with known systems — asking people to add to a list is more productive than asking them to recall from memory.
@@ -155,7 +186,7 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 
 ## Phase D — Technology Architecture Interview
 
-**Goal:** Understand current and desired technology platform
+**Goal:** Understand current and desired technology platform, and technology goals
 
 **Key questions:**
 1. What is your current technology stack — key platforms, infrastructure, and tooling?
@@ -166,6 +197,13 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 6. What does your technology landscape need to look like in three years?
 7. Where is your technology debt concentrated — which parts of the platform are most at risk?
 8. What security or compliance requirements directly affect technology decisions?
+9. *(If Technology direction not yet defined)* Capture Technology direction using the three-type model:
+   - **Technology goal** example: "Operate a cloud-native, zero-trust platform" (qualitative state)
+   - **Technology objective** example: "Achieve 99.9% availability for all Tier-1 systems by Q3 2026" (measurable + deadline)
+   - **Technology strategy** example: "Containerise all new workloads using Kubernetes" (chosen approach)
+
+   Watch for common confusion: "move to the cloud" is a strategy if cloud is the approach to achieve availability or cost goals; it becomes a goal if the cloud-native state is itself the aspiration.
+10. For each Technology objective, ask: "How will you measure this — what is the unit, the baseline, and where does data come from?" Capture as a `performance` metric (`TM-`). For Technology strategies, ask for an activity measure (e.g., "% of workloads containerised") — capture as an `activity` metric.
 
 **Output Routing:**
 
@@ -181,6 +219,7 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 | Future tech landscape | Technology Architecture | `{{future_tech_state}}` |
 | Technology debt | Gap Analysis | `{{tech_debt}}` |
 | Security/compliance requirements | Requirements Register | `{{security_requirements}}` |
+| Technology direction (goals, objectives, strategies) | engagement.json + Technology Standards Catalogue | `direction.Technology` + `{{technology_direction}}` |
 
 **Facilitation Notes:**
 - Open with "what keeps you up at night about your current technology?" — this surfaces the real pain points faster than a structured inventory review.
