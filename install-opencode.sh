@@ -9,18 +9,18 @@ SKILL_TARGET="${OPENCODE_SKILLS_DIR:-$HOME/.config/opencode/skills}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 SKILLS=(
-  plugins/ea-assistant/skills/archimate-notation
-  plugins/ea-assistant/skills/ea-artifact-templates
-  plugins/ea-assistant/skills/ea-document-ingestion
-  plugins/ea-assistant/skills/ea-engagement-lifecycle
-  plugins/ea-assistant/skills/ea-requirements-management
-  plugins/ea-assistant/skills/zachman-framework
-  plugins/RAG-assistant/skills/doc-ingestion-pipeline
-  plugins/RAG-assistant/skills/rag-chat
-  plugins/togaf-adm/skills/togaf-adm-phases
-  plugins/togaf-adm/skills/togaf-artifacts
-  plugins/togaf-adm/skills/togaf-generation
-  plugins/togaf-adm/skills/togaf-interview-techniques
+  ea-assistant/skills/archimate-notation
+  ea-assistant/skills/ea-artifact-templates
+  ea-assistant/skills/ea-document-ingestion
+  ea-assistant/skills/ea-engagement-lifecycle
+  ea-assistant/skills/ea-generation
+  ea-assistant/skills/ea-requirements-management
+  ea-assistant/skills/ea-interview-ui
+  ea-assistant/skills/zachman-framework
+  RAG-assistant/skills/doc-ingestion-pipeline
+  RAG-assistant/skills/rag-chat
+  ITIL-assistant/skills/itil-change-request
+  ITIL-assistant/skills/cab-review
 )
 
 if [[ "${1:-}" == "--uninstall" ]]; then
