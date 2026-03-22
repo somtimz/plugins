@@ -57,7 +57,7 @@ Read `EA-projects/active/engagement.json` (or discover the active slug via Glob)
 
 ### Step 2 — Read the document
 - `.txt` / `.md`: use the Read tool directly.
-- `.docx`: use Bash to extract text with `python3 -c "import docx; print('\n'.join(p.text for p in docx.Document('FILE').paragraphs))"`. If python-docx is unavailable, ask the user to paste the content.
+- `.docx`: use Bash to extract text with `python3 -c "import docx; print('\n'.join(p.text for p in docx.Document('FILE').paragraphs))"` (on Windows, use `python` instead of `python3` if needed). If python-docx is unavailable, ask the user to paste the content.
 - Record: file name, detected encoding, approximate word count.
 
 ### Step 3 — Classify the document type

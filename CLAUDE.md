@@ -73,11 +73,26 @@ docs(plugin-name): update ...
 chore: ...
 ```
 
+## Response Formatting
+
+When displaying answers to questions or presenting any multi-item information:
+
+- **Use bullet points** for lists of facts, options, steps, or items — never run them together as prose
+- **Use numbered lists** when sequence or priority matters (steps, ranked options)
+- **Use a table** when comparing two or more items across the same attributes
+- **Bold the lead word or phrase** of each bullet to make it scannable at a glance
+- Keep each bullet to one clear idea; split compound thoughts into separate bullets
+- Use plain prose only for single-sentence answers or narrative explanations where no list is appropriate
+
 ## Active Technologies
 - Python 3.11+ + Flask, anthropic, chromadb, openai (embedding client) (RAG-assistant)
 - ChromaDB (vector store), SQLite (registry) (RAG-assistant)
-- Markdown (Claude Code plugin instruction files) + Claude Code plugin framework (commands/, skills/, agents/) (002-ea-project-management)
-- JSON files (`engagement.json`) and directory structure (`EA-projects/`) (002-ea-project-management)
+- Python 3.11+ + python-docx, python-pptx (ea-assistant artifact generation scripts)
+- Markdown (Claude Code plugin instruction files) + Claude Code plugin framework (commands/, skills/, agents/) (ea-assistant, RAG-assistant, ITIL-assistant)
+- JSON files (`engagement.json`) and directory structure (`EA-projects/`) (ea-assistant)
+- Markdown (plugin instruction files) + React JSX (artifact apps) + Node.js (docx export scripts) + Claude Code plugin framework (auto-discovery), React (artifact runtime), `docx` npm package (Word export) (003-cr-workflow)
+- `window.storage` (key-value, JSON-serialized) — browser-side persistence in Claude's artifact viewer (003-cr-workflow)
 
 ## Recent Changes
+- ea-assistant/togaf-enrichment: Added artifact generation (Word/PPTX/Mermaid), phase interview question bank, requirements analyst agent, ADM reference material; togaf-adm plugin retired and merged into ea-assistant (v0.4.0)
 - RAG-assistant/001-rag-search-transparency: Added transparent RAG search — chunk panel, inspect prompt, inline citations

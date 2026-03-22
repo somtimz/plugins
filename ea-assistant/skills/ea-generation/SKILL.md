@@ -6,7 +6,7 @@ version: 0.1.0
 
 # EA Artifact Generation — Word, PowerPoint, and Mermaid
 
-This skill governs how to produce formatted output files from individual EA artifacts within an engagement. Three formats are supported: Mermaid diagrams (embedded in Markdown or rendered as images), Word documents (.docx), and PowerPoint presentations (.pptx). For consolidated reports merging all artifacts across an engagement, use `/ea-merge` instead.
+This skill governs how to produce formatted output files from individual EA artifacts within an engagement. Three formats are supported: Mermaid diagrams (embedded in Markdown or rendered as images), Word documents (.docx), and PowerPoint presentations (.pptx). For consolidated reports merging all artifacts across an engagement, use `/ea-publish` instead.
 
 ## Format Selection Guide
 
@@ -318,6 +318,6 @@ python ${CLAUDE_PLUGIN_ROOT}/scripts/generate-pptx.py \
 
 ## Troubleshooting
 
-- **python-docx not found:** Run `pip3 install python-docx` and verify your Python environment is active.
-- **python-pptx not found:** Run `pip3 install python-pptx` and verify your Python environment is active.
+- **python-docx not found:** Run `pip3 install python-docx` (Linux/macOS) or `pip install python-docx` (Windows) and verify your Python environment is active.
+- **python-pptx not found:** Run `pip3 install python-pptx` (Linux/macOS) or `pip install python-pptx` (Windows) and verify your Python environment is active.
 - **Script not found:** Verify the plugin root path is set correctly. Check that `${CLAUDE_PLUGIN_ROOT}` resolves to the plugin installation directory and that the `scripts/` subdirectory exists.

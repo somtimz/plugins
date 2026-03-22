@@ -8,7 +8,9 @@ Display a comprehensive status dashboard for all EA engagements.
 
 ## Instructions
 
-1. **Scan for engagements.** Find all `EA-projects/*/engagement.json` files. The glob pattern `EA-projects/*/` excludes dotdirs like `.archive/`, so archived engagements are not included in the default view. If no engagements exist, display:
+1. **Read the plugin version.** Read `.claude-plugin/plugin.json` from the ea-assistant plugin directory and extract the `version` field.
+
+2. **Scan for engagements.** Find all `EA-projects/*/engagement.json` files. The glob pattern `EA-projects/*/` excludes dotdirs like `.archive/`, so archived engagements are not included in the default view. If no engagements exist, display:
 
    ```
    No EA engagements found.
@@ -16,7 +18,7 @@ Display a comprehensive status dashboard for all EA engagements.
    Get started by creating your first engagement: /ea-new
    ```
 
-2. **Read each engagement.** For each `engagement.json`, extract:
+3. **Read each engagement.** For each `engagement.json`, extract:
    - `name`, `status`, `currentPhase`, `lastModified`
    - `engagementType` (display "—" if field is missing or null)
    - `architectureDomains` (default to all four if field is missing)
@@ -26,11 +28,11 @@ Display a comprehensive status dashboard for all EA engagements.
 
    **Backward compatibility**: If `engagementType`, `architectureDomains`, or `targetEndDate` fields are missing (pre-v0.2.0 engagements), apply defaults: type = null (display "—"), domains = all four, targetEndDate = null (display "—").
 
-3. **Display the dashboard.** For each engagement, show:
+4. **Display the dashboard.** For each engagement, show:
 
    ```
    ═══════════════════════════════════════════════════════════════
-   EA ENGAGEMENT DASHBOARD
+   EA ENGAGEMENT DASHBOARD                        ea-assistant v{version}
    ═══════════════════════════════════════════════════════════════
 
    📁 {name}          [{STATUS}]     {engagementType or "—"}
@@ -59,9 +61,9 @@ Display a comprehensive status dashboard for all EA engagements.
 
    If a specific engagement is currently open (active in conversation context), highlight it with a ► marker before its name.
 
-4. **Display portfolio summary.** After all engagements, show the total count and breakdown by engagement status (Active, On Hold, Planning, Completed).
+5. **Display portfolio summary.** After all engagements, show the total count and breakdown by engagement status (Active, On Hold, Planning, Completed).
 
-5. **Display legend and options.**
+6. **Display legend and options.**
 
    ```
    Legend: ✅ Complete | 🔄 In Progress | ⏸ On Hold | ⬜ Not Started | ➖ Not Applicable
@@ -72,7 +74,7 @@ Display a comprehensive status dashboard for all EA engagements.
    3. Show archived engagements
    ```
 
-6. **Show archived engagements** (when user selects option 3). Scan `EA-projects/.archive/*/engagement.json` files. If `.archive/` doesn't exist or contains no engagements, display "No archived engagements found." Otherwise display:
+7. **Show archived engagements** (when user selects option 3). Scan `EA-projects/.archive/*/engagement.json` files. If `.archive/` doesn't exist or contains no engagements, display "No archived engagements found." Otherwise display:
 
    ```
    ───────────────────────────────────────────────────────────────
@@ -90,12 +92,12 @@ Display a comprehensive status dashboard for all EA engagements.
    3. Return to active dashboard
    ```
 
-7. **Restore an archived engagement** (when user selects restore from archived section). Display a numbered list of archived engagements. After user selects one:
+8. **Restore an archived engagement** (when user selects restore from archived section). Display a numbered list of archived engagements. After user selects one:
    - Check if `EA-projects/{slug}/` already exists. If so, warn: "Cannot restore: an active engagement with slug '{slug}' already exists. Rename or delete the active engagement first." and stop.
    - Move the directory from `EA-projects/.archive/{slug}/` to `EA-projects/{slug}/`.
    - Confirm: "Restored: {name}. Now visible in /ea-status and /ea-open."
 
-8. **Delete an archived engagement** (when user selects delete from archived section). Display a numbered list of archived engagements. After user selects one:
+9. **Delete an archived engagement** (when user selects delete from archived section). Display a numbered list of archived engagements. After user selects one:
    - Display warning: "DELETE '{name}'? This will PERMANENTLY remove EA-projects/.archive/{slug}/ including all artifacts, interviews, diagrams, and engagement data. This action cannot be undone."
    - Require user to type the engagement slug to confirm.
    - If slug matches, remove the directory. Confirm: "Deleted: {name}."

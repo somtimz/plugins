@@ -66,6 +66,8 @@ Artefacts are listed by ADM phase. Where an artefact spans multiple phases (e.g.
 
 **Contents:**
 - Executive summary of the problem being solved
+- **Direction Summary** — cross-domain table drawn from `engagement.json direction`, listing all goals, objectives, and strategies across all selected domains with their priority and (for strategies) which goals/objectives they support; items with no `statement` are excluded. Present in three grouped sections: Goals / Objectives / Strategies. Include a brief definition of each term at the top of the section to orient readers who may be unfamiliar with the distinction.
+- **Metrics Summary** — cross-domain table drawn from `engagement.json metrics`, listing all metrics grouped by type (Outcome / Performance / Activity), showing name, measure, baseline → target, deadline, frequency, source, linked direction ID, and current status. Metrics with no `name` or `measure` are excluded.
 - Business goals and strategic drivers
 - Scope of the architecture engagement
 - High-level description of the target state (narrative, not technical)
@@ -137,9 +139,15 @@ Artefacts are listed by ADM phase. Where an artefact spans multiple phases (e.g.
 **Audience:** Business owners, strategy teams, enterprise architects.
 
 **Contents:**
+- **Business Direction** — drawn from `engagement.json direction.Business`; presented in three sections:
+  - *Goals* (where the business wants to be) — each with ID, statement, priority
+  - *Objectives* (measurable targets) — each with ID, statement, measure, target value, deadline, priority
+  - *Strategies* (approaches chosen) — each with ID, statement, the goal/objective IDs it supports, priority
+  - Capabilities in the map are then annotated to show which goals and objectives they support, and which strategies they enable
+- **Business Metrics** — drawn from `engagement.json metrics.Business`; a table of all Business metrics with type, measure, baseline → target, deadline, frequency, source, and current status. Group by type: Outcome (tracks goals) / Performance (tracks objectives) / Activity (tracks strategies)
 - Level 1 capability areas (e.g., "Customer Management", "Finance", "Supply Chain")
 - Level 2 and Level 3 capability decomposition
-- Heat mapping: optional colour coding to show maturity, investment priority, or gap status
+- Heat mapping: optional colour coding to show maturity, investment priority, or gap status; goal-driven priority takes precedence
 - Mapping of capabilities to supporting applications (optional cross-reference)
 
 **When to Create:** Phase B. Often derived from or cross-validated against industry reference models (BIAN, eTOM, APQC PCF).
@@ -204,6 +212,12 @@ Artefacts are listed by ADM phase. Where an artefact spans multiple phases (e.g.
 **Audience:** IT leadership, solution architects, enterprise architects, operations.
 
 **Contents:**
+- **Application Direction** — drawn from `engagement.json direction.Application`; presented in three sections:
+  - *Goals* — desired application landscape state (e.g., consolidated CRM, modern API platform)
+  - *Objectives* — measurable application targets (e.g., "decommission 3 legacy systems by Q2 2027")
+  - *Strategies* — chosen modernisation approaches (e.g., lift-and-shift, re-platform, replace with SaaS)
+  - Each application's lifecycle status (Invest / Tolerate / Migrate / Eliminate) is annotated with the direction item(s) that drove the classification
+- **Application Metrics** — drawn from `engagement.json metrics.Application`; table of Application metrics grouped by type with measure, baseline → target, deadline, frequency, source, and current status
 - Application ID, name, and description
 - Business capabilities supported
 - Technology platform and version
@@ -229,6 +243,12 @@ Artefacts are listed by ADM phase. Where an artefact spans multiple phases (e.g.
 **Audience:** Data architects, application architects, integration teams, business data owners.
 
 **Contents:**
+- **Data Direction** — drawn from `engagement.json direction.Data`; presented in three sections:
+  - *Goals* — where the data landscape needs to be (e.g., single source of truth, improved data quality)
+  - *Objectives* — measurable data targets (e.g., "reduce duplicate customer records by 90% by June 2026")
+  - *Strategies* — data management approaches chosen (e.g., master data management, data mesh, data lake)
+  - Entity and model design decisions are annotated to show which direction items they address
+- **Data Metrics** — drawn from `engagement.json metrics.Data`; table of Data metrics grouped by type with measure, baseline → target, deadline, frequency, source, and current status
 - Entity names and descriptions
 - Key attributes per entity
 - Primary keys and foreign key relationships
@@ -274,10 +294,15 @@ Artefacts are listed by ADM phase. Where an artefact spans multiple phases (e.g.
 **Audience:** Solution architects, developers, infrastructure engineers, procurement.
 
 **Contents:**
+- **Technology Direction** — drawn from `engagement.json direction.Technology`; presented in three sections:
+  - *Goals* — desired technology state (e.g., "cloud-native platform", "zero-trust security posture")
+  - *Objectives* — measurable technology targets (e.g., "achieve 99.9% availability for Tier-1 systems by Q3 2026")
+  - *Strategies* — chosen technology approaches (e.g., cloud-first, containerisation, open-source preferred)
 - Technology domain (e.g., Database, Middleware, Identity, Compute)
 - Standard name and product/technology
 - Approved versions
-- Rationale for selection
+- Rationale for selection (including which Technology direction items the standard supports)
+- **Technology Metrics** — drawn from `engagement.json metrics.Technology`; table of Technology metrics grouped by type with measure, baseline → target, deadline, frequency, source, and current status
 - Exceptions process
 - Review/expiry date
 

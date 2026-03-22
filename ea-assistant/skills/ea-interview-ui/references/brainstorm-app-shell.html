@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EA Brainstorm</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: #F9FAFB; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" data-presets="react">
+    const { useState, useRef, useEffect } = React;
+
+    // ── Paste the full component body from brainstorm-app.jsx below ──────────
+    // (everything after the imports — CATEGORIES constant, CategoryCard,
+    //  ResultScreen, and the default export BrainstormPad)
+    // Claude pastes it verbatim; the import statement is NOT included because
+    // React hooks are already available as destructured globals above.
+    %%COMPONENT_BODY%%
+    // ────────────────────────────────────────────────────────────────────────
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<BrainstormPad />);
+  </script>
+</body>
+</html>

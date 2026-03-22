@@ -23,11 +23,22 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
 
 3. Load any existing dated interview notes from `interviews/` for this artifact. If notes exist, ask: "Previous interview notes found (v{N}, {date}). Resume from these, or start fresh?"
 
+3b. **Check for brainstorm notes:** Look for `EA-projects/{slug}/brainstorm/brainstorm-notes.md`. Note whether it exists.
+
+3c. **Select interview mode** — ask the user:
+   > How would you like to conduct this interview?
+   > **1. Text** (default) — questions asked one at a time in chat
+   > **2. Web** — interactive form you fill in and paste back
+   > **3. Display** — show all questions without collecting answers
+   >
+   > Press Enter or type 1 for Text.
+
 4. Hand off to the `ea-interviewer` agent with:
    - The artifact name and file path
    - The extracted question list
    - Any pre-existing answers from previous notes or uploaded docs
-   - Interview rules: one question at a time, skip/N/A/default options
+   - The selected mode (text / web / display)
+   - Brainstorm notes path (if available): `brainstorm/brainstorm-notes.md`
 
 5. On interview completion:
    - Save dated notes to `interviews/interview-{artifact-id}-{YYYY-MM-DD}-v{N}.md`
@@ -46,15 +57,20 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
    3. Phase B — Business Architecture
    4. Phase C — Information Systems
    5. Phase D — Technology Architecture
-   6. Phase E/F — Opportunities & Roadmap
-   7. Phase G — Implementation Governance
-   8. Phase H — Architecture Change Management
-   9. Requirements Management
+   6. Phase E — Opportunities and Solutions
+   7. Phase F — Migration Planning
+   8. Phase G — Implementation Governance
+   9. Phase H — Architecture Change Management
+   10. Requirements Management
    ```
 
 2. Load the question bank from `skills/ea-artifact-templates/references/phase-interview-questions.md` for the selected phase.
 
 3. Load any existing interview notes for this phase from `interviews/interview-phase-{phase}-*`. If notes exist, ask: "Previous phase interview notes found (v{N}, {date}). Resume from these, or start fresh?"
+
+3b. **Check for brainstorm notes:** Look for `EA-projects/{slug}/brainstorm/brainstorm-notes.md`. Note whether it exists.
+
+3c. **Select interview mode** — ask the user (same three-option prompt as artifact mode, Text default).
 
 4. Hand off to the `ea-interviewer` agent in **phase mode** with:
    - The phase name
@@ -62,6 +78,8 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
    - The output routing table for this phase
    - Any pre-existing answers from previous sessions
    - All artifacts that this phase's routing table targets
+   - The selected mode (text / web / display)
+   - Brainstorm notes path (if available): `brainstorm/brainstorm-notes.md`
 
 5. On interview completion:
    - Save dated notes to `interviews/interview-phase-{phase}-{YYYY-MM-DD}-v{N}.md`
@@ -129,7 +147,17 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
 
 2. Let the user select which version to resume from.
 
-3. Load the selected notes, identify unanswered questions, and restart the interview from where it left off using the `ea-interviewer` agent.
+3. Load the selected notes, identify unanswered questions.
+
+3b. **Check for brainstorm notes:** Look for `EA-projects/{slug}/brainstorm/brainstorm-notes.md`. Note whether it exists.
+
+3c. **Select interview mode** — ask the user (same three-option prompt, Text default).
+
+4. Hand off to the `ea-interviewer` agent to restart the interview from where it left off, passing:
+   - The artifact name and file path
+   - Unanswered questions from the selected notes
+   - The selected mode (text / web / display)
+   - Brainstorm notes path (if available): `brainstorm/brainstorm-notes.md`
 
 ---
 

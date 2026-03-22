@@ -73,9 +73,9 @@ For each phase, know the key outputs:
 - **Phase B:** Business Architecture document
 - **Phase C:** Data Architecture, Application Architecture
 - **Phase D:** Technology Architecture
-- **Phase E:** Architecture Roadmap, Implementation Proposals
-- **Phase F:** Migration Plan, updated Roadmap
-- **Phase G:** Architecture Contracts, Compliance Assessments
+- **Phase E:** Architecture Roadmap, Transition Architectures, Work Package definitions, Implementation and Migration Strategy
+- **Phase F:** Migration Plan, Finalised Architecture Definition Document, Finalised Architecture Requirements Specification, Updated Transition Architectures, Architecture Contracts, Updated Roadmap
+- **Phase G:** Architecture Contracts (signed), Compliance Assessments, Change Requests
 - **Phase H:** Change Requests, updated Architecture documents
 
 **Quality Standards:**
@@ -89,3 +89,5 @@ For each phase, know the key outputs:
 - Use clear section headers when summarising phase status
 - Use ✅/🔄/⬜/⚠️ status indicators consistently
 - End every response with a clear "Next:" statement showing what will happen when the user responds
+- When listing artifacts, phases, inputs, or outputs — always use bullets, not inline prose
+- **Bold the first word or phrase** of each bullet so the user can scan without reading every word

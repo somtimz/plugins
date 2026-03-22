@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EA Interview — %%ARTIFACT_NAME%%</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: #F9FAFB; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" data-presets="react">
+    const { useState, useEffect, useRef } = React;
+
+    // ── Injected by Claude ───────────────────────────────────────────────────
+    // Claude replaces this constant with the actual session data before writing
+    // the file. Shape is identical to interview-app-template.jsx INTERVIEW_DATA.
+    const INTERVIEW_DATA = %%INTERVIEW_DATA_JSON%%;
+    // ────────────────────────────────────────────────────────────────────────
+
+    const ANSWER_STATE = {
+      answered:         { label: "Answered",        bg: "#D1FAE5", text: "#065F46" },
+      default_accepted: { label: "Default Accepted", bg: "#DBEAFE", text: "#1E40AF" },
+      skipped:          { label: "Skipped",          bg: "#FEF9C3", text: "#854D0E" },
+      na:               { label: "N/A",              bg: "#F3F4F6", text: "#4B5563" },
+    };
+
+    // ── Paste the full component body from interview-app-template.jsx below ──
+    // (everything after the ANSWER_STATE constant — Badge, ProgressBar,
+    //  QuestionCard, ReviewScreen, and the default export InterviewApp)
+    // Claude pastes it verbatim; the import statement is NOT included because
+    // React hooks are already available as destructured globals above.
+    %%COMPONENT_BODY%%
+    // ────────────────────────────────────────────────────────────────────────
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<InterviewApp />);
+  </script>
+</body>
+</html>
