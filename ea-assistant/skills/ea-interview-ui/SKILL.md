@@ -4,7 +4,7 @@ description: >
   Render interactive React artifacts for EA interview sessions and brainstorming.
   Use the interview app when conducting structured Q&A for an artifact or phase.
   Use the brainstorm pad when capturing freeform engagement thoughts.
-version: 0.1.0
+version: 0.2.0
 ---
 
 # EA Interview UI Skill
