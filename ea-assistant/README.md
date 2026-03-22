@@ -17,9 +17,10 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Architecture Requirements** — manage requirements locally with a reference to a shared requirements repository
 - **Artifact generation** — all TOGAF artifacts from templates, guided by interviews
 - **Format export** — generate Word (.docx), PowerPoint (.pptx), and Mermaid diagrams from any artifact
-- **Phase interviews** — curated question bank for each ADM phase with output routing to artifacts
+- **Phase interviews** — curated question bank for each ADM phase (Text, Web, or Display mode) with output routing to artifacts
+- **Brainstorming** — capture freeform thoughts before or during interviews; surfaced automatically as context during Q&A
 - **Requirements analysis** — extract structured requirements from uploaded documents, map to ADM phases and Zachman cells
-- **Stakeholder interviews** — online or via Word export/import; dated and versioned notes
+- **Stakeholder interviews** — chat-based or interactive web form; dated and versioned notes
 - **Diagram support** — Mermaid, Graphviz (.dot), Draw.io (.drawio), ArchiMate notation
 - **Review & consistency** — per-artifact review workflow; cross-artifact consistency checking
 - **Consolidated reporting** — merge all artifacts into a single Markdown or Word document
@@ -61,11 +62,13 @@ requirementsRepoPath: /path/to/shared/requirements-folder
 | `/ea-status` | Portfolio dashboard with type, domains, phase progress, artifact counts, and archive management |
 | `/ea-phase [phase]` | Start, edit, or resume an ADM phase |
 | `/ea-artifact [action]` | Create or list artifacts for the active engagement |
-| `/ea-interview [mode]` | Start, export, import, or resume a stakeholder interview (artifact or phase mode) |
+| `/ea-brainstorm [phase]` | Capture freeform thoughts and context before or during interviews |
+| `/ea-interview [mode]` | Start or resume a stakeholder interview (artifact or phase mode; Text/Web/Display) |
 | `/ea-generate [artifact] [format]` | Export an artifact as Word (.docx), PowerPoint (.pptx), or Mermaid diagram |
 | `/ea-review [artifact]` | Open an artifact for review and assessment |
 | `/ea-requirements [action]` | Manage architecture requirements |
 | `/ea-publish` | Merge all artifacts into a consolidated document |
+| `/ea-help` | Getting-started guide and full command reference |
 
 ## Engagement Management
 

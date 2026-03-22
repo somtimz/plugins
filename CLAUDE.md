@@ -90,9 +90,13 @@ When displaying answers to questions or presenting any multi-item information:
 - Python 3.11+ + python-docx, python-pptx (ea-assistant artifact generation scripts)
 - Markdown (Claude Code plugin instruction files) + Claude Code plugin framework (commands/, skills/, agents/) (ea-assistant, RAG-assistant, ITIL-assistant)
 - JSON files (`engagement.json`) and directory structure (`EA-projects/`) (ea-assistant)
-- Markdown (plugin instruction files) + React JSX (artifact apps) + Node.js (docx export scripts) + Claude Code plugin framework (auto-discovery), React (artifact runtime), `docx` npm package (Word export) (003-cr-workflow)
-- `window.storage` (key-value, JSON-serialized) — browser-side persistence in Claude's artifact viewer (003-cr-workflow)
+- React JSX (artifact apps for interview UI and brainstorm pad) — rendered as Claude artifacts or written to disk as standalone HTML (ea-assistant)
+- `window.localStorage` (key-value, JSON-serialized) — browser-side persistence in Claude's artifact viewer (ITIL-assistant)
 
 ## Recent Changes
-- ea-assistant/togaf-enrichment: Added artifact generation (Word/PPTX/Mermaid), phase interview question bank, requirements analyst agent, ADM reference material; togaf-adm plugin retired and merged into ea-assistant (v0.4.0)
-- RAG-assistant/001-rag-search-transparency: Added transparent RAG search — chunk panel, inspect prompt, inline citations
+- repo: Flattened plugin directory structure — all plugins now live at repo root instead of inside `plugins/` subfolder
+- ea-assistant v0.6.0: Interview mode selection (Text default, Web, Display); markdown checklists on enumerated questions; Phase F Migration Planning interview; version display in `/ea-help` and `/ea-status`; governance framework reference with diagrams; `/ea-brainstorm` command; `/ea-publish` command (replaces `/ea-merge`)
+- ea-assistant v0.5.0: ITIL-assistant plugin added; ADM governance framework added; interview UI React artifacts for web mode
+- ea-assistant v0.4.0: Artifact generation (Word/PPTX/Mermaid), phase interview question bank, requirements analyst agent, ADM reference material; togaf-adm plugin retired and merged
+- RAG-assistant v0.1.0: Transparent RAG search — chunk panel, inspect prompt, inline citations
+- ITIL-assistant v0.1.0: Change Request management and CAB review workflow with React artifact UI
