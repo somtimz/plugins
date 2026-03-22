@@ -8,16 +8,18 @@ Display a getting-started guide and command reference for EA Assistant.
 
 ## Instructions
 
-1. **Check for existing engagements.** Run `ls EA-projects/*/engagement.json 2>/dev/null` to detect any existing projects.
+1. **Read the plugin version.** Read `.claude-plugin/plugin.json` from the ea-assistant plugin directory and extract the `version` field.
 
-2. **Display the guide.** Print the following, adapting the "Getting Started" section based on whether engagements exist:
+2. **Check for existing engagements.** Run `ls EA-projects/*/engagement.json 2>/dev/null` to detect any existing projects.
+
+3. **Display the guide.** Print the following, adapting the "Getting Started" section based on whether engagements exist:
 
 ---
 
 **If no engagements exist:**
 
 ```
-## EA Assistant — Getting Started
+## EA Assistant v{version} — Getting Started
 
 EA Assistant manages Enterprise Architecture engagements using TOGAF 10,
 Zachman Framework, and ArchiMate 3.x.
@@ -44,9 +46,11 @@ Zachman Framework, and ArchiMate 3.x.
   • `/ea-review` — review artifacts for completeness and quality
 ```
 
-**If engagements exist, replace the Quick Start section with:**
+**If engagements exist:**
 
 ```
+## EA Assistant v{version} — Getting Started
+
 ### Resume Work
 
 You have existing engagements. Common next steps:
@@ -59,7 +63,7 @@ You have existing engagements. Common next steps:
 
 ---
 
-3. **Always show the full command reference:**
+4. **Always show the full command reference:**
 
 ```
 ### All Commands
@@ -94,6 +98,6 @@ You have existing engagements. Common next steps:
   the governance structure, cascade, roles, and TOGAF tool mapping.
 ```
 
-4. **If the user asks about architecture governance** (e.g. "how does governance work", "explain the ARB", "what is the governance cascade", "governance roles", "Phase G governance"), read `skills/ea-engagement-lifecycle/references/governance-framework.md` and present it in full. The file contains two images (`images/governance-structure.png` and `images/governance-cascade.png`) — display both inline at the points where they are referenced in the document. Do not summarise — present the full reference.
+5. **If the user asks about architecture governance** (e.g. "how does governance work", "explain the ARB", "what is the governance cascade", "governance roles", "Phase G governance"), read `skills/ea-engagement-lifecycle/references/governance-framework.md` and present it in full. The file contains two images (`images/governance-structure.png` and `images/governance-cascade.png`) — display both inline at the points where they are referenced in the document. Do not summarise — present the full reference.
 
-5. **Otherwise, do not add any content beyond what is specified above.** Keep the output clean and scannable.
+6. **Otherwise, do not add any content beyond what is specified above.** Keep the output clean and scannable.
