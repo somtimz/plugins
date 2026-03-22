@@ -14,7 +14,7 @@
         "name": "Costa Pissaris",
         "email": "cpissaris@gmail.com"
       },
-      "source": "./plugins/ea-assistant",
+      "source": "./ea-assistant",
       "category": "development",
       "strict": false
     },
@@ -26,7 +26,7 @@
         "name": "Costa Pissaris",
         "email": "cpissaris@gmail.com"
       },
-      "source": "./plugins/RAG-assistant",
+      "source": "./RAG-assistant",
       "category": "development",
       "strict": false
     },
@@ -38,7 +38,7 @@
         "name": "Costa Pissaris",
         "email": "cpissaris@gmail.com"
       },
-      "source": "./plugins/ITIL-assistant",
+      "source": "./ITIL-assistant",
       "category": "development",
       "strict": false
     }

@@ -3,7 +3,7 @@
 ## Repository Layout
 
 ```
-plugins/<plugin-name>/          plugin source (one directory per plugin)
+<plugin-name>/          plugin source (one directory per plugin)
 .claude-plugin/marketplace.json marketplace index listing all plugins
 .github/scripts/                CI helper scripts (TypeScript, run via Bun)
 .github/workflows/              GitHub Actions workflows
@@ -11,14 +11,14 @@ plugins/<plugin-name>/          plugin source (one directory per plugin)
 
 ## Adding a New Plugin
 
-1. Create `plugins/<plugin-name>/` with the standard plugin structure.
+1. Create `<plugin-name>/` at the repo root with the standard plugin structure.
 2. Add an entry to `.claude-plugin/marketplace.json`.
 3. Validate frontmatter locally before pushing (see below).
 
 ### Required Plugin Structure
 
 ```
-plugins/<plugin-name>/
+<plugin-name>/
 ├── .claude-plugin/plugin.json   # required: name, version, description, author
 ├── README.md                    # required
 ├── LICENSE                      # required
