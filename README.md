@@ -6,9 +6,9 @@ A curated collection of plugins for Claude Code and OpenCode maintained by [@som
 
 | Plugin | Description | Version |
 |---|---|---|
-| [ea-assistant](./plugins/ea-assistant/) | End-to-end Enterprise Architecture engagement management (TOGAF 10, Zachman, ArchiMate) with artifact generation, phase interviews, and requirements analysis | 0.4.0 |
-| [RAG-assistant](./plugins/RAG-assistant/) | Conversational RAG assistant — ingests documents into ChromaDB, web UI for cited Q&A and ingestion management | 0.1.0 |
-| [ITIL-assistant](./plugins/ITIL-assistant/) | ITIL v4 Change Management assistant — create, manage, and review Change Requests with CAB approval workflow | 0.1.0 |
+| [ea-assistant](./ea-assistant/) | End-to-end Enterprise Architecture engagement management (TOGAF 10, Zachman, ArchiMate) with artifact generation, phase interviews, and requirements analysis | 0.6.0 |
+| [RAG-assistant](./RAG-assistant/) | Conversational RAG assistant — ingests documents into ChromaDB, web UI for cited Q&A and ingestion management | 0.1.0 |
+| [ITIL-assistant](./ITIL-assistant/) | ITIL v4 Change Management assistant — create, manage, and review Change Requests with CAB approval workflow | 0.1.0 |
 
 ## Installation
 
@@ -23,12 +23,12 @@ In Claude Code, add this repo as a marketplace to browse and install all plugins
 Or install a single plugin directly:
 
 ```bash
-/plugin install https://github.com/somtimz/plugins/tree/main/plugins/<plugin-name>
+/plugin install https://github.com/somtimz/plugins/tree/main/<plugin-name>
 ```
 
 ### OpenCode — install skills
 
-OpenCode has no marketplace mechanism, but all 11 skills are format-compatible. Clone the repo and run the install script to symlink skills into OpenCode's discovery path:
+OpenCode has no marketplace mechanism, but all 12 skills are format-compatible. Clone the repo and run the install script to symlink skills into OpenCode's discovery path:
 
 ```bash
 git clone https://github.com/somtimz/plugins.git
@@ -49,6 +49,7 @@ The script symlinks all skills into `~/.config/opencode/skills/`. Set `OPENCODE_
 | `ea-engagement-lifecycle` | ea-assistant |
 | `ea-generation` | ea-assistant |
 | `ea-requirements-management` | ea-assistant |
+| `ea-interview-ui` | ea-assistant |
 | `zachman-framework` | ea-assistant |
 | `doc-ingestion-pipeline` | RAG-assistant |
 | `rag-chat` | RAG-assistant |
@@ -58,16 +59,15 @@ The script symlinks all skills into `~/.config/opencode/skills/`. Set `OPENCODE_
 ## Repository Structure
 
 ```
-plugins/
-└── <plugin-name>/
-    ├── .claude-plugin/plugin.json   # plugin manifest
-    ├── agents/                      # subagent definitions
-    ├── commands/                    # slash commands
-    ├── skills/                      # skill files
-    ├── hooks/                       # lifecycle hooks
-    ├── templates/                   # document templates
-    └── README.md
-.claude-plugin/marketplace.json      # marketplace index
+<plugin-name>/
+├── .claude-plugin/plugin.json   # plugin manifest
+├── agents/                      # subagent definitions
+├── commands/                    # slash commands
+├── skills/                      # skill files
+├── hooks/                       # lifecycle hooks
+├── templates/                   # document templates
+└── README.md
+.claude-plugin/marketplace.json  # marketplace index
 .github/
     scripts/validate-frontmatter.ts  # CI frontmatter validator
     workflows/
