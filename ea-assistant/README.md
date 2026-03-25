@@ -67,7 +67,7 @@ requirementsRepoPath: /path/to/shared/requirements-folder
 | `/ea-interview [mode]` | Start or resume a stakeholder interview (artifact or phase mode; Text/Web/Display) |
 | `/ea-generate [artifact] [format]` | Export an artifact as Word (.docx), PowerPoint (.pptx), or Mermaid diagram |
 | `/ea-review [artifact]` | Open an artifact for review and assessment |
-| `/ea-requirements [action]` | Manage architecture requirements |
+| `/ea-requirements [action]` | Manage architecture requirements and architecture principles |
 | `/ea-publish` | Merge all artifacts into a consolidated document |
 | `/ea-help` | Getting-started guide and full command reference |
 

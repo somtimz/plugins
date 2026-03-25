@@ -1,11 +1,11 @@
 ---
 name: ea-requirements
-description: Manage architecture requirements — capture, view, sync from repo, and trace to artifacts
-argument-hint: "[list|add|sync|trace]"
+description: Manage architecture requirements and principles — capture, view, sync from repo, and trace to artifacts
+argument-hint: "[list|add|sync|trace|principles]"
 allowed-tools: [Read, Write, Bash]
 ---
 
-Manage architecture requirements for the active engagement.
+Manage architecture requirements and principles for the active engagement.
 
 ## Instructions
 
@@ -35,9 +35,31 @@ ID         Scope      Priority  Status    Title
 **Subcommand variants:**
 - `list corporate` — show only Corporate-scoped requirements
 - `list project` — show only Project-scoped requirements
+- `list principles` — show only requirements with category `Principle` (see Mode: `principles`)
 - `list corporate waived` — combine scope and status filters (any valid status value accepted)
 
-Offer: add a requirement, sync from repo, view traceability.
+Offer: add a requirement, sync from repo, view traceability, view principles.
+
+---
+
+### Mode: `principles` (alias: `list principles`)
+
+Display only requirements with `category: "Principle"`, grouped by scope (Corporate first):
+
+```
+Architecture Principles — Acme Retail Transformation
+═══════════════════════════════════════════════════════════════════
+ID         Scope      Priority  Status    Statement
+───────────────────────────────────────────────────────────────────
+🔒REQ-005  Corporate  High      Approved  Single source of truth for all master data
+  REQ-007  Project    Medium    Draft     All integrations use published APIs
+═══════════════════════════════════════════════════════════════════
+2 principles (1 Approved, 1 Draft) | 1 Corporate 🔒, 1 Project
+```
+
+For each principle, display its full **rationale** and **implications** fields below the table (stored in the requirement's `description` field using the sub-structure `Rationale: … / Implications: …`).
+
+Offer: add a principle, or switch to full requirements list.
 
 ---
 
@@ -49,6 +71,11 @@ Offer: add a requirement, sync from repo, view traceability.
    - Priority: High / Medium / Low
    - Source: stakeholder name or document reference
    - ADM phase relevance
+
+   **If category is `Principle`**, ask two additional fields instead of (or in addition to) a description:
+   - **Rationale** — why this principle exists; what risk or problem it prevents
+   - **Implications** — what the principle means for design decisions in practice
+   Store both in the `description` field as: `Rationale: {text}\n\nImplications: {text}`
 2. Ask: "Is this a **Corporate** (enterprise-wide standard or policy) or **Project** (specific to this engagement) requirement?"
    - If **Corporate**: source field is mandatory. Display notice: "Corporate requirements have read-only content fields. Only status, linked artifacts, and waiver justification can be updated after adding."
    - If **Project**: ask (optional): "Does this requirement derive from an existing Corporate requirement? Enter a Corporate REQ ID or press Enter to skip." If an ID is provided, validate it exists and is Corporate-scoped — warn if not, but do not block.
