@@ -1,11 +1,11 @@
 ---
 name: ea-requirements
-description: Manage architecture requirements and principles — capture, view, sync from repo, and trace to artifacts
-argument-hint: "[list|add|sync|trace|principles]"
+description: Manage architecture requirements, principles, policies, and standards — capture, view, sync from repo, and trace to artifacts
+argument-hint: "[list|add|sync|trace|principles|policies|standards]"
 allowed-tools: [Read, Write, Bash]
 ---
 
-Manage architecture requirements and principles for the active engagement.
+Manage architecture requirements, principles, policies, and standards for the active engagement.
 
 ## Instructions
 
@@ -33,12 +33,14 @@ ID         Scope      Priority  Status    Title
 ```
 
 **Subcommand variants:**
-- `list corporate` — show only Corporate-scoped requirements
-- `list project` — show only Project-scoped requirements
-- `list principles` — show only requirements with category `Principle` (see Mode: `principles`)
+- `list corporate` — show only Corporate-scoped items
+- `list project` — show only Project-scoped items
+- `list principles` — show only category `Principle` (see Mode: `principles`)
+- `list policies` — show only category `Policy` (see Mode: `policies`)
+- `list standards` — show only category `Standard` (see Mode: `standards`)
 - `list corporate waived` — combine scope and status filters (any valid status value accepted)
 
-Offer: add a requirement, sync from repo, view traceability, view principles.
+Offer: add a requirement, sync from repo, view traceability, view principles, view policies, view standards.
 
 ---
 
@@ -63,19 +65,75 @@ Offer: add a principle, or switch to full requirements list.
 
 ---
 
+### Mode: `policies` (alias: `list policies`)
+
+Display only requirements with `category: "Policy"`, grouped by scope (Corporate first):
+
+```
+Organisation Policies — Acme Retail Transformation
+═══════════════════════════════════════════════════════════════════
+ID         Scope      Priority  Status    Title
+───────────────────────────────────────────────────────────────────
+🔒REQ-008  Corporate  High      Approved  Data Retention Policy
+🔒REQ-009  Corporate  High      Approved  Cloud Hosting Approval Policy
+  REQ-011  Project    Medium    Draft     Vendor Onboarding Policy
+═══════════════════════════════════════════════════════════════════
+3 policies (2 Approved, 1 Draft) | 2 Corporate 🔒, 1 Project
+```
+
+For each policy, display its full **statement**, **owner**, **effective date**, and **enforcement** fields below the table (stored in the requirement's `description` field using `Owner: … / Effective: … / Enforcement: …`).
+
+Offer: add a policy, or switch to full requirements list.
+
+---
+
+### Mode: `standards` (alias: `list standards`)
+
+Display only requirements with `category: "Standard"`, grouped by scope (Corporate first):
+
+```
+Architecture Standards — Acme Retail Transformation
+═══════════════════════════════════════════════════════════════════
+ID         Scope      Priority  Status    Title
+───────────────────────────────────────────────────────────────────
+🔒REQ-010  Corporate  High      Approved  REST API Design Standard v2.1
+🔒REQ-012  Corporate  High      Approved  ISO 27001:2022 Information Security
+  REQ-013  Project    Medium    Draft     Microservices Deployment Standard
+═══════════════════════════════════════════════════════════════════
+3 standards (2 Approved, 1 Draft) | 2 Corporate 🔒, 1 Project
+```
+
+For each standard, display its full **statement**, **version**, **domain**, and **enforcement** fields below the table (stored in the requirement's `description` field using `Version: … / Domain: … / Enforcement: …`).
+
+Offer: add a standard, or switch to full requirements list.
+
+---
+
 ### Mode: `add`
 
 1. Ask for:
-   - Requirement statement (required)
-   - Category: Functional / Non-Functional / Constraint / Principle
+   - Title (required)
+   - Category: Functional / Non-Functional / Constraint / Principle / Policy / Standard
    - Priority: High / Medium / Low
    - Source: stakeholder name or document reference
    - ADM phase relevance
 
-   **If category is `Principle`**, ask two additional fields instead of (or in addition to) a description:
+   **If category is `Principle`**, ask two additional fields:
    - **Rationale** — why this principle exists; what risk or problem it prevents
    - **Implications** — what the principle means for design decisions in practice
-   Store both in the `description` field as: `Rationale: {text}\n\nImplications: {text}`
+   Store in `description` as: `Rationale: {text}\n\nImplications: {text}`
+
+   **If category is `Policy`**, ask three additional fields:
+   - **Owner** — team or role responsible for the policy (e.g., CISO, CTO Office)
+   - **Effective date** — when the policy came into force (YYYY-MM-DD or "TBD")
+   - **Enforcement** — `Mandatory` or `Advisory`
+   Store in `description` as: `Owner: {text} / Effective: {date} / Enforcement: {value}`
+
+   **If category is `Standard`**, ask three additional fields:
+   - **Version** — version or edition of the standard (e.g., "v2.1", "2022", "TBD")
+   - **Domain** — `Business` / `Data` / `Application` / `Technology` / `Cross-cutting`
+   - **Enforcement** — `Mandatory` or `Advisory`
+   Store in `description` as: `Version: {text} / Domain: {value} / Enforcement: {value}`
 2. Ask: "Is this a **Corporate** (enterprise-wide standard or policy) or **Project** (specific to this engagement) requirement?"
    - If **Corporate**: source field is mandatory. Display notice: "Corporate requirements have read-only content fields. Only status, linked artifacts, and waiver justification can be updated after adding."
    - If **Project**: ask (optional): "Does this requirement derive from an existing Corporate requirement? Enter a Corporate REQ ID or press Enter to skip." If an ID is provided, validate it exists and is Corporate-scoped — warn if not, but do not block.
