@@ -14,7 +14,8 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 
 - **Multi-engagement management** — create, open, track, edit, archive, and delete EA projects
 - **Full ADM lifecycle** — start, edit, or resume any TOGAF ADM phase (Prelim, A–H)
-- **Architecture Requirements** — manage requirements locally with a reference to a shared requirements repository
+- **Business Model Canvas** — Phase B BMC template (9 building blocks) with 27-question interview bank and linkage table to Business Architecture elements
+- **Architecture Requirements** — manage requirements with Corporate (read-only, waiveable) and Project (editable) scope distinction; sync from shared repo with automatic Corporate tagging
 - **Artifact generation** — all TOGAF artifacts from templates, guided by interviews
 - **Format export** — generate Word (.docx), PowerPoint (.pptx), and Mermaid diagrams from any artifact
 - **Phase interviews** — curated question bank for each ADM phase (Text, Web, or Display mode) with output routing to artifacts

@@ -94,6 +94,7 @@ When displaying answers to questions or presenting any multi-item information:
 - `window.localStorage` (key-value, JSON-serialized) — browser-side persistence in Claude's artifact viewer (ITIL-assistant)
 
 ## Recent Changes
+- ea-assistant (post v0.6.0): Business Model Canvas template (Phase B) with BMC interview question bank (27 questions, output routing, facilitation notes); corporate vs project requirements distinction — scope field, edit protection, Waived status with justification enforcement, sync auto-tagging, backward-compatible migration; scaffolding-map reference added
 - repo: Flattened plugin directory structure — all plugins now live at repo root instead of inside `plugins/` subfolder
 - ea-assistant v0.6.0: Interview mode selection (Text default, Web, Display); markdown checklists on enumerated questions; Phase F Migration Planning interview; version display in `/ea-help` and `/ea-status`; governance framework reference with diagrams; `/ea-brainstorm` command; `/ea-publish` command (replaces `/ea-merge`)
 - ea-assistant v0.5.0: ITIL-assistant plugin added; ADM governance framework added; interview UI React artifacts for web mode
