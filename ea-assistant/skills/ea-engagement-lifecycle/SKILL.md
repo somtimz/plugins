@@ -214,7 +214,7 @@ Deselecting a domain sets its corresponding ADM phase to "Not Applicable" and ex
 | Prelim | Preliminary | Architecture Principles, Org Model, Tailoring |
 | Requirements | Architecture Requirements | Requirements Register, Traceability Matrix |
 | A | Architecture Vision | Statement of Architecture Work, Architecture Vision |
-| B | Business Architecture | Business Architecture document |
+| B | Business Architecture | Business Model Canvas, Business Architecture document |
 | C-Data | Data Architecture | Data Architecture document |
 | C-App | Application Architecture | Application Architecture document |
 | D | Technology Architecture | Technology Architecture document |

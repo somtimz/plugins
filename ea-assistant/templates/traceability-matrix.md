@@ -10,8 +10,9 @@ lastModified: {{YYYY-MM-DD}}
 
 <!-- GUIDANCE:
   The Requirements Traceability Matrix maps each architecture requirement to the artifacts
-  that address it. It ensures every approved requirement has coverage in at least one artifact,
-  and provides a single view of requirement-to-artifact linkage across all phases.
+  that address it. Requirements are grouped by scope — Corporate first, Project second.
+  Corporate requirements with status Waived are shown with 🚫 in all artifact cells;
+  the waiver itself is the coverage action and they are excluded from the untraced count.
   This matrix is generated or updated by /ea-requirements trace.
 -->
 
@@ -26,38 +27,54 @@ lastModified: {{YYYY-MM-DD}}
 
 ## Coverage Summary
 
-| Total Requirements | Fully Traced | Partially Traced | Not Traced |
-|---|---|---|---|
-| {{total}} | {{fully_traced}} | {{partial}} | {{not_traced}} |
+| Total | Corporate 🔒 | Project | Fully Traced | Partially Traced | Not Traced |
+|---|---|---|---|---|---|
+| {{total}} | {{corporate}} | {{project}} | {{fully_traced}} | {{partial}} | {{not_traced}} |
+
+**Corporate coverage:** {{corp_traced}} / {{corp_total}} requirements fully traced
+**Project coverage:** {{proj_traced}} / {{proj_total}} requirements fully traced
 
 ---
 
-## Traceability Matrix
+## Traceability Matrix — Corporate Requirements
 
 <!-- GUIDANCE:
-  One row per requirement. Add a column for each artifact created in the engagement.
-  Use ✅ (addressed), ⚠️ (partial), ⬜ (not addressed).
-  Populate using /ea-requirements trace — do not fill manually.
+  Corporate requirements appear first. Content fields are read-only; this matrix tracks
+  artifact linkage and coverage status only. Waived requirements show 🚫 in all cells.
 -->
 
 | Req ID | Requirement | Priority | Arch Vision | Biz Arch | Data | App | Tech | Roadmap |
 |---|---|---|---|---|---|---|---|---|
-| REQ-001 | {{requirement}} | High | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| 🔒REQ-001 | {{requirement}} | High | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 
-Legend: ✅ Addressed | ⚠️ Partially addressed | ⬜ Not addressed
+---
+
+## Traceability Matrix — Project Requirements
+
+<!-- GUIDANCE:
+  Project-specific requirements. The Derives From column shows which Corporate requirement
+  this project requirement responds to, if applicable (— if none).
+-->
+
+| Req ID | Requirement | Priority | Derives From | Arch Vision | Biz Arch | Data | App | Tech | Roadmap |
+|---|---|---|---|---|---|---|---|---|---|
+| REQ-00N | {{requirement}} | Medium | — | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+
+Legend: ✅ Addressed | ⚠️ Partially addressed | ⬜ Not addressed | 🚫 Waived
 
 ---
 
 ## Untraced Requirements
 
 <!-- GUIDANCE:
-  List all requirements with no artifact coverage. These must be addressed before
-  any artifact is submitted for approval.
+  List all requirements with no artifact coverage. These must be addressed or formally
+  waived before any artifact is submitted for approval. Waived Corporate requirements
+  are excluded from this section.
 -->
 
-| Req ID | Requirement | Status | Action Required |
-|---|---|---|---|
-| {{req_id}} | {{requirement}} | {{status}} | {{action}} |
+| Req ID | Scope | Requirement | Status | Action Required |
+|---|---|---|---|---|
+| {{req_id}} | Corporate / Project | {{requirement}} | {{status}} | {{action}} |
 
 ---
 
@@ -69,3 +86,4 @@ Legend: ✅ Addressed | ⚠️ Partially addressed | ⬜ Not addressed
 
 *This document was created using the EA Assistant plugin.*
 *Use `/ea-requirements trace` to regenerate this matrix from current artifact data.*
+*🚫 = Requirement formally waived — see Waiver Justification in the Requirements Register.*

@@ -69,6 +69,7 @@ All TOGAF artifacts are in scope. Templates are stored in the plugin's `template
 | `statement-of-architecture-work.md` | Statement of Architecture Work | A |
 | `architecture-principles.md` | Architecture Principles | Prelim / A |
 | `stakeholder-map.md` | Stakeholder Map | Prelim / A |
+| `business-model-canvas.md` | Business Model Canvas | B |
 | `business-architecture.md` | Business Architecture | B |
 | `data-architecture.md` | Data/Information Architecture | C |
 | `application-architecture.md` | Application Architecture | C |

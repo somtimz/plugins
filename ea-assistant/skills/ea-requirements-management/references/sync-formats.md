@@ -14,14 +14,17 @@ The EA Assistant can ingest requirements from four source formats. The goal of e
 | `category` | Enum | Yes | FR / NFR / CON / PRI / ASS |
 | `title` | String | Yes | Short title (one line) |
 | `statement` | String | Yes | The full requirement statement |
+| `scope` | Enum | Yes | `Corporate` or `Project` — Corporate requirements are enterprise-wide standards, principles, or regulatory mandates; their content fields are read-only once imported. Project requirements are engagement-specific and fully editable. **Default on sync-import: `Corporate`. Default on manual add: `Project`.** |
 | `rationale` | String | No | Why this requirement exists |
-| `source` | String | No | Origin of the requirement (document, workshop, person) |
+| `source` | String | No | Origin of the requirement (document, workshop, person). Mandatory for Corporate-scoped requirements. |
 | `priority` | Enum | No | Must / Should / Could / Won't (MoSCoW) |
-| `status` | Enum | No | Draft / Agreed / Rejected / Superseded |
+| `status` | Enum | No | Draft / Agreed / Rejected / Superseded / Waived |
 | `owner` | String | No | Person or role responsible for the requirement |
 | `adm_phase` | String | No | TOGAF ADM phase this requirement primarily relates to |
 | `notes` | String | No | Free-text notes |
 | `tags` | List[String] | No | User-defined tags for filtering |
+| `derivedFrom` | List[String] | No | IDs of Corporate requirements this Project requirement responds to or refines |
+| `waiverJustification` | String | No | Required (non-empty) when `status` is `Waived` for Corporate-scoped requirements |
 
 ---
 
@@ -204,11 +207,14 @@ When requirements are imported from an external source into an existing requirem
 
 | Scenario | Default Behaviour |
 |---|---|
-| `id` not found in existing register | New record is created |
+| `id` not found in existing register | New record is created; `scope` set to `Corporate` |
 | `id` found; all fields identical | No change; record is marked as `confirmed` |
 | `id` found; one or more fields differ | Fields are updated; the change is logged in the requirement's change history |
 | `id` found in source but not in register (was deleted externally) | Record is NOT deleted by default; a `sync_deleted` flag is set for review |
 | `id` in register but not in source | Record is retained as-is; no action taken |
+| `id` found with `scope: Corporate`; content field (statement, category, priority) differs in source | Content fields are updated from source (sync is the authority for Corporate content); `status`, `linkedArtifacts`, and `waiverJustification` are **never** overwritten by sync |
+| `id` found with `scope: Corporate` and `status: Waived`; re-sync encounters a different status in source | `status` and `waiverJustification` are preserved locally; log in sync report: "REQ-XXX: Skipped status/justification update — requirement is locally Waived" |
+| `id` found with `scope: Project`; incoming source has `scope: Corporate` | Flag as **scope reclassification conflict**: prompt user to confirm before making content fields read-only |
 
 ### Conflict Resolution
 
@@ -228,3 +234,5 @@ All imported requirements are validated against the following rules:
 | `priority` must be a valid MoSCoW value | Warning | Unknown priority values are imported as-is and flagged |
 | `id` must be unique within the import batch | Warning | Duplicate IDs in the source result in only the last occurrence being imported; earlier occurrences are logged |
 | `id` should follow the [CATEGORY]-[NNN] pattern | Info | IDs not matching the pattern are accepted but flagged for review |
+| `scope` must be `Corporate` or `Project` if present | Warning | Unknown scope values are imported as `Corporate` (safe default for sync-imported records) and flagged |
+| `status: Waived` requires non-empty `waiverJustification` for Corporate-scoped requirements | Error | Waived Corporate requirements with no justification are rejected; set status to `Draft` and flag for review |
