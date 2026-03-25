@@ -330,3 +330,58 @@ class TestConfig:
         with patch("ui._DEFAULT_CONFIG", str(cfg_path)):
             resp = client.put("/api/config", json=payload)
         assert resp.status_code == 422
+
+
+# ---------------------------------------------------------------------------
+# GET /api/status
+# ---------------------------------------------------------------------------
+
+class TestStatus:
+    def test_status_ok_no_config(self, client, tmp_path):
+        with patch("ui._DEFAULT_CONFIG", str(tmp_path / "missing.toml")):
+            resp = client.get("/api/status")
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["status"] == "ok"
+        assert data["config_present"] is False
+        assert data["vector_store"]["ok"] is False
+        assert data["active_run"] is None
+
+    def test_status_ok_with_config_and_chroma(self, client, valid_config_toml):
+        mock_collection = MagicMock()
+        mock_collection.count.return_value = 42
+        mock_client = MagicMock()
+        mock_cfg = MagicMock()
+        mock_cfg.vector_store.path = ".rag-store"
+        mock_cfg.vector_store.collection = "docs"
+        mock_cfg.embedding.model = "text-embedding-3-small"
+
+        with patch("ui._DEFAULT_CONFIG", str(valid_config_toml)), \
+             patch("ui.load_config", return_value=mock_cfg), \
+             patch("ui.chromadb.PersistentClient", return_value=mock_client), \
+             patch("ui.get_or_create_collection", return_value=mock_collection):
+            resp = client.get("/api/status")
+
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["status"] == "ok"
+        assert data["config_present"] is True
+        assert data["vector_store"]["ok"] is True
+        assert data["vector_store"]["doc_count"] == 42
+
+    def test_status_chroma_failure_is_graceful(self, client, valid_config_toml):
+        with patch("ui._DEFAULT_CONFIG", str(valid_config_toml)), \
+             patch("ui.chromadb.PersistentClient", side_effect=Exception("chroma down")):
+            resp = client.get("/api/status")
+
+        assert resp.status_code == 200
+        data = resp.get_json()
+        assert data["status"] == "ok"
+        assert data["vector_store"]["ok"] is False
+
+    def test_status_reflects_active_run(self, client, tmp_path):
+        ui._active_run = {"run_id": "r1", "status": "running"}
+        with patch("ui._DEFAULT_CONFIG", str(tmp_path / "missing.toml")):
+            resp = client.get("/api/status")
+        data = resp.get_json()
+        assert data["active_run"]["run_id"] == "r1"

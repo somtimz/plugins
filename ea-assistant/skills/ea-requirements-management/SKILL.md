@@ -43,7 +43,7 @@ The `requirementsRepoPath` in `engagement.json` points to a shared folder (curre
 | **ID** | REQ-001 |
 | **Scope** | Corporate 🔒 |
 | **Statement** | {{requirement_statement}} |
-| **Category** | Functional / Non-Functional / Constraint / Principle |
+| **Category** | Functional / Non-Functional / Constraint / Principle / Policy / Standard |
 | **Priority** | High / Medium / Low |
 | **Source** | {{source_document_or_stakeholder}} |
 | **Status** | Draft / Approved / Deferred / Waived / Rejected |
@@ -61,7 +61,7 @@ The `requirementsRepoPath` in `engagement.json` points to a shared folder (curre
 | **ID** | REQ-00N |
 | **Scope** | Project |
 | **Statement** | {{requirement_statement}} |
-| **Category** | Functional / Non-Functional / Constraint / Principle |
+| **Category** | Functional / Non-Functional / Constraint / Principle / Policy / Standard |
 | **Priority** | High / Medium / Low |
 | **Source** | {{source_stakeholder_or_document}} |
 | **Status** | Draft / Approved / Deferred / Rejected |
@@ -84,7 +84,7 @@ The `requirementsRepoPath` in `engagement.json` points to a shared folder (curre
       "id": "REQ-001",
       "title": "",
       "statement": "",
-      "category": "Functional | Non-Functional | Constraint | Principle | Assumption",
+      "category": "Functional | Non-Functional | Constraint | Principle | Policy | Standard | Assumption",
       "scope": "Corporate | Project",
       "status": "Draft | Approved | Deferred | Rejected | Waived",
       "priority": "High | Medium | Low",
@@ -100,6 +100,32 @@ The `requirementsRepoPath` in `engagement.json` points to a shared folder (curre
 ```
 
 **Fields added vs. previous schema:** `statement`, `category`, `scope`, `source`, `derivedFrom`, `waiverJustification`. `Waived` added to status enum.
+
+## Category-Specific Guidance
+
+Each category captures different information. The `description` field stores category-specific structured metadata:
+
+| Category | Purpose | Extra fields in `description` |
+|---|---|---|
+| **Functional** | Capabilities the architecture must provide | Plain text description |
+| **Non-Functional** | Quality attributes (performance, availability, security) | Plain text description |
+| **Constraint** | Fixed limits — budget, technology, regulatory — that restrict design choices | Plain text description |
+| **Principle** | Normative design statement governing all decisions | `Rationale: … \n\n Implications: …` |
+| **Policy** | Organisation-wide rules that architecture must comply with | `Owner: … / Effective: … / Enforcement: Mandatory\|Advisory` |
+| **Standard** | Prescribed technical or process standards (internal or external) | `Version: … / Domain: … / Enforcement: Mandatory\|Advisory` |
+| **Assumption** | Stated beliefs about unknowns, held pending confirmation | Plain text description |
+
+**Policy vs. Standard vs. Principle — definitions to use when classifying:**
+
+| Term | Answers | Typical source | Example |
+|------|---------|----------------|---------|
+| **Policy** | *What are we required to comply with?* | Executive directive, legal, regulatory body | "All customer PII must remain within the EU" |
+| **Standard** | *How must we implement it?* | Enterprise architecture team, industry body | "All APIs must conform to REST API Design Standard v2.1" |
+| **Principle** | *What values guide every decision?* | Architecture Review Board, EA team | "Prefer open standards over proprietary solutions" |
+
+When a user provides an item that could be any of these, ask a clarifying question rather than guessing. Common confusions:
+- A policy with technical detail is often a standard (e.g., "must use TLS 1.3" → Standard, not Policy).
+- A principle stated as a rule is often a policy (e.g., "all data must be encrypted at rest" → Policy if it has an owner/enforcer, Principle if it is a design value).
 
 ## Corporate Requirement Edit Protection
 
@@ -184,7 +210,7 @@ The Architecture Requirements phase runs in two modes:
 **Initial capture (before Phase A):**
 1. Sync from requirements repo — all synced records are automatically tagged `scope: "Corporate"`
 2. Conduct requirements interview using `ea-interviewer` agent
-3. Classify each requirement (functional, non-functional, constraint, principle)
+3. Classify each item (functional, non-functional, constraint, principle, policy, standard, assumption)
 4. Assign Zachman cell classification
 5. Set initial priority and status
 
