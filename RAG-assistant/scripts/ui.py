@@ -705,6 +705,37 @@ def _chat_stream(message: str, history: list, cfg):
 
 
 # ---------------------------------------------------------------------------
+# Status
+# ---------------------------------------------------------------------------
+
+@app.get("/api/status")
+def get_status():
+    config_path = Path(_DEFAULT_CONFIG)
+    config_present = config_path.exists()
+
+    chroma_ok = False
+    doc_count = 0
+    if config_present:
+        try:
+            cfg = load_config(_DEFAULT_CONFIG)
+            chroma_client = chromadb.PersistentClient(path=cfg.vector_store.path)
+            collection = get_or_create_collection(
+                chroma_client, cfg.vector_store.collection, cfg.embedding.model
+            )
+            doc_count = collection.count()
+            chroma_ok = True
+        except Exception:
+            pass
+
+    return jsonify({
+        "status": "ok",
+        "config_present": config_present,
+        "vector_store": {"ok": chroma_ok, "doc_count": doc_count},
+        "active_run": _active_run,
+    })
+
+
+# ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
 
