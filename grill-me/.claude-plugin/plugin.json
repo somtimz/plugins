@@ -1,0 +1,10 @@
+{
+  "name": "grill-me",
+  "version": "0.1.0",
+  "description": "Seven relentless interview skills for stress-testing strategies, decisions, and designs — from depth-first clarification to board simulation, pre-mortem, decision memo extraction, and design critique.",
+  "author": {
+    "name": "Costa Pissaris",
+    "email": "cpissaris@gmail.com"
+  },
+  "keywords": ["strategy", "decision-making", "critical-thinking", "interview", "stress-test"]
+}
