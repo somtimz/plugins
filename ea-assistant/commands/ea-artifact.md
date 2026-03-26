@@ -45,9 +45,20 @@ Offer: create a missing artifact, view an existing one, start an interview.
 ### Mode: `view [artifact-name]`
 
 1. Find the artifact file in `artifacts/`
-2. Display the artifact content
-3. Show review status and any open review comments from `{artifact}.review.md`
-4. Offer: edit via interview, start review, export to Word
+2. **Run the Compliance Check** (see `skills/ea-artifact-templates/references/compliance-check.md`):
+   - If all checks pass → display artifact with a `✅ Compliant` badge.
+   - If failures exist → display a compliance notice above the artifact content:
+     ```
+     ⚠️ Compliance gaps detected ({N} issues). Options:
+       1. Achieve compliance now
+       2. Accept as-is (use with defaults)
+       3. View compliance details
+       4. Continue viewing (no action)
+     ```
+     If the user selects 4 or presses Enter → display the artifact as-is without changes.
+3. Display the artifact content
+4. Show review status and any open review comments from `{artifact}.review.md`
+5. Offer: edit via interview, start review, export to Word, achieve compliance (if non-compliant)
 
 ### Artifact Naming
 

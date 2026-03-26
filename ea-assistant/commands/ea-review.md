@@ -26,8 +26,15 @@ Select artifact to review:
 ### Load Artifact for Review
 
 1. Read the artifact file from `artifacts/{artifact-id}.md`
-2. Read the review file `artifacts/{artifact-id}.review.md` if it exists
-3. Display the artifact content with existing review comments inline (if any)
+2. **Run the Compliance Check** (see `skills/ea-artifact-templates/references/compliance-check.md`):
+   - Apply Tier 1, Tier 2, and Tier 3 checks for this artifact type.
+   - If all pass → continue silently.
+   - If any fail → present the compliance prompt before showing review actions:
+     - **Option 1 (Achieve compliance):** apply all remediations preserving content, then load for review.
+     - **Option 2 (Accept as-is):** apply minimal frontmatter defaults, set `complianceNote: accepted-non-standard`, then load for review. Add an informational banner at the top of the review display: `ℹ️ This artifact has {N} compliance gap(s) accepted as-is. Non-standard fields and missing sections will not affect the review workflow.`
+     - **Option 3 (View details):** display full compliance report, then re-present Options 1 and 2.
+3. Read the review file `artifacts/{artifact-id}.review.md` if it exists
+4. Display the artifact content with existing review comments inline (if any)
 
 ### Review Actions
 

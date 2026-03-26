@@ -26,6 +26,7 @@ Display a comprehensive status dashboard for all EA engagements.
    - Count artifacts by status: Draft, In Review, Approved, Needs Revision
    - Each phase status from the `phases` object
    - `optOuts[]` — count entries by type: `question` and `artifact`
+   - For each artifact in `artifacts[]`, check the artifact file frontmatter for `complianceNote: accepted-non-standard` — count these as non-standard artifacts
 
    **Backward compatibility**: If `engagementType`, `architectureDomains`, `targetEndDate`, or `optOuts` fields are missing, apply defaults: type = null (display "—"), domains = all four, targetEndDate = null (display "—"), optOuts = [] (display nothing).
 
@@ -44,6 +45,7 @@ Display a comprehensive status dashboard for all EA engagements.
       Dates         : {startDate} → {targetEndDate or "—"}
       Last Modified : {lastModified}
       ⊘ Opt-outs    : {N artifact opt-outs, N question opt-outs — omit this line entirely if optOuts[] is empty}
+      ⚠️ Non-standard: {N} artifact(s) accepted as-is — run /ea-review to remediate (omit if none)
 
    [repeat for each engagement]
 

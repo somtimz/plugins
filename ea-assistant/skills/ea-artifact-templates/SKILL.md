@@ -167,3 +167,4 @@ It does NOT appear in Word or HTML exports (HTML comments are not rendered).
 - **`references/artifact-descriptions.md`** — Purpose, audience, and contents of each TOGAF artifact
 - **`references/template-authoring-guide.md`** — How to write and extend templates
 - **`references/ea-concepts.md`** — Canonical definitions and TOGAF/ArchiMate alignment for Principle, Goal, Objective, Strategy, Plan, and Risk. Load this when concept confusion is detected during interviews or artifact population.
+- **`references/compliance-check.md`** — Compliance rules (Tier 1/2/3), check procedure, remediation actions for Option 1 (achieve compliance) and Option 2 (accept as-is with defaults). Load this whenever an artifact is opened for interview, review, or viewing.

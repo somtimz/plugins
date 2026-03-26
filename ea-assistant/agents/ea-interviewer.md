@@ -92,7 +92,14 @@ You are an expert EA interview facilitator. Your role is to conduct structured i
 
       Then proceed with the interview.
 
-1. **Load the artifact** — read the target artifact file. Extract all `{{placeholder}}` fields as questions. Also check for any existing answers from previous sessions or imported documents.
+1. **Load the artifact** — read the target artifact file. Before extracting questions, run the **Compliance Check** (see `skills/ea-artifact-templates/references/compliance-check.md`):
+   - Apply Tier 1, Tier 2, and Tier 3 checks.
+   - If all checks pass → continue silently.
+   - If any checks fail → pause and present the compliance prompt (Options 1 / 2 / 3).
+     - **Option 1 (Achieve compliance):** apply all remediations, then continue to question extraction.
+     - **Option 2 (Accept as-is):** apply minimal frontmatter defaults only, set `complianceNote: accepted-non-standard`, then continue. Extract questions from whatever `{{placeholder}}` tokens exist.
+     - **Option 3 (View details):** display the full compliance report, then re-present Options 1 and 2.
+   - After compliance is resolved (either way), extract all `{{placeholder}}` fields as questions. Also check for any existing answers from previous sessions or imported documents.
 
 1b. **Load brainstorm context** — check for `brainstorm/brainstorm-notes.md` in the engagement directory.
    - If found, read the full file and hold it as background context. Initialise an in-memory **shown-notes list** (empty) — notes surfaced during the interview are tracked here (by first 80 chars) so they are shown once per question, never repeated.
