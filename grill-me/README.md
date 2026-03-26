@@ -14,6 +14,8 @@ A Claude Code plugin for stress-testing strategies, decisions, and designs throu
 | `grill-me-design` | Critiquing service, org, UX, or concept design against design principles |
 | `grill-me-software-design` | Deep technical review of software architecture — patterns, coupling, APIs, data models, testability, scalability |
 | `grill-me-infra-design` | Deep technical review of infrastructure — topology, resilience, blast radius, cost, security boundaries, observability |
+| `grill-me-artifact` | Section-by-section review of a structured architecture artifact — completeness, traceability, consistency |
+| `grill-me-diagram` | Visual design review of architecture diagrams — topology, missing components, anti-patterns, readability |
 | `grill-me-boardroom-strategy` | Hybrid: depth + board pressure + pre-mortem — best for senior leadership work |
 
 ### When to use which
@@ -28,6 +30,8 @@ A Claude Code plugin for stress-testing strategies, decisions, and designs throu
 | Service, UX, or org design quality | `grill-me-design` |
 | Software architecture review | `grill-me-software-design` |
 | Infrastructure and reliability review | `grill-me-infra-design` |
+| Structured artifact quality check | `grill-me-artifact` |
+| Architecture diagram review | `grill-me-diagram` |
 | Leadership work (strategy + board + risk) | `grill-me-boardroom-strategy` |
 
 ## Installation

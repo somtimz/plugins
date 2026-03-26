@@ -30,7 +30,7 @@ Or install a single plugin directly:
 
 ### OpenCode — install skills
 
-OpenCode has no marketplace mechanism, but all 21 skills are format-compatible. Clone the repo and run the install script to symlink skills into OpenCode's discovery path:
+OpenCode has no marketplace mechanism, but all 23 skills are format-compatible. Clone the repo and run the install script to symlink skills into OpenCode's discovery path:
 
 ```bash
 git clone https://github.com/somtimz/plugins.git
@@ -65,6 +65,8 @@ The script symlinks all skills into `~/.config/opencode/skills/`. Set `OPENCODE_
 | `grill-me-design` | grill-me |
 | `grill-me-software-design` | grill-me |
 | `grill-me-infra-design` | grill-me |
+| `grill-me-artifact` | grill-me |
+| `grill-me-diagram` | grill-me |
 | `grill-me-boardroom-strategy` | grill-me |
 
 ## Repository Structure

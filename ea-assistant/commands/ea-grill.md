@@ -54,6 +54,8 @@ The `--skill` argument accepts these short names (mapped to the full `grill-me-*
 | `design` | `grill-me-design` | Design critique: user needs, failure points, edge cases, incentives, scalability (service/UX/org) |
 | `software-design` | `grill-me-software-design` | Software architecture: patterns, coupling, APIs, data models, testability, operational readiness |
 | `infra-design` | `grill-me-infra-design` | Infrastructure: topology, resilience, blast radius, cost, security boundaries, observability |
+| `artifact` | `grill-me-artifact` | Structured artifact review: section-by-section completeness, traceability chains, consistency |
+| `diagram` | `grill-me-diagram` | Visual design review: topology, missing components, anti-patterns, readability |
 | `boardroom-strategy` | `grill-me-boardroom-strategy` | Hybrid: depth + board pressure + pre-mortem (most thorough) |
 
 ---
