@@ -25,8 +25,9 @@ Display a comprehensive status dashboard for all EA engagements.
    - `startDate`, `targetEndDate` (display "—" if missing or null)
    - Count artifacts by status: Draft, In Review, Approved, Needs Revision
    - Each phase status from the `phases` object
+   - `optOuts[]` — count entries by type: `question` and `artifact`
 
-   **Backward compatibility**: If `engagementType`, `architectureDomains`, or `targetEndDate` fields are missing (pre-v0.2.0 engagements), apply defaults: type = null (display "—"), domains = all four, targetEndDate = null (display "—").
+   **Backward compatibility**: If `engagementType`, `architectureDomains`, `targetEndDate`, or `optOuts` fields are missing, apply defaults: type = null (display "—"), domains = all four, targetEndDate = null (display "—"), optOuts = [] (display nothing).
 
 4. **Display the dashboard.** For each engagement, show:
 
@@ -42,6 +43,7 @@ Display a comprehensive status dashboard for all EA engagements.
       ADM Progress  : Prelim {i} | Req {i} | A {i} | B {i} | C-Data {i} | C-App {i} | D {i} | E {i} | F {i} | G {i} | H {i}
       Dates         : {startDate} → {targetEndDate or "—"}
       Last Modified : {lastModified}
+      ⊘ Opt-outs    : {N artifact opt-outs, N question opt-outs — omit this line entirely if optOuts[] is empty}
 
    [repeat for each engagement]
 

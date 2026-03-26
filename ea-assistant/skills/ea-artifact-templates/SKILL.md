@@ -39,9 +39,12 @@ Guidance explaining what a section means is marked with HTML comments so it is i
 | Answered | Value written directly |
 | Not answered | `⚠️ Not answered` |
 | Not applicable | `➖ Not applicable` |
+| Opted out | `⊘ Opted out` or `⊘ Opted out — {reason}` |
 | AI-suggested draft | `> 🤖 **AI Draft — Review Required**` blockquote |
 | Default accepted | value + ` ✓ Default accepted` |
 | Source document | value + ` 📎 Source: uploads/{filename}` |
+
+**Opted out vs. Not answered:** `⊘ Opted out` is an explicit, deliberate choice — the user decided this question or artifact is out of scope for their needs. The reason is recorded in `engagement.json` under `optOuts[]` and surfaced in status reports. `⚠️ Not answered` is a temporary skip — the field may still be filled in later.
 
 ### Governance State Markers (Appendix A3 — Decision Log)
 

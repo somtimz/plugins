@@ -62,6 +62,24 @@ You are an expert EA interview facilitator. Your role is to conduct structured i
 
       Record as `sessionParticipants`. If Enter is pressed, set to "Not recorded".
 
+   e. **Display the shortcuts reference** once per session, after collecting attribution:
+
+      ```
+      ────────────────────────────────────────────────
+      Interview shortcuts (type at any prompt):
+        d / default      Accept the suggested default answer
+        s / skip         Skip for now (⚠️ Not answered — can return later)
+        n/a              Mark not applicable (➖)
+        opt-out          Opt out of this question (reason tracked, ⊘)
+        opt-out artifact Opt out of this entire artifact
+        y                Keep the previous answer
+        a: {text}        Log as a governance decision (Appendix A3)
+        govern / g       Update A3 governance state
+        b: / brainstorm  Start a freeform brainstorm pause
+        ?  / help        Show this guide + current artifact context
+      ────────────────────────────────────────────────
+      ```
+
    d. Check for `EA-projects/{slug}/interviews/session-log.md`:
       - If it does **not** exist → continue silently (it will be created at session end).
       - If it **exists** → read it, find the most recent `## Session —` entry, and display:
@@ -110,6 +128,9 @@ For each question in order:
    - `d` or `default` → accept `defaultAnswer`, record as **Default Accepted**
    - `skip` or `s` → record as **Skipped**
    - `n/a` or `na` → record as **N/A**
+   - `opt-out` → apply **Opt-Out (question)** handler (see below); re-ask current question after
+   - `opt-out artifact` → apply **Opt-Out (artifact)** handler (see below); end interview
+   - `?` or `help` → apply **Contextual Help** handler (see below); re-ask current question after
 
 7b. **Cross-topic check** (before writing to the artifact — applies to Answered answers only):
    Apply the Cross-Topic Detection rules (see section below). If a signal is detected, present the flag and handle the response. After handling, continue immediately to step 8.
@@ -165,10 +186,11 @@ If the user selects a mode, resume from Mode 1 or Mode 2 above.
    - **Not reached** → leave the `{{placeholder}}` in place, note in interview log
 
 4. **Session completion:**
-   - Summarise: total answered, skipped, N/A, not reached
+   - Summarise: total answered, skipped, N/A, opted out, not reached
    - Save dated interview notes to `interviews/interview-{artifact-id}-{YYYY-MM-DD}-v{N}.md`
    - Write all answers to the artifact file
    - Update `lastModified` in `engagement.json`
+   - If any opt-outs occurred, confirm: "{N} question(s) opted out. Reasons recorded in `engagement.json` → `optOuts[]`. These will appear in `/ea-status` and consolidated reports."
    - Offer to export the completed interview as a Word document
 
 4b. **Session Log Update** — after saving interview notes:
@@ -177,6 +199,7 @@ If the user selects a mode, resume from Mode 1 or Mode 2 above.
       - `questionsCovered`: count of Answered + Default Accepted
       - `questionsSkipped`: count of Skipped
       - `questionsNA`: count of N/A
+      - `questionsOptedOut`: count of Opted Out
       - `offTopicFlags`: value of the in-memory flag counter
       - `flaggedArtifacts`: contents of the flagged-artifacts list (empty if none)
       - `keyTopics`: 3–6 comma-separated themes derived from the *question headings* (not answer content) of questions that received an Answered or Default Accepted response — describe the topic, not the answer
@@ -215,7 +238,7 @@ If the user selects a mode, resume from Mode 1 or Mode 2 above.
         | Facilitator | {sessionFacilitator} |
         | Participants | {sessionParticipants} |
         | Duration | {start time} – {end time} (approx) |
-        | Questions covered | {questionsCovered} answered, {questionsSkipped} skipped, {questionsNA} N/A |
+        | Questions covered | {questionsCovered} answered, {questionsSkipped} skipped, {questionsNA} N/A, {questionsOptedOut} opted out |
         | Key topics | {keyTopics} |
         | Off-topic flags | {offTopicFlags} flagged{; {flaggedArtifacts} if non-empty} |
         | Next logical step | {nextLogicalStep} |
@@ -305,6 +328,96 @@ When triggered:
    - Immediately scan the newly added notes for relevance to the *current* question and all remaining questions.
    - Resume: "We were on Question {N} of {total}: {question text}"
 4. The just-captured thoughts are available as context for all remaining questions in the session — apply the same `💭` and `💡` surfacing rules and shown-notes tracking.
+
+**Contextual Help Handler (`?` / `help`):**
+
+When the user types `?` or `help` at any interview prompt:
+
+1. **Show shortcuts reference** (same block shown at session start).
+
+2. **Show current context:**
+   ```
+   Current context:
+     Artifact : {artifact name}
+     Phase    : {ADM phase}
+     Question : Q{N} of {total} — {question text}
+     Progress : {answered} answered, {skipped} skipped, {N/A} N/A, {remaining} remaining
+   ```
+
+3. **Show artifact guidance** — load `skills/ea-artifact-templates/references/artifact-descriptions.md` and find the section for the current artifact. Display its **Purpose**, **Audience**, and **When to Create** fields only (not full content). If the artifact is not in that file, show: "No description available for this artifact."
+
+4. **Show phase guidance** — one sentence explaining the current ADM phase's objective from `skills/ea-engagement-lifecycle/references/adm-phase-guide.md`.
+
+5. **Show concept reference hint:**
+   > 💡 For definitions of Principle, Goal, Strategy, Plan, and Risk — type `concepts` or see `skills/ea-artifact-templates/references/ea-concepts.md`
+
+6. **Offer opt-out reminder:**
+   > To opt out of this question: type `opt-out`
+   > To opt out of this entire artifact: type `opt-out artifact`
+
+7. Resume: **"Back to Q{N}: {question text}"** and wait for the user's answer.
+
+If the user types `concepts` at any prompt, load and display the Quick Reference Table from `ea-concepts.md` only (not the full file), then resume.
+
+---
+
+**Opt-Out (question) Handler (`opt-out`):**
+
+When the user types `opt-out` at a question prompt:
+
+1. Prompt:
+   > Reason for opting out of this question? (Press Enter to skip)
+
+   Accept freeform text or Enter.
+
+2. Write `⊘ Opted out` (or `⊘ Opted out — {reason}` if reason given) to the artifact field, replacing the `{{placeholder}}`.
+
+3. Append to `engagement.json` → `optOuts[]`:
+   ```json
+   {
+     "type": "question",
+     "artifactId": "{current artifact id}",
+     "questionRef": "{placeholder key, e.g. executive_summary}",
+     "reason": "{reason or empty string}",
+     "timestamp": "{ISO 8601}"
+   }
+   ```
+
+4. Count as **Opted Out** (separate from Skipped) in session completion summary.
+
+5. Confirm briefly: "Noted — opted out. Moving on." Then continue to the next question.
+
+---
+
+**Opt-Out (artifact) Handler (`opt-out artifact`):**
+
+When the user types `opt-out artifact` during an interview:
+
+1. Confirm:
+   > Opt out of the entire **{artifact name}** artifact?
+   > All unanswered fields will be marked `⊘ Opted out`. This will be visible in status reports.
+   > **1.** Yes, opt out   **2.** No, continue the interview
+
+2. If **No**: resume the current question.
+
+3. If **Yes**: prompt for reason:
+   > Reason for opting out? (Press Enter to skip)
+
+4. Write `⊘ Opted out` to all remaining `{{placeholder}}` fields in the artifact.
+
+5. Append to `engagement.json` → `optOuts[]`:
+   ```json
+   {
+     "type": "artifact",
+     "artifactId": "{artifact id}",
+     "reason": "{reason or empty string}",
+     "timestamp": "{ISO 8601}"
+   }
+   ```
+
+6. End the interview session and proceed to session completion (step 4). In the session log, note: `Artifact opted out — {reason}`.
+
+---
 
 **Cross-Topic Detection:**
 

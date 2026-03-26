@@ -72,7 +72,7 @@ You have existing engagements. Common next steps:
 |---|---|
 | `/ea-new` | Create a new engagement |
 | `/ea-open` | Open, edit, archive, or delete an engagement |
-| `/ea-status` | Portfolio dashboard — progress, artifacts, phases |
+| `/ea-status` | Portfolio dashboard — progress, artifacts, phases, opt-outs |
 | `/ea-phase [phase]` | Start, edit, or resume an ADM phase |
 | `/ea-artifact [action]` | Create or list artifacts |
 | `/ea-interview [mode]` | Stakeholder interviews (artifact or phase mode) |
@@ -80,8 +80,32 @@ You have existing engagements. Common next steps:
 | `/ea-generate [artifact] [format]` | Export artifact as Word, PPTX, or Mermaid |
 | `/ea-review [artifact]` | Review and assess an artifact |
 | `/ea-requirements [action]` | Manage architecture requirements |
+| `/ea-decisions [options]` | Generate Decision Register from all A3 decision logs |
 | `/ea-publish` | Merge artifacts into a consolidated report |
 | `/ea-help` | This guide |
+
+### Interview Shortcuts
+
+Type these at any interview prompt:
+
+| Shortcut | What it does |
+|---|---|
+| `d` / `default` | Accept the suggested default answer |
+| `s` / `skip` | Skip for now — field marked ⚠️ Not answered (can revisit) |
+| `n/a` | Mark not applicable — field marked ➖ |
+| `opt-out` | Opt out of this question — field marked ⊘, reason tracked |
+| `opt-out artifact` | Opt out of the entire artifact — all fields marked ⊘ |
+| `y` | Keep the existing/previous answer |
+| `a: {text}` | Log as a governance decision (writes to Appendix A3) |
+| `govern` / `g` | Update governance state of an A3 decision row |
+| `b:` / `brainstorm` | Start a freeform brainstorm pause |
+| `resume` / `done` | End brainstorm and return to the interview |
+| `?` / `help` | Show this guide + current artifact context and purpose |
+| `concepts` | Show the EA concepts quick reference (Principle/Goal/Strategy/Plan/Risk) |
+
+**Opt-out vs. Skip:**
+- **Skip** (`s`) means "I'll come back to this" — temporary, does not appear in reports as a concern
+- **Opt-out** (`opt-out`) means "I am deliberately not doing this" — permanent, tracked in `engagement.json`, flagged in `/ea-status` and consolidated reports
 
 ### Tips
 
@@ -94,6 +118,8 @@ You have existing engagements. Common next steps:
   a full consolidated document.
 • Upload documents to `EA-projects/{name}/uploads/` and the
   requirements analyst agent will extract structured requirements.
+• Type `?` at any interview prompt for contextual help including
+  the artifact's purpose, value, and guidance on the current question.
 • Ask "how does architecture governance work" for a full explanation of
   the governance structure, cascade, roles, and TOGAF tool mapping.
 ```

@@ -33,7 +33,10 @@ Status legend:
 - ✅ Approved — signed off, ready for publication
 - 🔄 In Review / Needs Revision — work in progress
 - ✏️  Draft — early stage, not yet reviewed
+- ⊘ Opted out — explicitly excluded by user (included in list but flagged)
 - ⬜ Not created — excluded automatically
+
+**Opt-out flagging:** Read `engagement.json` → `optOuts[]`. If any artifact-level opt-outs exist, add them to the selection list with an `⊘ Opted out` marker and a note: `"{reason}"`. They are excluded from the consolidated document by default — the user may choose to include a placeholder section for each. If any question-level opt-outs exist within included artifacts, they appear inline in the artifact content as `⊘ Opted out — {reason}`.
 
 > **Tip:** To export a single artifact, use `/ea-generate [artifact-name] [format]` instead.
 
@@ -115,6 +118,9 @@ Include immediately after the cover page metadata, before the Table of Contents:
 If any artifact is not Approved, add this note below the table:
 > ⚠️ This document contains sections that have not been approved. Review each section's status header before distributing.
 
+If any opt-outs exist (artifact or question level), add:
+> ⊘ This document contains opted-out items. Fields or artifacts marked ⊘ were explicitly excluded by the engagement team. See `engagement.json → optOuts[]` for the full audit trail with reasons and timestamps.
+
 #### Each Artifact Section
 
 Open each artifact section with a status header showing its individual status and date:
@@ -161,5 +167,7 @@ If a `.docx` reference template does not exist, run pandoc without `--reference-
 Report:
 - Output file path(s) and sizes
 - Number of artifacts included
-- Any artifacts excluded and why (not created, or deselected)
+- Any artifacts excluded and why (not created, deselected, or opted out)
+- If opted-out artifacts were excluded: "⊘ {N} artifact(s) opted out and excluded: {names}. Run `/ea-open` to review or reverse opt-outs."
+- If opted-out questions appear in included artifacts: "⊘ {N} question(s) opted out within included artifacts — marked inline."
 - Overall document status

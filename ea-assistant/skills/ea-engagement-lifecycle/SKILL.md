@@ -94,7 +94,8 @@ EA-projects/
     "G": { "status": "Not Started", "startedAt": null, "completedAt": null },
     "H": { "status": "Not Started", "startedAt": null, "completedAt": null }
   },
-  "artifacts": []
+  "artifacts": [],
+  "optOuts": []
 }
 ```
 
@@ -362,6 +363,37 @@ Track artifacts in `engagement.json` under the `artifacts` array:
 
 Artifact status: `Draft` | `In Review` | `Approved` | `Needs Revision`
 Review status: `Not Reviewed` | `In Review` | `Approved` | `Needs Revision`
+
+**`optOuts[]` schema** — records every explicit opt-out decision for reporting and audit:
+
+```json
+{
+  "optOuts": [
+    {
+      "type": "question",
+      "artifactId": "architecture-vision",
+      "questionRef": "executive_summary",
+      "reason": "Not yet available — revisit in Phase A review",
+      "timestamp": "ISO 8601"
+    },
+    {
+      "type": "artifact",
+      "artifactId": "business-model-canvas",
+      "reason": "Assessment-only engagement — BMC not in scope",
+      "timestamp": "ISO 8601"
+    }
+  ]
+}
+```
+
+Fields:
+- `type` — `"question"` or `"artifact"`
+- `artifactId` — matches the artifact `id` field in `artifacts[]`
+- `questionRef` — placeholder key (question opt-outs only); e.g. `"executive_summary"`
+- `reason` — user-supplied reason, or `""` if none given
+- `timestamp` — ISO 8601 datetime of the opt-out
+
+Opt-outs accumulate across sessions; they are never automatically removed. Use `/ea-open` → Edit artifact status to reverse an opt-out (change the artifact back to Draft and remove the `optOuts[]` entry manually if needed).
 
 **Decision Register** is a special artifact type: it is generated from Appendix A3 data across all artifacts, not from interview placeholders. When registered in `engagement.json`, use:
 
