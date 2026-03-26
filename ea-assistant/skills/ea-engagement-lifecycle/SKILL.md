@@ -1,7 +1,7 @@
 ---
 name: EA Engagement Lifecycle
 description: This skill should be used when the user asks to "start an EA engagement", "manage an EA project", "set up a new architecture engagement", "what phase are we in", "advance the ADM", "continue the engagement", "resume an EA project", or when working within any TOGAF ADM phase. Provides end-to-end lifecycle guidance for Enterprise Architecture engagements using TOGAF 10 as the backbone.
-version: 0.4.0
+version: 0.5.0
 ---
 
 # EA Engagement Lifecycle
@@ -362,6 +362,24 @@ Track artifacts in `engagement.json` under the `artifacts` array:
 
 Artifact status: `Draft` | `In Review` | `Approved` | `Needs Revision`
 Review status: `Not Reviewed` | `In Review` | `Approved` | `Needs Revision`
+
+**Decision Register** is a special artifact type: it is generated from Appendix A3 data across all artifacts, not from interview placeholders. When registered in `engagement.json`, use:
+
+```json
+{
+  "id": "decision-register-{YYYY-MM-DD}",
+  "name": "Decision Register ({YYYY-MM-DD})",
+  "phase": "All",
+  "file": "artifacts/decision-register-{YYYY-MM-DD}.md",
+  "reviewFile": "artifacts/decision-register-{YYYY-MM-DD}.review.md",
+  "status": "Draft",
+  "createdAt": "{ISO 8601}",
+  "lastModified": "{ISO 8601}",
+  "reviewStatus": "Not Reviewed"
+}
+```
+
+Multiple decision registers may exist (one per generation date). All are listed in `engagement.json`. `/ea-decisions status` uses the most recently generated one for its summary.
 
 ## Content Policy
 

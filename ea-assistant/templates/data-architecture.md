@@ -173,4 +173,20 @@ lastModified: {{YYYY-MM-DD}}
 
 ---
 
+---
+
+## Appendix A3 — Decision Log
+
+<!-- GUIDANCE:
+  Record all decisions made during the development of this artifact.
+  Use /ea-decisions to aggregate this table across all artifacts into a Decision Register.
+-->
+
+| Item | Value | State | Captured By | Owner | Authority | Domain | Cost | Impact | Risk | Subject | Date |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| *(no decisions recorded)* | — | — | — | — | — | — | — | — | — | — | — |
+
+---
+
 *This document was created using the EA Assistant plugin.*
+*Use `/ea-decisions` to generate a cross-artifact Decision Register from all A3 tables.*

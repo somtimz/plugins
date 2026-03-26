@@ -23,6 +23,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Requirements analysis** — extract structured requirements from uploaded documents, map to ADM phases and Zachman cells
 - **Stakeholder interviews** — chat-based or interactive web form; dated and versioned notes
 - **Diagram support** — Mermaid, Graphviz (.dot), Draw.io (.drawio), ArchiMate notation
+- **Decision Register** — cross-artifact decision tracking with governance states (Provisional → Verified/Voted/Fiat), owner attribution, and on-demand registers tailored by audience, domain, authority, cost, impact, or risk
 - **Review & consistency** — per-artifact review workflow; cross-artifact consistency checking
 - **Consolidated reporting** — merge all artifacts into a single Markdown or Word document
 - **Document ingestion** — upload existing docs and diagrams to inform artifacts
@@ -68,6 +69,7 @@ requirementsRepoPath: /path/to/shared/requirements-folder
 | `/ea-generate [artifact] [format]` | Export an artifact as Word (.docx), PowerPoint (.pptx), or Mermaid diagram |
 | `/ea-review [artifact]` | Open an artifact for review and assessment |
 | `/ea-requirements [action]` | Manage architecture requirements |
+| `/ea-decisions [options]` | Generate a Decision Register from all A3 decision logs; filter by audience, owner, domain, authority, cost, impact, risk, subject, or status |
 | `/ea-publish` | Merge all artifacts into a consolidated document |
 | `/ea-help` | Getting-started guide and full command reference |
 

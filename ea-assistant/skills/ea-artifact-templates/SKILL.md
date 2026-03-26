@@ -1,7 +1,7 @@
 ---
 name: EA Artifact Templates
 description: This skill should be used when the user asks to "create an artifact", "generate the architecture vision", "start a new artifact from a template", "what template should I use", "populate this artifact", or when any TOGAF artifact needs to be created or populated. Provides template selection, placeholder conventions, and guidance text marking standards for all EA artifacts.
-version: 0.1.0
+version: 0.2.0
 ---
 
 # EA Artifact Templates
@@ -43,6 +43,45 @@ Guidance explaining what a section means is marked with HTML comments so it is i
 | Default accepted | value + ` ✓ Default accepted` |
 | Source document | value + ` 📎 Source: uploads/{filename}` |
 
+### Governance State Markers (Appendix A3 — Decision Log)
+
+Used exclusively in Appendix A3 decision rows to track the governance state of each decision:
+
+| State | Marker | Meaning |
+|---|---|---|
+| Provisional | `🔄 Provisional` | Recorded but not yet reviewed or owned |
+| Awaiting Verification | `⏳ Awaiting Verification` | Assigned to an owner; pending their confirmation |
+| Verified | `✓ Verified` | Owner has confirmed the decision is correct |
+| Under Vote | `🗳️ Under Vote` | Submitted to stakeholders for a formal vote |
+| Voted | `✅ Voted` | Decision carried by stakeholder vote |
+| Fiat | `👑 Fiat` | Decided by a senior decision maker without vote |
+| Returned | `↩️ Returned` | Sent back for rework by approver or facilitator |
+
+### Appendix Schema — A3 Decision Log
+
+Every artifact that supports a Decision Log uses this standard table in `## Appendix A3 — Decision Log`:
+
+```markdown
+### Appendix A3 — Decision Log
+
+| Item | Value | State | Captured By | Owner | Authority | Domain | Cost | Impact | Risk | Subject | Date |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| {{item}} | {{value}} | 🔄 Provisional | {{facilitator}} | {{owner}} | Strategic / Tactical / Operational | Business / Data / Application / Technology / Cross | High / Med / Low / TBD | High / Med / Low / TBD | High / Med / Low / TBD | {{subject_tag}} | {{date}} |
+```
+
+**Field definitions:**
+
+| Field | Values | Meaning |
+|---|---|---|
+| **Authority** | Strategic / Tactical / Operational | Strategic = enterprise-wide long-term commitment; Tactical = engagement-scoped medium-term; Operational = implementation detail short-term |
+| **Domain** | Business / Data / Application / Technology / Cross | Which architecture domain this decision primarily affects |
+| **Cost** | High / Med / Low / TBD | Resource or time commitment required to execute this decision |
+| **Impact** | High / Med / Low / TBD | Business or architecture impact if this decision stands or changes |
+| **Risk** | High / Med / Low / TBD | Risk of making this decision incorrectly or reversing it later |
+| **Subject** | Free text | Short tag (e.g. "Cloud strategy", "Data governance", "API design") for topic-based filtering |
+
+A3 rows are the source data for `/ea-decisions`.
+
 ### Review State Header
 
 Every artifact includes a status block at the top:
@@ -82,6 +121,7 @@ All TOGAF artifacts are in scope. Templates are stored in the plugin's `template
 | `change-request.md` | Architecture Change Request | H |
 | `requirements-register.md` | Architecture Requirements Register | Requirements |
 | `traceability-matrix.md` | Requirements Traceability Matrix | Requirements |
+| `decision-register.md` | Decision Register | All phases |
 | `consolidated-report.md` | Consolidated Architecture Report | All phases |
 
 ## Creating an Artifact

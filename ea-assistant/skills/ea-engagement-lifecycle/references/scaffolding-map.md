@@ -96,6 +96,7 @@ All available templates and the phase they belong to. These are not all scaffold
 | `architecture-contract.md` | Architecture Contract | G | All | Greenfield, Brownfield, Migration |
 | `compliance-assessment.md` | Compliance Assessment | G | All | Greenfield, Brownfield, Migration |
 | `change-request.md` | Architecture Change Request | H | All | Greenfield, Brownfield, Migration |
+| `decision-register.md` | Decision Register | All phases | All | All |
 | `consolidated-report.md` | Consolidated Architecture Report | All phases | All | All |
 
 ### Domain Column Key

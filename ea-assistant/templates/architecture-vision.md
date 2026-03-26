@@ -169,5 +169,23 @@ Summary:
 
 ---
 
+---
+
+## Appendix A3 — Decision Log
+
+<!-- GUIDANCE:
+  Record all decisions made during the development of this artifact.
+  Each row captures the decision item, agreed value, governance state, who captured it,
+  who owns or must verify it, and classification fields used by /ea-decisions.
+  Use /ea-decisions to aggregate this table across all artifacts into a Decision Register.
+-->
+
+| Item | Value | State | Captured By | Owner | Authority | Domain | Cost | Impact | Risk | Subject | Date |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| *(no decisions recorded)* | — | — | — | — | — | — | — | — | — | — | — |
+
+---
+
 *This document was created using the EA Assistant plugin.*
 *Sections marked ⚠️ are unanswered. Sections marked 🤖 contain AI-suggested content requiring review.*
+*Use `/ea-decisions` to generate a cross-artifact Decision Register from all A3 tables.*

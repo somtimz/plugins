@@ -208,5 +208,48 @@ When triggered:
    - Resume: "We were on Question {N} of {total}: {question text}"
 4. The just-captured thoughts are available as context for all remaining questions in the session — apply the same `💭` and `💡` surfacing rules and shown-notes tracking.
 
+**Recording Decisions to Appendix A3:**
+
+At any point during a Text interview, the user can log a governance decision to the artifact's Appendix A3 table by typing `a` or `decision` after providing an answer, or by prefixing their input with `a:` (e.g., `a: We will adopt API-first integration`).
+
+When triggered:
+1. Write the decision item and value to the current question's artifact field as normal.
+2. Set the initial governance state to `🔄 Provisional`.
+3. Prompt for the five A3 classification fields:
+
+   ```
+   Classify this decision for the Decision Register:
+     Authority  [Strategic / Tactical / Operational]:
+     Domain     [Business / Data / App / Tech / Cross]:
+     Cost       [High / Med / Low / TBD]:
+     Impact     [High / Med / Low / TBD]:
+     Risk       [High / Med / Low / TBD]:
+     Subject    (one or two words, e.g. "Cloud strategy"):
+   Press Enter to accept defaults: Tactical / Cross / TBD / TBD / TBD / blank
+   ```
+
+4. Record `Captured By` as the facilitator name if one was established at session start; otherwise use `EA Facilitator`.
+5. Record `Owner` as the owner name if one was established at session start; otherwise leave as `⚠️ Not assigned`.
+6. Append the fully populated row to `## Appendix A3 — Decision Log` in the artifact file. If the section contains only the placeholder row (`*(no decisions recorded)*`), replace it.
+7. Confirm: "Decision logged to A3 — run `/ea-decisions` at any time to generate the Decision Register."
+
+**Governance state transitions (A3 rows):**
+
+After any interview session, the user may update the governance state of any A3 row by typing `govern` or `g` followed by a row number. Present options:
+
+```
+Update governance state for decision {N} ("{item}"):
+  Current: {state}
+  1. Mark as Awaiting Verification  (assign/confirm owner)
+  2. Mark as Verified               (owner confirms)
+  3. Submit for Vote                (moves to Under Vote)
+  4. Record Vote result             (Voted — specify majority/unanimous)
+  5. Mark as Fiat                   (senior decision maker override — specify name/role)
+  6. Return for rework              (Returned — add note)
+  Press Enter to keep current state.
+```
+
+Write the updated state back to the A3 row in the artifact file.
+
 **Skipping Questions:**
 When a user skips: acknowledge briefly and move on without pressure. "Noted — marked as not answered. Moving on."
