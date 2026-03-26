@@ -6,7 +6,7 @@ A curated collection of plugins for Claude Code and OpenCode maintained by [@som
 
 | Plugin | Description | Version |
 |---|---|---|
-| [ea-assistant](./ea-assistant/) | End-to-end Enterprise Architecture engagement management (TOGAF 10, Zachman, ArchiMate) with artifact generation, phase interviews, Business Model Canvas, corporate/project requirements management, and Decision Register | 0.7.0 |
+| [ea-assistant](./ea-assistant/) | End-to-end Enterprise Architecture engagement management (TOGAF 10, Zachman, ArchiMate) with artifact generation, phase interviews, Decision Register, session tracking, opt-out tracking, and artifact compliance checking | 0.8.0 |
 | [RAG-assistant](./RAG-assistant/) | Conversational RAG assistant — ingests documents into ChromaDB, web UI for cited Q&A and ingestion management | 0.1.0 |
 | [ITIL-assistant](./ITIL-assistant/) | ITIL v4 Change Management assistant — create, manage, and review Change Requests with CAB approval workflow | 0.1.0 |
 

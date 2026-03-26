@@ -19,13 +19,20 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Artifact generation** — all TOGAF artifacts from templates, guided by interviews
 - **Format export** — generate Word (.docx), PowerPoint (.pptx), and Mermaid diagrams from any artifact
 - **Phase interviews** — curated question bank for each ADM phase (Text, Web, or Display mode) with output routing to artifacts
+- **Interview shortcuts** — single-key shortcuts for defaults, skip, N/A, opt-out, brainstorm, A3 logging, and governance transitions; type `?` at any prompt for contextual help
+- **Contextual help** — type `?` during any interview to see the artifact's purpose, value, current progress, and a link to the EA concepts reference
+- **EA concepts reference** — canonical definitions of Principle, Goal, Strategy, Plan, and Risk with TOGAF/ArchiMate alignment and common-confusion disambiguation
+- **Cross-topic detection** — flags answers that belong in a different artifact and offers to route them correctly or save for later
+- **Session tracking** — records facilitator, participants, topics, and next recommended step for every interview session; prior session summary shown at session start
 - **Brainstorming** — capture freeform thoughts before or during interviews; surfaced automatically as context during Q&A
 - **Requirements analysis** — extract structured requirements from uploaded documents, map to ADM phases and Zachman cells
 - **Stakeholder interviews** — chat-based or interactive web form; dated and versioned notes
 - **Diagram support** — Mermaid, Graphviz (.dot), Draw.io (.drawio), ArchiMate notation
 - **Decision Register** — cross-artifact decision tracking with governance states (Provisional → Verified/Voted/Fiat), owner attribution, and on-demand registers tailored by audience, domain, authority, cost, impact, or risk
+- **Opt-out tracking** — explicitly opt out of any question or artifact; reasons and timestamps recorded; surfaced in status reports and consolidated documents
+- **Artifact compliance** — automatic compliance check when opening any artifact; offer to remediate missing fields/sections or accept as-is with sensible defaults
 - **Review & consistency** — per-artifact review workflow; cross-artifact consistency checking
-- **Consolidated reporting** — merge all artifacts into a single Markdown or Word document
+- **Consolidated reporting** — merge all artifacts into a single Markdown or Word document; opted-out and non-standard items flagged inline
 - **Document ingestion** — upload existing docs and diagrams to inform artifacts
 - **ADM reference material** — detailed phase inputs/outputs, tailoring guidance for agile/programme/capability-based contexts
 
@@ -61,17 +68,37 @@ requirementsRepoPath: /path/to/shared/requirements-folder
 |---|---|
 | `/ea-new` | Create a new EA engagement with guided setup, engagement type selection, domain scoping, and Preliminary phase scaffolding |
 | `/ea-open` | Open an engagement with full details, edit metadata/phases/artifacts, archive or delete |
-| `/ea-status` | Portfolio dashboard with type, domains, phase progress, artifact counts, and archive management |
+| `/ea-status` | Portfolio dashboard with type, domains, phase progress, artifact counts, opt-outs, and non-standard artifact flags |
 | `/ea-phase [phase]` | Start, edit, or resume an ADM phase |
-| `/ea-artifact [action]` | Create or list artifacts for the active engagement |
+| `/ea-artifact [action]` | Create, view, or list artifacts; runs compliance check on view |
 | `/ea-brainstorm [phase]` | Capture freeform thoughts and context before or during interviews |
 | `/ea-interview [mode]` | Start or resume a stakeholder interview (artifact or phase mode; Text/Web/Display) |
 | `/ea-generate [artifact] [format]` | Export an artifact as Word (.docx), PowerPoint (.pptx), or Mermaid diagram |
-| `/ea-review [artifact]` | Open an artifact for review and assessment |
+| `/ea-review [artifact]` | Open an artifact for review and assessment; runs compliance check on load |
 | `/ea-requirements [action]` | Manage architecture requirements |
 | `/ea-decisions [options]` | Generate a Decision Register from all A3 decision logs; filter by audience, owner, domain, authority, cost, impact, risk, subject, or status |
-| `/ea-publish` | Merge all artifacts into a consolidated document |
-| `/ea-help` | Getting-started guide and full command reference |
+| `/ea-publish` | Merge all artifacts into a consolidated document; flags opted-out and non-standard items |
+| `/ea-help` | Getting-started guide, full command reference, and interview shortcuts |
+
+## Interview Shortcuts
+
+Type these at any interview prompt:
+
+| Shortcut | Action |
+|---|---|
+| `d` / `default` | Accept the suggested default answer |
+| `s` / `skip` | Skip for now — field marked ⚠️ (can return later) |
+| `n/a` | Mark not applicable — field marked ➖ |
+| `opt-out` | Opt out of this question — field marked ⊘, reason tracked |
+| `opt-out artifact` | Opt out of the entire artifact |
+| `y` | Keep the existing answer |
+| `a: {text}` | Log as a governance decision (Appendix A3) |
+| `govern` / `g` | Update A3 governance state |
+| `b:` / `brainstorm` | Start a freeform brainstorm pause |
+| `?` / `help` | Show artifact purpose, current progress, and shortcuts |
+| `concepts` | Show EA concepts quick reference (Principle/Goal/Strategy/Plan/Risk) |
+
+> **Skip vs. Opt-out:** `skip` is temporary — the field can be filled in later. `opt-out` is a deliberate decision — recorded in `engagement.json`, visible in `/ea-status`, and flagged in reports.
 
 ## Engagement Management
 
@@ -84,7 +111,32 @@ After creating an engagement, use `/ea-open` to:
 - **Archive** — move completed engagements to `.archive/` to declutter your portfolio
 - **Delete** — permanently remove engagements (requires slug confirmation)
 
-Use `/ea-status` for a portfolio-level dashboard showing all engagements with type, domains, progress, and artifact counts.
+Use `/ea-status` for a portfolio-level dashboard showing all engagements with type, domains, progress, artifact counts, opt-outs, and any non-standard artifacts.
+
+## Artifact Content Policy
+
+> **Important:** Artifacts are populated from user interviews, uploaded documents, and explicit input — not arbitrary AI-generated content.
+
+| Marker | Meaning |
+|---|---|
+| `⚠️ Not answered` | Field skipped — can be filled in later |
+| `➖ Not applicable` | Field does not apply to this engagement |
+| `⊘ Opted out` / `⊘ Opted out — {reason}` | Deliberately excluded; reason and timestamp tracked |
+| `🤖 AI Draft — Review required` | AI-suggested content awaiting human confirmation |
+| `✓ Default accepted` | User accepted the suggested default |
+| `📎 Source: uploads/{file}` | Answer sourced from an uploaded document |
+
+## Artifact Compliance
+
+When any artifact is opened for interview, review, or viewing, EA Assistant runs a three-tier compliance check:
+
+- **Tier 1** — frontmatter fields, heading structure
+- **Tier 2** — engagement header block, content sections, unresolved template tokens
+- **Tier 3** — artifact-specific requirements (e.g., Appendix A3 Decision Log)
+
+If gaps are found, you are offered:
+1. **Achieve compliance** — add missing fields and sections; all existing content is preserved
+2. **Accept as-is** — apply minimal defaults only; document structure unchanged; gaps noted in reports
 
 ## Project Storage
 
@@ -93,20 +145,18 @@ All engagement data is stored in `EA-projects/` relative to your working directo
 ```
 EA-projects/
 ├── engagement-name/
-│   ├── engagement.json       # metadata, ADM phase, settings
+│   ├── engagement.json       # metadata, ADM phases, settings, opt-outs
 │   ├── requirements/         # local architecture requirements
 │   ├── artifacts/            # generated artifacts + review files
 │   ├── diagrams/             # Mermaid, Graphviz, Draw.io files
 │   ├── uploads/              # source documents and diagrams
-│   └── interviews/           # dated, versioned interview notes
+│   └── interviews/
+│       ├── session-log.md    # chronological session history (who, what, next step)
+│       └── interview-*.md    # dated, versioned interview notes
 └── .archive/                 # archived engagements (hidden)
     └── old-engagement/
         └── engagement.json
 ```
-
-## Artifact Content Policy
-
-> **Important:** Artifacts are populated from user interviews, uploaded documents, and explicit input — not arbitrary AI-generated content. Any AI-suggested content is clearly marked with `🤖 AI Draft — Review required`. Unanswered fields are marked `⚠️ Not answered`. N/A fields are marked `➖ Not applicable`.
 
 ## Frameworks Supported
 
