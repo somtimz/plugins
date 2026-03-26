@@ -2,7 +2,7 @@
 
 ## How to Use This Reference
 
-This file is the canonical source for five EA concepts that are frequently confused during interviews and artifact creation: **Principle**, **Goal**, **Strategy**, **Plan**, and **Risk**. When the `ea-interviewer` agent detects concept confusion it cites this file. All commands and skills that capture direction, decisions, or risks should use these definitions — do not redefine them inline.
+This file is the canonical source for eight EA concepts that are frequently confused during interviews and artifact creation: **Principle**, **Goal**, **Objective**, **Strategy**, **Plan**, **Risk**, **Issue**, and **Problem**. When the `ea-interviewer` agent detects concept confusion it cites this file. All commands and skills that capture direction, decisions, or risks should use these definitions — do not redefine them inline.
 
 ---
 
@@ -11,10 +11,13 @@ This file is the canonical source for five EA concepts that are frequently confu
 | Concept | Core Question | One-Line Marker | TOGAF Artifact Home | ArchiMate Element |
 |---|---|---|---|---|
 | **Principle** | *What must always be true?* | Normative rule — applies to every future decision in its domain | Architecture Principles Catalogue (Prelim) | Principle (Motivation) |
-| **Goal** | *Where do we want to be?* | Desired future state — qualitative, no deadline required | Architecture Vision; domain artifacts | Goal (Motivation) |
+| **Goal** | *Where do we want to be?* | Desired future state — qualitative, no deadline required | Architecture Vision §3; domain artifacts | Goal (Motivation) |
+| **Objective** | *How far, and by when?* | Measurable, time-bound result — must have a measure, target, and deadline | Architecture Vision §4; domain artifacts | Outcome (Motivation) |
 | **Strategy** | *How will we get there?* | Chosen course of action — not an outcome, not a sequence | Architecture Vision; domain artifacts | Course of Action (Motivation) |
 | **Plan** | *What will we do, in what order, by when?* | Sequenced execution — who, what, when | Architecture Roadmap (Phase E); Migration Plan (Phase F) | Implementation Event sequences (Impl. & Migration) |
 | **Risk** | *What could go wrong?* | Uncertain future event with potential negative effect on objectives | Architecture Vision; Statement of Architecture Work; Migration Plan | Risk (Motivation, Strategy layer) |
+| **Issue** | *What systemic concern is threatening a goal?* | Broad barrier or pattern of dysfunction — no single fix; threatens a Goal | Architecture Vision §5 (Phase A) | — |
+| **Problem** | *What specific symptom is blocking an objective?* | Observable, measurable, and fixable — blocks an Objective | Architecture Vision §6 (Phase A) | — |
 
 ---
 
@@ -71,9 +74,87 @@ A goal is a qualitative statement of a desired future state. It describes *where
 - "Adopt API-first integration" — this is a **Strategy** (a chosen approach), not a goal
 - "Comply with GDPR" — this is a **Requirement** (a compliance obligation), not a goal. The related goal might be "Become a trusted custodian of customer data"
 
-**TOGAF placement:** `direction.goals[]` in `engagement.json`; summarised in the Architecture Vision Direction Summary; referenced in domain architecture documents.
+**TOGAF placement:** `direction.goals[]` in `engagement.json`; Architecture Vision §3; referenced in domain architecture documents.
 
 **ArchiMate:** `Goal` element in the Motivation aspect. Realised by `Outcomes`, associated with `Requirements`.
+
+---
+
+### Objective
+
+**What it IS:**
+An objective is the measurable, time-bound operationalisation of a goal. It answers *how far, and by when?* Every objective must have three parts: a **unit of measure** (what you will count or track), a **target value** (how much), and a **deadline** (by when). Objectives are the direct anchor for Problems — if a problem cannot be linked to an objective, it may be out of scope.
+
+**Structural parts** (Architecture Vision §4 / `direction.objectives[]`):
+- **Statement** — one declarative sentence specifying the outcome
+- **Measure** — unit of measure (e.g. "unplanned downtime hours per quarter")
+- **Target** — target value (e.g. "< 4 hours")
+- **Deadline** — date by which the target must be reached
+- **Baseline** — current measured value (e.g. "currently 22 hours/quarter")
+- **Linked Goal** — G-NNN of the parent goal
+
+**What it is NOT:**
+- Not a **Goal** — a goal is the qualitative parent; the objective is the measurable child
+- Not a **Strategy** — an objective describes what you will achieve; a strategy describes how
+- Not a **KPI** — a KPI is an ongoing performance measure; an objective is a one-time target with a deadline
+
+**Common confusions:**
+- "We want to improve customer satisfaction" — this is a **Goal** (no measure or deadline). The objective is: "Increase NPS from 32 to 50 by Q3 2026"
+- "Reduce costs" — this is a **Goal**. "Reduce operational cost by 15% by end of FY27" is the **Objective**
+- "We want 99.9% uptime" — has a measure and implicit target; add a deadline to make it a complete Objective
+
+**TOGAF placement:** Architecture Vision §4; domain artifacts; `direction.objectives[]` in `engagement.json`.
+
+**ArchiMate:** `Outcome` element in the Motivation aspect. Associated with `Goal` (realisation relationship).
+
+---
+
+### Issue
+
+**What it IS:**
+An issue is a broader, systemic concern that threatens the organisation's ability to achieve one or more goals. Issues are management-level problems — patterns of dysfunction, capability gaps, unresolved conflicts, or sustained exposure to a driver that has no single fix. An issue has multiple contributing causes, affects a domain or process broadly, and requires sustained organisational response rather than a technical patch.
+
+**Structural parts** (Architecture Vision §5):
+- **Statement** — one sentence naming the systemic concern
+- **Area** — organisational, process, or technology domain most affected
+- **Threatens Goal(s)** — G-NNN IDs of the goals this issue puts at risk
+
+**What it is NOT:**
+- Not a **Problem** — a problem is a specific, observable symptom with a direct fix; an issue is broader and systemic
+- Not a **Risk** — a risk is a future, uncertain event; an issue is a present, ongoing concern. When a risk materialises, it becomes an issue
+- Not a **Driver** — a driver is an external or internal force; an issue is the organisational consequence of inadequately responding to a driver
+
+**Common confusions:**
+- "Our API is returning 500 errors" — this is a **Problem** (specific, observable, fixable)
+- "We have poor data culture" — this is an **Issue** (systemic, no single fix)
+- "Increasing regulatory pressure" — this is a **Driver** (external force)
+- "The integration broke" — this is a **Problem** (specific, fixable). The related issue might be "Our integration architecture lacks resilience and monitoring"
+
+**TOGAF placement:** Architecture Vision §5 (Phase A). Issues captured here feed into Gap Analysis, Risk assessments, and Requirements.
+
+---
+
+### Problem
+
+**What it IS:**
+A problem is a specific, observable, and fixable symptom that is actively blocking the achievement of one or more objectives. Problems have a clear cause-and-effect relationship: a root cause produces a visible symptom that degrades performance against a known objective. Because they are specific and measurable, problems can be prioritised, assigned, and resolved directly.
+
+**Structural parts** (Architecture Vision §6):
+- **Statement** — one sentence naming the specific problem
+- **Observable Symptom** — what can be seen or measured today (ideally a number)
+- **Blocks Objective(s)** — OBJ-NNN IDs of the objectives this problem is preventing
+
+**What it is NOT:**
+- Not an **Issue** — an issue is broad and systemic; a problem is specific and fixable. Multiple problems can contribute to a single issue
+- Not a **Risk** — a risk is uncertain and future; a problem is certain and present
+- Not a **Gap** — a gap is the difference between baseline and target state in a specific architecture domain (used in Gap Analysis); a problem is a current operational failure
+
+**Common confusions:**
+- "We have poor data quality" — this is an **Issue** (systemic). The problem is: "30% of customer records have duplicate entries, causing order processing errors 4× per week"
+- "Our systems are slow" — this is an **Issue**. The problem is: "Mobile checkout page load time averages 8.2 seconds, causing 68% cart abandonment"
+- "The vendor may not deliver" — this is a **Risk** (uncertain, future)
+
+**TOGAF placement:** Architecture Vision §6 (Phase A). Problems feed directly into Requirements — each problem should produce one or more architecture requirements.
 
 ---
 
@@ -167,11 +248,13 @@ Apply these tests in order. The first test that matches identifies the concept:
 3. **Does it include a sequence, phases, waves, or work packages with dates?** → likely a **Plan** (Roadmap or Migration Plan), not a Strategy
 4. **Does it apply universally to all future decisions in its domain, not just this engagement?** → likely a **Principle**, not a Strategy or Goal
 5. **Is it uncertain — could it either happen or not happen?** → likely a **Risk**, not a Constraint
-6. **Has it already happened?** → it is an **Issue**, not a Risk
-7. **Is it non-negotiable — it will definitely apply regardless of decisions?** → it is a **Constraint**, not a Risk
-8. **Does it describe a desired future state without specifying how to get there?** → likely a **Goal**, not a Strategy
-9. **Is it a binding rule that governs architecture decisions — not a description of what the organisation wants or how it will get there?** → it is a **Principle**
-10. **Does it require a Rationale, Implications, and Owner to be complete?** → it is a **Principle** (TOGAF standard structure)
+6. **Is it a current, ongoing concern — already affecting the organisation?** → it is an **Issue** (if broad and systemic) or a **Problem** (if specific and fixable), not a Risk
+7. **Is it specific, observable, and directly fixable — does it block a particular objective?** → it is a **Problem**, not an Issue
+8. **Is it broad, systemic, and without a single fix — does it threaten a goal?** → it is an **Issue**, not a Problem
+9. **Is it non-negotiable — it will definitely apply regardless of decisions?** → it is a **Constraint**, not a Risk
+10. **Does it describe a desired future state without specifying how to get there?** → likely a **Goal**, not a Strategy
+11. **Is it a binding rule that governs architecture decisions — not a description of what the organisation wants or how it will get there?** → it is a **Principle**
+12. **Does it require a Rationale, Implications, and Owner to be complete?** → it is a **Principle** (TOGAF standard structure)
 
 ---
 
@@ -195,11 +278,12 @@ Apply these tests in order. The first test that matches identifies the concept:
 | Concept | TOGAF Artefact Home | ADM Phase First Used | ArchiMate Aspect | ArchiMate Element |
 |---|---|---|---|---|
 | Principle | Architecture Principles Catalogue | Preliminary | Motivation | Principle |
-| Goal | Architecture Vision; Domain Artifacts | A | Motivation | Goal |
-| Objective | Architecture Vision; Domain Artifacts | A | Motivation | Outcome |
+| Goal | Architecture Vision §3; Domain Artifacts | A | Motivation | Goal |
+| Objective | Architecture Vision §4; Domain Artifacts | A | Motivation | Outcome |
 | Strategy | Architecture Vision; Domain Artifacts | A | Motivation | Course of Action |
 | Plan | Architecture Roadmap; Migration Plan | E / F | Implementation & Migration | Work Package, Implementation Event |
 | Risk | Architecture Vision; Statement of Architecture Work; Migration Plan | A | Motivation (Strategy layer) | Risk |
 | Constraint | Architecture Vision; Principles; Requirements Register | Preliminary / A | Motivation | Constraint |
 | Requirement | Requirements Register; Traceability Matrix | Requirements | Motivation | Requirement |
-| Issue | N/A (tracked in governance logs) | H (Change Management) | — | — |
+| Issue | Architecture Vision §5; Gap Analysis | A | — | — |
+| Problem | Architecture Vision §6; Requirements Register (Motivation field) | A | — | — |

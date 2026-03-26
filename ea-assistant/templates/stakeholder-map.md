@@ -8,11 +8,14 @@ version: 0.1
 lastModified: {{YYYY-MM-DD}}
 ---
 
-<!-- GUIDANCE:
-  The Stakeholder Map identifies all stakeholders, their interests, influence, and required
-  level of engagement. It is used to plan communications and ensure architecture decisions
-  address the right concerns. Update throughout the engagement as new stakeholders are identified.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+The Stakeholder Map identifies all stakeholders, their interests, influence, and required
+level of engagement. It is used to plan communications and ensure architecture decisions
+address the right concerns. Update throughout the engagement as new stakeholders are identified.
+
+</details>
 
 # Stakeholder Map
 
@@ -24,10 +27,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## Stakeholder Register
 
-<!-- GUIDANCE:
-  List every stakeholder who has an interest in or influence over the architecture.
-  Include both supporters and potential resistors.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+List every stakeholder who has an interest in or influence over the architecture.
+Include both supporters and potential resistors.
+
+</details>
 
 | ID | Name | Role / Title | Organisation Unit | Interest | Influence | Engagement |
 |---|---|---|---|---|---|---|
@@ -37,10 +43,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## Stakeholder Concerns
 
-<!-- GUIDANCE:
-  For each key stakeholder, describe their primary architecture concerns.
-  These become the basis for architecture viewpoints and artifact selection.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+For each key stakeholder, describe their primary architecture concerns.
+These become the basis for architecture viewpoints and artifact selection.
+
+</details>
 
 ### {{stakeholder_name}}
 - **Primary concern:** {{concern}}
@@ -51,13 +60,16 @@ lastModified: {{YYYY-MM-DD}}
 
 ## Influence / Interest Matrix
 
-<!-- GUIDANCE:
-  Plot stakeholders on a 2x2 matrix: Influence (y-axis) vs Interest (x-axis).
-  - High influence, high interest: Manage closely
-  - High influence, low interest: Keep satisfied
-  - Low influence, high interest: Keep informed
-  - Low influence, low interest: Monitor
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Plot stakeholders on a 2x2 matrix: Influence (y-axis) vs Interest (x-axis).
+- High influence, high interest: Manage closely
+- High influence, low interest: Keep satisfied
+- Low influence, high interest: Keep informed
+- Low influence, low interest: Monitor
+
+</details>
 
 ```
 High Influence │ Keep Satisfied  │ Manage Closely
@@ -75,9 +87,12 @@ Low Influence  │ Monitor         │ Keep Informed
 
 ## Communication Plan
 
-<!-- GUIDANCE:
-  Define how and when each stakeholder group will be engaged.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Define how and when each stakeholder group will be engaged.
+
+</details>
 
 | Stakeholder Group | Communication Method | Frequency | Owner |
 |---|---|---|---|

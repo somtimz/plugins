@@ -8,14 +8,17 @@ version: 0.1
 lastModified: {{YYYY-MM-DD}}
 ---
 
-<!-- GUIDANCE:
-  An Architecture Change Request (ACR) is a Phase H artifact. Phase H (Architecture Change
-  Management) governs the ongoing evolution of the architecture after the initial target state
-  has been delivered. Change requests are raised when a business event, technology change, or
-  implementation learning requires a deviation from, or update to, the agreed architecture.
-  The ACR process ensures changes are assessed for architectural impact before they are approved,
-  preventing uncontrolled architectural drift.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+An Architecture Change Request (ACR) is a Phase H artifact. Phase H (Architecture Change
+Management) governs the ongoing evolution of the architecture after the initial target state
+has been delivered. Change requests are raised when a business event, technology change, or
+implementation learning requires a deviation from, or update to, the agreed architecture.
+The ACR process ensures changes are assessed for architectural impact before they are approved,
+preventing uncontrolled architectural drift.
+
+</details>
 
 # Architecture Change Request
 
@@ -31,12 +34,15 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 1. Change Description
 
-<!-- GUIDANCE:
-  Describe the proposed change clearly and concisely. State what is being changed, added, or
-  removed. Be specific about the architectural element involved (a specific application, data
-  entity, integration, technology component, or principle). Avoid conflating the change with
-  its justification — that belongs in section 2.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Describe the proposed change clearly and concisely. State what is being changed, added, or
+removed. Be specific about the architectural element involved (a specific application, data
+entity, integration, technology component, or principle). Avoid conflating the change with
+its justification — that belongs in section 2.
+
+</details>
 
 **Type of Change:** New capability / Technology substitution / Process change / Correction / Decommission / Other
 
@@ -51,13 +57,16 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 2. Justification
 
-<!-- GUIDANCE:
-  Explain why this change is needed. Link to a business driver, technology trigger (e.g. a vendor
-  end-of-life notice), regulatory requirement, or learning from implementation. A well-justified
-  change request is much easier to assess and approve. Include the consequence of NOT making the
-  change — this helps the architecture authority weigh the risk of approval against the risk of
-  rejection.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Explain why this change is needed. Link to a business driver, technology trigger (e.g. a vendor
+end-of-life notice), regulatory requirement, or learning from implementation. A well-justified
+change request is much easier to assess and approve. Include the consequence of NOT making the
+change — this helps the architecture authority weigh the risk of approval against the risk of
+rejection.
+
+</details>
 
 **Business Driver / Trigger:** {{business_driver}}
 
@@ -71,12 +80,15 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 3. Impact Assessment
 
-<!-- GUIDANCE:
-  Assess the impact of the proposed change on the existing architecture. Consider all domains,
-  even if the change appears localised — application changes often have data and technology
-  implications, and vice versa. List each artifact that would need to be updated if the change
-  is approved. Identify any dependencies on other work packages or change requests.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Assess the impact of the proposed change on the existing architecture. Consider all domains,
+even if the change appears localised — application changes often have data and technology
+implications, and vice versa. List each artifact that would need to be updated if the change
+is approved. Identify any dependencies on other work packages or change requests.
+
+</details>
 
 ### Impact on Architecture Domains
 
@@ -102,12 +114,15 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 4. Risk Assessment
 
-<!-- GUIDANCE:
-  Assess the risks introduced by making this change. Also consider the risk of the change
-  interacting badly with work already in progress. Distinguish between architectural risks
-  (the change creates technical debt, introduces an undesirable pattern, or weakens a control)
-  and implementation risks (disruption to live systems, migration complexity).
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Assess the risks introduced by making this change. Also consider the risk of the change
+interacting badly with work already in progress. Distinguish between architectural risks
+(the change creates technical debt, introduces an undesirable pattern, or weakens a control)
+and implementation risks (disruption to live systems, migration complexity).
+
+</details>
 
 | Risk ID | Description | Likelihood | Impact | Mitigation |
 |---|---|---|---|---|
@@ -120,12 +135,15 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 5. Disposition
 
-<!-- GUIDANCE:
-  Record the decision made by the architecture authority. Choose Approve, Reject, or Defer,
-  and document the rationale. If approved with conditions, list the conditions explicitly —
-  these become conformance requirements for the implementing team. If deferred, record when
-  the request should be reconsidered and what information is needed before a decision can be made.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Record the decision made by the architecture authority. Choose Approve, Reject, or Defer,
+and document the rationale. If approved with conditions, list the conditions explicitly —
+these become conformance requirements for the implementing team. If deferred, record when
+the request should be reconsidered and what information is needed before a decision can be made.
+
+</details>
 
 **Decision:** Approved / Rejected / Deferred / Approved with Conditions
 
@@ -145,11 +163,14 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 6. Updated Artifacts
 
-<!-- GUIDANCE:
-  If the change is approved, list all artifacts that must be updated as a result, who is
-  responsible for updating them, and the target date. Tracking this ensures the architecture
-  repository remains current and consistent with the implemented state.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+If the change is approved, list all artifacts that must be updated as a result, who is
+responsible for updating them, and the target date. Tracking this ensures the architecture
+repository remains current and consistent with the implemented state.
+
+</details>
 
 | Artifact | Update Required | Owner | Target Date | Status |
 |---|---|---|---|---|

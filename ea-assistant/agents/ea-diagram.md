@@ -31,7 +31,7 @@ description: >
   </commentary>
   </example>
 model: inherit
-color: green
+color: blue
 tools: ["Read", "Write", "Bash", "Glob"]
 ---
 

@@ -8,11 +8,14 @@ version: 0.1
 lastModified: {{YYYY-MM-DD}}
 ---
 
-<!-- GUIDANCE:
-  The Architecture Roadmap lists individual work packages in priority order that together
-  deliver the Target Architecture. It evolves from Phase E (initial) through Phase F (refined)
-  and is updated in Phase H as change requests are processed.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+The Architecture Roadmap lists individual work packages in priority order that together
+deliver the Target Architecture. It evolves from Phase E (initial) through Phase F (refined)
+and is updated in Phase H as change requests are processed.
+
+</details>
 
 # Architecture Roadmap
 
@@ -25,9 +28,12 @@ lastModified: {{YYYY-MM-DD}}
 
 ## Roadmap Overview
 
-<!-- GUIDANCE:
-  Provide a high-level timeline view. Reference a diagram if available.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Provide a high-level timeline view. Reference a diagram if available.
+
+</details>
 
 *Reference diagram:* `../diagrams/{{roadmap_diagram}}`
 
@@ -35,10 +41,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## Work Packages
 
-<!-- GUIDANCE:
-  Each work package is a discrete unit of change that can be planned and resourced.
-  Work packages close gaps identified in the Gap Analysis.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Each work package is a discrete unit of change that can be planned and resourced.
+Work packages close gaps identified in the Gap Analysis.
+
+</details>
 
 ### WP-001: {{work_package_name}}
 
@@ -58,10 +67,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## Transition Architectures
 
-<!-- GUIDANCE:
-  Define the intermediate states (plateaus) between baseline and target.
-  Each plateau should be a stable, usable architecture state.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Define the intermediate states (plateaus) between baseline and target.
+Each plateau should be a stable, usable architecture state.
+
+</details>
 
 | Plateau | Description | Target Date | Work Packages |
 |---|---|---|---|
@@ -73,9 +85,12 @@ lastModified: {{YYYY-MM-DD}}
 
 ## Prioritisation
 
-<!-- GUIDANCE:
-  Explain the prioritisation criteria used to sequence work packages.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Explain the prioritisation criteria used to sequence work packages.
+
+</details>
 
 {{prioritisation_rationale}}
 

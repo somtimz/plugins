@@ -1,15 +1,47 @@
 import { useState, useRef, useEffect } from "react";
 
-// ─── Categories ───────────────────────────────────────────────────────────────
+// ─── Brainstorm Data (injected at runtime — null fields = generic defaults) ────
+//
+// Shape injected by ea-brainstorm.md at render time:
+//
+//   const BRAINSTORM_DATA = {
+//     phase: "Phase D — Technology Architecture",   // null = no phase badge
+//     subtitle: "Focus on platform, infrastructure, and technical decisions.",  // null = generic
+//     categories: [                                 // null = use all defaults
+//       { id: "concerns",      hint: "Platform lock-in, security posture, technical debt, skills gaps" },
+//       { id: "goals",         hint: "Target platform, infrastructure principles, cloud/hybrid strategy" },
+//       { id: "constraints",   hint: "Existing infrastructure, vendor agreements, security policies" },
+//       { id: "opportunities", hint: "Cloud adoption, automation, platform standardisation, cost optimisation" },
+//       { id: "assumptions",   hint: "Cloud readiness, vendor support timelines, network capacity" },
+//       { id: "other",         hint: "Technology radar inputs, emerging tech candidates, decommission targets" },
+//     ],
+//   };
 
-const CATEGORIES = [
-  { id: "concerns",     label: "Concerns",        emoji: "⚠️", hint: "Risks, worries, unknowns" },
-  { id: "goals",        label: "Goals & Vision",   emoji: "🎯", hint: "Desired outcomes, strategic intent" },
-  { id: "constraints",  label: "Constraints",      emoji: "🔒", hint: "Budget, time, tech, or organisational limits" },
-  { id: "opportunities",label: "Opportunities",    emoji: "💡", hint: "Potential wins, improvements, innovations" },
-  { id: "assumptions",  label: "Assumptions",      emoji: "🔮", hint: "Things taken as true without confirmation" },
-  { id: "other",        label: "Other",            emoji: "📝", hint: "Anything that doesn't fit above" },
+const BRAINSTORM_DATA = {
+  phase: null,
+  subtitle: null,
+  categories: null,
+};
+
+
+// ─── Default Categories ────────────────────────────────────────────────────────
+
+const DEFAULT_CATEGORIES = [
+  { id: "concerns",      label: "Concerns",        emoji: "⚠️", hint: "Risks, worries, unknowns" },
+  { id: "goals",         label: "Goals & Vision",   emoji: "🎯", hint: "Desired outcomes, strategic intent" },
+  { id: "constraints",   label: "Constraints",      emoji: "🔒", hint: "Budget, time, tech, or organisational limits" },
+  { id: "opportunities", label: "Opportunities",    emoji: "💡", hint: "Potential wins, improvements, innovations" },
+  { id: "assumptions",   label: "Assumptions",      emoji: "🔮", hint: "Things taken as true without confirmation" },
+  { id: "other",         label: "Other",            emoji: "📝", hint: "Anything that doesn't fit above" },
 ];
+
+// Merge phase-specific hint overrides into the default category list
+const _hintOverrides = BRAINSTORM_DATA.categories
+  ? Object.fromEntries(BRAINSTORM_DATA.categories.map(c => [c.id, c.hint]))
+  : {};
+const CATEGORIES = DEFAULT_CATEGORIES.map(c =>
+  _hintOverrides[c.id] ? { ...c, hint: _hintOverrides[c.id] } : c
+);
 
 
 // ─── CategoryCard ─────────────────────────────────────────────────────────────
@@ -125,6 +157,7 @@ function ResultScreen({ thoughts, onBack }) {
 
   function buildOutput() {
     const lines = ["BRAINSTORM NOTES", "---"];
+    if (BRAINSTORM_DATA.phase) lines.push(`Phase: ${BRAINSTORM_DATA.phase}`);
     for (const cat of CATEGORIES) {
       const filled = thoughts[cat.id].filter(t => t.trim());
       if (filled.length) {
@@ -229,13 +262,13 @@ export default function BrainstormPad() {
       {/* Header */}
       <div style={{ marginBottom: 24 }}>
         <div style={{ fontSize: 11, fontWeight: 700, color: "#6366F1", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>
-          EA Brainstorm
+          EA Brainstorm{BRAINSTORM_DATA.phase ? ` · ${BRAINSTORM_DATA.phase}` : ""}
         </div>
         <h1 style={{ fontSize: 22, fontWeight: 800, color: "#111827", margin: "0 0 4px" }}>
           What's on your mind?
         </h1>
         <p style={{ fontSize: 13, color: "#9CA3AF", margin: 0 }}>
-          Capture thoughts freely — no wrong answers. Press Enter to add another thought.
+          {BRAINSTORM_DATA.subtitle || "Capture thoughts freely — no wrong answers. Press Enter to add another thought."}
         </p>
       </div>
 

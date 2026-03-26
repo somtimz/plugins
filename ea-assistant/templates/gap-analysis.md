@@ -8,11 +8,14 @@ version: 0.1
 lastModified: {{YYYY-MM-DD}}
 ---
 
-<!-- GUIDANCE:
-  Gap Analysis documents the differences between the Baseline (current) and Target architectures.
-  A separate Gap Analysis is typically produced for each architecture domain (B, C-Data, C-App, D).
-  Gaps feed directly into the Architecture Roadmap in Phase E.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Gap Analysis documents the differences between the Baseline (current) and Target architectures.
+A separate Gap Analysis is typically produced for each architecture domain (B, C-Data, C-App, D).
+Gaps feed directly into the Architecture Roadmap in Phase E.
+
+</details>
 
 # Gap Analysis — {{domain}} Architecture
 
@@ -24,10 +27,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## Baseline Architecture Summary
 
-<!-- GUIDANCE:
-  Brief description of the current state architecture for this domain.
-  Reference the relevant baseline artifact if it exists.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Brief description of the current state architecture for this domain.
+Reference the relevant baseline artifact if it exists.
+
+</details>
 
 {{baseline_summary}}
 
@@ -35,10 +41,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## Target Architecture Summary
 
-<!-- GUIDANCE:
-  Brief description of the target state architecture for this domain.
-  Reference the target architecture document.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Brief description of the target state architecture for this domain.
+Reference the target architecture document.
+
+</details>
 
 {{target_summary}}
 
@@ -46,10 +55,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## Gap Register
 
-<!-- GUIDANCE:
-  List each gap between baseline and target.
-  Categories: Missing capability, Retiring component, Consolidation, New requirement, Enhancement
--->
+<details>
+<summary>📋 Guidance</summary>
+
+List each gap between baseline and target.
+Categories: Missing capability, Retiring component, Consolidation, New requirement, Enhancement
+
+</details>
 
 | Gap ID | Description | Category | Priority | Baseline State | Target State | Effort |
 |---|---|---|---|---|---|---|
@@ -59,9 +71,12 @@ lastModified: {{YYYY-MM-DD}}
 
 ## Zachman Coverage Analysis
 
-<!-- GUIDANCE:
-  Assess Zachman cell coverage for this domain. Identify which cells have gaps.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Assess Zachman cell coverage for this domain. Identify which cells have gaps.
+
+</details>
 
 | | What (Data) | How (Function) | Where (Network) | Who (People) | When (Time) | Why (Motivation) |
 |---|---|---|---|---|---|---|

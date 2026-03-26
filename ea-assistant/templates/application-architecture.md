@@ -8,14 +8,17 @@ version: 0.1
 lastModified: {{YYYY-MM-DD}}
 ---
 
-<!-- GUIDANCE:
-  The Application Architecture is a Phase C artifact that describes the current and target
-  application portfolio, the interactions between applications, and how applications deliver
-  the capabilities identified in the Business Architecture. It sits between the Business
-  Architecture (what the business needs) and the Technology Architecture (what infrastructure
-  hosts it). Application Architecture drives integration decisions, rationalisation opportunities,
-  and build/buy/retire choices.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+The Application Architecture is a Phase C artifact that describes the current and target
+application portfolio, the interactions between applications, and how applications deliver
+the capabilities identified in the Business Architecture. It sits between the Business
+Architecture (what the business needs) and the Technology Architecture (what infrastructure
+hosts it). Application Architecture drives integration decisions, rationalisation opportunities,
+and build/buy/retire choices.
+
+</details>
 
 # Application Architecture
 
@@ -27,12 +30,15 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 1. Application Context
 
-<!-- GUIDANCE:
-  Describe the application landscape context: the business capabilities being supported, any
-  strategic direction for the application portfolio (cloud-first, SaaS migration, rationalisation),
-  and the key pain points with the current application estate (duplication, integration complexity,
-  technical debt, unsupported systems). Reference the Business Architecture.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Describe the application landscape context: the business capabilities being supported, any
+strategic direction for the application portfolio (cloud-first, SaaS migration, rationalisation),
+and the key pain points with the current application estate (duplication, integration complexity,
+technical debt, unsupported systems). Reference the Business Architecture.
+
+</details>
 
 {{application_context}}
 
@@ -40,11 +46,14 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 2. Current Application Portfolio
 
-<!-- GUIDANCE:
-  Catalogue the applications currently in scope. For each application, capture its function,
-  technology stack, lifecycle status, and the business capabilities it supports. This forms
-  the baseline. Flag applications that are end-of-life, unsupported, or candidates for retirement.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Catalogue the applications currently in scope. For each application, capture its function,
+technology stack, lifecycle status, and the business capabilities it supports. This forms
+the baseline. Flag applications that are end-of-life, unsupported, or candidates for retirement.
+
+</details>
 
 | App ID | Application Name | Function | Technology | Lifecycle Status | Capabilities Supported |
 |---|---|---|---|---|---|
@@ -57,11 +66,14 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 3. Target Application Landscape
 
-<!-- GUIDANCE:
-  Describe the target state: which applications are retained, replaced, retired, or introduced.
-  Explain the rationale for significant decisions (e.g. why a particular SaaS product was chosen,
-  why a legacy system is being retained). Include a target landscape diagram.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Describe the target state: which applications are retained, replaced, retired, or introduced.
+Explain the rationale for significant decisions (e.g. why a particular SaaS product was chosen,
+why a legacy system is being retained). Include a target landscape diagram.
+
+</details>
 
 {{target_application_description}}
 
@@ -75,11 +87,14 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 4. Application Components
 
-<!-- GUIDANCE:
-  For each significant target application or component, describe its responsibilities,
-  boundaries, and key interfaces. Use ArchiMate Application Component notation where applicable.
-  Focus on the components that are new, changed, or architecturally significant.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+For each significant target application or component, describe its responsibilities,
+boundaries, and key interfaces. Use ArchiMate Application Component notation where applicable.
+Focus on the components that are new, changed, or architecturally significant.
+
+</details>
 
 ### {{component_name_1}}
 
@@ -107,12 +122,15 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 5. Integration Architecture
 
-<!-- GUIDANCE:
-  Describe how applications communicate and exchange data. Specify the integration patterns
-  adopted (event-driven, API-first, ESB, point-to-point) and the rationale. Identify any
-  integration platform or middleware in the target state. Highlight integrations with external
-  parties. Include an integration diagram.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Describe how applications communicate and exchange data. Specify the integration patterns
+adopted (event-driven, API-first, ESB, point-to-point) and the rationale. Identify any
+integration platform or middleware in the target state. Highlight integrations with external
+parties. Include an integration diagram.
+
+</details>
 
 ### Integration Principles
 {{integration_principles}}
@@ -131,11 +149,14 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 6. Gap Analysis
 
-<!-- GUIDANCE:
-  Summarise the key application architecture gaps between current and target state.
-  Typical gaps: missing capabilities, duplicated applications, unsupported integrations,
-  shadow IT, applications without a clear owner. Reference the full Gap Analysis artifact.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Summarise the key application architecture gaps between current and target state.
+Typical gaps: missing capabilities, duplicated applications, unsupported integrations,
+shadow IT, applications without a clear owner. Reference the full Gap Analysis artifact.
+
+</details>
 
 *See Gap Analysis artifact for full detail:* `gap-analysis.md`
 
@@ -147,10 +168,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 7. Requirements Addressed
 
-<!-- GUIDANCE:
-  Map this artifact to requirements from the Requirements Register to demonstrate traceability.
-  Every significant architectural decision should be traceable to at least one requirement.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Map this artifact to requirements from the Requirements Register to demonstrate traceability.
+Every significant architectural decision should be traceable to at least one requirement.
+
+</details>
 
 | Req ID | Requirement | How Addressed |
 |---|---|---|
@@ -162,10 +186,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## Appendix A3 — Decision Log
 
-<!-- GUIDANCE:
-  Record all decisions made during the development of this artifact.
-  Use /ea-decisions to aggregate this table across all artifacts into a Decision Register.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Record all decisions made during the development of this artifact.
+Use /ea-decisions to aggregate this table across all artifacts into a Decision Register.
+
+</details>
 
 | Item | Value | State | Captured By | Owner | Authority | Domain | Cost | Impact | Risk | Subject | Date |
 |---|---|---|---|---|---|---|---|---|---|---|---|

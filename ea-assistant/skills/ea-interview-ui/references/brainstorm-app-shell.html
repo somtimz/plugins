@@ -18,11 +18,16 @@
   <script type="text/babel" data-presets="react">
     const { useState, useRef, useEffect } = React;
 
-    // ── Paste the full component body from brainstorm-app.jsx below ──────────
-    // (everything after the imports — CATEGORIES constant, CategoryCard,
-    //  ResultScreen, and the default export BrainstormPad)
-    // Claude pastes it verbatim; the import statement is NOT included because
-    // React hooks are already available as destructured globals above.
+    // ── Phase-specific brainstorm data (injected by ea-brainstorm.md) ─────────
+    const BRAINSTORM_DATA = %%BRAINSTORM_DATA_JSON%%;
+    // ────────────────────────────────────────────────────────────────────────
+
+    // ── Paste the component body from brainstorm-app.jsx below ───────────────
+    // (everything after the BRAINSTORM_DATA constant — DEFAULT_CATEGORIES,
+    //  the merge logic, CategoryCard, ResultScreen, and BrainstormPad)
+    // The import statement and BRAINSTORM_DATA constant are NOT included —
+    // React hooks are available as destructured globals and BRAINSTORM_DATA
+    // is already declared above.
     %%COMPONENT_BODY%%
     // ────────────────────────────────────────────────────────────────────────
 

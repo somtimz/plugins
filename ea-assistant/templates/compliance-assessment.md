@@ -8,13 +8,16 @@ version: 0.1
 lastModified: {{YYYY-MM-DD}}
 ---
 
-<!-- GUIDANCE:
-  A Compliance Assessment is a Phase G artifact that evaluates whether an implemented (or
-  in-progress) solution conforms to the agreed architecture. Assessments are typically triggered
-  by scheduled review gates defined in the Architecture Contract, or by a concern raised by
-  the architecture team. The output is an objective record of conformance, non-conformances,
-  and required remediation actions. Non-conformances must be tracked to closure.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+A Compliance Assessment is a Phase G artifact that evaluates whether an implemented (or
+in-progress) solution conforms to the agreed architecture. Assessments are typically triggered
+by scheduled review gates defined in the Architecture Contract, or by a concern raised by
+the architecture team. The output is an objective record of conformance, non-conformances,
+and required remediation actions. Non-conformances must be tracked to closure.
+
+</details>
 
 # Compliance Assessment
 
@@ -32,12 +35,15 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 1. Assessment Purpose
 
-<!-- GUIDANCE:
-  State why this assessment is being conducted and what triggered it. Reference the Architecture
-  Contract review schedule if this is a planned gate review, or describe the concern that
-  triggered an ad-hoc assessment. State the expected outcome (confirm conformance, identify
-  remediation actions, support go/no-go decision).
--->
+<details>
+<summary>📋 Guidance</summary>
+
+State why this assessment is being conducted and what triggered it. Reference the Architecture
+Contract review schedule if this is a planned gate review, or describe the concern that
+triggered an ad-hoc assessment. State the expected outcome (confirm conformance, identify
+remediation actions, support go/no-go decision).
+
+</details>
 
 {{assessment_purpose}}
 
@@ -48,11 +54,14 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 2. Scope
 
-<!-- GUIDANCE:
-  Define what is in scope for this assessment. List the solution components, architecture domains
-  (business, data, application, technology), and Architecture Contract requirements being assessed.
-  Be explicit about what is NOT being assessed to manage expectations.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Define what is in scope for this assessment. List the solution components, architecture domains
+(business, data, application, technology), and Architecture Contract requirements being assessed.
+Be explicit about what is NOT being assessed to manage expectations.
+
+</details>
 
 ### In Scope
 {{scope_in}}
@@ -67,11 +76,14 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 3. Compliance Criteria
 
-<!-- GUIDANCE:
-  List the specific criteria against which the solution is being assessed. These should map
-  directly to the Architecture Contract conformance requirements (ACR-xxx) and agreed standards.
-  Each criterion must be objectively assessable — define what evidence will demonstrate compliance.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+List the specific criteria against which the solution is being assessed. These should map
+directly to the Architecture Contract conformance requirements (ACR-xxx) and agreed standards.
+Each criterion must be objectively assessable — define what evidence will demonstrate compliance.
+
+</details>
 
 | Criteria ID | Description | Source | Evidence Required |
 |---|---|---|---|
@@ -83,11 +95,14 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 4. Findings
 
-<!-- GUIDANCE:
-  Record the assessment findings for each criterion. Findings should be factual and evidence-based.
-  Do not conflate observations with judgements. Reference specific evidence (document names,
-  test results, code review observations) to support each finding.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Record the assessment findings for each criterion. Findings should be factual and evidence-based.
+Do not conflate observations with judgements. Reference specific evidence (document names,
+test results, code review observations) to support each finding.
+
+</details>
 
 | Criteria ID | Finding | Evidence Reviewed | Compliance Status |
 |---|---|---|---|
@@ -102,12 +117,15 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 5. Non-conformances
 
-<!-- GUIDANCE:
-  Record each non-conformance identified. A non-conformance is a deviation from a mandatory
-  requirement in the Architecture Contract. For each, assign a severity, identify the required
-  remediation action, and set a target resolution date. Non-conformances must be tracked to
-  closure — either by remediation or by a formal architecture waiver (documented change request).
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Record each non-conformance identified. A non-conformance is a deviation from a mandatory
+requirement in the Architecture Contract. For each, assign a severity, identify the required
+remediation action, and set a target resolution date. Non-conformances must be tracked to
+closure — either by remediation or by a formal architecture waiver (documented change request).
+
+</details>
 
 | NC ID | Description | Criteria ID | Severity | Required Action | Target Resolution | Owner |
 |---|---|---|---|---|---|---|
@@ -121,22 +139,28 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 6. Recommendations
 
-<!-- GUIDANCE:
-  Provide recommendations beyond mandatory remediation — these address advisory guidance
-  deviations or improvement opportunities identified during the assessment. Recommendations
-  are not blocking but should be tracked. Include a recommendation for the go/no-go decision
-  if this assessment feeds one.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Provide recommendations beyond mandatory remediation — these address advisory guidance
+deviations or improvement opportunities identified during the assessment. Recommendations
+are not blocking but should be tracked. Include a recommendation for the go/no-go decision
+if this assessment feeds one.
+
+</details>
 
 | Rec ID | Recommendation | Priority | Owner |
 |---|---|---|---|
 | REC-001 | {{recommendation}} | High / Med / Low | {{owner}} |
 
 ### Go / No-Go Recommendation
-<!-- GUIDANCE:
-  If this assessment feeds a deployment or phase-gate decision, state the recommendation clearly.
-  If recommending conditional approval, list the conditions that must be met.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+If this assessment feeds a deployment or phase-gate decision, state the recommendation clearly.
+If recommending conditional approval, list the conditions that must be met.
+
+</details>
 
 **Recommendation:** Go / No-Go / Conditional Go
 
@@ -150,11 +174,14 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 7. Sign-off
 
-<!-- GUIDANCE:
-  The assessor and the solution lead should both sign. The assessor confirms the assessment
-  is accurate and objective. The solution lead acknowledges the findings and commits to
-  remediation. For go/no-go decisions, the architecture authority must also sign.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+The assessor and the solution lead should both sign. The assessor confirms the assessment
+is accurate and objective. The solution lead acknowledges the findings and commits to
+remediation. For go/no-go decisions, the architecture authority must also sign.
+
+</details>
 
 | Role | Name | Organisation | Signature | Date |
 |---|---|---|---|---|

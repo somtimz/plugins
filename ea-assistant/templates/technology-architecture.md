@@ -8,13 +8,16 @@ version: 0.1
 lastModified: {{YYYY-MM-DD}}
 ---
 
-<!-- GUIDANCE:
-  The Technology Architecture is the Phase D artifact describing the technology platforms,
-  infrastructure components, and standards that host and connect the application and data
-  layers. It translates application requirements into infrastructure and platform decisions.
-  Technology Architecture should be driven by the Application Architecture outputs, not by
-  technology preferences alone. It must address security, resilience, and operational concerns.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+The Technology Architecture is the Phase D artifact describing the technology platforms,
+infrastructure components, and standards that host and connect the application and data
+layers. It translates application requirements into infrastructure and platform decisions.
+Technology Architecture should be driven by the Application Architecture outputs, not by
+technology preferences alone. It must address security, resilience, and operational concerns.
+
+</details>
 
 # Technology Architecture
 
@@ -26,12 +29,15 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 1. Technology Context
 
-<!-- GUIDANCE:
-  Describe the current technology environment and the strategic context for technology decisions.
-  Include: existing infrastructure estate (on-premise, cloud, hybrid), organisational cloud
-  strategy and maturity, constraints from existing contracts or vendor relationships, and any
-  mandated technology standards from the enterprise or regulatory body.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Describe the current technology environment and the strategic context for technology decisions.
+Include: existing infrastructure estate (on-premise, cloud, hybrid), organisational cloud
+strategy and maturity, constraints from existing contracts or vendor relationships, and any
+mandated technology standards from the enterprise or regulatory body.
+
+</details>
 
 {{technology_context}}
 
@@ -39,12 +45,15 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 2. Technology Standards
 
-<!-- GUIDANCE:
-  Document the agreed technology standards for this engagement. Standards constrain and guide
-  technology choices throughout implementation. Distinguish between mandatory standards
-  (must be followed) and preferred standards (default choice, deviation requires justification).
-  Include standards for compute, storage, networking, middleware, security, and observability.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Document the agreed technology standards for this engagement. Standards constrain and guide
+technology choices throughout implementation. Distinguish between mandatory standards
+(must be followed) and preferred standards (default choice, deviation requires justification).
+Include standards for compute, storage, networking, middleware, security, and observability.
+
+</details>
 
 | Category | Standard | Mandatory / Preferred | Rationale |
 |---|---|---|---|
@@ -59,12 +68,15 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 3. Infrastructure Components
 
-<!-- GUIDANCE:
-  Catalogue the key infrastructure components in the target state. For each component, describe
-  its role, the platform or product used, deployment model, and sizing considerations. Use
-  ArchiMate Technology layer elements (Node, Device, System Software) where applicable.
-  Include a target infrastructure diagram.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Catalogue the key infrastructure components in the target state. For each component, describe
+its role, the platform or product used, deployment model, and sizing considerations. Use
+ArchiMate Technology layer elements (Node, Device, System Software) where applicable.
+Include a target infrastructure diagram.
+
+</details>
 
 *Reference diagram:* `../diagrams/{{infrastructure_diagram}}`
 
@@ -77,10 +89,13 @@ lastModified: {{YYYY-MM-DD}}
 {{hosting_model_description}}
 
 ### Disaster Recovery and Resilience
-<!-- GUIDANCE:
-  Describe the DR strategy: RTO (Recovery Time Objective), RPO (Recovery Point Objective),
-  and the mechanism used (warm standby, pilot light, multi-region active-active, backup/restore).
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Describe the DR strategy: RTO (Recovery Time Objective), RPO (Recovery Point Objective),
+and the mechanism used (warm standby, pilot light, multi-region active-active, backup/restore).
+
+</details>
 
 | Service Tier | RTO | RPO | DR Mechanism |
 |---|---|---|---|
@@ -90,12 +105,15 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 4. Network Architecture
 
-<!-- GUIDANCE:
-  Describe the network topology, segmentation model, and connectivity approach. Include:
-  network zones (DMZ, internal, management), connectivity to cloud providers or external
-  parties, VPN/private connectivity, DNS, and load balancing strategy.
-  Include a network diagram reference.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Describe the network topology, segmentation model, and connectivity approach. Include:
+network zones (DMZ, internal, management), connectivity to cloud providers or external
+parties, VPN/private connectivity, DNS, and load balancing strategy.
+Include a network diagram reference.
+
+</details>
 
 *Reference diagram:* `../diagrams/{{network_diagram}}`
 
@@ -112,13 +130,16 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 5. Security Architecture
 
-<!-- GUIDANCE:
-  Describe the security controls and patterns applied in the technology architecture. Cover:
-  identity and access management (IAM), network security (firewalls, WAF, DDoS protection),
-  data protection at rest and in transit, secrets management, vulnerability management, and
-  compliance with relevant security standards (ISO 27001, SOC 2, NIST CSF, etc.).
-  Security architecture should be reviewed by a security specialist.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Describe the security controls and patterns applied in the technology architecture. Cover:
+identity and access management (IAM), network security (firewalls, WAF, DDoS protection),
+data protection at rest and in transit, secrets management, vulnerability management, and
+compliance with relevant security standards (ISO 27001, SOC 2, NIST CSF, etc.).
+Security architecture should be reviewed by a security specialist.
+
+</details>
 
 ### Identity and Access Management
 {{iam_description}}
@@ -142,12 +163,15 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 6. Gap Analysis
 
-<!-- GUIDANCE:
-  Summarise technology architecture gaps between the current estate and the target state.
-  Common technology gaps: end-of-life platforms, missing observability, inadequate DR posture,
-  inconsistent security controls, unsupported or vendor lock-in risks.
-  Reference the full Gap Analysis artifact for detail.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Summarise technology architecture gaps between the current estate and the target state.
+Common technology gaps: end-of-life platforms, missing observability, inadequate DR posture,
+inconsistent security controls, unsupported or vendor lock-in risks.
+Reference the full Gap Analysis artifact for detail.
+
+</details>
 
 *See Gap Analysis artifact for full detail:* `gap-analysis.md`
 
@@ -159,11 +183,14 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 7. Requirements Addressed
 
-<!-- GUIDANCE:
-  Trace technology decisions back to requirements from the Requirements Register.
-  Non-functional requirements (performance, availability, security, scalability) are especially
-  important to trace here, as they most directly shape technology choices.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Trace technology decisions back to requirements from the Requirements Register.
+Non-functional requirements (performance, availability, security, scalability) are especially
+important to trace here, as they most directly shape technology choices.
+
+</details>
 
 | Req ID | Requirement | How Addressed |
 |---|---|---|
@@ -175,10 +202,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## Appendix A3 — Decision Log
 
-<!-- GUIDANCE:
-  Record all decisions made during the development of this artifact.
-  Use /ea-decisions to aggregate this table across all artifacts into a Decision Register.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Record all decisions made during the development of this artifact.
+Use /ea-decisions to aggregate this table across all artifacts into a Decision Register.
+
+</details>
 
 | Item | Value | State | Captured By | Owner | Authority | Domain | Cost | Impact | Risk | Subject | Date |
 |---|---|---|---|---|---|---|---|---|---|---|---|

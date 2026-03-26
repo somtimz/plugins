@@ -8,11 +8,14 @@ version: 0.1
 lastModified: {{YYYY-MM-DD}}
 ---
 
-<!-- GUIDANCE:
-  The Business Architecture describes the business strategy, governance, organisation, and
-  key business processes. It is the foundation for the Application and Technology architectures.
-  Phase B takes Architecture Vision as its primary input.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+The Business Architecture describes the business strategy, governance, organisation, and
+key business processes. It is the foundation for the Application and Technology architectures.
+Phase B takes Architecture Vision as its primary input.
+
+</details>
 
 # Business Architecture
 
@@ -24,10 +27,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 1. Business Context
 
-<!-- GUIDANCE:
-  Describe the business context: industry, operating model, strategic direction.
-  Reference the Architecture Vision for strategic goals.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Describe the business context: industry, operating model, strategic direction.
+Reference the Architecture Vision for strategic goals.
+
+</details>
 
 {{business_context}}
 
@@ -35,10 +41,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 2. Organisation Model
 
-<!-- GUIDANCE:
-  Describe the organisational structure relevant to this architecture.
-  Include a diagram reference if available.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Describe the organisational structure relevant to this architecture.
+Include a diagram reference if available.
+
+</details>
 
 {{organisation_model}}
 
@@ -48,11 +57,14 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 3. Business Capabilities
 
-<!-- GUIDANCE:
-  List the business capabilities relevant to this engagement.
-  A capability is an ability to achieve a business outcome, not a process or function.
-  Use ArchiMate Capability elements from the Strategy layer.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+List the business capabilities relevant to this engagement.
+A capability is an ability to achieve a business outcome, not a process or function.
+Use ArchiMate Capability elements from the Strategy layer.
+
+</details>
 
 | Capability | Description | Current Maturity | Target Maturity |
 |---|---|---|---|
@@ -62,10 +74,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 4. Business Processes
 
-<!-- GUIDANCE:
-  Describe the key business processes in scope.
-  Map to capabilities above. Include process diagrams in diagrams/ folder.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Describe the key business processes in scope.
+Map to capabilities above. Include process diagrams in diagrams/ folder.
+
+</details>
 
 ### {{process_name}}
 
@@ -80,10 +95,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 5. Business Services
 
-<!-- GUIDANCE:
-  List the business services delivered by the organisation.
-  A business service is an explicitly defined exposed behaviour.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+List the business services delivered by the organisation.
+A business service is an explicitly defined exposed behaviour.
+
+</details>
 
 | Service | Description | Consumer | Provider |
 |---|---|---|---|
@@ -93,10 +111,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 6. Business Information / Data Objects
 
-<!-- GUIDANCE:
-  Key business information objects used and produced by the business processes.
-  These feed into the Data Architecture in Phase C.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Key business information objects used and produced by the business processes.
+These feed into the Data Architecture in Phase C.
+
+</details>
 
 | Information Object | Description | Owner | Sensitivity |
 |---|---|---|---|
@@ -106,10 +127,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 7. Gap Analysis
 
-<!-- GUIDANCE:
-  Compare the current state business architecture with the target state.
-  Identify gaps that need to be addressed in the solution architecture.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Compare the current state business architecture with the target state.
+Identify gaps that need to be addressed in the solution architecture.
+
+</details>
 
 | Gap | Current State | Target State | Impact |
 |---|---|---|---|
@@ -119,9 +143,12 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 8. Requirements Addressed
 
-<!-- GUIDANCE:
-  List requirements from the Requirements Register that this artifact addresses.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+List requirements from the Requirements Register that this artifact addresses.
+
+</details>
 
 | Req ID | Requirement | How Addressed |
 |---|---|---|
@@ -133,10 +160,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## Appendix A3 — Decision Log
 
-<!-- GUIDANCE:
-  Record all decisions made during the development of this artifact.
-  Use /ea-decisions to aggregate this table across all artifacts into a Decision Register.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Record all decisions made during the development of this artifact.
+Use /ea-decisions to aggregate this table across all artifacts into a Decision Register.
+
+</details>
 
 | Item | Value | State | Captured By | Owner | Authority | Domain | Cost | Impact | Risk | Subject | Date |
 |---|---|---|---|---|---|---|---|---|---|---|---|

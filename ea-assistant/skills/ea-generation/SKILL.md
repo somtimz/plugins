@@ -161,9 +161,13 @@ flowchart TD
 
 ### Prerequisites
 
-```bash
-pip install python-docx
-```
+**No manual setup required.** When `/ea-generate` runs for the first time it:
+
+1. Creates `~/.ea-assistant-venv` if it does not exist
+2. Installs `python-docx` and `python-pptx` into that venv
+3. Uses the venv Python for all subsequent runs
+
+This avoids WSL2 / externally-managed-environment errors without touching system Python.
 
 ### Standard Document Structure
 
@@ -318,6 +322,7 @@ python ${CLAUDE_PLUGIN_ROOT}/scripts/generate-pptx.py \
 
 ## Troubleshooting
 
-- **python-docx not found:** Run `pip3 install python-docx` (Linux/macOS) or `pip install python-docx` (Windows) and verify your Python environment is active.
-- **python-pptx not found:** Run `pip3 install python-pptx` (Linux/macOS) or `pip install python-pptx` (Windows) and verify your Python environment is active.
+- **WSL2 / externally-managed-environment error:** Use a venv — `python3 -m venv ~/.ea-assistant-venv && ~/.ea-assistant-venv/bin/pip install python-docx python-pptx`. The generation commands detect and use it automatically.
+- **python-docx not found:** Run `~/.ea-assistant-venv/bin/pip install python-docx` (venv) or `pip3 install python-docx` (system).
+- **python-pptx not found:** Run `~/.ea-assistant-venv/bin/pip install python-pptx` (venv) or `pip3 install python-pptx` (system).
 - **Script not found:** Verify the plugin root path is set correctly. Check that `${CLAUDE_PLUGIN_ROOT}` resolves to the plugin installation directory and that the `scripts/` subdirectory exists.

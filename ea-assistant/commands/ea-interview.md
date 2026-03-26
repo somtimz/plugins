@@ -111,8 +111,19 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
 
 3. Write to `interviews/interview-{artifact-id}-{YYYY-MM-DD}-v{N}-export.md`
 
-4. If `pandoc` is available, convert to `.docx`:
+4. Convert to `.docx` — bootstrap pandoc if not already installed, then run:
    ```bash
+   if ! command -v pandoc &>/dev/null; then
+     echo "Installing pandoc..."
+     if command -v brew &>/dev/null; then
+       brew install pandoc
+     elif command -v apt-get &>/dev/null; then
+       sudo apt-get install -y pandoc
+     else
+       echo "Cannot auto-install pandoc. Skipping .docx export — interview saved as .md only."
+       exit 0
+     fi
+   fi
    pandoc interviews/{filename}.md -o interviews/{filename}.docx
    ```
 

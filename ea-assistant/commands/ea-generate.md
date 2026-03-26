@@ -87,33 +87,44 @@ graph TD
 
 - Build a content JSON object from the artifact content and engagement metadata.
 - Determine the output path: `EA-projects/{slug}/artifacts/{artifact-id}.docx`
-- Run the generation script:
+- Build a content JSON object from the artifact content and engagement metadata.
+- Determine the output path: `EA-projects/{slug}/artifacts/{artifact-id}.docx`
+- Run the bootstrap + generation block:
 
 ```bash
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/generate-docx.py \
+# Bootstrap: create venv and install dependencies if not already present
+VENV="$HOME/.ea-assistant-venv"
+if [ ! -f "$VENV/bin/python" ]; then
+  echo "Setting up EA Assistant Python environment..."
+  python3 -m venv "$VENV"
+fi
+if ! "$VENV/bin/python" -c "import docx" 2>/dev/null; then
+  echo "Installing python-docx and python-pptx..."
+  "$VENV/bin/pip" install --quiet python-docx python-pptx
+fi
+
+"$VENV/bin/python" ${CLAUDE_PLUGIN_ROOT}/scripts/generate-docx.py \
   --type {artifact-type} \
   --input EA-projects/{slug}/artifacts/{artifact-id}.md \
   --output EA-projects/{slug}/artifacts/{artifact-id}.docx \
   --engagement EA-projects/{slug}/engagement.json
 ```
 
-> **Windows:** Use `python` instead of `python3` if `python3` is not available.
+> **Windows (PowerShell):** Replace `$HOME` with `$env:USERPROFILE`, `bin/python` with `Scripts\python.exe`, and `bin/pip` with `Scripts\pip.exe`.
 
 **For pptx:**
 
 - Build a content JSON object from the artifact content and engagement metadata.
 - Determine the output path: `EA-projects/{slug}/artifacts/{artifact-id}.pptx`
-- Run the generation script:
+- Run the same bootstrap block (the `import docx` check covers both packages since they install together), then:
 
 ```bash
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/generate-pptx.py \
+"$VENV/bin/python" ${CLAUDE_PLUGIN_ROOT}/scripts/generate-pptx.py \
   --type {artifact-type} \
   --input EA-projects/{slug}/artifacts/{artifact-id}.md \
   --output EA-projects/{slug}/artifacts/{artifact-id}.pptx \
   --engagement EA-projects/{slug}/engagement.json
 ```
-
-> **Windows:** Use `python` instead of `python3` if `python3` is not available.
 
 If the script exits with a non-zero status, display the error output and stop. Do not update the engagement.
 

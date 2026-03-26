@@ -50,46 +50,76 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 **Goal:** Define scope, concerns, high-level target, and cross-domain goals
 
 **Key questions:**
-1. What is the business problem or opportunity driving this engagement?
-2. What does success look like at the end of this engagement?
-3. Who are the key stakeholders and what are their primary concerns?
-4. What is explicitly in scope and out of scope for this engagement?
-5. What known constraints or assumptions should be documented upfront?
-6. What existing architecture assets, decisions, or documents are relevant?
-7. What is the desired timeline for completing this work?
-8. What are the biggest risks that could derail this engagement?
-9. *(If direction was not captured at engagement creation)* Let's capture the direction for this engagement. I'll distinguish between three types — and it matters which one we use:
-   - **Goals** answer "where do we want to be?" — qualitative, long-term (e.g. "become the most trusted provider")
-   - **Objectives** answer "how far, and by when?" — measurable and time-bound (e.g. "reduce onboarding from 5 days to 1 day by Q4 2026")
-   - **Strategies** answer "how will we get there?" — courses of action, not outcomes (e.g. "adopt API-first integration")
 
-   Ask: "What are the goals for this engagement?" → classify each response; if it contains a number or deadline, it is likely an objective. If it describes an approach rather than an outcome, it is likely a strategy. Confirm classification before recording.
-10. *(After direction is captured)* For each objective captured, ask: "How will you measure progress toward this? What is the current baseline, and where does the data come from?" Capture as a performance metric linked to the objective. For each goal, ask if there is a leading indicator that would signal progress — capture as an outcome metric. For each strategy, ask if there is an activity measure (e.g., % adoption, number of systems migrated) — capture as an activity metric.
+*Business Drivers — the forces making this engagement necessary:*
+1. What external forces (market shifts, regulatory changes, competitive pressure, technology change) are creating pressure to act now?
+2. What internal forces (cost pressure, strategic mandate, leadership change, capability gap) are pushing this engagement forward?
+3. For each driver: is it an opportunity to exploit, a threat to respond to, or a mandate to comply with?
+
+*Goals — the broad outcomes the strategy must achieve:*
+4. Given those drivers, what are the high-level outcomes this engagement must achieve? Capture each as a goal: a qualitative statement of a desired future state — no numbers or deadlines required at this level. (e.g. "Become a trusted custodian of customer data", "Achieve highly reliable platform operations")
+   - If a response includes a specific number or deadline, it is an **Objective** — note it and handle in the next step.
+   - If it describes an approach ("adopt cloud-first"), it is a **Strategy** — note it and record separately.
+   - Assign each confirmed goal a G-NNN ID and note which driver(s) it responds to.
+
+*Objectives — the measurable, time-bound results that operationalise each goal:*
+5. For each goal captured: what is the specific, measurable result that would prove this goal is being achieved — and by when? (e.g. for "Achieve highly reliable platform operations" → "Reduce unplanned downtime to under 4 hours per quarter by Q4 2026")
+   - Each objective must have: a unit of measure, a target value, and a deadline. Push back on any that lack all three.
+   - Assign each confirmed objective an OBJ-NNN ID and link it to its parent goal.
+6. For each objective: how will you measure progress? What is the current baseline, and where does the data come from? Capture as a performance metric linked to the objective.
+   - For goals without a single measure, ask for a leading indicator — capture as an outcome metric.
+
+*Issues — the systemic barriers that threaten goals:*
+7. For each goal: what broader, systemic concerns are currently preventing or threatening its achievement? (Patterns of dysfunction, capability gaps, unresolved conflicts — not single broken things.) (e.g. "Weak stakeholder alignment across business units", "Inconsistent data quality across operational systems")
+   - Assign each confirmed issue an ISS-NNN ID and link it to the goal(s) it threatens.
+   - If a response is too specific and fixable ("error rate is 30%"), it is a **Problem** — note it and handle in the next step.
+
+*Problems — the specific, observable symptoms that block objectives:*
+8. For each objective: what specific, measurable symptoms are actively blocking or undermining its delivery today? (e.g. "The monthly close process takes 15 days due to manual reconciliation", "Mobile checkout abandonment is 68% — 2× the industry benchmark")
+   - Assign each confirmed problem a PRB-NNN ID and link it to the objective(s) it blocks.
+   - If a response is too broad and unfixable directly ("we have poor data culture"), it is an **Issue** — move it up.
+
+*Scope, constraints, and risks:*
+9. What does success look like at the end of this engagement?
+10. Who are the key stakeholders and what are their primary concerns?
+11. What is explicitly in scope and out of scope for this engagement?
+12. What known constraints or assumptions should be documented upfront?
+13. What existing architecture assets, decisions, or documents are relevant?
+14. What is the desired timeline for completing this work?
+15. What are the biggest risks that could derail this engagement?
 
 **Output Routing:**
 
 | Response Topic | Target Artifact | Target Field |
 |---|---|---|
-| Business problem/opportunity | Architecture Vision | `{{business_problem}}` |
-| Success criteria | Architecture Vision | `{{success_criteria}}` |
-| Statement of Architecture Work | Statement of Architecture Work | `{{engagement_justification}}` |
+| External business drivers | Architecture Vision | `§2 Business Drivers` (DRV-NNN rows) |
+| Internal business drivers | Architecture Vision | `§2 Business Drivers` (DRV-NNN rows) |
+| Goals | Architecture Vision + engagement.json | `§3 Goals` (G-NNN rows) + `direction.goals[]` |
+| Objectives | Architecture Vision + engagement.json | `§4 Objectives` (OBJ-NNN rows) + `direction.objectives[]` |
+| Systemic issues | Architecture Vision | `§5 Issues` (ISS-NNN rows) |
+| Specific problems | Architecture Vision | `§6 Problems` (PRB-NNN rows) |
+| Performance metrics | engagement.json | `metrics[]` linked to OBJ-NNN |
+| Success criteria | Architecture Vision | `§1 Executive Summary` + `§3 Goals` |
 | Key stakeholders | Stakeholder Map | `{{stakeholder_list}}` |
 | Stakeholder concerns | Stakeholder Map | `{{stakeholder_concerns}}` |
-| In-scope items | Architecture Vision | `{{scope_inclusions}}` |
-| Out-of-scope items | Architecture Vision | `{{scope_exclusions}}` |
+| In-scope items | Architecture Vision | `§7 Scope — {{scope_in}}` |
+| Out-of-scope items | Architecture Vision | `§7 Scope — {{scope_out}}` |
 | Constraints | Statement of Architecture Work | `{{constraints}}` |
 | Assumptions | Statement of Architecture Work | `{{assumptions}}` |
-| Existing architecture assets | Architecture Vision | `{{existing_assets}}` |
+| Existing architecture assets | Statement of Architecture Work | `§3 Approach` (reference existing assets as inputs) |
 | Timeline | Statement of Architecture Work | `{{timeline}}` |
-| Key risks | Architecture Vision | `{{key_risks}}` |
-| Cross-domain direction (goals, objectives, strategies) | engagement.json + Architecture Vision | `direction.*` + `{{direction_summary}}` |
-| Cross-domain metrics | engagement.json + Architecture Vision | `metrics.*` + `{{metrics_summary}}` |
+| Key risks | Architecture Vision | `§13 Key Risks` (table rows) |
+| Strategies | engagement.json | `direction.strategies[]` |
 
 **Facilitation Notes:**
-- The "what does success look like" question is the most important in this phase — get a concrete, measurable answer rather than accepting vague aspirations.
+- Follow the sequence: Drivers → Goals → Objectives → Issues → Problems. Each layer is easier to articulate once the layer above is established.
+- Goals come before objectives. Do not ask for measures until you have a confirmed, classified goal — premature measurement pressure collapses goals into objectives and loses the qualitative anchor.
+- When classifying responses: numbers or deadlines → Objective; approaches or choices → Strategy; broad dysfunction → Issue; specific observable symptom → Problem. Reclassify explicitly and confirm with the stakeholder before recording.
+- For every Issue, ask "which goal does this threaten?" — if it threatens no goal, either the goal list is incomplete or the issue is not architecture-relevant.
+- For every Problem, ask "which objective does this block?" — if it blocks no objective, either the objectives list is incomplete or the problem is out of scope.
 - Scope boundary questions often generate the most debate; document disagreements explicitly rather than forcing premature consensus.
-- Ask stakeholders to describe their concerns in terms of consequences: "what happens if this is not addressed?" reveals priority more reliably than a ranking exercise.
 - A brief stakeholder RACI draft during this session prevents scope and accountability conflicts later.
+- If a driver, issue, or problem needs external validation or deeper investigation, pause and invoke `@research-agent` before recording it as fact. Example: "I'll check the regulatory landscape on that before we lock in DRV-002." Research findings can be pasted directly into brainstorm notes or artifact fields.
 
 ---
 

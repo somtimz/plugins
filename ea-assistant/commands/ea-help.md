@@ -79,6 +79,7 @@ You have existing engagements. Common next steps:
 | `/ea-brainstorm [phase]` | Capture freeform thoughts and context for use during interviews |
 | `/ea-generate [artifact] [format]` | Export artifact as Word, PPTX, or Mermaid |
 | `/ea-review [artifact]` | Review and assess an artifact |
+| `/ea-grill [artifact] [--skill]` | Deep-review an artifact using a grill-me skill (stress-test, boardroom, premortem, decision, design) |
 | `/ea-requirements [action]` | Manage architecture requirements |
 | `/ea-decisions [options]` | Generate Decision Register from all A3 decision logs |
 | `/ea-publish` | Merge artifacts into a consolidated report |
@@ -122,6 +123,22 @@ Type these at any interview prompt:
   the artifact's purpose, value, and guidance on the current question.
 • Ask "how does architecture governance work" for a full explanation of
   the governance structure, cascade, roles, and TOGAF tool mapping.
+
+### Using the Research Agent during an engagement
+
+The `@research-agent` is available at any point in an EA engagement. Use it when you need
+evidence, citations, or deeper investigation before populating an artifact.
+
+| When | Example |
+|---|---|
+| Identifying business drivers | `@research-agent research current regulatory drivers for financial services data governance in the EU` |
+| Validating a technology choice | `@research-agent investigate event-driven architecture adoption patterns in retail banking` |
+| Grounding a risk or assumption | `@research-agent find evidence on failure rates for large-scale ERP consolidations` |
+| Populating a Business Model Canvas | `@research-agent research competitor business models in the B2B SaaS payroll space` |
+
+The agent maps the topic, gathers primary evidence with citations, flags contradictions, and
+returns an executive-ready synthesis with confidence scores. Paste findings directly into
+brainstorm notes or artifact fields.
 ```
 
 5. **If the user asks about architecture governance** (e.g. "how does governance work", "explain the ARB", "what is the governance cascade", "governance roles", "Phase G governance"), read `skills/ea-engagement-lifecycle/references/governance-framework.md` and present it in full. The file contains two images (`images/governance-structure.png` and `images/governance-cascade.png`) — display both inline at the points where they are referenced in the document. Do not summarise — present the full reference.

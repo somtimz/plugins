@@ -8,13 +8,16 @@ version: 0.1
 lastModified: {{YYYY-MM-DD}}
 ---
 
-<!-- GUIDANCE:
-  The Migration Plan is the primary Phase F artifact. It takes the work packages from the
-  Architecture Roadmap (Phase E) and defines how they will be sequenced and executed to
-  transition from the baseline to the target architecture. Phase F focuses on the practical
-  "how and when" of migration: sequencing, dependency management, wave planning, risk, and
-  rollback. It is an input to implementation planning and must be kept current as delivery proceeds.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+The Migration Plan is the primary Phase F artifact. It takes the work packages from the
+Architecture Roadmap (Phase E) and defines how they will be sequenced and executed to
+transition from the baseline to the target architecture. Phase F focuses on the practical
+"how and when" of migration: sequencing, dependency management, wave planning, risk, and
+rollback. It is an input to implementation planning and must be kept current as delivery proceeds.
+
+</details>
 
 # Migration Plan
 
@@ -27,12 +30,15 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 1. Migration Overview
 
-<!-- GUIDANCE:
-  Summarise the migration at a high level: what is being migrated, from what baseline, to what
-  target, and over what timeframe. State the overall migration strategy (e.g. big-bang,
-  phased, parallel run, strangler fig). Reference the Architecture Roadmap for the work packages
-  being executed.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Summarise the migration at a high level: what is being migrated, from what baseline, to what
+target, and over what timeframe. State the overall migration strategy (e.g. big-bang,
+phased, parallel run, strangler fig). Reference the Architecture Roadmap for the work packages
+being executed.
+
+</details>
 
 {{migration_overview}}
 
@@ -44,14 +50,17 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 2. Migration Approach
 
-<!-- GUIDANCE:
-  Describe the approach in enough detail that a delivery team can plan from it. Address:
-  - How data will be migrated (ETL, replication, manual, dual-write)
-  - How cut-over will be managed (hard cut-over, phased, feature flags)
-  - How users will be transitioned (training, change management)
-  - How legacy systems will be decommissioned
-  - Any parallel running period and how reconciliation will be conducted
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Describe the approach in enough detail that a delivery team can plan from it. Address:
+- How data will be migrated (ETL, replication, manual, dual-write)
+- How cut-over will be managed (hard cut-over, phased, feature flags)
+- How users will be transitioned (training, change management)
+- How legacy systems will be decommissioned
+- Any parallel running period and how reconciliation will be conducted
+
+</details>
 
 ### Data Migration Approach
 {{data_migration_approach}}
@@ -69,13 +78,16 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 3. Wave Plan
 
-<!-- GUIDANCE:
-  Break the migration into discrete waves (tranches). Each wave should deliver a stable,
-  usable state (a transition architecture plateau). Sequence waves to manage dependency,
-  risk, and organisational change capacity. Each wave should have clear entry criteria
-  (what must be true before the wave begins) and exit criteria (what must be true before
-  the next wave starts).
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Break the migration into discrete waves (tranches). Each wave should deliver a stable,
+usable state (a transition architecture plateau). Sequence waves to manage dependency,
+risk, and organisational change capacity. Each wave should have clear entry criteria
+(what must be true before the wave begins) and exit criteria (what must be true before
+the next wave starts).
+
+</details>
 
 ### Wave 1: {{wave_1_name}}
 
@@ -105,12 +117,15 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 4. Risk Register
 
-<!-- GUIDANCE:
-  List the risks specific to migration execution. Migration risks differ from architecture
-  risks — they focus on execution: data loss, extended downtime, user disruption, integration
-  failure during cut-over, and regulatory issues during transition. Include likelihood,
-  impact, mitigation, and an owner for each risk.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+List the risks specific to migration execution. Migration risks differ from architecture
+risks — they focus on execution: data loss, extended downtime, user disruption, integration
+failure during cut-over, and regulatory issues during transition. Include likelihood,
+impact, mitigation, and an owner for each risk.
+
+</details>
 
 | Risk ID | Description | Likelihood | Impact | Mitigation | Owner |
 |---|---|---|---|---|---|
@@ -121,12 +136,15 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 5. Rollback Plan
 
-<!-- GUIDANCE:
-  For each wave, define the rollback trigger, rollback procedure, and rollback decision authority.
-  A rollback plan should be tested before it is needed. Specify: what monitoring will detect
-  a need to roll back, who can authorise rollback, and how long the rollback window is open
-  after each cut-over.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+For each wave, define the rollback trigger, rollback procedure, and rollback decision authority.
+A rollback plan should be tested before it is needed. Specify: what monitoring will detect
+a need to roll back, who can authorise rollback, and how long the rollback window is open
+after each cut-over.
+
+</details>
 
 | Wave | Rollback Trigger | Rollback Procedure | Decision Authority | Rollback Window |
 |---|---|---|---|---|
@@ -140,11 +158,14 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 6. Success Criteria
 
-<!-- GUIDANCE:
-  Define the measurable criteria that will confirm the migration has succeeded. Criteria should
-  be verifiable: system health checks, data reconciliation counts, performance benchmarks,
-  user acceptance sign-off. Include the testing approach used to validate each criterion.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Define the measurable criteria that will confirm the migration has succeeded. Criteria should
+be verifiable: system health checks, data reconciliation counts, performance benchmarks,
+user acceptance sign-off. Include the testing approach used to validate each criterion.
+
+</details>
 
 | Criterion | Measure | Target | Validation Method | Owner |
 |---|---|---|---|---|

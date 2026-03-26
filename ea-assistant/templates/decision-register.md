@@ -11,12 +11,15 @@ filters: {{applied_filters_or_None}}
 audience: {{audience_or_All}}
 ---
 
-<!-- GUIDANCE:
-  The Decision Register aggregates all Appendix A3 Decision Log rows from every artifact
-  in this engagement into a single cross-artifact view. It is generated on demand via
-  /ea-decisions and can be tailored to any audience, decision maker, domain, or status.
-  Rows are sourced from A3 tables; do not edit this document directly — regenerate it.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+The Decision Register aggregates all Appendix A3 Decision Log rows from every artifact
+in this engagement into a single cross-artifact view. It is generated on demand via
+/ea-decisions and can be tailored to any audience, decision maker, domain, or status.
+Rows are sourced from A3 tables; do not edit this document directly — regenerate it.
+
+</details>
 
 # Decision Register
 
@@ -52,10 +55,13 @@ audience: {{audience_or_All}}
 
 ## Open Decisions — Action Required
 
-<!-- GUIDANCE:
-  All decisions with state: Provisional, Awaiting Verification, or Returned.
-  These require an owner to act before they can be considered resolved.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+All decisions with state: Provisional, Awaiting Verification, or Returned.
+These require an owner to act before they can be considered resolved.
+
+</details>
 
 | # | Item | Value | State | Owner | Authority | Domain | Impact | Risk | Source Artifact | Date |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -67,9 +73,12 @@ audience: {{audience_or_All}}
 
 ### Strategic Decisions
 
-<!-- GUIDANCE:
-  Enterprise-wide, long-term commitments. High scrutiny — these bind the organisation.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Enterprise-wide, long-term commitments. High scrutiny — these bind the organisation.
+
+</details>
 
 | # | Item | Value | State | Owner | Domain | Impact | Risk | Source Artifact | Date |
 |---|---|---|---|---|---|---|---|---|---|
@@ -191,10 +200,13 @@ audience: {{audience_or_All}}
 
 ## Full Decision Index
 
-<!-- GUIDANCE:
-  Complete flat table of all decisions in this register, regardless of filters.
-  Sortable reference for architects and auditors.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Complete flat table of all decisions in this register, regardless of filters.
+Sortable reference for architects and auditors.
+
+</details>
 
 | # | Item | Value | State | Captured By | Owner | Authority | Domain | Cost | Impact | Risk | Subject | Source Artifact | Date |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|

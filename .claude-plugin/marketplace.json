@@ -1,6 +1,6 @@
 {
   "name": "somtimz-plugins",
-  "description": "Enterprise Architecture, RAG, and ITIL plugins for Claude Code",
+  "description": "Enterprise Architecture, research, strategy critique, RAG, and ITIL plugins for Claude Code",
   "owner": {
     "name": "Costa Pissaris",
     "email": "cpissaris@gmail.com"
@@ -9,7 +9,7 @@
     {
       "name": "ea-assistant",
       "description": "End-to-end Enterprise Architecture engagement management with artifact generation, phase interviews, brainstorming, and requirements analysis. Supports TOGAF 10, Zachman, and ArchiMate.",
-      "version": "0.8.0",
+      "version": "0.9.0",
       "author": {
         "name": "Costa Pissaris",
         "email": "cpissaris@gmail.com"
@@ -28,6 +28,30 @@
       },
       "source": "./RAG-assistant",
       "category": "development",
+      "strict": false
+    },
+    {
+      "name": "research-agent",
+      "description": "A Lead Research Analyst agent that conducts deep, evidence-based research into topics, codebases, and documents — with confidence scoring, contradiction detection, and executive-ready synthesis.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Costa Pissaris",
+        "email": "cpissaris@gmail.com"
+      },
+      "source": "./research-agent",
+      "category": "productivity",
+      "strict": false
+    },
+    {
+      "name": "grill-me",
+      "description": "Seven relentless interview skills for stress-testing strategies, decisions, and designs — from depth-first clarification to board simulation, pre-mortem, decision memo extraction, and design critique.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Costa Pissaris",
+        "email": "cpissaris@gmail.com"
+      },
+      "source": "./grill-me",
+      "category": "productivity",
       "strict": false
     },
     {

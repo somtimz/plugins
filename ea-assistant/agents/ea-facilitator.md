@@ -32,7 +32,7 @@ description: >
   </commentary>
   </example>
 model: inherit
-color: blue
+color: yellow
 tools: ["Read", "Write", "Glob", "Grep"]
 ---
 

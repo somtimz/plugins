@@ -96,23 +96,48 @@ Then save interview notes and update `engagement.json` as per the normal intervi
 
 **When to use:** At the start of every `ea-brainstorm` command session, in place of the iterative chat loop.
 
+The brainstorm pad is parameterised via a `BRAINSTORM_DATA` constant injected at render time (same pattern as `INTERVIEW_DATA` in App 1). When no phase is provided, all fields are `null` and the app shows generic hints.
+
+### BRAINSTORM_DATA shape
+
+```js
+const BRAINSTORM_DATA = {
+  phase: "<phase label, e.g. 'Phase D — Technology Architecture'>",  // null = no badge
+  subtitle: "<one-sentence focus prompt>",                            // null = generic subtitle
+  categories: [   // null = use all generic defaults
+    { id: "concerns",      hint: "<phase-specific hint text>" },
+    { id: "goals",         hint: "<phase-specific hint text>" },
+    { id: "constraints",   hint: "<phase-specific hint text>" },
+    { id: "opportunities", hint: "<phase-specific hint text>" },
+    { id: "assumptions",   hint: "<phase-specific hint text>" },
+    { id: "other",         hint: "<phase-specific hint text>" },
+  ],
+};
+```
+
+Only `hint` is overridden — `label` and `emoji` are always taken from defaults.
+
 ### Mode A: React artifact (Claude Code / Cowork)
 
 1. Read `references/brainstorm-app.jsx`.
-2. Present it as-is as a **React artifact** — no modifications needed.
+2. Replace the `BRAINSTORM_DATA` constant (lines beginning `const BRAINSTORM_DATA = {`) with the actual data provided by `ea-brainstorm.md`. When no phase is active, set all fields to `null`.
+3. Present the modified JSX as a **React artifact**.
 
 ### Mode B: HTML file (OpenCode / no artifact renderer)
 
 1. Read `references/brainstorm-app-shell.html`.
-2. Replace `%%COMPONENT_BODY%%` with the full body of `references/brainstorm-app.jsx` — everything **after** the `import` line (i.e. from `const CATEGORIES` to end of file), changing `export default function BrainstormPad` → `function BrainstormPad`.
-3. Write to `EA-projects/{slug}/ui/brainstorm-{YYYY-MM-DD}.html`.
-4. Open in browser using the same platform command as the interview app.
-5. Tell the user: "Brainstorm pad opened in your browser. Fill in your thoughts, click 'Done', then copy the notes and paste back here."
+2. Replace `%%BRAINSTORM_DATA_JSON%%` with the JSON-serialised `BRAINSTORM_DATA` object (same shape as above).
+3. Replace `%%COMPONENT_BODY%%` with the full body of `references/brainstorm-app.jsx` — everything **after** the `import` line and `BRAINSTORM_DATA` constant (i.e. from `const DEFAULT_CATEGORIES` to end of file), changing `export default function BrainstormPad` → `function BrainstormPad`.
+4. Write to `EA-projects/{slug}/ui/brainstorm-{YYYY-MM-DD}.html`.
+5. Open in browser using the same platform command as the interview app.
+6. Tell the user: "Brainstorm pad opened in your browser. Fill in your thoughts, click 'Done', then copy the notes and paste back here."
 
 **App behaviour (for reference):**
 - Six collapsible category cards: Concerns, Goals & Vision, Constraints, Opportunities, Assumptions, Other
+- Each card shows a phase-specific hint under its label when `BRAINSTORM_DATA.categories` is set
+- Phase badge shown in the header label when `BRAINSTORM_DATA.phase` is set
 - Each card has one or more text inputs; Enter adds a new thought; × removes one
-- "Done — show notes →" produces a formatted text block; user copies and pastes it into chat
+- "Done — show notes →" produces a formatted text block (includes `Phase:` line when scoped); user copies and pastes it into chat
 - "Clear all" resets the pad
 
 **Processing the paste-back:**

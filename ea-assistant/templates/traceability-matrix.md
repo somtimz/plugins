@@ -8,13 +8,16 @@ version: 0.1
 lastModified: {{YYYY-MM-DD}}
 ---
 
-<!-- GUIDANCE:
-  The Requirements Traceability Matrix maps each architecture requirement to the artifacts
-  that address it. Requirements are grouped by scope — Corporate first, Project second.
-  Corporate requirements with status Waived are shown with 🚫 in all artifact cells;
-  the waiver itself is the coverage action and they are excluded from the untraced count.
-  This matrix is generated or updated by /ea-requirements trace.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+The Requirements Traceability Matrix maps each architecture requirement to the artifacts
+that address it. Requirements are grouped by scope — Corporate first, Project second.
+Corporate requirements with status Waived are shown with 🚫 in all artifact cells;
+the waiver itself is the coverage action and they are excluded from the untraced count.
+This matrix is generated or updated by /ea-requirements trace.
+
+</details>
 
 # Requirements Traceability Matrix
 
@@ -38,10 +41,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## Traceability Matrix — Corporate Requirements
 
-<!-- GUIDANCE:
-  Corporate requirements appear first. Content fields are read-only; this matrix tracks
-  artifact linkage and coverage status only. Waived requirements show 🚫 in all cells.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Corporate requirements appear first. Content fields are read-only; this matrix tracks
+artifact linkage and coverage status only. Waived requirements show 🚫 in all cells.
+
+</details>
 
 | Req ID | Requirement | Priority | Arch Vision | Biz Arch | Data | App | Tech | Roadmap |
 |---|---|---|---|---|---|---|---|---|
@@ -51,10 +57,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## Traceability Matrix — Project Requirements
 
-<!-- GUIDANCE:
-  Project-specific requirements. The Derives From column shows which Corporate requirement
-  this project requirement responds to, if applicable (— if none).
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Project-specific requirements. The Derives From column shows which Corporate requirement
+this project requirement responds to, if applicable (— if none).
+
+</details>
 
 | Req ID | Requirement | Priority | Derives From | Arch Vision | Biz Arch | Data | App | Tech | Roadmap |
 |---|---|---|---|---|---|---|---|---|---|
@@ -66,11 +75,14 @@ Legend: ✅ Addressed | ⚠️ Partially addressed | ⬜ Not addressed | 🚫 Wa
 
 ## Untraced Requirements
 
-<!-- GUIDANCE:
-  List all requirements with no artifact coverage. These must be addressed or formally
-  waived before any artifact is submitted for approval. Waived Corporate requirements
-  are excluded from this section.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+List all requirements with no artifact coverage. These must be addressed or formally
+waived before any artifact is submitted for approval. Waived Corporate requirements
+are excluded from this section.
+
+</details>
 
 | Req ID | Scope | Requirement | Status | Action Required |
 |---|---|---|---|---|

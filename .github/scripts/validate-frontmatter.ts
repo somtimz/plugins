@@ -34,6 +34,12 @@ function quoteSpecialValues(text: string): string {
         result.push(line);
         continue;
       }
+      // Don't quote YAML block scalar indicators — quoting them breaks multiline values
+      const blockScalarIndicators = /^[|>][+\-]?\s*$/;
+      if (blockScalarIndicators.test(value)) {
+        result.push(line);
+        continue;
+      }
       if (YAML_SPECIAL_CHARS.test(value)) {
         const escaped = value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
         result.push(`${key}: "${escaped}"`);
@@ -146,6 +152,8 @@ async function findMdFiles(baseDir: string): Promise<{ path: string; type: FileT
     for (const entry of entries) {
       const fullPath = join(dir, entry.name);
       if (entry.isDirectory()) {
+        // Skip .claude directories — these contain user-level commands, not plugin files
+        if (entry.name === ".claude") continue;
         await walk(fullPath);
       } else if (entry.name.endsWith(".md")) {
         const type = detectFileType(fullPath);

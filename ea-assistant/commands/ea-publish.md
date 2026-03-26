@@ -155,6 +155,19 @@ If the artifact has open review comments (in its `.review.md` file), append:
 - Word: `artifacts/consolidated-report-{YYYY-MM-DD}.docx`
 
 ```bash
+# Bootstrap: install pandoc if not present
+if ! command -v pandoc &>/dev/null; then
+  echo "Installing pandoc..."
+  if command -v brew &>/dev/null; then
+    brew install pandoc
+  elif command -v apt-get &>/dev/null; then
+    sudo apt-get install -y pandoc
+  else
+    echo "Cannot auto-install pandoc. Please install it manually: https://pandoc.org/installing.html"
+    exit 1
+  fi
+fi
+
 pandoc artifacts/consolidated-report-{date}.md \
   --reference-doc=templates/consolidated-report.docx \
   -o artifacts/consolidated-report-{date}.docx

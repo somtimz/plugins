@@ -8,12 +8,15 @@ version: 0.1
 lastModified: {{YYYY-MM-DD}}
 ---
 
-<!-- GUIDANCE:
-  Architecture Principles define the rules and guidelines that govern architecture decisions.
-  They should be agreed with the sponsor and key stakeholders before Phase A begins.
-  Each principle has a Name, Statement, Rationale, and Implications.
-  TOGAF recommends 9-15 principles. Too few lack guidance; too many become unmanageable.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Architecture Principles define the rules and guidelines that govern architecture decisions.
+They should be agreed with the sponsor and key stakeholders before Phase A begins.
+Each principle has a Name, Statement, Rationale, and Implications.
+TOGAF recommends 9-15 principles. Too few lack guidance; too many become unmanageable.
+
+</details>
 
 # Architecture Principles
 
@@ -26,10 +29,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## Principle Categories
 
-<!-- GUIDANCE:
-  Organise principles into categories: Business, Data, Application, Technology.
-  Add or remove categories as appropriate.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Organise principles into categories: Business, Data, Application, Technology.
+Add or remove categories as appropriate.
+
+</details>
 
 ---
 

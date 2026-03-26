@@ -8,12 +8,15 @@ version: 0.1
 lastModified: {{YYYY-MM-DD}}
 ---
 
-<!-- GUIDANCE:
-  The Statement of Architecture Work (SoAW) is the formal agreement that defines the scope and
-  approach for an architecture engagement. It is produced in Phase A and approved by the sponsor
-  before substantive architecture work begins. It is analogous to a project charter and establishes
-  the mandate, schedule, and acceptance criteria for the engagement.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+The Statement of Architecture Work (SoAW) is the formal agreement that defines the scope and
+approach for an architecture engagement. It is produced in Phase A and approved by the sponsor
+before substantive architecture work begins. It is analogous to a project charter and establishes
+the mandate, schedule, and acceptance criteria for the engagement.
+
+</details>
 
 # Statement of Architecture Work
 
@@ -29,11 +32,14 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 1. Purpose
 
-<!-- GUIDANCE:
-  State why this architecture engagement is being undertaken. Describe the business trigger or
-  decision that has initiated this work. Reference the Architecture Vision if it already exists.
-  This should be 2-4 sentences: clear, non-technical, and focused on business value.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+State why this architecture engagement is being undertaken. Describe the business trigger or
+decision that has initiated this work. Reference the Architecture Vision if it already exists.
+This should be 2-4 sentences: clear, non-technical, and focused on business value.
+
+</details>
 
 {{purpose}}
 
@@ -41,11 +47,14 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 2. Scope
 
-<!-- GUIDANCE:
-  Define the architectural scope precisely. Specify which business domains, systems, organisational
-  units, geographies, and TOGAF phases are in scope. Clearly list what is out of scope to prevent
-  scope creep. Reference the Architecture Vision scope section for consistency.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Define the architectural scope precisely. Specify which business domains, systems, organisational
+units, geographies, and TOGAF phases are in scope. Clearly list what is out of scope to prevent
+scope creep. Reference the Architecture Vision scope section for consistency.
+
+</details>
 
 ### In Scope
 {{scope_in}}
@@ -63,12 +72,15 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 3. Approach
 
-<!-- GUIDANCE:
-  Describe the methodology and approach for conducting the engagement. Include: how stakeholder
-  engagement will be managed, what discovery techniques will be used (workshops, interviews, document
-  review), what modelling notation will be applied (ArchiMate, BPMN, etc.), and how decisions
-  will be documented and governed.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Describe the methodology and approach for conducting the engagement. Include: how stakeholder
+engagement will be managed, what discovery techniques will be used (workshops, interviews, document
+review), what modelling notation will be applied (ArchiMate, BPMN, etc.), and how decisions
+will be documented and governed.
+
+</details>
 
 {{approach}}
 
@@ -82,10 +94,13 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 4. Schedule
 
-<!-- GUIDANCE:
-  Provide a high-level schedule with milestones. Include phase start/end dates, key review gates,
-  and the expected date of each deliverable. Align with any broader programme or project timeline.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Provide a high-level schedule with milestones. Include phase start/end dates, key review gates,
+and the expected date of each deliverable. Align with any broader programme or project timeline.
+
+</details>
 
 | Milestone | Description | Target Date | Owner |
 |---|---|---|---|
@@ -98,11 +113,14 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 5. Roles and Responsibilities
 
-<!-- GUIDANCE:
-  List all roles involved in the engagement. Clarify who is Responsible, Accountable, Consulted,
-  and Informed (RACI) for key decisions and deliverables. Include both the architecture team and
-  client-side stakeholders who have obligations.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+List all roles involved in the engagement. Clarify who is Responsible, Accountable, Consulted,
+and Informed (RACI) for key decisions and deliverables. Include both the architecture team and
+client-side stakeholders who have obligations.
+
+</details>
 
 | Role | Name | Organisation | RACI for Deliverables | RACI for Decisions |
 |---|---|---|---|---|
@@ -115,11 +133,14 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 6. Acceptance Criteria
 
-<!-- GUIDANCE:
-  Define the measurable criteria that must be satisfied for each deliverable to be accepted.
-  Acceptance criteria should be objective and verifiable — avoid vague terms like "high quality".
-  Include who has authority to accept each deliverable.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+Define the measurable criteria that must be satisfied for each deliverable to be accepted.
+Acceptance criteria should be objective and verifiable — avoid vague terms like "high quality".
+Include who has authority to accept each deliverable.
+
+</details>
 
 | Deliverable | Acceptance Criteria | Accepted By |
 |---|---|---|
@@ -131,11 +152,14 @@ lastModified: {{YYYY-MM-DD}}
 
 ## 7. Sign-off
 
-<!-- GUIDANCE:
-  This section records formal approval of the Statement of Architecture Work. All named approvers
-  must sign before the engagement proceeds beyond Phase A. Retain a signed copy in the engagement
-  record.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+This section records formal approval of the Statement of Architecture Work. All named approvers
+must sign before the engagement proceeds beyond Phase A. Retain a signed copy in the engagement
+record.
+
+</details>
 
 By signing below, the named parties confirm they have read, understood, and approved this
 Statement of Architecture Work.
