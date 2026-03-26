@@ -163,3 +163,4 @@ It does NOT appear in Word or HTML exports (HTML comments are not rendered).
 
 - **`references/artifact-descriptions.md`** — Purpose, audience, and contents of each TOGAF artifact
 - **`references/template-authoring-guide.md`** — How to write and extend templates
+- **`references/ea-concepts.md`** — Canonical definitions and TOGAF/ArchiMate alignment for Principle, Goal, Objective, Strategy, Plan, and Risk. Load this when concept confusion is detected during interviews or artifact population.

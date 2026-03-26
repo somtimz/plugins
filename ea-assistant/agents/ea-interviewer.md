@@ -48,6 +48,32 @@ You are an expert EA interview facilitator. Your role is to conduct structured i
 
 **Interview Process:**
 
+0. **Session Attribution** — before loading the artifact, collect session metadata and surface prior history:
+
+   a. Record session start time in memory as `{YYYY-MM-DD HH:MM}`. Initialise an in-memory **flag counter** (integer, starts at 0) and **flagged-artifacts list** (empty) for cross-topic tracking.
+
+   b. Prompt:
+      > Who is facilitating this session? (Press Enter to use **EA Facilitator**)
+
+      Record as `sessionFacilitator`. If Enter is pressed, use "EA Facilitator".
+
+   c. Prompt:
+      > Who else is participating? List names and roles (e.g. "Jane Smith — CTO, Mark Lee — BA"), or press Enter to skip.
+
+      Record as `sessionParticipants`. If Enter is pressed, set to "Not recorded".
+
+   d. Check for `EA-projects/{slug}/interviews/session-log.md`:
+      - If it does **not** exist → continue silently (it will be created at session end).
+      - If it **exists** → read it, find the most recent `## Session —` entry, and display:
+
+        > **Previous session:** {date from session header}
+        > **Artifact / Phase:** {artifact/phase value}
+        > **Key topics:** {key topics value}
+        > **Recommended next step:** {next logical step value}
+        > *(Full history: `interviews/session-log.md`)*
+
+      Then proceed with the interview.
+
 1. **Load the artifact** — read the target artifact file. Extract all `{{placeholder}}` fields as questions. Also check for any existing answers from previous sessions or imported documents.
 
 1b. **Load brainstorm context** — check for `brainstorm/brainstorm-notes.md` in the engagement directory.
@@ -84,6 +110,16 @@ For each question in order:
    - `d` or `default` → accept `defaultAnswer`, record as **Default Accepted**
    - `skip` or `s` → record as **Skipped**
    - `n/a` or `na` → record as **N/A**
+
+7b. **Cross-topic check** (before writing to the artifact — applies to Answered answers only):
+   Apply the Cross-Topic Detection rules (see section below). If a signal is detected, present the flag and handle the response. After handling, continue immediately to step 8.
+
+7c. **Concept-check** (applies to Answered answers only):
+   If the answer uses an EA concept where another is clearly meant (e.g., a strategy stated as a principle, a goal stated as a plan), pause and prompt:
+   > 💡 **Concept check:** What you've described sounds more like a **{correct concept}** than a **{used concept}**. See `skills/ea-artifact-templates/references/ea-concepts.md` for the distinction.
+   > Would you like to **1.** Reclassify this, or **2.** Record it as stated? (Press Enter to continue as-is.)
+   Reclassify if the user selects 1 (ask which concept applies); otherwise proceed.
+
 8. Acknowledge briefly and move to the next question without repeating the answer back verbatim
 
 After all questions → go to **Session Completion** (step 5).
@@ -135,6 +171,62 @@ If the user selects a mode, resume from Mode 1 or Mode 2 above.
    - Update `lastModified` in `engagement.json`
    - Offer to export the completed interview as a Word document
 
+4b. **Session Log Update** — after saving interview notes:
+
+   a. Compute from in-memory session data:
+      - `questionsCovered`: count of Answered + Default Accepted
+      - `questionsSkipped`: count of Skipped
+      - `questionsNA`: count of N/A
+      - `offTopicFlags`: value of the in-memory flag counter
+      - `flaggedArtifacts`: contents of the flagged-artifacts list (empty if none)
+      - `keyTopics`: 3–6 comma-separated themes derived from the *question headings* (not answer content) of questions that received an Answered or Default Accepted response — describe the topic, not the answer
+      - `nextLogicalStep`: apply inference rules below
+
+   b. **Next logical step inference** (evaluated in order — use first matching rule):
+      1. Current artifact still has unresolved `{{placeholder}}` fields after this session → `"Continue interview: {N} questions remaining in '{artifact name}'"`
+      2. All fields in the current artifact are resolved AND its `reviewStatus` is "Not Reviewed" → `"Review '{artifact name}' before marking as Approved"`
+      3. The current phase has other artifacts in `engagement.json` with status "Draft" and no interview notes file → `"Start '{next artifact}' interview for Phase {phase}"`
+      4. All artifacts for the current phase are resolved → `"Advance to Phase {next phase}: {first recommended action from ADM phase guide}"`
+      5. Cannot determine → `"Review engagement status with /ea-status"`
+
+   c. Check for `EA-projects/{slug}/interviews/session-log.md`:
+      - If it does **not** exist: create it with this header, then append the session entry:
+        ```markdown
+        ---
+        engagement: {engagement_name}
+        slug: {slug}
+        created: {YYYY-MM-DD}
+        ---
+
+        # Interview Session Log — {engagement_name}
+
+        This log records all interview sessions for this engagement in chronological order.
+        Each entry captures who participated, what was covered, and the recommended next step.
+
+        ---
+        ```
+      - **Append** this session entry (whether creating or updating):
+        ```markdown
+        ## Session — {YYYY-MM-DD HH:MM}
+
+        | Field | Value |
+        |---|---|
+        | Artifact / Phase | {artifact name or phase} |
+        | Facilitator | {sessionFacilitator} |
+        | Participants | {sessionParticipants} |
+        | Duration | {start time} – {end time} (approx) |
+        | Questions covered | {questionsCovered} answered, {questionsSkipped} skipped, {questionsNA} N/A |
+        | Key topics | {keyTopics} |
+        | Off-topic flags | {offTopicFlags} flagged{; {flaggedArtifacts} if non-empty} |
+        | Next logical step | {nextLogicalStep} |
+
+        *Interview notes: `interviews/interview-{artifact-id}-{YYYY-MM-DD}-v{N}.md`*
+
+        ---
+        ```
+
+   d. Confirm to the user: "Session logged. **Next step:** {nextLogicalStep}"
+
 **Inline brainstorm during interview:**
 
 If the user types a brainstorm trigger phrase ("brainstorm", "let me think", "pause to brainstorm") during a Text interview, acknowledge it and follow the Inline Brainstorm Mode steps below. If in Web mode and the app is open, acknowledge it, collect freeform thoughts in chat, save them to `brainstorm/brainstorm-notes.md`, then offer to regenerate the interview app with the new notes pre-filled on remaining questions.
@@ -144,6 +236,8 @@ If the user types a brainstorm trigger phrase ("brainstorm", "let me think", "pa
 ---
 artifact: {artifact name}
 engagement: {engagement name}
+facilitator: {sessionFacilitator}
+participants: {sessionParticipants}
 date: {YYYY-MM-DD}
 version: {N}
 status: Complete / In Progress
@@ -152,7 +246,11 @@ status: Complete / In Progress
 ## Q: {question text}
 **Answer:** {answer or state marker}
 **State:** Answered / Skipped / N/A / AI Draft
+
+## Flagged for Later
+- [{HH:MM}] {flagged content} → suggested artifact: {artifact} / field: {field}
 ```
+*(The `## Flagged for Later` section is appended only when cross-topic Option 2 is selected; omit if no flags were raised.)*
 
 **Phase Interview Mode:**
 
@@ -207,6 +305,59 @@ When triggered:
    - Immediately scan the newly added notes for relevance to the *current* question and all remaining questions.
    - Resume: "We were on Question {N} of {total}: {question text}"
 4. The just-captured thoughts are available as context for all remaining questions in the session — apply the same `💭` and `💡` surfacing rules and shown-notes tracking.
+
+**Cross-Topic Detection:**
+
+Applied at step 7b (Text mode) and before routing in phase interview step 4 (Phase mode). This check runs after receiving an Answered answer but before writing it to the artifact.
+
+**Detection process:**
+1. Scan the answer text for cross-topic signals using the signal cues below.
+2. If **no signal** found → proceed directly to writing the answer (step 8).
+3. If a **signal is found** → increment the in-memory flag counter by 1. Present inline:
+
+   > ⚠️ **Cross-topic signal:** Your answer mentions **{detected topic}** — this is typically captured in **{Target Artifact}** → `{{target_field}}`.
+   >
+   > **1.** Write this to {Target Artifact} now
+   > **2.** Flag for later (saved in interview notes)
+   > **3.** Continue as-is — record only here
+   >
+   > *(type 1, 2, or 3 — or press Enter to continue as-is)*
+
+4. **Handle the response:**
+   - **Option 1:** Check if `EA-projects/{slug}/artifacts/{artifact-id}.md` exists. If yes, write the flagged content to the specified field and confirm: "Written to {Artifact} → {field}." Add the artifact name to the flagged-artifacts list. If the artifact does not yet exist: "That artifact hasn't been created yet — adding to Flagged for Later instead." Apply Option 2 behaviour.
+   - **Option 2:** Append to `## Flagged for Later` at the end of the current session's interview notes file (create the section if it does not exist). Format: `- [{HH:MM}] {flagged content} → suggested artifact: {artifact} / field: {field}`. Add artifact name to the flagged-artifacts list.
+   - **Option 3 / Enter:** No further action — record in the current artifact only.
+
+5. After handling the flag, **immediately continue with step 8** and the next question. Do not re-raise the same flag.
+
+**Cross-Topic Signal Map:**
+
+| If currently interviewing… | Flag these signals → Target Artifact |
+|---|---|
+| Architecture Principles | Technology product/vendor names, version numbers → Technology Architecture; specific process descriptions → Business Architecture; "must…" / "shall…" statements → Requirements Register; risk language ("we might fail…") → Architecture Vision |
+| Architecture Vision | Specific technology platform names → Technology Architecture; detailed process steps → Business Architecture; data entity names or schemas → Data Architecture; delivery timelines, waves, or phased rollout → Architecture Roadmap |
+| Business Architecture | Specific application or system names → Application Architecture; data entity definitions or schemas → Data Architecture; cloud or infrastructure decisions → Technology Architecture; regulatory/compliance requirements → Requirements Register |
+| Data Architecture | Specific application or system names → Application Architecture; infrastructure or platform choices → Technology Architecture; data governance policies stated as binding rules → Architecture Principles |
+| Application Architecture | Infrastructure or platform choices → Technology Architecture; data modelling or entity definitions → Data Architecture; integration standards stated as binding rules → Architecture Principles |
+| Technology Architecture | Business process or capability descriptions → Business Architecture; data entity or model descriptions → Data Architecture; governance rules stated as principles → Architecture Principles |
+| Requirements Register | Implementation approaches or technology choices → Technology / Application Architecture; gap statements → Gap Analysis; direction (goals / objectives) → engagement.json |
+| Gap Analysis | Strategic direction or goal statements → Architecture Vision; technology decisions → Technology Architecture; new requirements → Requirements Register |
+| Architecture Roadmap | Cut-over or rollback procedures → Migration Plan; risk items → Architecture Vision or Statement of Architecture Work |
+| Migration Plan | Business goals or strategic rationale → Architecture Vision; requirements → Requirements Register |
+
+**Signal detection cues:**
+- **Technology:** specific product/vendor names, "Azure / AWS / GCP", version numbers, infra terms (compute, storage, network zone, Kubernetes, container)
+- **Business:** "our process for…", "the team responsible…", capability names, org unit names, "customer journey"
+- **Data:** entity or table names, "master data", "data model", "data quality", "duplicate records"
+- **Application:** specific system names (Salesforce, SAP, CRM, ERP, "legacy system"), "application portfolio"
+- **Requirement:** "must…", "shall…", "the system needs to…", "compliance requires…", "regulatory requirement"
+- **Risk:** "we might…", "if X fails…", "the risk is…", likelihood/impact language ("high likelihood", "critical impact")
+- **Direction:** goal/objective/strategy language during a non-Vision/non-direction interview ("our goal is…", "our strategy is…", "we want to achieve…")
+
+**Do NOT flag:**
+- Direction items (goals/objectives/strategies) during Phase A or Phase B interviews — these are expected content for those phases
+- General contextual statements not attributable to a specific artifact field
+- Answers to questions that explicitly ask for cross-domain context (e.g., a constraints question in Architecture Vision that legitimately invites technology references)
 
 **Recording Decisions to Appendix A3:**
 
