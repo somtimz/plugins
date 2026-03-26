@@ -12,6 +12,8 @@ A Claude Code plugin for stress-testing strategies, decisions, and designs throu
 | `grill-me-premortem` | Risk discovery — assumes failure and works backwards |
 | `grill-me-decision` | Converting sprawling discussion into a clean decision memo |
 | `grill-me-design` | Critiquing service, org, UX, or concept design against design principles |
+| `grill-me-software-design` | Deep technical review of software architecture — patterns, coupling, APIs, data models, testability, scalability |
+| `grill-me-infra-design` | Deep technical review of infrastructure — topology, resilience, blast radius, cost, security boundaries, observability |
 | `grill-me-boardroom-strategy` | Hybrid: depth + board pressure + pre-mortem — best for senior leadership work |
 
 ### When to use which
@@ -23,7 +25,9 @@ A Claude Code plugin for stress-testing strategies, decisions, and designs throu
 | Board or executive prep | `grill-me-boardroom` |
 | Risk and failure discovery | `grill-me-premortem` |
 | Turning discussion into a decision | `grill-me-decision` |
-| Design quality | `grill-me-design` |
+| Service, UX, or org design quality | `grill-me-design` |
+| Software architecture review | `grill-me-software-design` |
+| Infrastructure and reliability review | `grill-me-infra-design` |
 | Leadership work (strategy + board + risk) | `grill-me-boardroom-strategy` |
 
 ## Installation

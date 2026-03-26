@@ -29,9 +29,9 @@ If `--skill` was provided, use that skill. Otherwise, recommend a skill based on
 | Statement of Architecture Work | `grill-me-decision` | A formal commitment — review as a decision memo |
 | Architecture Principles | `grill-me-stress-test` | Each principle needs to survive assumption testing |
 | Business Architecture | `grill-me-design` | Reviews for user needs, incentives, edge cases, and unintended consequences |
-| Application Architecture | `grill-me-design` | Reviews for scalability, failure points, and integration friction |
-| Data Architecture | `grill-me-design` | Reviews for data needs, access patterns, quality, and governance gaps |
-| Technology Architecture | `grill-me-design` | Reviews for vendor lock-in, resilience, and operational realism |
+| Application Architecture | `grill-me-software-design` | Reviews architecture patterns, coupling, API contracts, testability, and scalability |
+| Data Architecture | `grill-me-software-design` | Reviews data model ownership, shared-state risks, access patterns, and quality |
+| Technology Architecture | `grill-me-infra-design` | Reviews topology, resilience, blast radius, cost, security boundaries, and observability |
 | Architecture Roadmap | `grill-me-premortem` | Assumes delivery failure — surfaces sequencing risks and missed dependencies |
 | Migration Plan | `grill-me-premortem` | Red-teams the migration — finds failure modes before they occur |
 | Gap Analysis | `grill-me-stress-test` | Tests whether gaps are correctly identified and prioritised |
@@ -51,7 +51,9 @@ The `--skill` argument accepts these short names (mapped to the full `grill-me-*
 | `boardroom` | `grill-me-boardroom` | Board panel simulation: finance, operations, risk, reputation, employee impact, strategic fit |
 | `premortem` | `grill-me-premortem` | Red-team assuming failure in 12 months: failure modes, warning signs, safeguards |
 | `decision` | `grill-me-decision` | Decision memo extractor: options, criteria, tradeoffs, recommendation, next steps |
-| `design` | `grill-me-design` | Design critique: user needs, failure points, edge cases, incentives, scalability |
+| `design` | `grill-me-design` | Design critique: user needs, failure points, edge cases, incentives, scalability (service/UX/org) |
+| `software-design` | `grill-me-software-design` | Software architecture: patterns, coupling, APIs, data models, testability, operational readiness |
+| `infra-design` | `grill-me-infra-design` | Infrastructure: topology, resilience, blast radius, cost, security boundaries, observability |
 | `boardroom-strategy` | `grill-me-boardroom-strategy` | Hybrid: depth + board pressure + pre-mortem (most thorough) |
 
 ---
