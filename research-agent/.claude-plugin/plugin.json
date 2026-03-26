@@ -1,0 +1,10 @@
+{
+  "name": "research-agent",
+  "version": "0.1.0",
+  "description": "A Lead Research Analyst agent that conducts deep, evidence-based research into topics, codebases, and documents — with confidence scoring, contradiction detection, and executive-ready synthesis.",
+  "author": {
+    "name": "Costa Pissaris",
+    "email": "cpissaris@gmail.com"
+  },
+  "keywords": ["research", "analysis", "evidence", "synthesis", "codebase", "documents"]
+}
