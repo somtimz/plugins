@@ -96,19 +96,34 @@ function validateAgent(frontmatter: Record<string, unknown>): ValidationIssue[] 
   if (!frontmatter["description"] || typeof frontmatter["description"] !== "string") {
     issues.push({ level: "error", message: 'Missing required "description" field' });
   }
+  if (!frontmatter["model"] || typeof frontmatter["model"] !== "string") {
+    issues.push({ level: "error", message: 'Missing required "model" field' });
+  }
+  if (!frontmatter["color"] || typeof frontmatter["color"] !== "string") {
+    issues.push({ level: "error", message: 'Missing required "color" field' });
+  }
   return issues;
 }
 
 function validateSkill(frontmatter: Record<string, unknown>): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
+  if (!frontmatter["name"] || typeof frontmatter["name"] !== "string") {
+    issues.push({ level: "error", message: 'Missing required "name" field' });
+  }
   if (!frontmatter["description"] && !frontmatter["when_to_use"]) {
     issues.push({ level: "error", message: 'Missing required "description" field' });
+  }
+  if (!frontmatter["version"] || typeof frontmatter["version"] !== "string") {
+    issues.push({ level: "error", message: 'Missing required "version" field' });
   }
   return issues;
 }
 
 function validateCommand(frontmatter: Record<string, unknown>): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
+  if (!frontmatter["name"] || typeof frontmatter["name"] !== "string") {
+    issues.push({ level: "error", message: 'Missing required "name" field' });
+  }
   if (!frontmatter["description"] || typeof frontmatter["description"] !== "string") {
     issues.push({ level: "error", message: 'Missing required "description" field' });
   }
