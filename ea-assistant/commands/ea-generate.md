@@ -56,11 +56,37 @@ Select format [1]:
 
 For artifact types where mermaid is not applicable, omit that option.
 
-### Step 3: Read Artifact Content
+### Step 3: Read and Extract Artifact Content
 
 1. Read the artifact file from `EA-projects/{slug}/artifacts/{artifact-id}.md`.
 2. Read the engagement metadata from `EA-projects/{slug}/engagement.json`.
-3. Parse the artifact content into structured sections (headings, tables, lists, body text).
+3. Parse the artifact into a content JSON object with this structure:
+
+```json
+{
+  "sections": [
+    {"heading": "Section Heading", "content": "Body text here", "level": 1},
+    {"heading": "Subsection", "content": "Body text", "level": 2}
+  ],
+  "tables": [
+    {
+      "heading": "Table Title",
+      "headers": ["Col 1", "Col 2", "Col 3"],
+      "rows": [["val", "val", "val"], ["val", "val", "val"]]
+    }
+  ]
+}
+```
+
+Rules for extraction:
+- Map each `## Heading` → `level: 1`, `### Heading` → `level: 2`
+- Skip `<details>` guidance blocks — they are template guidance, not content
+- Skip YAML frontmatter
+- For each markdown table, extract it as an entry in `"tables"` — include the section heading it belongs to
+- Where a field is `{{placeholder}}` or empty, use `""` as the content value (the script will render it as "[To be completed]")
+- Collapse the content to plain text — do not include raw markdown syntax in content strings
+
+4. Write the extracted JSON to a temp file: `/tmp/ea-gen-{artifact-id}.json`
 
 ### Step 4: Generate Output
 
@@ -85,14 +111,17 @@ graph TD
 
 **For docx:**
 
-- Build a content JSON object from the artifact content and engagement metadata.
-- Determine the output path: `EA-projects/{slug}/artifacts/{artifact-id}.docx`
-- Build a content JSON object from the artifact content and engagement metadata.
-- Determine the output path: `EA-projects/{slug}/artifacts/{artifact-id}.docx`
-- Run the bootstrap + generation block:
+Locate the script, bootstrap the venv, then run:
 
 ```bash
-# Bootstrap: create venv and install dependencies if not already present
+# Locate the script in the plugin install
+SCRIPT=$(find "$HOME/.claude" -name "generate-docx.py" -path "*/ea-assistant/scripts/*" 2>/dev/null | head -1)
+if [ -z "$SCRIPT" ]; then
+  echo "ERROR: generate-docx.py not found. Is the ea-assistant plugin installed?"
+  exit 1
+fi
+
+# Bootstrap venv
 VENV="$HOME/.ea-assistant-venv"
 if [ ! -f "$VENV/bin/python" ]; then
   echo "Setting up EA Assistant Python environment..."
@@ -103,30 +132,34 @@ if ! "$VENV/bin/python" -c "import docx" 2>/dev/null; then
   "$VENV/bin/pip" install --quiet python-docx python-pptx
 fi
 
-"$VENV/bin/python" ${CLAUDE_PLUGIN_ROOT}/scripts/generate-docx.py \
-  --type {artifact-type} \
-  --input EA-projects/{slug}/artifacts/{artifact-id}.md \
-  --output EA-projects/{slug}/artifacts/{artifact-id}.docx \
-  --engagement EA-projects/{slug}/engagement.json
+"$VENV/bin/python" "$SCRIPT" \
+  --type {script-type} \
+  --engagement-dir EA-projects/{slug} \
+  --content @/tmp/ea-gen-{artifact-id}.json \
+  --output EA-projects/{slug}/artifacts/{artifact-id}.docx
 ```
-
-> **Windows (PowerShell):** Replace `$HOME` with `$env:USERPROFILE`, `bin/python` with `Scripts\python.exe`, and `bin/pip` with `Scripts\pip.exe`.
 
 **For pptx:**
 
-- Build a content JSON object from the artifact content and engagement metadata.
-- Determine the output path: `EA-projects/{slug}/artifacts/{artifact-id}.pptx`
-- Run the same bootstrap block (the `import docx` check covers both packages since they install together), then:
+Run the same bootstrap block, then:
 
 ```bash
-"$VENV/bin/python" ${CLAUDE_PLUGIN_ROOT}/scripts/generate-pptx.py \
-  --type {artifact-type} \
-  --input EA-projects/{slug}/artifacts/{artifact-id}.md \
-  --output EA-projects/{slug}/artifacts/{artifact-id}.pptx \
-  --engagement EA-projects/{slug}/engagement.json
+SCRIPT=$(find "$HOME/.claude" -name "generate-pptx.py" -path "*/ea-assistant/scripts/*" 2>/dev/null | head -1)
+if [ -z "$SCRIPT" ]; then
+  echo "ERROR: generate-pptx.py not found. Is the ea-assistant plugin installed?"
+  exit 1
+fi
+
+"$VENV/bin/python" "$SCRIPT" \
+  --type {script-type} \
+  --engagement-dir EA-projects/{slug} \
+  --content @/tmp/ea-gen-{artifact-id}.json \
+  --output EA-projects/{slug}/artifacts/{artifact-id}.pptx
 ```
 
 If the script exits with a non-zero status, display the error output and stop. Do not update the engagement.
+
+> **Windows (PowerShell / WSL):** The bootstrap uses `$HOME` and `bin/python`. On native Windows PowerShell replace `$HOME` with `$env:USERPROFILE`, `bin/python` with `Scripts\python.exe`, and `bin/pip` with `Scripts\pip.exe`. On WSL2, the Unix paths work as-is.
 
 ### Step 5: Update Engagement
 
@@ -161,17 +194,19 @@ Options:
 
 ### Artifact Type Mapping
 
-| Artifact Name            | `--type` value (docx/pptx) | Primary Format | Mermaid Available |
-|--------------------------|----------------------------|----------------|-------------------|
-| Architecture Vision      | `architecture-vision`      | docx           | No                |
-| Stakeholder Map          | `stakeholder-map`          | mermaid        | Yes               |
-| Business Architecture    | `business-architecture`    | docx           | No                |
-| Gap Analysis             | `gap-analysis`             | docx           | No                |
-| Architecture Roadmap     | `architecture-roadmap`     | mermaid        | Yes               |
-| Requirements Register    | `requirements-register`    | docx           | No                |
-| Capability Map           | `capability-map`           | mermaid        | Yes               |
-| Application Portfolio    | `application-portfolio`    | docx           | No                |
-| Data Architecture        | `data-architecture`        | docx           | No                |
-| Migration Plan           | `migration-plan`           | pptx           | No                |
-| Risk Register            | `risk-register`            | docx           | No                |
-| Implementation Roadmap   | `implementation-roadmap`   | pptx           | No                |
+`{script-type}` is the value passed to `--type` in the script. It must match the keys the script recognises.
+
+| Artifact Name            | `{script-type}` | Primary Format | Mermaid Available |
+|--------------------------|-----------------|----------------|-------------------|
+| Architecture Vision      | `vision`        | docx           | No                |
+| Stakeholder Map          | `stakeholder-map` | mermaid       | Yes               |
+| Business Architecture    | `business`      | docx           | No                |
+| Gap Analysis             | `gap-analysis`  | docx           | No                |
+| Architecture Roadmap     | `roadmap`       | mermaid        | Yes               |
+| Requirements Register    | `requirements-register` | docx   | No                |
+| Capability Map           | `capability-map` | mermaid       | Yes               |
+| Application Portfolio    | `app-portfolio` | docx           | No                |
+| Data Architecture        | `data`          | docx           | No                |
+| Migration Plan           | `roadmap`       | pptx           | No                |
+| Risk Register            | `risk-register` | docx           | No                |
+| Implementation Roadmap   | `roadmap`       | pptx           | No                |
