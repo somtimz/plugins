@@ -14,6 +14,8 @@ The plugin turns Claude into an EA facilitator: it interviews practitioners and 
 
 It is not an EA modelling tool (that is Sparx, Archi, or MEGA). It is the **engagement management and documentation layer** that most EA tooling omits.
 
+**Platform:** The current version runs inside **Claude Code** and relies on the Claude Code plugin framework (commands, skills, agents). A future version is planned as a standalone application backed by an LLM API, removing the Claude Code dependency. Implementation decisions should avoid deep Claude Code-specific coupling where a framework-agnostic alternative exists.
+
 ---
 
 ## 2. Problem Statement
