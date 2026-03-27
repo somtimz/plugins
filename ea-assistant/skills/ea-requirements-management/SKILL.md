@@ -230,3 +230,4 @@ The Architecture Requirements phase runs in two modes:
 
 - **`references/requirement-categories.md`** — Taxonomy of requirement types with TOGAF alignment
 - **`references/sync-formats.md`** — Detailed parsing rules for Word, Excel, and CSV requirement formats
+- **`references/government-principles.md`** — 12 Architecture Principles for Government (GP-001–GP-012) with Statement, Rationale, and Implications; use as a starting-point catalogue for public-sector engagements
