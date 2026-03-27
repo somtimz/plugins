@@ -48,15 +48,14 @@ The `--skill` argument accepts these short names (mapped to the full `grill-me-*
 | Short name | Skill ID | What it does |
 |---|---|---|
 | `stress-test` | `grill-me-stress-test` | Tests assumptions, surfaces risks, forces execution realism |
-| `boardroom` | `grill-me-boardroom` | Board panel simulation: finance, operations, risk, reputation, employee impact, strategic fit |
-| `premortem` | `grill-me-premortem` | Red-team assuming failure in 12 months: failure modes, warning signs, safeguards |
+| `premortem` | `grill-me-premortem` | Generate new risks (pre-mortem) or review an existing risk register |
 | `decision` | `grill-me-decision` | Decision memo extractor: options, criteria, tradeoffs, recommendation, next steps |
 | `design` | `grill-me-design` | Design critique: user needs, failure points, edge cases, incentives, scalability (service/UX/org) |
 | `software-design` | `grill-me-software-design` | Software architecture: patterns, coupling, APIs, data models, testability, operational readiness |
 | `infra-design` | `grill-me-infra-design` | Infrastructure: topology, resilience, blast radius, cost, security boundaries, observability |
 | `artifact` | `grill-me-artifact` | Structured artifact review: section-by-section completeness, traceability chains, consistency |
 | `diagram` | `grill-me-diagram` | Visual design review: topology, missing components, anti-patterns, readability |
-| `boardroom-strategy` | `grill-me-boardroom-strategy` | Hybrid: depth + board pressure + pre-mortem (most thorough) |
+| `boardroom-strategy` | `grill-me-boardroom-strategy` | Hybrid: strategic depth + board pressure + pre-mortem (most thorough) |
 
 ---
 

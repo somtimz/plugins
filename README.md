@@ -9,7 +9,7 @@ A curated collection of plugins for Claude Code and OpenCode maintained by [@som
 | [ea-assistant](./ea-assistant/) | End-to-end Enterprise Architecture engagement management (TOGAF 10, Zachman, ArchiMate) with artifact generation, phase interviews, Decision Register, session tracking, opt-out tracking, and artifact compliance checking | 0.8.0 |
 | [RAG-assistant](./RAG-assistant/) | Conversational RAG assistant — ingests documents into ChromaDB, web UI for cited Q&A and ingestion management | 0.1.0 |
 | [research-agent](./research-agent/) | Lead Research Analyst agent — evidence-based deep research with confidence scoring, contradiction detection, and executive-ready synthesis | 0.1.0 |
-| [grill-me](./grill-me/) | Relentless structured interviewing to stress-test strategies, decisions, and designs | 0.1.0 |
+| [grill-me](./grill-me/) | Nine interview skills for stress-testing strategies, decisions, risks, and designs | 0.4.0 |
 | [ITIL-assistant](./ITIL-assistant/) | ITIL v4 Change Management assistant — create, manage, and review Change Requests with CAB approval workflow | 0.1.0 |
 
 ## Installation
@@ -30,7 +30,7 @@ Or install a single plugin directly:
 
 ### OpenCode — install skills
 
-OpenCode has no marketplace mechanism, but all 23 skills are format-compatible. Clone the repo and run the install script to symlink skills into OpenCode's discovery path:
+OpenCode has no marketplace mechanism, but all 21 skills are format-compatible. Clone the repo and run the install script to symlink skills into OpenCode's discovery path:
 
 ```bash
 git clone https://github.com/somtimz/plugins.git
@@ -57,9 +57,7 @@ The script symlinks all skills into `~/.config/opencode/skills/`. Set `OPENCODE_
 | `rag-chat` | RAG-assistant |
 | `itil-change-request` | ITIL-assistant |
 | `cab-review` | ITIL-assistant |
-| `grill-me-strategy` | grill-me |
 | `grill-me-stress-test` | grill-me |
-| `grill-me-boardroom` | grill-me |
 | `grill-me-premortem` | grill-me |
 | `grill-me-decision` | grill-me |
 | `grill-me-design` | grill-me |

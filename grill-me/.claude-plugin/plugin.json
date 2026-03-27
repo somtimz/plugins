@@ -1,7 +1,7 @@
 {
   "name": "grill-me",
-  "version": "0.3.0",
-  "description": "Eleven relentless interview skills for stress-testing strategies, decisions, and designs — from depth-first clarification to board simulation, pre-mortem, decision memo extraction, service/software/infrastructure design critique, structured artifact review, and diagram review.",
+  "version": "0.4.0",
+  "description": "Nine interview skills for stress-testing strategies, decisions, risks, and designs — strategic stress-test, pre-mortem and risk review, decision memo, boardroom strategy, service/software/infrastructure design critique, artifact review, and diagram review.",
   "author": {
     "name": "Costa Pissaris",
     "email": "cpissaris@gmail.com"
