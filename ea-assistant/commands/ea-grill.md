@@ -128,3 +128,55 @@ date: [YYYY-MM-DD]
 reviewer: ea-grill
 ---
 ```
+
+---
+
+### Step 7 — Apply findings to the artifact
+
+After saving (or declining to save) the review, offer to apply the findings:
+
+```
+Apply findings to the artifact?
+
+I identified [N] recommended revisions. I can apply them now, one at a time, with your confirmation on each.
+
+Options:
+  (a) Apply all — I'll walk through each revision and apply on your go-ahead
+  (s) Select — I'll list the revisions and you pick which to apply
+  (n) Skip — leave the artifact unchanged for now
+```
+
+If the user selects `a` or `s`:
+
+1. List each recommended revision with:
+   - **Section** — which artifact section it affects
+   - **Issue** — what the grill identified as the problem
+   - **Proposed change** — the specific text or structural fix
+
+   Example:
+   ```
+   Revision 1 of 3
+   ───────────────────────────────────
+   Section: §3 Goals
+   Issue: G-002 has no Business Driver (DRV) linked — traceability broken
+   Proposed: Add "DRV-001" to the Linked Drivers field of G-002
+
+   Apply this revision? (y/n/edit)
+   ```
+
+2. For each confirmed revision:
+   - Write the change to the artifact
+   - Confirm: `✅ Applied — §3 Goals / G-002 updated`
+
+3. For `edit` responses — present the proposed text and let the user dictate the replacement before writing
+
+4. After all revisions are processed:
+   - Bump the artifact `version` by a patch increment (e.g. `0.1` → `0.2`)
+   - Update `lastModified` to today's date
+   - Set `reviewStatus` to `Revised` if it was `Not Reviewed`, or keep existing if already higher
+   - Confirm: `Artifact updated — [N] revisions applied, version bumped to [new version]`
+
+**Constraints:**
+- Never apply a revision to an `Approved` artifact without explicit user confirmation — warn first: `⚠️ This artifact is Approved. Applying revisions will reset reviewStatus to Revised. Continue? (y/n)`
+- Never invent content — only apply revisions derived directly from the grill output
+- If a revision touches a field that references other artifacts (e.g. adds a GAP-NNN or REQ-NNN ID), flag it: `⚠️ This adds a reference to [ID] — verify it exists in the source artifact before saving`
