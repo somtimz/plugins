@@ -141,6 +141,38 @@ Apply throughout the interview session:
 
 **Mode 1 — Text Interview:**
 
+**Step 0 — Question Preview:**
+
+Before asking any questions, display the full question list so the user can see what's coming:
+
+```
+Interview: {artifactName} — {engagementName}
+{N} questions
+
+  Q1   {question text}
+  Q2   {question text}
+  Q3   {question text}
+  …
+
+────────────────────────────────────────────────
+What would you like to do?
+  1. Start from the beginning
+  2. Jump to a specific question (enter number)
+  3. Switch to Web mode (interactive form)
+  4. Display only (no answers collected)
+────────────────────────────────────────────────
+```
+
+- If the user selects **1** — begin from Q1.
+- If the user selects **2** — ask "Which question?" and begin from that Q number.
+- If the user selects **3** — switch to Mode 2 (Web Interview).
+- If the user selects **4** — switch to Mode 3 (Display).
+- If there are any **previously answered** questions (from a prior session), show them with a `✓` marker in the preview list and offer: "You have {N} answered question(s) from a previous session. Start from Q1, resume from first unanswered, or review previous answers?" Add option **5. Resume from first unanswered** to the menu if applicable.
+
+Then proceed with the selected starting point.
+
+---
+
 For each question in order:
 
 1. Show the question header: `**Q{N}/{total}:** {question text}`
