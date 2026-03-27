@@ -129,9 +129,10 @@ Apply throughout the interview session:
 2. **Select interview mode** — if a `mode` was passed by the invoking command, use it directly. Otherwise, prompt:
 
    > How would you like to conduct this interview?
-   > **1. Web** (default) — I'll open an interactive form with input fields you fill in and paste back
-   > **2. Text** — I'll ask questions one at a time in this chat
-   > **3. Display** — Show all questions now without collecting answers
+   > **1. Web** (default) — Interactive form with text input fields; fill in and paste back
+   > **2. Voice** — Interactive form with a microphone button on each question; speak your answers
+   > **3. Text** — I'll ask questions one at a time in this chat
+   > **4. Display** — Show all questions now without collecting answers
    >
    > Press Enter or type 1 for Web.
 
@@ -156,18 +157,22 @@ Interview: {artifactName} — {engagementName}
 
 ────────────────────────────────────────────────
 What would you like to do?
-  1. Start from the beginning
-  2. Jump to a specific question (enter number)
-  3. Switch to Web mode (interactive form with input fields)
-  4. Display only (no answers collected)
+  1. Start answering (Web form — default)
+  2. Start answering (Voice — speak your answers)
+  3. Start answering (Text — chat Q&A)
+  4. Brainstorm first (capture thoughts before answering)
+  5. Jump to a specific question (enter number)
+  6. Display only (no answers collected)
 ────────────────────────────────────────────────
 ```
 
-- If the user selects **1** — begin from Q1.
-- If the user selects **2** — ask "Which question?" and begin from that Q number.
-- If the user selects **3** — switch to Mode 1 (Web Interview).
-- If the user selects **4** — switch to Mode 3 (Display).
-- If there are any **previously answered** questions (from a prior session), show them with a `✓` marker in the preview list and offer: "You have {N} answered question(s) from a previous session. Start from Q1, resume from first unanswered, or review previous answers?" Add option **5. Resume from first unanswered** to the menu if applicable.
+- If the user selects **1** — switch to Mode 1 (Web Interview), begin from Q1.
+- If the user selects **2** — switch to Mode 2 (Voice Interview), begin from Q1.
+- If the user selects **3** — begin Text interview (Mode 3) from Q1.
+- If the user selects **4** — launch the Brainstorm Pad (load `ea-interview-ui` App 2) scoped to this artifact/phase. When the user pastes back brainstorm notes, save them, then redisplay this preview menu so the user can choose how to answer.
+- If the user selects **5** — ask "Which question?" then begin from that Q number in Web mode (or whichever mode was previously chosen).
+- If the user selects **6** — switch to Mode 4 (Display).
+- If there are any **previously answered** questions (from a prior session), show them with a `✓` marker in the preview list and add option **7. Resume from first unanswered**.
 
 Then proceed with the selected starting point.
 
@@ -206,17 +211,42 @@ After all questions → go to **Session Completion** (step 5).
 
 ---
 
-**Mode 2 — Web Interview:**
+**Mode 1 — Web Interview:**
 
 Load the `ea-interview-ui` skill and present the **Interview App** artifact.
 - Build the `questions` array: for each extracted question, include `text`, `context` (one sentence on why it matters), `defaultAnswer` if applicable, `existingAnswer` from any previous session, `brainstormNote` for any semantically related thought from the loaded notes (first 80-char identifier added to shown-notes list once populated), and `options` / `allowMultiple` where the question has enumerated choices.
 - Set `artifactName` and `engagementName` from engagement context.
+- Set `voiceEnabled: false`.
 
 Wait for the user to paste the `INTERVIEW RESULTS —` block back into the chat, then process it (step 4).
 
 ---
 
-**Mode 3 — Display:**
+**Mode 2 — Voice Interview:**
+
+Load the `ea-interview-ui` skill and present the **Interview App** artifact in voice mode.
+- Build the `questions` array the same as Web mode.
+- Set `voiceEnabled: true` — this enables the 🎤 microphone button on every question card.
+
+**How voice mode works in the app:**
+- Each question card shows a 🎤 **Record** button alongside the text input field
+- Clicking 🎤 starts the browser's Web Speech API (`SpeechRecognition`); the button turns red (🔴 Recording…)
+- Clicking again stops recording; the transcript is inserted into the answer text field
+- The user can edit the transcript before moving on — voice is a starting point, not final
+- If speech recognition is unavailable (unsupported browser or no microphone), the 🎤 button is hidden and the field falls back to text input only; a note is shown: "Voice input unavailable — type your answer"
+- All other app behaviours (skip, N/A, default, review screen, copy results) work identically to Web mode
+
+Wait for the user to paste the `INTERVIEW RESULTS —` block back into the chat, then process it (step 4).
+
+---
+
+**Mode 3 — Text Interview (chat Q&A):**
+
+*(This is the mode described above under "For each question in order".)*
+
+---
+
+**Mode 4 — Display:**
 
 Output all questions as a formatted read-only list:
 
@@ -232,8 +262,8 @@ Output all questions as a formatted read-only list:
 …
 ```
 
-After displaying, ask: "Ready to start? Type **1** for Web (default) or **2** for Text."
-If the user selects a mode, resume from Mode 1 (Web) or Mode 2 (Text) above.
+After displaying, ask: "Ready to start? **1** Web (default) / **2** Voice / **3** Text"
+Branch to Mode 1, 2, or 3 above.
 
 ---
 
@@ -344,12 +374,13 @@ When invoked in phase mode (via `/ea-interview start phase [phase-name]`), the i
 
 2. **Orient the user** — briefly explain which phase is being interviewed, how many questions, and that answers will be routed to relevant artifacts.
 
-2b. **Select interview mode** — if a `mode` was passed by the invoking command, use it directly. Otherwise, prompt the same three-option menu as artifact mode (Web default, Text, Display). Branch to the appropriate mode below.
+2b. **Select interview mode** — if a `mode` was passed by the invoking command, use it directly. Otherwise, prompt the same four-option menu as artifact mode (Web default, Voice, Text, Display). Branch to the appropriate mode below.
 
 3. **Conduct the interview** using the selected mode:
-   - **Text mode:** follow the Text Interview steps above. For questions with enumerated checklist options, show the options inline and accept comma-separated or numbered selections as well as free text.
-   - **Web mode:** load the `ea-interview-ui` skill and present the **Interview App** artifact in `mode: "phase"`. Build the `questions` array from the phase question bank, including `context`, `existingAnswer` (from any existing artifact field), `brainstormNote` (from loaded notes), and `options`/`allowMultiple` where the question has enumerated choices. Set `artifactName` to the phase name and `engagementName` from engagement context.
-   - **Display mode:** output all questions for the phase as a numbered list with context, then ask which mode to use to start.
+   - **Web mode (Mode 1):** load the `ea-interview-ui` skill, present **Interview App** in `mode: "phase"` with `voiceEnabled: false`. Build the `questions` array from the phase question bank.
+   - **Voice mode (Mode 2):** same as Web mode but with `voiceEnabled: true`.
+   - **Text mode (Mode 3):** follow the Text Interview steps above. For questions with enumerated checklist options, show the options inline and accept comma-separated or numbered selections as well as free text.
+   - **Display mode (Mode 4):** output all questions for the phase as a numbered list with context, then ask which mode to use to start.
 
 4. **Process answers** (Web: from pasted results block; Text: collected inline):
    - For each answered question, consult the output routing table:

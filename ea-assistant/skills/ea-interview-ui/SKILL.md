@@ -59,6 +59,12 @@ const INTERVIEW_DATA = {
 
 Set `options` when the question bank has enumerated choices (e.g. constraint types, data migration approaches, cut-over approaches). Set `allowMultiple: false` for single-select questions (radio buttons).
 
+Set `voiceEnabled: true` when the user selects Voice mode. This adds a 🎤 microphone button to every question card:
+- Clicking 🎤 starts `window.SpeechRecognition` (or `window.webkitSpeechRecognition`); button shows 🔴 Recording…
+- Clicking again stops recording; the transcript is inserted into the answer text field (editable)
+- If speech recognition is unavailable, the button is hidden and a note shown: "Voice input unavailable — type your answer"
+- All other app behaviours (skip, N/A, default, review, copy results) are identical to Web mode
+
 3. Present the modified JSX as a **React artifact**.
 
 ### Mode B: HTML file (OpenCode / no artifact renderer)
