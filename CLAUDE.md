@@ -62,6 +62,39 @@ All `agents/*.md`, `commands/*.md`, and `skills/*/SKILL.md` files must have vali
 
 Plugins use semantic versioning (`MAJOR.MINOR.PATCH`). Bump `version` in both `plugin.json` and the skill `SKILL.md` frontmatter when releasing changes.
 
+## Change Workflow
+
+### When to use a PR
+
+Use a **feature branch + PR** for:
+- Any new feature or capability spanning multiple files or sessions
+- Changes to agent behaviour, skill logic, or interview flows
+- New templates, commands, or skills
+- Anything that warrants a review before merging
+
+Process:
+1. Create a branch: `git checkout -b feat/short-description`
+2. Plan the change — outline what files will be touched and why before writing code
+3. Implement in focused commits
+4. Validate frontmatter: `~/.bun/bin/bun .github/scripts/validate-frontmatter.ts <plugin>/`
+5. Open a PR: `gh pr create` with a clear summary and test plan
+6. Merge only after review
+
+### When to commit directly to main
+
+Direct commits to `main` are acceptable for:
+- Single-file bug fixes and typo corrections
+- Version bumps, README updates, changelog entries
+- QA fixes and small doc-only changes within a single session
+
+### Validation before any commit
+
+Always run frontmatter validation before committing changes to `agents/`, `skills/`, or `commands/`:
+
+```bash
+~/.bun/bin/bun .github/scripts/validate-frontmatter.ts <plugin>/
+```
+
 ## Commit Style
 
 Use conventional commits:
