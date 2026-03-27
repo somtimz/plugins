@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.1
+**Version:** 0.9.2
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -73,14 +73,16 @@ Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Problem — each with a
 
 **Disambiguation summary:**
 
-| Concept | Qualitative or Measurable | Time-bound | Owns a mitigation |
-|---|---|---|---|
-| Goal | Qualitative | No | No |
-| Objective | Measurable | Yes | No |
-| Strategy | Directional | No | No |
-| Issue | Qualitative (systemic barrier) | No | Yes (action plan) |
-| Problem | Specific symptom | No | Yes (requirement) |
-| Risk | Potential future event | No | Yes (mitigation) |
+| Concept | Qualitative or Measurable | Time-bound | Owns a mitigation | Links to |
+|---|---|---|---|---|
+| Principle | Rule (non-negotiable) | No | No | Architecture decisions |
+| Goal | Qualitative | No | No | Drivers |
+| Objective | Measurable | Yes | No | Goals |
+| Strategy | Directional | No | No | Goals (STR-NNN) |
+| Plan | Ordered action set | Yes | No | Strategies |
+| Issue | Qualitative (systemic barrier) | No | Yes (action plan) | Goals (threatens) |
+| Problem | Specific symptom | No | Yes (requirement) | Objectives (blocks) |
+| Risk | Potential future event | No | Yes (mitigation) | Goals or Objectives |
 
 ---
 
@@ -217,7 +219,15 @@ Decisions captured during interviews are logged in **Appendix A3 Decision Log** 
 | `Fiat` | Accepted by executive authority without formal vote; sponsor directive | Sponsor |
 | `Returned` | Sent back for rework; reason must be recorded | Reviewer |
 
-**Transition path:** Provisional → Awaiting → Verified / Voted / Fiat / Returned → (if Returned) back to Provisional.
+**Transition path:** Provisional may move directly to Verified, Voted, or Fiat when no formal review step is needed. Awaiting is an optional holding state used when stakeholder confirmation or a governance vote is pending before resolution. Returned sends the decision back to Provisional; a reason must be recorded.
+
+```
+Provisional ──────────────────────────────► Verified / Voted / Fiat
+     │                                              ▲
+     └──► Awaiting (optional) ─────────────────────┘
+                                    │
+                                    └──► Returned ──► Provisional
+```
 
 **Filter flags:** `--audience`, `--owner`, `--domain`, `--authority`, `--cost`, `--impact`, `--risk`, `--subject`, `--status`
 **Audience presets:** `executive` / `architect` / `business` / `technical`
@@ -272,11 +282,11 @@ Decisions captured during interviews are logged in **Appendix A3 Decision Log** 
 
 ### 5.11 Undocumented Agents (Planned Features)
 
-Three agents exist in the plugin but have no dedicated interview or command workflow yet:
+Three agents exist in the plugin but have no dedicated command workflow yet. They are loaded as part of the plugin context and invoked by asking Claude directly:
 
-- **`ea-consistency-checker`** — flags cross-artifact inconsistencies (e.g., a Goal in the Architecture Vision that has no corresponding entry in the Business Architecture); invoked manually via chat
-- **`ea-document-analyst`** — analyses uploaded documents in `uploads/` for architecture content and suggests artifact mappings; invoked manually via chat
-- **`ea-advisor`** — answers EA methodology questions (TOGAF, Zachman, ArchiMate) in context; invoked manually via chat
+- **`ea-consistency-checker`** — flags cross-artifact inconsistencies (e.g., a Goal in the Architecture Vision that has no corresponding entry in the Business Architecture); invoke by asking: *"Check for cross-artifact inconsistencies in this engagement."*
+- **`ea-document-analyst`** — analyses uploaded documents in `uploads/` for architecture content and suggests artifact mappings; invoke by asking: *"Analyse the uploaded documents and suggest artifact mappings."*
+- **`ea-advisor`** — answers EA methodology questions (TOGAF, Zachman, ArchiMate) in context; invoke by asking any methodology question in chat.
 
 These will gain dedicated commands and workflow integration in a future version.
 
@@ -381,9 +391,9 @@ EA-projects/
 | `ea-facilitator` | Guides users through ADM phases; reads facilitatorStyle config | `/ea-phase`, `/ea-open` |
 | `ea-interviewer` | Conducts structured interviews; all 4 modes, question preview, brainstorm, cross-topic detection | `/ea-interview` |
 | `ea-requirements-analyst` | Extracts structured requirements from uploaded documents | `/ea-requirements` |
-| `ea-consistency-checker` | Flags cross-artifact inconsistencies (manual invocation only) | Chat (`@ea-consistency-checker`) |
-| `ea-document-analyst` | Analyses uploaded documents for architecture content (manual invocation only) | Chat (`@ea-document-analyst`) |
-| `ea-advisor` | Answers EA methodology questions — TOGAF, Zachman, ArchiMate (manual invocation only) | Chat (`@ea-advisor`) |
+| `ea-consistency-checker` | Flags cross-artifact inconsistencies (no dedicated command) | Ask Claude: "Check for cross-artifact inconsistencies" |
+| `ea-document-analyst` | Analyses uploaded documents for architecture content (no dedicated command) | Ask Claude: "Analyse the uploaded documents" |
+| `ea-advisor` | Answers EA methodology questions — TOGAF, Zachman, ArchiMate (no dedicated command) | Ask any methodology question in chat |
 | `ea-diagram` | Generates and interprets architecture diagrams | `/ea-generate [artifact] mermaid` |
 
 ---
@@ -407,7 +417,7 @@ EA-projects/
 | Motivation chain coverage | Typically 0–20% of objectives have a traceable driver | 100% of OBJ-NNN entries link to at least one G-NNN; 100% of G-NNN entries link to at least one DRV-NNN | Compliance check on Architecture Vision §2–§6 |
 | Report manual corrections before stakeholder submission | Typically 2–4 hours of formatting and gap-filling | ≤ 3 corrections (missing fields, formatting) per published report | User-reported on post-publish review |
 | Non-EA stakeholder participation rate | Low — stakeholders disengage from text-heavy TOGAF interviews | Non-EA stakeholders can complete a Web or Voice interview with no prior TOGAF knowledge, verified by facilitator observation | Facilitator assessment at session close |
-| Decision traceability | Decisions made verbally in sessions; rarely documented | 100% of architecture decisions recorded in A3 logs and visible in `/ea-decisions` output before Phase G | `/ea-decisions` row count vs. decisions noted in session logs |
+| Decision traceability | Decisions made verbally in sessions; rarely documented | All A3 log entries have a recorded owner and governance state of Awaiting or above before Phase G commences | `/ea-decisions` output inspected at Phase G gate: zero entries with state `Provisional` and no `owner` field |
 
 ---
 
