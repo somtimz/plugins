@@ -12,16 +12,17 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 
 ## Features
 
-- **Multi-engagement management** — create, open, track, edit, archive, and delete EA projects
+- **Multi-engagement management** — create, open, track, edit, archive, and delete EA projects with engagement type classification (Greenfield/Brownfield/Assessment-only/Migration)
 - **Full ADM lifecycle** — start, edit, or resume any TOGAF ADM phase (Prelim, A–H)
+- **Motivation framework** — structured Business Drivers (DRV), Goals (G), Objectives (OBJ), Issues (ISS), and Problems (PRB) with ID-based traceability chains in the Architecture Vision (15 sections including Strategic Direction Summary with Strategies and Key Metrics)
 - **Business Model Canvas** — Phase B BMC template (9 building blocks) with 27-question interview bank and linkage table to Business Architecture elements
-- **Architecture Requirements** — manage requirements with Corporate (read-only, waiveable) and Project (editable) scope distinction; sync from shared repo with automatic Corporate tagging
+- **Architecture Requirements** — manage requirements with Corporate (read-only, waiveable) and Project (editable) scope distinction; Motivation field links each requirement to its driver, issue, problem, goal, or objective
 - **Artifact generation** — all TOGAF artifacts from templates, guided by interviews
 - **Format export** — generate Word (.docx), PowerPoint (.pptx), and Mermaid diagrams from any artifact
-- **Phase interviews** — curated question bank for each ADM phase (Text, Web, or Display mode) with output routing to artifacts
+- **Phase interviews** — curated question bank for each ADM phase (Text, Web, or Display mode) with output routing to artifacts; ID scheme reference and section markers for Phase A
 - **Interview shortcuts** — single-key shortcuts for defaults, skip, N/A, opt-out, brainstorm, A3 logging, and governance transitions; type `?` at any prompt for contextual help
 - **Contextual help** — type `?` during any interview to see the artifact's purpose, value, current progress, and a link to the EA concepts reference
-- **EA concepts reference** — canonical definitions of Principle, Goal, Strategy, Plan, and Risk with TOGAF/ArchiMate alignment and common-confusion disambiguation
+- **EA concepts reference** — canonical definitions of Principle, Goal, Objective, Strategy, Plan, Risk, Issue, and Problem with TOGAF/ArchiMate alignment and common-confusion disambiguation
 - **Cross-topic detection** — flags answers that belong in a different artifact and offers to route them correctly or save for later
 - **Session tracking** — records facilitator, participants, topics, and next recommended step for every interview session; prior session summary shown at session start
 - **Brainstorming** — capture freeform thoughts before or during interviews; surfaced automatically as context during Q&A
@@ -29,10 +30,13 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Stakeholder interviews** — chat-based or interactive web form; dated and versioned notes
 - **Diagram support** — Mermaid, Graphviz (.dot), Draw.io (.drawio), ArchiMate notation
 - **Decision Register** — cross-artifact decision tracking with governance states (Provisional → Verified/Voted/Fiat), owner attribution, and on-demand registers tailored by audience, domain, authority, cost, impact, or risk
+- **Artifact grill** — deep-review any artifact using grill-me skills (stress-test, premortem, decision, design, software-design, infra-design, artifact, diagram, boardroom-strategy); auto-selects best skill by artifact type
 - **Opt-out tracking** — explicitly opt out of any question or artifact; reasons and timestamps recorded; surfaced in status reports and consolidated documents
 - **Artifact compliance** — automatic compliance check when opening any artifact; offer to remediate missing fields/sections or accept as-is with sensible defaults
+- **Pre-publish compliance** — `/ea-publish` runs compliance scan on all selected artifacts before assembly; non-compliant items flagged with option to proceed or remediate
 - **Review & consistency** — per-artifact review workflow; cross-artifact consistency checking
 - **Consolidated reporting** — merge all artifacts into a single Markdown or Word document; opted-out and non-standard items flagged inline
+- **Research agent integration** — invoke `@research-agent` at any point during interviews for evidence-based validation of drivers, risks, technology choices, or assumptions
 - **Document ingestion** — upload existing docs and diagrams to inform artifacts
 - **ADM reference material** — detailed phase inputs/outputs, tailoring guidance for agile/programme/capability-based contexts
 
@@ -77,7 +81,8 @@ requirementsRepoPath: /path/to/shared/requirements-folder
 | `/ea-review [artifact]` | Open an artifact for review and assessment; runs compliance check on load |
 | `/ea-requirements [action]` | Manage architecture requirements |
 | `/ea-decisions [options]` | Generate a Decision Register from all A3 decision logs; filter by audience, owner, domain, authority, cost, impact, risk, subject, or status |
-| `/ea-publish` | Merge all artifacts into a consolidated document; flags opted-out and non-standard items |
+| `/ea-grill [artifact] [--skill]` | Deep-review an artifact using a grill-me skill (stress-test, premortem, decision, design, boardroom-strategy, etc.) |
+| `/ea-publish` | Merge all artifacts into a consolidated document; compliance pre-check, opted-out and non-standard items flagged |
 | `/ea-help` | Getting-started guide, full command reference, and interview shortcuts |
 
 ## Interview Shortcuts
@@ -96,7 +101,7 @@ Type these at any interview prompt:
 | `govern` / `g` | Update A3 governance state |
 | `b:` / `brainstorm` | Start a freeform brainstorm pause |
 | `?` / `help` | Show artifact purpose, current progress, and shortcuts |
-| `concepts` | Show EA concepts quick reference (Principle/Goal/Strategy/Plan/Risk) |
+| `concepts` | Show EA concepts quick reference (Principle/Goal/Objective/Strategy/Plan/Risk/Issue/Problem) |
 
 > **Skip vs. Opt-out:** `skip` is temporary — the field can be filled in later. `opt-out` is a deliberate decision — recorded in `engagement.json`, visible in `/ea-status`, and flagged in reports.
 

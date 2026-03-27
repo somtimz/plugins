@@ -15,6 +15,7 @@ Create a new EA engagement project under `EA-projects/`.
    - **Sponsor / Owner** (required) — name of the executive sponsor
    - **Organisation** (required) — organisation or business unit
    - **Scope** (required) — brief scope statement
+   - **Engagement Type** (required) — Greenfield / Brownfield / Assessment-only / Migration
    - **Start Date** (required, default: today's date) — offer today's date as default
    - **Status** (default: `Active`) — Active / On Hold / Planning
 
@@ -51,6 +52,7 @@ Create a new EA engagement project under `EA-projects/`.
   "sponsor": "",
   "organisation": "",
   "scope": "",
+  "engagementType": "",
   "startDate": "",
   "status": "Active",
   "currentPhase": "Prelim",

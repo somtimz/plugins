@@ -54,6 +54,28 @@ Enter numbers separated by commas (e.g. 1,2,3), a range (e.g. 1-4), or "all" for
 - If the selection includes Draft or In Review artifacts, warn: "⚠️ Your selection includes {N} artifact(s) that are not yet Approved. They will be included and marked accordingly."
 - Confirm the final selection before proceeding
 
+### Step 2b: Pre-Publish Compliance Check
+
+For each selected artifact, run a quick compliance scan (the same three-tier check used by artifact load: frontmatter fields, template structure, artifact-specific rules). Present a summary:
+
+```
+Pre-publish compliance check:
+
+  #  Artifact                        Compliance
+  ─────────────────────────────────────────────────
+  1  Architecture Principles         ✅ Compliant
+  2  Requirements Register           ⚠️ 2 issues (missing Motivation field on REQ-003, REQ-007)
+  3  Architecture Vision             ✅ Compliant
+  4  Business Architecture           ⚠️ 1 issue (empty §4 Capability Gaps)
+```
+
+If any artifact has compliance issues:
+- List the specific issues per artifact
+- Ask: "Proceed with publication anyway, or address compliance issues first?"
+- If the user proceeds, add a `complianceNote` to the Artifact Status Summary table: `⚠️ Published with known compliance issues — see individual artifact headers`
+
+If all artifacts are compliant, proceed silently to Step 3.
+
 ### Step 3: Determine Output Format
 
 - If argument is `markdown` — Markdown only

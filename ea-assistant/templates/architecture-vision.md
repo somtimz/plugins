@@ -139,7 +139,36 @@ Issues, not derived from them.
 
 ---
 
-## 7. Scope
+## 7. Strategic Direction Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+This section rolls up the strategic direction elements captured during the engagement. Strategies are
+the chosen approaches for achieving goals — they are recorded in `engagement.json → direction.strategies[]`
+and summarised here. Metrics are the measures used to track progress against objectives — they are
+recorded in `engagement.json → metrics[]`. This section provides a single-page view for executive
+stakeholders who need the full motivation chain without reading individual sections.
+
+</details>
+
+### Strategies
+
+| ID | Strategy | Supports Goal(s) |
+|---|---|---|
+| STR-001 | {{strategy_1}} | G-00N |
+
+### Key Metrics
+
+| ID | Metric | Type | Linked Objective | Baseline | Target |
+|---|---|---|---|---|---|
+| MET-001 | {{metric_1}} | Performance / Outcome / Activity | OBJ-00N | {{baseline_1}} | {{target_1}} |
+
+> *Full direction data is maintained in `engagement.json → direction` and `metrics[]`.*
+
+---
+
+## 8. Scope
 
 <details>
 <summary>📋 Guidance</summary>
@@ -160,7 +189,7 @@ Be specific about organisational units, systems, geographies, and time horizons.
 
 ---
 
-## 8. Stakeholders
+## 9. Stakeholders
 
 <details>
 <summary>📋 Guidance</summary>
@@ -177,7 +206,7 @@ This feeds directly into the Stakeholder Map artifact.
 
 ---
 
-## 9. Architecture Principles
+## 10. Architecture Principles
 
 <details>
 <summary>📋 Guidance</summary>
@@ -195,7 +224,7 @@ Summary:
 
 ---
 
-## 10. Constraints
+## 11. Constraints
 
 <details>
 <summary>📋 Guidance</summary>
@@ -211,7 +240,7 @@ Distinguish between hard constraints (non-negotiable) and soft constraints (pref
 
 ---
 
-## 11. Assumptions
+## 12. Assumptions
 
 <details>
 <summary>📋 Guidance</summary>
@@ -224,7 +253,7 @@ List the assumptions being made. These should be validated and updated throughou
 
 ---
 
-## 12. High-Level Target Architecture
+## 13. High-Level Target Architecture
 
 <details>
 <summary>📋 Guidance</summary>
@@ -240,7 +269,7 @@ Reference diagrams stored in the diagrams/ folder. Avoid detailed design at this
 
 ---
 
-## 13. Key Risks
+## 14. Key Risks
 
 <details>
 <summary>📋 Guidance</summary>
@@ -255,7 +284,7 @@ Identify the top 3-5 risks to the architecture or engagement. Include mitigation
 
 ---
 
-## 14. Next Steps
+## 15. Next Steps
 
 <details>
 <summary>📋 Guidance</summary>

@@ -49,44 +49,58 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 
 **Goal:** Define scope, concerns, high-level target, and cross-domain goals
 
+**ID Scheme Reference:**
+
+| Prefix | Concept | Example | Linked To |
+|---|---|---|---|
+| DRV-NNN | Business Driver | DRV-001 | — (root cause of engagement) |
+| G-NNN | Goal | G-001 | DRV-NNN (responds to driver) |
+| OBJ-NNN | Objective | OBJ-001 | G-NNN (operationalises goal) |
+| ISS-NNN | Issue | ISS-001 | G-NNN (threatens goal) |
+| PRB-NNN | Problem | PRB-001 | OBJ-NNN (blocks objective) |
+| STR-NNN | Strategy | STR-001 | G-NNN (approach to achieve goal) |
+| MET-NNN | Metric | MET-001 | OBJ-NNN (measures objective) |
+
+Assign IDs sequentially within each prefix as responses are confirmed. Record IDs in the Architecture Vision template and in `engagement.json` where applicable.
+
 **Key questions:**
 
-*Business Drivers — the forces making this engagement necessary:*
+*§2 Business Drivers — the forces making this engagement necessary:*
 1. What external forces (market shifts, regulatory changes, competitive pressure, technology change) are creating pressure to act now?
 2. What internal forces (cost pressure, strategic mandate, leadership change, capability gap) are pushing this engagement forward?
 3. For each driver: is it an opportunity to exploit, a threat to respond to, or a mandate to comply with?
 
-*Goals — the broad outcomes the strategy must achieve:*
+*§3 Goals — the broad outcomes the strategy must achieve:*
 4. Given those drivers, what are the high-level outcomes this engagement must achieve? Capture each as a goal: a qualitative statement of a desired future state — no numbers or deadlines required at this level. (e.g. "Become a trusted custodian of customer data", "Achieve highly reliable platform operations")
    - If a response includes a specific number or deadline, it is an **Objective** — note it and handle in the next step.
    - If it describes an approach ("adopt cloud-first"), it is a **Strategy** — note it and record separately.
    - Assign each confirmed goal a G-NNN ID and note which driver(s) it responds to.
 
-*Objectives — the measurable, time-bound results that operationalise each goal:*
+*§4 Objectives — the measurable, time-bound results that operationalise each goal:*
 5. For each goal captured: what is the specific, measurable result that would prove this goal is being achieved — and by when? (e.g. for "Achieve highly reliable platform operations" → "Reduce unplanned downtime to under 4 hours per quarter by Q4 2026")
    - Each objective must have: a unit of measure, a target value, and a deadline. Push back on any that lack all three.
    - Assign each confirmed objective an OBJ-NNN ID and link it to its parent goal.
 6. For each objective: how will you measure progress? What is the current baseline, and where does the data come from? Capture as a performance metric linked to the objective.
    - For goals without a single measure, ask for a leading indicator — capture as an outcome metric.
 
-*Issues — the systemic barriers that threaten goals:*
+*§5 Issues — the systemic barriers that threaten goals:*
 7. For each goal: what broader, systemic concerns are currently preventing or threatening its achievement? (Patterns of dysfunction, capability gaps, unresolved conflicts — not single broken things.) (e.g. "Weak stakeholder alignment across business units", "Inconsistent data quality across operational systems")
    - Assign each confirmed issue an ISS-NNN ID and link it to the goal(s) it threatens.
    - If a response is too specific and fixable ("error rate is 30%"), it is a **Problem** — note it and handle in the next step.
 
-*Problems — the specific, observable symptoms that block objectives:*
+*§6 Problems — the specific, observable symptoms that block objectives:*
 8. For each objective: what specific, measurable symptoms are actively blocking or undermining its delivery today? (e.g. "The monthly close process takes 15 days due to manual reconciliation", "Mobile checkout abandonment is 68% — 2× the industry benchmark")
    - Assign each confirmed problem a PRB-NNN ID and link it to the objective(s) it blocks.
    - If a response is too broad and unfixable directly ("we have poor data culture"), it is an **Issue** — move it up.
 
-*Scope, constraints, and risks:*
-9. What does success look like at the end of this engagement?
-10. Who are the key stakeholders and what are their primary concerns?
-11. What is explicitly in scope and out of scope for this engagement?
-12. What known constraints or assumptions should be documented upfront?
-13. What existing architecture assets, decisions, or documents are relevant?
-14. What is the desired timeline for completing this work?
-15. What are the biggest risks that could derail this engagement?
+*§1 Executive Summary / §8 Scope / §9–§15 — scope, constraints, and risks:*
+9. What does success look like at the end of this engagement? → §1 Executive Summary
+10. Who are the key stakeholders and what are their primary concerns? → §9 Stakeholders + Stakeholder Map
+11. What is explicitly in scope and out of scope for this engagement? → §8 Scope
+12. What known constraints or assumptions should be documented upfront? → §11 Constraints + §12 Assumptions
+13. What existing architecture assets, decisions, or documents are relevant? → Statement of Architecture Work §3
+14. What is the desired timeline for completing this work? → §8 Scope (Time Horizon) + SoAW
+15. What are the biggest risks that could derail this engagement? → §14 Key Risks
 
 **Output Routing:**
 
@@ -102,13 +116,15 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 | Success criteria | Architecture Vision | `§1 Executive Summary` + `§3 Goals` |
 | Key stakeholders | Stakeholder Map | `{{stakeholder_list}}` |
 | Stakeholder concerns | Stakeholder Map | `{{stakeholder_concerns}}` |
-| In-scope items | Architecture Vision | `§7 Scope — {{scope_in}}` |
-| Out-of-scope items | Architecture Vision | `§7 Scope — {{scope_out}}` |
+| Strategies | Architecture Vision + engagement.json | `§7 Strategic Direction Summary` (STR-NNN rows) + `direction.strategies[]` |
+| Metrics | engagement.json | `§7 Strategic Direction Summary` (MET-NNN rows) + `metrics[]` |
+| In-scope items | Architecture Vision | `§8 Scope — {{scope_in}}` |
+| Out-of-scope items | Architecture Vision | `§8 Scope — {{scope_out}}` |
 | Constraints | Statement of Architecture Work | `{{constraints}}` |
 | Assumptions | Statement of Architecture Work | `{{assumptions}}` |
 | Existing architecture assets | Statement of Architecture Work | `§3 Approach` (reference existing assets as inputs) |
 | Timeline | Statement of Architecture Work | `{{timeline}}` |
-| Key risks | Architecture Vision | `§13 Key Risks` (table rows) |
+| Key risks | Architecture Vision | `§14 Key Risks` (table rows) |
 | Strategies | engagement.json | `direction.strategies[]` |
 
 **Facilitation Notes:**

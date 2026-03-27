@@ -94,6 +94,10 @@ When displaying answers to questions or presenting any multi-item information:
 - `window.localStorage` (key-value, JSON-serialized) — browser-side persistence in Claude's artifact viewer (ITIL-assistant)
 
 ## Recent Changes
+- ea-assistant v0.9.0: Motivation framework — Architecture Vision restructured with §2 Business Drivers (DRV-NNN), §3 Goals (G-NNN), §4 Objectives (OBJ-NNN), §5 Issues (ISS-NNN), §6 Problems (PRB-NNN), §7 Strategic Direction Summary (Strategies + Metrics); 15 sections total; ID scheme reference and section markers in Phase A interview
+- ea-assistant v0.9.0: `/ea-grill` command — deep-review any artifact using grill-me skills with auto-skill selection by artifact type (9 skills); review output saved to `reviews/` folder
+- ea-assistant v0.9.0: EA concepts expanded from 5 to 8 (added Objective, Issue, Problem); `/ea-new` collects `engagementType`; `/ea-publish` pre-publish compliance check; Requirements Register Motivation field for traceability; research agent integration during interviews
+- grill-me v0.4.0: Consolidated to 9 skills — added software-design, infra-design, artifact, diagram; premortem dual Generate/Review mode; removed redundant strategy and boardroom skills
 - ea-assistant v0.8.0: Artifact compliance check — three-tier rule set (frontmatter, template structure, artifact-specific); compliance prompt on every artifact load (achieve compliance / accept as-is / view details); complianceNote frontmatter field; non-standard artifact flag in /ea-status and /ea-publish
 - ea-assistant v0.8.0: Shortcuts reference shown at interview start; `?`/`help` contextual help (artifact purpose, phase context, concept hint, opt-out reminder); `concepts` quick reference for Principle/Goal/Strategy/Plan/Risk
 - ea-assistant v0.8.0: Opt-out tracking — `opt-out` (question) and `opt-out artifact`; ⊘ answer state marker; engagement.json optOuts[] array with reason/timestamp; flagged in /ea-status, /ea-publish, and session log

@@ -93,7 +93,8 @@ Ready? Here is my first question.
 Apply the selected grill-me skill, using the artifact content as the "proposal" being reviewed. You have full context of every section. Ask questions that specifically challenge the content of this artifact — do not ask generic questions that ignore what is written.
 
 For example:
-- If reviewing an Architecture Vision and the Business Drivers section lists only internal drivers, challenge whether external forces have been overlooked.
+- If reviewing an Architecture Vision and §2 Business Drivers lists only internal drivers, challenge whether external forces have been overlooked.
+- If reviewing an Architecture Vision and §7 Strategic Direction Summary has strategies that don't link to any goal, challenge the traceability.
 - If reviewing a Migration Plan and Wave 1 has no rollback procedure, ask directly about that gap.
 - If reviewing an Architecture Principles artifact and a principle lacks an Implications section, probe whether the team understands the practical consequences.
 
