@@ -47,13 +47,9 @@ Read `.claude/ea-assistant.local.md` and extract:
 - `researchPrompts` → default `true`
 - `sessionSummary` → default `true`
 
-Apply throughout the interview session:
+Apply the active style throughout the interview session per the **Style Behaviour Reference** in `skills/ea-engagement-lifecycle/SKILL.md`. Do not redefine style rules here — read and apply them from that file.
 
-- **`facilitatorStyle: patient`** — Before each question, show one sentence of context on why it matters. After recording each answer, give a brief warm acknowledgement ("Got it — noted."). If an answer is very short (under 5 words), ask one gentle follow-up: "Can you say a little more about that?" Proactively offer an example when a question is abstract. At section boundaries, pause: "Anything else before we move on?"
-- **`facilitatorStyle: direct`** — Show the question number and text only. Record the answer. Move to the next question. No preamble, no acknowledgement, no section-boundary pauses.
-- **`facilitatorStyle: executive`** — Frame each question in terms of business outcomes. Replace TOGAF artifact names with plain descriptions ("the architecture document" not "Architecture Vision"). Offer to skip deep-detail questions: "We can skip the detailed constraints section — or would you like to include it?" Checkpoint every 5–7 questions: "Shall we pause here or keep going?"
-
-- **`audienceLevel`** — Adjust vocabulary: `executive` = no TOGAF terms; `architect` = full TOGAF/ArchiMate; `technical` = system-level language; `mixed` = plain language with brief TOGAF glosses on first use.
+Additional interview-specific config behaviour:
 - **`requireConfirmBeforeRecord: true`** — After every Answered response, show: `"Record this? (y / edit / skip)"` and wait before writing to the artifact.
 - **`researchPrompts: true`** — When a business driver, risk, assumption, or technology claim is recorded, show once per session per topic: `💡 Consider validating this with @research-agent before finalising.`
 - **`sessionSummary: false`** — Skip the themes/topics summary at session end; show only the next logical step.
@@ -511,56 +507,7 @@ When the user types `opt-out artifact` during an interview:
 
 **Cross-Topic Detection:**
 
-Applied at step 7b (Text mode) and before routing in phase interview step 4 (Phase mode). This check runs after receiving an Answered answer but before writing it to the artifact.
-
-**Detection process:**
-1. Scan the answer text for cross-topic signals using the signal cues below.
-2. If **no signal** found → proceed directly to writing the answer (step 8).
-3. If a **signal is found** → increment the in-memory flag counter by 1. Present inline:
-
-   > ⚠️ **Cross-topic signal:** Your answer mentions **{detected topic}** — this is typically captured in **{Target Artifact}** → `{{target_field}}`.
-   >
-   > **1.** Write this to {Target Artifact} now
-   > **2.** Flag for later (saved in interview notes)
-   > **3.** Continue as-is — record only here
-   >
-   > *(type 1, 2, or 3 — or press Enter to continue as-is)*
-
-4. **Handle the response:**
-   - **Option 1:** Check if `EA-projects/{slug}/artifacts/{artifact-id}.md` exists. If yes, write the flagged content to the specified field and confirm: "Written to {Artifact} → {field}." Add the artifact name to the flagged-artifacts list. If the artifact does not yet exist: "That artifact hasn't been created yet — adding to Flagged for Later instead." Apply Option 2 behaviour.
-   - **Option 2:** Append to `## Flagged for Later` at the end of the current session's interview notes file (create the section if it does not exist). Format: `- [{HH:MM}] {flagged content} → suggested artifact: {artifact} / field: {field}`. Add artifact name to the flagged-artifacts list.
-   - **Option 3 / Enter:** No further action — record in the current artifact only.
-
-5. After handling the flag, **immediately continue with step 8** and the next question. Do not re-raise the same flag.
-
-**Cross-Topic Signal Map:**
-
-| If currently interviewing… | Flag these signals → Target Artifact |
-|---|---|
-| Architecture Principles | Technology product/vendor names, version numbers → Technology Architecture; specific process descriptions → Business Architecture; "must…" / "shall…" statements → Requirements Register; risk language ("we might fail…") → Architecture Vision |
-| Architecture Vision | Specific technology platform names → Technology Architecture; detailed process steps → Business Architecture; data entity names or schemas → Data Architecture; delivery timelines, waves, or phased rollout → Architecture Roadmap |
-| Business Architecture | Specific application or system names → Application Architecture; data entity definitions or schemas → Data Architecture; cloud or infrastructure decisions → Technology Architecture; regulatory/compliance requirements → Requirements Register |
-| Data Architecture | Specific application or system names → Application Architecture; infrastructure or platform choices → Technology Architecture; data governance policies stated as binding rules → Architecture Principles |
-| Application Architecture | Infrastructure or platform choices → Technology Architecture; data modelling or entity definitions → Data Architecture; integration standards stated as binding rules → Architecture Principles |
-| Technology Architecture | Business process or capability descriptions → Business Architecture; data entity or model descriptions → Data Architecture; governance rules stated as principles → Architecture Principles |
-| Requirements Register | Implementation approaches or technology choices → Technology / Application Architecture; gap statements → Gap Analysis; direction (goals / objectives) → engagement.json |
-| Gap Analysis | Strategic direction or goal statements → Architecture Vision; technology decisions → Technology Architecture; new requirements → Requirements Register |
-| Architecture Roadmap | Cut-over or rollback procedures → Migration Plan; risk items → Architecture Vision or Statement of Architecture Work |
-| Migration Plan | Business goals or strategic rationale → Architecture Vision; requirements → Requirements Register |
-
-**Signal detection cues:**
-- **Technology:** specific product/vendor names, "Azure / AWS / GCP", version numbers, infra terms (compute, storage, network zone, Kubernetes, container)
-- **Business:** "our process for…", "the team responsible…", capability names, org unit names, "customer journey"
-- **Data:** entity or table names, "master data", "data model", "data quality", "duplicate records"
-- **Application:** specific system names (Salesforce, SAP, CRM, ERP, "legacy system"), "application portfolio"
-- **Requirement:** "must…", "shall…", "the system needs to…", "compliance requires…", "regulatory requirement"
-- **Risk:** "we might…", "if X fails…", "the risk is…", likelihood/impact language ("high likelihood", "critical impact")
-- **Direction:** goal/objective/strategy language during a non-Vision/non-direction interview ("our goal is…", "our strategy is…", "we want to achieve…")
-
-**Do NOT flag:**
-- Direction items (goals/objectives/strategies) during Phase A or Phase B interviews — these are expected content for those phases
-- General contextual statements not attributable to a specific artifact field
-- Answers to questions that explicitly ask for cross-domain context (e.g., a constraints question in Architecture Vision that legitimately invites technology references)
+Applied at step 7b (Text mode) and before routing in phase interview step 4 (Phase mode). Apply the full detection process, signal map, and "Do NOT flag" rules from `skills/ea-artifact-templates/references/cross-topic-detection.md`.
 
 **Recording Decisions to Appendix A3:**
 
@@ -589,21 +536,7 @@ When triggered:
 
 **Governance state transitions (A3 rows):**
 
-After any interview session, the user may update the governance state of any A3 row by typing `govern` or `g` followed by a row number. Present options:
-
-```
-Update governance state for decision {N} ("{item}"):
-  Current: {state}
-  1. Mark as Awaiting Verification  (assign/confirm owner)
-  2. Mark as Verified               (owner confirms)
-  3. Submit for Vote                (moves to Under Vote)
-  4. Record Vote result             (Voted — specify majority/unanimous)
-  5. Mark as Fiat                   (senior decision maker override — specify name/role)
-  6. Return for rework              (Returned — add note)
-  Press Enter to keep current state.
-```
-
-Write the updated state back to the A3 row in the artifact file.
+After any interview session, the user may update the governance state of any A3 row by typing `govern` or `g` followed by a row number. Use the governance states, emoji markers, and transition path defined in `skills/ea-artifact-templates/SKILL.md` (Governance State Markers section). Write the updated state back to the A3 row in the artifact file.
 
 **Skipping Questions:**
 When a user skips: acknowledge briefly and move on without pressure. "Noted — marked as not answered. Moving on."

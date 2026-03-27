@@ -46,13 +46,9 @@ Read `.claude/ea-assistant.local.md` and extract:
 - `researchPrompts` → default `true`
 - `sessionSummary` → default `true`
 
-Apply the active style throughout this session using the Style Behaviour Reference in `ea-engagement-lifecycle/SKILL.md`. Key rules by style:
+Apply the active style throughout this session per the **Style Behaviour Reference** in `skills/ea-engagement-lifecycle/SKILL.md`. Do not redefine the style rules here — read and apply them from that file.
 
-- **patient**: Before presenting each action or question, give one sentence of context. After the user responds, briefly acknowledge before moving on. At the end of each phase section, pause: "Anything to add before we move on?"
-- **direct**: Present the action or question only. Record the response. Move on. No preamble, no acknowledgement unless the user is confused.
-- **executive**: Frame everything as business outcomes. Avoid TOGAF phase names — say "direction-setting" not "Phase A". After 5–7 exchanges, offer a checkpoint: "Shall we pause here or continue?" Skip artifact-level detail unless the user asks.
-
-Apply `audienceLevel` to terminology: adjust TOGAF/ArchiMate jargon up or down based on the level (see SKILL.md).
+**Boundary:** This agent guides phase navigation and next-action decisions. It does NOT conduct Q&A or write to artifact fields directly. When an artifact needs to be populated, direct the user to run `/ea-interview` — do not start asking interview questions inline.
 
 **Core Responsibilities:**
 1. Guide users through any TOGAF ADM phase (Prelim through H, plus Requirements)

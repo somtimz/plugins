@@ -72,34 +72,6 @@ Only write to artifacts after user confirmation:
 2. Mark extracted fields as sourced from the uploaded document: `📎 Source: uploads/{filename}`
 3. Do not overwrite existing answered fields without explicit user approval
 
-## Interview Form Parsing
-
-When a user imports a completed interview Word document:
-
-### Expected Structure
-
-Interview Word exports use a structured format:
-```
-## Question 1: [Question text]
-**Answer:** [user's answer or SKIP or N/A]
-
-## Question 2: [Question text]
-**Answer:** [user's answer]
-```
-
-### Parsing Workflow
-
-1. Read the document
-2. Extract each Q&A pair
-3. Map answers to the corresponding artifact fields
-4. Preserve answer states:
-   - Written answer → use as artifact field value
-   - `SKIP` → mark as `⚠️ Not answered`
-   - `N/A` → mark as `➖ Not applicable`
-   - Empty → treat as skipped, not overriding existing values
-5. Present a summary of extracted answers to the user before applying
-6. Apply answers to the artifact and save a dated interview note
-
 ## Content Policy
 
 - Never overwrite `Approved` artifacts from uploaded content without explicit user confirmation

@@ -47,13 +47,13 @@ EA-projects/
   "direction": {
     "Business": {
       "goals": [
-        { "id": "BG-001", "statement": "", "priority": "High | Medium | Low" }
+        { "id": "G-001", "statement": "", "priority": "High | Medium | Low" }
       ],
       "objectives": [
-        { "id": "BO-001", "statement": "", "measure": "", "target": "", "deadline": "", "priority": "High | Medium | Low" }
+        { "id": "OBJ-001", "statement": "", "measure": "", "target": "", "deadline": "", "priority": "High | Medium | Low" }
       ],
       "strategies": [
-        { "id": "BS-001", "statement": "", "supports": ["BG-001"], "priority": "High | Medium | Low" }
+        { "id": "STR-001", "statement": "", "supports": ["G-001"], "priority": "High | Medium | Low" }
       ]
     },
     "Data": { "goals": [], "objectives": [], "strategies": [] },
@@ -63,7 +63,7 @@ EA-projects/
   "metrics": {
     "Business": [
       {
-        "id": "BM-001",
+        "id": "MET-001",
         "name": "",
         "type": "outcome | performance | activity",
         "description": "",
@@ -106,41 +106,32 @@ EA-projects/
 
 **New fields** (added in v0.4.0):
 - `direction`: Domain-scoped direction object. Keys match selected `architectureDomains`. Each domain has three sub-arrays — `goals`, `objectives`, `strategies` — with the following schemas:
-  - **Goal** `{ id, statement, priority }` — high-level desired outcome (WHERE). IDs: `BG-`, `DG-`, `AG-`, `TG-`
-  - **Objective** `{ id, statement, measure, target, deadline, priority }` — specific measurable target (HOW FAR, BY WHEN). IDs: `BO-`, `DO-`, `AO-`, `TO-`
-  - **Strategy** `{ id, statement, supports: [id,...], priority }` — course of action (HOW). IDs: `BS-`, `DS-`, `AS-`, `TS-`
+  - **Goal** `{ id, statement, priority }` — high-level desired outcome (WHERE). IDs: `G-NNN` (sequential across all domains, e.g. `G-001`, `G-002`)
+  - **Objective** `{ id, statement, measure, target, deadline, priority }` — specific measurable target (HOW FAR, BY WHEN). IDs: `OBJ-NNN`
+  - **Strategy** `{ id, statement, supports: [id,...], priority }` — course of action (HOW). IDs: `STR-NNN`
   - `supports` links a strategy to the goal or objective IDs it serves.
+  - IDs are unique across all domains — do not restart numbering per domain.
   - Items with an empty `statement` are placeholders and MUST NOT be referenced in artifacts.
   - Only domains in `architectureDomains` are populated — unused domains are omitted.
 
-**Direction vs. Goals vs. Objectives vs. Strategies — definitions commands MUST use:**
+**Direction vs. Goals vs. Objectives vs. Strategies:** See canonical definitions and disambiguation checklist in `skills/ea-artifact-templates/references/ea-concepts.md`.
 
-| Term | Answers | Characteristics | Example |
-|------|---------|-----------------|---------|
-| **Direction** | *Why are we doing this?* | Superset of all three below; the complete performance expectation and constraint set | "Transform our data capability to support real-time decision-making" |
-| **Goal** | *Where do we want to be?* | Qualitative, long-term, not directly measurable | "Become the most trusted financial services provider in the region" |
-| **Objective** | *How far, by when?* | Specific, measurable, time-bound; testable | "Reduce customer onboarding from 5 days to 1 day by Q4 2026" |
-| **Strategy** | *How will we get there?* | Course of action; choice of approach; not an outcome | "Adopt API-first integration to enable real-time data access" |
-
-When capturing direction from a user, ALWAYS classify what they say before writing it. If a user says something that could be any of the three, ask a clarifying question rather than guessing. Common confusions:
-- A goal stated with a number in it is usually an objective (e.g. "achieve 99.9% availability" → objective, not goal).
-- A strategy stated as an outcome is usually a goal or objective (e.g. "move to the cloud" is a strategy; "have 80% of workloads on cloud by 2027" is an objective).
-- "We want to improve data quality" is a goal; "reduce duplicate customer records by 90% by June 2026" is the corresponding objective.
+When capturing direction from a user, ALWAYS classify what they say before writing it. If a user says something that could be any of the three, ask a clarifying question rather than guessing.
 
 Existing engagements created before v0.4.0 will not have the `direction` field. All commands MUST handle a missing `direction` field gracefully by treating each domain as `{ goals: [], objectives: [], strategies: [] }`.
 
 **New fields** (added in v0.5.0):
 - `metrics`: Domain-scoped metrics array. Each metric tracks the performance of one or more direction items (goals, objectives, or strategies) via its `supports` array of direction IDs. Metric `type` determines what it tracks:
 
-| Metric type | Tracks | Linked to | Example |
-|-------------|--------|-----------|---------|
-| `outcome` | Whether a **goal** is being approached | `BG-`, `DG-`, `AG-`, `TG-` | Customer satisfaction score trending toward target |
-| `performance` | Whether an **objective** is on track | `BO-`, `DO-`, `AO-`, `TO-` | Onboarding time: baseline 5 days → target 1 day |
-| `activity` | Whether a **strategy** is being executed | `BS-`, `DS-`, `AS-`, `TS-` | % of new workloads containerised |
+| Metric type | Tracks | Example |
+|-------------|--------|---------|
+| `outcome` | Whether a **goal** is being approached | Customer satisfaction score trending toward target |
+| `performance` | Whether an **objective** is on track | Onboarding time: baseline 5 days → target 1 day |
+| `activity` | Whether a **strategy** is being executed | % of new workloads containerised |
 
 Metric status values: `Not Established` | `On Track` | `At Risk` | `Behind` | `Achieved`
 
-ID patterns: `BM-` (Business), `DM-` (Data), `AM-` (Application), `TM-` (Technology).
+IDs: `MET-NNN` (sequential across all domains).
 
 Metrics with an empty `name` or `measure` are placeholders and MUST NOT be displayed in artifacts.
 
