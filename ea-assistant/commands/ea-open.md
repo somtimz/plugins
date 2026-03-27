@@ -79,6 +79,8 @@ Display a picklist of all EA engagements, open the selected one with full detail
 
 6. **Store the active engagement** slug in the conversation context for subsequent commands.
 
+7. **Refresh `EA-projects/{slug}/CLAUDE.md`** with current engagement state (name, slug, engagementType, organisation, sponsor, scope, currentPhase, status, startDate, lastModified). Use the same template defined in `/ea-new`. This keeps the file current so future sessions opened from the project folder always see the latest phase and status. If the file does not exist (e.g. legacy engagement created before this feature), create it now.
+
 7. **Offer next actions:**
 
    ```
