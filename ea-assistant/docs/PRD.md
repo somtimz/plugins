@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.2
+**Version:** 0.9.3
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -50,33 +50,37 @@ The **EA Practitioner** is the primary user. All design decisions should favour 
 The engagement's strategic context is captured as a linked chain:
 
 ```
-Business Drivers (DRV) ──drives──► Goals (G) ──operationalises──► Objectives (OBJ)
-                                        ▲                                  ▲
-                               threatens│                         blocks   │
-                                        │                                  │
-                                   Issues (ISS)                  Problems (PRB)
-                                                                           │
-                                                                    Requirements Register
+Vision ──inspires──► Mission ──contextualizes──► Business Drivers (DRV)
+                                                          │
+                                                       drives
+                                                          ▼
+                Issues (ISS) ──threatens──► Goals (G) ──operationalizes──► Objectives (OBJ) ◄──blocks── Problems (PRB)
+                                                                                  │
+                                                                     Requirements Register
                                                                   (links to any of the above)
 ```
 
+- **Vision** — long-term aspirational destination (3–5 years); the "North Star" all Drivers and Strategies must align with
+- **Mission** — the organisation's fundamental purpose today; bounds which Drivers are in scope
 - **Business Drivers** — forces making the engagement necessary (internal/external, opportunity/threat/mandate)
 - **Goals** — qualitative desired outcomes linked to drivers
 - **Objectives** — measurable, time-bound results that operationalise goals
-- **Issues** — systemic barriers that *threaten* goals (not observable symptoms — structural, persistent)
+- **Issues** — systemic barriers that *threaten* goals (structural, persistent — not a single-fix symptom)
 - **Problems** — specific, observable symptoms that *block* objectives
 - **Strategies** — chosen approaches for achieving goals; recorded in §7 Strategic Direction Summary of the Architecture Vision (STR-NNN)
 
 Requirements Register entries carry a Motivation field that links each requirement to its source — any of: DRV, ISS, PRB, G, or OBJ.
 
-### EA Concepts (8 total)
+### EA Concepts (10 total)
 
-Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Problem — each with a formal definition, TOGAF phase placement, ArchiMate 3.x element, and a disambiguation checklist to prevent concept confusion during interviews. Full definitions in `skills/ea-artifact-templates/references/ea-concepts.md`.
+Vision, Mission, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Problem — each with a formal definition, TOGAF phase placement, ArchiMate 3.x element, and a disambiguation checklist. Full definitions in `skills/ea-artifact-templates/references/ea-concepts.md`.
 
 **Disambiguation summary:**
 
 | Concept | Qualitative or Measurable | Time-bound | Owns a mitigation | Links to |
 |---|---|---|---|---|
+| Vision | Aspirational (future state) | No | No | Inspires Mission and Drivers |
+| Mission | Declarative (present purpose) | No | No | Bounds Drivers and Goals |
 | Principle | Rule (non-negotiable) | No | No | Architecture decisions |
 | Goal | Qualitative | No | No | Drivers |
 | Objective | Measurable | Yes | No | Goals |

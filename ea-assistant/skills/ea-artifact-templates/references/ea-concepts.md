@@ -2,7 +2,30 @@
 
 ## How to Use This Reference
 
-This file is the canonical source for eight EA concepts that are frequently confused during interviews and artifact creation: **Principle**, **Goal**, **Objective**, **Strategy**, **Plan**, **Risk**, **Issue**, and **Problem**. When the `ea-interviewer` agent detects concept confusion it cites this file. All commands and skills that capture direction, decisions, or risks should use these definitions — do not redefine them inline.
+This file is the canonical source for ten EA concepts that are frequently confused during interviews and artifact creation: **Vision**, **Mission**, **Principle**, **Goal**, **Objective**, **Strategy**, **Plan**, **Risk**, **Issue**, and **Problem**. When the `ea-interviewer` agent detects concept confusion it cites this file. All commands and skills that capture direction, decisions, or risks should use these definitions — do not redefine them inline.
+
+---
+
+## Motivation Framework
+
+The engagement's strategic context is captured as a linked chain:
+
+```
+Vision ──inspires──► Mission ──contextualizes──► Business Drivers (DRV)
+                                                          │
+                                                       drives
+                                                          ▼
+                                         Issues (ISS) ──threatens──► Goals (G) ──operationalizes──► Objectives (OBJ) ◄──blocks── Problems (PRB)
+                                                                                                           │
+                                                                                              Requirements Register
+                                                                                           (links to any of the above)
+```
+
+- **Vision** sets the long-term "North Star" — all Drivers and Strategies must align with it
+- **Mission** bounds current activity — defines which Drivers are in scope
+- **Business Drivers** create the urgency that makes the engagement necessary
+- **Goals → Objectives** translate that urgency into direction and measurable targets
+- **Requirements Register** is the formal bridge from the strategic layer to the implementation layer; every requirement traces back to a Driver, Goal, or Objective
 
 ---
 
@@ -10,6 +33,8 @@ This file is the canonical source for eight EA concepts that are frequently conf
 
 | Concept | Core Question | One-Line Marker | TOGAF Artifact Home | ArchiMate Element |
 |---|---|---|---|---|
+| **Vision** | *What do we aspire to become?* | Long-term aspirational destination — the North Star; all Drivers and Strategies must align | Architecture Vision §1; Stakeholder Map | — |
+| **Mission** | *Why do we exist today?* | Fundamental purpose and scope of activity — bounds which Drivers are relevant | Architecture Vision §1; Stakeholder Map | — |
 | **Principle** | *What must always be true?* | Normative rule — applies to every future decision in its domain | Architecture Principles Catalogue (Prelim) | Principle (Motivation) |
 | **Goal** | *Where do we want to be?* | Desired future state — qualitative, no deadline required | Architecture Vision §3; domain artifacts | Goal (Motivation) |
 | **Objective** | *How far, and by when?* | Measurable, time-bound result — must have a measure, target, and deadline | Architecture Vision §4; domain artifacts | Outcome (Motivation) |
@@ -22,6 +47,58 @@ This file is the canonical source for eight EA concepts that are frequently conf
 ---
 
 ## Concept Definitions
+
+---
+
+### Vision
+
+**What it IS:**
+A Vision is a forward-looking, aspirational description of what the organisation intends to become or achieve in the long term — typically a 3–5 year horizon. It serves as the "North Star": all Business Drivers, Goals, and Strategies must align with the Vision to ensure cohesive transformation. The Vision answers *"What are we becoming?"* — not what the organisation does today, but what it is striving towards.
+
+**Distinguishing markers:**
+- Aspirational and inspirational — not a plan or a set of tasks
+- Long-horizon (3–5 years) — not a near-term target
+- Describes an end state, not a method
+- Provides the alignment test for all strategic choices made during the engagement
+
+**What it is NOT:**
+- Not a **Mission** — a Vision describes the future destination; a Mission describes today's purpose
+- Not a **Goal** — a Vision is the overarching aspiration; Goals are the specific desired outcomes that contribute to realising it
+- Not a **Strategy** — a Vision says *where*; a Strategy says *how*
+- Not a **Principle** — a Vision is a directional statement, not a governance rule
+
+**Common confusions:**
+- "Become the leading digital insurer in Southeast Asia by 2030" — this is a **Vision** ✓ (aspirational, long-term, end-state)
+- "Deliver outstanding customer service" — this could be a **Mission** (present-day purpose) or a **Goal** (desired state), not a Vision unless it describes a multi-year transformation
+- "Adopt cloud-first architecture" — this is a **Strategy** (a chosen approach), not a Vision
+
+**TOGAF placement:** Architecture Vision §1 Executive Summary; Stakeholder Map (as organisational context). Captured during Phase A as the strategic frame for the entire engagement. All Business Drivers should be validated against the Vision — Drivers that do not contribute to the Vision should be flagged.
+
+---
+
+### Mission
+
+**What it IS:**
+A Mission is a concise statement defining the organisation's fundamental purpose, its core activities, and the primary stakeholders it serves. It answers *"Why do we exist today?"* — not where the organisation is going, but what it is for right now. The Mission provides the boundary for all Business Drivers and Goals: Drivers and Goals that fall outside the Mission may indicate scope creep or a need to update the Mission itself.
+
+**Distinguishing markers:**
+- Present-tense, enduring — describes current purpose, not future aspiration
+- Names what the organisation does, for whom, and why
+- Provides the scope boundary test for Drivers and Goals
+- Stable across engagements (unlike Goals and Objectives which are engagement-specific)
+
+**What it is NOT:**
+- Not a **Vision** — a Mission describes today's purpose; a Vision describes tomorrow's aspiration
+- Not a **Goal** — a Mission is a standing statement of purpose; a Goal is a time-bound desired outcome
+- Not a **Principle** — a Mission explains what the organisation is for; a Principle governs how decisions are made
+- Not a **Strategy** — a Mission is a declaration of purpose, not a chosen approach
+
+**Common confusions:**
+- "We exist to connect people with affordable financial services" — this is a **Mission** ✓ (defines purpose, beneficiaries, and core activity)
+- "Become the most trusted financial services provider in the region" — this is a **Vision** (aspirational, future state)
+- "We will adopt API-first integration" — this is a **Strategy** (approach), not a Mission
+
+**TOGAF placement:** Architecture Vision §1 Executive Summary; Stakeholder Map. Captured as organisational context in Phase A. Used to validate that Business Drivers are within scope — a Driver that cannot be traced to the Mission is out of scope for this engagement unless the Mission is being updated.
 
 ---
 
@@ -277,6 +354,8 @@ Apply these tests in order. The first test that matches identifies the concept:
 
 | Concept | TOGAF Artefact Home | ADM Phase First Used | ArchiMate Aspect | ArchiMate Element |
 |---|---|---|---|---|
+| Vision | Architecture Vision §1; Stakeholder Map | A | Motivation | — |
+| Mission | Architecture Vision §1; Stakeholder Map | A | Motivation | — |
 | Principle | Architecture Principles Catalogue | Preliminary | Motivation | Principle |
 | Goal | Architecture Vision §3; Domain Artifacts | A | Motivation | Goal |
 | Objective | Architecture Vision §4; Domain Artifacts | A | Motivation | Outcome |
