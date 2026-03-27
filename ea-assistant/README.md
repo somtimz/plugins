@@ -58,13 +58,34 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 
 ## Configuration
 
-Create `.claude/ea-assistant.local.md` in your project:
+Create `.claude/ea-assistant.local.md` in your working directory to configure EA Assistant behaviour:
 
-```
+```yaml
+# Path to shared requirements folder
 requirementsRepoPath: /path/to/shared/requirements-folder
+
+# Facilitator tone: patient | direct | executive  (default: patient)
+facilitatorStyle: patient
+
+# Audience: executive | architect | technical | mixed  (default: mixed)
+audienceLevel: mixed
+
+# Confirm before writing each answer to an artifact  (default: false)
+requireConfirmBeforeRecord: false
+
+# Show @research-agent reminders on drivers, risks, assumptions  (default: true)
+researchPrompts: true
+
+# Show topic/theme summary at end of each interview session  (default: true)
+sessionSummary: true
 ```
 
-> This path currently points to a local folder. SharePoint integration is planned for a future version.
+**Style guide:**
+- `patient` — explains each question, offers examples, probes short answers, pauses at section transitions
+- `direct` — ask, record, move on; minimal preamble
+- `executive` — business-outcome framing, no TOGAF jargon, checkpoints every 5–7 questions
+
+> `requirementsRepoPath` currently points to a local folder. SharePoint integration is planned for a future version.
 
 ## Commands
 
