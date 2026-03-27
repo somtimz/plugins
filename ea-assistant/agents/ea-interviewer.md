@@ -129,11 +129,11 @@ Apply throughout the interview session:
 2. **Select interview mode** — if a `mode` was passed by the invoking command, use it directly. Otherwise, prompt:
 
    > How would you like to conduct this interview?
-   > **1. Text** (default) — I'll ask questions one at a time in this chat
-   > **2. Web** — I'll open an interactive form you fill in and paste back
+   > **1. Web** (default) — I'll open an interactive form with input fields you fill in and paste back
+   > **2. Text** — I'll ask questions one at a time in this chat
    > **3. Display** — Show all questions now without collecting answers
    >
-   > Press Enter or type 1 for Text.
+   > Press Enter or type 1 for Web.
 
    Then branch to the appropriate section below.
 
@@ -158,14 +158,14 @@ Interview: {artifactName} — {engagementName}
 What would you like to do?
   1. Start from the beginning
   2. Jump to a specific question (enter number)
-  3. Switch to Web mode (interactive form)
+  3. Switch to Web mode (interactive form with input fields)
   4. Display only (no answers collected)
 ────────────────────────────────────────────────
 ```
 
 - If the user selects **1** — begin from Q1.
 - If the user selects **2** — ask "Which question?" and begin from that Q number.
-- If the user selects **3** — switch to Mode 2 (Web Interview).
+- If the user selects **3** — switch to Mode 1 (Web Interview).
 - If the user selects **4** — switch to Mode 3 (Display).
 - If there are any **previously answered** questions (from a prior session), show them with a `✓` marker in the preview list and offer: "You have {N} answered question(s) from a previous session. Start from Q1, resume from first unanswered, or review previous answers?" Add option **5. Resume from first unanswered** to the menu if applicable.
 
@@ -232,8 +232,8 @@ Output all questions as a formatted read-only list:
 …
 ```
 
-After displaying, ask: "Ready to start? Type **1** for Text or **2** for Web."
-If the user selects a mode, resume from Mode 1 or Mode 2 above.
+After displaying, ask: "Ready to start? Type **1** for Web (default) or **2** for Text."
+If the user selects a mode, resume from Mode 1 (Web) or Mode 2 (Text) above.
 
 ---
 
@@ -344,7 +344,7 @@ When invoked in phase mode (via `/ea-interview start phase [phase-name]`), the i
 
 2. **Orient the user** — briefly explain which phase is being interviewed, how many questions, and that answers will be routed to relevant artifacts.
 
-2b. **Select interview mode** — if a `mode` was passed by the invoking command, use it directly. Otherwise, prompt the same three-option menu as artifact mode (Text default, Web, Display). Branch to the appropriate mode below.
+2b. **Select interview mode** — if a `mode` was passed by the invoking command, use it directly. Otherwise, prompt the same three-option menu as artifact mode (Web default, Text, Display). Branch to the appropriate mode below.
 
 3. **Conduct the interview** using the selected mode:
    - **Text mode:** follow the Text Interview steps above. For questions with enumerated checklist options, show the options inline and accept comma-separated or numbered selections as well as free text.
