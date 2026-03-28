@@ -2,30 +2,61 @@
 
 ## How to Use This Reference
 
-This file is the canonical source for ten EA concepts that are frequently confused during interviews and artifact creation: **Vision**, **Mission**, **Principle**, **Goal**, **Objective**, **Strategy**, **Plan**, **Risk**, **Issue**, and **Problem**. When the `ea-interviewer` agent detects concept confusion it cites this file. All commands and skills that capture direction, decisions, or risks should use these definitions — do not redefine them inline.
+This file is the canonical source for EA concepts that are frequently confused during interviews and artifact creation: **Vision**, **Mission**, **Principle**, **Goal**, **Objective**, **Strategy**, **Plan**, **Risk**, **Issue**, **Problem**, **Capability Model**, **Operating Model**, and **Metrics**. When the `ea-interviewer` agent detects concept confusion it cites this file. All commands and skills that capture direction, decisions, or risks should use these definitions — do not redefine them inline.
+
+> 📎 Source: `references/ea-concepts-source.pdf` — *Enterprise Architecture Strategic Context: Terms, Concepts, and Relationship Models*. The definitions, relationships, and model diagrams in this file are grounded in that document.
 
 ---
 
 ## Motivation Framework
 
-The engagement's strategic context is captured as a linked chain:
+The engagement's strategic context is captured as a complete, linked chain from executive intent to practical execution:
 
 ```
 Vision ──inspires──► Mission ──contextualizes──► Business Drivers (DRV)
                                                           │
                                                        drives
                                                           ▼
-                                         Issues (ISS) ──threatens──► Goals (G) ──operationalizes──► Objectives (OBJ) ◄──blocks── Problems (PRB)
-                                                                                                           │
-                                                                                              Requirements Register
-                                                                                           (links to any of the above)
+Issues (ISS) ──threatens──► Goals (G) ◄──achieves── Strategies (STR)
+    │                           │
+   causes                 operationalizes
+    ▼                           ▼
+Problems (PRB) ──blocks──► Objectives (OBJ)
+                                │
+                             informs
+                                ▼
+                        Capability Model          ◄── Capability Gap (prevents Goals)
+                       (What the org does)
+                                │
+                            shapes
+                                ▼
+                         Operating Model
+                       (How the org functions)
+                                │
+                           measured by
+                                ▼
+                      Metrics (Leading & Lagging)
+                       /          |          \
+                 surfaces    identifies    evaluates
+                     ▼            ▼             ▼
+                New Issues   New Problems   Cap. Maturity
+                                │
+                             defines
+                                ▼
+                     Requirements Register
+                    (traces to ALL layers above)
 ```
 
-- **Vision** sets the long-term "North Star" — all Drivers and Strategies must align with it
-- **Mission** bounds current activity — defines which Drivers are in scope
-- **Business Drivers** create the urgency that makes the engagement necessary
-- **Goals → Objectives** translate that urgency into direction and measurable targets
-- **Requirements Register** is the formal bridge from the strategic layer to the implementation layer; every requirement traces back to a Driver, Goal, or Objective
+Key relationships:
+- **Vision** inspires Mission; **Mission** contextualizes Business Drivers
+- **Business Drivers** drive Goals; **Issues** threaten Goals; **Strategies** achieve Goals
+- **Goals** are operationalized through Objectives; **Problems** block Objectives
+- **Objectives and Strategies** inform the Capability Model — what the org must be able to do
+- **Capability Model** shapes the Operating Model — how capabilities are organized and delivered
+- **Operating Model** performance is measured through Metrics
+- **Metrics** close the feedback loop: they validate success or surface new Issues, Problems, and Capability Maturity gaps
+- **Capability Gaps** (missing or immature capabilities) prevent Goals from being achieved — they are identified through the Capability Model and feed into the Gap Analysis
+- **Requirements Register** is the formal bridge from the strategic layer to execution; every requirement traces back to a Driver, Goal, Objective, Issue, Problem, Capability, Operating Model element, or Metric
 
 ---
 
@@ -43,6 +74,10 @@ Vision ──inspires──► Mission ──contextualizes──► Business Dr
 | **Risk** | *What could go wrong?* | Uncertain future event with potential negative effect on objectives | Architecture Vision; Statement of Architecture Work; Migration Plan | Risk (Motivation, Strategy layer) |
 | **Issue** | *What systemic concern is threatening a goal?* | Broad barrier or pattern of dysfunction — no single fix; threatens a Goal | Architecture Vision §5 (Phase A) | — |
 | **Problem** | *What specific symptom is blocking an objective?* | Observable, measurable, and fixable — blocks an Objective | Architecture Vision §6 (Phase A) | — |
+| **Capability Model** | *What must the organisation be able to do?* | Stable, hierarchical map of capabilities (people + process + info + tools) — independent of org structure or current systems | Business Architecture (Phase B); Capability Map | Resource (Active Structure) |
+| **Capability Gap** | *Which capabilities are missing or immature?* | Delta between required and current capability — prevents goals; feeds Gap Analysis | Gap Analysis (Phase B/C/D) | — |
+| **Operating Model** | *How does the organisation function to deliver value?* | Describes how process, information, technology, and governance are organized and coordinated | Business Architecture (Phase B); Technology Architecture (Phase D) | — |
+| **Metrics** | *How do we know we are succeeding?* | Specific, quantifiable measures — leading (predictive) or lagging (outcome); validate strategies or surface new Issues and Problems | Architecture Vision §7; domain artifacts | — |
 
 ---
 
@@ -316,6 +351,105 @@ A risk is an uncertain future event or condition that, if it occurs, will have a
 
 ---
 
+### Capability Model
+
+**What it IS:**
+A Capability Model is a stable, hierarchical map of what the organisation must be able to do to achieve its business outcomes — independent of current organisational structure, people, or systems. Capabilities represent bundles of people, processes, information, and tools working together to produce a defined outcome. The Capability Model answers *"What must the organisation be able to do?"*
+
+**Structural characteristics:**
+- Organised as a hierarchy: Level 1 (domain) → Level 2 (capability) → Level 3 (sub-capability)
+- Each capability has a name, brief description, and maturity level (Absent / Immature / Developing / Mature)
+- Independent of how the capability is currently delivered — what, not how or who
+- Stable across reorganisations; changes only when business outcomes change
+
+**Key relationships:**
+- **Objectives and Strategies inform** the Capability Model — the capabilities the org must develop are determined by where it is going and how it plans to get there
+- **Capability Model shapes** the Operating Model — once you know what you must be able to do, you design how it will be done
+- **Capability Gap** = a capability that is absent or immature relative to what the Strategies and Objectives require; capability gaps prevent Goals from being achieved
+
+**What it is NOT:**
+- Not an org chart — capabilities are outcome-based, not structure-based
+- Not a process model — a capability is what can be done; a process is how it is done
+- Not a system inventory — capabilities are business concepts; applications implement them
+
+**TOGAF placement:** Business Architecture (Phase B) — the primary home. Referenced in Gap Analysis and Architecture Vision when summarising what the organisation must be able to do to achieve its Goals.
+
+---
+
+### Operating Model
+
+**What it IS:**
+The Operating Model is a high-level description of how the organisation functions in order to deliver value. It describes how process, information, technology, and governance are organised and coordinated — the "how" to the Capability Model's "what". The Operating Model answers *"How does the organisation function to deliver value?"*
+
+**Typical components:**
+- **Process** — how work flows across the organisation to produce outcomes
+- **Information** — what data and knowledge is required, where it lives, and how it flows
+- **Technology** — the platforms, systems, and tools that enable operations
+- **Governance** — how decisions are made, who has authority, and how performance is managed
+
+**Key relationships:**
+- **Capability Model shapes** the Operating Model — the design of processes, information flows, and technology choices follow from capability requirements
+- **Operating Model performance is measured by** Metrics — the operating model is the source of most operational metrics
+- Changes to the Operating Model are the primary driver of Business Architecture and Technology Architecture work
+
+**What it is NOT:**
+- Not a Capability Model — the Operating Model describes how work happens; the Capability Model describes what the org can do
+- Not an org chart — an Operating Model includes process, information, and technology alongside people
+- Not a system architecture — the Operating Model operates at the business level; the Technology Architecture is its technical expression
+
+**TOGAF placement:** Business Architecture (Phase B) — particularly the Business Model Canvas and process views. Technology Architecture (Phase D) — the technical dimensions of the Operating Model.
+
+---
+
+### Metrics
+
+**What it IS:**
+Metrics are specific, quantifiable measures used to track progress, performance, and outcomes. They provide evidence as to whether Strategies are working and whether Objectives and Goals are being achieved. Metrics answer *"How do we know we are succeeding?"*
+
+**Leading vs Lagging:**
+- **Leading metrics** — predictive; indicate whether future performance is likely to improve or worsen (e.g. number of teams trained on new process before go-live)
+- **Lagging metrics** — outcome-based; indicate whether desired results have already been achieved (e.g. NPS score after three months of operation)
+- A robust measurement framework uses both: leading metrics to act early, lagging metrics to validate success
+
+**Feedback loop role:**
+Metrics close the loop between intention and evidence:
+- If performance is on target → metrics **validate** the Strategy; Goals and Objectives are being achieved
+- If performance is below threshold → metrics **surface new Problems** (observable symptoms) or **reveal deeper Issues** (systemic conditions)
+- Metrics also **evaluate Capability Maturity** — when a capability is not performing, metrics identify which ones need investment
+
+**Structural parts** (Architecture Vision §7 / Metrics Register):
+- **ID** — MET-NNN
+- **Description** — what is being measured
+- **Type** — Leading / Lagging
+- **Unit** — how it is measured
+- **Baseline** — current value
+- **Target** — desired value
+- **Deadline** — when the target must be reached
+- **Linked Objective(s)** — OBJ-NNN this metric tracks
+
+**What it is NOT:**
+- Not an Objective — an Objective defines the target; a Metric measures whether the target is being reached
+- Not a KPI (necessarily) — all KPIs are metrics, but not all metrics are KPIs; KPIs are the most strategically significant metrics
+- Not a requirement — a requirement specifies what must be done; a metric measures whether it has been done successfully
+
+**TOGAF placement:** Architecture Vision §7 Strategic Direction Summary; referenced in Phase G (Implementation Governance) for compliance tracking; Phase H (Architecture Change Management) for performance feedback.
+
+---
+
+### Capability Gap
+
+**What it IS:**
+A Capability Gap is a delta between the capabilities the organisation currently has and the capabilities it needs to achieve its Goals and Objectives. Capability Gaps are identified by comparing the Capability Model against the requirements of the Strategies and Objectives. A gap may be a **missing capability** (entirely absent) or an **immature capability** (present but not yet fit-for-purpose).
+
+**Key relationships:**
+- Capability Gaps **prevent Goals** from being achieved — if a required capability is absent or immature, the associated Goal cannot be reached
+- Identified Capability Gaps **trigger work packages** in the Architecture Roadmap (Phase E)
+- Capability Gaps are the primary output of the **Gap Analysis** artifact
+
+**TOGAF placement:** Gap Analysis (Phases B, C, D) — one gap register per domain. Feeds into Architecture Roadmap work package definitions (Phase E).
+
+---
+
 ## Disambiguation Checklist
 
 Apply these tests in order. The first test that matches identifies the concept:
@@ -366,3 +500,7 @@ Apply these tests in order. The first test that matches identifies the concept:
 | Requirement | Requirements Register; Traceability Matrix | Requirements | Motivation | Requirement |
 | Issue | Architecture Vision §5; Gap Analysis | A | — | — |
 | Problem | Architecture Vision §6; Requirements Register (Motivation field) | A | — | — |
+| Capability Model | Business Architecture; Capability Map | B | Business | Resource (Active Structure) |
+| Capability Gap | Gap Analysis (B/C/D); Architecture Roadmap (E) | B | Business | — |
+| Operating Model | Business Architecture; Technology Architecture | B / D | Business | — |
+| Metrics | Architecture Vision §7; Phase G/H governance | A / G / H | Motivation | — |
