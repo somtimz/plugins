@@ -7,6 +7,13 @@ status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
 lastModified: {{YYYY-MM-DD}}
+taxonomy:
+  domain: Cross-cutting
+  category: Register
+  audience: Governance
+  layer: Governance
+  sensitivity: Confidential
+  tags: [risks, register, mitigation, cross-cutting]
 ---
 
 <details>

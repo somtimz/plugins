@@ -25,9 +25,17 @@ These checks apply to every `.md` file in `artifacts/`:
 | T1-7 | `version` field present | `version: 0.1` | Missing |
 | T1-8 | `lastModified` field present | `lastModified: 2026-03-26` | Missing |
 | T1-9 | Document has at least one top-level heading | `# Architecture Vision` | No headings |
+| T1-10 | `taxonomy` block present with `domain`, `category`, `audience`, `layer`, `sensitivity` | `taxonomy: domain: Cross-cutting ...` | Missing taxonomy block or missing sub-fields |
 
 **Valid `status` values:** `Draft` | `In Review` | `Approved` | `Needs Revision`
 **Valid `reviewStatus` values:** `Not Reviewed` | `In Review` | `Approved` | `Needs Revision`
+**Valid `taxonomy.domain` values:** `Business` | `Data` | `Application` | `Technology` | `Cross-cutting`
+**Valid `taxonomy.category` values:** `Strategy` | `Analysis` | `Design` | `Planning` | `Governance` | `Register`
+**Valid `taxonomy.audience` values:** `Executive` | `Business` | `Architecture` | `Delivery` | `Governance` | `All`
+**Valid `taxonomy.layer` values:** `Motivation` | `Baseline` | `Target` | `Transition` | `Governance` | `Reference`
+**Valid `taxonomy.sensitivity` values:** `Internal` | `Confidential` | `Restricted`
+
+See `references/taxonomy.md` for the canonical taxonomy definition and the full mapping table.
 
 ---
 

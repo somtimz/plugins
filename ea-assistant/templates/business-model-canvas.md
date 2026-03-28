@@ -6,6 +6,13 @@ status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
 lastModified: {{YYYY-MM-DD}}
+taxonomy:
+  domain: Business
+  category: Strategy
+  audience: Executive
+  layer: Motivation
+  sensitivity: Confidential
+  tags: [business-model, value-proposition, phase-b]
 ---
 
 <details>

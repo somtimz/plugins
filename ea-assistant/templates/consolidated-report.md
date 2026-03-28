@@ -4,6 +4,13 @@ engagement: {{engagement_name}}
 date: {{YYYY-MM-DD}}
 version: {{version}}
 status: {{document_status}}
+taxonomy:
+  domain: Cross-cutting
+  category: Planning
+  audience: Executive
+  layer: Reference
+  sensitivity: Internal
+  tags: [summary, executive, portfolio, cross-cutting]
 ---
 
 <details>

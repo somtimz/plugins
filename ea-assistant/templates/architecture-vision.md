@@ -6,6 +6,13 @@ status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
 lastModified: {{YYYY-MM-DD}}
+taxonomy:
+  domain: Cross-cutting
+  category: Strategy
+  audience: Executive
+  layer: Motivation
+  sensitivity: Internal
+  tags: [vision, drivers, goals, strategy, phase-a]
 ---
 
 <details>

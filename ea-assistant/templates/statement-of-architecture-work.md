@@ -6,6 +6,13 @@ status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
 lastModified: {{YYYY-MM-DD}}
+taxonomy:
+  domain: Cross-cutting
+  category: Planning
+  audience: Governance
+  layer: Governance
+  sensitivity: Confidential
+  tags: [scope, commitment, deliverables, phase-a]
 ---
 
 <details>

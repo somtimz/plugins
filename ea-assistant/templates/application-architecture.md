@@ -6,6 +6,13 @@ status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
 lastModified: {{YYYY-MM-DD}}
+taxonomy:
+  domain: Application
+  category: Design
+  audience: Architecture
+  layer: Target
+  sensitivity: Internal
+  tags: [applications, integration, portfolio, phase-c]
 ---
 
 <details>

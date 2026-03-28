@@ -96,6 +96,7 @@ Rules for extraction:
   - `reviewStatus` → `meta.reviewStatus` (e.g. `"Pending"`, `"Revised"`)
   - `version` → `meta.version` (string, e.g. `"0.2"`)
   - `lastModified` → `meta.lastModified` (ISO 8601 string)
+  - `taxonomy` → `meta.taxonomy` (object — copy the full nested taxonomy block as-is: `{domain, category, audience, layer, sensitivity, tags}`)
   - Omit any field that is absent from the frontmatter.
 - Map each `## Heading` → `level: 1`, `### Heading` → `level: 2`
 - Skip `<details>` guidance blocks — they are template guidance, not content

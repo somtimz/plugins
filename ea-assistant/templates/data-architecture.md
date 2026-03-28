@@ -6,6 +6,13 @@ status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
 lastModified: {{YYYY-MM-DD}}
+taxonomy:
+  domain: Data
+  category: Design
+  audience: Architecture
+  layer: Target
+  sensitivity: Internal
+  tags: [data-model, information, data-flow, phase-c]
 ---
 
 <details>

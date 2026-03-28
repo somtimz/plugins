@@ -6,6 +6,13 @@ status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
 lastModified: {{YYYY-MM-DD}}
+taxonomy:
+  domain: Cross-cutting
+  category: Analysis
+  audience: Architecture
+  layer: Transition
+  sensitivity: Internal
+  tags: [gaps, baseline, target, phase-e]
 ---
 
 <details>

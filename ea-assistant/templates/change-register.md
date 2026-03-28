@@ -8,6 +8,13 @@ version: 0.1
 lastModified: {{YYYY-MM-DD}}
 generated: {{YYYY-MM-DD}}
 filters: {{applied_filters_or_None}}
+taxonomy:
+  domain: Cross-cutting
+  category: Register
+  audience: Governance
+  layer: Governance
+  sensitivity: Internal
+  tags: [changes, register, acr, phase-h]
 ---
 
 <details>

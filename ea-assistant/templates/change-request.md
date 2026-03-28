@@ -6,6 +6,13 @@ status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
 lastModified: {{YYYY-MM-DD}}
+taxonomy:
+  domain: Cross-cutting
+  category: Governance
+  audience: Governance
+  layer: Governance
+  sensitivity: Confidential
+  tags: [change, impact, disposition, phase-h]
 ---
 
 <details>

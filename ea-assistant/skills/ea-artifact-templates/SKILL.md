@@ -1,12 +1,30 @@
 ---
 name: EA Artifact Templates
 description: This skill should be used when the user asks to "create an artifact", "generate the architecture vision", "start a new artifact from a template", "what template should I use", "populate this artifact", or when any TOGAF artifact needs to be created or populated. Provides template selection, placeholder conventions, and guidance text marking standards for all EA artifacts.
-version: 0.2.0
+version: 0.3.0
 ---
 
 # EA Artifact Templates
 
 All EA artifacts are created from templates stored in the plugin's `templates/` directory. Templates use a consistent structure with clearly marked guidance, placeholder tokens, and answer state markers.
+
+## Artifact Taxonomy
+
+Every artifact template includes a `taxonomy:` block in its YAML frontmatter. Use `references/taxonomy.md` as the canonical reference for all valid values and assignment rules.
+
+```yaml
+taxonomy:
+  domain: Cross-cutting        # Business | Data | Application | Technology | Cross-cutting
+  category: Strategy           # Strategy | Analysis | Design | Planning | Governance | Register
+  audience: Executive          # Executive | Business | Architecture | Delivery | Governance | All
+  layer: Motivation            # Motivation | Baseline | Target | Transition | Governance | Reference
+  sensitivity: Internal        # Internal | Confidential | Restricted
+  tags: [vision, goals, phase-a]
+```
+
+When creating a non-standard artifact, assign taxonomy values using `references/taxonomy.md`. The `taxonomy` block is a T1-10 compliance requirement — all artifacts must have it.
+
+---
 
 ## Template Conventions
 

@@ -6,6 +6,13 @@ status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
 lastModified: {{YYYY-MM-DD}}
+taxonomy:
+  domain: Technology
+  category: Design
+  audience: Architecture
+  layer: Target
+  sensitivity: Internal
+  tags: [infrastructure, platforms, technology, phase-d]
 ---
 
 <details>

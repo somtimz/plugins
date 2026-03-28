@@ -6,6 +6,13 @@ status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
 lastModified: {{YYYY-MM-DD}}
+taxonomy:
+  domain: Cross-cutting
+  category: Planning
+  audience: All
+  layer: Transition
+  sensitivity: Internal
+  tags: [roadmap, work-packages, sequencing, phase-e]
 ---
 
 <details>
