@@ -1,7 +1,7 @@
 ---
 name: ea-generation
 description: This skill should be used when the user asks to "generate a Word document", "export an artifact as PowerPoint", "create a .docx", "produce slides", "make a Mermaid diagram", "export artifact", "create a presentation", or any request to produce a formatted file output from an EA artifact.
-version: 0.1.0
+version: 0.2.0
 ---
 
 # EA Artifact Generation — Word, PowerPoint, and Mermaid
@@ -184,18 +184,23 @@ Generated Word documents follow this standard structure:
 With engagement directory (recommended):
 
 ```bash
-python ${CLAUDE_PLUGIN_ROOT}/scripts/generate-docx.py \
+SCRIPT=$(find "$HOME/.claude" -name "generate-docx.py" -path "*/ea-assistant/scripts/*" | head -1)
+VENV="$HOME/.ea-assistant-venv"
+[ ! -f "$VENV/bin/python" ] && python3 -m venv "$VENV" && "$VENV/bin/pip" install --quiet python-docx python-pptx
+"$VENV/bin/python" "$SCRIPT" \
   --engagement-dir ./EA-projects/my-engagement \
-  --artifact-type vision \
+  --type vision \
+  --content @/tmp/ea-gen-{artifact-id}.json \
   --output ./output/architecture-vision.docx
 ```
 
 Standalone (content JSON supplied directly):
 
 ```bash
-python ${CLAUDE_PLUGIN_ROOT}/scripts/generate-docx.py \
-  --artifact-type gap-analysis \
-  --content-json ./gap-analysis-content.json \
+SCRIPT=$(find "$HOME/.claude" -name "generate-docx.py" -path "*/ea-assistant/scripts/*" | head -1)
+"$HOME/.ea-assistant-venv/bin/python" "$SCRIPT" \
+  --type gap-analysis \
+  --content @/tmp/ea-gen-gap.json \
   --output ./output/gap-analysis.docx
 ```
 
@@ -259,9 +264,11 @@ pip install python-pptx
 With engagement directory:
 
 ```bash
-python ${CLAUDE_PLUGIN_ROOT}/scripts/generate-pptx.py \
+SCRIPT=$(find "$HOME/.claude" -name "generate-pptx.py" -path "*/ea-assistant/scripts/*" | head -1)
+"$HOME/.ea-assistant-venv/bin/python" "$SCRIPT" \
   --engagement-dir ./EA-projects/my-engagement \
-  --deck-type vision \
+  --type vision \
+  --content @/tmp/ea-gen-{artifact-id}.json \
   --output ./output/architecture-vision.pptx
 ```
 

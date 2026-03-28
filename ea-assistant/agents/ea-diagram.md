@@ -79,43 +79,13 @@ You are an expert EA diagramming specialist. Your role is to create, edit, and i
 
 6. **Reference in artifact** — offer to add a diagram reference in the relevant artifact: `![Diagram Title](../diagrams/{filename})`
 
-**ArchiMate → Mermaid Conventions:**
+**ArchiMate Conventions:**
 
-```mermaid
-graph TD
-  %% 🤖 AI Draft — Review Required
-  %% ArchiMate Viewpoint: [viewpoint name]
-  %% Layer: Business
+For element types, emoji prefixes, layer colours, valid relationships, and viewpoint guidance — see `skills/archimate-notation/SKILL.md`. Do not redefine ArchiMate conventions inline.
 
-  A["👤 Actor\n{name}"]
-  R["🎭 Role\n{name}"]
-  P["⚙️ Process\n{name}"]
-  S["📦 Service\n{name}"]
-  O["📄 Object\n{name}"]
-
-  A -->|assigned to| R
-  R -->|performs| P
-  P -->|realises| S
-```
-
-**ArchiMate → Graphviz Conventions:**
-
-```dot
-digraph {
-  // 🤖 AI Draft — Review Required
-  // Viewpoint: [name]
-  rankdir=TB;
-  node [shape=box, fontname="Arial"];
-
-  // Business Layer (tan background)
-  subgraph cluster_business {
-    label="Business Layer";
-    style=filled; fillcolor="#FFF8DC";
-    Actor [label="👤 Actor\nName", shape=box];
-    Process [label="⚙️ Process\nName", shape=ellipse];
-  }
-}
-```
+All generated diagrams must begin with:
+- Mermaid: `%% 🤖 AI Draft — Review Required` and `%% ArchiMate Viewpoint: [viewpoint name]`
+- Graphviz: `// 🤖 AI Draft — Review Required` and `// Viewpoint: [name]`
 
 **Quality Standards:**
 - Every AI-generated diagram MUST be marked as a draft

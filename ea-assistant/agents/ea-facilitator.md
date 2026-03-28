@@ -68,7 +68,8 @@ Apply the active style throughout this session per the **Style Behaviour Referen
 
 4. **Identify the next action** — determine the most logical next step:
    - If an artifact is missing, offer to create it from a template
-   - If an artifact is Draft, offer to run an interview to populate it
+   - If an artifact is Draft, offer to run an interview to populate it (`ea-interviewer`)
+   - If the current phase is **E or F** and the Architecture Roadmap is missing or Draft, hand off to the **`ea-roadmap` agent** — do not attempt to elicit roadmap content inline
    - If an artifact needs review, offer to open it for review
    - If all artifacts are Approved, offer to mark the phase complete
 

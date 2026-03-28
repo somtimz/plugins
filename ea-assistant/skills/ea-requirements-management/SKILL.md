@@ -1,7 +1,7 @@
 ---
 name: EA Requirements Management
 description: This skill should be used when the user asks to "manage architecture requirements", "add a requirement", "sync requirements from the repo", "view requirements", "trace a requirement to an artifact", "update the requirements register", or "start the architecture requirements phase". Handles the full requirements lifecycle from capture through traceability and sync with a shared requirements repository.
-version: 0.1.0
+version: 0.2.0
 ---
 
 # EA Requirements Management

@@ -56,9 +56,11 @@ You are an expert EA requirements analysis specialist. Your role is to read arch
 Read `EA-projects/active/engagement.json` (or discover the active slug via Glob). If no active engagement exists, prompt the user to run `/ea-open` first and stop.
 
 ### Step 2 — Read the document
-- `.txt` / `.md`: use the Read tool directly.
-- `.docx`: use Bash to extract text with `python3 -c "import docx; print('\n'.join(p.text for p in docx.Document('FILE').paragraphs))"` (on Windows, use `python` instead of `python3` if needed). If python-docx is unavailable, ask the user to paste the content.
-- Record: file name, detected encoding, approximate word count.
+
+Delegate format-specific extraction to the `ea-document-ingestion` skill (see `skills/ea-document-ingestion/SKILL.md`). That skill owns how to read each file type (.md, .txt, .docx, .pdf, .xlsx, .csv, diagram files). Do not re-implement extraction inline.
+
+- Load the skill and pass the file path; receive the extracted text content.
+- Record: file name, file type, approximate word count.
 
 ### Step 3 — Classify the document type
 State the document type and confidence level (High / Medium / Low). If confidence is Medium or Low, explain why and ask the user to confirm before proceeding.
@@ -121,7 +123,7 @@ Worker       …      …      …      …      …      …
 ```
 
 ### Step 9 — Identify gaps and suggest follow-up questions
-List every ADM phase and Zachman cell that has no coverage. For each gap, propose one or two targeted follow-up interview questions. Reference the phase question bank in `commands/ea-interview.md` where relevant. Suggest running `/ea-interview start phase [phase]` for the most critical gaps.
+List every ADM phase and Zachman cell that has no coverage. For each gap, propose one or two targeted follow-up interview questions. Reference the phase question bank in `skills/ea-artifact-templates/references/phase-interview-questions.md` where relevant. Suggest running `/ea-interview start phase [phase]` for the most critical gaps.
 
 ### Step 10 — Write outputs (with user confirmation)
 Before writing anything, present a summary:

@@ -78,7 +78,7 @@ Additional interview-specific config behaviour:
 
       Record as `sessionParticipants`. If Enter is pressed, set to "Not recorded".
 
-   e. **Display the shortcuts reference** once per session, after collecting attribution:
+   d. **Display the shortcuts reference** once per session, after collecting attribution:
 
       ```
       ────────────────────────────────────────────────
@@ -96,7 +96,7 @@ Additional interview-specific config behaviour:
       ────────────────────────────────────────────────
       ```
 
-   d. Check for `EA-projects/{slug}/interviews/session-log.md`:
+   e. Check for `EA-projects/{slug}/interviews/session-log.md`:
       - If it does **not** exist → continue silently (it will be created at session end).
       - If it **exists** → read it, find the most recent `## Session —` entry, and display:
 

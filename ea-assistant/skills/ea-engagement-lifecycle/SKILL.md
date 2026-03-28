@@ -73,7 +73,7 @@ EA-projects/
         "deadline": "",
         "frequency": "Daily | Weekly | Monthly | Quarterly",
         "source": "",
-        "supports": ["BG-001"],
+        "supports": ["G-001"],
         "status": "Not Established | On Track | At Risk | Behind | Achieved"
       }
     ],
@@ -231,9 +231,9 @@ Phases can be started, edited, or resumed in any order. Navigation is non-linear
    > - **Strategies** — the approaches you'll take to get there"
 
    For each domain:
-   - Ask: "What are the **goals** for the **{Domain}** architecture?" Capture each; assign IDs (`BG-001`, `DG-001`, etc.)
-   - Ask: "What **objectives** do you have — specific, measurable targets with a deadline?" Capture statement, measure, target value, deadline; assign IDs (`BO-001`, `DO-001`, etc.)
-   - Ask: "What **strategies** will you use — the approaches or courses of action?" For each, ask which goal(s) or objective(s) it supports; assign IDs (`BS-001`, `DS-001`, etc.)
+   - Ask: "What are the **goals** for the **{Domain}** architecture?" Capture each; assign IDs continuing from the last used G-NNN (e.g. `G-001`, `G-002` — sequential across all domains)
+   - Ask: "What **objectives** do you have — specific, measurable targets with a deadline?" Capture statement, measure, target value, deadline; assign IDs continuing from the last used OBJ-NNN (e.g. `OBJ-001`, `OBJ-002`)
+   - Ask: "What **strategies** will you use — the approaches or courses of action?" For each, ask which goal(s) or objective(s) it supports; assign IDs continuing from the last used STR-NNN (e.g. `STR-001`, `STR-002`)
    - If the user gives something that could be any of the three, classify it and confirm: "That sounds like a [goal/objective/strategy] — I'll record it as one. Does that sound right?"
    - Direction may be skipped at creation time — user can add it later via Edit engagement metadata
    - After capturing direction, ask: "Do you want to define metrics now to track these goals, objectives, and strategies?" If yes, for each direction item prompt: metric name, what will be measured (measure), baseline value, target value, frequency, and data source. Classify metric type automatically from what it supports (outcome for goals, performance for objectives, activity for strategies). Metrics may also be added later.
@@ -277,9 +277,9 @@ All editing flows are accessed through `/ea-open` next actions menu after openin
 
 ```
 Business Metrics
-  BM-001  Customer Onboarding Time     [Performance → BO-001]  On Track   5d → 1d by Q4 2026
-  BM-002  Customer Satisfaction Score  [Outcome → BG-001]      At Risk    72 → 85 by Q2 2026
-  BM-003  API-first adoption rate      [Activity → BS-001]     On Track   0% → 100% by Q3 2026
+  MET-001  Customer Onboarding Time     [Performance → OBJ-001]  On Track   5d → 1d by Q4 2026
+  MET-002  Customer Satisfaction Score  [Outcome → G-001]        At Risk    72 → 85 by Q2 2026
+  MET-003  API-first adoption rate      [Activity → STR-001]     On Track   0% → 100% by Q3 2026
 ```
 
 User may: add a new metric (select the direction item(s) it supports — type is inferred automatically), edit an existing metric (any field including status), or remove a metric. When adding, always confirm the `supports` link — a metric without a linked direction item is an orphan and should not be saved. After saving, offer to update the status field for metrics where current data is available.
@@ -288,9 +288,9 @@ User may: add a new metric (select the direction item(s) it supports — type is
 
 ```
 Business Direction
-  Goals:      BG-001  Become the most trusted provider in the region        [High]
-  Objectives: BO-001  Reduce onboarding from 5 days to 1 day by Q4 2026    [High]
-  Strategies: BS-001  Adopt API-first integration                           [High]  → supports BG-001
+  Goals:      G-001    Become the most trusted provider in the region        [High]
+  Objectives: OBJ-001  Reduce onboarding from 5 days to 1 day by Q4 2026    [High]
+  Strategies: STR-001  Adopt API-first integration                           [High]  → supports G-001
 ```
 
 User may: add a new item (selecting type first), edit an existing item, or remove an item. IDs are never reused after deletion. When adding, always confirm the type with the user using the definitions:
@@ -403,6 +403,30 @@ Opt-outs accumulate across sessions; they are never automatically removed. Use `
 ```
 
 Multiple decision registers may exist (one per generation date). All are listed in `engagement.json`. `/ea-decisions status` uses the most recently generated one for its summary.
+
+## engagement.json Write Protocol
+
+Multiple agents write to `engagement.json`. To prevent silent overwrites, each agent owns a specific section:
+
+| Section | Owner |
+|---|---|
+| `name`, `slug`, `description`, `sponsor`, `organisation`, `scope`, `startDate`, `targetEndDate`, `status`, `engagementType`, `architectureDomains`, `requirementsRepoPath`, `lastModified` | `/ea-open` (metadata edits) and `/ea-new` (creation) |
+| `currentPhase` | `ea-facilitator` (on phase advance) |
+| `phases[*].status`, `phases[*].startedAt`, `phases[*].completedAt` | `ea-facilitator` (on phase transition) |
+| `artifacts[*].status`, `artifacts[*].reviewStatus`, `artifacts[*].lastModified` | `ea-interviewer` and `/ea-open` artifact edit |
+| `artifacts[]` (add new entry) | The command or agent that creates the artifact (e.g. `/ea-artifact`, `ea-roadmap`) |
+| `direction` | `/ea-open` metadata edit; `ea-interviewer` (during interviews when explicitly prompted) |
+| `metrics` | `/ea-open` metadata edit |
+| `optOuts[]` | `ea-interviewer` only (append only — never remove) |
+| `analysis_runs` | `ea-requirements-analyst` only |
+
+**Rules:**
+- Always read `engagement.json` fresh before writing — never write from a stale in-memory copy
+- Write only the section you own; do not touch other sections
+- Update `lastModified` (engagement-level) on every write
+- Never delete existing entries from `optOuts[]`, `artifacts[]`, or `analysis_runs` — append only
+
+---
 
 ## Content Policy
 

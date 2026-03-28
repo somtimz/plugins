@@ -409,3 +409,58 @@ Before committing any change:
 - [ ] `CLAUDE.md` (plugin-level) updated if architecture changed
 - [ ] Conventional commit message used: `feat|fix|docs|chore(ea-assistant): ...`
 - [ ] Feature branch + PR for multi-file changes; direct commit for single-file fixes
+
+---
+
+## 17. Open Design Questions
+
+These are known architectural trade-offs that have been consciously deferred. Each is marked with a suggested trigger for revisiting.
+
+### OD-001 — `ea-interviewer` monolith vs. split agents
+
+**Status:** Deferred — potential future enhancement
+
+**The bet:** `ea-interviewer` is a 550+ line agent covering artifact interview, phase interview, 4 UI modes, cross-topic detection, concept-checking, A3 decision logging, governance transitions, inline brainstorm, opt-out handling, contextual help, and session logging. The bet is that Claude can reliably execute the full file without missing branches.
+
+**Risk:** As the file grows, reliability degrades. Specific failure modes to watch for:
+- Cross-topic detection not firing during Text interviews
+- Session log not being written after opt-out sessions
+- Governance state transitions (`govern` command) being missed
+
+**Trigger to revisit:** If any of the above failure modes are observed in practice, split the A3/governance logic and opt-out/help handlers into a reference file the interviewer loads (`references/interview-handlers.md`), and separate the Phase Interview flow into a dedicated `ea-phase-interviewer` agent.
+
+---
+
+### OD-002 — `ea-document-analyst` vs. `ea-requirements-analyst` as separate agents
+
+**Status:** Deferred — potential future enhancement
+
+**The bet:** Two agents process uploaded documents. `ea-document-analyst` does broad EA mapping (strategy → Vision, processes → Business Architecture). `ea-requirements-analyst` does structured requirements extraction with ADM phase coverage and Zachman classification. They are different enough in output format to justify separate agents.
+
+**Risk:** Users may not know which to invoke. The natural entry point ("I have a document") could reach either agent depending on how it's phrased. The engagement may end up with duplicate or inconsistent extractions from the same source file.
+
+**Trigger to revisit:** If user confusion is observed (wrong agent invoked, same document processed twice), consider merging into one `ea-document-analyst` agent with two modes: `general` (current document analyst) and `requirements` (current requirements analyst). The `ea-requirements-analyst` would become a mode, not a separate agent.
+
+---
+
+### OD-003 — No `engagement.json` write conflict resolution
+
+**Status:** Deferred — potential future enhancement
+
+**The bet:** In any given session, only one agent is active at a time. The write protocol (§ engagement.json Write Protocol in `ea-engagement-lifecycle/SKILL.md`) is followed by each agent, so section-level isolation prevents conflicts.
+
+**Risk:** If a user switches between agents mid-session without completing the first agent's write (e.g. abandons an interview mid-way, then runs `/ea-open`), the last write wins and the intermediate state is silently discarded.
+
+**Trigger to revisit:** If data loss from mid-session switches is reported, implement a write-verify step: before writing `engagement.json`, read it fresh and check whether the key fields you're about to overwrite have changed since you last read them. If they have, alert the user before proceeding.
+
+---
+
+### OD-004 — `ea-engagement-lifecycle` SKILL.md as reference vs. executable specification
+
+**Status:** Deferred — potential future enhancement
+
+**The bet:** Skills are read-only reference material; agents and commands cite them. `ea-engagement-lifecycle/SKILL.md` currently contains prescriptive workflow steps (Starting a New Engagement, Editing Workflows, Archive/Restore/Delete) that go beyond classification or reference — they read like a command definition.
+
+**Risk:** If the skill continues to grow with workflow logic, it will become a shadow command that agents partially execute, partially ignore, creating unpredictable behaviour. Commands (`/ea-new`, `/ea-open`) are the authoritative source for workflow steps; the skill should be the authoritative source for schema definitions and status values only.
+
+**Trigger to revisit:** If the skill exceeds 600 lines, extract the workflow steps into a `references/engagement-workflows.md` reference document, and reduce the skill to: schema definitions, status enumerations, state transition rules, write protocol, and content policy.
