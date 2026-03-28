@@ -181,11 +181,19 @@ For each question in order:
 3. If `brainstormNote` matches, show: `💭 Brainstorm: {note}` (add to shown-notes list)
 4. If `existingAnswer` exists, show: `📎 Previous answer: {existingAnswer} — type **y** to keep, or enter a new answer`
 5. If `defaultAnswer` exists, show: `💡 Default: {defaultAnswer} — type **d** to accept`
+5b. If `suggestions` exist and `existingAnswer` is not set, show them as numbered shortcuts:
+   ```
+   💡 Common answers — type a number to use as your starting point, then edit if needed:
+     [1] {suggestion[0].label}: {suggestion[0].value}
+     [2] {suggestion[1].label}: {suggestion[1].value}
+     …
+   ```
 6. If the question has enumerated options (from the question bank checklist), list them as: `Options: {option1} / {option2} / …`
 7. Wait for user input and interpret:
    - Any non-empty text → record as **Answered**
    - `y` (when existingAnswer shown) → keep existing, record as **Answered**
    - `d` or `default` → accept `defaultAnswer`, record as **Default Accepted**
+   - `1`, `2`, `3`, `4` (when suggestions shown) → load that suggestion value into the answer field; show: `Starting with: "{value}" — press Enter to accept, or edit first`. If user presses Enter with no edit, record as **Suggestion Accepted**; if they edit, record as **Answered**
    - `skip` or `s` → record as **Skipped**
    - `n/a` or `na` → record as **N/A**
    - `opt-out` → apply **Opt-Out (question)** handler (see below); re-ask current question after
@@ -207,10 +215,21 @@ After all questions → go to **Session Completion** (step 5).
 
 ---
 
+**Building suggestions for each question (applies to all modes):**
+
+For each question, generate 2–4 `suggestions` entries covering common good-practice answers relevant to the engagement context (engagementType, industry if known, current phase). Suggestions are short, actionable answer texts — not abstract labels. Rules:
+- Only generate suggestions for open-ended free-text questions. Omit (set `null`) when the question already has `options` (enumerated checklist).
+- Omit when `existingAnswer` is set — the user already has a starting point.
+- Calibrate suggestions to the engagement: a greenfield cloud migration gets different suggestions than a legacy-modernisation programme.
+- Keep each suggestion under 120 characters so it fits in the UI chip.
+- Example for "What is the primary cloud adoption strategy?": `[{label:"Cloud-first", value:"Migrate all new workloads to public cloud; retain on-prem only for regulated data"}, {label:"Hybrid", value:"Balance on-prem and public cloud based on workload classification and data sovereignty"}, {label:"On-prem preferred", value:"Maintain on-premises as default; use cloud for overflow capacity and DR only"}]`
+
+---
+
 **Mode 1 — Web Interview:**
 
 Load the `ea-interview-ui` skill and present the **Interview App** artifact.
-- Build the `questions` array: for each extracted question, include `text`, `context` (one sentence on why it matters), `defaultAnswer` if applicable, `existingAnswer` from any previous session, `brainstormNote` for any semantically related thought from the loaded notes (first 80-char identifier added to shown-notes list once populated), and `options` / `allowMultiple` where the question has enumerated choices.
+- Build the `questions` array: for each extracted question, include `text`, `context` (one sentence on why it matters), `defaultAnswer` if applicable, `existingAnswer` from any previous session, `brainstormNote` for any semantically related thought from the loaded notes (first 80-char identifier added to shown-notes list once populated), `suggestions` (see above), and `options` / `allowMultiple` where the question has enumerated choices.
 - Set `artifactName` and `engagementName` from engagement context.
 - Set `voiceEnabled: false`.
 

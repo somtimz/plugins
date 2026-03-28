@@ -46,9 +46,14 @@ const INTERVIEW_DATA = {
       id: "q1",
       text: "<question text extracted from {{placeholder}} or phase question bank>",
       context: "<one-sentence explanation of why this matters>",
-      defaultAnswer: "<suggested default, or null>",
+      defaultAnswer: "<single best-practice default, or null>",
       existingAnswer: "<value from previous session, or null>",
       brainstormNote: "<relevant thought from brainstorm-notes.md, or null>",
+      suggestions: [
+        { label: "<short chip label>", value: "<full answer text the user can edit>" },
+        // 2–4 entries covering common good-practice answers for this question in context
+        // null if no common answers are relevant
+      ],
       options: ["<option 1>", "<option 2>"],  // or null — for checklist questions
       allowMultiple: true,  // false for single-select (radio); omit if options is null
     },
@@ -58,6 +63,8 @@ const INTERVIEW_DATA = {
 ```
 
 Set `options` when the question bank has enumerated choices (e.g. constraint types, data migration approaches, cut-over approaches). Set `allowMultiple: false` for single-select questions (radio buttons).
+
+Set `suggestions` when common good-practice answers exist for the question given the engagement context. Suggestions are rendered as clickable chips labelled with `label`; clicking one loads the full `value` text into the textarea so the user can edit it before submitting. Use 2–4 suggestions per question. Suppress suggestions when `existingAnswer` is set (the user already has a prior answer to work from). Do not set both `suggestions` and `options` on the same question — use `options` for constrained enumerated choices and `suggestions` for open-ended questions with common starting points.
 
 Set `voiceEnabled: true` when the user selects Voice mode. This adds a 🎤 microphone button to every question card:
 - Clicking 🎤 starts `window.SpeechRecognition` (or `window.webkitSpeechRecognition`); button shows 🔴 Recording…
@@ -111,12 +118,18 @@ const BRAINSTORM_DATA = {
   phase: "<phase label, e.g. 'Phase D — Technology Architecture'>",  // null = no badge
   subtitle: "<one-sentence focus prompt>",                            // null = generic subtitle
   categories: [   // null = use all generic defaults
-    { id: "concerns",      hint: "<phase-specific hint text>" },
-    { id: "goals",         hint: "<phase-specific hint text>" },
-    { id: "constraints",   hint: "<phase-specific hint text>" },
-    { id: "opportunities", hint: "<phase-specific hint text>" },
-    { id: "assumptions",   hint: "<phase-specific hint text>" },
-    { id: "other",         hint: "<phase-specific hint text>" },
+    { id: "concerns",      hint: "<phase-specific hint text>",
+      suggestions: ["<common concern for this phase>", "<another common concern>"] },  // or omit/null
+    { id: "goals",         hint: "<phase-specific hint text>",
+      suggestions: ["<common goal>", "<another common goal>"] },
+    { id: "constraints",   hint: "<phase-specific hint text>",
+      suggestions: null },
+    { id: "opportunities", hint: "<phase-specific hint text>",
+      suggestions: null },
+    { id: "assumptions",   hint: "<phase-specific hint text>",
+      suggestions: null },
+    { id: "other",         hint: "<phase-specific hint text>",
+      suggestions: null },
   ],
   questions: [   // null if no artifact/phase context — upcoming interview questions shown as prompts
     {
@@ -139,7 +152,7 @@ const BRAINSTORM_DATA = {
 };
 ```
 
-Only `hint` is overridden in `categories` — `label` and `emoji` are always taken from defaults.
+Only `hint` and `suggestions` are overridden in `categories` — `label` and `emoji` are always taken from defaults. `suggestions` is optional: omit or set to `null` for categories where no common starters apply. When `suggestions` is set, the app renders a "💡 Thought starters" toggle inside the category card — clicking a starter adds it as a pre-filled thought entry the user can edit.
 
 **App behaviour for `questions`:** Within each category card, show a collapsible "📋 Upcoming questions" section (collapsed by default). List each question whose `category` matches the card. This gives the user context for what topics to brainstorm before the interview.
 

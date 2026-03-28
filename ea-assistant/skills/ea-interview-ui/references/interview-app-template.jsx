@@ -14,6 +14,7 @@ import { useState, useEffect, useRef } from "react";
 //     defaultAnswer: string | null,
 //     existingAnswer: string | null,     // from previous session / imported doc
 //     brainstormNote: string | null,     // relevant thought from brainstorm notes
+//     suggestions: Array<{label: string, value: string}> | null,  // common answers — click to load into textarea for editing
 //     options: Array<string> | null,     // if set, renders as a checklist/radio list
 //     allowMultiple: boolean,            // true = checkboxes (default), false = radio (select one)
 //   }>
@@ -116,6 +117,35 @@ function OptionSelector({ options, allowMultiple, checked, onChange }) {
   );
 }
 
+function SuggestionChips({ suggestions, onSelect }) {
+  if (!suggestions || suggestions.length === 0) return null;
+  return (
+    <div style={{ marginBottom: 14 }}>
+      <div style={{ fontSize: 11, fontWeight: 700, color: "#9CA3AF", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>
+        💡 Common answers — click to load, then edit or submit
+      </div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+        {suggestions.map((s, i) => (
+          <button
+            key={i}
+            onClick={() => onSelect(s.value)}
+            title={s.value}
+            style={{
+              padding: "6px 14px", borderRadius: 999,
+              border: "1.5px solid #C7D2FE",
+              background: "#EEF2FF", color: "#4338CA",
+              fontSize: 13, cursor: "pointer",
+              fontFamily: "inherit",
+            }}
+          >
+            {s.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function QuestionCard({ q, qNum, total, onAnswer, inputVal, setInputVal, checkedVals, onCheckChange, onBack, onJumpToReview }) {
   const textareaRef = useRef(null);
   const hasOptions = q.options && q.options.length > 0;
@@ -187,6 +217,13 @@ function QuestionCard({ q, qNum, total, onAnswer, inputVal, setInputVal, checked
           }}>
             📎 <strong>Previous answer:</strong> {q.existingAnswer}
           </div>
+        )}
+
+        {!q.existingAnswer && (
+          <SuggestionChips
+            suggestions={q.suggestions}
+            onSelect={v => { setInputVal(v); setTimeout(() => textareaRef.current?.focus(), 50); }}
+          />
         )}
 
         {/* Checklist or free-text input */}

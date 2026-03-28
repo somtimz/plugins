@@ -79,6 +79,13 @@ Capture freeform brainstorm notes for the active EA engagement.
 
    Set `BRAINSTORM_DATA.phase` to the full phase label (e.g. `"Phase D — Technology Architecture"`). If the phase has no letter prefix (Preliminary, Requirements), use just the name (e.g. `"Preliminary"`).
 
+   **Generate thought-starter suggestions for each category.** For each category, derive 2–4 short, concrete thought starters relevant to the phase and engagement context. These are pre-written thought entries the user can click to add without typing — they should be specific enough to be immediately useful, not just restatements of the hint. Use the hint as the seed, then concretise. Example for Technology Architecture / concerns:
+   - `"Legacy ERP creates vendor lock-in — no supported migration path before 2027"`
+   - `"Security posture is reactive — no zero-trust or identity governance in place"`
+   - `"Two key platform engineers leaving in Q3 — risk to delivery capacity"`
+
+   Set `suggestions: null` for categories where generic suggestions would be meaningless (e.g., `other`). Only set suggestions when they genuinely help the user get started faster.
+
    Load the `ea-interview-ui` skill and present the **Brainstorm Pad** artifact with the constructed `BRAINSTORM_DATA`.
 
    - If phase-scoped, announce: "Opening a brainstorm pad scoped to {Phase Name}. Fill in thoughts freely across any category, then click 'Done' and paste the results back."

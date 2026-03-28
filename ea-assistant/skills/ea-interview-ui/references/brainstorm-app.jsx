@@ -8,12 +8,13 @@ import { useState, useRef, useEffect } from "react";
 //     phase: "Phase D — Technology Architecture",   // null = no phase badge
 //     subtitle: "Focus on platform, infrastructure, and technical decisions.",  // null = generic
 //     categories: [                                 // null = use all defaults
-//       { id: "concerns",      hint: "Platform lock-in, security posture, technical debt, skills gaps" },
-//       { id: "goals",         hint: "Target platform, infrastructure principles, cloud/hybrid strategy" },
-//       { id: "constraints",   hint: "Existing infrastructure, vendor agreements, security policies" },
-//       { id: "opportunities", hint: "Cloud adoption, automation, platform standardisation, cost optimisation" },
-//       { id: "assumptions",   hint: "Cloud readiness, vendor support timelines, network capacity" },
-//       { id: "other",         hint: "Technology radar inputs, emerging tech candidates, decommission targets" },
+//       { id: "concerns",      hint: "Platform lock-in, security posture, technical debt, skills gaps",
+//         suggestions: ["Legacy platform creates vendor lock-in with no viable migration path",
+//                       "Security posture is immature — no zero-trust controls in place"] },
+//       { id: "goals",         hint: "Target platform, infrastructure principles, cloud/hybrid strategy",
+//         suggestions: ["Cloud-native platform with container-first deployment",
+//                       "Hybrid cloud balancing on-prem for regulated data and public cloud for scale"] },
+//       // ... other categories — suggestions is optional, null if omitted
 //     ],
 //   };
 
@@ -35,16 +36,56 @@ const DEFAULT_CATEGORIES = [
   { id: "other",         label: "Other",            emoji: "📝", hint: "Anything that doesn't fit above" },
 ];
 
-// Merge phase-specific hint overrides into the default category list
-const _hintOverrides = BRAINSTORM_DATA.categories
-  ? Object.fromEntries(BRAINSTORM_DATA.categories.map(c => [c.id, c.hint]))
+// Merge phase-specific hint and suggestion overrides into the default category list
+const _catOverrides = BRAINSTORM_DATA.categories
+  ? Object.fromEntries(BRAINSTORM_DATA.categories.map(c => [c.id, c]))
   : {};
-const CATEGORIES = DEFAULT_CATEGORIES.map(c =>
-  _hintOverrides[c.id] ? { ...c, hint: _hintOverrides[c.id] } : c
-);
+const CATEGORIES = DEFAULT_CATEGORIES.map(c => {
+  const ov = _catOverrides[c.id];
+  if (!ov) return c;
+  return { ...c, hint: ov.hint ?? c.hint, suggestions: ov.suggestions ?? null };
+});
 
 
 // ─── CategoryCard ─────────────────────────────────────────────────────────────
+
+function ThoughtStarters({ suggestions, onAdd }) {
+  const [open, setOpen] = useState(false);
+  if (!suggestions || suggestions.length === 0) return null;
+  return (
+    <div style={{ marginBottom: 10 }}>
+      <button
+        onClick={() => setOpen(o => !o)}
+        style={{
+          padding: "4px 10px", borderRadius: 6, border: "1px dashed #C7D2FE",
+          background: "transparent", color: "#6366F1", fontSize: 12, cursor: "pointer",
+          fontFamily: "inherit",
+        }}
+      >
+        💡 Thought starters {open ? "▴" : "▾"}
+      </button>
+      {open && (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 8 }}>
+          {suggestions.map((s, i) => (
+            <button
+              key={i}
+              onClick={() => onAdd(s)}
+              title="Click to add as a thought"
+              style={{
+                padding: "5px 12px", borderRadius: 999,
+                border: "1.5px solid #C7D2FE",
+                background: "#EEF2FF", color: "#4338CA",
+                fontSize: 12, cursor: "pointer", fontFamily: "inherit",
+              }}
+            >
+              + {s}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 function CategoryCard({ cat, thoughts, onUpdate, onAdd, onRemove, autoFocusLast }) {
   const lastRef = useRef(null);
@@ -95,6 +136,7 @@ function CategoryCard({ cat, thoughts, onUpdate, onAdd, onRemove, autoFocusLast 
       {/* Inputs */}
       {!collapsed && (
         <div style={{ padding: "0 18px 16px" }}>
+          <ThoughtStarters suggestions={cat.suggestions} onAdd={v => onAdd(v)} />
           {thoughts.map((thought, i) => (
             <div key={i} style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-start" }}>
               <textarea
@@ -239,8 +281,8 @@ export default function BrainstormPad() {
     });
   }
 
-  function addThought(catId) {
-    setThoughts(t => ({ ...t, [catId]: [...t[catId], ""] }));
+  function addThought(catId, prefill = "") {
+    setThoughts(t => ({ ...t, [catId]: [...t[catId], prefill] }));
     setLastAddedCat(catId);
   }
 
@@ -280,7 +322,7 @@ export default function BrainstormPad() {
               cat={cat}
               thoughts={thoughts[cat.id]}
               onUpdate={(i, v) => updateThought(cat.id, i, v)}
-              onAdd={() => addThought(cat.id)}
+              onAdd={(v) => addThought(cat.id, v)}
               onRemove={i => removeThought(cat.id, i)}
               autoFocusLast={lastAddedCat === cat.id}
             />
