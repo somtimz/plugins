@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.1 (plugin.json) / 0.9.4 (PRD)
+**Current version:** 0.9.3 (plugin.json)
 **Branch:** `feat/interview-voice-brainstorm`
 
 ---
