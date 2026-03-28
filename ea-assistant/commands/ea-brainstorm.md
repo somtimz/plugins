@@ -34,9 +34,33 @@ Capture freeform brainstorm notes for the active EA engagement.
    - If the user wants to view, display the full file content, then ask if they want to add more.
    - If not found, continue silently to the capture session.
 
+3b. **Pull upcoming interview questions.** Build a set of question prompts to show inside the pad as context:
+
+   - **Artifact-scoped** (invoked from `/ea-interview` before a specific artifact): read the artifact template and extract all `{{placeholder}}` field names as question texts. If the artifact file already exists, also read it to skip fields that are already answered.
+   - **Phase-scoped** (phase argument provided): read `skills/ea-artifact-templates/references/phase-interview-questions.md` for the relevant phase. Extract up to 8 key questions in order.
+   - **Unscoped**: omit — leave `questions: null`.
+
+   For each question, assign a `category` based on its topic:
+   - Questions about risks, blockers, stakeholder concerns → `"concerns"`
+   - Questions about vision, goals, objectives, outcomes → `"goals"`
+   - Questions about budget, time, policy, org limits → `"constraints"`
+   - Questions about improvements, gaps to close, new capabilities → `"opportunities"`
+   - Questions about baseline state, stakeholder readiness, preconditions → `"assumptions"`
+   - All others → `"other"`
+
+3c. **Pull pre-existing answers from documents.** Check whether any answers already exist that should be surfaced in the pad:
+
+   - Read the artifact file (if it exists) and extract any fields that are already answered (non-placeholder, non-`⚠️ Not answered`, non-`⊘`). For each, record: `{ questionRef, questionText, answer, source: "artifact" }`.
+   - Scan `EA-projects/{slug}/uploads/` for any previously processed documents. For each, check `interviews/` for a corresponding extraction note; extract Q&A pairs recorded against this artifact or phase. Record: `{ questionRef, questionText, answer, source: "{filename}" }`.
+   - Deduplicate by `questionRef` — if both artifact and document have an answer for the same field, prefer the artifact value (it is the more authoritative state).
+   - Set `prefilled` to the resulting list. If none found, set to `null`.
+
+   If any prefilled entries were found, announce before launching the pad:
+   > "Found {N} pre-existing answer(s) from {source(s)}. These will appear in the brainstorm pad marked with 📄 — you can keep, edit, or replace them."
+
 4. **Build `BRAINSTORM_DATA` and launch the brainstorm pad.**
 
-   Construct the `BRAINSTORM_DATA` object based on the resolved phase. Use the table below to look up the phase-specific values. If no phase argument was provided, set all fields to `null`.
+   Construct the `BRAINSTORM_DATA` object based on the resolved phase. Use the table below to look up the phase-specific values. If no phase argument was provided, set all fields to `null`. Include `questions` (from step 3b) and `prefilled` (from step 3c) in the object.
 
    **Phase hint table:**
 
@@ -61,7 +85,34 @@ Capture freeform brainstorm notes for the active EA engagement.
    - If not phase-scoped: "Opening the brainstorm pad. Fill in any thoughts across the categories, then click 'Done' and paste the results back."
    - The app handles all input — do not run a parallel chat Q&A.
 
-5. **Wait for the user to paste their notes.** The app's result screen has a "Copy to clipboard" button. When the user pastes the `BRAINSTORM NOTES` block back into the chat, proceed to step 6.
+5. **Wait for the user to paste their notes.** The app's result screen has a "Copy to clipboard" button. When the user pastes the `BRAINSTORM NOTES` block back into the chat, proceed to step 5b.
+
+5b. **Detect and resolve conflicts.** Compare the user's brainstorm entries against any `prefilled` items from step 3c:
+
+   A conflict exists when the paste-back contains both:
+   - A `[📄 From: {source}]`-tagged entry (pre-filled from a document or artifact), AND
+   - A user-written thought in the same category that addresses the same question or topic
+
+   For each conflict detected, pause and present:
+
+   ```
+   ⚠️  Conflict — {question text}
+
+   📄  {source}: {document / artifact answer}
+   💭  Your brainstorm: {user thought}
+
+   How would you like to resolve this?
+   1. Keep document answer  (discard brainstorm thought)
+   2. Keep brainstorm thought  (discard document answer)
+   3. Combine both  (both recorded; interviewer will see both)
+   4. Keep both separately  (record as distinct thoughts — no preference stated)
+
+   Press Enter to keep both separately.
+   ```
+
+   Apply each resolution before saving. If the user chooses option 3 (Combine), merge into a single entry: `"{document answer} — {brainstorm thought}"`. If option 1 or 2, discard the other. If option 4 or Enter, record both entries with their original tags.
+
+   If no conflicts are found, continue silently to step 6.
 
 6. **Save the pasted notes.** Parse the `BRAINSTORM NOTES` block from the user's paste. The categories are already structured by the app (Concerns / Goals & Vision / Constraints / Opportunities / Assumptions / Other) — use them as-is; do not re-categorise.
 

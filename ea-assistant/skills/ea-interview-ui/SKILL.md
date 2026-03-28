@@ -4,7 +4,7 @@ description: >
   Render interactive React artifacts for EA interview sessions and brainstorming.
   Use the interview app when conducting structured Q&A for an artifact or phase.
   Use the brainstorm pad when capturing freeform engagement thoughts.
-version: 0.2.0
+version: 0.3.0
 ---
 
 # EA Interview UI Skill
@@ -118,10 +118,35 @@ const BRAINSTORM_DATA = {
     { id: "assumptions",   hint: "<phase-specific hint text>" },
     { id: "other",         hint: "<phase-specific hint text>" },
   ],
+  questions: [   // null if no artifact/phase context — upcoming interview questions shown as prompts
+    {
+      id: "q1",
+      text: "<question that will be asked in the upcoming interview>",
+      category: "concerns | goals | constraints | opportunities | assumptions | other",
+    },
+    // ... up to 8 questions
+  ],
+  prefilled: [   // null if no pre-existing answers — document/artifact answers pre-populated in pad
+    {
+      questionRef: "<placeholder key or question id>",
+      questionText: "<full question text>",
+      answer: "<pre-existing answer from document or artifact>",
+      source: "<'artifact' or upload filename>",
+      category: "concerns | goals | constraints | opportunities | assumptions | other",
+    },
+    // ...
+  ],
 };
 ```
 
-Only `hint` is overridden — `label` and `emoji` are always taken from defaults.
+Only `hint` is overridden in `categories` — `label` and `emoji` are always taken from defaults.
+
+**App behaviour for `questions`:** Within each category card, show a collapsible "📋 Upcoming questions" section (collapsed by default). List each question whose `category` matches the card. This gives the user context for what topics to brainstorm before the interview.
+
+**App behaviour for `prefilled`:** Within each category card, pre-populate a thought entry for each `prefilled` item whose `category` matches. Tag each pre-filled entry with a `📄 From: {source}` badge. The user can:
+- Keep the entry as-is (it will be included in the copied results with its `📄` tag)
+- Edit the text (the `📄` tag is retained so Claude can detect modifications at paste-back)
+- Delete the entry (removes it entirely from the results)
 
 ### Mode A: React artifact (Claude Code / Cowork)
 
@@ -149,7 +174,9 @@ Only `hint` is overridden — `label` and `emoji` are always taken from defaults
 **Processing the paste-back:**
 
 When the user pastes the `BRAINSTORM NOTES` block, parse the categories and thoughts, then:
-- Append as a new session block to `EA-projects/{slug}/brainstorm/brainstorm-notes.md`
+- Identify pre-filled entries by the `[📄 From: {source}]` tag in the thought text
+- Pass the full structured results (with tags intact) back to `ea-brainstorm.md` step 5b for conflict detection before saving
+- After conflict resolution, append the resolved session block to `EA-projects/{slug}/brainstorm/brainstorm-notes.md`
 - Follow the append and frontmatter-update rules from `ea-brainstorm.md`
 - Confirm: "Saved. These notes will be available when you run `/ea-interview`."
 
