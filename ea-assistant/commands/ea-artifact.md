@@ -58,7 +58,12 @@ Offer: create a missing artifact, view an existing one, start an interview.
      If the user selects 4 or presses Enter → display the artifact as-is without changes.
 3. Display the artifact content
 4. Show review status and any open review comments from `{artifact}.review.md`
-5. Offer: edit via interview, start review, export to Word, achieve compliance (if non-compliant)
+5. Offer:
+   - Edit via interview (`/ea-interview`)
+   - Start review
+   - **Deep review — grill-me** (`/ea-grill {artifact-name}`) — stress-test, boardroom, pre-mortem, or design critique using the recommended skill for this artifact type
+   - Export to Word
+   - Achieve compliance (if non-compliant)
 
 ### Artifact Naming
 

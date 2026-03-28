@@ -64,6 +64,7 @@ Navigate to a specific TOGAF ADM phase for the active engagement.
    - Continue an in-progress artifact interview → `/ea-interview resume`
    - View phase guidance → loads the `ea-engagement-lifecycle` skill and use the `ea-facilitator` agent
    - **Brainstorm about this phase** → opens a phase-scoped brainstorm session
+   - **Review Phase {N} artifacts** → invoke `/ea-engage-review --quick` and offer to grill each artifact in the current phase using the recommended grill-me skill (see `ea-grill.md` skill mapping table)
    - Mark phase complete → verify all required artifacts exist first
 
    When the user selects "Brainstorm about this phase":

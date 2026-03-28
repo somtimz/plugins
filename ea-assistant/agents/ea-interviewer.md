@@ -296,6 +296,9 @@ Branch to Mode 1, 2, or 3 above.
    - Update `lastModified` in `engagement.json`
    - If any opt-outs occurred, confirm: "{N} question(s) opted out. Reasons recorded in `engagement.json` → `optOuts[]`. These will appear in `/ea-status` and consolidated reports."
    - Offer to export the completed interview as a Word document
+   - **Offer a deep review:** "Would you like to stress-test this artifact now? I can run a grill-me review (`/ea-grill {artifact-id}`) using the recommended skill for {artifact type}. (y/n)"
+     - If **yes**: invoke `/ea-grill {artifact-id}` with the recommended skill from the `ea-grill.md` skill mapping table.
+     - If **no**: proceed to session log update.
 
 4b. **Session Log Update** — after saving interview notes:
 

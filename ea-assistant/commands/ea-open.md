@@ -94,16 +94,23 @@ Display a picklist of all EA engagements, open the selected one with full detail
    ```
    ## Next Actions
 
-   1. Continue current phase ({currentPhase} — {phase name})
-   2. View artifacts (/ea-artifact)
-   3. Start an interview (/ea-interview)
-   4. View detailed status
-   5. Edit engagement metadata
-   6. Edit phase status
-   7. Edit artifact status
-   8. Archive engagement
-   9. Delete engagement
+    1. Continue current phase ({currentPhase} — {phase name})
+    2. View artifacts (/ea-artifact)
+    3. Start an interview (/ea-interview)
+    4. View detailed status
+    5. Edit engagement metadata
+    6. Edit phase status
+    7. Edit artifact status
+    8. Archive engagement
+    9. Delete engagement
+   10. Review & align this engagement (/ea-engage-review)
    ```
+
+### Action: Review & Align Engagement (option 10)
+
+Invoke `/ea-engage-review` for the active engagement. This runs the full-scope consistency, alignment, governance, and quality review and produces the Engagement Review Report.
+
+---
 
 ### Action: View Detailed Status (option 4)
 

@@ -76,7 +76,11 @@ Display a comprehensive status dashboard for all EA engagements.
    1. Open an engagement (/ea-open)
    2. Create a new engagement (/ea-new)
    3. Show archived engagements
+   {if an engagement is currently open (► marker):}
+   4. Review & align active engagement (/ea-engage-review)
    ```
+
+   Option 4 is shown only when an engagement is active in conversation context. Selecting it invokes `/ea-engage-review` for that engagement.
 
 7. **Show archived engagements** (when user selects option 3). Scan `EA-projects/.archive/*/engagement.json` files. If `.archive/` doesn't exist or contains no engagements, display "No archived engagements found." Otherwise display:
 
