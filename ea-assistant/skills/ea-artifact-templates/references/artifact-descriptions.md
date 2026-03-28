@@ -360,6 +360,36 @@ Artefacts are listed by ADM phase. Where an artefact spans multiple phases (e.g.
 
 ---
 
+### Risk Register
+
+**Purpose:** A cross-cutting artifact that aggregates and tracks all architecture risks across the engagement — from initial identification in the Architecture Vision through to delivery in the Migration Plan. Provides a single authoritative view of risk status, ownership, and mitigation across all phases.
+
+**Audience:** Programme sponsor, enterprise architect, architecture review board, risk manager, delivery teams.
+
+**Contents:**
+- Risk summary (counts by rating and status)
+- Risks grouped by rating: Critical, High, Medium, Low
+- Per risk: RIS-NNN ID, description, likelihood, impact, derived rating, source artifact, ADM phase identified, affected objectives (G-NNN / OBJ-NNN), mitigation, contingency, owner, status, last reviewed date
+- Risk heatmap summary (likelihood × impact matrix populated with RIS-NNN IDs)
+- Source artifact cross-reference (which artifacts contributed risks)
+- Closed/Accepted risks retained for audit
+
+**Risk Rating Matrix:**
+- Critical: High likelihood + High impact
+- High: High + Medium OR Medium + High
+- Medium: Medium + Medium OR High + Low OR Low + High
+- Low: Medium + Low OR Low + Medium OR Low + Low
+
+**Risk Statuses:** Open / Monitoring / Accepted / Closed
+
+**When to Create:** After Phase A (initial risks from Architecture Vision and Statement of Architecture Work). Refreshed at each phase gate and whenever a new risk source artifact is updated. Use `/ea-risks generate` to auto-aggregate from all artifacts.
+
+**Who Reviews:** Programme sponsor, architecture review board, risk manager.
+
+**Phase:** Cross-cutting (first generated in Phase A; updated throughout the engagement).
+
+---
+
 ## Phase G — Governance Artefacts
 
 ### Architecture Compliance Assessment

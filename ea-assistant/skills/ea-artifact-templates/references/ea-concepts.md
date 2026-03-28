@@ -326,13 +326,19 @@ A plan is a sequenced description of how a strategy will be executed. It specifi
 **What it IS:**
 A risk is an uncertain future event or condition that, if it occurs, will have a negative effect on one or more objectives. Every risk has two dimensions: **likelihood** (probability it will occur) and **impact** (severity of effect if it does). The combination of the two determines risk rating.
 
+**ID scheme:** `RIS-NNN` (e.g., RIS-001, RIS-002). Assigned by `/ea-risks generate` when risks are aggregated into the Risk Register. Source artifacts may use local IDs (e.g., `MIG-R001` in Migration Plan); these are re-mapped to `RIS-NNN` on aggregation.
+
 **Structural parts** (risk register row):
-- **Description** — what could happen
-- **Likelihood** — High / Med / Low
-- **Impact** — High / Med / Low
-- **Risk Rating** — derived (High × High = High; Low × Low = Low; etc.)
+- **RIS-NNN** — canonical risk ID assigned on aggregation
+- **Description** — what could happen and why
+- **Likelihood** — High / Medium / Low
+- **Impact** — High / Medium / Low
+- **Rating** — derived: Critical (H×H) / High (H×M, M×H) / Medium (M×M, H×L, L×H) / Low (M×L, L×M, L×L)
 - **Mitigation** — action taken to reduce likelihood or impact
+- **Contingency** — what to do if the risk materialises despite mitigation
 - **Owner** — who is responsible for the mitigation
+- **Status** — Open / Monitoring / Accepted / Closed
+- **Source** — which artifact the risk was identified in
 
 **What it is NOT:**
 - Not a **Constraint** — a constraint is certain and non-negotiable (e.g., "the project must complete by 31 December 2026"); a risk is uncertain and conditional
@@ -345,7 +351,7 @@ A risk is an uncertain future event or condition that, if it occurs, will have a
 - "We assume stakeholder buy-in" — this is an **Assumption**. The associated risk is: "If stakeholder buy-in is not secured, adoption of the target architecture may fail"
 - "The integration is broken" — this is an **Issue** (already occurred), not a risk
 
-**TOGAF placement:** Architecture Vision (preliminary risks, Section 9); Statement of Architecture Work (risk register); Architecture Compliance Assessment (outstanding risks); Migration Plan (risk register per wave). Risk likelihood and impact ratings appear in the A3 Decision Log `Risk` column.
+**TOGAF placement:** Architecture Vision (preliminary risks, §14); Statement of Architecture Work (risk register); Architecture Compliance Assessment (outstanding risks); Migration Plan (risk register per wave, §4). The consolidated **Risk Register** artifact aggregates all of the above into a single cross-cutting view — use `/ea-risks` to generate it. Risk likelihood and impact ratings also appear in the A3 Decision Log `Risk` column.
 
 **ArchiMate:** `Risk` element in the Motivation aspect (Strategy layer, introduced in ArchiMate 3.0). Associated with `Goal` and `Outcome` via influence relationships.
 

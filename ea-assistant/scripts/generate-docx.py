@@ -87,6 +87,16 @@ ARTIFACT_SECTIONS = {
         "Power/Interest Analysis",
         "Engagement Plan",
     ],
+    "risk-register": [
+        "Risk Summary",
+        "Critical Risks",
+        "High Risks",
+        "Medium Risks",
+        "Low Risks",
+        "Closed / Accepted Risks",
+        "Risk Heatmap Summary",
+        "Source Artifact Cross-Reference",
+    ],
 }
 
 
