@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.3
+**Version:** 0.9.4
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -47,17 +47,41 @@ The **EA Practitioner** is the primary user. All design decisions should favour 
 
 ### Motivation Framework
 
-The engagement's strategic context is captured as a linked chain:
+The engagement's strategic context is captured as a complete linked chain from executive intent to practical execution:
 
 ```
 Vision ──inspires──► Mission ──contextualizes──► Business Drivers (DRV)
                                                           │
                                                        drives
                                                           ▼
-                Issues (ISS) ──threatens──► Goals (G) ──operationalizes──► Objectives (OBJ) ◄──blocks── Problems (PRB)
-                                                                                  │
-                                                                     Requirements Register
-                                                                  (links to any of the above)
+Issues (ISS) ──threatens──► Goals (G) ◄──achieves── Strategies (STR)
+    │                           │
+   causes                 operationalizes
+    ▼                           ▼
+Problems (PRB) ──blocks──► Objectives (OBJ)
+                                │
+                             informs
+                                ▼
+                        Capability Model          ◄── Capability Gap (prevents Goals)
+                       (What the org does)
+                                │
+                            shapes
+                                ▼
+                         Operating Model
+                       (How the org functions)
+                                │
+                           measured by
+                                ▼
+                      Metrics (Leading & Lagging)
+                       /          |          \
+                 surfaces    identifies    evaluates
+                     ▼            ▼             ▼
+                New Issues   New Problems   Cap. Maturity
+                                │
+                             defines
+                                ▼
+                     Requirements Register
+                    (traces to ALL layers above)
 ```
 
 - **Vision** — long-term aspirational destination (3–5 years); the "North Star" all Drivers and Strategies must align with
@@ -68,12 +92,18 @@ Vision ──inspires──► Mission ──contextualizes──► Business Dr
 - **Issues** — systemic barriers that *threaten* goals (structural, persistent — not a single-fix symptom)
 - **Problems** — specific, observable symptoms that *block* objectives
 - **Strategies** — chosen approaches for achieving goals; recorded in §7 Strategic Direction Summary of the Architecture Vision (STR-NNN)
+- **Capability Model** — stable, hierarchical map of what the organisation must be able to do (people + process + info + tools), independent of org structure; informed by Objectives and Strategies
+- **Capability Gap** — a missing or immature capability that prevents Goals; identified through Gap Analysis; triggers Phase E work packages
+- **Operating Model** — how the organisation functions to deliver value (process, information, technology, governance); shaped by the Capability Model; measured by Metrics
+- **Metrics** — specific, quantifiable measures (leading or lagging) that validate whether Strategies are working and Goals/Objectives are being achieved; close the feedback loop by surfacing new Issues and Problems when performance falls below threshold
 
-Requirements Register entries carry a Motivation field that links each requirement to its source — any of: DRV, ISS, PRB, G, or OBJ.
+Requirements Register entries carry a Motivation field that links each requirement to its source — any layer of the chain above.
 
-### EA Concepts (10 total)
+> 📎 Source framework: `skills/ea-artifact-templates/references/ea-concepts-source.pdf` — *Enterprise Architecture Strategic Context: Terms, Concepts, and Relationship Models*
 
-Vision, Mission, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Problem — each with a formal definition, TOGAF phase placement, ArchiMate 3.x element, and a disambiguation checklist. Full definitions in `skills/ea-artifact-templates/references/ea-concepts.md`.
+### EA Concepts (13 total)
+
+Vision, Mission, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Problem, Capability Model, Operating Model, Metrics — each with a formal definition, TOGAF phase placement, ArchiMate 3.x element, and a disambiguation checklist. Full definitions in `skills/ea-artifact-templates/references/ea-concepts.md`.
 
 **Disambiguation summary:**
 
@@ -89,6 +119,10 @@ Vision, Mission, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Proble
 | Issue | Qualitative (systemic barrier) | No | Yes (action plan) | Goals (threatens) |
 | Problem | Specific symptom | No | Yes (requirement) | Objectives (blocks) |
 | Risk | Potential future event | No | Yes (mitigation) | Goals or Objectives |
+| Capability Model | What the org does | No | No | Informed by Objectives and Strategies; shapes Operating Model |
+| Capability Gap | Missing/immature capability | No | Yes (work package) | Prevents Goals; triggers Gap Analysis and Phase E WPs |
+| Operating Model | How the org functions | No | No | Shaped by Capability Model; measured by Metrics |
+| Metrics | Quantifiable measure (leading/lagging) | Yes (target + deadline) | No | Validates Objectives; surfaces new Issues and Problems |
 
 ---
 
@@ -159,7 +193,7 @@ Artifacts are populated from interview answers, uploaded documents, or explicit 
 | Application Architecture | C-App | — |
 | Technology Architecture | D | — |
 | Gap Analysis (covers all selected domains) | B–D | — |
-| Architecture Roadmap | E | ✓ |
+| Architecture Roadmap (with Strategic Alignment section — G/OBJ/STR coverage table + per-WP goal/strategy links) | E | ✓ |
 | Migration Plan | F | — |
 | Architecture Contract | G | ✓ |
 | Compliance Assessment | G | — |
@@ -249,6 +283,7 @@ Provisional ──────────────────────�
 - `/ea-grill [artifact] [--skill]` — runs a grill-me skill against the artifact; output saved to `reviews/{artifact}-review-{YYYY-MM-DD}.md`
 - Auto-selects skill by artifact type; override with `--skill`
 - When an artifact matches multiple routing rows, the more specific row wins (e.g., Architecture Vision matches both "Architecture Vision, Strategy" and "Any structured document" — `stress-test` wins)
+- **Apply findings (Step 7)** — after the grill output is produced, offers to apply recommended revisions back to the artifact one at a time (apply / skip / edit per revision); each applied revision bumps the artifact version (patch increment) and updates `lastModified`; `reviewStatus` is set to `Revised`; Approved artifacts require explicit confirmation before any revision is written
 
 **Grill skill routing (auto-selection):**
 
@@ -286,12 +321,36 @@ Provisional ──────────────────────�
 - Research prompts are shown automatically on driver, risk, and assumption questions when `researchPrompts: true` (default)
 - Documented in Phase A facilitation notes and `/ea-help`
 
-### 5.11 Undocumented Agents (Planned Features)
+### 5.11 Architecture Roadmap Agent
 
-Three agents exist in the plugin but have no dedicated command workflow yet. They are loaded as part of the plugin context and invoked by asking Claude directly:
+The `ea-roadmap` agent creates and manages the Architecture Roadmap artifact (Phase E/F). It auto-selects one of three modes based on what exists in the engagement:
+
+| Mode | Triggers when | Behaviour |
+|---|---|---|
+| **Review** | `artifacts/architecture-roadmap.md` exists | Checks completeness, traceability (GAP/REQ refs), wave/dependency logic; presents issues for fix |
+| **Artifact-informed** | Source artifacts exist, no roadmap yet | Reads Architecture Vision (G/OBJ/STR), Gap Analysis, Requirements Register → builds goal/strategy coverage register → derives candidate WPs → elicits wave/effort/owner → writes artifact |
+| **Clean-slate** | No artifacts at all | 7-question elicitation sequence (horizon → waves → WPs → plateaus → prioritisation) → writes artifact |
+
+In artifact-informed mode, **every candidate work package is anchored to at least one Goal (G-NNN), Objective (OBJ-NNN), or Strategy (STR-NNN)** from the Architecture Vision before any WP is confirmed. Goals and Strategies with no covering WP are flagged as coverage gaps. This alignment is recorded in the Strategic Alignment section of the roadmap template and in the `Advances Goals/Objectives` and `Executes Strategies` fields of each WP.
+
+Invoke by asking Claude: *"Let's build the architecture roadmap"* or *"Review the current roadmap."*
+
+### 5.12 Document Ingestion Layer
+
+Document handling is split across two components with clear responsibilities:
+
+- **`ea-document-ingestion` skill** — **format layer**: how to read each file type (.docx, .pdf, .xlsx, .csv, .mmd, .drawio, .png). Handles format-specific extraction only.
+- **`ea-document-analyst` agent** — **EA mapping layer**: what to extract and where it belongs. Reads the extracted content and maps it to artifact fields, artifact types, and ADM phases. Presents a confirmation summary before writing anything.
+
+This separation ensures format changes (e.g., adding .pptx support) only touch the ingestion skill, while EA mapping logic (e.g., "strategy content → Architecture Vision §7") is centralised in the analyst agent.
+
+Invoke by asking Claude: *"Analyse the uploaded documents"* or *"Use this document to populate the artifacts."*
+
+### 5.13 Undocumented Agents (Planned Features)
+
+Two agents exist in the plugin but have no dedicated command workflow yet:
 
 - **`ea-consistency-checker`** — flags cross-artifact inconsistencies (e.g., a Goal in the Architecture Vision that has no corresponding entry in the Business Architecture); invoke by asking: *"Check for cross-artifact inconsistencies in this engagement."*
-- **`ea-document-analyst`** — analyses uploaded documents in `uploads/` for architecture content and suggests artifact mappings; invoke by asking: *"Analyse the uploaded documents and suggest artifact mappings."*
 - **`ea-advisor`** — answers EA methodology questions (TOGAF, Zachman, ArchiMate) in context; invoke by asking any methodology question in chat.
 
 These will gain dedicated commands and workflow integration in a future version.
@@ -396,9 +455,10 @@ EA-projects/
 |---|---|---|
 | `ea-facilitator` | Guides users through ADM phases; reads facilitatorStyle config | `/ea-phase`, `/ea-open` |
 | `ea-interviewer` | Conducts structured interviews; all 4 modes, question preview, brainstorm, cross-topic detection | `/ea-interview` |
+| `ea-roadmap` | Creates and manages the Architecture Roadmap in Review / Artifact-informed / Clean-slate mode | Ask Claude: "Let's build the roadmap" or "Review the roadmap" |
 | `ea-requirements-analyst` | Extracts structured requirements from uploaded documents | `/ea-requirements` |
 | `ea-consistency-checker` | Flags cross-artifact inconsistencies (no dedicated command) | Ask Claude: "Check for cross-artifact inconsistencies" |
-| `ea-document-analyst` | Analyses uploaded documents for architecture content (no dedicated command) | Ask Claude: "Analyse the uploaded documents" |
+| `ea-document-analyst` | EA mapping layer — extracts content from uploaded documents and maps to artifacts (no dedicated command) | Ask Claude: "Analyse the uploaded documents" |
 | `ea-advisor` | Answers EA methodology questions — TOGAF, Zachman, ArchiMate (no dedicated command) | Ask any methodology question in chat |
 | `ea-diagram` | Generates and interprets architecture diagrams | `/ea-generate [artifact] mermaid` |
 

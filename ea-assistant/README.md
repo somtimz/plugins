@@ -22,7 +22,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Phase interviews** — curated question bank for each ADM phase (Text, Web, or Display mode) with output routing to artifacts; ID scheme reference and section markers for Phase A
 - **Interview shortcuts** — single-key shortcuts for defaults, skip, N/A, opt-out, brainstorm, A3 logging, and governance transitions; type `?` at any prompt for contextual help
 - **Contextual help** — type `?` during any interview to see the artifact's purpose, value, current progress, and a link to the EA concepts reference
-- **EA concepts reference** — canonical definitions of Principle, Goal, Objective, Strategy, Plan, Risk, Issue, and Problem with TOGAF/ArchiMate alignment and common-confusion disambiguation
+- **EA concepts reference** — canonical definitions of all 13 EA concepts (Vision, Mission, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Problem, Capability Model, Operating Model, Metrics) with full motivation chain model, TOGAF/ArchiMate alignment, and disambiguation checklist; grounded in *EA Strategic Context: Terms, Concepts, and Relationship Models*
 - **Cross-topic detection** — flags answers that belong in a different artifact and offers to route them correctly or save for later
 - **Session tracking** — records facilitator, participants, topics, and next recommended step for every interview session; prior session summary shown at session start
 - **Brainstorming** — capture freeform thoughts before or during interviews; surfaced automatically as context during Q&A
@@ -30,14 +30,16 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Stakeholder interviews** — chat-based or interactive web form; dated and versioned notes
 - **Diagram support** — Mermaid, Graphviz (.dot), Draw.io (.drawio), ArchiMate notation
 - **Decision Register** — cross-artifact decision tracking with governance states (Provisional → Verified/Voted/Fiat), owner attribution, and on-demand registers tailored by audience, domain, authority, cost, impact, or risk
-- **Artifact grill** — deep-review any artifact using grill-me skills (stress-test, premortem, decision, design, software-design, infra-design, artifact, diagram, boardroom-strategy); auto-selects best skill by artifact type
+- **Artifact grill** — deep-review any artifact using grill-me skills (stress-test, premortem, decision, design, software-design, infra-design, artifact, diagram, boardroom-strategy); auto-selects best skill by artifact type; apply findings back to the artifact one revision at a time with per-revision confirm/skip/edit
 - **Opt-out tracking** — explicitly opt out of any question or artifact; reasons and timestamps recorded; surfaced in status reports and consolidated documents
 - **Artifact compliance** — automatic compliance check when opening any artifact; offer to remediate missing fields/sections or accept as-is with sensible defaults
 - **Pre-publish compliance** — `/ea-publish` runs compliance scan on all selected artifacts before assembly; non-compliant items flagged with option to proceed or remediate
 - **Review & consistency** — per-artifact review workflow; cross-artifact consistency checking
 - **Consolidated reporting** — merge all artifacts into a single Markdown or Word document; opted-out and non-standard items flagged inline
 - **Research agent integration** — invoke `@research-agent` at any point during interviews for evidence-based validation of drivers, risks, technology choices, or assumptions
-- **Document ingestion** — upload existing docs and diagrams to inform artifacts
+- **Document ingestion** — upload existing docs and diagrams to inform artifacts; format extraction (docx, pdf, xlsx, csv, drawio, mmd) handled by `ea-document-ingestion` skill; EA content mapping handled by `ea-document-analyst` agent
+- **Architecture Roadmap agent** — three-mode roadmap creation: Review (existing artifact), Artifact-informed (reads Vision Goals/Strategies/Objectives + Gap Analysis + Requirements to seed work packages with strategic alignment), Clean-slate (direct elicitation with no prior artifacts); Strategic Alignment table in roadmap template links every G-NNN/OBJ-NNN/STR-NNN to covering work packages
+- **Phase E strategic alignment** — roadmap work packages explicitly link to Goals and Strategies from Phase A; interview questions anchor prioritisation to G-NNN/STR-NNN before addressing gaps and constraints
 - **ADM reference material** — detailed phase inputs/outputs, tailoring guidance for agile/programme/capability-based contexts
 
 ## Prerequisites

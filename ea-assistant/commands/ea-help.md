@@ -79,7 +79,7 @@ You have existing engagements. Common next steps:
 | `/ea-brainstorm [phase]` | Capture freeform thoughts and context for use during interviews |
 | `/ea-generate [artifact] [format]` | Export artifact as Word, PPTX, or Mermaid |
 | `/ea-review [artifact]` | Review and assess an artifact |
-| `/ea-grill [artifact] [--skill]` | Deep-review an artifact using a grill-me skill (stress-test, premortem, decision, design, software-design, infra-design, artifact, diagram, boardroom-strategy) |
+| `/ea-grill [artifact] [--skill]` | Deep-review an artifact using a grill-me skill; then optionally apply findings back to the artifact one revision at a time |
 | `/ea-requirements [action]` | Manage architecture requirements |
 | `/ea-decisions [options]` | Generate Decision Register from all A3 decision logs |
 | `/ea-publish` | Merge artifacts into a consolidated report |
@@ -102,7 +102,7 @@ Type these at any interview prompt:
 | `b:` / `brainstorm` | Start a freeform brainstorm pause |
 | `resume` / `done` | End brainstorm and return to the interview |
 | `?` / `help` | Show this guide + current artifact context and purpose |
-| `concepts` | Show the EA concepts quick reference (Principle/Goal/Objective/Strategy/Plan/Risk/Issue/Problem) |
+| `concepts` | Show the EA concepts quick reference (Vision/Mission/Principle/Goal/Objective/Strategy/Plan/Risk/Issue/Problem/Capability Model/Operating Model/Metrics) |
 
 **Opt-out vs. Skip:**
 - **Skip** (`s`) means "I'll come back to this" — temporary, does not appear in reports as a concern
@@ -118,9 +118,15 @@ Type these at any interview prompt:
 • Use `/ea-generate` to export individual artifacts; `/ea-publish` for
   a full consolidated document.
 • Upload documents to `EA-projects/{name}/uploads/` and the
-  requirements analyst agent will extract structured requirements.
+  ea-document-analyst agent will extract architecture-relevant content
+  and map it to the appropriate artifact sections.
 • Type `?` at any interview prompt for contextual help including
   the artifact's purpose, value, and guidance on the current question.
+• Ask "let's build the roadmap" to start the ea-roadmap agent —
+  it reads your Vision goals and strategies to seed work packages
+  automatically (or works from scratch if no artifacts exist yet).
+• After `/ea-grill`, choose "apply findings" to revise the artifact
+  one recommendation at a time, with confirm/skip/edit per change.
 • Ask "how does architecture governance work" for a full explanation of
   the governance structure, cascade, roles, and TOGAF tool mapping.
 
