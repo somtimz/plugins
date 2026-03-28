@@ -357,6 +357,28 @@ A risk is an uncertain future event or condition that, if it occurs, will have a
 
 ---
 
+### Stakeholder Concern / Objection
+
+**What it IS:**
+A stakeholder concern or objection is a named challenge, question, or objection raised by a stakeholder or surfaced during a formal review (grill-me session, ARB review, executive challenge session). Unlike a Risk (which is an uncertain future event), a concern is a **present-tense challenge** to the architecture that requires either a documented response or a corrective action.
+
+**ID scheme:** `CON-NNN` (e.g., CON-001). Assigned sequentially across the engagement; scoped to the artifact where the concern was raised. Aggregated by `/ea-concerns` into a cross-artifact Concerns Register.
+
+**Structural parts** (Appendix A4 row):
+- **ID** — CON-NNN
+- **Concern** — the objection or question verbatim where possible
+- **Raised By** — stakeholder name/role, or grill-me skill used
+- **Category** — Scope / Goal / Approach / Feasibility / Risk / Stakeholder / Other
+- **Status** — Addressed / Partially Addressed / Requires Attention
+- **Response** — where in the artifact (or another) the concern is answered; blank if unresolved
+- **Action / Owner** — what needs to happen and who is responsible (Requires Attention only)
+
+**Distinction from Risk:** A concern becomes a Risk when it has a probability and a potential future impact on an objective. A concern that is "Requires Attention" and category "Risk" should be escalated to the Risk Register as a RIS-NNN entry.
+
+**TOGAF placement:** Appendix A4 of every primary artifact. Aggregated via `/ea-concerns` into a cross-engagement Concerns Register.
+
+---
+
 ### Capability Model
 
 **What it IS:**

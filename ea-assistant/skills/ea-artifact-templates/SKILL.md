@@ -85,6 +85,37 @@ Every artifact that supports a Decision Log uses this standard table in `## Appe
 
 A3 rows are the source data for `/ea-decisions`.
 
+### Appendix Schema — A4 Stakeholder Concerns & Objections
+
+Every primary artifact (Architecture Vision, all domain architectures, Gap Analysis, Architecture Roadmap, Statement of Architecture Work, and Migration Plan) includes this appendix in `## Appendix A4 — Stakeholder Concerns & Objections`:
+
+```markdown
+### Appendix A4 — Stakeholder Concerns & Objections
+
+| ID | Concern | Raised By | Category | Status | Response | Action / Owner |
+|---|---|---|---|---|---|---|
+| *(no concerns recorded)* | — | — | — | — | — | — |
+```
+
+**Field definitions:**
+
+| Field | Values | Meaning |
+|---|---|---|
+| **ID** | CON-NNN | Concern identifier — sequential within the engagement across all artifacts |
+| **Concern** | Free text | The objection, question, or challenge as it was raised — verbatim where possible |
+| **Raised By** | Free text | Source: stakeholder name/role (e.g. "CIO"), "grill-me-boardroom", "Architecture Review Board", "Sponsor workshop", etc. |
+| **Category** | Scope / Goal / Approach / Feasibility / Risk / Stakeholder / Other | The type of concern |
+| **Status** | Addressed / Partially Addressed / Requires Attention | Whether the concern has been resolved |
+| **Response** | Free text or artifact/section reference | Where in this artifact (or another) the concern is answered (e.g. "§3 Goals — G-001 scoped to exclude retail domain"). Leave blank if Requires Attention |
+| **Action / Owner** | Free text | What needs to happen and who is responsible — only for Requires Attention items. Leave `—` for Addressed items |
+
+**Status rules:**
+- **Addressed** — a clear, documented response exists; record where. Set `Action / Owner` to `—`
+- **Partially Addressed** — a response exists but with acknowledged gaps; note both the response and remaining gap
+- **Requires Attention** — no adequate response exists; must have an Action and Owner. These rows are flagged by `/ea-concerns` and may be escalated to the Risk Register as RIS-NNN entries
+
+A4 rows are the source data for `/ea-concerns`.
+
 ### Review State Header
 
 Every artifact includes a status block at the top:

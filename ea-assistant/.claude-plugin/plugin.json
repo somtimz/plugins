@@ -1,6 +1,6 @@
 {
   "name": "ea-assistant",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "End-to-end Enterprise Architecture engagement management with motivation framework (Drivers/Goals/Objectives/Issues/Problems), artifact generation, phase interviews, roadmap agent, grill-me integration, brainstorming, and requirements analysis. Supports TOGAF 10, Zachman, and ArchiMate.",
   "author": {
     "name": "Costa Pissaris",

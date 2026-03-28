@@ -117,4 +117,25 @@ Explain the prioritisation criteria used to sequence work packages.
 
 ---
 
+## Appendix A4 — Stakeholder Concerns & Objections
+
+<details>
+<summary>📋 Guidance</summary>
+
+Record all stakeholder concerns, objections, and tough questions raised about this artifact.
+Sources include grill-me sessions, Architecture Review Board feedback, executive challenge
+sessions, and sponsor meetings. For each concern, record whether it is addressed in existing
+documentation (Addressed / Partially Addressed) or requires further action (Requires Attention).
+Use `/ea-concerns` to aggregate unresolved items across all artifacts. Concerns that represent
+a material risk should also be raised as RIS-NNN entries via `/ea-risks`.
+
+</details>
+
+| ID | Concern | Raised By | Category | Status | Response | Action / Owner |
+|---|---|---|---|---|---|---|
+| *(no concerns recorded)* | — | — | — | — | — | — |
+
+---
+
 *This document was created using the EA Assistant plugin.*
+*Use `/ea-concerns` to generate a cross-artifact Concerns Register from all A4 tables.*

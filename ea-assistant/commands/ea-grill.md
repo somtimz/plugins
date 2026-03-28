@@ -131,6 +131,50 @@ reviewer: ea-grill
 
 ---
 
+### Step 6b — Populate Appendix A4 from grill output
+
+After saving (or declining to save) the review file, and **before** offering to apply findings, offer to populate the artifact's A4 appendix with the concerns and objections surfaced during the grill:
+
+```
+Populate Appendix A4 — Stakeholder Concerns & Objections?
+
+The grill identified [N] objections, concerns, or tough questions. I can add these to
+the artifact's A4 appendix now, tagged as raised by "[skill-name] session".
+
+Options:
+  (a) Add all — I'll add all identified concerns to A4
+  (s) Select — I'll list them and you choose which to add
+  (n) Skip — leave A4 unchanged
+```
+
+If the user selects `a` or `s`:
+
+1. For each selected concern/objection from the grill output:
+   - Assign the next available `CON-NNN` ID (read existing A4 rows first to determine last used number across all artifacts in the engagement)
+   - Set `Raised By` to the skill name (e.g., `"grill-me-boardroom-strategy session"`)
+   - Set `Category` based on the nature of the concern:
+     - Challenge to scope or boundaries → `Scope`
+     - Challenge to a goal, driver, or objective → `Goal`
+     - Challenge to an architectural approach or decision → `Approach`
+     - Feasibility doubt (cost, time, capability) → `Feasibility`
+     - Risk or failure mode identified → `Risk`
+     - Stakeholder alignment issue → `Stakeholder`
+     - Other → `Other`
+   - Set `Status` based on whether the artifact has a documented response:
+     - If the artifact section being challenged contains a clear answer → `Addressed`; record the section reference in `Response`
+     - If the artifact section exists but is weak or incomplete → `Partially Addressed`; note what is missing
+     - If no adequate response exists in the artifact → `Requires Attention`; leave `Response` blank
+   - Set `Action / Owner` for `Requires Attention` items: propose the action (e.g., "Expand §3 Goals to address retail scope exclusion — Owner: Lead Architect")
+
+2. Append all new A4 rows to the artifact's `## Appendix A4 — Stakeholder Concerns & Objections` table.
+3. Update `lastModified` in the artifact frontmatter.
+4. Confirm: "Added [N] concerns to Appendix A4. [M] require attention — run `/ea-concerns` to see the full register."
+
+**Concerns that are `Category: Risk`:** After adding to A4, flag them:
+> "⚠️ [N] concern(s) in category Risk. Run `/ea-risks` to register them in the Risk Register."
+
+---
+
 ### Step 7 — Apply findings to the artifact
 
 After saving (or declining to save) the review, offer to apply the findings:

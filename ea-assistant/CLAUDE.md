@@ -47,6 +47,7 @@ hooks/hooks.json Plugin lifecycle hooks
 | GAP-NNN | Gap (Gap Analysis) | GAP-001 |
 | REQ-NNN | Requirement | REQ-001 |
 | RIS-NNN | Risk | RIS-001 |
+| CON-NNN | Stakeholder Concern / Objection | CON-001 |
 
 **Do not use domain-prefixed IDs** (BG-/DG-/AG-/TG- etc.) — the scheme is unified and domain-agnostic.
 
