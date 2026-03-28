@@ -371,21 +371,36 @@ Assign IDs sequentially within each prefix as responses are confirmed. Record ID
 
 ## Phase E — Opportunities and Solutions Interview
 
-**Goal:** Prioritise work packages and build the initial architecture roadmap
+**Goal:** Prioritise work packages and build the initial architecture roadmap, grounded in the Goals, Objectives, and Strategies established in Phase A.
+
+**Pre-session preparation:** Load the Architecture Vision and read §3 Goals (G-NNN), §4 Objectives (OBJ-NNN), and §7 Strategic Direction Summary (STR-NNN) before starting. Present this list to participants so work package prioritisation is anchored to stated intent.
 
 **Key questions:**
-1. Which capability gaps identified in earlier phases are the highest priority to close?
-2. What projects are already in flight that this roadmap must align with or avoid conflicting with?
-3. What is the available investment budget and target delivery timeline?
-4. What sequencing dependencies exist — which changes must happen before others can begin?
-5. What are acceptable transition states — what does "good enough for now" look like at each stage?
-6. If the budget were halved, what would you deliver first?
-7. What are the biggest risks to delivering this roadmap?
+
+*Strategic alignment (ask first — establishes the anchor for all prioritisation)*
+1. Looking at the Goals and Strategies defined in Phase A, which are the most critical to advance in the next 12 months? (Reference G-NNN and STR-NNN IDs by name.)
+2. For each proposed work package, which Goal, Objective, or Strategy does it directly advance? Are there Goals or Strategies that no work package addresses — and is that intentional?
+
+*Opportunity and gap coverage*
+3. Which capability gaps identified in earlier phases are the highest priority to close?
+4. What projects are already in flight that this roadmap must align with or avoid conflicting with?
+
+*Constraints and sequencing*
+5. What is the available investment budget and target delivery timeline?
+6. What sequencing dependencies exist — which changes must happen before others can begin?
+7. What are acceptable transition states — what does "good enough for now" look like at each stage?
+8. If the budget were halved, which Goals and work packages would you protect, and which would you defer?
+
+*Risk*
+9. What are the biggest risks to delivering this roadmap — and do any of those risks directly threaten a Goal or Strategy?
 
 **Output Routing:**
 
 | Response Topic | Target Artifact | Target Field |
 |---|---|---|
+| Goals/strategies addressed by the roadmap | Architecture Roadmap | Strategic Alignment table (G-NNN / OBJ-NNN / STR-NNN column) |
+| Goals/strategies with no covering WP | Architecture Roadmap | `{{unaddressed_items}}` |
+| Goals/strategies per work package | Architecture Roadmap | WP table `{{g_obj_ids}}` / `{{str_ids}}` per WP |
 | Priority capability gaps | Architecture Roadmap | `{{priority_gaps}}` |
 | In-flight projects | Architecture Roadmap | `{{existing_projects}}` |
 | Investment budget | Architecture Roadmap | `{{investment_budget}}` |
@@ -396,7 +411,9 @@ Assign IDs sequentially within each prefix as responses are confirmed. Record ID
 | Delivery risks | Architecture Roadmap | `{{delivery_risks}}` |
 
 **Facilitation Notes:**
-- The "halved budget" question is the most powerful prioritisation tool in this phase — it forces genuine trade-off decisions rather than keeping everything on the roadmap as "high priority."
+- **Always anchor to Phase A Goals first.** Without this, prioritisation defaults to loudest voice or easiest wins rather than strategic intent. If the Architecture Vision is incomplete or has no Goals defined, flag this as a blocker and recommend completing §3–§4 before proceeding.
+- The Strategic Alignment table in the roadmap must have every G-NNN and STR-NNN from Phase A appear at least once. Anything missing is an explicit coverage gap.
+- The "halved budget" question is the most powerful prioritisation tool — framing it as "which Goals do we protect?" makes the trade-off explicit and strategic rather than tactical.
 - In-flight project alignment is frequently underestimated; request a project portfolio list before the session and map conflicts in advance.
 - Sequencing questions work well as a group exercise where participants physically order work packages — disagreements in the room are better surfaced now than during delivery.
 - Acceptable transition states define architecture checkpoints; if the organisation cannot articulate them, the roadmap will lack governance anchors.

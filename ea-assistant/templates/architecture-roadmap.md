@@ -26,6 +26,25 @@ and is updated in Phase H as change requests are processed.
 
 ---
 
+## Strategic Alignment
+
+<details>
+<summary>📋 Guidance</summary>
+
+Map this roadmap to the Goals, Objectives, and Strategies defined in Phase A. Every Goal and Strategy in the Architecture Vision should be traceable to at least one Work Package. Gaps in coverage should be flagged explicitly.
+
+</details>
+
+| ID | Goal / Objective / Strategy | Type | Addressed by Work Packages |
+|---|---|---|---|
+| {{G-001}} | {{goal_description}} | Goal | {{WP-NNN}} |
+| {{OBJ-001}} | {{objective_description}} | Objective | {{WP-NNN}} |
+| {{STR-001}} | {{strategy_description}} | Strategy | {{WP-NNN}} |
+
+**Unaddressed items:** {{list_any_goals_objectives_strategies_not_covered_or_None}}
+
+---
+
 ## Roadmap Overview
 
 <details>
@@ -55,6 +74,8 @@ Work packages close gaps identified in the Gap Analysis.
 |---|---|
 | **ID** | WP-001 |
 | **Description** | {{description}} |
+| **Advances Goals / Objectives** | {{g_obj_ids}} |
+| **Executes Strategies** | {{str_ids}} |
 | **Closes Gaps** | {{gap_ids}} |
 | **Addresses Requirements** | {{req_ids}} |
 | **Phase / Wave** | Wave 1 / Wave 2 / Wave 3 |

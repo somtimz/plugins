@@ -96,13 +96,18 @@ Read available source artifacts in this priority order:
 
 | Source | Extract |
 |---|---|
+| Architecture Vision | Goals (G-NNN) with descriptions, Objectives (OBJ-NNN), Strategies (STR-NNN) from §7 Strategic Direction Summary, Issues (ISS-NNN), Problems (PRB-NNN), strategic horizon |
 | Gap Analysis | GAP-NNN IDs, descriptions, severity, affected domain |
-| Architecture Vision | Goals (G-NNN), Objectives (OBJ-NNN), strategic horizon |
 | Requirements Register | REQ-NNN IDs, priority, phase applicability |
 | Business Architecture | Key capability changes, process impacts |
 | Application/Data/Technology Architecture | System changes, integration needs, technical debt |
 
 For each source read, note: file path, extraction date, items found.
+
+**If the Architecture Vision exists**, build a goal/strategy register before proposing work packages:
+- List all G-NNN, OBJ-NNN, and STR-NNN with their descriptions
+- This register is the primary anchor for work package derivation — every WP must advance at least one item in this list
+- Flag any G-NNN/STR-NNN that cannot be addressed by any extracted work candidate — surface these as coverage gaps before proceeding
 
 **Step 2 — Work candidate derivation**
 
@@ -112,20 +117,30 @@ Group extracted items into logical work packages:
 - One WP per infrastructure or platform migration
 - Assign a provisional WP-NNN ID starting at WP-001
 
-Present candidates to the user before writing:
+Present candidates to the user before writing — always show strategic alignment if Vision goals were extracted:
 ```
 Extracted from artifacts
 ──────────────────────────────────
+Architecture Vision: 4 goals (G-001–G-004), 3 strategies (STR-001–STR-003), horizon 3 years
 Gap Analysis: 8 gaps → 4 candidate WPs
 Requirements Register: 15 requirements → mapped to 3 existing candidates + 1 new
-Architecture Vision: horizon 3 years, 4 strategic goals noted
+
+Goals / Strategies coverage:
+  G-001 Customer Experience → WP-005
+  G-002 Operational Efficiency → WP-001, WP-003
+  G-003 Data-Driven Decisions → WP-002
+  G-004 Cloud-First Platform → WP-004
+  STR-001 Consolidate CRM → WP-003
+  STR-002 API-first integration → WP-001, WP-002
+  STR-003 Retire on-premise data centre → WP-004
+  ⚠️ No WP covers G-004 beyond cloud infra — review if WP-004 scope is sufficient
 
 Proposed Work Packages:
-- WP-001: Identity Platform Migration (closes GAP-001, GAP-002; REQ-001, REQ-003)
-- WP-002: Data Integration Layer (closes GAP-003; REQ-005, REQ-006)
-- WP-003: Legacy Decommission — CRM (closes GAP-004, GAP-005)
-- WP-004: Cloud Infrastructure Uplift (closes GAP-006, GAP-007, GAP-008; REQ-011)
-- WP-005: Portal Modernisation (REQ-013, REQ-014, REQ-015)
+- WP-001: Identity Platform Migration (G-002, STR-002; GAP-001, GAP-002; REQ-001, REQ-003)
+- WP-002: Data Integration Layer (G-003, STR-002; GAP-003; REQ-005, REQ-006)
+- WP-003: Legacy Decommission — CRM (G-002, STR-001; GAP-004, GAP-005)
+- WP-004: Cloud Infrastructure Uplift (G-004, STR-003; GAP-006, GAP-007, GAP-008; REQ-011)
+- WP-005: Portal Modernisation (G-001; REQ-013, REQ-014, REQ-015)
 
 Shall I proceed with these as the starting set? (yes/no/edit)
 ```

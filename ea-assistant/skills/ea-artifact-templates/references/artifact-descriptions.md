@@ -344,8 +344,9 @@ Artefacts are listed by ADM phase. Where an artefact spans multiple phases (e.g.
 **Audience:** Programme sponsors, project managers, business stakeholders, delivery teams.
 
 **Contents:**
+- Strategic Alignment table — every G-NNN, OBJ-NNN, STR-NNN from Phase A mapped to covering Work Packages
 - Timeline (typically quarterly or by milestone)
-- Work packages / initiatives, sequenced and prioritised
+- Work packages / initiatives, sequenced and prioritised — each WP links to the Goals/Objectives it advances and the Strategies it executes
 - Dependencies between work packages
 - Transition architectures at key milestones
 - Benefits expected at each stage
