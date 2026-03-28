@@ -68,6 +68,7 @@ Offer: create a missing artifact, view an existing one, start an interview.
 ### Artifact Naming
 
 Map common names to file IDs:
+- "Engagement Charter" / "Charter" → `engagement-charter`
 - "Architecture Vision" → `architecture-vision`
 - "Business Architecture" → `business-architecture`
 - "Data Architecture" / "Information Architecture" → `data-architecture`

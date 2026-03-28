@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.4 (plugin.json)
+**Current version:** 0.9.5 (plugin.json)
 **Branch:** `feat/risk-management`
 
 ---
@@ -13,7 +13,7 @@ Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 pro
 agents/          8 agents (ea-facilitator, ea-interviewer, ea-roadmap, ea-document-analyst, ...)
 commands/        17 commands (/ea-new, /ea-open, /ea-phase, /ea-interview, /ea-grill, /ea-changes, ...)
 skills/          8 skill directories (ea-artifact-templates, ea-engagement-lifecycle, ...)
-templates/       19 TOGAF artifact templates (.md)
+templates/       20 TOGAF artifact templates (.md)
 scripts/         Python scripts for Word/PPTX generation
 docs/PRD.md      Authoritative product requirements (v0.9.4)
 hooks/hooks.json Plugin lifecycle hooks
