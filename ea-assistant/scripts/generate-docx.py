@@ -18,7 +18,7 @@ import argparse
 import json
 import os
 import sys
-from datetime import date
+from datetime import date, datetime
 
 try:
     from docx import Document
@@ -30,6 +30,12 @@ try:
 except ImportError:
     print("ERROR: python-docx not installed. Run: pip3 install python-docx")
     sys.exit(1)
+
+try:
+    from lxml import etree as _etree
+    _HAS_LXML = True
+except ImportError:
+    _HAS_LXML = False
 
 DARK_BLUE = RGBColor(0x1F, 0x38, 0x64)
 MED_BLUE  = RGBColor(0x2E, 0x74, 0xB5)
@@ -84,6 +90,95 @@ ARTIFACT_SECTIONS = {
 }
 
 
+# ---------------------------------------------------------------------------
+# Document properties
+# ---------------------------------------------------------------------------
+
+def set_core_properties(doc, meta: dict, engagement: dict) -> None:
+    """Write Dublin Core / Office core properties from artifact metadata."""
+    props = doc.core_properties
+
+    props.title           = meta.get("artifact") or engagement.get("name", "Architecture Document")
+    props.subject         = f"ADM Phase {meta['phase']}" if meta.get("phase") else ""
+    props.author          = engagement.get("sponsor") or engagement.get("author", "")
+    props.last_modified_by = engagement.get("sponsor", "")
+    props.category        = "Enterprise Architecture"
+    props.content_status  = meta.get("status", "Draft")
+    props.identifier      = meta.get("artifactId", "")
+    props.description     = engagement.get("scope", "")
+
+    # version field (string)
+    props.version = str(meta.get("version", "0.1"))
+
+    # keywords: TOGAF + phase + engagement type
+    kw_parts = ["TOGAF", "Enterprise Architecture"]
+    if meta.get("phase"):
+        kw_parts.append(f"Phase {meta['phase']}")
+    if engagement.get("engagementType"):
+        kw_parts.append(engagement["engagementType"])
+    props.keywords = ", ".join(kw_parts)
+
+    # comments: engagement name + review status — visible in Windows Explorer
+    comments_parts = [engagement.get("name", "")]
+    if meta.get("reviewStatus"):
+        comments_parts.append(f"Review: {meta['reviewStatus']}")
+    props.comments = " | ".join(p for p in comments_parts if p)
+
+
+def set_custom_properties(doc, props: dict) -> None:
+    """
+    Write EA-specific custom document properties (visible in Word File → Properties →
+    Custom tab and searchable via Windows Explorer advanced search).
+
+    Requires lxml (installed as a python-docx dependency). Skips silently if unavailable.
+    """
+    if not _HAS_LXML:
+        return
+    if not props:
+        return
+
+    from docx.opc.part import Part
+    from docx.opc.packuri import PackURI
+
+    CUSTOM_NS   = "http://schemas.openxmlformats.org/officeDocument/2006/custom-properties"
+    VT_NS       = "http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"
+    REL_TYPE    = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/custom-properties"
+    CONTENT_TYPE = "application/vnd.openxmlformats-officedocument.custom-properties+xml"
+    FMTID       = "{D5CDD505-2E9C-101B-9397-08002B2CF9AE}"
+
+    root = _etree.Element(
+        f"{{{CUSTOM_NS}}}Properties",
+        nsmap={None: CUSTOM_NS, "vt": VT_NS},
+    )
+
+    for pid, (name, value) in enumerate(props.items(), start=2):
+        prop = _etree.SubElement(
+            root,
+            f"{{{CUSTOM_NS}}}property",
+            fmtid=FMTID,
+            pid=str(pid),
+            name=name,
+        )
+        vt_str = _etree.SubElement(prop, f"{{{VT_NS}}}lpwstr")
+        vt_str.text = str(value) if value is not None else ""
+
+    xml_bytes = _etree.tostring(
+        root, xml_declaration=True, encoding="UTF-8", standalone=True
+    )
+
+    custom_part = Part(
+        PackURI("/docProps/custom.xml"),
+        CONTENT_TYPE,
+        xml_bytes,
+        doc.part.package,
+    )
+    doc.part.package.relate_to(custom_part, REL_TYPE)
+
+
+# ---------------------------------------------------------------------------
+# Document layout helpers
+# ---------------------------------------------------------------------------
+
 def set_cell_background(cell, hex_color):
     tc = cell._tc
     tcPr = tc.get_or_add_tcPr()
@@ -94,7 +189,7 @@ def set_cell_background(cell, hex_color):
     tcPr.append(shd)
 
 
-def add_cover_page(doc, title, org, architect, doc_type="Architecture Document"):
+def add_cover_page(doc, title, org, architect, doc_type, version_label, doc_date):
     section = doc.sections[0]
     section.page_width  = Inches(8.5)
     section.page_height = Inches(11)
@@ -103,7 +198,6 @@ def add_cover_page(doc, title, org, architect, doc_type="Architecture Document")
     doc.add_paragraph()
     doc.add_paragraph()
 
-    # Organisation
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run(org)
@@ -113,7 +207,6 @@ def add_cover_page(doc, title, org, architect, doc_type="Architecture Document")
 
     doc.add_paragraph()
 
-    # Title
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run(title)
@@ -121,7 +214,6 @@ def add_cover_page(doc, title, org, architect, doc_type="Architecture Document")
     run.font.color.rgb = DARK_BLUE
     run.font.bold = True
 
-    # Subtitle
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run(doc_type)
@@ -131,18 +223,17 @@ def add_cover_page(doc, title, org, architect, doc_type="Architecture Document")
     doc.add_paragraph()
     doc.add_paragraph()
 
-    # Metadata table
     table = doc.add_table(rows=4, cols=2)
     table.alignment = WD_TABLE_ALIGNMENT.CENTER
     table.style = 'Table Grid'
 
-    meta = [
+    meta_rows = [
         ("Prepared by", architect),
         ("Organisation", org),
-        ("Date", date.today().strftime("%B %Y")),
-        ("Version", "0.1 Draft"),
+        ("Date", doc_date),
+        ("Version", version_label),
     ]
-    for i, (label, value) in enumerate(meta):
+    for i, (label, value) in enumerate(meta_rows):
         row = table.rows[i]
         row.cells[0].text = label
         row.cells[0].paragraphs[0].runs[0].font.bold = True
@@ -177,7 +268,6 @@ def add_table(doc, headers, rows):
     table = doc.add_table(rows=1 + len(rows), cols=len(headers))
     table.style = 'Table Grid'
 
-    # Header row
     hdr_cells = table.rows[0].cells
     for i, h in enumerate(headers):
         hdr_cells[i].text = h
@@ -185,7 +275,6 @@ def add_table(doc, headers, rows):
         hdr_cells[i].paragraphs[0].runs[0].font.color.rgb = WHITE
         set_cell_background(hdr_cells[i], "1F3864")
 
-    # Data rows
     for ri, row_data in enumerate(rows):
         row_cells = table.rows[ri + 1].cells
         for ci, cell_text in enumerate(row_data):
@@ -197,18 +286,38 @@ def add_table(doc, headers, rows):
     doc.add_paragraph()
 
 
-def build_document(args, content):
+# ---------------------------------------------------------------------------
+# Main build
+# ---------------------------------------------------------------------------
+
+def build_document(args, content: dict, meta: dict, engagement: dict) -> None:
     doc = Document()
 
-    # Set default font
     style = doc.styles['Normal']
     style.font.name = 'Calibri'
     style.font.size = Pt(11)
 
-    add_cover_page(doc, args.title, args.org, args.architect)
+    # --- Cover page values from metadata ---
+    title      = meta.get("artifact") or args.title or engagement.get("name", "Architecture Document")
+    org        = args.org or engagement.get("organisation", "Organisation")
+    architect  = args.architect or engagement.get("sponsor", "Architect")
+    status     = meta.get("status", "Draft")
+    version    = str(meta.get("version", "0.1"))
+    version_label = f"{version} {status}"
+
+    last_modified = meta.get("lastModified") or ""
+    try:
+        doc_date = datetime.fromisoformat(last_modified).strftime("%B %Y") if last_modified else date.today().strftime("%B %Y")
+    except ValueError:
+        doc_date = date.today().strftime("%B %Y")
+
+    phase    = meta.get("phase", "")
+    doc_type = f"ADM Phase {phase} — Enterprise Architecture" if phase else "Enterprise Architecture"
+
+    add_cover_page(doc, title, org, architect, doc_type, version_label, doc_date)
     add_toc_placeholder(doc)
 
-    # Sections from content or defaults
+    # --- Content sections ---
     artifact_type = args.type
     sections = content.get("sections", [])
 
@@ -218,27 +327,54 @@ def build_document(args, content):
             body    = sec.get("content", "")
             level   = sec.get("level", 1)
             add_section(doc, heading, body, level)
-
-            # Embedded table
             if "table" in sec:
                 t = sec["table"]
                 add_table(doc, t.get("headers", []), t.get("rows", []))
     else:
-        # Use default sections for artifact type
         default_sections = ARTIFACT_SECTIONS.get(artifact_type, ["Content"])
         for sec_name in default_sections:
             add_section(doc, sec_name)
 
-    # Standalone tables
     for tbl in content.get("tables", []):
         heading = tbl.get("heading", "")
         if heading:
             add_section(doc, heading, level=2)
         add_table(doc, tbl.get("headers", []), tbl.get("rows", []))
 
+    # --- Core properties (Dublin Core / Office standard) ---
+    set_core_properties(doc, meta, engagement)
+
+    # --- Custom properties (EA-specific, visible in Word Properties → Custom) ---
+    custom_props = {}
+    if meta.get("artifactId"):
+        custom_props["EA.ArtifactId"]      = meta["artifactId"]
+    if meta.get("artifact"):
+        custom_props["EA.ArtifactType"]    = meta["artifact"]
+    if meta.get("phase"):
+        custom_props["EA.Phase"]           = meta["phase"]
+    if meta.get("status"):
+        custom_props["EA.Status"]          = meta["status"]
+    if meta.get("reviewStatus"):
+        custom_props["EA.ReviewStatus"]    = meta["reviewStatus"]
+    if engagement.get("slug"):
+        custom_props["EA.EngagementSlug"]  = engagement["slug"]
+    if engagement.get("name"):
+        custom_props["EA.EngagementName"]  = engagement["name"]
+    if engagement.get("engagementType"):
+        custom_props["EA.EngagementType"]  = engagement["engagementType"]
+
+    set_custom_properties(doc, custom_props)
+
     doc.save(args.output)
     print(f"✅ Word document saved: {args.output}")
+    if custom_props:
+        print(f"   Core properties: title, subject, author, keywords, content_status, version, identifier")
+        print(f"   Custom properties: {', '.join(custom_props.keys())}")
 
+
+# ---------------------------------------------------------------------------
+# Entry point
+# ---------------------------------------------------------------------------
 
 def main():
     parser = argparse.ArgumentParser(description="Generate EA Assistant Word document")
@@ -251,7 +387,8 @@ def main():
     parser.add_argument("--engagement-dir", default=None,   help="Path to engagement directory containing engagement.json")
     args = parser.parse_args()
 
-    # Load engagement metadata if provided
+    # Load engagement metadata
+    engagement = {}
     if args.engagement_dir:
         engagement_path = os.path.join(args.engagement_dir, "engagement.json")
         if os.path.exists(engagement_path):
@@ -264,9 +401,8 @@ def main():
             if not args.architect:
                 args.architect = engagement.get("sponsor", "Architect")
         else:
-            print(f"WARNING: engagement.json not found at {engagement_path}, using explicit arguments")
+            print(f"WARNING: engagement.json not found at {engagement_path}")
 
-    # Validate required fields
     if not args.title:
         print("ERROR: --title is required when --engagement-dir is not provided")
         sys.exit(1)
@@ -275,7 +411,7 @@ def main():
     if not args.architect:
         args.architect = "Architect"
 
-    # Load content
+    # Load content JSON
     content_str = args.content
     if content_str.startswith("@"):
         with open(content_str[1:]) as f:
@@ -286,7 +422,10 @@ def main():
         print(f"ERROR: Invalid JSON content — {e}")
         sys.exit(1)
 
-    build_document(args, content)
+    # Extract artifact metadata from content JSON (populated by ea-generate.md Step 3)
+    meta = content.pop("meta", {})
+
+    build_document(args, content, meta, engagement)
 
 
 if __name__ == "__main__":

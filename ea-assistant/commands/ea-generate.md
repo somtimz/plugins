@@ -64,6 +64,15 @@ For artifact types where mermaid is not applicable, omit that option.
 
 ```json
 {
+  "meta": {
+    "artifact":      "Architecture Vision",
+    "artifactId":    "architecture-vision",
+    "phase":         "A",
+    "status":        "Draft",
+    "reviewStatus":  "Pending",
+    "version":       "0.2",
+    "lastModified":  "2026-03-28T10:00:00"
+  },
   "sections": [
     {"heading": "Section Heading", "content": "Body text here", "level": 1},
     {"heading": "Subsection", "content": "Body text", "level": 2}
@@ -79,9 +88,17 @@ For artifact types where mermaid is not applicable, omit that option.
 ```
 
 Rules for extraction:
+- **Extract YAML frontmatter** into the `meta` block. Map these fields:
+  - `artifact` → `meta.artifact` (e.g. `"Architecture Vision"`)
+  - `artifactId` → `meta.artifactId` (e.g. `"architecture-vision"`)
+  - `phase` → `meta.phase` (ADM phase letter, e.g. `"A"`)
+  - `status` → `meta.status` (e.g. `"Draft"`, `"Approved"`)
+  - `reviewStatus` → `meta.reviewStatus` (e.g. `"Pending"`, `"Revised"`)
+  - `version` → `meta.version` (string, e.g. `"0.2"`)
+  - `lastModified` → `meta.lastModified` (ISO 8601 string)
+  - Omit any field that is absent from the frontmatter.
 - Map each `## Heading` → `level: 1`, `### Heading` → `level: 2`
 - Skip `<details>` guidance blocks — they are template guidance, not content
-- Skip YAML frontmatter
 - For each markdown table, extract it as an entry in `"tables"` — include the section heading it belongs to
 - Where a field is `{{placeholder}}` or empty, use `""` as the content value (the script will render it as "[To be completed]")
 - Collapse the content to plain text — do not include raw markdown syntax in content strings
