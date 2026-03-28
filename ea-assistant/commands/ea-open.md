@@ -79,7 +79,15 @@ Display a picklist of all EA engagements, open the selected one with full detail
 
 6. **Store the active engagement** slug in the conversation context for subsequent commands.
 
-7. **Refresh `EA-projects/{slug}/CLAUDE.md`** with current engagement state (name, slug, engagementType, organisation, sponsor, scope, currentPhase, status, startDate, lastModified). Use the same template defined in `/ea-new`. This keeps the file current so future sessions opened from the project folder always see the latest phase and status. If the file does not exist (e.g. legacy engagement created before this feature), create it now.
+7. **Refresh `EA-projects/{slug}/CLAUDE.md`** using the full template defined in `/ea-new`. Populate all sections from current `engagement.json` state:
+   - **Engagement Identity** — name, slug, type, organisation, sponsor, scope, phase, status, domains, dates
+   - **Strategic Intent** — Vision, Mission, Business Drivers (DRV-NNN), Goals (G-NNN), Objectives (OBJ-NNN), Strategies (STR-NNN), Issues (ISS-NNN) from `engagement.json → direction`; write "Not captured yet." for any empty field — never omit a section
+   - **Artifact Status** — list all artifacts with phase, status, and reviewStatus
+   - **Phase Progress** — list phases that are In Progress, Complete, or On Hold (skip Not Started / Not Applicable)
+   - **Open Decisions** — scan each artifact file's Appendix A3 Decision Log for rows with state Provisional or Awaiting; list with artifact name, description, state, and owner
+   - **Quick Commands** — always include, with currentPhase substituted
+
+   If the file does not exist (legacy engagement created before this feature), create it now.
 
 7. **Offer next actions:**
 
