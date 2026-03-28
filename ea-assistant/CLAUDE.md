@@ -2,8 +2,8 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.3 (plugin.json)
-**Branch:** `feat/interview-voice-brainstorm`
+**Current version:** 0.9.4 (plugin.json)
+**Branch:** `feat/risk-management`
 
 ---
 
@@ -11,9 +11,9 @@ Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 pro
 
 ```
 agents/          8 agents (ea-facilitator, ea-interviewer, ea-roadmap, ea-document-analyst, ...)
-commands/        14 commands (/ea-new, /ea-open, /ea-phase, /ea-interview, /ea-grill, ...)
+commands/        17 commands (/ea-new, /ea-open, /ea-phase, /ea-interview, /ea-grill, /ea-changes, ...)
 skills/          8 skill directories (ea-artifact-templates, ea-engagement-lifecycle, ...)
-templates/       16 TOGAF artifact templates (.md)
+templates/       19 TOGAF artifact templates (.md)
 scripts/         Python scripts for Word/PPTX generation
 docs/PRD.md      Authoritative product requirements (v0.9.4)
 hooks/hooks.json Plugin lifecycle hooks
@@ -134,6 +134,18 @@ The Risk Register (`templates/risk-register.md`) is a cross-cutting artifact gen
 **`/ea-risks` modes:** `generate` (default, writes file), `status` (inline summary), `update RIS-NNN <field> <value>` (single field update)
 
 **Risk rating:** Derived from Likelihood × Impact → Critical / High / Medium / Low (see template guidance block for matrix)
+
+## Governance Artifacts
+
+Three new governance templates covering Preliminary through Phase H:
+
+| Template | Phase | Purpose | Command |
+|---|---|---|---|
+| `governance-framework.md` | Prelim | Enterprise governance structure: ARB ToR, decision rights, ADM tailoring, compliance process | `/ea-artifact create governance-framework` |
+| `implementation-governance-plan.md` | G | Engagement-specific governance: review schedule, checkpoints, waiver process, escalation | `/ea-artifact create implementation-governance-plan` |
+| `change-register.md` | H | Aggregated view of all ACR artifacts | `/ea-changes` (generated) |
+
+**`/ea-changes` modes:** `generate` (default, writes change-register file), `status` (inline summary), `update <ACR-ID> <field> <value>` (single field update)
 
 ---
 
