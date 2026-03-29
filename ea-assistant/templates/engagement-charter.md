@@ -336,14 +336,14 @@ to populate engagement.json simultaneously.
 <details>
 <summary>📋 Guidance</summary>
 
-Define the programme phases — the major stages of delivery for this engagement. Each
-phase is a distinct period of work with its own objectives, deliverables, and success
-criteria. Not all phase types are required, and phases may be merged where appropriate
-(e.g. Planning and Preparation may be a single phase; a pilot may be folded into the
-first implementation wave).
+Define the delivery phases for this engagement — the major stages of work with their
+objectives, deliverables, and sequencing. Keep this section focused on *what will be
+delivered and when*. Governance arrangements (who decides what, ARB structure, decision
+rights, compliance process) are defined in the **Architecture Governance Framework**;
+do not duplicate them here.
 
 Phase types:
-- **Planning** — scope definition, resource planning, governance setup, architecture work
+- **Planning** — scope definition, resource planning, architecture work
 - **Preparation** — environment setup, team onboarding, data migration readiness, tooling
 - **Procurement** — vendor selection, contract negotiation, partner engagement
 - **Pilot** — limited or time-boxed deployment to validate approach before full rollout
@@ -373,6 +373,11 @@ Each phase should link to the goals and objectives it primarily delivers against
 **Phasing Rationale:**
 {{phasing_rationale}}
 *(Explain why the programme is structured this way — e.g. regulatory deadline drives Phase 1 timeline; Pilot reduces risk before full rollout; Implementation split across two waves to manage change capacity)*
+
+**Governance Reference:**
+Architecture governance for this engagement is defined in the Architecture Governance Framework (Preliminary phase artifact). That document covers: governance bodies and their Terms of Reference, decision rights and escalation thresholds, ADM compliance process, waiver procedures, and the Architecture Review Board structure.
+
+> See: `artifacts/governance-framework.md`
 
 ---
 
@@ -549,9 +554,13 @@ required for the programme to succeed — not everyone who has a passive interes
 <details>
 <summary>📋 Guidance</summary>
 
-Record the formal approval of the Charter. An unsigned Charter is a statement of intent,
-not a mandate. Approval triggers the engagement to move forward and commits the named
-parties to the scope, objectives, and governance arrangements defined here.
+Record the formal approval of the Charter by the business and programme parties who own
+the mandate and budget. An unsigned Charter is a statement of intent, not a mandate.
+
+Note: Architecture governance approval (ARB sign-off on architecture compliance) is a
+separate concern managed through the Architecture Governance Framework and the
+Implementation Governance Plan — do not conflate business programme approval with
+architecture governance approval.
 
 </details>
 
@@ -560,11 +569,11 @@ parties to the scope, objectives, and governance arrangements defined here.
 | Programme Sponsor | {{sponsor}} | {{reference}} | {{YYYY-MM-DD}} |
 | Programme Director | {{programme_director}} | {{reference}} | {{YYYY-MM-DD}} |
 | Lead Architect | {{lead_architect}} | {{reference}} | {{YYYY-MM-DD}} |
-| Architecture Governance (ARB Chair) | {{arb_chair}} | {{reference}} | {{YYYY-MM-DD}} |
+| Business Owner | {{business_owner}} | {{reference}} | {{YYYY-MM-DD}} |
 | {{other_approver}} | {{name}} | {{reference}} | {{YYYY-MM-DD}} |
 
 **Next Review Date:** {{YYYY-MM-DD}}
-*(Charter should be reviewed when: scope changes, key assumptions are invalidated, programme structure is revised, or sponsor/programme director changes)*
+*(Charter should be reviewed when: scope changes materially, key assumptions are invalidated, programme structure is revised, or sponsor/programme director changes)*
 
 ---
 

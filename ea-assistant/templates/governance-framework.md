@@ -62,6 +62,9 @@ of domains? Scope ambiguity is the most common governance failure mode.
 **Relationship to existing governance frameworks (corporate, project, IT):**
 {{relationship_to_existing_governance}}
 
+**Relationship to the Engagement Charter:**
+The Engagement Charter defines the programme mandate, delivery phases, costs, benefits, and business approval. This Governance Framework defines how architecture decisions are made and enforced within that programme. Programme delivery structure (phases, milestones, sponsor accountability) is **not** repeated here — see `artifacts/engagement-charter.md §7`.
+
 ---
 
 ## 2. Governance Objectives
