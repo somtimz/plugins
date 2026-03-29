@@ -296,6 +296,47 @@ def add_table(doc, headers, rows):
     doc.add_paragraph()
 
 
+def add_diagrams_appendix(doc, diagrams: list) -> None:
+    """Append a Diagrams appendix with each PNG embedded full-width."""
+    if not diagrams:
+        return
+
+    doc.add_page_break()
+    h = doc.add_heading("Appendix — Architecture Diagrams", level=1)
+    for run in h.runs:
+        run.font.color.rgb = DARK_BLUE
+
+    p = doc.add_paragraph("The following diagrams were generated as part of this engagement. Each diagram is marked as an AI draft and requires architect review.")
+    p.runs[0].font.color.rgb = RGBColor(0x80, 0x80, 0x80)
+    p.runs[0].font.italic = True
+    doc.add_paragraph()
+
+    for item in diagrams:
+        title = item.get("title", "Diagram")
+        path  = item.get("path", "")
+
+        if not path or not os.path.exists(path):
+            p = doc.add_paragraph(f"[Diagram not found: {path}]")
+            p.runs[0].font.color.rgb = RGBColor(0x80, 0x00, 0x00)
+            p.runs[0].font.italic = True
+            continue
+
+        h2 = doc.add_heading(title, level=2)
+        for run in h2.runs:
+            run.font.color.rgb = MED_BLUE
+
+        try:
+            doc.add_picture(path, width=Inches(6.0))
+            last_para = doc.paragraphs[-1]
+            last_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        except Exception as exc:
+            p = doc.add_paragraph(f"[Could not embed diagram: {exc}]")
+            p.runs[0].font.color.rgb = RGBColor(0x80, 0x00, 0x00)
+            p.runs[0].font.italic = True
+
+        doc.add_paragraph()
+
+
 # ---------------------------------------------------------------------------
 # Main build
 # ---------------------------------------------------------------------------
@@ -351,6 +392,10 @@ def build_document(args, content: dict, meta: dict, engagement: dict) -> None:
             add_section(doc, heading, level=2)
         add_table(doc, tbl.get("headers", []), tbl.get("rows", []))
 
+    # --- Diagrams appendix ---
+    diagrams = args.diagrams_list if hasattr(args, "diagrams_list") else []
+    add_diagrams_appendix(doc, diagrams)
+
     # --- Core properties (Dublin Core / Office standard) ---
     set_core_properties(doc, meta, engagement)
 
@@ -395,6 +440,7 @@ def main():
     parser.add_argument("--output",         required=True,  help="Output filename (.docx)")
     parser.add_argument("--content",        default="{}",   help="JSON content string or @file.json")
     parser.add_argument("--engagement-dir", default=None,   help="Path to engagement directory containing engagement.json")
+    parser.add_argument("--diagrams",       default=None,   help="JSON array of {title, path} objects, or @file.json")
     args = parser.parse_args()
 
     # Load engagement metadata
@@ -434,6 +480,18 @@ def main():
 
     # Extract artifact metadata from content JSON (populated by ea-generate.md Step 3)
     meta = content.pop("meta", {})
+
+    # Load diagrams list
+    args.diagrams_list = []
+    if args.diagrams:
+        diag_str = args.diagrams
+        if diag_str.startswith("@"):
+            with open(diag_str[1:]) as f:
+                diag_str = f.read()
+        try:
+            args.diagrams_list = json.loads(diag_str)
+        except json.JSONDecodeError as e:
+            print(f"WARNING: Invalid diagrams JSON — {e}. Diagrams will be skipped.")
 
     build_document(args, content, meta, engagement)
 

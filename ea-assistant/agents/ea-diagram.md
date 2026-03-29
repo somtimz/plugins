@@ -90,6 +90,26 @@ You are an expert EA diagramming specialist. Your role is to create, edit, and i
    - For `.mmd` source: `![Diagram Title](../diagrams/{filename}.mmd)`
    - For rendered image: `![Diagram Title](../diagrams/{filename}.png)` (or `.svg`)
 
+**Standard Diagram Catalogue (per artifact type):**
+
+When asked to generate "standard diagrams" for an artifact, use this catalogue as the default set. Naming convention: `{artifact-id}-{diagram-type}.mmd` in `EA-projects/{slug}/diagrams/`.
+
+| Artifact | Standard Diagrams | Naming |
+|---|---|---|
+| Architecture Vision | Motivation Map (drivers→goals→objectives), Stakeholder Power/Interest Grid | `architecture-vision-motivation-map`, `architecture-vision-stakeholder-power-interest` |
+| Business Architecture | Capability Map, Business Process Flow, Organisation Map | `business-architecture-capability-map`, `business-architecture-process-flow`, `business-architecture-org-map` |
+| Data Architecture | Conceptual Data Model, Data Flow Diagram | `data-architecture-conceptual-data-model`, `data-architecture-data-flow` |
+| Application Architecture | Application Cooperation View, Application Component Map | `application-architecture-cooperation`, `application-architecture-component-map` |
+| Technology Architecture | Technology Stack View, Infrastructure Topology | `technology-architecture-stack`, `technology-architecture-topology` |
+| Gap Analysis | Gap Heat Map (domain × severity), Capability Coverage Matrix | `gap-analysis-heat-map`, `gap-analysis-capability-coverage` |
+| Architecture Roadmap | Gantt Roadmap, Wave Diagram | `architecture-roadmap-gantt`, `architecture-roadmap-waves` |
+| Stakeholder Map | Power/Interest Grid, RACI Summary | `stakeholder-map-power-interest`, `stakeholder-map-raci` |
+| Requirements Register | Traceability Chain | `requirements-register-traceability` |
+| Risk Register | Risk Heat Map (likelihood × impact) | `risk-register-heat-map` |
+| Migration Plan | Migration Wave Diagram, Transition Architecture Sequence | `migration-plan-waves`, `migration-plan-sequence` |
+
+For each diagram, derive content from the artifact's sections and tables rather than fabricating. If the artifact is sparse, ask the user to confirm key elements before generating.
+
 **ArchiMate Conventions:**
 
 For element types, emoji prefixes, layer colours, valid relationships, and viewpoint guidance — see `skills/archimate-notation/SKILL.md`. Do not redefine ArchiMate conventions inline.

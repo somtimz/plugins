@@ -228,6 +228,52 @@ def add_table_slide(prs, title, headers, rows):
     return slide
 
 
+def add_diagram_slide(prs, title, image_path):
+    """Add a slide with a centred diagram image and title bar."""
+    layout = prs.slide_layouts[6]
+    slide = prs.slides.add_slide(layout)
+
+    # Background
+    bg = slide.background
+    fill = bg.fill
+    fill.solid()
+    fill.fore_color.rgb = WHITE
+
+    # Title bar
+    bar = slide.shapes.add_shape(1, 0, 0, SLIDE_W, Inches(1.1))
+    bar.fill.solid()
+    bar.fill.fore_color.rgb = DARK_BLUE
+    bar.line.fill.background()
+
+    # Title text
+    txBox = slide.shapes.add_textbox(Inches(0.4), Inches(0.15), Inches(12.0), Inches(0.8))
+    tf = txBox.text_frame
+    p = tf.paragraphs[0]
+    run = p.add_run()
+    run.text = title
+    run.font.size = Pt(22)
+    run.font.bold = True
+    run.font.color.rgb = WHITE
+
+    # Image — centred, max width 11", top-aligned below title bar
+    try:
+        img_width  = Inches(11.0)
+        img_left   = (SLIDE_W - img_width) // 2
+        img_top    = Inches(1.3)
+        img_height = SLIDE_H - img_top - Inches(0.3)
+        slide.shapes.add_picture(image_path, img_left, img_top, width=img_width, height=img_height)
+    except Exception as exc:
+        txErr = slide.shapes.add_textbox(Inches(0.6), Inches(2.0), Inches(12.0), Inches(1.0))
+        tfErr = txErr.text_frame
+        pErr = tfErr.paragraphs[0]
+        run = pErr.add_run()
+        run.text = f"[Could not embed diagram: {exc}]"
+        run.font.color.rgb = RGBColor(0x80, 0x00, 0x00)
+        run.font.italic = True
+
+    return slide
+
+
 def build_deck(args, content):
     prs = Presentation()
     prs.slide_width  = SLIDE_W
@@ -255,6 +301,16 @@ def build_deck(args, content):
             bullets = slide_def.get("bullets", ["[Content to be added]"])
             add_content_slide(prs, title, bullets)
 
+    # --- Diagram slides appended after content ---
+    diagrams = getattr(args, "diagrams_list", [])
+    for item in diagrams:
+        diag_title = item.get("title", "Architecture Diagram")
+        diag_path  = item.get("path", "")
+        if diag_path and os.path.exists(diag_path):
+            add_diagram_slide(prs, diag_title, diag_path)
+        else:
+            print(f"WARNING: diagram not found, skipping: {diag_path}")
+
     prs.save(args.output)
     print(f"✅ PowerPoint saved: {args.output}")
 
@@ -268,6 +324,7 @@ def main():
     parser.add_argument("--output",         required=True, help="Output filename (.pptx)")
     parser.add_argument("--content",        default="{}",  help="JSON content string or @file.json")
     parser.add_argument("--engagement-dir", default=None,  help="Path to engagement directory containing engagement.json")
+    parser.add_argument("--diagrams",       default=None,  help="JSON array of {title, path} objects, or @file.json")
     args = parser.parse_args()
 
     # Load engagement metadata if provided
@@ -303,6 +360,18 @@ def main():
     except json.JSONDecodeError as e:
         print(f"ERROR: Invalid JSON — {e}")
         sys.exit(1)
+
+    # Load diagrams list
+    args.diagrams_list = []
+    if args.diagrams:
+        diag_str = args.diagrams
+        if diag_str.startswith("@"):
+            with open(diag_str[1:]) as f:
+                diag_str = f.read()
+        try:
+            args.diagrams_list = json.loads(diag_str)
+        except json.JSONDecodeError as e:
+            print(f"WARNING: Invalid diagrams JSON — {e}. Diagrams will be skipped.")
 
     build_deck(args, content)
 

@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.9 (plugin.json)
+**Current version:** 0.9.10 (plugin.json)
 **Branch:** `feat/risk-management`
 
 ---
@@ -123,11 +123,13 @@ SCRIPT=$(find "$HOME/.claude" -name "generate-docx.py" -path "*/ea-assistant/scr
   --type {script-type} \
   --engagement-dir EA-projects/{slug} \
   --content @/tmp/ea-gen-{artifact-id}.json \
+  --diagrams @/tmp/ea-diagrams-{artifact-id}.json \
   --output EA-projects/{slug}/artifacts/{artifact-id}.docx
 ```
 
 `--type` values: `vision`, `gap-analysis`, `app-portfolio`, `requirements-register`, `roadmap`, `stakeholder-map` — must match script's `ARTIFACT_SECTIONS` keys.
 Content JSON must be extracted from the artifact markdown by Claude before calling the script; it is passed via `--content @file`, not via a non-existent `--input` flag.
+`--diagrams` is optional; pass a JSON array `[{"title":"...", "path":"..."}]` or `@file.json`. Diagrams are embedded as a final appendix (docx) or appended as slides (pptx). If omitted, no diagrams section is added.
 
 ## Compliance Rules (Tier 3 — Artifact-specific)
 

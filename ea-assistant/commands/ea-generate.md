@@ -237,6 +237,27 @@ python3 "$SCRIPT" \
 
 This renders every `.mmd` file in the engagement's diagrams directory to images in the same directory.
 
+**Diagram discovery (docx and pptx only):**
+
+Before invoking the generation script, collect associated diagrams for inclusion:
+
+1. Scan `EA-projects/{slug}/diagrams/` for files matching `{artifact-id}-*.png` — these are pre-rendered diagrams linked to this artifact.
+2. Also scan for `{artifact-id}-*.mmd` files that have no corresponding `.png`. For each:
+   - Render it to PNG automatically using the same mmdc detection logic from the **Render to Image** section above.
+   - If rendering fails, skip that diagram and show a warning; continue with the rest.
+3. Build a diagrams list in this format and write it to `/tmp/ea-diagrams-{artifact-id}.json`:
+
+```json
+[
+  {"title": "Capability Map", "path": "EA-projects/{slug}/diagrams/{artifact-id}-capability-map.png"},
+  {"title": "Stakeholder Power/Interest", "path": "EA-projects/{slug}/diagrams/{artifact-id}-stakeholder-power-interest.png"}
+]
+```
+
+Derive `title` from the filename stem: strip `{artifact-id}-` prefix, replace `-` with spaces, capitalise each word.
+
+If no diagrams are found, proceed without `--diagrams` (no appendix will be added). Do not prompt the user — include diagrams by default.
+
 **For docx:**
 
 Locate the script, bootstrap the venv, then run:
@@ -260,10 +281,15 @@ if ! "$VENV/bin/python" -c "import docx" 2>/dev/null; then
   "$VENV/bin/pip" install --quiet python-docx python-pptx
 fi
 
+# Include diagrams if the list file was written above
+DIAGRAMS_ARG=""
+[ -f "/tmp/ea-diagrams-{artifact-id}.json" ] && DIAGRAMS_ARG="--diagrams @/tmp/ea-diagrams-{artifact-id}.json"
+
 "$VENV/bin/python" "$SCRIPT" \
   --type {script-type} \
   --engagement-dir EA-projects/{slug} \
   --content @/tmp/ea-gen-{artifact-id}.json \
+  $DIAGRAMS_ARG \
   --output EA-projects/{slug}/artifacts/{artifact-id}.docx
 ```
 
@@ -278,10 +304,14 @@ if [ -z "$SCRIPT" ]; then
   exit 1
 fi
 
+DIAGRAMS_ARG=""
+[ -f "/tmp/ea-diagrams-{artifact-id}.json" ] && DIAGRAMS_ARG="--diagrams @/tmp/ea-diagrams-{artifact-id}.json"
+
 "$VENV/bin/python" "$SCRIPT" \
   --type {script-type} \
   --engagement-dir EA-projects/{slug} \
   --content @/tmp/ea-gen-{artifact-id}.json \
+  $DIAGRAMS_ARG \
   --output EA-projects/{slug}/artifacts/{artifact-id}.pptx
 ```
 
@@ -303,10 +333,12 @@ For docx or pptx, report:
 ```
 Generated: EA-projects/{slug}/artifacts/{artifact-id}.{ext}
 Size: {file-size}
+Diagrams included: {N} (or "none")
 
 Options:
 1. Generate in another format
-2. Return to engagement (/ea-status)
+2. Generate diagrams for this artifact  (/ea-diagram)
+3. Return to engagement (/ea-status)
 ```
 
 For mermaid (inline), the diagram is already shown. Offer:
