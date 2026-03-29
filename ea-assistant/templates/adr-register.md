@@ -11,7 +11,7 @@ lastModified: {{YYYY-MM-DD}}
 taxonomy:
   domain: Cross-cutting
   category: Register
-  audience: Architecture
+  audience: Governance
   layer: Governance
   sensitivity: Internal
   tags: [adr, decisions, register, cross-cutting]

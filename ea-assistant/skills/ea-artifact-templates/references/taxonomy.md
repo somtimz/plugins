@@ -143,6 +143,10 @@ Free-form list of 3–6 lowercase kebab-case keywords. Tags should include:
 | decision-register | Cross-cutting | Register | Governance | Governance | Internal |
 | risk-register | Cross-cutting | Register | Governance | Governance | Confidential |
 | change-register | Cross-cutting | Register | Governance | Governance | Internal |
+| adr-register | Cross-cutting | Register | Governance | Governance | Internal |
+| architecture-decision-record | Cross-cutting | Governance | Architecture | Governance | Internal |
+| zachman-diagram | Cross-cutting | Analysis | Architecture | Reference | Internal |
+| engagement-charter | Cross-cutting | Strategy | Executive | Motivation | Confidential |
 
 ---
 
