@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.7 (plugin.json)
+**Current version:** 0.9.8 (plugin.json)
 **Branch:** `feat/risk-management`
 
 ---
@@ -11,9 +11,9 @@ Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 pro
 
 ```
 agents/          8 agents (ea-facilitator, ea-interviewer, ea-roadmap, ea-document-analyst, ...)
-commands/        19 commands (/ea-new, /ea-open, /ea-phase, /ea-interview, /ea-grill, /ea-changes, /ea-migrate, /ea-adrs, ...)
-skills/          8 skill directories (ea-artifact-templates, ea-engagement-lifecycle, ...)
-templates/       22 TOGAF artifact templates (.md)
+commands/        20 commands (/ea-new, /ea-open, /ea-phase, /ea-interview, /ea-grill, /ea-changes, /ea-migrate, /ea-adrs, /ea-zachman, ...)
+skills/          8 skill directories (ea-artifact-templates, ea-engagement-lifecycle, zachman-framework, ...)
+templates/       23 TOGAF artifact templates (.md)
 scripts/         Python scripts for Word/PPTX generation
 docs/PRD.md      Authoritative product requirements (v0.9.4)
 hooks/hooks.json Plugin lifecycle hooks
@@ -135,6 +135,28 @@ The Risk Register (`templates/risk-register.md`) is a cross-cutting artifact gen
 **`/ea-risks` modes:** `generate` (default, writes file), `status` (inline summary), `update RIS-NNN <field> <value>` (single field update)
 
 **Risk rating:** Derived from Likelihood × Impact → Critical / High / Medium / Low (see template guidance block for matrix)
+
+## Zachman Diagram
+
+The Zachman Diagram is a cross-cutting classification artifact that maps all engagement content across the 6×6 grid (rows: Contextual → Functioning; columns: What / How / Where / Who / When / Why).
+
+**`/ea-zachman` modes:** `generate` (auto-populate from existing artifacts), `review` (inline coverage matrix), `gap` (prioritised gap list with remediation actions), `interview` (guided Q&A row by row), `classify <artifact>` (cell classification for any artifact)
+
+**Coverage indicator:** ✅ Populated / ⚠️ Partial / ❌ Empty / 🚫 Out of scope
+
+**Key source mappings:**
+- Architecture Vision → R1,C6 + R2,C6 (goals, drivers, strategies)
+- Business Architecture → R2,C2 + R2,C4 (processes, organisation)
+- Data Architecture → R2,C1 + R3,C1 + R4,C1 (semantic → logical → physical data)
+- Application Architecture → R3,C2 + R3,C3 + R3,C4 (functions, distribution, roles)
+- Technology Architecture → R4,C3 + R4,C2 (infrastructure, system design)
+- Requirements Register → R2,C6 + R3,C6 (motivation, business rules)
+
+**Row 6** is always 🚫 — it represents the running enterprise, observed not modelled.
+
+**Template:** `zachman-diagram.md` (created/updated by `/ea-zachman`)
+
+---
 
 ## Architecture Decision Records
 
