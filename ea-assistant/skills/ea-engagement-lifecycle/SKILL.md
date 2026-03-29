@@ -95,7 +95,9 @@ EA-projects/
     "H": { "status": "Not Started", "startedAt": null, "completedAt": null }
   },
   "artifacts": [],
-  "optOuts": []
+  "optOuts": [],
+  "pluginVersion": "0.9.5",
+  "lastMigratedVersion": "0.9.5"
 }
 ```
 
@@ -141,6 +143,15 @@ Metrics with an empty `name` or `measure` are placeholders and MUST NOT be displ
 - Every objective should have at least one metric. A metric without a linked direction item is an orphan — flag it for the user to link or remove.
 
 Existing engagements before v0.5.0 will not have `metrics`. Handle gracefully as empty arrays per domain.
+
+**New fields** (added in v0.9.5):
+- `pluginVersion`: The ea-assistant version that last opened or modified this engagement. Set by `/ea-open` on every load. Absent in legacy engagements — treat as `"0.0.0"` (pre-versioning).
+- `lastMigratedVersion`: The ea-assistant version at which `/ea-migrate` last ran a successful migration. Absent until the first migration — treat as `"0.0.0"`. Updated by `/ea-migrate` after each successful migration run.
+
+These two fields together allow `/ea-open` to detect version drift: if `pluginVersion` < current plugin version, the engagement has not been opened since an upgrade. If `lastMigratedVersion` < current plugin version, there may be migration gaps even if the engagement has been recently opened.
+
+**Artifact `templateVersion` field** (added in v0.9.5):
+Every artifact created from a template now includes `templateVersion: {N}` in its frontmatter, recording which plugin version the template was at when the artifact was created or last migrated. Absent in artifacts created before v0.9.5 — treat as `"0.0.0"`. Updated by `/ea-migrate` when migration remediation is applied to an artifact.
 
 ### Engagement Status Values
 

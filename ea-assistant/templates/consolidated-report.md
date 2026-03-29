@@ -3,6 +3,7 @@ artifact: Consolidated Architecture Document
 engagement: {{engagement_name}}
 date: {{YYYY-MM-DD}}
 version: {{version}}
+templateVersion: 0.9.5
 status: {{document_status}}
 taxonomy:
   domain: Cross-cutting

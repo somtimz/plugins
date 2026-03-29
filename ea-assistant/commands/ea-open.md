@@ -79,7 +79,32 @@ Display a picklist of all EA engagements, open the selected one with full detail
 
 6. **Store the active engagement** slug in the conversation context for subsequent commands.
 
-7. **Refresh `EA-projects/{slug}/CLAUDE.md`** using the full template defined in `/ea-new`. Populate all sections from current `engagement.json` state:
+7. **Update version tracking fields** in `engagement.json`:
+   - Set `pluginVersion` to the current plugin version (read from `.claude-plugin/plugin.json`).
+   - If `pluginVersion` was absent (legacy engagement), add it now.
+   - Do NOT modify `lastMigratedVersion` — that is only updated by `/ea-migrate`.
+   - Update `lastModified` to now.
+
+8. **Alignment check** — after refreshing CLAUDE.md, run a lightweight gap scan (no files modified):
+
+   a. Compare `engagement.json → lastMigratedVersion` (or `"0.0.0"` if absent) against the current plugin version.
+   b. Count the following quickly detectable gaps:
+      - `taxonomy:` block absent on any artifact file in `artifacts/` (check frontmatter only — do not read full file)
+      - `templateVersion:` field absent on any artifact
+      - Appendix A4 section absent from any artifact that should have it
+      - Expected Preliminary artifacts missing: Engagement Charter
+   c. If **no gaps found** → display nothing (silent pass).
+   d. If **gaps found** → append a single notice to the engagement summary (do not interrupt the next actions menu):
+
+      ```
+      ⚠️ Alignment notice — {N} gap(s) detected since ea-assistant v{lastMigratedVersion or "initial"}.
+         Run /ea-migrate to review and align this engagement with v{current_version} standards.
+         (Use /ea-migrate --report to preview changes without applying them.)
+      ```
+
+   **This step makes no changes to any file.** It is a read-only scan.
+
+7b. **Refresh `EA-projects/{slug}/CLAUDE.md`** using the full template defined in `/ea-new`. Populate all sections from current `engagement.json` state:
    - **Engagement Identity** — name, slug, type, organisation, sponsor, scope, phase, status, domains, dates
    - **Strategic Intent** — Vision, Mission, Business Drivers (DRV-NNN), Goals (G-NNN), Objectives (OBJ-NNN), Strategies (STR-NNN), Issues (ISS-NNN) from `engagement.json → direction`; write "Not captured yet." for any empty field — never omit a section
    - **Artifact Status** — list all artifacts with phase, status, and reviewStatus

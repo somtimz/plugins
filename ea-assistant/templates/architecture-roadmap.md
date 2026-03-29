@@ -5,6 +5,7 @@ phase: E/F
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
+templateVersion: 0.9.5
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   domain: Cross-cutting

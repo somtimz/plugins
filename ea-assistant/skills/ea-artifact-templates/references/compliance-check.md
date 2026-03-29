@@ -26,6 +26,7 @@ These checks apply to every `.md` file in `artifacts/`:
 | T1-8 | `lastModified` field present | `lastModified: 2026-03-26` | Missing |
 | T1-9 | Document has at least one top-level heading | `# Architecture Vision` | No headings |
 | T1-10 | `taxonomy` block present with `domain`, `category`, `audience`, `layer`, `sensitivity` | `taxonomy: domain: Cross-cutting ...` | Missing taxonomy block or missing sub-fields |
+| T1-11 | `templateVersion` field present | `templateVersion: 0.9.5` | Missing — run `/ea-migrate` to add |
 
 **Valid `status` values:** `Draft` | `In Review` | `Approved` | `Needs Revision`
 **Valid `reviewStatus` values:** `Not Reviewed` | `In Review` | `Approved` | `Needs Revision`

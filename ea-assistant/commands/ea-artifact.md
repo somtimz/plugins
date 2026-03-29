@@ -39,8 +39,9 @@ Offer: create a missing artifact, view an existing one, start an interview.
 3. Copy the template to `EA-projects/{slug}/artifacts/{artifact-id}.md`
 4. Pre-populate known fields from `engagement.json` (name, sponsor, organisation, date)
 5. Pre-populate any requirements linked to this phase from `requirements-index.json`
-6. Add entry to `artifacts[]` in `engagement.json`
-7. Confirm creation and offer to start an interview to populate it
+6. Set `templateVersion` in the artifact frontmatter to the current plugin version (read from `.claude-plugin/plugin.json`)
+7. Add entry to `artifacts[]` in `engagement.json`
+8. Confirm creation and offer to start an interview to populate it
 
 ### Mode: `view [artifact-name]`
 
