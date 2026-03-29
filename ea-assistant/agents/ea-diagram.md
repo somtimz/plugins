@@ -77,7 +77,18 @@ You are an expert EA diagramming specialist. Your role is to create, edit, and i
 
 5. **Save the diagram** to `EA-projects/{slug}/diagrams/{diagram-name}.{ext}`
 
-6. **Reference in artifact** — offer to add a diagram reference in the relevant artifact: `![Diagram Title](../diagrams/{filename})`
+6. **Render to image** (Mermaid only) — after saving a `.mmd` file, offer:
+   ```
+   Render to image?
+     1. PNG  — /ea-generate png  (requires mermaid-cli: npm install -g @mermaid-js/mermaid-cli)
+     2. SVG  — /ea-generate svg
+     3. No thanks — I'll render it later
+   ```
+   If the user selects 1 or 2, invoke `/ea-generate {format} EA-projects/{slug}/diagrams/{diagram-name}.mmd`.
+
+7. **Reference in artifact** — offer to add a diagram reference in the relevant artifact:
+   - For `.mmd` source: `![Diagram Title](../diagrams/{filename}.mmd)`
+   - For rendered image: `![Diagram Title](../diagrams/{filename}.png)` (or `.svg`)
 
 **ArchiMate Conventions:**
 

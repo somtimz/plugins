@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.8 (plugin.json)
+**Current version:** 0.9.9 (plugin.json)
 **Branch:** `feat/risk-management`
 
 ---
@@ -92,6 +92,24 @@ The `ea-roadmap` agent auto-selects based on engagement state:
 
 Steps 1–6: load artifact → select skill → brief → run grill → produce output → offer to save review file
 **Step 7 (apply findings):** walk through each recommended revision with `y/n/edit` per revision; applied revisions bump artifact version (patch) and update `lastModified`; sets `reviewStatus: Revised`; Approved artifacts warn before write.
+
+## /ea-generate — Mermaid Image Rendering
+
+`/ea-generate png` and `/ea-generate svg` render `.mmd` files to images using mermaid-cli (`mmdc`).
+
+**Prerequisite:** `npm install -g @mermaid-js/mermaid-cli`
+Auto-fallback: `npx -y @mermaid-js/mermaid-cli` (downloads on first run if `mmdc` not on PATH)
+
+**Render single file:** `/ea-generate png diagrams/my-diagram.mmd`
+**Render all diagrams:** `/ea-generate png --all`
+**Options:** `--theme default|dark|forest|neutral|base` `--bg white|transparent|#rrggbb`
+
+**Batch script:** `scripts/render-mermaid.py` — direct Python invocation for bulk rendering
+```bash
+python3 ea-assistant/scripts/render-mermaid.py EA-projects/{slug}/diagrams/ --format png --theme default
+```
+
+**WSL2 note:** If Puppeteer/Chromium fails: `export PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable`
 
 ## /ea-generate — Script Invocation
 

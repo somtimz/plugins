@@ -1,7 +1,7 @@
 ---
 name: ea-generate
-description: Generate a formatted file (Word, PowerPoint, or Mermaid) from an EA artifact
-argument-hint: "[artifact-name] [docx|pptx|mermaid]"
+description: Generate a formatted file (Word, PowerPoint, Mermaid diagram, or rendered image) from an EA artifact or .mmd file
+argument-hint: "[artifact-name] [docx|pptx|mermaid|png|svg] [--theme <theme>] [--bg <color>]"
 allowed-tools: [Read, Write, Bash]
 ---
 
@@ -47,14 +47,19 @@ Example prompt:
 Recommended format for Architecture Vision: docx (Word)
 
 Generate as:
-1. docx  — Word document (recommended)
-2. pptx  — PowerPoint presentation
+1. docx    — Word document (recommended)
+2. pptx    — PowerPoint presentation
 3. mermaid — inline diagram (not available for this artifact type)
+4. png     — rendered image via mermaid-cli (Mermaid artifacts only)
+5. svg     — scalable vector image via mermaid-cli (Mermaid artifacts only)
 
 Select format [1]:
 ```
 
-For artifact types where mermaid is not applicable, omit that option.
+For artifact types where mermaid is not applicable, omit options 3, 4, and 5.
+
+**Rendering existing `.mmd` files directly:**
+If the user runs `/ea-generate` with a `.mmd` file path or with `png`/`svg` as the format and no artifact name, skip Steps 1–3 and go directly to the **Render to Image** section of Step 4.
 
 ### Step 3: Read and Extract Artifact Content
 
@@ -108,7 +113,7 @@ Rules for extraction:
 
 ### Step 4: Generate Output
 
-**For Mermaid:**
+**For Mermaid (inline source):**
 
 - Determine the correct Mermaid diagram type from the artifact content and type:
   - Stakeholder Map → `graph TD` or `graph LR`
@@ -116,7 +121,8 @@ Rules for extraction:
   - Capability Map → `graph TD`
   - Other → `graph TD` as fallback
 - Build the diagram from the artifact content.
-- Render it as a fenced mermaid code block inline in the conversation. No file is created.
+- Save the source to `EA-projects/{slug}/diagrams/{artifact-id}.mmd`
+- Render it as a fenced mermaid code block inline in the conversation.
 
 Example output:
 
@@ -126,6 +132,110 @@ graph TD
     ...
 ```
 ````
+
+After showing the inline diagram, offer:
+```
+Render to image file?
+  1. PNG  — high-resolution raster image (recommended for Word/PowerPoint)
+  2. SVG  — scalable vector image (recommended for web/HTML export)
+  3. No thanks
+```
+If the user selects 1 or 2, proceed to **Render to Image** below.
+
+**For png / svg (Render to Image):**
+
+Renders a `.mmd` file to a raster or vector image using mermaid-cli (`mmdc`).
+
+**Input resolution — in order of preference:**
+1. A `.mmd` file path provided directly by the user
+2. A `.mmd` file generated in the current session (from the Mermaid step above)
+3. Scan `EA-projects/{slug}/diagrams/` for `.mmd` files and ask the user to select one
+
+**Theme and background options** (from command arguments or prompt):
+- `--theme`: `default` (default) | `dark` | `forest` | `neutral` | `base`
+- `--bg`: `white` (default) | `transparent` | `#rrggbb`
+
+If no options were provided and the user didn't specify, use defaults silently.
+
+**Check for mmdc:**
+
+```bash
+# Check if mmdc is available
+if command -v mmdc &>/dev/null; then
+    MMDC_CMD="mmdc"
+elif command -v npx &>/dev/null; then
+    MMDC_CMD="npx -y @mermaid-js/mermaid-cli"
+    echo "ℹ️  mmdc not found globally — using npx (will download on first run)"
+else
+    echo "ERROR: mermaid-cli not found."
+    echo "Install it with:  npm install -g @mermaid-js/mermaid-cli"
+    exit 1
+fi
+```
+
+If neither `mmdc` nor `npx` is available, display:
+```
+⚠️  mermaid-cli (mmdc) is not installed.
+
+To install:
+  npm install -g @mermaid-js/mermaid-cli
+
+Or, if you have Node.js with npx:
+  npx -y @mermaid-js/mermaid-cli (used automatically on next run)
+
+After installing, run /ea-generate again to render the image.
+```
+Then stop.
+
+**Render the file:**
+
+```bash
+OUTPUT_FILE="EA-projects/{slug}/diagrams/{stem}.{format}"
+
+$MMDC_CMD \
+  -i "{input.mmd}" \
+  -o "$OUTPUT_FILE" \
+  -t {theme} \
+  -b {bg} \
+  -w 1920 \
+  -s 2
+```
+
+For SVG, omit `-w` and `-s` (they apply to raster output only):
+```bash
+$MMDC_CMD \
+  -i "{input.mmd}" \
+  -o "$OUTPUT_FILE" \
+  -t {theme} \
+  -b {bg}
+```
+
+If the command fails (non-zero exit):
+- Display the stderr output
+- Suggest common fixes:
+  - "If you see a Puppeteer/Chromium error, run: `npx puppeteer browsers install chrome`"
+  - "If you see a syntax error, open the .mmd file and check the diagram syntax"
+  - "On WSL2, try setting: `export PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable`"
+
+**Render all `.mmd` files in the diagrams directory:**
+
+If the user runs `/ea-generate png --all` or `/ea-generate svg --all`:
+
+```bash
+SCRIPT=$(find "$HOME/.claude" -name "render-mermaid.py" -path "*/ea-assistant/scripts/*" 2>/dev/null | head -1)
+if [ -z "$SCRIPT" ]; then
+  echo "ERROR: render-mermaid.py not found. Is the ea-assistant plugin installed?"
+  exit 1
+fi
+
+python3 "$SCRIPT" \
+  "EA-projects/{slug}/diagrams/" \
+  --format {format} \
+  --theme {theme} \
+  --bg {bg}
+```
+
+This renders every `.mmd` file in the engagement's diagrams directory to images in the same directory.
 
 **For docx:**
 
@@ -199,12 +309,26 @@ Options:
 2. Return to engagement (/ea-status)
 ```
 
-For mermaid, the diagram is already shown inline. Offer:
+For mermaid (inline), the diagram is already shown. Offer:
 
 ```
 Options:
-1. Generate as docx instead
-2. Generate as pptx instead
+1. Render as PNG image  (mermaid-cli)
+2. Render as SVG image  (mermaid-cli)
+3. Generate as docx instead
+4. Generate as pptx instead
+5. Return to engagement (/ea-status)
+```
+
+For png/svg, after successful render report:
+
+```
+Generated: EA-projects/{slug}/diagrams/{filename}.{ext}
+Size: {file-size}
+
+Options:
+1. Render another diagram
+2. Render all diagrams in this engagement  (/ea-generate {format} --all)
 3. Return to engagement (/ea-status)
 ```
 
