@@ -18,7 +18,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Business Model Canvas** — Phase B BMC template (9 building blocks) with 27-question interview bank and linkage table to Business Architecture elements
 - **Architecture Requirements** — manage requirements with Corporate (read-only, waiveable) and Project (editable) scope distinction; Motivation field links each requirement to its driver, issue, problem, goal, or objective
 - **Artifact generation** — all TOGAF artifacts from templates, guided by interviews
-- **Format export** — generate Word (.docx), PowerPoint (.pptx), and Mermaid diagrams from any artifact
+- **Format export** — generate Word (.docx), PowerPoint (.pptx), Mermaid source, PNG, and SVG from any artifact; diagrams automatically embedded in docx/pptx deliverables
 - **Phase interviews** — curated question bank for each ADM phase (Text, Web, or Display mode) with output routing to artifacts; ID scheme reference and section markers for Phase A
 - **Interview shortcuts** — single-key shortcuts for defaults, skip, N/A, opt-out, brainstorm, A3 logging, and governance transitions; type `?` at any prompt for contextual help
 - **Contextual help** — type `?` during any interview to see the artifact's purpose, value, current progress, and a link to the EA concepts reference
@@ -41,6 +41,15 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Architecture Roadmap agent** — three-mode roadmap creation: Review (existing artifact), Artifact-informed (reads Vision Goals/Strategies/Objectives + Gap Analysis + Requirements to seed work packages with strategic alignment), Clean-slate (direct elicitation with no prior artifacts); Strategic Alignment table in roadmap template links every G-NNN/OBJ-NNN/STR-NNN to covering work packages
 - **Phase E strategic alignment** — roadmap work packages explicitly link to Goals and Strategies from Phase A; interview questions anchor prioritisation to G-NNN/STR-NNN before addressing gaps and constraints
 - **ADM reference material** — detailed phase inputs/outputs, tailoring guidance for agile/programme/capability-based contexts
+- **Risk Register** — `/ea-risks` generates a cross-cutting Risk Register (RIS-NNN) by scanning all artifacts for risk content; Likelihood × Impact severity matrix
+- **Architecture Decision Records** — `/ea-adrs` manages standalone ADRs (Candidate → Completed lifecycle); `ea-interviewer` auto-suggests ADRs at 2+ threshold indicators; Appendix A5 links artifacts to related ADRs
+- **Zachman Diagram** — `/ea-zachman` auto-populates and manages the 6×6 classification grid; generate, review, gap, interview, and classify modes
+- **Governance artifacts** — Engagement Charter (Prelim), Governance Framework (Prelim), Implementation Governance Plan (G), Change Register (H)
+- **Architecture Change Management** — `/ea-changes` generates Change Register from Phase H ACR artifacts; `/ea-concerns` manages CON-NNN stakeholder concerns (Appendix A4)
+- **Engagement review** — `/ea-engage-review` produces a full health report covering coverage, traceability, governance, ADR status, and Zachman completeness
+- **Migration** — `/ea-migrate` aligns legacy engagements to the current plugin version; preview with `--report`
+- **Research & References** — `/ea-research` manages a per-engagement library (documents, notes, links); `apply` mode synthesises research against any artifact — gaps and contradictions surfaced with `y/n/edit` revision workflow; synthesis reports saved to `ResearchAndReferences/`
+- **Diagram rendering** — render Mermaid (`.mmd`) files to PNG or SVG via mermaid-cli (`mmdc`); standard diagram catalogue per artifact type; batch render with `--all`
 
 ## Prerequisites
 
@@ -51,6 +60,9 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - Python 3.11+ with `python-docx` and `python-pptx` packages (for `/ea-generate` Word/PPTX export)
   - **Linux/macOS:** `pip3 install python-docx python-pptx`
   - **Windows:** `pip install python-docx python-pptx`
+- `mermaid-cli` (for `/ea-generate png|svg` diagram rendering — optional)
+  - `npm install -g @mermaid-js/mermaid-cli`
+  - Falls back to `npx -y @mermaid-js/mermaid-cli` automatically if not globally installed
 
 ## Installation
 
@@ -100,11 +112,19 @@ sessionSummary: true
 | `/ea-artifact [action]` | Create, view, or list artifacts; runs compliance check on view |
 | `/ea-brainstorm [phase]` | Capture freeform thoughts and context before or during interviews |
 | `/ea-interview [mode]` | Start or resume a stakeholder interview (artifact or phase mode; Text/Web/Display) |
-| `/ea-generate [artifact] [format]` | Export an artifact as Word (.docx), PowerPoint (.pptx), or Mermaid diagram |
+| `/ea-generate [artifact] [format]` | Export as docx, pptx, mermaid, png, or svg; diagrams embedded in docx/pptx by default |
 | `/ea-review [artifact]` | Open an artifact for review and assessment; runs compliance check on load |
 | `/ea-requirements [action]` | Manage architecture requirements |
 | `/ea-decisions [options]` | Generate a Decision Register from all A3 decision logs; filter by audience, owner, domain, authority, cost, impact, risk, subject, or status |
-| `/ea-grill [artifact] [--skill]` | Deep-review an artifact using a grill-me skill (stress-test, premortem, decision, design, boardroom-strategy, etc.) |
+| `/ea-adrs [mode]` | Manage Architecture Decision Records — generate register, create new ADR, update status |
+| `/ea-risks [mode]` | Generate and maintain a cross-cutting Risk Register from all artifact risk sections |
+| `/ea-changes [mode]` | Generate Change Register aggregating Phase H ACR artifacts |
+| `/ea-concerns` | Manage CON-NNN stakeholder concerns and objections (Appendix A4) |
+| `/ea-zachman [mode]` | Manage the Zachman 6×6 classification diagram — generate, review, gap, interview, classify |
+| `/ea-research [mode]` | Research library — add documents, notes, links; apply findings to artifacts |
+| `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman |
+| `/ea-migrate [--report]` | Align a legacy engagement to the current plugin version conventions |
+| `/ea-grill [artifact] [--skill]` | Deep-review an artifact using a grill-me skill; apply findings one revision at a time |
 | `/ea-publish` | Merge all artifacts into a consolidated document; compliance pre-check, opted-out and non-standard items flagged |
 | `/ea-help` | Getting-started guide, full command reference, and interview shortcuts |
 
@@ -173,15 +193,18 @@ All engagement data is stored in `EA-projects/` relative to your working directo
 ```
 EA-projects/
 ├── engagement-name/
-│   ├── engagement.json       # metadata, ADM phases, settings, opt-outs
-│   ├── requirements/         # local architecture requirements
-│   ├── artifacts/            # generated artifacts + review files
-│   ├── diagrams/             # Mermaid, Graphviz, Draw.io files
-│   ├── uploads/              # source documents and diagrams
+│   ├── engagement.json           # metadata, ADM phases, settings, opt-outs
+│   ├── CLAUDE.md                 # auto-generated session context (refreshed on /ea-open)
+│   ├── requirements/             # local architecture requirements
+│   ├── artifacts/                # generated artifacts + review files
+│   ├── diagrams/                 # Mermaid, Graphviz, Draw.io, PNG, SVG files
+│   ├── uploads/                  # source documents and diagrams
+│   ├── reviews/                  # grill-me review outputs
+│   ├── ResearchAndReferences/    # research docs, notes, links; research-index.md
 │   └── interviews/
-│       ├── session-log.md    # chronological session history (who, what, next step)
-│       └── interview-*.md    # dated, versioned interview notes
-└── .archive/                 # archived engagements (hidden)
+│       ├── session-log.md        # chronological session history (who, what, next step)
+│       └── interview-*.md        # dated, versioned interview notes
+└── .archive/                     # archived engagements (hidden)
     └── old-engagement/
         └── engagement.json
 ```

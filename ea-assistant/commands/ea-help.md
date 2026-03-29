@@ -77,11 +77,19 @@ You have existing engagements. Common next steps:
 | `/ea-artifact [action]` | Create or list artifacts |
 | `/ea-interview [mode]` | Stakeholder interviews (artifact or phase mode) |
 | `/ea-brainstorm [phase]` | Capture freeform thoughts and context for use during interviews |
-| `/ea-generate [artifact] [format]` | Export artifact as Word, PPTX, or Mermaid |
+| `/ea-generate [artifact] [format]` | Export artifact as Word, PPTX, Mermaid, PNG, or SVG; embeds diagrams in docx/pptx by default |
 | `/ea-review [artifact]` | Review and assess an artifact |
 | `/ea-grill [artifact] [--skill]` | Deep-review an artifact using a grill-me skill; then optionally apply findings back to the artifact one revision at a time |
 | `/ea-requirements [action]` | Manage architecture requirements |
 | `/ea-decisions [options]` | Generate Decision Register from all A3 decision logs |
+| `/ea-adrs [mode]` | Manage Architecture Decision Records (generate, new, update) |
+| `/ea-risks [mode]` | Generate and maintain a cross-cutting Risk Register |
+| `/ea-changes [mode]` | Generate Change Register for Phase H ACR artifacts |
+| `/ea-concerns` | Manage CON-NNN stakeholder concerns (Appendix A4) |
+| `/ea-zachman [mode]` | Manage the Zachman 6×6 classification diagram (generate, review, gap, interview, classify) |
+| `/ea-research [mode]` | Research library — add, note, link, list, view, apply findings to artifacts |
+| `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman |
+| `/ea-migrate [--report]` | Align legacy engagement to current plugin version conventions |
 | `/ea-publish` | Merge artifacts into a consolidated report |
 | `/ea-help` | This guide |
 
@@ -115,8 +123,9 @@ Type these at any interview prompt:
   inline by typing "brainstorm" at any interview prompt.
 • Use `/ea-interview start phase [name]` for guided phase interviews
   with output routing to the right artifacts.
-• Use `/ea-generate` to export individual artifacts; `/ea-publish` for
-  a full consolidated document.
+• Use `/ea-generate [artifact] [docx|pptx|mermaid|png|svg]` to export
+  individual artifacts — diagrams are embedded automatically in docx/pptx.
+  Use `/ea-publish` for a full consolidated document.
 • Upload documents to `EA-projects/{name}/uploads/` and the
   ea-document-analyst agent will extract architecture-relevant content
   and map it to the appropriate artifact sections.
@@ -127,6 +136,17 @@ Type these at any interview prompt:
   automatically (or works from scratch if no artifacts exist yet).
 • After `/ea-grill`, choose "apply findings" to revise the artifact
   one recommendation at a time, with confirm/skip/edit per change.
+• Use `/ea-research` to add whitepapers, notes, or URL references to
+  the engagement library. Run `/ea-research apply` to synthesise
+  research against any artifact and apply findings with y/n/edit.
+• Use `/ea-adrs` to manage Architecture Decision Records. The interviewer
+  suggests an ADR automatically when a significant decision is detected.
+• Use `/ea-zachman` to classify and review engagement content across the
+  Zachman 6×6 grid — generate, review, gap, interview, or classify modes.
+• Use `/ea-risks` to generate a cross-cutting Risk Register from all
+  artifact risk sections; `/ea-changes` for Phase H change management.
+• Use `/ea-engage-review` for a full engagement health check — coverage,
+  traceability, governance, ADR status, and Zachman completeness.
 • Ask "how does architecture governance work" for a full explanation of
   the governance structure, cascade, roles, and TOGAF tool mapping.
 
