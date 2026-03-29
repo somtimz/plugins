@@ -130,7 +130,7 @@ It shows which artifacts address each requirement, grouped by scope.
 Legend: ✅ Addressed | ⚠️ Partial | ⬜ Not addressed | 🚫 Waived
 
 ---
-## Related Architecture Decisions
+## Appendix A5 — Related Architecture Decisions
 
 <details>
 <summary>📋 Guidance</summary>

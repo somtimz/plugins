@@ -183,7 +183,7 @@ user acceptance sign-off. Include the testing approach used to validate each cri
 
 ---
 
-## Related Architecture Decisions
+## Appendix A5 — Related Architecture Decisions
 
 <details>
 <summary>📋 Guidance</summary>

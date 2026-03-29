@@ -125,7 +125,7 @@ Explain the prioritisation criteria used to sequence work packages.
 
 ---
 
-## Related Architecture Decisions
+## Appendix A5 — Related Architecture Decisions
 
 <details>
 <summary>📋 Guidance</summary>

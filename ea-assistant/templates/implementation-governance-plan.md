@@ -295,7 +295,7 @@ governance activities are budgeted and resourced.
 
 ---
 
-## Related Architecture Decisions
+## Appendix A5 — Related Architecture Decisions
 
 <details>
 <summary>📋 Guidance</summary>

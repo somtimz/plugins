@@ -192,7 +192,7 @@ Every significant architectural decision should be traceable to at least one req
 
 ---
 
-## Related Architecture Decisions
+## Appendix A5 — Related Architecture Decisions
 
 <details>
 <summary>📋 Guidance</summary>

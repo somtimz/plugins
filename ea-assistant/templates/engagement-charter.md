@@ -568,7 +568,7 @@ parties to the scope, objectives, and governance arrangements defined here.
 
 ---
 
-## Related Architecture Decisions
+## Appendix A5 — Related Architecture Decisions
 
 <details>
 <summary>📋 Guidance</summary>

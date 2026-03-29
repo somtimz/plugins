@@ -94,7 +94,7 @@ For each artifact, check for missing structural elements added in recent version
 |---|---|---|---|---|
 | `## Appendix A3 — Decision Log` section present | Architecture Vision, Business/Data/App/Tech Architecture, Gap Analysis, Roadmap, SAoW, Migration Plan | Section absent | 0.7.0 | Medium |
 | `## Appendix A4 — Stakeholder Concerns & Objections` section present | Architecture Vision, Business/Data/App/Tech Architecture, Gap Analysis, Roadmap, SAoW, Migration Plan, Engagement Charter, Governance Framework, Implementation Governance Plan | Section absent | 0.9.3 | Medium |
-| `## Related Architecture Decisions` section present | Architecture Vision, Business/Data/App/Tech Architecture, Gap Analysis, Architecture Roadmap, SAoW, Migration Plan, Compliance Assessment, Requirements Register, Engagement Charter, Governance Framework, Implementation Governance Plan | Section absent | 0.9.7 | Low |
+| `## Appendix A5 — Related Architecture Decisions` section present | Architecture Vision, Business/Data/App/Tech Architecture, Gap Analysis, Architecture Roadmap, SAoW, Migration Plan, Compliance Assessment, Requirements Register, Engagement Charter, Governance Framework, Implementation Governance Plan | Section absent | 0.9.7 | Low |
 
 ---
 
@@ -123,8 +123,8 @@ Artifact frontmatter gaps        {N gaps | ✅ None}
 Artifact content gaps            {N gaps | ✅ None}
   GAP-M-030  [Medium] architecture-vision.md — Appendix A4 missing
   GAP-M-031  [Medium] business-architecture.md — Appendix A4 missing
-  GAP-M-040  [Low]    architecture-vision.md — Related Architecture Decisions section missing
-  GAP-M-041  [Low]    business-architecture.md — Related Architecture Decisions section missing
+  GAP-M-040  [Low]    architecture-vision.md — Appendix A5 — Related Architecture Decisions section missing
+  GAP-M-041  [Low]    business-architecture.md — Appendix A5 — Related Architecture Decisions section missing
 
 ════════════════════════════════════════════════════════════
 Total: {N} gaps — {N} Medium, {N} Low, {N} Info
@@ -218,10 +218,10 @@ Record governance decisions made during the development of this artifact. Use `/
 | *(no decisions recorded)* | — | — | — | — | — | — | — | — | — | — | — |
 ```
 
-**Artifact content gaps — Related Architecture Decisions:**
+**Artifact content gaps — Appendix A5:**
 Append before Appendix A3 (or before the footer if neither appendix is present):
 ```markdown
-## Related Architecture Decisions
+## Appendix A5 — Related Architecture Decisions
 
 | ADR ID | Title | Status | Summary |
 |---|---|---|---|

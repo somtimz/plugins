@@ -208,7 +208,7 @@ important to trace here, as they most directly shape technology choices.
 
 ---
 
-## Related Architecture Decisions
+## Appendix A5 — Related Architecture Decisions
 
 <details>
 <summary>📋 Guidance</summary>

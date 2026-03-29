@@ -210,7 +210,7 @@ data architecture decisions are driven by stated requirements, not just technica
 
 ---
 
-## Related Architecture Decisions
+## Appendix A5 — Related Architecture Decisions
 
 <details>
 <summary>📋 Guidance</summary>

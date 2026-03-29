@@ -105,7 +105,7 @@ Legend: ✅ Covered | ⚠️ Partial | ⬜ Gap
 
 ---
 
-## Related Architecture Decisions
+## Appendix A5 — Related Architecture Decisions
 
 <details>
 <summary>📋 Guidance</summary>

@@ -582,4 +582,4 @@ Apply these tests in order. The first test that matches identifies the concept:
 | Capability Gap | Gap Analysis (B/C/D); Architecture Roadmap (E) | B | Business | — |
 | Operating Model | Business Architecture; Technology Architecture | B / D | Business | — |
 | Metrics | Architecture Vision §7; Phase G/H governance | A / G / H | Motivation | — |
-| Architecture Decision Record | ADR Register; individual ADR-NNN files; cross-referenced in artifact `## Related Architecture Decisions` sections | Any | — | — |
+| Architecture Decision Record | ADR Register; individual ADR-NNN files; cross-referenced in artifact `## Appendix A5 — Related Architecture Decisions` sections | Any | — | — |

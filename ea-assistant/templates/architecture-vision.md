@@ -308,7 +308,7 @@ Typically: approve Statement of Architecture Work, proceed to Phase B/C/D.
 
 ---
 
-## Related Architecture Decisions
+## Appendix A5 — Related Architecture Decisions
 
 <details>
 <summary>📋 Guidance</summary>

@@ -561,7 +561,7 @@ Artefacts are listed by ADM phase. Where an artefact spans multiple phases (e.g.
 - Decision — unambiguous statement of the chosen option and governance reference
 - Rationale — why the chosen option was selected; accepted trade-offs
 - Consequences — positive, negative, risks introduced (RIS-NNN links), new decisions required
-- Related Architecture Decisions — ADR-to-ADR relationships
+- Related Architecture Decisions — ADR-to-ADR relationships (§8 within the ADR itself)
 - Affected Artifacts — which artifacts are materially impacted
 
 **When to Create:** When a significant decision is made at any phase — particularly for technology or vendor selection, architecture pattern choices, make-vs-buy decisions, data governance approaches, security architecture decisions, or any decision that is hard to reverse. Use `/ea-adrs new` to create a new ADR. The `ea-interviewer` will suggest an ADR when a decision recorded in A3 meets threshold criteria (high cost, high risk, vendor/technology selection, or contested by stakeholders).

@@ -2,7 +2,7 @@
 """
 add-related-adrs.py — one-time batch script
 
-Adds a "## Related Architecture Decisions" section to each applicable
+Adds a "## Appendix A5 — Related Architecture Decisions" section to each applicable
 artifact template that doesn't already have one. The section is inserted
 before the Appendix A3 or A4 block (or at the end of the file if neither
 appendix is present).
@@ -39,7 +39,7 @@ APPLICABLE_TEMPLATES = [
 ]
 
 RELATED_ADRS_SECTION = """\
-## Related Architecture Decisions
+## Appendix A5 — Related Architecture Decisions
 
 <details>
 <summary>📋 Guidance</summary>
@@ -63,7 +63,7 @@ criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
 """
 
 def has_related_adrs_section(content: str) -> bool:
-    return "## Related Architecture Decisions" in content
+    return "## Appendix A5 — Related Architecture Decisions" in content
 
 def find_insertion_point(content: str) -> int:
     """

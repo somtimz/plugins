@@ -198,7 +198,7 @@ remediation. For go/no-go decisions, the architecture authority must also sign.
 | Architecture Authority | {{architecture_authority}} | {{arch_org}} | | |
 
 ---
-## Related Architecture Decisions
+## Appendix A5 — Related Architecture Decisions
 
 <details>
 <summary>📋 Guidance</summary>

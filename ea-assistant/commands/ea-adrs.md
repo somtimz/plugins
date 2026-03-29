@@ -245,7 +245,7 @@ When `/ea-adrs` is invoked from within an artifact interview (`ea-interviewer`) 
 
 ## ADR Summary Block (for use in other artifacts)
 
-When the `ea-interviewer` or any artifact-creation command needs to include ADR context in a `## Related Architecture Decisions` section, use this format:
+When the `ea-interviewer` or any artifact-creation command needs to include ADR context in a `## Appendix A5 — Related Architecture Decisions` section, use this format:
 
 ```markdown
 | ADR ID | Title | Status | Summary |
