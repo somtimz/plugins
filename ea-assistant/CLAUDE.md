@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.10 (plugin.json)
+**Current version:** 0.9.11 (plugin.json)
 **Branch:** `feat/risk-management`
 
 ---
@@ -11,7 +11,7 @@ Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 pro
 
 ```
 agents/          8 agents (ea-facilitator, ea-interviewer, ea-roadmap, ea-document-analyst, ...)
-commands/        20 commands (/ea-new, /ea-open, /ea-phase, /ea-interview, /ea-grill, /ea-changes, /ea-migrate, /ea-adrs, /ea-zachman, ...)
+commands/        22 commands (/ea-new, /ea-open, /ea-phase, /ea-interview, /ea-grill, /ea-changes, /ea-migrate, /ea-adrs, /ea-zachman, /ea-research, ...)
 skills/          8 skill directories (ea-artifact-templates, ea-engagement-lifecycle, zachman-framework, ...)
 templates/       23 TOGAF artifact templates (.md)
 scripts/         Python scripts for Word/PPTX generation
@@ -227,15 +227,26 @@ Three new governance templates covering Preliminary through Phase H:
 
 ```
 EA-projects/{slug}/
-├── engagement.json        # all state: phases, artifacts, sessions, direction, metrics, optOuts
-├── CLAUDE.md              # auto-generated per-engagement context (overwritten on /ea-open)
-├── artifacts/             # .md artifacts + .review.md review files
-├── reviews/               # /ea-grill output files
-├── interviews/            # session-log.md + dated interview notes
-├── brainstorm/            # brainstorm-notes.md
-├── diagrams/              # .mmd, .dot, .drawio
-├── uploads/               # source documents for ingestion
-└── ui/                    # generated HTML interview/brainstorm forms
+├── engagement.json           # all state: phases, artifacts, sessions, direction, metrics, optOuts
+├── CLAUDE.md                 # auto-generated per-engagement context (overwritten on /ea-open)
+├── artifacts/                # .md artifacts + .review.md review files
+├── reviews/                  # /ea-grill output files
+├── interviews/               # session-log.md + dated interview notes
+├── brainstorm/               # brainstorm-notes.md
+├── diagrams/                 # .mmd, .dot, .drawio
+├── uploads/                  # source documents for ingestion
+├── ResearchAndReferences/    # research documents, notes, links; research-index.md
+└── ui/                       # generated HTML interview/brainstorm forms
 ```
+
+## Research & References
+
+The `ResearchAndReferences/` folder is the engagement library for external context.
+
+**`/ea-research` modes:** `add` (paste document), `note` (freeform note), `link` (URL + summary), `list` (default, shows index), `view <item>` (full content), `apply [artifact-id]` (synthesise against deliverable)
+
+**Apply workflow:** loads selected research items + target artifact → identifies gaps, contradictions, enhancements → `y/n/edit` per revision → bumps artifact version (patch) → writes synthesis report to `ResearchAndReferences/synthesis-{artifact-id}-{date}.md`
+
+**Index file:** `ResearchAndReferences/research-index.md` — auto-maintained, tracks type/title/file/date/tags for every item
 
 The `CLAUDE.md` inside each engagement folder is auto-generated and **will be overwritten** on every `/ea-open`. Do not edit it manually; use `brainstorm/brainstorm-notes.md` for persistent notes within an engagement.

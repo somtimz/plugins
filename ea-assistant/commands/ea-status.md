@@ -27,6 +27,7 @@ Display a comprehensive status dashboard for all EA engagements.
    - Each phase status from the `phases` object
    - `optOuts[]` — count entries by type: `question` and `artifact`
    - For each artifact in `artifacts[]`, check the artifact file frontmatter for `complianceNote: accepted-non-standard` — count these as non-standard artifacts
+   - Count rows in `ResearchAndReferences/research-index.md` Items table (0 if file missing)
 
    **Backward compatibility**: If `engagementType`, `architectureDomains`, `targetEndDate`, or `optOuts` fields are missing, apply defaults: type = null (display "—"), domains = all four, targetEndDate = null (display "—"), optOuts = [] (display nothing).
 
@@ -44,6 +45,7 @@ Display a comprehensive status dashboard for all EA engagements.
       ADM Progress  : Prelim {i} | Req {i} | A {i} | B {i} | C-Data {i} | C-App {i} | D {i} | E {i} | F {i} | G {i} | H {i}
       Dates         : {startDate} → {targetEndDate or "—"}
       Last Modified : {lastModified}
+      📚 Research    : {N items in ResearchAndReferences/ — omit this line entirely if 0}
       ⊘ Opt-outs    : {N artifact opt-outs, N question opt-outs — omit this line entirely if optOuts[] is empty}
       ⚠️ Non-standard: {N} artifact(s) accepted as-is — run /ea-review to remediate (omit if none)
 

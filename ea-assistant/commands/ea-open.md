@@ -114,6 +114,8 @@ Display a picklist of all EA engagements, open the selected one with full detail
 
    If the file does not exist (legacy engagement created before this feature), create it now.
 
+7c. **Ensure ResearchAndReferences folder exists** — check for `EA-projects/{slug}/ResearchAndReferences/`. If missing (legacy engagement), create it and seed `ResearchAndReferences/research-index.md` using the same template as `/ea-new` (with current slug and name, today's date, empty item table). This is silent — do not notify the user.
+
 7. **Offer next actions:**
 
    ```
@@ -122,26 +124,35 @@ Display a picklist of all EA engagements, open the selected one with full detail
     1. Continue current phase ({currentPhase} — {phase name})
     2. View artifacts (/ea-artifact)
     3. Start an interview (/ea-interview)
-    4. View detailed status
-    5. Edit engagement metadata
-    6. Edit phase status
-    7. Edit artifact status
-    8. Archive engagement
-    9. Delete engagement
-   10. Review & align this engagement (/ea-engage-review)
+    4. Research & References ({N items} — /ea-research)
+    5. View detailed status
+    6. Edit engagement metadata
+    7. Edit phase status
+    8. Edit artifact status
+    9. Archive engagement
+   10. Delete engagement
+   11. Review & align this engagement (/ea-engage-review)
    ```
 
-### Action: Review & Align Engagement (option 10)
+   For option 4, show the count of items in `ResearchAndReferences/research-index.md` (count rows in the Items table). If the index is empty or missing, show "0 items".
+
+### Action: Research & References (option 4)
+
+Invoke `/ea-research` for the active engagement.
+
+---
+
+### Action: Review & Align Engagement (option 11)
 
 Invoke `/ea-engage-review` for the active engagement. This runs the full-scope consistency, alignment, governance, and quality review and produces the Engagement Review Report.
 
 ---
 
-### Action: View Detailed Status (option 4)
+### Action: View Detailed Status (option 5)
 
 Display a single-engagement status view using the same format as `/ea-status`: engagement type, domains, current phase, artifact counts by status, ADM progress line with indicators, dates, and last modified.
 
-### Action: Edit Engagement Metadata (option 5)
+### Action: Edit Engagement Metadata (option 6)
 
 1. Display the list of editable fields:
 
@@ -176,7 +187,7 @@ Display a single-engagement status view using the same format as `/ea-status`: e
 
 7. Confirm: "Updated: {field} → '{new value}'. engagement.json saved."
 
-### Action: Edit Phase Status (option 6)
+### Action: Edit Phase Status (option 7)
 
 1. Display all 11 phases with their current status in a numbered table:
 
@@ -208,7 +219,7 @@ Display a single-engagement status view using the same format as `/ea-status`: e
 
 7. **Suggest advancement**: If the phase was marked Complete, suggest advancing `currentPhase` to the next applicable (non-N/A) phase in sequence. If the user accepts, update `currentPhase` in `engagement.json`.
 
-### Action: Edit Artifact Status (option 7)
+### Action: Edit Artifact Status (option 8)
 
 1. Display all artifacts in a numbered table:
 
@@ -234,7 +245,7 @@ Display a single-engagement status view using the same format as `/ea-status`: e
 
 5. Confirm: "Updated: {artifact name} {field} → '{new value}'."
 
-### Action: Archive Engagement (option 8)
+### Action: Archive Engagement (option 9)
 
 1. Display confirmation:
 
@@ -256,7 +267,7 @@ Display a single-engagement status view using the same format as `/ea-status`: e
 
 3. If declined, return to next actions menu.
 
-### Action: Delete Engagement (option 9)
+### Action: Delete Engagement (option 10)
 
 1. Display warning:
 

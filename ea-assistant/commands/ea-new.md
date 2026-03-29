@@ -32,8 +32,26 @@ Create a new EA engagement project under `EA-projects/`.
    ├── uploads/
    ├── interviews/
    ├── reviews/
+   ├── ResearchAndReferences/
+   │   └── research-index.md    ← seed with empty index
    └── brainstorm/
        └── brainstorm-notes.md    ← seed with heading and instructions
+   ```
+
+   Seed `ResearchAndReferences/research-index.md` with:
+   ```markdown
+   ---
+   indexType: research
+   engagementSlug: {slug}
+   lastUpdated: {today ISO 8601}
+   ---
+
+   # Research & References — {name}
+
+   Add research documents, notes, and links with `/ea-research`.
+
+   | # | Type | Title | File | Added | Tags |
+   |---|------|-------|------|-------|------|
    ```
 
    Seed `brainstorm/brainstorm-notes.md` with:
@@ -136,6 +154,7 @@ Freeform context, background, constraints, and stakeholder notes that should not
 | `/ea-artifact` | Create or view artifacts |
 | `/ea-grill [artifact]` | Deep-review an artifact using a grill-me skill |
 | `/ea-decisions` | Generate Decision Register from all A3 logs |
+| `/ea-research` | Manage research documents, notes, and links |
 | `/ea-publish` | Produce consolidated architecture report |
 ```
 
