@@ -19,19 +19,48 @@ taxonomy:
 <details>
 <summary>📋 Guidance</summary>
 
-The Implementation Governance Plan is a Phase G artifact that defines how architecture
-governance will be conducted during the implementation and delivery of the target architecture.
-Where the Architecture Governance Framework (Preliminary Phase) defines the permanent governance
-structure for the enterprise, the Implementation Governance Plan is engagement-specific: it
-translates the governance framework into a concrete schedule of reviews, checkpoints, and
-ownership assignments tied to this programme's work packages.
+The Implementation Governance Plan is a Phase G artifact. It translates the Architecture
+Governance Framework (Preliminary Phase) into a concrete schedule of reviews, checkpoints,
+and ownership assignments tied to this programme's work packages.
 
-Without this plan, Phase G governance becomes ad-hoc — architects are called into reviews
-at the wrong time, non-conformances are discovered too late, and change requests pile up
-with no agreed process.
+**What Phase G governs — and what it does not:**
+
+Phase G is architecture's *contribution to* programme governance. Its central question is:
+
+> **"Is the implementation conforming to the approved architecture?"**
+
+Phase G governs:
+- architecture compliance reviews at delivery gates (design, pre-build, pre-deployment)
+- handling of deviations and dispensations from the approved architecture
+- architecture change requests raised by delivery teams
+- monitoring of solution realisation fidelity against the target architecture
+- architecture contracts between the architecture function and delivery projects
+
+Phase G does **not** replace programme governance. The programme's own governance
+structures — steering committees, PMO, investment committees, delivery stage gates,
+risk and issue management, benefits tracking — continue to operate independently.
+This plan adds the architectural lens to those structures.
+
+**The two governance questions at Phase G:**
+
+| Governance layer | Central question | Owner |
+|---|---|---|
+| Architecture governance (this plan) | "Is the solution being built conformant with the approved architecture?" | Lead Architect / ARB |
+| Programme governance | "Is the programme delivering the change effectively, on time, and within budget?" | Programme Sponsor / PMO |
+
+Both questions must be answered at each delivery gate. This plan covers only the first.
+
+**How this plan relates to the Architecture Governance Framework:**
+
+The Governance Framework (Preliminary) defines the permanent governance structures, decision
+rights, and compliance approach. This plan applies those structures to the specific work
+packages and delivery timeline of this engagement. It does not redefine governance —
+it schedules and operationalises it.
 
 Create this artifact at the start of Phase G and keep it updated as the delivery schedule
-evolves.
+evolves. Without this plan, Phase G governance becomes ad-hoc — architects are called into
+reviews at the wrong time, non-conformances are discovered too late, and change requests
+pile up with no agreed process.
 
 </details>
 
@@ -73,6 +102,9 @@ by programme completion.
 </details>
 
 **Governed Scope:** {{governed_scope}}
+
+**Relationship to Programme Governance:**
+This plan governs architecture conformance only. Programme delivery governance (scope, schedule, budget, benefits, risk, and issue management) is owned by {{programme_governance_owner}} and operates through {{programme_governance_mechanism}}. Architecture governance is one input to programme stage gates — it does not replace them.
 
 **Work Packages / Projects in Scope:**
 

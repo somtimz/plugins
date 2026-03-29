@@ -19,14 +19,42 @@ taxonomy:
 <details>
 <summary>📋 Guidance</summary>
 
-The Architecture Governance Framework is a Preliminary Phase artifact that defines how
-architecture decisions are made, enforced, and communicated across the enterprise. It
-establishes the structures and processes that all subsequent ADM work operates within.
-Without a governance framework, architecture decisions become inconsistent, compliance
-checking is informal, and the architecture programme loses credibility with delivery teams.
+The Architecture Governance Framework is a Preliminary Phase artifact. It establishes the
+structures and processes that all subsequent ADM work operates within.
 
-Create this artifact before beginning Phase A. It should be reviewed and updated whenever
-the governance structure changes or the programme scope expands significantly.
+**What this framework governs — and what it does not:**
+
+This framework governs the *architecture practice and process*. Its central question is:
+
+> **"Are we doing architecture properly?"**
+
+It controls:
+- how architecture decisions are made and approved
+- whether architecture deliverables meet required standards
+- whether principles, patterns, and compliance requirements are being applied
+- whether ADM phases are completed with the right rigour and sign-off
+
+It does **not** govern the delivery programme. Programme governance — controlling
+scope, schedule, budget, benefits, risk, and project delivery — is owned by the
+programme sponsor, PMO, and steering committee. This framework operates alongside
+those structures, not in place of them.
+
+The architecture-specific contribution to delivery governance is expressed through the
+**Implementation Governance Plan** (Phase G), which answers the complementary question:
+"Is the implementation conforming to the approved architecture?"
+
+**Two governance layers in TOGAF:**
+
+| Layer | Governs | Central question | Main artifacts |
+|---|---|---|---|
+| Architecture governance (this framework) | Architecture process, decisions, standards, compliance | "Are we doing architecture properly?" | Architecture Governance Framework, Architecture Principles, Compliance Assessments |
+| Programme governance | Delivery execution, scope, budget, benefits, risk | "Are we delivering the change effectively?" | Business case, programme plan, stage gates, benefits register |
+
+Architecture governance is an input and constraint on programme governance — the approved
+architecture sets the conformance bar that delivery must meet. It does not replace it.
+
+Create this artifact before beginning Phase A. Review it whenever the governance structure
+changes or the programme scope expands significantly.
 
 </details>
 
@@ -332,6 +360,41 @@ governance failures, programme closure).
 | Average waiver decision time | {{target}} | {{measurement}} |
 | Non-conformances identified post-deployment | {{target}} | {{measurement}} |
 | {{metric}} | {{target}} | {{measurement}} |
+
+---
+
+## 11. Governance Across ADM Phases
+
+<details>
+<summary>📋 Guidance</summary>
+
+Architecture governance is not only defined once in the Preliminary Phase — it is *applied*
+throughout the ADM. This section documents how governance operates at each phase: what the
+governance mechanism is, what requires approval, and what the output is.
+
+Use this as the reference checklist when entering each phase. Delivery teams and project
+managers should also read this section to understand what architecture governance will
+require of them at each delivery stage.
+
+</details>
+
+| Phase | Governance mechanism | What requires approval / review | Typical output |
+|---|---|---|---|
+| **Preliminary** | Establish governance structures, ARB, principles, tailoring decisions | Governance Framework itself; Architecture Principles | Approved Governance Framework and Principles |
+| **Phase A — Architecture Vision** | Sponsor authorisation; scope and constraint confirmation | Statement of Architecture Work sign-off; engagement scope; key principles applied | Approved Architecture Vision; authorised SAoW |
+| **Phase B–D — Domain Architectures** | Architecture review at domain completion; principle compliance check | Domain architecture artifacts before proceeding to next phase; significant design decisions | Compliance-checked domain artifacts; ADRs for significant decisions |
+| **Phase E — Opportunities & Solutions** | Governance bridging to delivery — validate solution direction against architecture | Work package structures; proposed implementation approaches; architectural coherence of solutions | Approved work package list; solution directions aligned to architecture |
+| **Phase F — Migration Planning** | Governance of sequencing and prioritisation decisions | Transition architecture; roadmap phasing; interaction with portfolio / investment governance | Approved Architecture Roadmap; prioritised transition architectures |
+| **Phase G — Implementation Governance** | Compliance reviews at delivery gates; waiver decisions; change request processing | Solution designs before build; pre-deployment conformance; architecture change requests | Compliance Assessments; approved or rejected waivers; updated Change Register |
+| **Phase H — Architecture Change Management** | Control architecture change requests; assess whether changes require a new ADM cycle | Architecture Change Requests (ACRs); significance of requested changes | Updated baseline; decision on whether new ADM cycle is triggered |
+| **Requirements (all phases)** | Requirements traceability and change control | New or changed requirements that alter scope, principles, or target state | Updated Requirements Register; impact assessment on affected artifacts |
+
+**Key point — Phase G boundary:**
+Phase G is the strongest TOGAF linkage between architecture governance and programme
+governance. It does not replace the programme's own delivery governance (stage gates,
+PMO reviews, investment decisions, benefits tracking). Phase G adds the architectural
+lens: *is the solution being built conformant with the approved architecture?* Programme
+governance answers all the other delivery questions.
 
 ---
 
