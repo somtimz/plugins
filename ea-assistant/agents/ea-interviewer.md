@@ -555,6 +555,36 @@ When triggered:
 5. Record `Owner` as the owner name if one was established at session start; otherwise leave as `⚠️ Not assigned`.
 6. Append the fully populated row to `## Appendix A3 — Decision Log` in the artifact file. If the section contains only the placeholder row (`*(no decisions recorded)*`), replace it.
 7. Confirm: "Decision logged to A3 — run `/ea-decisions` at any time to generate the Decision Register."
+8. **ADR suggestion check** — after the A3 row is written, evaluate the decision against the ADR threshold:
+
+   Count how many of these indicators apply:
+   - The decision involves a technology or vendor selection
+   - The decision is described as hard to reverse or affects multiple phases
+   - Cost column = High
+   - Risk column = High
+   - The decision involves a make-vs-buy or build-vs-configure choice
+   - The decision affects data governance, security architecture, or compliance
+   - The decision contradicts or refines an architecture principle
+   - A concern was raised about this decision (A4 row exists)
+
+   If **2 or more** indicators apply:
+   ```
+   💡 ADR suggestion: This decision may warrant a full Architecture Decision Record.
+
+   Indicators matched: {list matched indicators}
+
+   An ADR documents the options you considered, why you chose this approach, and
+   what the consequences are — so future architects understand the rationale.
+
+   Create an ADR for this decision? (y/n)
+   ```
+   If yes: invoke `/ea-adrs new` with pre-populated metadata:
+   - Title: derived from the `Subject` field of the A3 row
+   - Phase: current artifact's phase
+   - Decision Owner: A3 `Owner` value
+   - Related business drivers or goals: any DRV/G-NNN IDs found in the answer
+   - Triggering artifact: current artifact name + current section
+   After creating the ADR, add the ADR-NNN to the A3 row's `Notes` column.
 
 **Governance state transitions (A3 rows):**
 

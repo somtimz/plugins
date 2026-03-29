@@ -64,6 +64,7 @@ Applies only to named artifact types:
 | Architecture Roadmap | At least one WP-NNN entry has a non-empty `Advances Goals / Objectives` or `Executes Strategies` field | T3-ROAD-WP |
 | Requirements Register | Scope column present (Corporate / Project distinction) | T3-REQ |
 | Traceability Matrix | Two-section structure (Corporate / Project) present | T3-TRACE |
+| Architecture Vision, Business/Data/App/Tech Architecture, Gap Analysis, Architecture Roadmap, Statement of Architecture Work, Migration Plan, Compliance Assessment, Requirements Register, Engagement Charter, Governance Framework, Implementation Governance Plan | `## Related Architecture Decisions` section present | T3-ADR |
 
 ---
 

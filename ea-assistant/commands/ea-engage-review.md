@@ -72,11 +72,13 @@ Summarise as: Fully aligned / Partially aligned / Gaps detected.
 
 ## Step 5 — Governance Scan
 
-**5a — Open Decisions:** Scan all A3 appendices. Count rows where State = `🔄 Provisional` or `⏳ Awaiting Verification`. List by artifact.
+**5a — Open Decisions:** Scan all A3 appendices. Count rows where State = `🔄 Provisional` or `⏳ Awaiting Verification`. List by artifact. Flag A3 rows with no ADR-NNN reference where 2+ ADR threshold indicators apply (see `ea-adrs.md` threshold criteria) — these may warrant an ADR.
 
 **5b — Unresolved Concerns:** Scan all A4 appendices. Count rows where Status = `Requires Attention`. List top 3 by artifact. Flag any Category = Risk items with no matching RIS-NNN.
 
 **5c — Open Risks:** Scan `risk-register-*.md` if present, else scan all A3/A4 rows for risk references. Count Critical + High risks with Status = Open.
+
+**5d — ADR Status:** Scan all `adr-*.md` files in `EA-projects/{slug}/artifacts/`. Count by status. Flag any Candidate ADRs older than 14 days (stale — no options analysis started). Flag any In Progress ADRs older than 30 days (overdue for decision).
 
 ---
 
@@ -113,6 +115,9 @@ Generated: {YYYY-MM-DD}  |  Phase: {currentPhase}  |  Artifacts: {N}
   Open decisions:         {N} ({artifact list})
   Concerns requiring attention: {N} ({top 3})
   Open critical/high risks:     {N}
+  ADRs open (Candidate):  {N}{; stale: {N} if any older than 14 days}
+  ADRs in progress:       {N}{; overdue: {N} if any older than 30 days}
+  A3 rows needing ADR:    {N} decisions may warrant an ADR (threshold indicators matched)
 
 ## Artifact Quality
   {artifact name}   {% complete}   {reviewStatus}   {✅/⚠️/🔴}
@@ -144,6 +149,8 @@ Fix options:
   7. Generate Decision Register                    — /ea-decisions generate
   8. Generate Risk Register                        — /ea-risks generate
   9. Generate Concerns Register                    — /ea-concerns generate
+ 11. Generate ADR Register                         — /ea-adrs generate
+ 12. Create a new ADR                              — /ea-adrs new
 
 Synchronize:
  10. Sync engagement                               — refresh CLAUDE.md, update lastModified, validate all frontmatter

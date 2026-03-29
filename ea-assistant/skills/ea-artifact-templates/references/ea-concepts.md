@@ -464,6 +464,56 @@ Metrics close the loop between intention and evidence:
 
 ---
 
+### Architecture Decision Record
+
+**What it IS:**
+An Architecture Decision Record (ADR) is a standalone document that captures the full context, options analysis, rationale, and consequences of a significant architecture decision. An ADR is written when a decision is hard to reverse, involves meaningful trade-offs, or requires documented rationale so that future architects understand why things are the way they are.
+
+**ID scheme:** `ADR-NNN` (e.g., ADR-001, ADR-023). Assigned sequentially per engagement. Managed by `/ea-adrs`.
+
+**ADR lifecycle:**
+```
+Candidate → In Progress → Completed
+                                └──→ Superseded (by ADR-NNN)
+          └──→ Deprecated (any time, with reason)
+```
+- **Candidate**: Decision identified; options analysis not yet started
+- **In Progress**: Options analysis underway; decision not yet made
+- **Completed**: Decision made and fully documented
+- **Superseded**: Replaced by a newer ADR; `supersededBy: ADR-NNN` recorded
+- **Deprecated**: No longer applicable; deprecation reason recorded
+
+**When to create an ADR (not just an A3 Decision Log entry):**
+- Technology or vendor selection (cloud platform, database engine, integration middleware)
+- Architecture pattern or style choice (microservices, event-driven, CQRS, layered)
+- Make-vs-buy or build-vs-configure decisions
+- Data governance approach (ownership, sharing, sovereignty model)
+- Security or compliance architecture approach
+- Significant API or integration design choice
+- Any decision that is hard to reverse or whose rationale may be questioned later
+
+**ADR vs. A3 Decision Log:**
+- The **A3 Decision Log** (within an artifact's appendix) tracks governance state — who decided what, at what authority level, and whether it has been verified. It is lightweight and lives inside the artifact.
+- An **ADR** documents the full decision context: what situation triggered it, what options were considered, why one was chosen, and what the consequences are. It is a standalone artifact.
+- They complement each other: log a high-level entry in A3; create an ADR for the full documentation. Link them via the ADR-NNN ID in the A3 `Notes` column.
+
+**Structural parts** (architecture-decision-record.md):
+- **§1 Status** — lifecycle history table (date/status/changed-by/note)
+- **§2 Context** — situation that forces the decision; linked DRV/G-NNN; triggering artifact
+- **§3 Decision Drivers** — evaluation criteria (must-have / should / nice-to-have)
+- **§4 Options Considered** — at least two options with pros/cons and driver assessment
+- **§5 Decision** — unambiguous statement; chosen option; governance reference
+- **§6 Rationale** — why the chosen option was selected; accepted trade-offs
+- **§7 Consequences** — positive, negative, risks introduced (RIS-NNN link), new decisions required
+- **§8 Related Architecture Decisions** — ADR-to-ADR relationships
+- **§9 Affected Artifacts** — artifacts materially affected by this decision
+
+**TOGAF placement:** ADR is not a native TOGAF artifact, but maps closely to the Architecture Decision concept in TOGAF's Architecture Repository. ADRs are referenced via the A3 Decision Log in Architecture Vision, domain architecture artifacts, and the ADR Register.
+
+**Commands:** Use `/ea-adrs` to manage ADRs, track the register, and surface ADR summaries. Use `/ea-adrs new` to create a new ADR. Use `/ea-adrs status` for a portfolio view.
+
+---
+
 ### Capability Gap
 
 **What it IS:**
@@ -532,3 +582,4 @@ Apply these tests in order. The first test that matches identifies the concept:
 | Capability Gap | Gap Analysis (B/C/D); Architecture Roadmap (E) | B | Business | — |
 | Operating Model | Business Architecture; Technology Architecture | B / D | Business | — |
 | Metrics | Architecture Vision §7; Phase G/H governance | A / G / H | Motivation | — |
+| Architecture Decision Record | ADR Register; individual ADR-NNN files; cross-referenced in artifact `## Related Architecture Decisions` sections | Any | — | — |

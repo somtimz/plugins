@@ -198,5 +198,26 @@ remediation. For go/no-go decisions, the architecture authority must also sign.
 | Architecture Authority | {{architecture_authority}} | {{arch_org}} | | |
 
 ---
+## Related Architecture Decisions
+
+<details>
+<summary>📋 Guidance</summary>
+
+List ADRs that informed, were informed by, or are otherwise relevant to this artifact.
+Reference the ADR-NNN ID so readers can navigate to the full decision record.
+Use `/ea-adrs` to manage the ADR Register and surface ADR summaries.
+
+When a significant decision is made during an interview for this artifact, the
+`ea-interviewer` will suggest creating an ADR if the decision meets the threshold
+criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
+
+</details>
+
+| ADR ID | Title | Status | Summary |
+|---|---|---|---|
+| *(no related ADRs recorded)* | — | — | — |
+
+---
+
 
 *This document was created using the EA Assistant plugin.*
