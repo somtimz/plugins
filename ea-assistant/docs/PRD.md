@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.4
+**Version:** 0.9.11
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -177,26 +177,35 @@ Vision, Mission, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Proble
 
 Artifacts are populated from interview answers, uploaded documents, or explicit user input. No AI-generated content is written to an artifact without a `🤖 AI Draft — Review Required` marker.
 
-**15 TOGAF artifact templates:**
+**23 TOGAF artifact templates:**
 
-| Artifact | Phase | A3 Decision Log |
-|---|---|---|
-| Architecture Principles | Prelim | — |
-| Requirements Register (with Motivation field) | Requirements | — |
-| Traceability Matrix | Requirements | — |
-| Architecture Vision (15 sections) | A | ✓ |
-| Statement of Architecture Work | A | ✓ |
-| Stakeholder Map | A | — |
-| Business Architecture | B | ✓ |
-| Business Model Canvas | B | — |
-| Data Architecture | C-Data | — |
-| Application Architecture | C-App | — |
-| Technology Architecture | D | — |
-| Gap Analysis (covers all selected domains) | B–D | — |
-| Architecture Roadmap (with Strategic Alignment section — G/OBJ/STR coverage table + per-WP goal/strategy links) | E | ✓ |
-| Migration Plan | F | — |
-| Architecture Contract | G | ✓ |
-| Compliance Assessment | G | — |
+| Artifact | Phase | A3 | A4 | A5 |
+|---|---|---|---|---|
+| Architecture Principles | Prelim | — | — | — |
+| Engagement Charter | Prelim | — | — | ✓ |
+| Governance Framework | Prelim | — | — | ✓ |
+| Requirements Register (with Motivation field) | Requirements | — | — | ✓ |
+| Traceability Matrix | Requirements | — | — | — |
+| Architecture Vision (15 sections) | A | ✓ | ✓ | ✓ |
+| Statement of Architecture Work | A | ✓ | — | ✓ |
+| Stakeholder Map | A | — | — | — |
+| Business Architecture | B | ✓ | ✓ | ✓ |
+| Business Model Canvas | B | — | — | — |
+| Data Architecture | C-Data | ✓ | ✓ | ✓ |
+| Application Architecture | C-App | ✓ | ✓ | ✓ |
+| Technology Architecture | D | ✓ | ✓ | ✓ |
+| Gap Analysis | B–D | — | — | ✓ |
+| Architecture Roadmap (Strategic Alignment + per-WP goal/strategy links) | E | ✓ | — | ✓ |
+| Migration Plan | F | — | — | ✓ |
+| Architecture Contract | G | ✓ | — | — |
+| Implementation Governance Plan | G | — | — | ✓ |
+| Compliance Assessment | G | — | — | ✓ |
+| Risk Register | Cross-cutting | — | — | — |
+| Architecture Decision Record | Cross-cutting | — | — | — |
+| ADR Register | Cross-cutting | — | — | — |
+| Zachman Diagram | Cross-cutting | — | — | ✓ |
+
+**Appendix columns:** A3 = Decision Log; A4 = Stakeholder Concerns & Objections; A5 = Related Architecture Decisions
 
 **Architecture Vision sections:**
 §1 Executive Summary · §2 Business Drivers · §3 Goals · §4 Objectives · §5 Issues · §6 Problems · §7 Strategic Direction Summary · §8 Scope · §9 Stakeholders · §10 Architecture Principles · §11 Constraints · §12 Assumptions · §13 High-Level Target Architecture · §14 Key Risks · §15 Next Steps · Appendix A3 Decision Log
@@ -355,6 +364,113 @@ Two agents exist in the plugin but have no dedicated command workflow yet:
 
 These will gain dedicated commands and workflow integration in a future version.
 
+### 5.14 Risk Management
+
+`/ea-risks` generates and maintains a cross-cutting Risk Register by scanning existing artifacts for risk content:
+
+- **Sources scanned:** Architecture Vision §14, Statement of Architecture Work, Migration Plan risk section, Compliance Assessment, and any existing `risk-register-*.md` files
+- **RIS-NNN ID scheme** — unified, domain-agnostic
+- **Risk rating:** Likelihood × Impact matrix → Critical / High / Medium / Low
+- **Modes:** `generate` (default, writes file), `status` (inline summary), `update RIS-NNN <field> <value>`
+- **Template:** `risk-register.md`
+
+### 5.15 Architecture Change Management
+
+`/ea-changes` generates a Change Register (`change-register.md`) by aggregating all ACR (Architecture Change Request) artifacts for Phase H.
+
+- **Modes:** `generate` (default), `status` (inline summary), `update <ACR-ID> <field> <value>`
+- **Template:** `change-register.md` (aggregate view of all change request artifacts)
+
+### 5.16 Stakeholder Concerns & Objections
+
+`/ea-concerns` manages CON-NNN entries captured during stakeholder engagement. Concerns are stored in **Appendix A4** within each applicable artifact.
+
+- **CON-NNN ID scheme** — stakeholder concern / objection
+- Records the concern statement, stakeholder, artifact context, and resolution status
+- Concerns feed into the Stakeholder Map and can trigger ADR threshold scoring
+
+### 5.17 Architecture Decision Records (ADR)
+
+ADRs are standalone documents capturing significant architecture decisions — technology/vendor selection, pattern choices, make-vs-buy, data governance, security architecture, or any decision that is hard to reverse.
+
+**ADR vs A3 Decision Log:**
+- **A3** = governance state tracking inside an artifact (who decided what, at what authority, verified or not)
+- **ADR** = standalone full-context document (situation, options analysis, rationale, consequences)
+- **A5** = cross-reference appendix inside artifacts listing related ADR-NNN IDs
+
+**ADR lifecycle:** `Candidate → In Progress → Completed → Superseded (by ADR-NNN) | Deprecated`
+
+**ADR threshold:** `ea-interviewer` suggests an ADR when 2+ of 8 indicators apply: technology/vendor selection, high cost/risk, hard to reverse, make-vs-buy, contested by stakeholder, affects data governance / security / compliance / principles.
+
+**`/ea-adrs` modes:** `generate` (writes ADR Register), `status` (inline summary), `new` (create ADR from template), `update ADR-NNN <field> <value>`
+
+**Templates:** `architecture-decision-record.md` (individual ADR), `adr-register.md` (aggregate register)
+
+### 5.18 Zachman Diagram
+
+The Zachman Diagram is a cross-cutting classification artifact mapping all engagement content across the 6×6 grid (Rows: Contextual → Functioning; Columns: What / How / Where / Who / When / Why). Row 6 (Functioning) is always 🚫 — it represents the running enterprise, not a specification.
+
+**Coverage indicator:** ✅ Populated / ⚠️ Partial / ❌ Empty / 🚫 Out of scope
+
+**`/ea-zachman` modes:** `generate` (auto-populate from existing artifacts), `review` (inline 6×6 matrix with % coverage), `gap` (prioritised gap list with remediation actions), `interview` (guided Q&A row by row), `classify <artifact>` (cell classification for any artifact/concept)
+
+**Template:** `zachman-diagram.md`
+
+### 5.19 Governance Artifacts
+
+Three governance templates covering Preliminary through Phase H:
+
+| Template | Phase | Purpose |
+|---|---|---|
+| `governance-framework.md` | Prelim | Enterprise governance structure: ARB ToR, decision rights, ADM tailoring, compliance process |
+| `implementation-governance-plan.md` | G | Engagement-specific governance: review schedule, checkpoints, waiver process, escalation |
+| `change-register.md` | H | Aggregated view of all ACR artifacts |
+
+Created via `/ea-artifact create <template-name>` or generated automatically by `/ea-changes`.
+
+### 5.20 Diagram Generation
+
+Diagrams are generated and rendered through two paths:
+
+**`ea-diagram` agent** — creates `.mmd` (Mermaid), `.dot` (Graphviz), or `.drawio` files. Uses a standard diagram catalogue per artifact type (e.g., Architecture Vision → motivation map + stakeholder power/interest grid; Business Architecture → capability map + process flow + org map). Naming convention: `{artifact-id}-{diagram-type}.mmd` in `EA-projects/{slug}/diagrams/`.
+
+**`/ea-generate png|svg`** — renders `.mmd` files to images using mermaid-cli (`mmdc`). Auto-discovers `mmdc` on PATH, falls back to `npx -y @mermaid-js/mermaid-cli`. Options: `--theme`, `--bg`, `--all` (batch render all `.mmd` in the engagement).
+
+**Diagram inclusion in deliverables (default on):** When generating docx or pptx, `/ea-generate` automatically:
+1. Scans `diagrams/{artifact-id}-*.png` for pre-rendered images
+2. Auto-renders any `{artifact-id}-*.mmd` without a matching PNG
+3. Passes the diagram list to the script via `--diagrams @/tmp/ea-diagrams-{artifact-id}.json`
+4. Embeds diagrams as a final appendix (docx) or appended slides (pptx)
+
+No prompt is shown — diagrams are included by default when they exist.
+
+### 5.21 Engagement Review and Migration
+
+**`/ea-engage-review`** runs a full-scope consistency, alignment, governance, and quality review for the active engagement. Produces an Engagement Review Report covering:
+- ADM phase coverage and artifact completeness
+- Motivation chain traceability (DRV→G→OBJ)
+- ADR status (Candidate/In Progress counts, stale/overdue)
+- Governance and compliance gaps
+- Zachman coverage summary
+
+**`/ea-migrate`** aligns a legacy engagement with the current plugin version's templates and conventions. Applies non-destructive structural patches (adds missing appendices, missing frontmatter fields, missing compliance notes). Use `--report` to preview without applying.
+
+### 5.22 Research & References
+
+The `ResearchAndReferences/` folder is the engagement library for external context: whitepapers, reference architectures, analyst reports, standards documents, repository links, and ad-hoc research notes.
+
+**`/ea-research` modes:**
+- `add` — paste a document; stored as `.md` with frontmatter
+- `note` — write a freeform research observation
+- `link` — add a URL with title, summary, and tags
+- `list` (default) — index table of all items with type/title/date/tags
+- `view <item>` — full content + edit/delete/apply options
+- `apply [artifact-id]` — synthesise selected research against an artifact
+
+**Apply workflow:** loads selected research items + target artifact → identifies gaps, contradictions, enhancements → `y/n/edit` per revision → bumps artifact version (patch) → writes synthesis report to `ResearchAndReferences/synthesis-{artifact-id}-{date}.md`
+
+**Index file:** `ResearchAndReferences/research-index.md` — auto-maintained, tracks type/title/file/date/tags for every item. Created during `/ea-new` scaffolding; created silently by `/ea-open` for legacy engagements.
+
 ---
 
 ## 6. Data Model
@@ -364,15 +480,16 @@ These will gain dedicated commands and workflow integration in a future version.
 ```
 EA-projects/
 └── {slug}/
-    ├── engagement.json        # all state: phases, artifacts, sessions, direction, metrics, optOuts
-    ├── CLAUDE.md              # auto-generated session context; refreshed (overwritten) on /ea-open
-    ├── artifacts/             # .md artifact files + .review.md review files
-    ├── interviews/            # session-log.md + dated interview notes per session
-    ├── brainstorm/            # brainstorm-notes.md
-    ├── diagrams/              # .mmd, .dot, .drawio files
-    ├── uploads/               # source documents for ingestion
-    ├── reviews/               # grill-me review outputs
-    └── ui/                    # generated HTML interview/brainstorm forms
+    ├── engagement.json           # all state: phases, artifacts, sessions, direction, metrics, optOuts
+    ├── CLAUDE.md                 # auto-generated session context; refreshed (overwritten) on /ea-open
+    ├── artifacts/                # .md artifact files + .review.md review files
+    ├── interviews/               # session-log.md + dated interview notes per session
+    ├── brainstorm/               # brainstorm-notes.md
+    ├── diagrams/                 # .mmd, .dot, .drawio, .png, .svg files
+    ├── uploads/                  # source documents for ingestion
+    ├── reviews/                  # grill-me review outputs
+    ├── ResearchAndReferences/    # research documents, notes, links; research-index.md; synthesis reports
+    └── ui/                       # generated HTML interview/brainstorm forms
 ```
 
 ### engagement.json Schema
@@ -432,18 +549,26 @@ EA-projects/
 
 | Command | Key Arguments / Options | Description |
 |---|---|---|
-| `/ea-new` | — | Create engagement — collects name, type, domains, sponsor, scope, dates; generates CLAUDE.md |
-| `/ea-open` | `[slug]` | Open engagement, refresh CLAUDE.md, next-action menu |
-| `/ea-status` | — | Portfolio dashboard — all engagements with progress, opt-outs, non-standard flags |
+| `/ea-new` | — | Create engagement — collects name, type, domains, sponsor, scope, dates; scaffolds ResearchAndReferences/; generates CLAUDE.md |
+| `/ea-open` | `[slug]` | Open engagement, refresh CLAUDE.md, ensure ResearchAndReferences/ exists, next-action menu |
+| `/ea-status` | — | Portfolio dashboard — all engagements with progress, research count, opt-outs, non-standard flags |
 | `/ea-phase` | `[phase name]` | Start, navigate to, or resume an ADM phase |
-| `/ea-interview` | `[web|voice|text|display]` | Run stakeholder interview; defaults to Web mode |
+| `/ea-interview` | `[web|voice|text|display]` | Run stakeholder interview; ADR threshold scoring; defaults to Web mode |
 | `/ea-artifact` | `[create|view|list]` | Create, view, or list artifacts; compliance check on view |
 | `/ea-brainstorm` | `[phase]` | Capture freeform thoughts before or during interviews |
-| `/ea-generate` | `[artifact] [word|pptx|mermaid]` | Export artifact using python-docx (word), python-pptx (pptx), or Mermaid source |
+| `/ea-generate` | `[artifact] [docx|pptx|mermaid|png|svg] [--theme] [--bg] [--all]` | Export artifact; embeds diagrams by default in docx/pptx; renders Mermaid to images via mmdc |
 | `/ea-review` | `[artifact]` | Open artifact for review; runs compliance check; update review status |
-| `/ea-grill` | `[artifact] [--skill name]` | Deep-review artifact using a grill-me skill; auto-selects skill by type |
+| `/ea-grill` | `[artifact] [--skill name]` | Deep-review artifact using a grill-me skill; auto-selects skill by type; apply findings with y/n/edit |
 | `/ea-requirements` | `[list|add|edit|waive]` | Manage architecture requirements; corporate (read-only) and project scope |
 | `/ea-decisions` | `[--audience] [--owner] [--domain] [--status] [--cost] [--impact] [--risk]` | Generate Decision Register from all A3 logs with filters |
+| `/ea-adrs` | `[generate|status|new|update ADR-NNN <field> <value>]` | Manage Architecture Decision Records; auto-suggested by interviewer at 2+ threshold indicators |
+| `/ea-risks` | `[generate|status|update RIS-NNN <field> <value>]` | Generate and maintain Risk Register by scanning all artifacts |
+| `/ea-changes` | `[generate|status|update <ACR-ID> <field> <value>]` | Generate Change Register aggregating all Phase H ACR artifacts |
+| `/ea-concerns` | — | Manage CON-NNN stakeholder concerns (Appendix A4) |
+| `/ea-zachman` | `[generate|review|gap|interview|classify <artifact>]` | Manage Zachman 6×6 classification diagram |
+| `/ea-research` | `[add|note|link|list|view <item>|apply [artifact-id]]` | Manage research library; synthesise research against deliverables |
+| `/ea-engage-review` | — | Full-scope engagement consistency, alignment, governance, and quality review |
+| `/ea-migrate` | `[--report]` | Align legacy engagement to current plugin version conventions |
 | `/ea-publish` | `[markdown|word]` | Consolidated report via Pandoc; pre-publish compliance check |
 | `/ea-help` | — | Command reference, interview shortcuts, research agent guide |
 
@@ -454,13 +579,13 @@ EA-projects/
 | Agent | Role | Invoked by |
 |---|---|---|
 | `ea-facilitator` | Guides users through ADM phases; reads facilitatorStyle config | `/ea-phase`, `/ea-open` |
-| `ea-interviewer` | Conducts structured interviews; all 4 modes, question preview, brainstorm, cross-topic detection | `/ea-interview` |
+| `ea-interviewer` | Conducts structured interviews; all 4 modes, question preview, brainstorm, cross-topic detection, ADR threshold scoring | `/ea-interview` |
 | `ea-roadmap` | Creates and manages the Architecture Roadmap in Review / Artifact-informed / Clean-slate mode | Ask Claude: "Let's build the roadmap" or "Review the roadmap" |
 | `ea-requirements-analyst` | Extracts structured requirements from uploaded documents | `/ea-requirements` |
 | `ea-consistency-checker` | Flags cross-artifact inconsistencies (no dedicated command) | Ask Claude: "Check for cross-artifact inconsistencies" |
 | `ea-document-analyst` | EA mapping layer — extracts content from uploaded documents and maps to artifacts (no dedicated command) | Ask Claude: "Analyse the uploaded documents" |
 | `ea-advisor` | Answers EA methodology questions — TOGAF, Zachman, ArchiMate (no dedicated command) | Ask any methodology question in chat |
-| `ea-diagram` | Generates and interprets architecture diagrams | `/ea-generate [artifact] mermaid` |
+| `ea-diagram` | Creates, edits, and interprets architecture diagrams (Mermaid, Graphviz, Draw.io, ArchiMate); standard diagram catalogue per artifact type; offers mmdc render after saving | `/ea-generate mermaid|png|svg`, ask Claude: "Create a diagram for..." |
 
 ---
 
@@ -468,10 +593,12 @@ EA-projects/
 
 | Gate | When | Mechanism |
 |---|---|---|
-| Artifact compliance | Every artifact open (interview, review, view) | 3-tier check: frontmatter → template structure → artifact-specific requirements (e.g., A3 presence in key artifacts) |
+| Artifact compliance | Every artifact open (interview, review, view) | 3-tier check: T1 frontmatter → T2 template structure → T3 artifact-specific (A3/A5 presence, Strategic Alignment, Scope column, Two-section structure) |
 | Pre-publish compliance | Before `/ea-publish` assembles | All selected artifacts scanned; user chooses proceed or remediate; non-compliant items flagged in output |
 | Content policy | Throughout interview | No AI content without `🤖` marker; no overwrite of Approved fields without confirmation |
 | Opt-out audit | Ongoing | Every exclusion tracked with reason + timestamp in `engagement.json → optOuts[]`; surfaced in `/ea-status` and published reports |
+| ADR threshold | During interview (post-answer) | After each answer, `ea-interviewer` scores 8 indicators; if 2+ match → suggest `/ea-adrs new` with pre-populated metadata; adds ADR-NNN to A3 Notes |
+| Migration alignment | On `/ea-open` | Lightweight gap scan comparing `lastMigratedVersion` to current plugin version; displays count of detectable gaps; run `/ea-migrate` to align |
 
 ---
 
