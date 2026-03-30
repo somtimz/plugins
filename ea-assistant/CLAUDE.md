@@ -15,7 +15,7 @@ commands/        22 commands (/ea-new, /ea-open, /ea-phase, /ea-interview, /ea-g
 skills/          8 skill directories (ea-artifact-templates, ea-engagement-lifecycle, zachman-framework, ...)
 templates/       23 TOGAF artifact templates (.md)
 scripts/         Python scripts for Word/PPTX generation
-docs/PRD.md      Authoritative product requirements (v0.9.4)
+docs/PRD.md      Authoritative product requirements (v0.9.12)
 hooks/hooks.json Plugin lifecycle hooks
 ```
 
@@ -222,6 +222,21 @@ Three new governance templates covering Preliminary through Phase H:
 - **Do not redefine concepts inline** — always reference `ea-concepts.md`; do not redefine style rules inline — reference `ea-engagement-lifecycle/SKILL.md`
 - **Do not duplicate logic across agents** — cross-topic detection lives in `cross-topic-detection.md`; A3 governance rules live in `ea-artifact-templates/SKILL.md`; concept definitions live in `ea-concepts.md`
 - **Feature branches + PRs** for multi-file changes; direct commits to `main` for single-file fixes
+
+## Documentation Update Checklist
+
+Before bumping `plugin.json` version and before pushing, always update these files to reflect new features, changed commands, or revised behaviour:
+
+| File | What to update |
+|---|---|
+| `docs/PRD.md` | Version number; new sections for any new feature area; revised command/agent/template counts; quality gates if changed |
+| `commands/ea-help.md` | Commands table (add/remove rows); tips section (add tips for new features) |
+| `README.md` | Feature bullet list; commands table; prerequisite changes; project storage layout if changed |
+| `CLAUDE.md` (this file) | Version number; Plugin Structure counts; any new key reference files; ID scheme additions; new compliance rules |
+
+**When a version bump is the only change** (no new features), update the version number in all four files only — no other edits needed.
+
+**When the docs are out of date**, bring them up to date before the next version bump — do not accumulate undocumented versions.
 
 ## Engagement Storage Layout (Runtime)
 

@@ -48,6 +48,9 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Architecture Change Management** — `/ea-changes` generates Change Register from Phase H ACR artifacts; `/ea-concerns` manages CON-NNN stakeholder concerns (Appendix A4)
 - **Engagement review** — `/ea-engage-review` produces a full health report covering coverage, traceability, governance, ADR status, and Zachman completeness
 - **Migration** — `/ea-migrate` aligns legacy engagements to the current plugin version; preview with `--report`
+- **Session rules** — each engagement folder is seeded with `.claude/rules/ea-engagement.md`: persistent guardrails loaded by Claude Code on every session (require `/ea-open`, protect Approved artifacts, enforce unified ID scheme, cite reference SSTs for concepts and phase guidance)
+- **Slim engagement CLAUDE.md** — the per-engagement `CLAUDE.md` is a lightweight pointer document (identity + state counts + content locations); full strategic detail stays in `engagement.json → direction` and artifact files
+- **TOGAF governance model** — two-layer governance reference (architecture governance vs programme governance) with phase-by-phase table; `ea-concepts.md` includes full motivation-concepts ADM lifecycle (where each concept is first captured, refined, realized, and adapted across Preliminary through Phase H)
 - **Research & References** — `/ea-research` manages a per-engagement library (documents, notes, links); `apply` mode synthesises research against any artifact — gaps and contradictions surfaced with `y/n/edit` revision workflow; synthesis reports saved to `ResearchAndReferences/`
 - **Diagram rendering** — render Mermaid (`.mmd`) files to PNG or SVG via mermaid-cli (`mmdc`); standard diagram catalogue per artifact type; batch render with `--all`
 
@@ -193,8 +196,11 @@ All engagement data is stored in `EA-projects/` relative to your working directo
 ```
 EA-projects/
 ├── engagement-name/
+│   ├── .claude/
+│   │   └── rules/
+│   │       └── ea-engagement.md  # persistent session rules (auto-loaded by Claude Code)
 │   ├── engagement.json           # metadata, ADM phases, settings, opt-outs
-│   ├── CLAUDE.md                 # auto-generated session context (refreshed on /ea-open)
+│   ├── CLAUDE.md                 # pointer doc — identity + state counts + locations
 │   ├── requirements/             # local architecture requirements
 │   ├── artifacts/                # generated artifacts + review files
 │   ├── diagrams/                 # Mermaid, Graphviz, Draw.io, PNG, SVG files

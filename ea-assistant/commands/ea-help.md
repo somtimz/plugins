@@ -149,6 +149,11 @@ Type these at any interview prompt:
   traceability, governance, ADR status, and Zachman completeness.
 • Ask "how does architecture governance work" for a full explanation of
   the governance structure, cascade, roles, and TOGAF tool mapping.
+• Each engagement folder contains `.claude/rules/ea-engagement.md` —
+  persistent session rules automatically loaded by Claude Code. They
+  enforce /ea-open at session start, protect Approved artifacts, and
+  point to the single-source-of-truth reference files for concepts and
+  phase guidance. Run `/ea-migrate` if the file is missing.
 
 ### Using the Research Agent during an engagement
 

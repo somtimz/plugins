@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.11
+**Version:** 0.9.12
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -471,6 +471,21 @@ The `ResearchAndReferences/` folder is the engagement library for external conte
 
 **Index file:** `ResearchAndReferences/research-index.md` — auto-maintained, tracks type/title/file/date/tags for every item. Created during `/ea-new` scaffolding; created silently by `/ea-open` for legacy engagements.
 
+### 5.23 Engagement Session Rules
+
+Each engagement folder contains `.claude/rules/ea-engagement.md` — a small rules file loaded by Claude Code on every session in the engagement directory. It enforces persistent behavioural guardrails without duplicating them in CLAUDE.md or agent instructions:
+
+- **Session start** — require `/ea-open` before proceeding unless user explicitly skips
+- **Artifact protection** — never modify `reviewStatus: Approved` artifacts without explicit confirmation; read frontmatter before any modification
+- **Concept SST** — direct Claude to `ea-concepts.md` for all concept definitions; do not paraphrase ADM phases from memory
+- **ID scheme** — enforce unified IDs (DRV-NNN, G-NNN, etc.); reject obsolete domain-prefixed variants
+
+The file is seeded by `/ea-new`, backfilled silently by `/ea-open` for legacy engagements, and detected as a gap by `/ea-migrate` if absent.
+
+### 5.24 Engagement CLAUDE.md
+
+The per-engagement `CLAUDE.md` is a **pointer document**, not a data dump. It contains identity fields, a one-sentence vision, engagement state counts (artifact totals, open decisions, research items), a pointer table to content locations, and a quick-command reference. Full strategic detail (goals, objectives, strategies, drivers) lives in `engagement.json → direction` and artifact files only — it is never copied into CLAUDE.md.
+
 ---
 
 ## 6. Data Model
@@ -480,8 +495,11 @@ The `ResearchAndReferences/` folder is the engagement library for external conte
 ```
 EA-projects/
 └── {slug}/
+    ├── .claude/
+    │   └── rules/
+    │       └── ea-engagement.md  # persistent session guardrails (session start, ID scheme, concept SST)
     ├── engagement.json           # all state: phases, artifacts, sessions, direction, metrics, optOuts
-    ├── CLAUDE.md                 # auto-generated session context; refreshed (overwritten) on /ea-open
+    ├── CLAUDE.md                 # pointer doc — identity + counts + locations; refreshed on /ea-open
     ├── artifacts/                # .md artifact files + .review.md review files
     ├── interviews/               # session-log.md + dated interview notes per session
     ├── brainstorm/               # brainstorm-notes.md
