@@ -86,7 +86,17 @@ Read the frontmatter. Check for:
 
 For taxonomy gaps: look up the canonical taxonomy for this artifact type from `skills/ea-artifact-templates/references/taxonomy.md`. If the artifact type is not in the canonical map, flag for manual assignment.
 
-### 3d — CLAUDE.md format gap
+### 3d — Rules file gap
+
+Check for `EA-projects/{slug}/.claude/rules/ea-engagement.md`:
+
+| Check | Gap if… | Introduced in | Severity |
+|---|---|---|---|
+| File exists | File absent | 0.9.12 | Low |
+
+If missing, the remediation is to create `.claude/rules/ea-engagement.md` using the template from `/ea-new` with the current engagement name and slug.
+
+### 3e — CLAUDE.md format gap
 
 Check `EA-projects/{slug}/CLAUDE.md`:
 
@@ -129,6 +139,9 @@ Artifact frontmatter gaps        {N gaps | ✅ None}
   GAP-M-020  [Medium] architecture-vision.md — taxonomy: block missing
   GAP-M-021  [Medium] business-architecture.md — taxonomy: block missing
   GAP-M-022  [Low]    requirements-register.md — templateVersion field missing
+
+Rules file gap                   {N gaps | ✅ None}
+  GAP-M-024  [Low]    .claude/rules/ea-engagement.md missing — create from template
 
 CLAUDE.md format gap             {N gaps | ✅ None}
   GAP-M-025  [Medium] CLAUDE.md — old-format (Strategic Intent tables present); regenerate as pointer doc

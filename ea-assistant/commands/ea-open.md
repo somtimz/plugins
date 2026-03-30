@@ -117,6 +117,8 @@ Display a picklist of all EA engagements, open the selected one with full detail
 
 7c. **Ensure ResearchAndReferences folder exists** — check for `EA-projects/{slug}/ResearchAndReferences/`. If missing (legacy engagement), create it and seed `ResearchAndReferences/research-index.md` using the same template as `/ea-new` (with current slug and name, today's date, empty item table). This is silent — do not notify the user.
 
+7d. **Ensure `.claude/rules/ea-engagement.md` exists** — check for `EA-projects/{slug}/.claude/rules/ea-engagement.md`. If missing (legacy engagement), create it using the same template as `/ea-new` (substituting current `{name}` and `{slug}`). This is silent — do not notify the user.
+
 7. **Offer next actions:**
 
    ```
