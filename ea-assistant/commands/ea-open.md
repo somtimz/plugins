@@ -104,15 +104,16 @@ Display a picklist of all EA engagements, open the selected one with full detail
 
    **This step makes no changes to any file.** It is a read-only scan.
 
-7b. **Refresh `EA-projects/{slug}/CLAUDE.md`** using the full template defined in `/ea-new`. Populate all sections from current `engagement.json` state:
-   - **Engagement Identity** — name, slug, type, organisation, sponsor, scope, phase, status, domains, dates
-   - **Strategic Intent** — Vision, Mission, Business Drivers (DRV-NNN), Goals (G-NNN), Objectives (OBJ-NNN), Strategies (STR-NNN), Issues (ISS-NNN) from `engagement.json → direction`; write "Not captured yet." for any empty field — never omit a section
-   - **Artifact Status** — list all artifacts with phase, status, and reviewStatus
-   - **Phase Progress** — list phases that are In Progress, Complete, or On Hold (skip Not Started / Not Applicable)
-   - **Open Decisions** — scan each artifact file's Appendix A3 Decision Log for rows with state Provisional or Awaiting; list with artifact name, description, state, and owner
-   - **Quick Commands** — always include, with currentPhase substituted
+7b. **Refresh `EA-projects/{slug}/CLAUDE.md`** using the pointer template defined in `/ea-new`. This file is a **lightweight index** — do not copy full goal/objective/strategy lists into it. Populate from current `engagement.json` state:
+   - **Identity** — organisation, slug, type, sponsor, phase, status, dates
+   - **Engagement Context** — Vision (single sentence only) and scope
+   - **Engagement State** — counts only: active phases (In Progress / On Hold), artifact totals, open decision count (Provisional + Awaiting across all A3 logs — count only, no detail), research item count, opt-out count
+   - **Where to Find Content** — pointer table (static, always the same)
+   - **Quick Commands** — always include, with `{currentPhase}` substituted
 
-   If the file does not exist (legacy engagement created before this feature), create it now.
+   Full strategic detail (goals, objectives, strategies, drivers, issues) lives in `engagement.json → direction` and artifact files — do not duplicate it here.
+
+   If the file does not exist (legacy engagement), create it now.
 
 7c. **Ensure ResearchAndReferences folder exists** — check for `EA-projects/{slug}/ResearchAndReferences/`. If missing (legacy engagement), create it and seed `ResearchAndReferences/research-index.md` using the same template as `/ea-new` (with current slug and name, today's date, empty item table). This is silent — do not notify the user.
 
