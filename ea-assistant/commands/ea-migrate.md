@@ -86,7 +86,17 @@ Read the frontmatter. Check for:
 
 For taxonomy gaps: look up the canonical taxonomy for this artifact type from `skills/ea-artifact-templates/references/taxonomy.md`. If the artifact type is not in the canonical map, flag for manual assignment.
 
-### 3d — Artifact content gaps
+### 3d — CLAUDE.md format gap
+
+Check `EA-projects/{slug}/CLAUDE.md`:
+
+| Check | Gap if… | Introduced in | Severity |
+|---|---|---|---|
+| File contains `## Where to Find Content` section | Section absent — file is old-format (fat CLAUDE.md with full goal/objective/strategy tables) | 0.9.12 | Medium |
+
+If the gap is present, the remediation is to regenerate CLAUDE.md using the current pointer-format template (from `/ea-new`). The full strategic data is not lost — it remains in `engagement.json → direction` and artifact files.
+
+### 3e — Artifact content gaps
 
 For each artifact, check for missing structural elements added in recent versions:
 
@@ -119,6 +129,9 @@ Artifact frontmatter gaps        {N gaps | ✅ None}
   GAP-M-020  [Medium] architecture-vision.md — taxonomy: block missing
   GAP-M-021  [Medium] business-architecture.md — taxonomy: block missing
   GAP-M-022  [Low]    requirements-register.md — templateVersion field missing
+
+CLAUDE.md format gap             {N gaps | ✅ None}
+  GAP-M-025  [Medium] CLAUDE.md — old-format (Strategic Intent tables present); regenerate as pointer doc
 
 Artifact content gaps            {N gaps | ✅ None}
   GAP-M-030  [Medium] architecture-vision.md — Appendix A4 missing

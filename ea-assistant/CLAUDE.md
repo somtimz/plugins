@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.11 (plugin.json)
+**Current version:** 0.9.12 (plugin.json)
 **Branch:** `feat/risk-management`
 
 ---
