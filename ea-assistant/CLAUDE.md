@@ -13,7 +13,7 @@ Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 pro
 agents/          8 agents (ea-facilitator, ea-interviewer, ea-roadmap, ea-document-analyst, ...)
 commands/        22 commands (/ea-new, /ea-open, /ea-phase, /ea-interview, /ea-grill, /ea-changes, /ea-migrate, /ea-adrs, /ea-zachman, /ea-research, ...)
 skills/          8 skill directories (ea-artifact-templates, ea-engagement-lifecycle, zachman-framework, ...)
-templates/       23 TOGAF artifact templates (.md)
+templates/       27 TOGAF artifact templates (.md)
 scripts/         Python scripts for Word/PPTX generation
 docs/PRD.md      Authoritative product requirements (v0.9.12)
 hooks/hooks.json Plugin lifecycle hooks
@@ -23,7 +23,7 @@ hooks/hooks.json Plugin lifecycle hooks
 
 | File | Purpose |
 |---|---|
-| `skills/ea-artifact-templates/references/ea-concepts.md` | Canonical definitions for all 13 EA concepts — **the single source of truth**; do not redefine concepts inline in agents or skills |
+| `skills/ea-artifact-templates/references/ea-concepts.md` | Canonical definitions for all 14 EA concepts — **the single source of truth**; do not redefine concepts inline in agents or skills |
 | `skills/ea-artifact-templates/references/compliance-check.md` | Three-tier artifact compliance rules (T1/T2/T3); all artifact-loading operations run this |
 | `skills/ea-artifact-templates/references/phase-interview-questions.md` | Full question bank for every ADM phase with output routing tables |
 | `skills/ea-artifact-templates/references/cross-topic-detection.md` | 10-row signal map for detecting answers that belong in a different artifact |
@@ -91,7 +91,7 @@ The `ea-roadmap` agent auto-selects based on engagement state:
 ## /ea-grill Workflow
 
 Steps 1–6: load artifact → select skill → brief → run grill → produce output → offer to save review file
-**Step 7 (apply findings):** walk through each recommended revision with `y/n/edit` per revision; applied revisions bump artifact version (patch) and update `lastModified`; sets `reviewStatus: Revised`; Approved artifacts warn before write.
+**Step 7 (apply findings):** walk through each recommended revision with `y/n/edit` per revision; applied revisions bump artifact version (patch) and update `lastModified`; sets `reviewStatus: In Review` (if previously Not Reviewed or Needs Revision); Approved artifacts warn before write.
 
 ## /ea-generate — Mermaid Image Rendering
 
@@ -135,7 +135,7 @@ Content JSON must be extracted from the artifact markdown by Claude before calli
 
 | Rule | Artifact | Requirement |
 |---|---|---|
-| T3-A3 | Architecture Vision, Business/Data/App/Tech Architecture | `## Appendix A3 — Decision Log` section present |
+| T3-A3 | Architecture Vision, Business/Data/App/Tech Architecture, Gap Analysis, Architecture Roadmap, Statement of Architecture Work, Migration Plan, Engagement Charter, Governance Framework, Implementation Governance Plan | `## Appendix A3 — Decision Log` section present |
 | T3-ROAD-SA | Architecture Roadmap | `## Strategic Alignment` section with at least one non-placeholder row |
 | T3-ROAD-WP | Architecture Roadmap | At least one WP has non-empty `Advances Goals/Objectives` or `Executes Strategies` |
 | T3-REQ | Requirements Register | Scope column present (Corporate / Project) |

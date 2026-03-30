@@ -7,6 +7,17 @@ allowed-tools: [Read, Write, Bash]
 
 Export a single EA artifact as a formatted file.
 
+## Generation Paths
+
+Two different generation mechanisms are used depending on the artifact type:
+
+| Mechanism | Used for | Why |
+|---|---|---|
+| **python-docx / python-pptx scripts** (`generate-docx.py`, `generate-pptx.py`) | Individual structured artifacts — Architecture Vision, Business Architecture, Gap Analysis, Requirements Register, Stakeholder Map, Architecture Roadmap | Rich section-by-section formatting, embedded tables, diagram embedding; structured output mapped to artifact sections |
+| **pandoc** | Consolidated Architecture Report (`/ea-publish` only) | Single-pass Markdown → DOCX for a flat narrative document; no section-structure mapping needed |
+
+When generating a single artifact via `/ea-generate docx`, always use the python-docx script path (Step 4 below). Pandoc is not used by this command — it is used only by `/ea-publish` for the consolidated report.
+
 ## Instructions
 
 If no engagement is active in context, display:

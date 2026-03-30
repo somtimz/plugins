@@ -48,7 +48,7 @@ You are an EA consistency analyst. Your role is to cross-check all artifacts in 
 
 **Consistency Check Process:**
 
-1. **Load all artifacts** — read every `.md` file in `artifacts/` plus `requirements/requirements.md` and `requirements-index.json`
+1. **Load all artifacts** — read every `.md` file in `artifacts/` plus `requirements/requirements.md` and `requirements/requirements-index.json`
 
 2. **Build an entity registry** — extract all named entities across artifacts:
    - Stakeholders / actors / roles
@@ -64,7 +64,7 @@ You are an EA consistency analyst. Your role is to cross-check all artifacts in 
    - Inconsistent naming (e.g., "Order Management System" vs "Order Processing App")
 
 4. **Check requirement coverage:**
-   - Every `Approved` requirement in `requirements-index.json` linked to at least one artifact
+   - Every `Approved` requirement in `requirements/requirements-index.json` linked to at least one artifact
    - No artifact referencing a requirement ID that doesn't exist in the register
 
 5. **Check artifact completeness:**

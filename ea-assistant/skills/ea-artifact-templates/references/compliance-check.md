@@ -58,7 +58,7 @@ Applies only to named artifact types:
 
 | Artifact | Requirement | Rule ID |
 |---|---|---|
-| Architecture Vision, Business Architecture, Data Architecture, Application Architecture, Technology Architecture | `## Appendix A3 — Decision Log` section present | T3-A3 |
+| Architecture Vision, Business Architecture, Data Architecture, Application Architecture, Technology Architecture, Gap Analysis, Architecture Roadmap, Statement of Architecture Work, Migration Plan, Engagement Charter, Governance Framework, Implementation Governance Plan | `## Appendix A3 — Decision Log` section present | T3-A3 |
 | Architecture Vision, Business Architecture, Data Architecture, Application Architecture, Technology Architecture, Gap Analysis, Architecture Roadmap, Statement of Architecture Work, Migration Plan | `## Appendix A4 — Stakeholder Concerns & Objections` section present | T3-A4 |
 | Architecture Roadmap | `## Strategic Alignment` section present with at least one populated row (non-placeholder) | T3-ROAD-SA |
 | Architecture Roadmap | At least one WP-NNN entry has a non-empty `Advances Goals / Objectives` or `Executes Strategies` field | T3-ROAD-WP |

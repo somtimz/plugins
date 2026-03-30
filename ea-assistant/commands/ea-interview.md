@@ -25,13 +25,7 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
 
 3b. **Check for brainstorm notes:** Look for `EA-projects/{slug}/brainstorm/brainstorm-notes.md`. Note whether it exists.
 
-3c. **Select interview mode** — ask the user:
-   > How would you like to conduct this interview?
-   > **1. Text** (default) — questions asked one at a time in chat
-   > **2. Web** — interactive form you fill in and paste back
-   > **3. Display** — show all questions without collecting answers
-   >
-   > Press Enter or type 1 for Text.
+3c. **Select interview mode** — the `ea-interviewer` agent will present the mode selection menu (Web default, with Text, Voice, and Display options). Pass the artifact name and pre-loaded context; the agent handles mode selection.
 
 4. Hand off to the `ea-interviewer` agent with:
    - The artifact name and file path
@@ -70,7 +64,7 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
 
 3b. **Check for brainstorm notes:** Look for `EA-projects/{slug}/brainstorm/brainstorm-notes.md`. Note whether it exists.
 
-3c. **Select interview mode** — ask the user (same three-option prompt as artifact mode, Text default).
+3c. **Select interview mode** — the `ea-interviewer` agent will present the mode selection menu. Pass the phase name and context; the agent handles mode selection.
 
 4. Hand off to the `ea-interviewer` agent in **phase mode** with:
    - The phase name
@@ -162,7 +156,7 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
 
 3b. **Check for brainstorm notes:** Look for `EA-projects/{slug}/brainstorm/brainstorm-notes.md`. Note whether it exists.
 
-3c. **Select interview mode** — ask the user (same three-option prompt, Text default).
+3c. **Select interview mode** — the `ea-interviewer` agent will present the mode selection menu. Pass context; the agent handles mode selection.
 
 4. Hand off to the `ea-interviewer` agent to restart the interview from where it left off, passing:
    - The artifact name and file path

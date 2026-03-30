@@ -136,7 +136,7 @@ Additional interview-specific config behaviour:
 
 ---
 
-**Mode 1 — Text Interview:**
+**Mode 3 — Text Interview:**
 
 **Step 0 — Question Preview:**
 

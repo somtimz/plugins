@@ -32,7 +32,7 @@ Flags from `--quick` skip the detailed consistency check and show only the gover
 
 ## Step 2 — Artifact Inventory
 
-Read all `.md` files in `EA-projects/{slug}/artifacts/` (exclude `*.review.md`, `decision-register-*.md`, `risk-register-*.md`, `concerns-register-*.md`). For each:
+Read all `.md` files in `EA-projects/{slug}/artifacts/` (exclude `*.review.md`, `decision-register-*.md`, `risk-register-*.md`, `concerns-register-*.md`, `adr-register-*.md`, `change-register-*.md`). For each:
 - Extract frontmatter: artifact name, phase, status, reviewStatus, version
 - Count `{{placeholder}}` tokens (unanswered fields)
 - Check for T3 appendix sections: Appendix A3 (Decision Log), Appendix A4 (Concerns)
@@ -184,7 +184,7 @@ Options:
 ### Option 10 — Sync engagement
 
 1. Re-read `engagement.json`.
-2. Refresh `EA-projects/{slug}/CLAUDE.md` using the full template from `/ea-open` step 7 — this updates: Engagement Identity, Strategic Intent, Artifact Status, Phase Progress, Open Decisions.
+2. Refresh `EA-projects/{slug}/CLAUDE.md` using the pointer-format template from `/ea-open` step 7 — updates Identity block (name, slug, phase, status, dates), Engagement State counts (artifact/phase/decision/research counts), and the Where to Find Content pointer table. Full goal/objective/strategy data is not repeated here — it lives in `engagement.json → direction`.
 3. Update `engagement.json → lastModified` to now.
 4. Run Tier 1 compliance check on all artifacts — report any T1 failures.
 5. Confirm: "Sync complete — CLAUDE.md refreshed, {N} T1 failures noted (run /ea-review to fix)."

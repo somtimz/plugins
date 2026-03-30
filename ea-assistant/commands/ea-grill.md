@@ -111,6 +111,10 @@ When the review is complete (or the user types `done` or `finish`), produce the 
 - **premortem** → top failure modes, early warning signs, safeguards, proceed/pause/redesign verdict
 - **decision** → decision statement, options analysis, recommendation, risks, next steps
 - **design** → strengths, design flaws, recommended revisions, unresolved design bets
+- **software-design** → architecture pattern assessment, coupling/cohesion findings, API contract gaps, testability rating, operational readiness checklist, top 5 recommended changes
+- **infra-design** → topology assessment, resilience gaps, blast radius analysis, cost observations, security boundary issues, observability gaps, top 5 recommended changes
+- **artifact** → section-by-section completeness scorecard, traceability chain gaps, cross-artifact consistency issues, top recommended revisions
+- **diagram** → topology assessment, missing components, anti-patterns identified, readability issues, recommended structural changes
 - **boardroom-strategy** → executive summary, case for proceeding, case against, top unresolved risks, next decision required, 2-minute board-ready version
 
 Offer to save the output as a review note:
@@ -217,10 +221,10 @@ If the user selects `a` or `s`:
 4. After all revisions are processed:
    - Bump the artifact `version` by a patch increment (e.g. `0.1` → `0.2`)
    - Update `lastModified` to today's date
-   - Set `reviewStatus` to `Revised` if it was `Not Reviewed`, or keep existing if already higher
+   - Set `reviewStatus` to `In Review` if it was `Not Reviewed` or `Needs Revision`, or keep existing if already `In Review` or `Approved`
    - Confirm: `Artifact updated — [N] revisions applied, version bumped to [new version]`
 
 **Constraints:**
-- Never apply a revision to an `Approved` artifact without explicit user confirmation — warn first: `⚠️ This artifact is Approved. Applying revisions will reset reviewStatus to Revised. Continue? (y/n)`
+- Never apply a revision to an `Approved` artifact without explicit user confirmation — warn first: `⚠️ This artifact is Approved. Applying revisions will reset reviewStatus to In Review. Continue? (y/n)`
 - Never invent content — only apply revisions derived directly from the grill output
 - If a revision touches a field that references other artifacts (e.g. adds a GAP-NNN or REQ-NNN ID), flag it: `⚠️ This adds a reference to [ID] — verify it exists in the source artifact before saving`
