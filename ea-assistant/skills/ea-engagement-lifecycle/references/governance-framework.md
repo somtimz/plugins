@@ -198,17 +198,63 @@ Every metric has:
 
 ---
 
+## The Two Governance Layers in TOGAF
+
+TOGAF distinguishes two related but distinct governance layers. Understanding which layer you are operating in — and who owns it — prevents confusion across the ADM.
+
+### Layer 1: Architecture Governance (governs the ADM and architecture outputs)
+
+- **Primary question:** "Are we doing architecture properly?"
+- **Object:** Architecture process, artifacts, standards, and decisions
+- **Defined:** Primarily in the Preliminary Phase as part of establishing the Architecture Capability
+- **Operated by:** Chief Architect, Architecture Review Board (ARB), EA function
+- **Key mechanisms:** Architecture Board, principles, phase reviews, approval gates, waivers/dispensations, standards compliance, repository controls
+
+### Layer 2: Program Governance (governs delivery of change)
+
+- **Primary question:** "Are we delivering the change effectively and in conformance with the architecture?"
+- **Object:** Portfolios, programs, projects, work packages, releases, benefits realization
+- **Defined:** Outside the ADM — by the program sponsor, PMO, and steering committee
+- **Operated by:** Program sponsor, PMO/portfolio office, program manager, steering committee (architects participate for conformance reviews)
+- **Key mechanisms:** Program boards, investment committees, delivery stage gates, risk/issue management, benefits tracking, change control
+
+### Comparison Table
+
+| Aspect | Architecture Governance (Layer 1) | Program Governance (Layer 2) |
+|---|---|---|
+| Primary purpose | Control architecture development and decisions | Control execution of change and benefits delivery |
+| Main object | Architecture process, artifacts, standards, decisions | Portfolios, programs, projects, releases |
+| TOGAF emphasis | Preliminary through all phases | Especially E, F, and G |
+| Strongest mechanism | ARB, reviews, standards, compliance | Steering committees, PMO, stage gates, funding |
+| Key concern | "Is the architecture right and properly governed?" | "Is the change being delivered successfully?" |
+| Architecture conformance | Central | One of several concerns |
+| Delivery scope / schedule / budget | Secondary | Central |
+
+### The Phase G Boundary
+
+Phase G is **not** general program management governance. It is architecture's specific contribution to program governance — the conformance layer.
+
+Phase G adds exactly one question to the broader program governance picture:
+
+> "Is the implementation conforming to the approved architecture?"
+
+Phase G does **not** replace: program boards, steering committees, investment committees, PMO oversight, benefits tracking, delivery schedule management, or funding governance.
+
+The cleanest formulation: **architecture governance governs the architecture; program governance governs the delivery; Phase G is where they interface.**
+
+---
+
 ## Mapping to TOGAF ADM Phases
 
-| Phase | Governance activity |
-|-------|---------------------|
-| **Prelim** | Establish the governance framework — ARB structure, decision rights, escalation paths |
-| **A** | Agree scope and direction with the sponsor; document in the Statement of Architecture Work |
-| **B–D** | Make architecture decisions within the approved direction; record in domain architecture documents |
-| **E** | Output Architecture Roadmap — concludes target architecture governance |
-| **F** | Produce Architecture Contract and Implementation Plan — initiates implementation governance |
-| **G** | Compliance assessments verify that solution designs conform to the decisions made in B–D |
-| **H** | Manage change requests; assess deviations; update direction if warranted |
+| Phase | Governance layer | What governance does | Typical outputs |
+|---|---|---|---|
+| **Preliminary** | Architecture (Layer 1) | Define and establish the governance framework: ARB structure, decision rights, escalation paths, principles, standards, compliance approach, waivers process, relationship to enterprise/corporate governance | Governance Framework, Architecture Principles |
+| **Phase A** | Architecture (Layer 1) | Approve scope and engagement mandate; confirm sponsorship; agree constraints and principles; authorise the architecture engagement; define how work will be governed; approve Statement of Architecture Work | Statement of Architecture Work (approved), Stakeholder Map |
+| **Phases B–D** | Architecture (Layer 1) | Govern architecture development: ensure content is developed per agreed method; review by right stakeholders; consistent with principles and standards; approved before advancing to next domain. Governance of the architecture development process itself. | Approved domain architectures, Gap Analysis |
+| **Phase E** | Architecture → Program bridge | Validate solution direction; structure work packages; ensure proposed solutions are architecturally coherent; begin bridging architecture governance with program governance | Architecture Roadmap, Solution Concept — concludes target architecture governance |
+| **Phase F** | Architecture → Program bridge | Prioritise transitions; align roadmap with portfolio constraints; connect architecture with investment/program decisions; produce Architecture Contract as the formal handoff | Architecture Contract, Implementation & Migration Plan — initiates implementation governance |
+| **Phase G** | Architecture (Layer 1) within Program (Layer 2) | Architecture's contribution to program governance: compliance reviews at delivery gates; approve or reject deviations; manage architecture contracts; monitor that delivered solutions conform to the approved architecture. Does not replace program boards or PMO. | Compliance Assessments, Dispensations, Architecture Contract updates |
+| **Phase H** | Architecture (Layer 1) | Govern change to the architecture: assess whether requests are minor adjustments or require a new ADM cycle; control architecture change requests; maintain integrity of baseline and target states; new issues/problems or strategy changes trigger re-entry | Architecture Updates, Change Requests, new Request for Architecture Work |
 
 ---
 
