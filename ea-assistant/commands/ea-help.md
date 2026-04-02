@@ -91,6 +91,7 @@ You have existing engagements. Common next steps:
 | `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman |
 | `/ea-migrate [--report]` | Align legacy engagement to current plugin version conventions |
 | `/ea-publish` | Merge artifacts into a consolidated report |
+| `/ea-config [section]` | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md |
 | `/ea-help` | This guide |
 
 ### Interview Shortcuts
@@ -147,6 +148,9 @@ Type these at any interview prompt:
   artifact risk sections; `/ea-changes` for Phase H change management.
 • Use `/ea-engage-review` for a full engagement health check — coverage,
   traceability, governance, ADR status, and Zachman completeness.
+• Use `/ea-config rules` to teach the engagement project-specific rules (e.g. naming
+  conventions, methodology constraints, compliance requirements). Rules are written to
+  `.claude/rules/ea-engagement.md` and loaded automatically by Claude Code each session.
 • Ask "how does architecture governance work" for a full explanation of
   the governance structure, cascade, roles, and TOGAF tool mapping.
 • Each engagement folder contains `.claude/rules/ea-engagement.md` —
