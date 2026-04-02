@@ -37,3 +37,36 @@ Used by Sections 2, 3, and 4. Run this logic whenever a section requires an acti
    No engagements found. Run `/ea-new` to create one.
    ```
    Then stop.
+
+## Dispatcher
+
+When this command runs:
+
+1. Read the argument (if any).
+
+2. If an argument is provided, dispatch directly:
+   - `settings` → jump to Section 1
+   - `rules` → run Engagement Resolution, then jump to Section 2
+   - `optouts` → run Engagement Resolution, then jump to Section 3
+   - `refresh` → run Engagement Resolution, then jump to Section 4
+   - Anything else → display: `Unknown section "{arg}". Valid options: settings, rules, optouts, refresh.` and stop.
+
+3. If no argument is provided, display the menu:
+   ```
+   EA Assistant Configuration
+
+   1. Plugin settings     (.claude/ea-assistant.local.md)
+   2. Engagement rules    (EA-projects/{slug}/.claude/rules/ea-engagement.md)
+   3. Opt-out management  (EA-projects/{slug}/engagement.json)
+   4. Refresh CLAUDE.md   (EA-projects/{slug}/CLAUDE.md)
+
+   Select a section (1–4), or press Enter to exit:
+   ```
+   Wait for input.
+   - `1` → Section 1
+   - `2` → run Engagement Resolution, then Section 2
+   - `3` → run Engagement Resolution, then Section 3
+   - `4` → run Engagement Resolution, then Section 4
+   - Empty / Enter → exit with no output
+
+4. After completing any section, return to the menu (unless the user chose a direct subcommand).
