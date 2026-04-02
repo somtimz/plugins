@@ -131,3 +131,62 @@ When this command runs:
    requirementsRepoPath: {value}
    ```
    If `requirementsRepoPath` has no value, write `requirementsRepoPath: ` (key present, empty value — do not omit the line).
+
+## Section 2 — Engagement Rules
+
+**File:** `EA-projects/{slug}/.claude/rules/ea-engagement.md`
+
+The seeded boilerplate (Session Start, Artifacts, Concepts and References, IDs sections) is system-managed and must never be altered. Custom rules live in a `## Custom Rules` section at the end of the file.
+
+**Flow:**
+
+1. Read `EA-projects/{slug}/.claude/rules/ea-engagement.md`. If the file does not exist, display:
+   ```
+   Engagement rules file not found for {slug}.
+   Run `/ea-new` or `/ea-migrate` to create it.
+   ```
+   Then return to the caller.
+
+2. Locate the `## Custom Rules` section. If it does not exist, treat the custom rules list as empty. Do not display or allow editing of the boilerplate sections above it.
+
+3. Display the custom rules list:
+   ```
+   Engagement Rules — {slug}
+
+   Custom rules:
+     1. {rule text}
+     2. {rule text}
+     (none)   ← if list is empty
+
+   Say "add: <rule in your words>" to add a rule,
+   "remove <N>" to remove a rule, or Enter to go back.
+   ```
+
+4. **Add flow** — on input starting with `add:`:
+   a. Extract the text after `add:` and trim whitespace.
+   b. Infer and rewrite it as a clean, imperative rule in the same style as the boilerplate rules (e.g. "Always validate data artifacts against GDPR Article 30 requirements before marking Approved"). The inferred rule should be a single sentence, begin with an imperative verb, and be unambiguous.
+   c. Confirm with the user:
+      ```
+      Add this rule?
+        → "{inferred rule}"
+      (y / edit / n):
+      ```
+   d. On `y`: append the rule to the `## Custom Rules` section, write the file, confirm `✓ Rule added`, redisplay the list.
+   e. On `edit`: ask "Enter your preferred wording:" — accept revised text, go back to step (c).
+   f. On `n`: discard, re-prompt.
+
+5. **Remove flow** — on input `remove <N>`:
+   a. Confirm: `Remove rule {N}: "{rule text}"? (y/n)`
+   b. On `y`: remove the entry from the list, rewrite the `## Custom Rules` section, write the file, confirm `✓ Rule removed`, redisplay the list.
+   c. On `n`: re-prompt.
+
+6. **File write rule:** When writing, preserve the boilerplate sections exactly as-is. Replace only the `## Custom Rules` section (or append it if absent). The `## Custom Rules` section format:
+   ```markdown
+   ## Custom Rules
+
+   - {rule 1}
+   - {rule 2}
+   ```
+   If the list is empty after a removal, write the section with just the heading and no bullets.
+
+7. On empty input: return to the caller.
