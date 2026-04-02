@@ -492,7 +492,7 @@ Multiple agents write to `engagement.json`. To prevent silent overwrites, each a
 | `artifacts[]` (add new entry) | The command or agent that creates the artifact (e.g. `/ea-artifact`, `ea-roadmap`) |
 | `direction` | `/ea-open` metadata edit; `ea-interviewer` (during interviews when explicitly prompted) |
 | `metrics` | `/ea-open` metadata edit |
-| `optOuts[]` | `ea-interviewer` only (append only — never remove) |
+| `optOuts[]` | `ea-interviewer` only (append only — never remove); removal is permitted only via `/ea-config optouts` |
 | `analysis_runs` | `ea-requirements-analyst` only |
 
 **Rules:**
