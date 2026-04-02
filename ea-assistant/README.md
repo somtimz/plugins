@@ -129,6 +129,7 @@ sessionSummary: true
 | `/ea-migrate [--report]` | Align a legacy engagement to the current plugin version conventions |
 | `/ea-grill [artifact] [--skill]` | Deep-review an artifact using a grill-me skill; apply findings one revision at a time |
 | `/ea-publish` | Merge all artifacts into a consolidated document; compliance pre-check, opted-out and non-standard items flagged |
+| `/ea-config [section]` | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md |
 | `/ea-help` | Getting-started guide, full command reference, and interview shortcuts |
 
 ## Interview Shortcuts

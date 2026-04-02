@@ -41,6 +41,7 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 | `/ea-status` | ea-facilitator | Dashboard: all engagements and progress |
 | `/ea-phase` | ea-facilitator | Start, edit, or resume an ADM phase |
 | `/ea-migrate` | ea-facilitator | Detect and resolve version alignment gaps |
+| `/ea-config` | ea-facilitator | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md |
 | `/ea-help` | ea-facilitator | List commands and getting-started guide |
 | `/ea-interview` | ea-interviewer | Structured Q&A for any artifact / ADM phase |
 | `/ea-brainstorm` | ea-facilitator | Capture freeform thoughts for current phase |
@@ -65,7 +66,7 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 
 ```
 agents/          8 agents (ea-facilitator, ea-interviewer, ea-roadmap, ea-document-analyst, ...)
-commands/        22 commands (see Command Reference above)
+commands/        23 commands (see Command Reference above)
 skills/          8 skill directories (ea-artifact-templates, ea-engagement-lifecycle, zachman-framework, ...)
 templates/       27 TOGAF artifact templates (.md)
 scripts/         Python scripts for Word/PPTX generation
