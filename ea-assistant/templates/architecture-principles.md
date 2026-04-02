@@ -1,7 +1,7 @@
 ---
 artifact: Architecture Principles
 engagement: {{engagement_name}}
-phase: Prelim/A
+phase: Prelim
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
@@ -14,6 +14,9 @@ taxonomy:
   layer: Reference
   sensitivity: Internal
   tags: [principles, standards, governance, preliminary]
+relatedArtifacts: []
+diagrams: []
+links: []
 ---
 
 <details>

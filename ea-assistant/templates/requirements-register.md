@@ -14,6 +14,9 @@ taxonomy:
   layer: Reference
   sensitivity: Internal
   tags: [requirements, nfr, constraints, traceability]
+relatedArtifacts: []
+diagrams: []
+links: []
 ---
 
 <details>

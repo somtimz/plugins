@@ -15,6 +15,9 @@ taxonomy:
   layer: Governance
   sensitivity: Confidential
   tags: [risks, register, mitigation, cross-cutting]
+relatedArtifacts: []
+diagrams: []
+links: []
 ---
 
 <details>

@@ -15,6 +15,9 @@ taxonomy:
   layer: Reference
   sensitivity: Internal
   tags: [zachman, classification, coverage, cross-cutting]
+relatedArtifacts: []
+diagrams: []
+links: []
 ---
 
 <details>

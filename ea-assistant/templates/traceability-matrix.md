@@ -14,6 +14,9 @@ taxonomy:
   layer: Reference
   sensitivity: Internal
   tags: [traceability, requirements, goals, cross-cutting]
+relatedArtifacts: []
+diagrams: []
+links: []
 ---
 
 <details>

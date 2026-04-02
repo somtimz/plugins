@@ -32,20 +32,42 @@ Phase B    Business Architecture           ⬜ Not Created  —
 
 Offer: create a missing artifact, view an existing one, start an interview.
 
+### Phase Folder Mapping
+
+Derive the artifact's storage folder from the `phase` field in the template frontmatter:
+
+| Template phase | Folder |
+|---|---|
+| Prelim or Prelim/A | `artifacts/preliminary/` |
+| Requirements | `artifacts/requirements/` |
+| A | `artifacts/phase-a/` |
+| B | `artifacts/phase-b/` |
+| C-Data | `artifacts/phase-c-data/` |
+| C-App | `artifacts/phase-c-app/` |
+| D | `artifacts/phase-d/` |
+| E or E/F | `artifacts/phase-e/` |
+| F | `artifacts/phase-f/` |
+| G | `artifacts/phase-g/` |
+| H | `artifacts/phase-h/` |
+| All or cross-cutting | `artifacts/cross-cutting/` |
+| `{{phase}}` | resolve from engagement's `currentPhase` at creation time |
+
 ### Mode: `create [artifact-name]`
 
 1. Match the artifact name to a template in the plugin's `templates/` directory
 2. If ambiguous, show a numbered list of matching templates
-3. Copy the template to `EA-projects/{slug}/artifacts/{artifact-id}.md`
-4. Pre-populate known fields from `engagement.json` (name, sponsor, organisation, date)
-5. Pre-populate any requirements linked to this phase from `requirements/requirements-index.json`
-6. Set `templateVersion` in the artifact frontmatter to the current plugin version (read from `.claude-plugin/plugin.json`)
-7. Add entry to `artifacts[]` in `engagement.json`
-8. Confirm creation and offer to start an interview to populate it
+3. Determine the phase folder using the **Phase Folder Mapping** table above
+4. Copy the template to `EA-projects/{slug}/artifacts/{phase-folder}/{artifact-id}.md`
+5. Pre-populate known fields from `engagement.json` (name, sponsor, organisation, date)
+6. Pre-populate any requirements linked to this phase from `requirements/requirements-index.json`
+7. Set `templateVersion` in the artifact frontmatter to the current plugin version (read from `.claude-plugin/plugin.json`)
+8. Resolve any `{{phase}}` placeholder in the frontmatter to the actual phase value
+9. Add entry to `artifacts[]` in `engagement.json` — `file` path must be `artifacts/{phase-folder}/{artifact-id}.md`
+10. Confirm creation and offer to start an interview to populate it
 
 ### Mode: `view [artifact-name]`
 
-1. Find the artifact file in `artifacts/`
+1. Find the artifact file using the path recorded in `engagement.json → artifacts[].file`. If that entry is missing, search all `artifacts/*/` subfolders for `{artifact-id}.md`
 2. **Run the Compliance Check** (see `skills/ea-artifact-templates/references/compliance-check.md`):
    - If all checks pass → display artifact with a `✅ Compliant` badge.
    - If failures exist → display a compliance notice above the artifact content:

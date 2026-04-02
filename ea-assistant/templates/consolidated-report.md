@@ -12,6 +12,9 @@ taxonomy:
   layer: Reference
   sensitivity: Internal
   tags: [summary, executive, portfolio, cross-cutting]
+relatedArtifacts: []
+diagrams: []
+links: []
 ---
 
 <details>
