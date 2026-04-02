@@ -459,7 +459,7 @@ Fields:
 - `reason` — user-supplied reason, or `""` if none given
 - `timestamp` — ISO 8601 datetime of the opt-out
 
-Opt-outs accumulate across sessions; they are never automatically removed. Use `/ea-open` → Edit artifact status to reverse an opt-out (change the artifact back to Draft and remove the `optOuts[]` entry manually if needed).
+Opt-outs accumulate across sessions; they are never automatically removed. Use `/ea-config optouts` to view and remove opt-out entries.
 
 **Decision Register** is a special artifact type: it is generated from Appendix A3 data across all artifacts, not from interview placeholders. When registered in `engagement.json`, use:
 
