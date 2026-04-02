@@ -70,3 +70,64 @@ When this command runs:
    - Empty / Enter → exit with no output
 
 4. After completing any section, return to the menu (unless the user chose a direct subcommand).
+
+## Section 1 — Plugin Settings
+
+**File:** `.claude/ea-assistant.local.md`
+
+**Settings schema:**
+
+| Key | Default | Allowed values |
+|---|---|---|
+| `facilitatorStyle` | `patient` | `patient`, `direct`, `executive` |
+| `audienceLevel` | `mixed` | `executive`, `architect`, `technical`, `mixed` |
+| `requireConfirmBeforeRecord` | `false` | `true`, `false` |
+| `researchPrompts` | `true` | `true`, `false` |
+| `sessionSummary` | `true` | `true`, `false` |
+| `requirementsRepoPath` | *(empty)* | any filesystem path |
+
+**File format:** plain text `key: value` lines (not strict YAML). Each setting on its own line. Preserve any comment lines (`#`) on read; write only key-value lines back.
+
+**Flow:**
+
+1. Attempt to read `.claude/ea-assistant.local.md`. If missing, treat all values as their defaults.
+
+2. Parse each `key: value` line. For `requirementsRepoPath`, treat a missing or blank value as `(not set)`.
+
+3. Display the current settings:
+   ```
+   Plugin Settings — .claude/ea-assistant.local.md
+
+     facilitatorStyle            {value}     (patient | direct | executive)
+     audienceLevel               {value}     (executive | architect | technical | mixed)
+     requireConfirmBeforeRecord  {value}     (true | false)
+     researchPrompts             {value}     (true | false)
+     sessionSummary              {value}     (true | false)
+     requirementsRepoPath        {value}     (any path)
+
+   Say "set <key> to <value>" to change a setting, or Enter to go back.
+   ```
+
+4. Wait for input.
+
+5. On `set <key> to <value>`:
+   - If `key` is not in the schema: display `Unknown setting "{key}". Valid settings: facilitatorStyle, audienceLevel, requireConfirmBeforeRecord, researchPrompts, sessionSummary, requirementsRepoPath.` and re-prompt.
+   - If `value` is not in the allowed values for the key (for enum settings): display `Invalid value "{value}" for {key}. Allowed: {list}.` and re-prompt.
+   - Otherwise: update the in-memory value, write all six settings to `.claude/ea-assistant.local.md` (overwrite), and confirm: `✓ {key} updated to "{value}"`
+   - Loop — redisplay settings and re-prompt.
+
+6. On empty input: return to the caller (menu or exit).
+
+7. **File write format** — always write in this exact structure (preserves comments from the README):
+   ```
+   # EA Assistant — local plugin settings
+   # See ea-assistant/README.md for documentation.
+
+   facilitatorStyle: {value}
+   audienceLevel: {value}
+   requireConfirmBeforeRecord: {value}
+   researchPrompts: {value}
+   sessionSummary: {value}
+   requirementsRepoPath: {value}
+   ```
+   If `requirementsRepoPath` has no value, write `requirementsRepoPath: ` (key present, empty value — do not omit the line).
