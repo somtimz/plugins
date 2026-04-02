@@ -240,3 +240,22 @@ The seeded boilerplate (Session Start, Artifacts, Concepts and References, IDs s
    d. On `n`: re-prompt.
 
 6. On empty input: return to the caller.
+
+## Section 4 — Refresh CLAUDE.md
+
+**File:** `EA-projects/{slug}/CLAUDE.md`
+
+**Flow:**
+
+1. Read `EA-projects/{slug}/engagement.json`. If unreadable, display the read error and return to the caller.
+
+2. Regenerate `EA-projects/{slug}/CLAUDE.md` using the same Project CLAUDE.md template defined in `ea-assistant/commands/ea-new.md` (the `## Project CLAUDE.md Template` section). Populate all placeholders from the current `engagement.json` values — identity fields, state counts (artifact count, in-progress count, open decisions, research items, opt-outs), phase folder map, artifact link conventions, and quick commands table.
+
+3. Write the file.
+
+4. Confirm:
+   ```
+   ✓ CLAUDE.md refreshed for {slug}
+   ```
+
+5. Return to the caller.
