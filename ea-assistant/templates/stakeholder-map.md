@@ -1,7 +1,7 @@
 ---
 artifact: Stakeholder Map
 engagement: {{engagement_name}}
-phase: Prelim/A
+phase: A
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
@@ -14,6 +14,9 @@ taxonomy:
   layer: Reference
   sensitivity: Confidential
   tags: [stakeholders, concerns, influence, phase-a]
+relatedArtifacts: []
+diagrams: []
+links: []
 ---
 
 <details>

@@ -14,6 +14,9 @@ taxonomy:
   layer: Governance
   sensitivity: Internal
   tags: [compliance, conformance, assessment, phase-g]
+relatedArtifacts: []
+diagrams: []
+links: []
 ---
 
 <details>

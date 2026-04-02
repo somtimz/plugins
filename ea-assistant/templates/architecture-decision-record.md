@@ -18,6 +18,9 @@ taxonomy:
   layer: Governance
   sensitivity: Internal
   tags: [adr, decision, rationale, options]
+relatedArtifacts: []
+diagrams: []
+links: []
 ---
 
 <details>

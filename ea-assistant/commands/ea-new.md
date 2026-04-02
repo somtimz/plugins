@@ -31,6 +31,18 @@ Create a new EA engagement project under `EA-projects/`.
    │       └── ea-engagement.md    ← persistent session guardrails
    ├── requirements/
    ├── artifacts/
+   │   ├── preliminary/            ← Phase Prelim artifacts
+   │   ├── requirements/           ← Requirements phase artifacts
+   │   ├── phase-a/                ← Phase A: Architecture Vision
+   │   ├── phase-b/                ← Phase B: Business Architecture
+   │   ├── phase-c-data/           ← Phase C: Data Architecture
+   │   ├── phase-c-app/            ← Phase C: Application Architecture
+   │   ├── phase-d/                ← Phase D: Technology Architecture
+   │   ├── phase-e/                ← Phase E: Opportunities & Solutions
+   │   ├── phase-f/                ← Phase F: Migration Planning
+   │   ├── phase-g/                ← Phase G: Implementation Governance
+   │   ├── phase-h/                ← Phase H: Architecture Change Management
+   │   └── cross-cutting/          ← Cross-phase registers and reports
    ├── diagrams/
    ├── uploads/
    ├── interviews/
@@ -153,12 +165,48 @@ Write this file to `EA-projects/{slug}/CLAUDE.md`. It is a **pointer document** 
 | Content | Location |
 |---|---|
 | Goals, objectives, strategies, drivers, issues | `engagement.json → direction` |
-| Artifact files | `artifacts/` |
+| Artifact files | `artifacts/{phase-folder}/` (see Phase Folder Map) |
 | Interview notes | `interviews/session-log.md` |
 | Working notes | `brainstorm/brainstorm-notes.md` |
 | Research library | `ResearchAndReferences/research-index.md` |
 | Architecture reviews | `reviews/` |
 | Diagrams | `diagrams/` |
+
+## Phase Folder Map
+
+| Phase | Folder | Example artifacts |
+|---|---|---|
+| Preliminary | `artifacts/preliminary/` | Architecture Principles, Engagement Charter |
+| Requirements | `artifacts/requirements/` | Requirements Register, Traceability Matrix |
+| A | `artifacts/phase-a/` | Architecture Vision, Statement of Architecture Work |
+| B | `artifacts/phase-b/` | Business Architecture, Business Model Canvas |
+| C-Data | `artifacts/phase-c-data/` | Data Architecture |
+| C-App | `artifacts/phase-c-app/` | Application Architecture |
+| D | `artifacts/phase-d/` | Technology Architecture |
+| E | `artifacts/phase-e/` | Gap Analysis, Architecture Roadmap |
+| F | `artifacts/phase-f/` | Migration Plan |
+| G | `artifacts/phase-g/` | Architecture Contract, Compliance Assessment |
+| H | `artifacts/phase-h/` | Change Request |
+| Cross-cutting | `artifacts/cross-cutting/` | Risk Register, Decision Register, ADR Register |
+
+## Artifact Link Conventions
+
+Within artifact markdown files, use relative links from the artifact's location:
+
+| Target | Relative path from `artifacts/{phase}/` |
+|---|---|
+| Diagram | `../../diagrams/{filename}.{ext}` |
+| Same-phase artifact | `./{artifact-id}.md` |
+| Different-phase artifact | `../{phase-folder}/{artifact-id}.md` |
+| Upload | `../../uploads/{filename}` |
+| Research document | `../../ResearchAndReferences/{filename}.md` |
+
+Example in artifact body:
+```markdown
+See the [Architecture Principles](../preliminary/architecture-principles.md) for the governing constraints.
+
+![Context Diagram](../../diagrams/context-diagram.png)
+```
 
 ## Quick Commands
 

@@ -14,6 +14,9 @@ taxonomy:
   layer: Motivation
   sensitivity: Confidential
   tags: [business-model, value-proposition, phase-b]
+relatedArtifacts: []
+diagrams: []
+links: []
 ---
 
 <details>

@@ -74,7 +74,7 @@ For each absent artifact, flag as a gap but do not auto-create — creating arti
 
 ### 3c — Artifact frontmatter gaps
 
-For each artifact file in `EA-projects/{slug}/artifacts/` (excluding `*.review.md`, registers, and session logs):
+For each artifact file in `EA-projects/{slug}/artifacts/` and all phase subdirectories `artifacts/*/` (excluding `*.review.md`, registers, and session logs):
 
 Read the frontmatter. Check for:
 
@@ -86,7 +86,30 @@ Read the frontmatter. Check for:
 
 For taxonomy gaps: look up the canonical taxonomy for this artifact type from `skills/ea-artifact-templates/references/taxonomy.md`. If the artifact type is not in the canonical map, flag for manual assignment.
 
-### 3d — Rules file gap
+### 3d — Phase-organized artifact structure gap
+
+Check whether artifacts are stored in phase subdirectories or flat in `artifacts/`:
+
+| Check | Gap if… | Introduced in | Severity |
+|---|---|---|---|
+| Artifact files stored in `artifacts/{phase-folder}/` subfolders | Any `artifacts[]` entry has `file` path directly in `artifacts/` (e.g. `artifacts/architecture-vision.md` instead of `artifacts/phase-a/architecture-vision.md`) | 1.0.0 | Medium |
+
+If gaps exist, list each affected artifact file. Remediation (per artifact, requires confirmation):
+1. Determine the target phase folder from the artifact's `phase:` frontmatter field using the Phase Folder Mapping in `/ea-artifact`
+2. Announce: "Move `artifacts/{artifact-id}.md` → `artifacts/{phase-folder}/{artifact-id}.md`"
+3. On user approval: move the file; update the `file` path in `engagement.json → artifacts[]` entry
+
+Also check the `relatedArtifacts`, `diagrams`, and `links` frontmatter fields:
+
+| Check | Gap if… | Introduced in | Severity |
+|---|---|---|---|
+| `relatedArtifacts:` field present in frontmatter | Field absent | 1.0.0 | Low |
+| `diagrams:` field present in frontmatter | Field absent | 1.0.0 | Low |
+| `links:` field present in frontmatter | Field absent | 1.0.0 | Low |
+
+Remediation: inject the three fields (all empty arrays `[]`) after the `tags:` line in the taxonomy block. This is non-destructive — safe to auto-apply.
+
+### 3e — Rules file gap
 
 Check for `EA-projects/{slug}/.claude/rules/ea-engagement.md`:
 
@@ -134,6 +157,10 @@ engagement.json schema gaps      {N gaps | ✅ None}
 
 Missing artifacts                {N gaps | ✅ None}
   GAP-M-010  [Medium] Engagement Charter not present (introduced v0.9.5)
+
+Phase structure gaps              {N gaps | ✅ None}
+  GAP-M-015  [Medium] architecture-vision.md — flat path; move to artifacts/phase-a/
+  GAP-M-016  [Low]    architecture-vision.md — relatedArtifacts/diagrams/links fields absent
 
 Artifact frontmatter gaps        {N gaps | ✅ None}
   GAP-M-020  [Medium] architecture-vision.md — taxonomy: block missing

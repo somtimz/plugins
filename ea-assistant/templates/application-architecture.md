@@ -1,7 +1,7 @@
 ---
 artifact: Application Architecture
 engagement: {{engagement_name}}
-phase: C
+phase: C-App
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
@@ -13,7 +13,10 @@ taxonomy:
   audience: Architecture
   layer: Target
   sensitivity: Internal
-  tags: [applications, integration, portfolio, phase-c]
+  tags: [applications, integration, portfolio, phase-c-app]
+relatedArtifacts: []
+diagrams: []
+links: []
 ---
 
 <details>
@@ -192,27 +195,6 @@ Every significant architectural decision should be traceable to at least one req
 
 ---
 
-## Appendix A5 — Related Architecture Decisions
-
-<details>
-<summary>📋 Guidance</summary>
-
-List ADRs that informed, were informed by, or are otherwise relevant to this artifact.
-Reference the ADR-NNN ID so readers can navigate to the full decision record.
-Use `/ea-adrs` to manage the ADR Register and surface ADR summaries.
-
-When a significant decision is made during an interview for this artifact, the
-`ea-interviewer` will suggest creating an ADR if the decision meets the threshold
-criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
-
-</details>
-
-| ADR ID | Title | Status | Summary |
-|---|---|---|---|
-| *(no related ADRs recorded)* | — | — | — |
-
----
-
 ## Appendix A3 — Decision Log
 
 <details>
@@ -246,6 +228,26 @@ a material risk should also be raised as RIS-NNN entries via `/ea-risks`.
 | ID | Concern | Raised By | Category | Status | Response | Action / Owner |
 |---|---|---|---|---|---|---|
 | *(no concerns recorded)* | — | — | — | — | — | — |
+
+
+## Appendix A5 — Related Architecture Decisions
+
+<details>
+<summary>📋 Guidance</summary>
+
+List ADRs that informed, were informed by, or are otherwise relevant to this artifact.
+Reference the ADR-NNN ID so readers can navigate to the full decision record.
+Use `/ea-adrs` to manage the ADR Register and surface ADR summaries.
+
+When a significant decision is made during an interview for this artifact, the
+`ea-interviewer` will suggest creating an ADR if the decision meets the threshold
+criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
+
+</details>
+
+| ADR ID | Title | Status | Summary |
+|---|---|---|---|
+| *(no related ADRs recorded)* | — | — | — |
 
 ---
 

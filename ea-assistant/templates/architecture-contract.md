@@ -14,6 +14,9 @@ taxonomy:
   layer: Governance
   sensitivity: Confidential
   tags: [contract, conformance, commitment, phase-g]
+relatedArtifacts: []
+diagrams: []
+links: []
 ---
 
 <details>

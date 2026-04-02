@@ -108,7 +108,7 @@ Display a picklist of all EA engagements, open the selected one with full detail
    - **Identity** — organisation, slug, type, sponsor, phase, status, dates
    - **Engagement Context** — Vision (single sentence only) and scope
    - **Engagement State** — counts only: active phases (In Progress / On Hold), artifact totals, open decision count (Provisional + Awaiting across all A3 logs — count only, no detail), research item count, opt-out count
-   - **Where to Find Content** — pointer table (static, always the same)
+   - **Where to Find Content** — pointer table (static, always the same); include Phase Folder Map from `/ea-new`
    - **Quick Commands** — always include, with `{currentPhase}` substituted
 
    Full strategic detail (goals, objectives, strategies, drivers, issues) lives in `engagement.json → direction` and artifact files — do not duplicate it here.
@@ -118,6 +118,23 @@ Display a picklist of all EA engagements, open the selected one with full detail
 7c. **Ensure ResearchAndReferences folder exists** — check for `EA-projects/{slug}/ResearchAndReferences/`. If missing (legacy engagement), create it and seed `ResearchAndReferences/research-index.md` using the same template as `/ea-new` (with current slug and name, today's date, empty item table). This is silent — do not notify the user.
 
 7d. **Ensure `.claude/rules/ea-engagement.md` exists** — check for `EA-projects/{slug}/.claude/rules/ea-engagement.md`. If missing (legacy engagement), create it using the same template as `/ea-new` (substituting current `{name}` and `{slug}`). This is silent — do not notify the user.
+
+7e. **Ensure phase artifact subdirectories exist** — check for the 12 phase subdirectories under `EA-projects/{slug}/artifacts/`. For any that are missing, create them silently:
+```
+artifacts/preliminary/
+artifacts/requirements/
+artifacts/phase-a/
+artifacts/phase-b/
+artifacts/phase-c-data/
+artifacts/phase-c-app/
+artifacts/phase-d/
+artifacts/phase-e/
+artifacts/phase-f/
+artifacts/phase-g/
+artifacts/phase-h/
+artifacts/cross-cutting/
+```
+Do not move existing artifact files — file migration is handled explicitly by `/ea-migrate`.
 
 7. **Offer next actions:**
 

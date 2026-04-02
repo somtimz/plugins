@@ -74,20 +74,27 @@ If the user runs `/ea-generate` with a `.mmd` file path or with `png`/`svg` as t
 
 ### Step 3: Read and Extract Artifact Content
 
-1. Read the artifact file from `EA-projects/{slug}/artifacts/{artifact-id}.md`.
+1. Read the artifact file from the path in `engagement.json → artifacts[].file` (e.g. `EA-projects/{slug}/artifacts/phase-a/architecture-vision.md`).
 2. Read the engagement metadata from `EA-projects/{slug}/engagement.json`.
-3. Parse the artifact into a content JSON object with this structure:
+3. **Resolve relative image links** — before extraction, scan the artifact body for markdown image syntax `![alt](relative-path)`. For each:
+   - Resolve the relative path against the artifact file's location to an absolute path.
+   - Replace the relative path with the absolute path in the extraction output.
+   - Example: artifact at `artifacts/phase-a/architecture-vision.md` with `![Context](../../diagrams/context.png)` → resolves to `EA-projects/{slug}/diagrams/context.png`.
+4. Parse the artifact into a content JSON object with this structure:
 
 ```json
 {
   "meta": {
-    "artifact":      "Architecture Vision",
-    "artifactId":    "architecture-vision",
-    "phase":         "A",
-    "status":        "Draft",
-    "reviewStatus":  "Pending",
-    "version":       "0.2",
-    "lastModified":  "2026-03-28T10:00:00"
+    "artifact":         "Architecture Vision",
+    "artifactId":       "architecture-vision",
+    "phase":            "A",
+    "status":           "Draft",
+    "reviewStatus":     "Pending",
+    "version":          "0.2",
+    "lastModified":     "2026-03-28T10:00:00",
+    "relatedArtifacts": ["architecture-principles", "requirements-register"],
+    "diagrams":         ["diagrams/context-diagram.png"],
+    "links":            [{"label": "Architecture Principles", "path": "../preliminary/architecture-principles.md"}]
   },
   "sections": [
     {"heading": "Section Heading", "content": "Body text here", "level": 1},
@@ -113,14 +120,17 @@ Rules for extraction:
   - `version` → `meta.version` (string, e.g. `"0.2"`)
   - `lastModified` → `meta.lastModified` (ISO 8601 string)
   - `taxonomy` → `meta.taxonomy` (object — copy the full nested taxonomy block as-is: `{domain, category, audience, layer, sensitivity, tags}`)
-  - Omit any field that is absent from the frontmatter.
+  - `relatedArtifacts` → `meta.relatedArtifacts` (array of artifact IDs; use `[]` if absent)
+  - `diagrams` → `meta.diagrams` (array of diagram paths relative to engagement root; use `[]` if absent)
+  - `links` → `meta.links` (array of `{label, path}` objects; use `[]` if absent)
+  - Omit any other field that is absent from the frontmatter.
 - Map each `## Heading` → `level: 1`, `### Heading` → `level: 2`
 - Skip `<details>` guidance blocks — they are template guidance, not content
 - For each markdown table, extract it as an entry in `"tables"` — include the section heading it belongs to
 - Where a field is `{{placeholder}}` or empty, use `""` as the content value (the script will render it as "[To be completed]")
-- Collapse the content to plain text — do not include raw markdown syntax in content strings
+- Collapse the content to plain text — do not include raw markdown syntax in content strings; **exception**: inline image syntax `![alt](absolute-path)` (already resolved in step 3) should be retained so the generation script can embed the image
 
-4. Write the extracted JSON to a temp file: `/tmp/ea-gen-{artifact-id}.json`
+5. Write the extracted JSON to a temp file: `/tmp/ea-gen-{artifact-id}.json`
 
 ### Step 4: Generate Output
 
@@ -250,12 +260,21 @@ This renders every `.mmd` file in the engagement's diagrams directory to images 
 
 **Diagram discovery (docx and pptx only):**
 
-Before invoking the generation script, collect associated diagrams for inclusion:
+Before invoking the generation script, collect associated diagrams for inclusion. Merge two sources:
 
-1. Scan `EA-projects/{slug}/diagrams/` for files matching `{artifact-id}-*.png` — these are pre-rendered diagrams linked to this artifact.
+**Source A — frontmatter `diagrams:` field** (explicit list in artifact metadata):
+- Read the `diagrams:` array from the artifact frontmatter (extracted in Step 3 as `meta.diagrams`).
+- Each entry is a path relative to the engagement root (e.g. `"diagrams/context-diagram.png"`).
+- Resolve each to an absolute path: `EA-projects/{slug}/{diagrams-entry}`.
+
+**Source B — filename convention** (legacy / auto-discovery):
+1. Scan `EA-projects/{slug}/diagrams/` for files matching `{artifact-id}-*.png`.
 2. Also scan for `{artifact-id}-*.mmd` files that have no corresponding `.png`. For each:
    - Render it to PNG automatically using the same mmdc detection logic from the **Render to Image** section above.
    - If rendering fails, skip that diagram and show a warning; continue with the rest.
+
+**Merge and deduplicate** — combine Source A and Source B, removing duplicate paths. Source A entries come first (they are explicitly authored).
+
 3. Build a diagrams list in this format and write it to `/tmp/ea-diagrams-{artifact-id}.json`:
 
 ```json
@@ -301,8 +320,10 @@ DIAGRAMS_ARG=""
   --engagement-dir EA-projects/{slug} \
   --content @/tmp/ea-gen-{artifact-id}.json \
   $DIAGRAMS_ARG \
-  --output EA-projects/{slug}/artifacts/{artifact-id}.docx
+  --output EA-projects/{slug}/artifacts/{phase-folder}/{artifact-id}.docx
 ```
+
+Output path uses the same `{phase-folder}` as the source artifact (e.g. `artifacts/phase-a/architecture-vision.docx`).
 
 **For pptx:**
 
@@ -323,7 +344,7 @@ DIAGRAMS_ARG=""
   --engagement-dir EA-projects/{slug} \
   --content @/tmp/ea-gen-{artifact-id}.json \
   $DIAGRAMS_ARG \
-  --output EA-projects/{slug}/artifacts/{artifact-id}.pptx
+  --output EA-projects/{slug}/artifacts/{phase-folder}/{artifact-id}.pptx
 ```
 
 If the script exits with a non-zero status, display the error output and stop. Do not update the engagement.

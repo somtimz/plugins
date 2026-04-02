@@ -15,6 +15,9 @@ taxonomy:
   layer: Governance
   sensitivity: Internal
   tags: [adr, decisions, register, cross-cutting]
+relatedArtifacts: []
+diagrams: []
+links: []
 ---
 
 <details>

@@ -14,17 +14,81 @@ Every EA engagement is stored as a folder under `EA-projects/`:
 
 ```
 EA-projects/
-├── {engagement-slug}/           # Active engagements
-│   ├── engagement.json          # metadata and state
-│   ├── requirements/            # local architecture requirements
-│   ├── artifacts/               # generated artifacts + review files
-│   ├── diagrams/                # .mmd, .dot, .drawio files
-│   ├── uploads/                 # source documents and diagrams
-│   └── interviews/              # dated, versioned interview notes
-└── .archive/                    # Archived engagements (hidden dotdir)
-    └── {engagement-slug}/       # Retains full structure
+├── {engagement-slug}/
+│   ├── engagement.json
+│   ├── CLAUDE.md                    # auto-generated pointer doc (refreshed on /ea-open)
+│   ├── .claude/rules/ea-engagement.md  # persistent session guardrails
+│   ├── artifacts/                   # phase-organized artifact files
+│   │   ├── preliminary/             # Prelim: Architecture Principles, Engagement Charter
+│   │   ├── requirements/            # Requirements: Register, Traceability Matrix
+│   │   ├── phase-a/                 # Phase A: Architecture Vision, SAoW, Stakeholder Map
+│   │   ├── phase-b/                 # Phase B: Business Architecture, Business Model Canvas
+│   │   ├── phase-c-data/            # Phase C: Data Architecture
+│   │   ├── phase-c-app/             # Phase C: Application Architecture
+│   │   ├── phase-d/                 # Phase D: Technology Architecture
+│   │   ├── phase-e/                 # Phase E: Gap Analysis, Architecture Roadmap
+│   │   ├── phase-f/                 # Phase F: Migration Plan
+│   │   ├── phase-g/                 # Phase G: Architecture Contract, Compliance Assessment
+│   │   ├── phase-h/                 # Phase H: Change Request
+│   │   └── cross-cutting/           # Risk Register, Decision Register, ADR Register, Zachman
+│   ├── diagrams/                    # .mmd, .dot, .drawio, .png, .svg
+│   ├── uploads/                     # source documents for ingestion
+│   ├── interviews/                  # session-log.md + dated interview notes
+│   ├── reviews/                     # /ea-grill output files
+│   ├── brainstorm/
+│   └── ResearchAndReferences/
+└── .archive/
+    └── {engagement-slug}/
         └── engagement.json
 ```
+
+### Phase Folder Mapping
+
+| Frontmatter `phase:` | Folder | Primary artifacts |
+|---|---|---|
+| `Prelim` | `artifacts/preliminary/` | Architecture Principles, Engagement Charter, Governance Framework |
+| `Requirements` | `artifacts/requirements/` | Requirements Register, Traceability Matrix |
+| `A` | `artifacts/phase-a/` | Architecture Vision, Statement of Architecture Work, Stakeholder Map |
+| `B` | `artifacts/phase-b/` | Business Architecture, Business Model Canvas |
+| `C-Data` | `artifacts/phase-c-data/` | Data Architecture |
+| `C-App` | `artifacts/phase-c-app/` | Application Architecture |
+| `D` | `artifacts/phase-d/` | Technology Architecture |
+| `E` or `E/F` | `artifacts/phase-e/` | Gap Analysis, Architecture Roadmap |
+| `F` | `artifacts/phase-f/` | Migration Plan |
+| `G` | `artifacts/phase-g/` | Architecture Contract, Compliance Assessment, Implementation Governance Plan |
+| `H` | `artifacts/phase-h/` | Change Request |
+| `All` or `cross-cutting` | `artifacts/cross-cutting/` | Risk Register, Decision Register, ADR Register, Zachman Diagram |
+| `{{phase}}` | resolve from `engagement.json → currentPhase` at creation time | Gap Analysis, ADRs |
+
+### Artifact Link Conventions
+
+Artifact markdown files use standard relative links. From `artifacts/{phase-folder}/{artifact-id}.md`:
+
+| Target | Relative path |
+|---|---|
+| Diagram file | `../../diagrams/{name}.{ext}` |
+| Same-phase artifact | `./{artifact-id}.md` |
+| Different-phase artifact | `../{phase-folder}/{artifact-id}.md` |
+| Upload document | `../../uploads/{filename}` |
+| Research document | `../../ResearchAndReferences/{filename}.md` |
+
+**Example usage in artifact body:**
+```markdown
+See [Architecture Principles](../preliminary/architecture-principles.md) for the governing constraints.
+
+![Context Diagram](../../diagrams/context-diagram.png)
+
+Refer to the [Requirements Register](../requirements/requirements-register.md) for traceability.
+```
+
+**Metadata frontmatter fields for cross-references** — all artifact frontmatter includes:
+```yaml
+relatedArtifacts: []   # list of artifact IDs this artifact references (e.g. ["architecture-vision", "gap-analysis"])
+diagrams: []           # list of diagram paths relative to engagement root (e.g. ["diagrams/context.png"])
+links: []              # list of {label, path} objects for named cross-references
+```
+
+Populate these fields when creating links in artifact body text so commands like `/ea-engage-review` can trace dependencies without parsing body content.
 
 ### engagement.json schema
 
@@ -395,7 +459,7 @@ Fields:
 - `reason` — user-supplied reason, or `""` if none given
 - `timestamp` — ISO 8601 datetime of the opt-out
 
-Opt-outs accumulate across sessions; they are never automatically removed. Use `/ea-open` → Edit artifact status to reverse an opt-out (change the artifact back to Draft and remove the `optOuts[]` entry manually if needed).
+Opt-outs accumulate across sessions; they are never automatically removed. Use `/ea-config optouts` to view and remove opt-out entries.
 
 **Decision Register** is a special artifact type: it is generated from Appendix A3 data across all artifacts, not from interview placeholders. When registered in `engagement.json`, use:
 
@@ -428,7 +492,7 @@ Multiple agents write to `engagement.json`. To prevent silent overwrites, each a
 | `artifacts[]` (add new entry) | The command or agent that creates the artifact (e.g. `/ea-artifact`, `ea-roadmap`) |
 | `direction` | `/ea-open` metadata edit; `ea-interviewer` (during interviews when explicitly prompted) |
 | `metrics` | `/ea-open` metadata edit |
-| `optOuts[]` | `ea-interviewer` only (append only — never remove) |
+| `optOuts[]` | `ea-interviewer` only (append only — never remove); removal is permitted only via `/ea-config optouts` |
 | `analysis_runs` | `ea-requirements-analyst` only |
 
 **Rules:**
