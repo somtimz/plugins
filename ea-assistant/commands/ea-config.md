@@ -190,3 +190,53 @@ The seeded boilerplate (Session Start, Artifacts, Concepts and References, IDs s
    If the list is empty after a removal, write the section with just the heading and no bullets.
 
 7. On empty input: return to the caller.
+
+## Section 3 — Opt-Out Management
+
+**Source:** `EA-projects/{slug}/engagement.json → optOuts[]`
+
+**Note:** This section intentionally allows removal of opt-out entries. This overrides the append-only rule in `ea-engagement-lifecycle/SKILL.md`, which applies to the interviewer agent only. `/ea-config` is the designated administrative interface for correcting opt-outs.
+
+**Flow:**
+
+1. Read `EA-projects/{slug}/engagement.json`. If unreadable, display:
+   ```
+   Could not read engagement.json for {slug}: {error}
+   ```
+   Then return to the caller.
+
+2. Extract `optOuts[]`. If the key is missing, treat it as an empty array.
+
+3. If the list is empty, display:
+   ```
+   Opt-Out Management — {slug}
+
+   No opt-outs recorded for this engagement.
+   ```
+   Then return to the caller.
+
+4. Display the opt-outs:
+   ```
+   Opt-Out Management — {slug}
+
+     1. {artifactId} / {questionRef or "—"}
+        Reason: "{reason or (none)}"
+        Added:  {timestamp}
+
+     2. ...
+
+   Say "remove <N>" to remove an opt-out, or Enter to go back.
+   ```
+
+5. **Remove flow** — on input `remove <N>`:
+   a. Validate N is in range. If not, display `No opt-out #{N}.` and re-prompt.
+   b. Confirm: `Remove opt-out for "{artifactId} / {questionRef}"? (y/n)`
+   c. On `y`:
+      - Read `engagement.json` fresh (do not use the in-memory copy).
+      - Splice the entry at index N-1 from `optOuts[]`.
+      - Update `lastModified` to the current ISO 8601 timestamp.
+      - Write `engagement.json`.
+      - Confirm `✓ Opt-out removed`, redisplay updated list.
+   d. On `n`: re-prompt.
+
+6. On empty input: return to the caller.
