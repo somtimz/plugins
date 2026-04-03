@@ -26,7 +26,7 @@
 ├── agents/                      # agent .md files
 ├── commands/                    # slash command .md files
 ├── skills/                      # skill directories (each with SKILL.md)
-├── hooks/hooks.json             # optional lifecycle hooks
+├── hooks/hooks.json             # optional lifecycle hooks — must be `{"hooks":{}}`, not `{}`
 └── templates/                   # optional document templates
 ```
 
@@ -40,6 +40,28 @@
   "author": { "name": "...", "email": "..." }
 }
 ```
+
+## Plugins & Marketplace
+
+When working with plugins — listing, deduplicating, checking status — always look in the installed plugins directory (`~/.claude/plugins/`), not the source repo. Use `claude plugins list` or read `~/.claude/plugins/` directly.
+
+## Repository Structure
+
+This is a monorepo. When pushing new packages or plugins to GitHub, always confirm the correct subdirectory placement (e.g., `RAG-assistant/`, `ea-assistant/`) before committing. Don't assume flat layout.
+
+## Tools & CLIs
+
+- **spec-kit** — CLI tool installed via `uv`. Invoke as `uv run spec-kit <command>`. It is NOT a Claude Code plugin or marketplace item.
+
+## Development Environment
+
+This user is on Windows/WSL2. Before editing text files (especially YAML, JSON, Markdown), be aware that CRLF line endings can cause silent failures — particularly in YAML frontmatter and plugin config files. If an edit fails to apply correctly, check line endings.
+
+## Testing & Verification
+
+- After any fix to plugin configs or UI components, verify the fix actually worked — don't just say "fixed". For JSON: parse it. For plugin installs: run the command and show output.
+- For web UI components (React, HTML), always test rendering in the browser before marking complete. UI rendering failures have occurred silently multiple times.
+- After bulk multi-file changes, maintain and show a checklist. Mark each file complete only after verifying it. Don't batch-complete without evidence.
 
 ## Frontmatter Rules
 
@@ -60,7 +82,7 @@ All `agents/*.md`, `commands/*.md`, and `skills/*/SKILL.md` files must have vali
 
 ## Versioning
 
-Plugins use semantic versioning (`MAJOR.MINOR.PATCH`). Bump `version` in both `plugin.json` and the skill `SKILL.md` frontmatter when releasing changes.
+Plugins use semantic versioning (`MAJOR.MINOR.PATCH`). When releasing changes, bump `version` in `plugin.json` and in **all** `skills/*/SKILL.md` frontmatter files for that plugin.
 
 ## Change Workflow
 
@@ -106,18 +128,9 @@ docs(plugin-name): update ...
 chore: ...
 ```
 
-## Response Formatting
-
-When displaying answers to questions or presenting any multi-item information:
-
-- **Use bullet points** for lists of facts, options, steps, or items — never run them together as prose
-- **Use numbered lists** when sequence or priority matters (steps, ranked options)
-- **Use a table** when comparing two or more items across the same attributes
-- **Bold the lead word or phrase** of each bullet to make it scannable at a glance
-- Keep each bullet to one clear idea; split compound thoughts into separate bullets
-- Use plain prose only for single-sentence answers or narrative explanations where no list is appropriate
-
 ## Active Technologies
+
+Use these existing stacks before introducing new dependencies:
 - Python 3.11+ + Flask, anthropic, chromadb, openai (embedding client) (RAG-assistant)
 - ChromaDB (vector store), SQLite (registry) (RAG-assistant)
 - Python 3.11+ + python-docx, python-pptx (ea-assistant artifact generation scripts)
