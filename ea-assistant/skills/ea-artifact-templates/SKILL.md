@@ -187,7 +187,7 @@ All TOGAF artifacts are in scope. Templates are stored in the plugin's `template
 ## Creating an Artifact
 
 1. Identify the artifact type and its template file
-2. Copy the template to `EA-projects/{slug}/artifacts/{artifact-id}.md`
+2. Copy the template to `EA-projects/{slug}/artifacts/{phase-folder}/{artifact-id}.md` — derive `{phase-folder}` from the Phase Folder Mapping table in `ea-artifact.md`
 3. Pre-populate fields with any available data from:
    - `engagement.json` (name, sponsor, organisation)
    - Requirements register (relevant requirements)
