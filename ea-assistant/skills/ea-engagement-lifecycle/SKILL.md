@@ -85,6 +85,7 @@ All static data is in `references/`. Read these rather than relying on memory:
 - **`references/engagement-patterns.md`** — common patterns and anti-patterns
 - **`references/scaffolding-map.md`** — engagement type/domain → artifact scaffolding mapping
 - **`references/phase-inputs-outputs.md`** — input/output tables per phase with quality gates
+- **`references/phase-constraints.md`** — plugin-level per-phase constraints: required artifacts, ID rules, traceability rules, and blocking gates; read by `ea-facilitator` on phase entry, `ea-interviewer` at session start, and `ea-consistency-checker` during validation
 - **`references/adm-tailoring.md`** — tailoring ADM for agile, programme, capability, and security contexts
 
 ## Lifecycle Workflow
@@ -135,7 +136,8 @@ All editing is accessed through `/ea-open` next actions menu.
 
 1. Update `currentPhase` in `engagement.json`
 2. Update phase `status` to `In Progress`; set `startedAt` if first entry (see `references/phase-transitions.md`)
-3. Use: `ea-facilitator` agent for facilitation; `ea-artifact-templates` skill for artifacts; `ea-interviewer` agent for interviews; `/ea-publish` for export
+3. Read `references/phase-constraints.md` for the entering phase; surface any Blocking gaps to the user before starting work
+4. Use: `ea-facilitator` agent for facilitation; `ea-artifact-templates` skill for artifacts; `ea-interviewer` agent for interviews; `/ea-publish` for export
 
 ### Completing a Phase
 

@@ -140,6 +140,7 @@ links: []              # named refs: [{label: "Context Diagram", path: "../../di
 | `skills/ea-artifact-templates/references/cross-topic-detection.md` | 10-row signal map for detecting answers belonging in a different artifact |
 | `skills/ea-artifact-templates/references/artifact-descriptions.md` | Purpose, audience, contents, and phase for every artifact type |
 | `skills/ea-engagement-lifecycle/SKILL.md` | ID scheme, facilitator style, opt-out rules |
+| `skills/ea-engagement-lifecycle/references/phase-constraints.md` | Per-phase runtime constraints: required artifacts, ID rules, traceability rules, blocking gates — read by ea-facilitator on phase entry, ea-interviewer at session start, ea-consistency-checker during validation |
 | `skills/ea-artifact-templates/SKILL.md` | A3 governance reference (states, transition rules) |
 | `docs/PRD.md` | Full feature spec, data model, agent table, quality gates, success metrics |
 
