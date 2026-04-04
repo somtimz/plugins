@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.13 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.14 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -49,6 +49,7 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 | `/ea-artifact` | ea-facilitator | Create, view, or list artifacts |
 | `/ea-review` | ea-facilitator | Open artifact for review; track review state |
 | `/ea-grill` | ea-interviewer | Deep-review artifact (9 grill-me skills) |
+| `/ea-consistency` | ea-consistency-checker | Focused consistency check: cross-artifact contradictions, within-artifact section inconsistencies, ID reference validation |
 | `/ea-engage-review` | ea-consistency-checker | Full engagement: consistency + traceability |
 | `/ea-publish` | ea-facilitator | Publish artifacts into a consolidated document |
 | `/ea-decisions` | ea-facilitator | Decision Register — aggregates all A3 rows |
@@ -66,7 +67,7 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 
 ```
 agents/          8 agents (ea-facilitator, ea-interviewer, ea-roadmap, ea-document-analyst, ...)
-commands/        23 commands (see Command Reference above)
+commands/        25 commands (see Command Reference above)
 skills/          8 skill directories (ea-artifact-templates, ea-engagement-lifecycle, zachman-framework, ...)
 templates/       31 TOGAF artifact templates (.md)
 scripts/         Python scripts for Word/PPTX generation
@@ -364,11 +365,15 @@ Before bumping `plugin.json` version and before pushing, always update these fil
 
 | File | What to update |
 |---|---|
+| `.claude-plugin/plugin.json` | Version number; description if feature set changed |
+| `../.claude-plugin/marketplace.json` | Version and description — **must exactly match `plugin.json`** |
 | `docs/PRD.md` | Version number; new sections for any new feature area; revised command/agent/template counts; quality gates if changed |
 | `commands/ea-help.md` | Commands table (add/remove rows); tips section (add tips for new features) |
 | `README.md` | Feature bullet list; commands table; prerequisite changes; project storage layout if changed |
 | `CLAUDE.md` (this file) | Version number; Plugin Structure counts; Command Reference table; ID scheme additions; new compliance rules; Skill Dependency Map |
 
-**When a version bump is the only change** (no new features), update the version number in all four files only — no other edits needed.
+**`plugin.json` ↔ `marketplace.json` sync rule:** The `version` and `description` fields in `ea-assistant/.claude-plugin/plugin.json` and the corresponding entry in `.claude-plugin/marketplace.json` must always be identical. Update both in the same edit — never one without the other.
+
+**When a version bump is the only change** (no new features), update the version number in all six files only — no other edits needed.
 
 **When the docs are out of date**, bring them up to date before the next version bump — do not accumulate undocumented versions.

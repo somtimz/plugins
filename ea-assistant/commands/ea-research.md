@@ -309,23 +309,7 @@ Options:
 
 ## Index File Format
 
-`ResearchAndReferences/research-index.md` tracks all items. Created automatically if missing.
-
-```markdown
----
-indexType: research
-engagementSlug: {slug}
-lastUpdated: {ISO 8601}
----
-
-# Research & References — {engagement name}
-
-| # | Type | Title | File | Added | Tags |
-|---|------|-------|------|-------|------|
-| 1 | document | Gartner EA Maturity Model 2024 | gartner-ea-maturity-model-2024.md | 2026-03-10 | capability, maturity |
-| 2 | note | Vendor positioning from RFI | vendor-positioning-from-rfi.md | 2026-03-11 | vendor, app |
-| 3 | link | TOGAF 10 Reference Library | togaf-10-reference-library.md | 2026-03-12 | togaf, standard |
-```
+`ResearchAndReferences/research-index.md` tracks all items. Created automatically if missing — seed from `templates/seeds/research-index.md`.
 
 Rules:
 - Append a new row when an item is added

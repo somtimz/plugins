@@ -48,7 +48,7 @@ You are an EA consistency analyst. Your role is to cross-check all artifacts in 
 
 **Consistency Check Process:**
 
-1. **Load all artifacts** — read every `.md` file in `artifacts/` plus `requirements/requirements.md` and `requirements/requirements-index.json`
+1. **Load all artifacts** — read every `.md` file in `artifacts/**/*.md` plus `requirements/requirements.md` and `requirements/requirements-index.json`
 
 2. **Build an entity registry** — extract all named entities across artifacts:
    - Stakeholders / actors / roles
@@ -71,6 +71,20 @@ You are an EA consistency analyst. Your role is to cross-check all artifacts in 
    - Count `{{placeholder}}` fields still unfilled
    - Count `⚠️ Not answered` fields
    - Flag artifacts with >30% unanswered fields as potentially incomplete
+
+5b. **ID Reference Validation**
+
+   Build an ID definition registry by scanning every artifact file. An ID is considered **defined** when it appears as:
+   - The first cell of a table row: `| G-001 | ...`
+   - A heading that begins with the ID token: `## G-001 — Reduce costs`
+
+   Pattern: `(G|OBJ|DRV|STR|ISS|PRB|MET|REQ|RIS|ADR|WP|GAP|CON)-\d{3}`
+
+   Registry entry: `{ id → { label, defined_in: "path/to/artifact.md", line: N } }`
+
+   Then scan every artifact for any occurrence of the pattern. Any occurrence that is NOT the definition source is a **reference**. Flag:
+   - **Broken references** — ID referenced in an artifact but absent from the registry (Critical/Warning severity depending on ID type)
+   - **Orphaned IDs** — ID defined in one artifact but never referenced in any other artifact (Info severity — may be a newly created ID)
 
 6. **Check phase alignment:**
    - Artifacts exist for all phases marked `Complete` in `engagement.json`
@@ -118,6 +132,20 @@ Artifacts checked: {N}
 |---|---|---|
 | Architecture Vision | 3 | 78% |
 | Business Architecture | 7 | 55% |
+
+---
+
+## 🔗 ID Reference Validation ({broken} broken refs, {orphaned} orphaned)
+
+### Broken References
+| Artifact | Section | ID | Line excerpt |
+|---|---|---|---|
+| phase-a/architecture-vision.md | §14 Key Risks | RIS-007 | "linked to RIS-007 (see Risk Register)" |
+
+### Orphaned IDs (Info)
+| Artifact | ID | Never referenced elsewhere |
+|---|---|---|
+| phase-b/business-architecture.md | GAP-003 | defined here, no other artifact references it |
 
 ---
 

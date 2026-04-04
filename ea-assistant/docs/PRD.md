@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.12
+**Version:** 0.9.14
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -455,6 +455,17 @@ No prompt is shown — diagrams are included by default when they exist.
 
 **`/ea-migrate`** aligns a legacy engagement with the current plugin version's templates and conventions. Applies non-destructive structural patches (adds missing appendices, missing frontmatter fields, missing compliance notes). Use `--report` to preview without applying.
 
+**`/ea-consistency`** runs a focused consistency check without the governance and quality sweep of `/ea-engage-review`. All modes are read-only.
+
+| Mode | Args | What it checks |
+|---|---|---|
+| Full | (none) | Cross-artifact contradictions, naming consistency, requirement traceability, phase alignment, ID reference validation |
+| Artifact | `artifact <id>` | Within-artifact section consistency (same ID labelled differently in §3 vs §14) + ID refs scoped to that file |
+| IDs only | `--ids` | Fast scan: builds ID definition registry, reports broken references (ID used but not defined) and orphaned IDs (defined but never referenced elsewhere) |
+| Any + report | `--report` | Suppresses interactive menu; prints full report inline |
+
+**Post-artifact-save sequence:** After every artifact write, the writing agent or command automatically runs Tier 1/2/3 compliance silently. If failures are found, the user is offered inline remediation before proceeding. Regardless of compliance outcome, the user is then offered to run `/ea-consistency artifact <id>` or `/ea-engage-review`. This sequence does not apply to generated register files (risk-register, adr-register, change-register, zachman-diagram).
+
 ### 5.22 Research & References
 
 The `ResearchAndReferences/` folder is the engagement library for external context: whitepapers, reference architectures, analyst reports, standards documents, repository links, and ad-hoc research notes.
@@ -585,9 +596,12 @@ EA-projects/
 | `/ea-concerns` | — | Manage CON-NNN stakeholder concerns (Appendix A4) |
 | `/ea-zachman` | `[generate|review|gap|interview|classify <artifact>]` | Manage Zachman 6×6 classification diagram |
 | `/ea-research` | `[add|note|link|list|view <item>|apply [artifact-id]]` | Manage research library; synthesise research against deliverables |
+| `/ea-consistency` | `[artifact <id>] [--ids] [--report]` | Focused consistency check — cross-artifact, within-artifact section contradictions, or ID reference scan only |
 | `/ea-engage-review` | — | Full-scope engagement consistency, alignment, governance, and quality review |
+| `/ea-reorganize` | `[--report] [--auto]` | Move flat-path artifacts into correct phase subfolders; update `engagement.json` file paths |
 | `/ea-migrate` | `[--report]` | Align legacy engagement to current plugin version conventions |
 | `/ea-publish` | `[markdown|word]` | Consolidated report via Pandoc; pre-publish compliance check |
+| `/ea-config` | `[section]` | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md |
 | `/ea-help` | — | Command reference, interview shortcuts, research agent guide |
 
 ---
@@ -600,7 +614,7 @@ EA-projects/
 | `ea-interviewer` | Conducts structured interviews; all 4 modes, question preview, brainstorm, cross-topic detection, ADR threshold scoring | `/ea-interview` |
 | `ea-roadmap` | Creates and manages the Architecture Roadmap in Review / Artifact-informed / Clean-slate mode | Ask Claude: "Let's build the roadmap" or "Review the roadmap" |
 | `ea-requirements-analyst` | Extracts structured requirements from uploaded documents | `/ea-requirements` |
-| `ea-consistency-checker` | Flags cross-artifact inconsistencies (no dedicated command) | Ask Claude: "Check for cross-artifact inconsistencies" |
+| `ea-consistency-checker` | Cross-artifact contradictions, naming consistency, traceability, phase alignment, ID reference validation | `/ea-consistency`, `/ea-engage-review` |
 | `ea-document-analyst` | EA mapping layer — extracts content from uploaded documents and maps to artifacts (no dedicated command) | Ask Claude: "Analyse the uploaded documents" |
 | `ea-advisor` | Answers EA methodology questions — TOGAF, Zachman, ArchiMate (no dedicated command) | Ask any methodology question in chat |
 | `ea-diagram` | Creates, edits, and interprets architecture diagrams (Mermaid, Graphviz, Draw.io, ArchiMate); standard diagram catalogue per artifact type; offers mmdc render after saving | `/ea-generate mermaid|png|svg`, ask Claude: "Create a diagram for..." |

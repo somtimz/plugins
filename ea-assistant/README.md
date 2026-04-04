@@ -34,7 +34,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Opt-out tracking** — explicitly opt out of any question or artifact; reasons and timestamps recorded; surfaced in status reports and consolidated documents
 - **Artifact compliance** — automatic compliance check when opening any artifact; offer to remediate missing fields/sections or accept as-is with sensible defaults
 - **Pre-publish compliance** — `/ea-publish` runs compliance scan on all selected artifacts before assembly; non-compliant items flagged with option to proceed or remediate
-- **Review & consistency** — per-artifact review workflow; cross-artifact consistency checking
+- **Review & consistency** — per-artifact review workflow; cross-artifact consistency checking; dedicated `/ea-consistency` command with ID reference registry (broken refs, orphaned IDs) and within-artifact section contradiction detection; post-save compliance + consistency prompt after every artifact write
 - **Consolidated reporting** — merge all artifacts into a single Markdown or Word document; opted-out and non-standard items flagged inline
 - **Research agent integration** — invoke `@research-agent` at any point during interviews for evidence-based validation of drivers, risks, technology choices, or assumptions
 - **Document ingestion** — upload existing docs and diagrams to inform artifacts; format extraction (docx, pdf, xlsx, csv, drawio, mmd) handled by `ea-document-ingestion` skill; EA content mapping handled by `ea-document-analyst` agent
@@ -125,7 +125,9 @@ sessionSummary: true
 | `/ea-concerns` | Manage CON-NNN stakeholder concerns and objections (Appendix A4) |
 | `/ea-zachman [mode]` | Manage the Zachman 6×6 classification diagram — generate, review, gap, interview, classify |
 | `/ea-research [mode]` | Research library — add documents, notes, links; apply findings to artifacts |
+| `/ea-consistency [options]` | Focused consistency check — cross-artifact contradictions, ID reference validation (`--ids`), or single-artifact within-section check (`artifact <id>`) |
 | `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman |
+| `/ea-reorganize [--report]` | Move flat-path artifacts into their correct phase subfolders; update engagement.json paths |
 | `/ea-migrate [--report]` | Align a legacy engagement to the current plugin version conventions |
 | `/ea-grill [artifact] [--skill]` | Deep-review an artifact using a grill-me skill; apply findings one revision at a time |
 | `/ea-publish` | Merge all artifacts into a consolidated document; compliance pre-check, opted-out and non-standard items flagged |
@@ -147,6 +149,7 @@ Type these at any interview prompt:
 | `a: {text}` | Log as a governance decision (Appendix A3) |
 | `govern` / `g` | Update A3 governance state |
 | `b:` / `brainstorm` | Start a freeform brainstorm pause |
+| `resume` / `done` | End brainstorm and return to the interview |
 | `?` / `help` | Show artifact purpose, current progress, and shortcuts |
 | `concepts` | Show EA concepts quick reference (Principle/Goal/Objective/Strategy/Plan/Risk/Issue/Problem) |
 

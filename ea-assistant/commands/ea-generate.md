@@ -5,414 +5,103 @@ argument-hint: "[artifact-name] [docx|pptx|mermaid|png|svg] [--theme <theme>] [-
 allowed-tools: [Read, Write, Bash]
 ---
 
-Export a single EA artifact as a formatted file.
+Export a single EA artifact as a formatted file. See `skills/ea-generation/references/artifact-type-mapping.md` for format recommendations and `--type` values per artifact.
 
-## Generation Paths
-
-Two different generation mechanisms are used depending on the artifact type:
-
-| Mechanism | Used for | Why |
-|---|---|---|
-| **python-docx / python-pptx scripts** (`generate-docx.py`, `generate-pptx.py`) | Individual structured artifacts — Architecture Vision, Business Architecture, Gap Analysis, Requirements Register, Stakeholder Map, Architecture Roadmap | Rich section-by-section formatting, embedded tables, diagram embedding; structured output mapped to artifact sections |
-| **pandoc** | Consolidated Architecture Report (`/ea-publish` only) | Single-pass Markdown → DOCX for a flat narrative document; no section-structure mapping needed |
-
-When generating a single artifact via `/ea-generate docx`, always use the python-docx script path (Step 4 below). Pandoc is not used by this command — it is used only by `/ea-publish` for the consolidated report.
-
-## Instructions
-
-If no engagement is active in context, display:
-
-```
-No engagement is currently open.
-
-Run /ea-open to open an existing engagement first.
-```
-
-Then stop.
+If no engagement is active, display "No engagement is currently open. Run /ea-open first." and stop.
 
 ### Step 1: Select Artifact
 
-If no artifact name was provided as an argument, list all artifacts in the active engagement with format recommendations. Read `EA-projects/{slug}/engagement.json` to get the artifacts array. Display:
+If no artifact name was given, read `EA-projects/{slug}/engagement.json → artifacts[]` and display a numbered list of existing artifacts with their status and recommended format. Prompt for selection.
 
-```
-Select artifact to generate:
-1. Architecture Vision           [docx recommended, pptx available]
-2. Stakeholder Map               [mermaid recommended, docx/pptx available]
-3. Business Architecture         [docx recommended, pptx available]
-4. Gap Analysis                  [docx recommended, pptx available]
-5. Architecture Roadmap          [mermaid recommended, docx/pptx available]
-6. Requirements Register         [docx recommended]
-```
-
-Show only artifacts that exist in the engagement (have a corresponding `.md` file in `EA-projects/{slug}/artifacts/`). Include the artifact status in brackets beside the name, e.g. `[Draft]` or `[Approved]`.
-
-Prompt the user to select an artifact by number or name.
+**Rendering an existing `.mmd` file directly:** If the user provides a `.mmd` file path or specifies `png`/`svg` with no artifact name, skip to the **Render to Image** section of Step 4.
 
 ### Step 2: Select Format
 
-If no format was provided as an argument, recommend the primary format for the selected artifact type (see Artifact Type Mapping below) and ask the user to confirm or choose another.
-
-Example prompt:
-
-```
-Recommended format for Architecture Vision: docx (Word)
-
-Generate as:
-1. docx    — Word document (recommended)
-2. pptx    — PowerPoint presentation
-3. mermaid — inline diagram (not available for this artifact type)
-4. png     — rendered image via mermaid-cli (Mermaid artifacts only)
-5. svg     — scalable vector image via mermaid-cli (Mermaid artifacts only)
-
-Select format [1]:
-```
-
-For artifact types where mermaid is not applicable, omit options 3, 4, and 5.
-
-**Rendering existing `.mmd` files directly:**
-If the user runs `/ea-generate` with a `.mmd` file path or with `png`/`svg` as the format and no artifact name, skip Steps 1–3 and go directly to the **Render to Image** section of Step 4.
+Recommend the primary format for the artifact type (see `skills/ea-generation/references/artifact-type-mapping.md`). Offer: `docx`, `pptx`, `mermaid` (if available), `png`, `svg`. Omit mermaid/png/svg for non-Mermaid artifact types.
 
 ### Step 3: Read and Extract Artifact Content
 
-1. Read the artifact file from the path in `engagement.json → artifacts[].file` (e.g. `EA-projects/{slug}/artifacts/phase-a/architecture-vision.md`).
-2. Read the engagement metadata from `EA-projects/{slug}/engagement.json`.
-3. **Resolve relative image links** — before extraction, scan the artifact body for markdown image syntax `![alt](relative-path)`. For each:
-   - Resolve the relative path against the artifact file's location to an absolute path.
-   - Replace the relative path with the absolute path in the extraction output.
-   - Example: artifact at `artifacts/phase-a/architecture-vision.md` with `![Context](../../diagrams/context.png)` → resolves to `EA-projects/{slug}/diagrams/context.png`.
-4. Parse the artifact into a content JSON object with this structure:
-
-```json
-{
-  "meta": {
-    "artifact":         "Architecture Vision",
-    "artifactId":       "architecture-vision",
-    "phase":            "A",
-    "status":           "Draft",
-    "reviewStatus":     "Pending",
-    "version":          "0.2",
-    "lastModified":     "2026-03-28T10:00:00",
-    "relatedArtifacts": ["architecture-principles", "requirements-register"],
-    "diagrams":         ["diagrams/context-diagram.png"],
-    "links":            [{"label": "Architecture Principles", "path": "../preliminary/architecture-principles.md"}]
-  },
-  "sections": [
-    {"heading": "Section Heading", "content": "Body text here", "level": 1},
-    {"heading": "Subsection", "content": "Body text", "level": 2}
-  ],
-  "tables": [
-    {
-      "heading": "Table Title",
-      "headers": ["Col 1", "Col 2", "Col 3"],
-      "rows": [["val", "val", "val"], ["val", "val", "val"]]
-    }
-  ]
-}
-```
-
-Rules for extraction:
-- **Extract YAML frontmatter** into the `meta` block. Map these fields:
-  - `artifact` → `meta.artifact` (e.g. `"Architecture Vision"`)
-  - `artifactId` → `meta.artifactId` (e.g. `"architecture-vision"`)
-  - `phase` → `meta.phase` (ADM phase letter, e.g. `"A"`)
-  - `status` → `meta.status` (e.g. `"Draft"`, `"Approved"`)
-  - `reviewStatus` → `meta.reviewStatus` (e.g. `"Pending"`, `"Revised"`)
-  - `version` → `meta.version` (string, e.g. `"0.2"`)
-  - `lastModified` → `meta.lastModified` (ISO 8601 string)
-  - `taxonomy` → `meta.taxonomy` (object — copy the full nested taxonomy block as-is: `{domain, category, audience, layer, sensitivity, tags}`)
-  - `relatedArtifacts` → `meta.relatedArtifacts` (array of artifact IDs; use `[]` if absent)
-  - `diagrams` → `meta.diagrams` (array of diagram paths relative to engagement root; use `[]` if absent)
-  - `links` → `meta.links` (array of `{label, path}` objects; use `[]` if absent)
-  - Omit any other field that is absent from the frontmatter.
-- Map each `## Heading` → `level: 1`, `### Heading` → `level: 2`
-- Skip `<details>` guidance blocks — they are template guidance, not content
-- For each markdown table, extract it as an entry in `"tables"` — include the section heading it belongs to
-- Where a field is `{{placeholder}}` or empty, use `""` as the content value (the script will render it as "[To be completed]")
-- Collapse the content to plain text — do not include raw markdown syntax in content strings; **exception**: inline image syntax `![alt](absolute-path)` (already resolved in step 3) should be retained so the generation script can embed the image
-
-5. Write the extracted JSON to a temp file: `/tmp/ea-gen-{artifact-id}.json`
+1. Read the artifact file from `engagement.json → artifacts[].file`
+2. **Resolve relative image links** — for each `![alt](relative-path)` in the body, resolve to an absolute path before extraction
+3. Parse into a content JSON object per the schema in `skills/ea-generation/references/content-extraction-schema.md`
+4. Write extracted JSON to `/tmp/ea-gen-{artifact-id}.json`
 
 ### Step 4: Generate Output
 
-**For Mermaid (inline source):**
-
-- Determine the correct Mermaid diagram type from the artifact content and type:
-  - Stakeholder Map → `graph TD` or `graph LR`
-  - Architecture Roadmap → `gantt`
-  - Capability Map → `graph TD`
-  - Other → `graph TD` as fallback
-- Build the diagram from the artifact content.
-- Save the source to `EA-projects/{slug}/diagrams/{artifact-id}.mmd`
-- Render it as a fenced mermaid code block inline in the conversation.
-
-Example output:
-
-````
-```mermaid
-graph TD
-    ...
-```
-````
-
-After showing the inline diagram, offer:
-```
-Render to image file?
-  1. PNG  — high-resolution raster image (recommended for Word/PowerPoint)
-  2. SVG  — scalable vector image (recommended for web/HTML export)
-  3. No thanks
-```
-If the user selects 1 or 2, proceed to **Render to Image** below.
+**For Mermaid (inline):**
+- Select diagram type from artifact type: Stakeholder Map → `graph TD/LR`, Roadmap → `gantt`, Capability Map → `graph TD`, other → `graph TD`
+- Build and render diagram; save source to `EA-projects/{slug}/diagrams/{artifact-id}.mmd`
+- Render as fenced mermaid code block inline
+- After display, offer: Render to PNG, Render to SVG, No thanks
 
 **For png / svg (Render to Image):**
 
-Renders a `.mmd` file to a raster or vector image using mermaid-cli (`mmdc`).
+Input (in order of preference): user-provided `.mmd` path → current session `.mmd` → scan `EA-projects/{slug}/diagrams/` and ask.
 
-**Input resolution — in order of preference:**
-1. A `.mmd` file path provided directly by the user
-2. A `.mmd` file generated in the current session (from the Mermaid step above)
-3. Scan `EA-projects/{slug}/diagrams/` for `.mmd` files and ask the user to select one
+Options: `--theme` (`default` | `dark` | `forest` | `neutral` | `base`), `--bg` (`white` | `transparent` | `#rrggbb`). Use defaults silently if not specified.
 
-**Theme and background options** (from command arguments or prompt):
-- `--theme`: `default` (default) | `dark` | `forest` | `neutral` | `base`
-- `--bg`: `white` (default) | `transparent` | `#rrggbb`
-
-If no options were provided and the user didn't specify, use defaults silently.
-
-**Check for mmdc:**
-
+Check for `mmdc`:
 ```bash
-# Check if mmdc is available
 if command -v mmdc &>/dev/null; then
     MMDC_CMD="mmdc"
 elif command -v npx &>/dev/null; then
     MMDC_CMD="npx -y @mermaid-js/mermaid-cli"
-    echo "ℹ️  mmdc not found globally — using npx (will download on first run)"
 else
-    echo "ERROR: mermaid-cli not found."
-    echo "Install it with:  npm install -g @mermaid-js/mermaid-cli"
+    echo "ERROR: mermaid-cli not found. Install: npm install -g @mermaid-js/mermaid-cli"
     exit 1
 fi
 ```
 
-If neither `mmdc` nor `npx` is available, display:
-```
-⚠️  mermaid-cli (mmdc) is not installed.
-
-To install:
-  npm install -g @mermaid-js/mermaid-cli
-
-Or, if you have Node.js with npx:
-  npx -y @mermaid-js/mermaid-cli (used automatically on next run)
-
-After installing, run /ea-generate again to render the image.
-```
-Then stop.
-
-**Render the file:**
-
+Render:
 ```bash
-OUTPUT_FILE="EA-projects/{slug}/diagrams/{stem}.{format}"
-
-$MMDC_CMD \
-  -i "{input.mmd}" \
-  -o "$OUTPUT_FILE" \
-  -t {theme} \
-  -b {bg} \
-  -w 1920 \
-  -s 2
+$MMDC_CMD -i "{input.mmd}" -o "EA-projects/{slug}/diagrams/{stem}.{format}" -t {theme} -b {bg} -w 1920 -s 2
+# For SVG omit -w and -s
 ```
 
-For SVG, omit `-w` and `-s` (they apply to raster output only):
-```bash
-$MMDC_CMD \
-  -i "{input.mmd}" \
-  -o "$OUTPUT_FILE" \
-  -t {theme} \
-  -b {bg}
-```
+If render fails: display stderr; suggest `npx puppeteer browsers install chrome` for Chromium errors, check `.mmd` syntax for syntax errors, and on WSL2: `export PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable`.
 
-If the command fails (non-zero exit):
-- Display the stderr output
-- Suggest common fixes:
-  - "If you see a Puppeteer/Chromium error, run: `npx puppeteer browsers install chrome`"
-  - "If you see a syntax error, open the .mmd file and check the diagram syntax"
-  - "On WSL2, try setting: `export PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable`"
-
-**Render all `.mmd` files in the diagrams directory:**
-
-If the user runs `/ea-generate png --all` or `/ea-generate svg --all`:
-
+**Render all (`--all`):**
 ```bash
 SCRIPT=$(find "$HOME/.claude" -name "render-mermaid.py" -path "*/ea-assistant/scripts/*" 2>/dev/null | head -1)
-if [ -z "$SCRIPT" ]; then
-  echo "ERROR: render-mermaid.py not found. Is the ea-assistant plugin installed?"
-  exit 1
-fi
-
-python3 "$SCRIPT" \
-  "EA-projects/{slug}/diagrams/" \
-  --format {format} \
-  --theme {theme} \
-  --bg {bg}
+python3 "$SCRIPT" "EA-projects/{slug}/diagrams/" --format {format} --theme {theme} --bg {bg}
 ```
 
-This renders every `.mmd` file in the engagement's diagrams directory to images in the same directory.
+**Diagram discovery (docx/pptx):**
 
-**Diagram discovery (docx and pptx only):**
+Collect diagrams from two sources, merge and deduplicate (Source A first):
+- **Source A** — `meta.diagrams` from artifact frontmatter (paths relative to engagement root → resolve to absolute)
+- **Source B** — scan `diagrams/` for `{artifact-id}-*.png`; also render any `{artifact-id}-*.mmd` with no matching `.png`
 
-Before invoking the generation script, collect associated diagrams for inclusion. Merge two sources:
-
-**Source A — frontmatter `diagrams:` field** (explicit list in artifact metadata):
-- Read the `diagrams:` array from the artifact frontmatter (extracted in Step 3 as `meta.diagrams`).
-- Each entry is a path relative to the engagement root (e.g. `"diagrams/context-diagram.png"`).
-- Resolve each to an absolute path: `EA-projects/{slug}/{diagrams-entry}`.
-
-**Source B — filename convention** (legacy / auto-discovery):
-1. Scan `EA-projects/{slug}/diagrams/` for files matching `{artifact-id}-*.png`.
-2. Also scan for `{artifact-id}-*.mmd` files that have no corresponding `.png`. For each:
-   - Render it to PNG automatically using the same mmdc detection logic from the **Render to Image** section above.
-   - If rendering fails, skip that diagram and show a warning; continue with the rest.
-
-**Merge and deduplicate** — combine Source A and Source B, removing duplicate paths. Source A entries come first (they are explicitly authored).
-
-3. Build a diagrams list in this format and write it to `/tmp/ea-diagrams-{artifact-id}.json`:
-
+Write diagram list to `/tmp/ea-diagrams-{artifact-id}.json`:
 ```json
-[
-  {"title": "Capability Map", "path": "EA-projects/{slug}/diagrams/{artifact-id}-capability-map.png"},
-  {"title": "Stakeholder Power/Interest", "path": "EA-projects/{slug}/diagrams/{artifact-id}-stakeholder-power-interest.png"}
-]
+[{"title": "Capability Map", "path": "EA-projects/{slug}/diagrams/{artifact-id}-capability-map.png"}]
 ```
-
-Derive `title` from the filename stem: strip `{artifact-id}-` prefix, replace `-` with spaces, capitalise each word.
-
-If no diagrams are found, proceed without `--diagrams` (no appendix will be added). Do not prompt the user — include diagrams by default.
+Derive `title` from filename stem (strip `{artifact-id}-` prefix, spaces, title-case). If no diagrams found, proceed without `--diagrams`.
 
 **For docx:**
-
-Locate the script, bootstrap the venv, then run:
-
 ```bash
-# Locate the script in the plugin install
 SCRIPT=$(find "$HOME/.claude" -name "generate-docx.py" -path "*/ea-assistant/scripts/*" 2>/dev/null | head -1)
-if [ -z "$SCRIPT" ]; then
-  echo "ERROR: generate-docx.py not found. Is the ea-assistant plugin installed?"
-  exit 1
-fi
-
-# Bootstrap venv
 VENV="$HOME/.ea-assistant-venv"
-if [ ! -f "$VENV/bin/python" ]; then
-  echo "Setting up EA Assistant Python environment..."
-  python3 -m venv "$VENV"
-fi
-if ! "$VENV/bin/python" -c "import docx" 2>/dev/null; then
-  echo "Installing python-docx and python-pptx..."
-  "$VENV/bin/pip" install --quiet python-docx python-pptx
-fi
-
-# Include diagrams if the list file was written above
+[ ! -f "$VENV/bin/python" ] && python3 -m venv "$VENV"
+"$VENV/bin/python" -c "import docx" 2>/dev/null || "$VENV/bin/pip" install --quiet python-docx python-pptx
 DIAGRAMS_ARG=""
 [ -f "/tmp/ea-diagrams-{artifact-id}.json" ] && DIAGRAMS_ARG="--diagrams @/tmp/ea-diagrams-{artifact-id}.json"
-
 "$VENV/bin/python" "$SCRIPT" \
-  --type {script-type} \
-  --engagement-dir EA-projects/{slug} \
-  --content @/tmp/ea-gen-{artifact-id}.json \
-  $DIAGRAMS_ARG \
+  --type {script-type} --engagement-dir EA-projects/{slug} \
+  --content @/tmp/ea-gen-{artifact-id}.json $DIAGRAMS_ARG \
   --output EA-projects/{slug}/artifacts/{phase-folder}/{artifact-id}.docx
 ```
 
-Output path uses the same `{phase-folder}` as the source artifact (e.g. `artifacts/phase-a/architecture-vision.docx`).
+**For pptx:** Same bootstrap; replace `generate-docx.py` with `generate-pptx.py` and `.docx` with `.pptx`.
 
-**For pptx:**
+> **WSL2:** Unix paths work as-is. Native Windows PowerShell: replace `$HOME` with `$env:USERPROFILE`, `bin/python` with `Scripts\python.exe`.
 
-Run the same bootstrap block, then:
-
-```bash
-SCRIPT=$(find "$HOME/.claude" -name "generate-pptx.py" -path "*/ea-assistant/scripts/*" 2>/dev/null | head -1)
-if [ -z "$SCRIPT" ]; then
-  echo "ERROR: generate-pptx.py not found. Is the ea-assistant plugin installed?"
-  exit 1
-fi
-
-DIAGRAMS_ARG=""
-[ -f "/tmp/ea-diagrams-{artifact-id}.json" ] && DIAGRAMS_ARG="--diagrams @/tmp/ea-diagrams-{artifact-id}.json"
-
-"$VENV/bin/python" "$SCRIPT" \
-  --type {script-type} \
-  --engagement-dir EA-projects/{slug} \
-  --content @/tmp/ea-gen-{artifact-id}.json \
-  $DIAGRAMS_ARG \
-  --output EA-projects/{slug}/artifacts/{phase-folder}/{artifact-id}.pptx
-```
-
-If the script exits with a non-zero status, display the error output and stop. Do not update the engagement.
-
-> **Windows (PowerShell / WSL):** The bootstrap uses `$HOME` and `bin/python`. On native Windows PowerShell replace `$HOME` with `$env:USERPROFILE`, `bin/python` with `Scripts\python.exe`, and `bin/pip` with `Scripts\pip.exe`. On WSL2, the Unix paths work as-is.
+If the script exits non-zero, display the error and stop. Do not update the engagement.
 
 ### Step 5: Update Engagement
 
-After successful generation (docx or pptx only), update the artifact entry in `EA-projects/{slug}/engagement.json`:
-
-- Set `lastModified` on the artifact entry to the current ISO 8601 timestamp.
-- Write the updated `engagement.json` back to disk.
+After successful docx/pptx generation, update `artifacts[].lastModified` in `engagement.json` to now.
 
 ### Step 6: Confirm
 
-For docx or pptx, report:
-
-```
-Generated: EA-projects/{slug}/artifacts/{artifact-id}.{ext}
-Size: {file-size}
-Diagrams included: {N} (or "none")
-
-Options:
-1. Generate in another format
-2. Generate diagrams for this artifact  (/ea-diagram)
-3. Return to engagement (/ea-status)
-```
-
-For mermaid (inline), the diagram is already shown. Offer:
-
-```
-Options:
-1. Render as PNG image  (mermaid-cli)
-2. Render as SVG image  (mermaid-cli)
-3. Generate as docx instead
-4. Generate as pptx instead
-5. Return to engagement (/ea-status)
-```
-
-For png/svg, after successful render report:
-
-```
-Generated: EA-projects/{slug}/diagrams/{filename}.{ext}
-Size: {file-size}
-
-Options:
-1. Render another diagram
-2. Render all diagrams in this engagement  (/ea-generate {format} --all)
-3. Return to engagement (/ea-status)
-```
-
----
-
-### Artifact Type Mapping
-
-`{script-type}` is the value passed to `--type` in the script. It must match the keys the script recognises.
-
-| Artifact Name            | `{script-type}` | Primary Format | Mermaid Available |
-|--------------------------|-----------------|----------------|-------------------|
-| Architecture Vision      | `vision`        | docx           | No                |
-| Stakeholder Map          | `stakeholder-map` | mermaid       | Yes               |
-| Business Architecture    | `business`      | docx           | No                |
-| Gap Analysis             | `gap-analysis`  | docx           | No                |
-| Architecture Roadmap     | `roadmap`       | mermaid        | Yes               |
-| Requirements Register    | `requirements-register` | docx   | No                |
-| Capability Map           | `capability-map` | mermaid       | Yes               |
-| Application Portfolio    | `app-portfolio` | docx           | No                |
-| Data Architecture        | `data`          | docx           | No                |
-| Migration Plan           | `roadmap`       | pptx           | No                |
-| Risk Register            | `risk-register` | docx           | No                |
-| Implementation Roadmap   | `roadmap`       | pptx           | No                |
+Report file path, size, and diagram count. Offer: generate another format, generate diagrams (`/ea-diagram`), return to engagement.
