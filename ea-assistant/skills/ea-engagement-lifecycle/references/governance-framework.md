@@ -158,9 +158,9 @@ Each metric tracks a specific element of direction:
 
 | Metric type | Tracks | Question it answers | Linked to |
 |-------------|--------|---------------------|-----------|
-| **Outcome** | A goal | Is the desired state being approached? | Goal IDs (`BG-`, `DG-`, etc.) |
-| **Performance** | An objective | Is the measurable target on track? | Objective IDs (`BO-`, `DO-`, etc.) |
-| **Activity** | A strategy | Is the chosen approach being executed? | Strategy IDs (`BS-`, `DS-`, etc.) |
+| **Outcome** | A goal | Is the desired state being approached? | Goal IDs (`G-NNN`) |
+| **Performance** | An objective | Is the measurable target on track? | Objective IDs (`OBJ-NNN`) |
+| **Activity** | A strategy | Is the chosen approach being executed? | Strategy IDs (`STR-NNN`) |
 
 Every metric has:
 - **Measure** — the specific unit or calculation (e.g., "average days from application to account activation")
