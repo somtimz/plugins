@@ -88,7 +88,9 @@ You have existing engagements. Common next steps:
 | `/ea-concerns` | Manage CON-NNN stakeholder concerns (Appendix A4) |
 | `/ea-zachman [mode]` | Manage the Zachman 6×6 classification diagram (generate, review, gap, interview, classify) |
 | `/ea-research [mode]` | Research library — add, note, link, list, view, apply findings to artifacts |
+| `/ea-consistency [options]` | Focused consistency check — cross-artifact contradictions, within-artifact section inconsistencies, or ID reference scan only (`--ids`) |
 | `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman |
+| `/ea-reorganize [--report]` | Move flat-path artifacts into correct phase subfolders; update engagement.json paths |
 | `/ea-migrate [--report]` | Align legacy engagement to current plugin version conventions |
 | `/ea-publish` | Merge artifacts into a consolidated report |
 | `/ea-config [section]` | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md |
@@ -146,6 +148,10 @@ Type these at any interview prompt:
   Zachman 6×6 grid — generate, review, gap, interview, or classify modes.
 • Use `/ea-risks` to generate a cross-cutting Risk Register from all
   artifact risk sections; `/ea-changes` for Phase H change management.
+• Use `/ea-consistency --ids` for a fast ID reference scan before publishing —
+  finds broken references and orphaned IDs without the full consistency sweep.
+  Use `/ea-consistency artifact [name]` to check a single artifact for
+  within-section label contradictions and broken ID refs.
 • Use `/ea-engage-review` for a full engagement health check — coverage,
   traceability, governance, ADR status, and Zachman completeness.
 • Use `/ea-config rules` to teach the engagement project-specific rules (e.g. naming

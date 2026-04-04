@@ -163,6 +163,57 @@ Artefacts are listed by ADM phase. Where an artefact spans multiple phases (e.g.
 
 ---
 
+### Communications Plan
+
+**Purpose:** Defines how architecture information will be communicated to each stakeholder group throughout the ADM cycle — what they need to know, how often, through what channel, and who is responsible. Complements the Stakeholder Map by converting stakeholder engagement strategies into a concrete communication schedule.
+
+**Audience:** Architecture team, programme manager, communications leads.
+
+**Contents:**
+- Communication objectives for the engagement
+- Stakeholder communication matrix (group, information need, frequency, channel, owner, ADM phases)
+- Communication schedule mapped to ADM phase milestones and gate reviews
+- Communication channels and formats
+- Escalation and feedback process
+
+**When to Create:** Phase A, alongside the Stakeholder Map. Updated when stakeholder landscape changes or a new phase gate is added.
+
+**Who Reviews:** Architecture team lead, programme manager.
+
+**Phase:** A (updated throughout).
+
+**Template:** `communications-plan.md` — create with `/ea-artifact create communications-plan`.
+
+---
+
+### Architecture Definition Document
+
+**Purpose:** The primary container for all architecture descriptions produced across the ADM cycle. Brings together the Business, Data, Application, and Technology architecture chapters into a single coherent document with cross-domain alignment and baseline/target narratives. Evolves from a skeleton in Phase A to a finalised, approved baseline in Phase F.
+
+**Audience:** Architecture Review Board, governance authority, delivery teams, programme sponsor.
+
+**Contents:**
+- Document status table (chapter by chapter, with source artifact links)
+- Scope and context
+- Architecture Principles summary (references the Principles Catalogue)
+- Business Architecture chapter (summarised, linking to full artifact)
+- Data Architecture chapter (summarised, linking to full artifact)
+- Application Architecture chapter (summarised, linking to full artifact)
+- Technology Architecture chapter (summarised, linking to full artifact)
+- Cross-domain alignment (interactions, dependencies, conflicts and resolutions)
+- Baseline Architecture summary (cross-domain)
+- Target Architecture summary (cross-domain)
+
+**When to Create:** Phase A (skeleton — structure and high-level content from Architecture Vision). Populated chapter by chapter as domain architectures are completed in Phases B, C, and D. Refined in Phase E; finalised and approved in Phase F.
+
+**Who Reviews:** Lead Architect (each phase); Architecture Review Board (Phase F finalisation).
+
+**Phase:** A (skeleton), B–D (populated), E (refined), F (finalised).
+
+**Template:** `architecture-definition-document.md` — create with `/ea-artifact create architecture-definition-document`.
+
+---
+
 ## Phase B — Business Architecture Artefacts
 
 ### Business Capability Map
@@ -368,7 +419,53 @@ Artefacts are listed by ADM phase. Where an artefact spans multiple phases (e.g.
 
 ---
 
-## Phase E / F — Roadmap Artefacts
+## Phase E / F — Roadmap and Transition Artefacts
+
+### Consolidated Gap Analysis
+
+**Purpose:** Aggregates and reconciles the domain-level gap analyses produced in Phases B, C-Data, C-App, and D into a single cross-domain view. Identifies interdependencies between domain gaps, surfaces conflicts, and provides the primary input to the Architecture Roadmap and Transition Architectures. The domain-level gap analyses remain authoritative for their domain; this document consolidates and reconciles them.
+
+**Audience:** Architecture team, programme sponsor, delivery leads.
+
+**Contents:**
+- Executive summary (total gaps, high-priority count)
+- Domain gap summary table (with links to source domain analyses)
+- Consolidated gap register (all domain gaps in a single prioritised list with cross-domain IDs)
+- Cross-domain dependency table (gaps that are prerequisites or enablers for other gaps)
+- Reconciliation notes (conflicts between domain analyses and their resolutions)
+- Roadmap input summary (candidate work packages mapped to the gaps they close)
+
+**When to Create:** Phase E, after all applicable domain gap analyses are complete. The consolidated gap analysis is the trigger for roadmap construction.
+
+**Who Reviews:** Lead Architect, programme sponsor, Architecture Review Board.
+
+**Phase:** E.
+
+**Template:** `consolidated-gap-analysis.md` — create with `/ea-artifact create consolidated-gap-analysis`.
+
+---
+
+### Transition Architectures
+
+**Purpose:** Defines the intermediate architecture states between the Baseline and Target Architecture. Each Transition Architecture represents a coherent, independently deliverable state of the enterprise that provides business value on its own — not merely a partial target. Used to de-risk migration by establishing stable stepping stones and to sequence work packages in the Architecture Roadmap.
+
+**Audience:** Architecture team, programme manager, delivery leads, Architecture Review Board.
+
+**Contents:**
+- Overview of the migration path (number of transition states and rationale)
+- Transition state summary table (state, name, target date, key capability delivered, supporting work packages)
+- Per-transition-state detail: changes from previous state (by domain), business value delivered, dependencies, risks
+- Traceability table mapping each work package to its contributing transition state
+
+**When to Create:** Phase E (initial definition), Phase F (refined and finalised with the Migration Plan). Updated in Phase H if change requests affect the migration sequence.
+
+**Who Reviews:** Lead Architect, programme sponsor, Architecture Review Board.
+
+**Phase:** E (initial), F (finalised).
+
+**Template:** `transition-architectures.md` — create with `/ea-artifact create transition-architectures`.
+
+---
 
 ### Architecture Roadmap
 

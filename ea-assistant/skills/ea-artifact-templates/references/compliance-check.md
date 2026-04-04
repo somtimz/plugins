@@ -58,13 +58,13 @@ Applies only to named artifact types:
 
 | Artifact | Requirement | Rule ID |
 |---|---|---|
-| Architecture Vision, Business Architecture, Data Architecture, Application Architecture, Technology Architecture, Gap Analysis, Architecture Roadmap, Statement of Architecture Work, Migration Plan, Engagement Charter, Governance Framework, Implementation Governance Plan | `## Appendix A3 — Decision Log` section present | T3-A3 |
-| Architecture Vision, Business Architecture, Data Architecture, Application Architecture, Technology Architecture, Gap Analysis, Architecture Roadmap, Statement of Architecture Work, Migration Plan | `## Appendix A4 — Stakeholder Concerns & Objections` section present | T3-A4 |
+| Architecture Vision, Business Architecture, Data Architecture, Application Architecture, Technology Architecture, Gap Analysis, Consolidated Gap Analysis, Architecture Roadmap, Statement of Architecture Work, Migration Plan, Engagement Charter, Governance Framework, Implementation Governance Plan, Communications Plan, Architecture Definition Document, Transition Architectures | `## Appendix A3 — Decision Log` section present | T3-A3 |
+| Architecture Vision, Business Architecture, Data Architecture, Application Architecture, Technology Architecture, Gap Analysis, Consolidated Gap Analysis, Architecture Roadmap, Statement of Architecture Work, Migration Plan, Communications Plan, Architecture Definition Document, Transition Architectures | `## Appendix A4 — Stakeholder Concerns & Objections` section present | T3-A4 |
 | Architecture Roadmap | `## Strategic Alignment` section present with at least one populated row (non-placeholder) | T3-ROAD-SA |
 | Architecture Roadmap | At least one WP-NNN entry has a non-empty `Advances Goals / Objectives` or `Executes Strategies` field | T3-ROAD-WP |
 | Requirements Register | Scope column present (Corporate / Project distinction) | T3-REQ |
 | Traceability Matrix | Two-section structure (Corporate / Project) present | T3-TRACE |
-| Architecture Vision, Business/Data/App/Tech Architecture, Gap Analysis, Architecture Roadmap, Statement of Architecture Work, Migration Plan, Compliance Assessment, Requirements Register, Engagement Charter, Governance Framework, Implementation Governance Plan | `## Appendix A5 — Related Architecture Decisions` section present | T3-ADR |
+| Architecture Vision, Business/Data/App/Tech Architecture, Gap Analysis, Consolidated Gap Analysis, Architecture Roadmap, Statement of Architecture Work, Migration Plan, Compliance Assessment, Requirements Register, Engagement Charter, Governance Framework, Implementation Governance Plan, Communications Plan, Architecture Definition Document, Transition Architectures | `## Appendix A5 — Related Architecture Decisions` section present | T3-ADR |
 
 ---
 
