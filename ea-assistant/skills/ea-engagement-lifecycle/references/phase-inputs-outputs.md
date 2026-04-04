@@ -39,6 +39,7 @@ Detailed input/output tables for every TOGAF ADM phase. Use this reference to va
 | Initial architecture repository | All ADM phases | Seeded repository with reference data, standards catalogue, and any existing architecture artefacts |
 | Restatement of business principles, goals, and drivers | Phase A and all subsequent phases | Confirmed and documented set of business context statements that inform all architecture decisions |
 | Governance and support strategy | Architecture governance bodies | Describes how architecture work will be governed, reviewed, and enforced across the enterprise |
+| Request for Architecture Work | Phase A | Formal trigger document issued by the sponsoring organisation to initiate the ADM cycle; defines scope, budget, and schedule for the architecture engagement |
 
 ### Quality Gates
 

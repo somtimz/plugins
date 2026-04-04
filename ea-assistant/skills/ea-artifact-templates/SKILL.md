@@ -162,12 +162,16 @@ All TOGAF artifacts are in scope. Templates are stored in the plugin's `template
 | `stakeholder-map.md` | Stakeholder Map | Prelim / A |
 | `architecture-vision.md` | Architecture Vision | A |
 | `statement-of-architecture-work.md` | Statement of Architecture Work | A |
+| `communications-plan.md` | Communications Plan | A |
+| `architecture-definition-document.md` | Architecture Definition Document | A (skeleton) → F (final) |
 | `business-model-canvas.md` | Business Model Canvas | B |
 | `business-architecture.md` | Business Architecture | B |
 | `data-architecture.md` | Data/Information Architecture | C |
 | `application-architecture.md` | Application Architecture | C |
 | `technology-architecture.md` | Technology Architecture | D |
-| `gap-analysis.md` | Gap Analysis | B–D |
+| `gap-analysis.md` | Gap Analysis (domain) | B, C-Data, C-App, D |
+| `consolidated-gap-analysis.md` | Consolidated Gap Analysis | E |
+| `transition-architectures.md` | Transition Architectures | E / F |
 | `architecture-roadmap.md` | Architecture Roadmap | E / F |
 | `migration-plan.md` | Migration Plan | F |
 | `implementation-governance-plan.md` | Implementation Governance Plan | G |

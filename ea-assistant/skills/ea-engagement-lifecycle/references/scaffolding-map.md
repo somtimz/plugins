@@ -83,14 +83,18 @@ All available templates and the phase they belong to. These are not all scaffold
 | `stakeholder-map.md` | Stakeholder Map | Prelim / A | All | All |
 | `statement-of-architecture-work.md` | Statement of Architecture Work | A | All | All |
 | `architecture-vision.md` | Architecture Vision | A | All | All |
+| `communications-plan.md` | Communications Plan | A | All | All |
+| `architecture-definition-document.md` | Architecture Definition Document | A (skeleton) → F (final) | All | All |
 | `requirements-register.md` | Architecture Requirements Register | Requirements | All | All |
 | `traceability-matrix.md` | Requirements Traceability Matrix | Requirements | All | All |
 | `business-model-canvas.md` | Business Model Canvas | B | Business | Greenfield, Brownfield, Migration |
 | `business-architecture.md` | Business Architecture | B | Business | All |
 | `data-architecture.md` | Data / Information Architecture | C-Data | Data | All |
 | `application-architecture.md` | Application Architecture | C-App | Application | All |
-| `gap-analysis.md` | Gap Analysis | B–D | All | All |
+| `gap-analysis.md` | Gap Analysis (domain) | B, C-Data, C-App, D | All | All |
 | `technology-architecture.md` | Technology Architecture | D | Technology | All |
+| `consolidated-gap-analysis.md` | Consolidated Gap Analysis | E | All | All |
+| `transition-architectures.md` | Transition Architectures | E / F | All | Greenfield, Brownfield, Migration |
 | `architecture-roadmap.md` | Architecture Roadmap | E / F | All | Greenfield, Brownfield, Migration |
 | `migration-plan.md` | Migration Plan | F | All | Brownfield, Migration |
 | `architecture-contract.md` | Architecture Contract | G | All | Greenfield, Brownfield, Migration |
@@ -109,6 +113,6 @@ All available templates and the phase they belong to. These are not all scaffold
 
 ### Engagement Type Notes
 
-- **Assessment-only**: Gap analysis is included (current-state gaps still identified); roadmap, migration plan, contracts, and change requests are excluded (E–H are Not Applicable).
+- **Assessment-only**: Domain gap analyses (B, C-Data, C-App, D) are included (current-state gaps still identified); consolidated gap analysis, roadmap, migration plan, contracts, and change requests are excluded (E–H are Not Applicable).
 - **Business Model Canvas**: Not applicable to Assessment-only engagements — the BMC documents the business model for transformation planning, not current-state assessment.
 - **Migration**: Migration Plan is primary; Architecture Roadmap is also created to sequence the migration waves.

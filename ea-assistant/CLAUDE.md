@@ -68,7 +68,7 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 agents/          8 agents (ea-facilitator, ea-interviewer, ea-roadmap, ea-document-analyst, ...)
 commands/        23 commands (see Command Reference above)
 skills/          8 skill directories (ea-artifact-templates, ea-engagement-lifecycle, zachman-framework, ...)
-templates/       27 TOGAF artifact templates (.md)
+templates/       31 TOGAF artifact templates (.md)
 scripts/         Python scripts for Word/PPTX generation
 docs/PRD.md      Authoritative product requirements (v0.9.12)
 hooks/hooks.json Plugin lifecycle hooks
@@ -340,7 +340,7 @@ ADRs are standalone documents capturing significant architecture decisions — t
 
 | Rule | Artifact | Requirement |
 |---|---|---|
-| T3-A3 | Architecture Vision, Business/Data/App/Tech Architecture, Gap Analysis, Architecture Roadmap, Statement of Architecture Work, Migration Plan, Engagement Charter, Governance Framework, Implementation Governance Plan | `## Appendix A3 — Decision Log` section present |
+| T3-A3 | Architecture Vision, Business/Data/App/Tech Architecture, Gap Analysis, Consolidated Gap Analysis, Architecture Roadmap, Statement of Architecture Work, Migration Plan, Engagement Charter, Governance Framework, Implementation Governance Plan, Communications Plan, Architecture Definition Document, Transition Architectures | `## Appendix A3 — Decision Log` section present |
 | T3-A5-ADR | Same artifact list as T3-A3 | `## Appendix A5 — Related Architecture Decisions` section present |
 | T3-ROAD-SA | Architecture Roadmap | `## Strategic Alignment` section with at least one non-placeholder row |
 | T3-ROAD-WP | Architecture Roadmap | At least one WP has non-empty `Advances Goals/Objectives` or `Executes Strategies` |
