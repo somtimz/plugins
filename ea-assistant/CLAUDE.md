@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.16 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.17 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -143,6 +143,7 @@ links: []              # named refs: [{label: "Context Diagram", path: "../../di
 | `skills/ea-artifact-templates/references/artifact-descriptions.md` | Purpose, audience, contents, and phase for every artifact type |
 | `skills/ea-engagement-lifecycle/SKILL.md` | ID scheme, facilitator style, opt-out rules |
 | `skills/ea-engagement-lifecycle/references/phase-constraints.md` | Per-phase runtime constraints: required artifacts, ID rules, traceability rules, blocking gates — read by ea-facilitator on phase entry, ea-interviewer at session start, ea-consistency-checker during validation |
+| `skills/ea-engagement-lifecycle/references/context-loading.md` | Context loading protocol — Scope A (artifact), Scope B (phase), Scope C (full) — used by ea-grill, ea-review, ea-consistency, ea-interview, ea-brainstorm |
 | `skills/ea-artifact-templates/SKILL.md` | A3 governance reference (states, transition rules) |
 | `docs/PRD.md` | Full feature spec, data model, agent table, quality gates, success metrics |
 

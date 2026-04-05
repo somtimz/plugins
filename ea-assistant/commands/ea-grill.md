@@ -2,7 +2,7 @@
 name: ea-grill
 description: Deep-review an EA artifact using a grill-me skill — stress-test, boardroom simulation, pre-mortem, decision critique, or design critique
 argument-hint: "[artifact-name] [--skill stress-test|boardroom|premortem|decision|design|boardroom-strategy]"
-allowed-tools: [Read, Bash]
+allowed-tools: [Read, Glob, Bash]
 ---
 
 Deeply review an EA artifact using a grill-me skill.
@@ -67,6 +67,8 @@ Read the artifact file. Extract:
 - Any A3 Decision Log entries
 - The current status, version, and review status from frontmatter
 
+Then load full artifact-scoped context using **Scope A** from `skills/ea-engagement-lifecycle/references/context-loading.md`. Announce the loaded context to the user before proceeding to Step 4.
+
 ---
 
 ### Step 4 — Brief the reviewer
@@ -99,6 +101,13 @@ For example:
 - If reviewing an Architecture Principles artifact and a principle lacks an Implications section, probe whether the team understands the practical consequences.
 
 Follow the selected skill's interviewing protocol exactly: one question at a time, with the question framing, recommended answer, and what a board member / critic / red-teamer would worry about.
+
+When asking questions, actively use the loaded context — do not treat it as passive background:
+- **Brainstorm notes:** If a session noted a concern that the artifact should address, challenge whether it has been resolved.
+- **Interview notes:** If a prior interview captured an answer that diverges from the artifact's current content, surface the discrepancy directly.
+- **Review / grill files:** If a prior grill identified revisions that were recommended but appear unapplied, flag them.
+- **Research items:** If a research item contains findings that contradict or qualify an artifact claim, cite it: `[research: {title}]`
+- **Related artifacts:** If a cross-referenced artifact labels the same ID differently or states a contradicting fact, challenge the inconsistency.
 
 ---
 

@@ -36,7 +36,15 @@ Parse the arguments passed to this command and route to the appropriate mode bel
 
 ### Full Mode (no args)
 
-Invoke the `ea-consistency-checker` agent. Instruct it to run all steps including the ID reference validation step (step 5b). Pass the engagement slug and artifact root path.
+Before dispatching to the agent, load full engagement context using **Scope C** from `skills/ea-engagement-lifecycle/references/context-loading.md`. Announce the loaded context.
+
+Invoke the `ea-consistency-checker` agent. Pass the engagement slug, artifact root path, and all loaded file paths (notes and research). Instruct the agent to run all steps including the ID reference validation step (step 5b), and to additionally check:
+
+- Whether artifact claims are consistent with interview notes for that phase (e.g. a goal stated in the artifact that contradicts what was captured in an interview session)
+- Whether brainstorm notes raised concerns that remain unaddressed in any artifact
+- Whether research items in `ResearchAndReferences/` contain findings that contradict artifact content
+
+The agent must report these in a separate section titled **"Notes & Research Contradictions"** at the end of the full report.
 
 After the agent produces its report, unless `--report` was specified, offer:
 
@@ -56,6 +64,10 @@ What would you like to do?
 **1. Locate the artifact**
 
 Use Glob to find `EA-projects/{slug}/artifacts/**/{id}.md`. If not found, list available artifact IDs and ask the user to confirm.
+
+**1b. Load artifact-scoped context**
+
+Load context using **Scope A** from `skills/ea-engagement-lifecycle/references/context-loading.md`. Use the loaded notes and research in steps 2 and 3 below to extend the consistency check beyond artifact-only content.
 
 **2. Within-artifact section consistency**
 
@@ -77,6 +89,13 @@ Scan all other artifacts in `EA-projects/{slug}/artifacts/**/*.md` to build the 
 
 Then check every ID referenced in the current artifact against the registry. Report any broken references (ID used in this artifact but not defined anywhere in the engagement).
 
+**3b. Notes and research consistency (artifact mode)**
+
+Using the loaded Scope A context:
+- **Interview notes:** For each interview note matching this artifact, check whether any captured answer contradicts the current artifact field value. Flag divergence: `⚠️ Field '{field}' says '{artifact value}' — interview {date} captured '{note value}'`
+- **Brainstorm notes:** Check whether any concern or assumption from the phase brainstorm notes is addressed somewhere in the artifact. Flag unaddressed concerns: `ℹ️ Brainstorm session N noted: '{concern}' — no corresponding artifact content found`
+- **Research items:** For each loaded research item, check whether any finding contradicts a claim in the artifact. Flag: `⚠️ Research '{title}' states '{finding}' — conflicts with artifact §{section}`
+
 **4. Output**
 
 ```
@@ -84,6 +103,7 @@ Consistency check: {artifact-name}
 ──────────────────────────────────
 Within-artifact label inconsistencies: {N}
 Broken ID references: {N}
+Notes & research contradictions: {N}
 
 [findings listed]
 

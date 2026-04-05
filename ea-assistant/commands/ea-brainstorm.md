@@ -69,7 +69,9 @@ Capture freeform brainstorm notes for the active EA engagement.
 
    - Read the artifact file (if it exists) and extract any fields that are already answered (non-placeholder, non-`⚠️ Not answered`, non-`⊘`). For each, record: `{ questionRef, questionText, answer, source: "artifact" }`.
    - Scan `EA-projects/{slug}/uploads/` for any previously processed documents. For each, check `artifacts/{phase-folder}/notes/interviews/` for a corresponding extraction note; extract Q&A pairs recorded against this artifact or phase. Record: `{ questionRef, questionText, answer, source: "{filename}" }`.
-   - Deduplicate by `questionRef` — if both artifact and document have an answer for the same field, prefer the artifact value (it is the more authoritative state).
+   - Read `ResearchAndReferences/research-index.md`. For each item tagged with the current phase or with topics matching the artifact or phase in scope, read the item's summary or first paragraph. Record as: `{ questionRef: null, questionText: item.title, answer: item.summary, source: "research: {item-title}" }`.
+   - Scan all `artifacts/{phase-folder}/*.md` (excluding `notes/`) for completed artifacts in this phase. For each, extract top-level section headings and any populated fields that carry concrete values (not placeholders). Record as read-only context annotations: `{ questionRef: null, questionText: "{artifact-name} — {section}", answer: "{value}", source: "artifact: {artifact-id}" }`.
+   - Deduplicate by `questionRef` — if both artifact and document have an answer for the same field, prefer the artifact value (it is the more authoritative state). Research and phase-artifact context entries have no `questionRef` and are never deduplicated — they are surfaced as additional context only.
    - Set `prefilled` to the resulting list. If none found, set to `null`.
 
    If any prefilled entries were found, announce before launching the pad:

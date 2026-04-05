@@ -2,7 +2,7 @@
 name: ea-interview
 description: Start, export, import, or resume a stakeholder interview about an EA artifact
 argument-hint: "[start|export|import|resume] [artifact|phase] [name]"
-allowed-tools: [Read, Write, Bash]
+allowed-tools: [Read, Write, Glob, Bash]
 ---
 
 Conduct or manage a stakeholder interview for an EA artifact.
@@ -29,12 +29,19 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
 
 3c. **Select interview mode** — the `ea-interviewer` agent will present the mode selection menu (Web default, with Text, Voice, and Display options). Pass the artifact name and pre-loaded context; the agent handles mode selection.
 
-4. Hand off to the `ea-interviewer` agent with:
+4. Load artifact-scoped context using **Scope A** from `skills/ea-engagement-lifecycle/references/context-loading.md`.
+
+   Hand off to the `ea-interviewer` agent with:
    - The artifact name and file path
    - The extracted question list
    - Any pre-existing answers from previous notes or uploaded docs
    - The selected mode (text / web / display)
    - Brainstorm notes path (if available): `artifacts/{phase-folder}/notes/brainstorm/brainstorm-notes.md`
+   - Loaded research items relevant to this artifact type or phase
+   - Summaries of other completed artifacts in the same phase (for cross-reference awareness)
+   - Prior grill review files for this artifact (so the interviewer can note whether earlier critique findings were addressed)
+
+   The `ea-interviewer` agent must reference this context during Q&A: if a loaded research item or prior note directly supports or contradicts a user answer, it should cite it — e.g. `"Research [title] suggests {finding} — does this align with what you've described?"`
 
 5. On interview completion:
    - Save dated notes to `artifacts/{phase-folder}/notes/interviews/interview-{artifact-id}-{YYYY-MM-DD}-v{N}.md`
@@ -71,7 +78,9 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
 
 3c. **Select interview mode** — the `ea-interviewer` agent will present the mode selection menu. Pass the phase name and context; the agent handles mode selection.
 
-4. Hand off to the `ea-interviewer` agent in **phase mode** with:
+4. Load phase-scoped context using **Scope B** from `skills/ea-engagement-lifecycle/references/context-loading.md`.
+
+   Hand off to the `ea-interviewer` agent in **phase mode** with:
    - The phase name
    - The question list from the question bank
    - The output routing table for this phase
@@ -79,6 +88,10 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
    - All artifacts that this phase's routing table targets
    - The selected mode (text / web / display)
    - Brainstorm notes path (if available): `artifacts/{phase-folder}/notes/brainstorm/brainstorm-notes.md`
+   - Loaded research items relevant to this phase
+   - Prior grill review files for any artifact in this phase
+
+   The `ea-interviewer` agent must reference this context during Q&A: cite research or prior notes when they support or contradict a user's answer.
 
 5. On interview completion:
    - Save dated notes to `artifacts/{phase-folder}/notes/interviews/interview-phase-{phase}-{YYYY-MM-DD}-v{N}.md`
