@@ -95,12 +95,19 @@ researchPrompts: true
 
 # Show topic/theme summary at end of each interview session  (default: true)
 sessionSummary: true
+
+# UI delivery mode: artifact | html  (default: html)
+# Use 'artifact' in Claude Code Desktop, Cowork Desktop, or claude.ai/code
+# Use 'html' (or omit) in Claude Code CLI terminal
+uiMode: html
 ```
 
 **Style guide:**
 - `patient` — explains each question, offers examples, probes short answers, pauses at section transitions
 - `direct` — ask, record, move on; minimal preamble
 - `executive` — business-outcome framing, no TOGAF jargon, checkpoints every 5–7 questions
+
+> **CLI users:** Leave `uiMode` unset or set to `html` — the interview and brainstorm UIs will open as a standalone HTML file in your browser. **Desktop/Cowork/Web users:** Set `uiMode: artifact` to render UIs inline as React artifacts.
 
 > `requirementsRepoPath` currently points to a local folder. SharePoint integration is planned for a future version.
 

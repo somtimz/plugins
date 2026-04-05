@@ -55,6 +55,13 @@ For each artifact in the table above:
    - `{{sponsor}}` → sponsor name
    - `{{YYYY-MM-DD}}` → today's date
 5. **Mark unpopulated content** — All sections not pre-populated from metadata MUST be marked `⚠️ Not answered`.
+5b. **Seed support files** — In addition to artifacts, copy these support files on every new engagement (no registration in `artifacts[]`; replace `{name}` and `{today ISO 8601}` tokens):
+
+   | Source template | Destination |
+   |---|---|
+   | `templates/seeds/research-index.md` | `ResearchAndReferences/research-index.md` |
+   | `templates/seeds/brainstorm-notes.md` | `brainstorm/brainstorm-notes.md` |
+
 6. **Register artifact** — Add an entry to `artifacts[]` in `engagement.json`:
    ```json
    {

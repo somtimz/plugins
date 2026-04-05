@@ -29,6 +29,11 @@ researchPrompts: true
 
 # Auto-summarise topics and themes at the end of every interview session
 sessionSummary: true
+
+# UI delivery mode for interview and brainstorm apps: artifact | html  (default: html)
+# Use 'artifact' in Claude Code Desktop, Cowork Desktop, or claude.ai/code
+# Use 'html' (or omit) in Claude Code CLI terminal
+uiMode: html
 ```
 
 All commands and agents that conduct interviews or facilitate phases MUST read this file at startup and apply the active style. If the file does not exist or `facilitatorStyle` is unset, default to `patient`.
@@ -60,3 +65,4 @@ All commands and agents that conduct interviews or facilitate phases MUST read t
 - **`requireConfirmBeforeRecord: true`** — after every answer, show: `"Record this? (y / edit / skip)"` before writing to the artifact
 - **`researchPrompts: true`** — when a driver, risk, assumption, or technology claim is recorded, show: `💡 Consider validating with @research-agent before finalising.`
 - **`sessionSummary: true`** — after session completion, display topics covered, answers recorded, and key themes. Set `false` to suppress (next step is always shown regardless)
+- **`uiMode: artifact`** — render interview and brainstorm UIs as inline React artifacts. Requires Claude Code Desktop, Cowork Desktop, or claude.ai/code. Set `html` (or omit) in Claude Code CLI terminal — UIs open as a standalone HTML file in the browser.

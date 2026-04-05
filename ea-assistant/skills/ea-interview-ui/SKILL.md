@@ -13,15 +13,15 @@ Provides two interactive UI apps for EA interview sessions and brainstorming.
 
 **This skill is only invoked when the user selects Web mode.** The default interview mode is Text (chat Q&A). Only load this skill when `mode = "web"` has been explicitly chosen.
 
-**Runtime detection — choose the delivery mode before proceeding:**
+**Runtime detection — read `uiMode` from `.claude/ea-assistant.local.md` first, then choose the delivery mode:**
 
-| Runtime | Delivery mode |
+| `uiMode` setting | Delivery mode |
 |---|---|
-| Claude Code or Claude Cowork | **React artifact** — present JSX inline |
-| Any harness + `preview_artifact` MCP tool available | **MCP preview** — call `preview_artifact(html, title)` |
-| OpenCode or any non-artifact environment | **HTML file** — write to disk, open in browser |
+| `artifact` | **React artifact** — present JSX inline; use in Claude Code Desktop, Cowork Desktop, or claude.ai/code |
+| `html` | **HTML file** — write to disk and open in browser; works in all environments including CLI terminal |
+| not set | Default to **HTML file** |
 
-Check for MCP mode before falling back to HTML file: if the `preview_artifact` tool is listed in the available tools, use it — pass the completed HTML string and the artifact/session title. The server handles opening the browser.
+Check for MCP mode before either: if the `preview_artifact` tool is listed in the available tools, use it regardless of `uiMode` — pass the completed HTML string and the artifact/session title. The server handles opening the browser.
 
 Both apps are stateless — all state lives in React `useState`. A page refresh resets the form, so complete the session in one sitting before copying the output.
 
@@ -200,6 +200,8 @@ When the user pastes the `BRAINSTORM NOTES` block, parse the categories and thou
 Both apps:
 - Use only React hooks (`useState`, `useEffect`, `useRef`) — no external CSS or icon libraries
 - Are stateless — all state lives in React `useState`; a page refresh resets the form
-- **React artifact mode**: no CDN or build step required — Claude Code and Cowork bundle React
-- **HTML file mode**: requires an internet connection for CDN scripts (React 18 + Babel Standalone from unpkg); total ~1 MB
+- **React artifact mode** (`uiMode: artifact`): no CDN or build step required — Claude Code Desktop, Cowork Desktop, and claude.ai/code bundle React. Not available in Claude Code CLI terminal (no artifact renderer).
+- **HTML file mode** (`uiMode: html`, default): requires an internet connection for CDN scripts (React 18 + Babel Standalone from unpkg); total ~1 MB. Works in all environments including CLI terminal.
 - The HTML shell files use `<script type="text/babel">` so the JSX is transformed at runtime — no pre-compilation needed
+- **CLI users**: leave `uiMode` unset or set to `html` — UIs will open as a standalone HTML file in your browser
+- **Desktop/Cowork/Web users**: set `uiMode: artifact` to render UIs inline as React artifacts
