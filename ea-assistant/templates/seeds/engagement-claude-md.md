@@ -83,6 +83,7 @@ Within artifact markdown files, use relative links from the artifact's location:
 | `/ea-decisions` | Decision register from all A3 logs |
 | `/ea-research` | Research library |
 | `/ea-grill` | Deep-review an artifact |
+| `/ea-next` | Suggest the best next action for this engagement |
 | `/ea-notes` | List, view, edit, or delete notes (interviews, brainstorm, reviews) |
 | `/ea-reorganize` | Move flat-path artifacts into correct phase subfolders |
 | `/ea-publish` | Consolidate and export artifacts |

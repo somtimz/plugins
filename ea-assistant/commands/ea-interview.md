@@ -40,6 +40,7 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
    - Save dated notes to `artifacts/{phase-folder}/notes/interviews/interview-{artifact-id}-{YYYY-MM-DD}-v{N}.md`
    - Update the artifact file with confirmed answers
    - Update `lastModified` in `engagement.json`
+   - Ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-next.md` and output the recommendation.
 
 ---
 
@@ -83,6 +84,7 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
    - Save dated notes to `artifacts/{phase-folder}/notes/interviews/interview-phase-{phase}-{YYYY-MM-DD}-v{N}.md`
    - Update target artifacts with confirmed answers (per output routing)
    - Update `lastModified` in `engagement.json`
+   - Ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-next.md` and output the recommendation.
 
 ---
 

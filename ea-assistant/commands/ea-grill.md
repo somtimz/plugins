@@ -230,3 +230,5 @@ If the user selects `a` or `s`:
 - Never apply a revision to an `Approved` artifact without explicit user confirmation — warn first: `⚠️ This artifact is Approved. Applying revisions will reset reviewStatus to In Review. Continue? (y/n)`
 - Never invent content — only apply revisions derived directly from the grill output
 - If a revision touches a field that references other artifacts (e.g. adds a GAP-NNN or REQ-NNN ID), flag it: `⚠️ This adds a reference to [ID] — verify it exists in the source artifact before saving`
+
+After all revisions are applied or the user skips Step 7, ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-next.md` and output the recommendation.

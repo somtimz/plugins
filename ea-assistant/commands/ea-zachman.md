@@ -41,6 +41,7 @@ Scans all artifacts, extracts content per cell, writes a populated Zachman Diagr
    - Write to: `EA-projects/{slug}/artifacts/zachman-diagram-{YYYY-MM-DD}.md`
    - Register in `engagement.json → artifacts[]`
 4. Confirm: `"Zachman Diagram written: {N} cells populated (✅ {N} / ⚠️ {N} / ❌ {N})"` then offer: review, see gaps, fill empty cells, done
+5. Ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-next.md` and output the recommendation.
 
 ---
 
@@ -95,6 +96,8 @@ Identifies ❌ and ⚠️ cells, classifies severity, recommends remediation.
 
 Output a structured gap report (High / Medium / Low sections, each gap with action), then offer: "Run '/ea-zachman interview' to fill the high-priority gaps now? (y/n)"
 
+After the gap report and the above offer, ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-next.md` and output the recommendation.
+
 ---
 
 ## Mode: `interview`
@@ -111,6 +114,7 @@ Guided Q&A to fill empty/partial cells row by row.
    - Ask for source artifact reference (optional)
    - Write answer to Zachman Diagram file; update coverage status
 4. **Session completion** — report cells populated/updated/skipped and new coverage %; offer: view coverage, see remaining gaps, done
+5. Ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-next.md` and output the recommendation.
 
 ---
 

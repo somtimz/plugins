@@ -64,6 +64,7 @@ Derive the artifact's storage folder from the `phase` field in the template fron
 8. Resolve any `{{phase}}` placeholder in the frontmatter to the actual phase value
 9. Add entry to `artifacts[]` in `engagement.json` — `file` path must be `artifacts/{phase-folder}/{artifact-id}.md`
 10. Confirm creation and offer to start an interview to populate it
+11. Ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-next.md` and output the recommendation.
 
 ### Mode: `view [artifact-name]`
 
