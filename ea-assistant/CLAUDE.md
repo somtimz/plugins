@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.14 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.15 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -49,6 +49,7 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 | `/ea-artifact` | ea-facilitator | Create, view, or list artifacts |
 | `/ea-review` | ea-facilitator | Open artifact for review; track review state |
 | `/ea-grill` | ea-interviewer | Deep-review artifact (9 grill-me skills) |
+| `/ea-notes` | ea-facilitator | List, view, edit, or delete interview notes, brainstorm notes, and review files |
 | `/ea-consistency` | ea-consistency-checker | Focused consistency check: cross-artifact contradictions, within-artifact section inconsistencies, ID reference validation |
 | `/ea-engage-review` | ea-consistency-checker | Full engagement: consistency + traceability |
 | `/ea-publish` | ea-facilitator | Publish artifacts into a consolidated document |
@@ -67,7 +68,7 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 
 ```
 agents/          8 agents (ea-facilitator, ea-interviewer, ea-roadmap, ea-document-analyst, ...)
-commands/        25 commands (see Command Reference above)
+commands/        26 commands (see Command Reference above)
 skills/          8 skill directories (ea-artifact-templates, ea-engagement-lifecycle, zachman-framework, ...)
 templates/       31 TOGAF artifact templates (.md)
 scripts/         Python scripts for Word/PPTX generation
@@ -94,11 +95,11 @@ EA-projects/{slug}/
 │   ├── phase-e/              # Phase E: Gap Analysis, Architecture Roadmap
 │   ├── phase-f/              # Phase F: Migration Plan
 │   ├── phase-g/              # Phase G: Architecture Contract, Compliance Assessment
+│   │   └── notes/            # interviews/, brainstorm/, reviews/ for this phase
 │   ├── phase-h/              # Phase H: Change Request
+│   │   └── notes/
 │   └── cross-cutting/        # Risk Register, Decision Register, ADR Register, Zachman
-├── reviews/                  # /ea-grill output files
-├── interviews/               # session-log.md + dated interview notes
-├── brainstorm/               # brainstorm-notes.md
+│       └── notes/            # unscoped notes (no active phase)
 ├── diagrams/                 # .mmd, .dot, .drawio, .png, .svg
 ├── uploads/                  # source documents for ingestion
 ├── ResearchAndReferences/    # research documents, notes, links; research-index.md

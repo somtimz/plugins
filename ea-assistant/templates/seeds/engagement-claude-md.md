@@ -36,10 +36,10 @@
 |---|---|
 | Goals, objectives, strategies, drivers, issues | `engagement.json → direction` |
 | Artifact files | `artifacts/{phase-folder}/` (see Phase Folder Map) |
-| Interview notes | `interviews/session-log.md` |
-| Working notes | `brainstorm/brainstorm-notes.md` |
+| Interview notes | `artifacts/{phase-folder}/notes/interviews/` |
+| Brainstorm notes | `artifacts/{phase-folder}/notes/brainstorm/brainstorm-notes.md` |
+| Review files | `artifacts/{phase-folder}/notes/reviews/` |
 | Research library | `ResearchAndReferences/research-index.md` |
-| Architecture reviews | `reviews/` |
 | Diagrams | `diagrams/` |
 
 ## Phase Folder Map
@@ -83,5 +83,6 @@ Within artifact markdown files, use relative links from the artifact's location:
 | `/ea-decisions` | Decision register from all A3 logs |
 | `/ea-research` | Research library |
 | `/ea-grill` | Deep-review an artifact |
+| `/ea-notes` | List, view, edit, or delete notes (interviews, brainstorm, reviews) |
 | `/ea-reorganize` | Move flat-path artifacts into correct phase subfolders |
 | `/ea-publish` | Consolidate and export artifacts |

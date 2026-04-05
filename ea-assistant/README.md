@@ -123,6 +123,7 @@ uiMode: html
 | `/ea-brainstorm [phase]` | Capture freeform thoughts and context before or during interviews |
 | `/ea-interview [mode]` | Start or resume a stakeholder interview (artifact or phase mode; Text/Web/Display) |
 | `/ea-generate [artifact] [format]` | Export as docx, pptx, mermaid, png, or svg; diagrams embedded in docx/pptx by default |
+| `/ea-notes [mode]` | List, view, edit, or delete interview notes, brainstorm notes, and review files |
 | `/ea-review [artifact]` | Open an artifact for review and assessment; runs compliance check on load |
 | `/ea-requirements [action]` | Manage architecture requirements |
 | `/ea-decisions [options]` | Generate a Decision Register from all A3 decision logs; filter by audience, owner, domain, authority, cost, impact, risk, subject, or status |

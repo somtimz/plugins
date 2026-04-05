@@ -11,7 +11,24 @@ Capture freeform brainstorm notes for the active EA engagement.
 
 1. **Require an active engagement.** Check for `engagement.json` in context. If no engagement is active, prompt: "No engagement is currently active. Run `/ea-open` to open one first."
 
-1b. **Extract slug.** Read `engagement.json` and extract the `slug` field. Use it in all file paths throughout this command (e.g. `EA-projects/{slug}/brainstorm/brainstorm-notes.md`).
+1b. **Extract slug and resolve phase folder.** Read `engagement.json` and extract the `slug` field. Resolve the phase folder from the phase argument (or `currentPhase` if no argument):
+
+   | Phase argument | Phase folder |
+   |---|---|
+   | `Prelim` | `preliminary` |
+   | `Req` / `Requirements` | `requirements` |
+   | `A` | `phase-a` |
+   | `B` | `phase-b` |
+   | `C` / `C-Data` | `phase-c-data` |
+   | `C-App` | `phase-c-app` |
+   | `D` | `phase-d` |
+   | `E` | `phase-e` |
+   | `F` | `phase-f` |
+   | `G` | `phase-g` |
+   | `H` | `phase-h` |
+   | (none) | `cross-cutting` |
+
+   Brainstorm notes path: `EA-projects/{slug}/artifacts/{phase-folder}/notes/brainstorm/brainstorm-notes.md`
 
 2. **Resolve phase scope.** If a phase argument was provided (e.g. `/ea-brainstorm phase B`), map it to a full phase name:
    - `Prelim` → Preliminary
@@ -27,7 +44,7 @@ Capture freeform brainstorm notes for the active EA engagement.
 
    Note the phase scope for use in the session header and opening prompt.
 
-3. **Check for existing notes.** Look for `EA-projects/{slug}/brainstorm/brainstorm-notes.md`.
+3. **Check for existing notes.** Look for `EA-projects/{slug}/artifacts/{phase-folder}/notes/brainstorm/brainstorm-notes.md`.
    - If found, read the frontmatter to get `sessions` and `lastUpdated`.
    - Show: "You have {N} brainstorm session(s) — last updated {date}."
    - Offer: "Would you like to view existing notes first, or go straight to adding new thoughts?"
@@ -51,7 +68,7 @@ Capture freeform brainstorm notes for the active EA engagement.
 3c. **Pull pre-existing answers from documents.** Check whether any answers already exist that should be surfaced in the pad:
 
    - Read the artifact file (if it exists) and extract any fields that are already answered (non-placeholder, non-`⚠️ Not answered`, non-`⊘`). For each, record: `{ questionRef, questionText, answer, source: "artifact" }`.
-   - Scan `EA-projects/{slug}/uploads/` for any previously processed documents. For each, check `interviews/` for a corresponding extraction note; extract Q&A pairs recorded against this artifact or phase. Record: `{ questionRef, questionText, answer, source: "{filename}" }`.
+   - Scan `EA-projects/{slug}/uploads/` for any previously processed documents. For each, check `artifacts/{phase-folder}/notes/interviews/` for a corresponding extraction note; extract Q&A pairs recorded against this artifact or phase. Record: `{ questionRef, questionText, answer, source: "{filename}" }`.
    - Deduplicate by `questionRef` — if both artifact and document have an answer for the same field, prefer the artifact value (it is the more authoritative state).
    - Set `prefilled` to the resulting list. If none found, set to `null`.
 
@@ -123,12 +140,13 @@ Capture freeform brainstorm notes for the active EA engagement.
 
 6. **Save the pasted notes.** Parse the `BRAINSTORM NOTES` block from the user's paste. The categories are already structured by the app (Concerns / Goals & Vision / Constraints / Opportunities / Assumptions / Other) — use them as-is; do not re-categorise.
 
-   **Append** a new session block to `EA-projects/{slug}/brainstorm/brainstorm-notes.md`. Never overwrite prior sessions. If the file does not exist, create it.
+   **Append** a new session block to `EA-projects/{slug}/artifacts/{phase-folder}/notes/brainstorm/brainstorm-notes.md`. Never overwrite prior sessions. If the file does not exist, seed it from `templates/seeds/brainstorm-notes.md` (replace `{name}` → engagement name, `{phase}` → resolved phase label, `{today ISO 8601}` → today's date), then append the session block.
 
    **File format:**
    ```markdown
    ---
    engagement: {name}
+   phase: {phase label, e.g. "Phase B — Business Architecture"}
    lastUpdated: YYYY-MM-DD
    sessions: N
    ---

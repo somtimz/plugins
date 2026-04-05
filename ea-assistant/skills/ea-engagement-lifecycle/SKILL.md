@@ -31,14 +31,19 @@ EA-projects/
 │   │   ├── phase-g/                 # Phase G: Architecture Contract, Compliance Assessment
 │   │   ├── phase-h/                 # Phase H: Change Request
 │   │   └── cross-cutting/           # Risk Register, Decision Register, ADR Register, Zachman
+│   │       └── notes/               # unscoped notes (no active phase)
 │   ├── diagrams/
 │   ├── uploads/
-│   ├── interviews/
-│   ├── reviews/
-│   ├── brainstorm/
 │   └── ResearchAndReferences/
 └── .archive/
 ```
+
+Each phase folder contains a `notes/` subfolder created on demand with three subdirectories:
+- `notes/interviews/` — dated interview note files (`interview-{artifact-id}-{YYYY-MM-DD}-v{N}.md`)
+- `notes/brainstorm/` — `brainstorm-notes.md` (one file per phase, seeded on first use)
+- `notes/reviews/` — grill/review output files (`grill-{artifact-id}-{skill}-{YYYY-MM-DD}.md`)
+
+Use `/ea-notes` to list, view, edit, or delete notes across all phases.
 
 ### Phase Folder Mapping
 

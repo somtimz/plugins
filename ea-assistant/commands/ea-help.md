@@ -88,6 +88,7 @@ You have existing engagements. Common next steps:
 | `/ea-concerns` | Manage CON-NNN stakeholder concerns (Appendix A4) |
 | `/ea-zachman [mode]` | Manage the Zachman 6×6 classification diagram (generate, review, gap, interview, classify) |
 | `/ea-research [mode]` | Research library — add, note, link, list, view, apply findings to artifacts |
+| `/ea-notes [mode]` | List, view, edit, or delete interview notes, brainstorm notes, and review files |
 | `/ea-consistency [options]` | Focused consistency check — cross-artifact contradictions, within-artifact section inconsistencies, or ID reference scan only (`--ids`) |
 | `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman |
 | `/ea-reorganize [--report]` | Move flat-path artifacts into correct phase subfolders; update engagement.json paths |

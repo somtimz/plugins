@@ -120,8 +120,10 @@ When the review is complete (or the user types `done` or `finish`), produce the 
 Offer to save the output as a review note:
 ```
 Save this grill output as a review file? (y/n)
-File would be saved to: EA-projects/{slug}/reviews/grill-{artifact-id}-{skill}-{YYYY-MM-DD}.md
+File would be saved to: EA-projects/{slug}/artifacts/{phase-folder}/notes/reviews/grill-{artifact-id}-{skill}-{YYYY-MM-DD}.md
 ```
+
+Resolve `{phase-folder}` from the artifact frontmatter `phase:` field using the Phase Folder Mapping table in `skills/ea-engagement-lifecycle/SKILL.md`.
 
 If the user confirms, write the file with a frontmatter header:
 ```yaml

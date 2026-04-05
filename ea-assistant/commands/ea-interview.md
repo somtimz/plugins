@@ -21,9 +21,11 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
 
 2. Load the artifact file and extract all `{{placeholder}}` fields as interview questions.
 
-3. Load any existing dated interview notes from `interviews/` for this artifact. If notes exist, ask: "Previous interview notes found (v{N}, {date}). Resume from these, or start fresh?"
+3. Resolve the phase folder for the artifact (read `phase:` from artifact frontmatter and map to the folder using the Phase Folder Mapping table in `skills/ea-engagement-lifecycle/SKILL.md`). Use this folder for all note paths in this mode.
 
-3b. **Check for brainstorm notes:** Look for `EA-projects/{slug}/brainstorm/brainstorm-notes.md`. Note whether it exists.
+   Load any existing dated interview notes from `artifacts/{phase-folder}/notes/interviews/` for this artifact. If notes exist, ask: "Previous interview notes found (v{N}, {date}). Resume from these, or start fresh?"
+
+3b. **Check for brainstorm notes:** Look for `EA-projects/{slug}/artifacts/{phase-folder}/notes/brainstorm/brainstorm-notes.md`. Note whether it exists.
 
 3c. **Select interview mode** — the `ea-interviewer` agent will present the mode selection menu (Web default, with Text, Voice, and Display options). Pass the artifact name and pre-loaded context; the agent handles mode selection.
 
@@ -32,10 +34,10 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
    - The extracted question list
    - Any pre-existing answers from previous notes or uploaded docs
    - The selected mode (text / web / display)
-   - Brainstorm notes path (if available): `brainstorm/brainstorm-notes.md`
+   - Brainstorm notes path (if available): `artifacts/{phase-folder}/notes/brainstorm/brainstorm-notes.md`
 
 5. On interview completion:
-   - Save dated notes to `interviews/interview-{artifact-id}-{YYYY-MM-DD}-v{N}.md`
+   - Save dated notes to `artifacts/{phase-folder}/notes/interviews/interview-{artifact-id}-{YYYY-MM-DD}-v{N}.md`
    - Update the artifact file with confirmed answers
    - Update `lastModified` in `engagement.json`
 
@@ -60,9 +62,11 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
 
 2. Load the question bank from `skills/ea-artifact-templates/references/phase-interview-questions.md` for the selected phase.
 
-3. Load any existing interview notes for this phase from `interviews/interview-phase-{phase}-*`. If notes exist, ask: "Previous phase interview notes found (v{N}, {date}). Resume from these, or start fresh?"
+3. Resolve the phase folder from the selected phase using the Phase Folder Mapping table in `skills/ea-engagement-lifecycle/SKILL.md`.
 
-3b. **Check for brainstorm notes:** Look for `EA-projects/{slug}/brainstorm/brainstorm-notes.md`. Note whether it exists.
+   Load any existing interview notes for this phase from `artifacts/{phase-folder}/notes/interviews/interview-phase-{phase}-*`. If notes exist, ask: "Previous phase interview notes found (v{N}, {date}). Resume from these, or start fresh?"
+
+3b. **Check for brainstorm notes:** Look for `EA-projects/{slug}/artifacts/{phase-folder}/notes/brainstorm/brainstorm-notes.md`. Note whether it exists.
 
 3c. **Select interview mode** — the `ea-interviewer` agent will present the mode selection menu. Pass the phase name and context; the agent handles mode selection.
 
@@ -73,10 +77,10 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
    - Any pre-existing answers from previous sessions
    - All artifacts that this phase's routing table targets
    - The selected mode (text / web / display)
-   - Brainstorm notes path (if available): `brainstorm/brainstorm-notes.md`
+   - Brainstorm notes path (if available): `artifacts/{phase-folder}/notes/brainstorm/brainstorm-notes.md`
 
 5. On interview completion:
-   - Save dated notes to `interviews/interview-phase-{phase}-{YYYY-MM-DD}-v{N}.md`
+   - Save dated notes to `artifacts/{phase-folder}/notes/interviews/interview-phase-{phase}-{YYYY-MM-DD}-v{N}.md`
    - Update target artifacts with confirmed answers (per output routing)
    - Update `lastModified` in `engagement.json`
 
@@ -103,7 +107,7 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
    **Answer:** [Write your answer here — or type SKIP or N/A]
    ```
 
-3. Write to `interviews/interview-{artifact-id}-{YYYY-MM-DD}-v{N}-export.md`
+3. Resolve the artifact's phase folder. Write to `artifacts/{phase-folder}/notes/interviews/interview-{artifact-id}-{YYYY-MM-DD}-v{N}-export.md`
 
 4. Convert to `.docx` — bootstrap pandoc if not already installed, then run:
    ```bash
@@ -118,7 +122,7 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
        exit 0
      fi
    fi
-   pandoc interviews/{filename}.md -o interviews/{filename}.docx
+   pandoc "artifacts/{phase-folder}/notes/interviews/{filename}.md" -o "artifacts/{phase-folder}/notes/interviews/{filename}.docx"
    ```
 
 5. Confirm export location and instruct the user to fill in answers and import with `/ea-interview import`.

@@ -55,12 +55,13 @@ For each artifact in the table above:
    - `{{sponsor}}` → sponsor name
    - `{{YYYY-MM-DD}}` → today's date
 5. **Mark unpopulated content** — All sections not pre-populated from metadata MUST be marked `⚠️ Not answered`.
-5b. **Seed support files** — In addition to artifacts, copy these support files on every new engagement (no registration in `artifacts[]`; replace `{name}` and `{today ISO 8601}` tokens):
+5b. **Seed support files** — In addition to artifacts, copy these support files on every new engagement (no registration in `artifacts[]`; replace `{name}`, `{slug}`, and `{today ISO 8601}` tokens):
 
    | Source template | Destination |
    |---|---|
    | `templates/seeds/research-index.md` | `ResearchAndReferences/research-index.md` |
-   | `templates/seeds/brainstorm-notes.md` | `brainstorm/brainstorm-notes.md` |
+
+   > **Brainstorm notes** (`templates/seeds/brainstorm-notes.md`) are NOT seeded at engagement creation. They are created on demand the first time `/ea-brainstorm` is run for a phase, and written to `artifacts/{phase-folder}/notes/brainstorm/brainstorm-notes.md`. One file per phase.
 
 6. **Register artifact** — Add an entry to `artifacts[]` in `engagement.json`:
    ```json
