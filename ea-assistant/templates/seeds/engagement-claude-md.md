@@ -10,25 +10,14 @@
 | Slug | {slug} |
 | Type | {engagementType} |
 | Sponsor | {sponsor} |
-| Current Phase | {currentPhase} |
-| Status | {status} |
 | Started | {startDate} |
-| Last Modified | {lastModified} |
 
 ## Engagement Context
 
 **Vision:** {direction.vision — single sentence; or "Not captured yet"}
 **Scope:** {scope}
 
-## Engagement State
-
-| Item | Value |
-|---|---|
-| Active phases | {phases with status In Progress or On Hold, comma-separated; or "None started"} |
-| Artifacts | {total count} total — {count of Draft + In Review} in progress |
-| Open decisions | {count of Provisional + Awaiting rows across all A3 logs} |
-| Research items | {count of rows in ResearchAndReferences/research-index.md Items table} |
-| Opt-outs | {count from engagement.json optOuts[]; omit row if 0} |
+> Run `/ea-open` for current phase, artifact status, and next actions. Run `/ea-status` for the portfolio dashboard.
 
 ## Where to Find Content
 
@@ -70,20 +59,3 @@ Within artifact markdown files, use relative links from the artifact's location:
 | Different-phase artifact | `../{phase-folder}/{artifact-id}.md` |
 | Upload | `../../uploads/{filename}` |
 | Research document | `../../ResearchAndReferences/{filename}.md` |
-
-## Quick Commands
-
-| Command | Action |
-|---|---|
-| `/ea-open` | Full engagement context and next-action menu |
-| `/ea-status` | Complete engagement dashboard |
-| `/ea-phase {currentPhase}` | Continue current phase |
-| `/ea-interview` | Run or resume a stakeholder interview |
-| `/ea-artifact` | Create or view artifacts |
-| `/ea-decisions` | Decision register from all A3 logs |
-| `/ea-research` | Research library |
-| `/ea-grill` | Deep-review an artifact |
-| `/ea-next` | Suggest the best next action for this engagement |
-| `/ea-notes` | List, view, edit, or delete notes (interviews, brainstorm, reviews) |
-| `/ea-reorganize` | Move flat-path artifacts into correct phase subfolders |
-| `/ea-publish` | Consolidate and export artifacts |

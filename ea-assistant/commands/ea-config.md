@@ -249,7 +249,7 @@ The seeded boilerplate (Session Start, Artifacts, Concepts and References, IDs s
 
 1. Read `EA-projects/{slug}/engagement.json`. If unreadable, display the read error and return to the caller.
 
-2. Regenerate `EA-projects/{slug}/CLAUDE.md` using the same Project CLAUDE.md template defined in `ea-assistant/commands/ea-new.md` (the `## Project CLAUDE.md Template` section). Populate all placeholders from the current `engagement.json` values — identity fields, state counts (artifact count, in-progress count, open decisions, research items, opt-outs), phase folder map, artifact link conventions, and quick commands table.
+2. Regenerate `EA-projects/{slug}/CLAUDE.md` using the seed template at `templates/seeds/engagement-claude-md.md`. Populate stable identity fields (organisation, slug, type, sponsor, started date), engagement context (vision, scope), phase folder map, and artifact link conventions from current `engagement.json` values. Do **not** populate current phase, status, state counts (artifact count, open decisions, opt-outs), or a quick commands table — these are transitory and intentionally excluded from the template.
 
 3. Write the file.
 

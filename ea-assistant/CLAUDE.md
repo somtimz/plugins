@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.17 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.18 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -82,7 +82,7 @@ hooks/hooks.json Plugin lifecycle hooks
 ```
 EA-projects/{slug}/
 ├── engagement.json           # all state: phases, artifacts, sessions, direction, metrics, optOuts
-├── CLAUDE.md                 # auto-generated per-engagement context (overwritten on /ea-open)
+├── CLAUDE.md                 # stable pointer doc — identity, context, folder map (overwritten on /ea-open; no transitory state)
 ├── .claude/rules/
 │   └── ea-engagement.md      # persistent session guardrails (concept SST, ID scheme, rules)
 ├── artifacts/                # phase-organized artifact files
@@ -107,7 +107,7 @@ EA-projects/{slug}/
 └── ui/                       # generated HTML interview/brainstorm forms
 ```
 
-> The `CLAUDE.md` inside each engagement folder is **auto-generated** and will be overwritten on every `/ea-open`. Do not edit it manually; use `brainstorm/brainstorm-notes.md` for persistent engagement notes.
+> The `CLAUDE.md` inside each engagement folder is a **stable pointer document** (identity, context, folder map) — it contains no transitory state (no current phase, status counts, or commands). It is overwritten on every `/ea-open`. Do not edit it manually; use `brainstorm/brainstorm-notes.md` for persistent notes. For current phase and artifact state, run `/ea-open` or `/ea-status`.
 
 ### Artifact Link Conventions
 

@@ -104,12 +104,12 @@ Display a picklist of all EA engagements, open the selected one with full detail
 
    **This step makes no changes to any file.** It is a read-only scan.
 
-7b. **Refresh `EA-projects/{slug}/CLAUDE.md`** using the pointer template defined in `/ea-new`. This file is a **lightweight index** — do not copy full goal/objective/strategy lists into it. Populate from current `engagement.json` state:
-   - **Identity** — organisation, slug, type, sponsor, phase, status, dates
-   - **Engagement Context** — Vision (single sentence only) and scope
-   - **Engagement State** — counts only: active phases (In Progress / On Hold), artifact totals, open decision count (Provisional + Awaiting across all A3 logs — count only, no detail), research item count, opt-out count
-   - **Where to Find Content** — pointer table (static, always the same); include Phase Folder Map from `/ea-new`
-   - **Quick Commands** — always include, with `{currentPhase}` substituted
+7b. **Refresh `EA-projects/{slug}/CLAUDE.md`** using the seed template at `templates/seeds/engagement-claude-md.md`. This file is a **stable pointer document** — it contains only information that does not change between sessions. Populate from `engagement.json`:
+   - **Identity** — organisation, slug, type, sponsor, started date (stable fields only — do **not** include current phase, status, last-modified, or any other transitory state)
+   - **Engagement Context** — Vision (single sentence) and scope
+   - **Where to Find Content** and **Phase Folder Map** — static; always the same
+
+   Do **not** include an Engagement State section, artifact counts, open decision counts, opt-out counts, or a Quick Commands table — these change frequently and will be stale. Direct the user to `/ea-open` and `/ea-status` instead (the blockquote pointer line in the template handles this).
 
    Full strategic detail (goals, objectives, strategies, drivers, issues) lives in `engagement.json → direction` and artifact files — do not duplicate it here.
 

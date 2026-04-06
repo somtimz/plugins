@@ -1,6 +1,6 @@
 {
   "name": "ea-assistant",
-  "version": "0.9.17",
+  "version": "0.9.18",
   "description": "End-to-end Enterprise Architecture engagement management — TOGAF 10 ADM lifecycle, Zachman classification, ArchiMate notation. Structured phase interviews, artifact generation, motivation framework (Drivers/Goals/Objectives/Issues/Problems), Decision Register, ADR management, Risk Register, roadmap agent, grill-me integration, consistency checking, and consolidated reporting.",
   "author": {
     "name": "Costa Pissaris",
