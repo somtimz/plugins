@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.18 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.19 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -84,7 +84,8 @@ EA-projects/{slug}/
 ├── engagement.json           # all state: phases, artifacts, sessions, direction, metrics, optOuts
 ├── CLAUDE.md                 # stable pointer doc — identity, context, folder map (overwritten on /ea-open; no transitory state)
 ├── .claude/rules/
-│   └── ea-engagement.md      # persistent session guardrails (concept SST, ID scheme, rules)
+│   ├── ea-engagement.md      # persistent session guardrails (concept SST, ID scheme, rules) — auto-generated
+│   └── ea-local-config.md    # user-editable local config (stakeholders, domain terms, preferences) — never overwritten
 ├── artifacts/                # phase-organized artifact files
 │   ├── preliminary/          # Prelim: Architecture Principles, Engagement Charter
 │   ├── requirements/         # Requirements: Register, Traceability Matrix

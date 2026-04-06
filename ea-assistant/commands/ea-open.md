@@ -119,6 +119,8 @@ Display a picklist of all EA engagements, open the selected one with full detail
 
 7d. **Ensure `.claude/rules/ea-engagement.md` exists** — check for `EA-projects/{slug}/.claude/rules/ea-engagement.md`. If missing (legacy engagement), create it using the same template as `/ea-new` (substituting current `{name}` and `{slug}`). This is silent — do not notify the user.
 
+7d2. **Ensure `.claude/rules/ea-local-config.md` exists** — check for `EA-projects/{slug}/.claude/rules/ea-local-config.md`. If missing (new engagement or legacy), seed it from `templates/seeds/ea-local-config.md` (substituting `{name}`). This is the user's local config file — **never overwrite if it already exists**. Notify the user only if creating for the first time: `ℹ️ Created .claude/rules/ea-local-config.md — add stakeholder context, domain terms, and preferences there. Run \`/ea-config local\` to edit.`
+
 7e. **Ensure phase artifact subdirectories exist** — check for the 12 phase subdirectories under `EA-projects/{slug}/artifacts/`. For any that are missing, create them silently:
 ```
 artifacts/preliminary/

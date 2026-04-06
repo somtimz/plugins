@@ -49,7 +49,8 @@ When this command runs:
    - `rules` → run Engagement Resolution, then jump to Section 2
    - `optouts` → run Engagement Resolution, then jump to Section 3
    - `refresh` → run Engagement Resolution, then jump to Section 4
-   - Anything else → display: `Unknown section "{arg}". Valid options: settings, rules, optouts, refresh.` and stop.
+   - `local` → run Engagement Resolution, then jump to Section 5
+   - Anything else → display: `Unknown section "{arg}". Valid options: settings, rules, optouts, refresh, local.` and stop.
 
 3. If no argument is provided, display the menu:
    ```
@@ -59,14 +60,16 @@ When this command runs:
    2. Engagement rules    (EA-projects/{slug}/.claude/rules/ea-engagement.md)
    3. Opt-out management  (EA-projects/{slug}/engagement.json)
    4. Refresh CLAUDE.md   (EA-projects/{slug}/CLAUDE.md)
+   5. Local config        (EA-projects/{slug}/.claude/rules/ea-local-config.md)
 
-   Select a section (1–4), or press Enter to exit:
+   Select a section (1–5), or press Enter to exit:
    ```
    Wait for input.
    - `1` → Section 1
    - `2` → run Engagement Resolution, then Section 2
    - `3` → run Engagement Resolution, then Section 3
    - `4` → run Engagement Resolution, then Section 4
+   - `5` → run Engagement Resolution, then Section 5
    - Empty / Enter → exit with no output
 
 4. After completing any section, return to the menu (unless the user chose a direct subcommand).
@@ -259,3 +262,39 @@ The seeded boilerplate (Session Start, Artifacts, Concepts and References, IDs s
    ```
 
 5. Return to the caller.
+
+---
+
+## Section 5 — Local Configuration
+
+**File:** `EA-projects/{slug}/.claude/rules/ea-local-config.md`
+
+This file is loaded automatically by Claude Code on every session. It is **never overwritten** by EA Assistant — it is the user's permanent space for engagement-specific context.
+
+**Flow:**
+
+1. Check whether `EA-projects/{slug}/.claude/rules/ea-local-config.md` exists.
+   - If it does not exist: seed it from `templates/seeds/ea-local-config.md` (substituting `{name}` → engagement name). Inform the user: `Created ea-local-config.md — ready to edit.`
+
+2. Read the file and display its current content.
+
+3. Present options:
+   ```
+   Local Config — {slug}
+
+   This file is auto-loaded by Claude Code on every session.
+   Add stakeholders, domain terms, interview preferences, or any
+   persistent context for this engagement.
+
+   Options:
+     (e) Edit   — open the file for editing now
+     (v) View   — show current content (already displayed above)
+     (r) Reset  — replace with the blank seed template (⚠️ this discards all content)
+     Enter      — close and return
+   ```
+
+4. **Edit (`e`):** Present the file section by section and ask the user to update any part. Apply changes with Write. Confirm: `✓ ea-local-config.md saved.`
+
+5. **Reset (`r`):** Warn: `⚠️ This will discard all content in ea-local-config.md. Type "reset" to confirm or press Enter to cancel.` If confirmed, re-seed from template.
+
+6. Return to the caller.

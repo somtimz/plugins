@@ -55,6 +55,7 @@ Create a new EA engagement project under `EA-projects/`.
 
    Seed files by reading from the `templates/seeds/` directory and substituting `{name}`, `{slug}`, and today's date:
    - `.claude/rules/ea-engagement.md` ← `templates/seeds/engagement-rules.md`
+   - `.claude/rules/ea-local-config.md` ← `templates/seeds/ea-local-config.md` (user-editable; never overwritten)
    - `ResearchAndReferences/research-index.md` ← `templates/seeds/research-index.md`
 
    Seed `brainstorm/brainstorm-notes.md` with:
