@@ -176,7 +176,7 @@ function CategoryCard({ cat, thoughts, onUpdate, onAdd, onRemove, autoFocusLast 
             </div>
           ))}
           <button
-            onClick={onAdd}
+            onClick={() => onAdd()}
             style={{
               padding: "6px 14px", borderRadius: 7,
               border: "1px dashed #D1D5DB", background: "transparent",
