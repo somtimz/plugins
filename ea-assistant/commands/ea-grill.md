@@ -139,7 +139,7 @@ If the user confirms, write the file with a frontmatter header:
 ---
 artifact: [artifact-name]
 skill: [grill-me-skill-used]
-date: [YYYY-MM-DD]
+date: [YYYY-MM-DDTHH:MM:SSZ]
 reviewer: ea-grill
 ---
 ```

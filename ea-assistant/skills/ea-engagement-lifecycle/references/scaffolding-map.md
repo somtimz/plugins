@@ -53,7 +53,7 @@ For each artifact in the table above:
    - `{{engagement_name}}` → engagement name
    - `{{organisation}}` → organisation
    - `{{sponsor}}` → sponsor name
-   - `{{YYYY-MM-DD}}` → today's date
+   - `{{YYYY-MM-DDTHH:MM:SSZ}}` → current ISO 8601 timestamp (obtain via `date -u +"%Y-%m-%dT%H:%M:%SZ"`)
 5. **Mark unpopulated content** — All sections not pre-populated from metadata MUST be marked `⚠️ Not answered`.
 5b. **Seed support files** — In addition to artifacts, copy these support files on every new engagement (no registration in `artifacts[]`; replace `{name}`, `{slug}`, and `{today ISO 8601}` tokens):
 

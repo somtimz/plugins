@@ -194,7 +194,7 @@ All interview sessions produce dated, versioned notes:
 artifact: Architecture Vision
 engagement: Acme Retail Transformation
 interviewer: EA Facilitator
-date: 2026-03-10
+date: 2026-03-10T14:22:00Z
 version: 1
 status: Complete / In Progress
 ---

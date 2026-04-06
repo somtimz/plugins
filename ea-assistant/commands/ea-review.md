@@ -52,7 +52,7 @@ Present the following options:
   - Prior grill: "Grill `[{date}]` recommended: `{finding}` — verify this revision was applied"
 - Append to `{artifact-id}.review.md`:
   ```markdown
-  ## Comment — {YYYY-MM-DD} {Reviewer}
+  ## Comment — {YYYY-MM-DDTHH:MM:SSZ} {Reviewer}
   **Section:** {section name}
   **Comment:** {comment text}
   **Status:** Open
@@ -83,7 +83,7 @@ Present the following options:
 
 ---
 
-## Comment — 2026-03-10 — Jane Smith
+## Comment — 2026-03-10T09:15:00Z — Jane Smith
 **Section:** Strategic Goals
 **Comment:** The goals listed do not align with the board's priorities from Q1 2026.
 **Status:** Open

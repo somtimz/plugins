@@ -34,7 +34,8 @@ All unfilled fields use double-brace tokens:
 ```
 {{field_name}}          — simple value
 {{stakeholder_name}}    — named entity
-{{YYYY-MM-DD}}          — date field
+{{YYYY-MM-DD}}          — date-only field (startDate, decisionDate, file names)
+{{YYYY-MM-DDTHH:MM:SSZ}} — timestamp field (lastModified, createdAt, lastUpdated)
 {{artifact_ref}}        — reference to another artifact
 ```
 
@@ -146,7 +147,7 @@ phase: A
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-lastModified: {{YYYY-MM-DD}}
+lastModified: {{YYYY-MM-DDTHH:MM:SSZ}}
 ---
 ```
 

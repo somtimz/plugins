@@ -21,6 +21,25 @@ Multiple agents and commands write to `engagement.json`. To prevent silent overw
 - Update `lastModified` (engagement-level) on every write
 - Never delete existing entries from `optOuts[]`, `artifacts[]`, or `analysis_runs` — append only
 
+## Timestamp Rule
+
+**All timestamp fields must include the time component — never write a date-only value.**
+
+| Field type | Format | Example |
+|---|---|---|
+| `lastModified`, `createdAt`, `lastUpdated`, `lastSynced` | `YYYY-MM-DDTHH:MM:SSZ` | `2026-04-06T14:32:07Z` |
+| `date:` in frontmatter (interview notes, grill reviews) | `YYYY-MM-DDTHH:MM:SSZ` | `2026-04-06T14:32:07Z` |
+| `generated:` in register files | `YYYY-MM-DDTHH:MM:SSZ` | `2026-04-06T14:32:07Z` |
+| File names, session headers, display text | `YYYY-MM-DD` (date only) | `2026-04-06` |
+| `startDate`, `targetEndDate`, `decisionDate` | `YYYY-MM-DD` (date only is correct) | `2026-04-06` |
+
+**Obtain the current timestamp via Bash before writing:**
+```bash
+date -u +"%Y-%m-%dT%H:%M:%SZ"
+```
+
+Never write `YYYY-MM-DDTHH:MM:SSZ` with zeroed time (`T00:00:00Z`) — always capture the actual current time.
+
 ---
 
 ## Post-Artifact-Save Sequence

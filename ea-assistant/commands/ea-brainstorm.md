@@ -149,7 +149,7 @@ Capture freeform brainstorm notes for the active EA engagement.
    ---
    engagement: {name}
    phase: {phase label, e.g. "Phase B — Business Architecture"}
-   lastUpdated: YYYY-MM-DD
+   lastUpdated: YYYY-MM-DDTHH:MM:SSZ
    sessions: N
    ---
 

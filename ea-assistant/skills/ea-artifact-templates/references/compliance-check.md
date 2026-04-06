@@ -130,7 +130,7 @@ Apply all required changes to bring the artifact up to the current standard. **P
 | T1-5 (no/invalid `status`) | Add `status: Draft` |
 | T1-6 (no `reviewStatus`) | Add `reviewStatus: Not Reviewed` |
 | T1-7 (no `version`) | Add `version: 0.1` |
-| T1-8 (no `lastModified`) | Add `lastModified: {today's date}` |
+| T1-8 (no `lastModified`) | Add `lastModified: {current ISO 8601 timestamp — YYYY-MM-DDTHH:MM:SSZ}` |
 | T1-9 (no heading) | Add `# {artifact name}` as first line after frontmatter |
 | T2-1 (no engagement header) | Add `**Engagement:** {name}` etc. block below the heading |
 | T2-2 (no content sections) | Add placeholder: `## 1. Content\n\n⚠️ Not answered` |
@@ -169,7 +169,7 @@ Apply **only** the minimum changes needed to make the artifact loadable and func
 | `status` | `Draft` |
 | `reviewStatus` | `Not Reviewed` |
 | `version` | `0.1` |
-| `lastModified` | Today's date (YYYY-MM-DD) |
+| `lastModified` | Current ISO 8601 timestamp (YYYY-MM-DDTHH:MM:SSZ) |
 
 **Behaviour for missing sections:**
 - Do NOT add missing sections.
