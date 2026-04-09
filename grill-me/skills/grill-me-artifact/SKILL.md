@@ -31,10 +31,43 @@ For each question:
 
 Do not let boilerplate pass. "Stakeholder engagement will be managed appropriately" is not an answer. Neither is a risk with no mitigation, a goal with no driver, or an objective with no measure.
 
+## Governance Anti-Pattern Checks
+
+After the section-by-section review, explicitly scan the artifact for these high-risk patterns. Flag every instance found — these are not optional or low-priority.
+
+**Governance bypass patterns:**
+- "Non-response within N days is treated as approval to proceed" — any variant of this converts inaction into approval. Flag it. Replace with an escalation mechanism (e.g., escalate to the next authority tier).
+- Notification-only activation gates where a tier-based approval workflow exists elsewhere in the engagement. If one artifact says "notify the CoE" but the governance model requires CoE approval for Tier 2 and Council approval for Tier 1, the notify-only clause is a bypass. Flag the conflict.
+
+**Regulatory status inconsistency:**
+- If a regulation is described as "enacted" in one place and "anticipated / pending" in another artifact or in a regulatory assumptions register, flag the conflict. Pending regulations should be consistently described as pending, with a caveat about what changes if the legislation stalls.
+
+**Classification scale mismatch:**
+- If the artifact defines or uses an impact/risk/likelihood scale (e.g., Tier 1/2/3, or Low/Medium/High/Very High), check that the same scale is used throughout this artifact and that any scale used elsewhere in the engagement matches. A document that uses "Tier 1/2/3" in its decision authority table but "High/Very High" in its AIA approval table has a practitioner confusion problem — flag it.
+- If the scale includes a level (e.g., "Very High") but the rating scale table leaves that level undefined (e.g., blank likelihood definition), flag it as incomplete.
+
+**Categorical employee commitments:**
+- Statements like "staff roles are enhanced, not eliminated" are absolute. If the engagement's workforce documents say "no employee will be laid off *solely* because of AI", the qualified language is more defensible. Flag absolute formulations that contradict more nuanced commitments elsewhere.
+
+**Cross-artifact target consistency:**
+- If the artifact states a quantified milestone (e.g., "80% of staff trained by Year 2"), check whether the same metric appears in KPI frameworks, workforce strategies, or architecture visions with a different target or timeline. Flag mismatches — they produce conflicting success criteria.
+
+**Binding vs advisory mitigations:**
+- Risk mitigations for high-consequence risks (agentic AI, citizen data, enforcement decisions) should be stated as binding conditions of deployment approval, not as recommended practices. If a mitigation says "should" or "is recommended" for a Critical or Very High risk, flag it for strengthening.
+
+**Constraints register completeness:**
+- If the artifact lists non-negotiable requirements (e.g., CIO approval for AI activation, CPO sign-off for personal data systems), check that every such requirement appears as a numbered constraint in the Constraints Register. Requirements that exist only in one artifact are unenforceable and are at risk of being overlooked.
+
+**Data flow State column:**
+- In data architecture artifacts, check that every data flow in the Flows table has an explicit State (Current / Planned / Target). Flows without State create ambiguity: a flow may appear as current in the table but as a gap in the Gap Analysis — both cannot be true. Flag any flow row where State is absent or ambiguous.
+
+---
+
 At the end, provide:
 1. a section-by-section scorecard (Complete / Partial / Empty / Inconsistent)
 2. traceability gaps (dangling or missing ID references)
-3. the three weakest sections and why
-4. the three strongest sections and why
-5. recommended revisions (prioritised)
-6. overall verdict: Ready for review / Needs revision / Incomplete
+3. governance anti-patterns found (from the checks above) — list each with the specific text and recommended fix
+4. the three weakest sections and why
+5. the three strongest sections and why
+6. recommended revisions (prioritised)
+7. overall verdict: Ready for review / Needs revision / Incomplete

@@ -31,11 +31,23 @@ scan all artifacts for risk content and compile them here.
 A risk is an uncertain future event or condition that, if it occurs, will have a negative effect
 on one or more objectives. Every risk must have a likelihood, impact, and mitigation strategy.
 
-Risk rating is derived from likelihood × impact:
+Risk rating is derived from likelihood × impact using a 3×3 matrix (High/Medium/Low for both
+axes). Do NOT extend the scale to add a "Very High" likelihood or impact tier unless you
+explicitly define it in the rating scale table — an undefined scale level leaves practitioners
+unable to classify risks consistently and creates gaps in heatmap coverage. If the engagement
+requires a fourth tier, define it with a concrete description (e.g., "Very High likelihood:
+near-certain even with planned controls in place") before using it.
+
   Critical: High likelihood + High impact
   High:     High likelihood + Medium impact, OR Medium likelihood + High impact
   Medium:   Medium likelihood + Medium impact, OR High/Low likelihood + Low/High impact
   Low:      Low likelihood + Low/Medium impact
+
+**Binding mitigations for high-consequence risks:** Mitigations for Critical or High risks
+should be stated as binding conditions of deployment or operation approval — not as
+recommendations. Use "required before deployment" or "mandatory control", not "should" or
+"is recommended." Agentic AI risks, citizen data risks, and enforcement-adjacent risks warrant
+this treatment regardless of overall rating.
 
 Statuses:
   Open:       Active risk — mitigation planned or in progress

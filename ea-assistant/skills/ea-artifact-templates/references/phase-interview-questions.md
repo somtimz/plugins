@@ -142,6 +142,14 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 - The motivation framework (Part 3) produces IDs used in all subsequent artifacts — agree them in this session and record in engagement.json before moving to Phase A.
 - Dual-route all DRV/G/OBJ/STR/ISS/PRB responses: write to the Engagement Charter AND to engagement.json → direction simultaneously.
 
+**§D Diagrams — ask at close of session:**
+> "Two standard diagrams help communicate the engagement scope and structure. Would you like to create either of these now, or describe what they should show?"
+- **Context Diagram** — engagement boundary, key external organisations and relationships (`engagement-charter-context.mmd`)
+- **Organisation Chart** — structure and units in scope (`engagement-charter-org-chart.mmd`)
+
+If the user describes content, offer to launch `/ea-diagram` immediately. Output routing: diagram files → `diagrams/`, filename added to Engagement Charter frontmatter `diagrams: []`.
+See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid starters.
+
 ---
 
 ## Phase A — Architecture Vision Interview
@@ -236,6 +244,14 @@ Assign IDs sequentially within each prefix as responses are confirmed. Record ID
 - A brief stakeholder RACI draft during this session prevents scope and accountability conflicts later.
 - If a driver, issue, or problem needs external validation or deeper investigation, pause and invoke `@research-agent` before recording it as fact. Example: "I'll check the regulatory landscape on that before we lock in DRV-002." Research findings can be pasted directly into brainstorm notes or artifact fields.
 
+**§D Diagrams — ask at close of session:**
+> "Two diagrams can make the Architecture Vision immediately clearer for executive stakeholders. Would you like to create either now, or describe what they should show?"
+- **Motivation Map** — shows the full DRV → Goal → Strategy chain in one visual (`architecture-vision-motivation-map.mmd`)
+- **Stakeholder Power/Interest Grid** — positions each stakeholder by influence and engagement level (`architecture-vision-stakeholder-grid.mmd`)
+
+If the user describes content, offer to launch `/ea-diagram` immediately. Output routing: diagram files → `diagrams/`, filenames added to Architecture Vision frontmatter `diagrams: []`.
+See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid starters.
+
 ---
 
 ## Phase B — Business Architecture Interview
@@ -280,6 +296,15 @@ Assign IDs sequentially within each prefix as responses are confirmed. Record ID
 - Process walk-throughs are best done with operational staff, not just managers; the "how it actually works" often differs significantly from the "how it should work" described by leadership.
 - When identifying gaps, ask "what would you do if you had no constraints?" to surface aspirational capabilities before applying reality checks.
 - The KPIs question links business architecture to measurable outcomes — use answers to define gap analysis criteria.
+
+**§D Diagrams — ask at close of session:**
+> "Three diagrams are standard for the Business Architecture. Which would you like to create or describe now?"
+- **Capability Map** — hierarchical heat map of business capabilities with maturity colouring (`business-architecture-capability-map.mmd`)
+- **Business Process Flow** — swimlane for the most critical end-to-end process (`business-architecture-process-flow.mmd`)
+- **Organisation Map** — structure and roles in scope (`business-architecture-org-map.mmd`)
+
+If the user describes content, offer to launch `/ea-diagram` immediately. Output routing: diagram files → `diagrams/`, filenames added to Business Architecture frontmatter `diagrams: []`.
+See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid starters.
 
 ---
 
@@ -421,6 +446,16 @@ Assign IDs sequentially within each prefix as responses are confirmed. Record ID
 - Data ownership questions frequently reveal ungoverned domains — treat "no one owns it" as a gap finding, not an oversight to skip.
 - Ask for data flow diagrams or integration documentation after the session; verbal descriptions of integration points are rarely complete.
 
+**§D Diagrams — ask at close of session:**
+> "Four diagrams are standard for Phase C. Which would you like to create or describe now?"
+- **Conceptual Data Model** — business-readable subject areas and their relationships (`data-architecture-conceptual-data-model.mmd`)
+- **Data Flow Diagram** — how data moves between systems and across boundaries (`data-architecture-data-flow.mmd`)
+- **Application Cooperation View** — integration topology showing how applications interact (`application-architecture-cooperation.mmd`)
+- **Application Component Map** — internal decomposition of key applications (`application-architecture-component-map.mmd`)
+
+If the user describes content, offer to launch `/ea-diagram` immediately. Output routing: diagram files → `diagrams/`, filenames added to the relevant artifact frontmatter `diagrams: []`.
+See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid starters.
+
 ---
 
 ## Phase D — Technology Architecture Interview
@@ -465,6 +500,14 @@ Assign IDs sequentially within each prefix as responses are confirmed. Record ID
 - Technology debt questions are best answered by infrastructure and platform engineers, not just IT leadership; schedule a separate technical session if needed.
 - Cloud strategy answers often reflect aspirations rather than funded plans; probe for budget commitment and timeline to distinguish strategy from wishful thinking.
 - Capture mandated standards as constraints in both Technology Architecture and the Requirements Register — they frequently constrain solution options in phases E and F.
+
+**§D Diagrams — ask at close of session:**
+> "Two diagrams are standard for the Technology Architecture. Which would you like to create or describe now?"
+- **Technology Stack View** — layered view from infrastructure through platform to application (`technology-architecture-stack.mmd`)
+- **Infrastructure Topology** — network zones, nodes, and security boundaries (`technology-architecture-topology.mmd`)
+
+If the user describes content, offer to launch `/ea-diagram` immediately. Output routing: diagram files → `diagrams/`, filenames added to Technology Architecture frontmatter `diagrams: []`.
+See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid starters.
 
 ---
 
@@ -516,6 +559,14 @@ Assign IDs sequentially within each prefix as responses are confirmed. Record ID
 - In-flight project alignment is frequently underestimated; request a project portfolio list before the session and map conflicts in advance.
 - Sequencing questions work well as a group exercise where participants physically order work packages — disagreements in the room are better surfaced now than during delivery.
 - Acceptable transition states define architecture checkpoints; if the organisation cannot articulate them, the roadmap will lack governance anchors.
+
+**§D Diagrams — ask at close of session:**
+> "One diagram is essential for Phase E. Would you like to create it now?"
+- **Architecture Roadmap (Gantt)** — work packages sequenced into delivery waves with timeline (`architecture-roadmap-gantt.mmd`)
+- **Gap Heat Map** *(optional)* — visual prioritisation of gaps by impact and effort (`gap-analysis-heat-map.mmd`)
+
+If the user describes content, offer to launch `/ea-diagram` immediately. Output routing: diagram files → `diagrams/`, filenames added to Architecture Roadmap frontmatter `diagrams: []`.
+See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid starters.
 
 ---
 
@@ -570,6 +621,13 @@ Assign IDs sequentially within each prefix as responses are confirmed. Record ID
 - Rollback planning is often skipped under time pressure — treat it as mandatory; a rollback that has not been rehearsed is not a rollback.
 - Data migration approach must be agreed with data owners and the DBA/data engineering team before the Migration Plan is finalised; late surprises here cause the most delivery delays.
 - External dependencies (regulatory approvals, vendor upgrade windows, third-party API changes) are frequently on the critical path; surface them early and track them explicitly.
+
+**§D Diagrams — ask at close of session:**
+> "One diagram makes the Migration Plan immediately clearer for delivery teams. Would you like to create it now?"
+- **Migration Wave Diagram** — Gantt showing what moves in each wave and key transition checkpoints (`migration-plan-waves.mmd`)
+
+If the user describes content, offer to launch `/ea-diagram` immediately. Output routing: diagram file → `diagrams/`, filename added to Migration Plan frontmatter `diagrams: []`.
+See `skills/ea-artifact-templates/references/diagram-catalogue.md` for a Mermaid starter.
 
 ---
 

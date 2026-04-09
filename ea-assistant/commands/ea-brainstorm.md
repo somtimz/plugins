@@ -181,7 +181,17 @@ Capture freeform brainstorm notes for the active EA engagement.
    - Update `lastUpdated` to today's date
    - Append the new session block after all existing content
 
-7. **Confirm.** After saving:
+7. **Prompt for diagrams.** Before confirming, check whether any standard diagrams exist for the active phase by reading `skills/ea-artifact-templates/references/diagram-catalogue.md` (Coverage Table section). Then ask:
+
+   > "Are there any diagrams or visual models that would help communicate these ideas? Standard diagrams for this phase:"
+
+   List the 1–3 most relevant diagram names and filenames from the catalogue. Then offer:
+   > "Would you like to create one now? I can launch `/ea-diagram` with your brainstorm notes as context."
+
+   If the user says yes: invoke `/ea-diagram` with a brief from the brainstorm notes and the appropriate Mermaid starter from the catalogue.
+   If the user says no or there are no relevant diagrams: continue silently to step 8.
+
+8. **Confirm.** After saving:
    > "Saved. These notes will be available when you run `/ea-interview` — the interviewer will reference relevant thoughts as it asks questions."
 
    If this was a phase-scoped session, also note:

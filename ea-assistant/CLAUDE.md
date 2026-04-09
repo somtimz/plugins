@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.20 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.21 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -141,6 +141,7 @@ links: []              # named refs: [{label: "Context Diagram", path: "../../di
 | `skills/ea-artifact-templates/references/compliance-check.md` | Three-tier artifact compliance rules (T1/T2/T3); run on every artifact load |
 | `skills/ea-artifact-templates/references/phase-interview-questions.md` | Full question bank for every ADM phase with output routing tables |
 | `skills/ea-artifact-templates/references/cross-topic-detection.md` | 10-row signal map for detecting answers belonging in a different artifact |
+| `skills/ea-artifact-templates/references/diagram-catalogue.md` | Expected diagrams per artifact type, Mermaid starters, naming conventions — used by ea-interviewer (§D prompts), ea-brainstorm (step 7), ea-grill (Step 8) |
 | `skills/ea-artifact-templates/references/artifact-descriptions.md` | Purpose, audience, contents, and phase for every artifact type |
 | `skills/ea-engagement-lifecycle/SKILL.md` | ID scheme, facilitator style, opt-out rules |
 | `skills/ea-engagement-lifecycle/references/phase-constraints.md` | Per-phase runtime constraints: required artifacts, ID rules, traceability rules, blocking gates — read by ea-facilitator on phase entry, ea-interviewer at session start, ea-consistency-checker during validation |

@@ -209,6 +209,24 @@ important to trace here, as they most directly shape technology choices.
 
 ---
 
+## 8. Diagrams
+
+<details>
+<summary>📋 Guidance</summary>
+
+Standard diagrams for the Technology Architecture. Diagrams are stored in `diagrams/` relative to the engagement root and embedded in exported documents via `/ea-generate`. Use `/ea-diagram` to create or edit. See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid starters.
+
+</details>
+
+| Diagram | File | Status |
+|---|---|---|
+| Technology Stack View | `../../diagrams/technology-architecture-stack.mmd` | ❌ Missing |
+| Infrastructure Topology | `../../diagrams/technology-architecture-topology.mmd` | ❌ Missing |
+
+*Use `/ea-diagram` to create. Run `/ea-generate png` to render for export.*
+
+---
+
 ---
 
 ## Appendix A3 — Decision Log

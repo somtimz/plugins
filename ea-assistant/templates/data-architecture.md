@@ -136,14 +136,19 @@ destination, frequency, volume (where significant), and transformation or enrich
 occurs in transit. Highlight cross-boundary flows that have governance or compliance implications.
 Include a data flow diagram reference.
 
+**State column is mandatory.** Use `Current` for flows that exist today, `Planned (Target)` for
+flows that are part of the target architecture but not yet implemented, and `Deprecated` for
+flows being decommissioned. This prevents contradictions between the data flows table and the
+Gap Analysis — a flow listed as Current must not also appear as a gap to be built.
+
 </details>
 
 *Reference diagram:* `../diagrams/{{data_flow_diagram}}`
 
-| Flow ID | Description | Source | Destination | Frequency | Classification |
-|---|---|---|---|---|---|
-| DF-001 | {{description}} | {{source}} | {{destination}} | Real-time / Batch / On-demand | {{classification}} |
-| DF-002 | {{description}} | {{source}} | {{destination}} | Real-time / Batch / On-demand | {{classification}} |
+| Flow ID | Description | Source | Destination | Frequency | State | Classification |
+|---|---|---|---|---|---|---|
+| DF-001 | {{description}} | {{source}} | {{destination}} | Real-time / Batch / On-demand | Current / Planned (Target) / Deprecated | {{classification}} |
+| DF-002 | {{description}} | {{source}} | {{destination}} | Real-time / Batch / On-demand | Current / Planned (Target) / Deprecated | {{classification}} |
 
 ---
 
@@ -208,6 +213,24 @@ data architecture decisions are driven by stated requirements, not just technica
 | Req ID | Requirement | How Addressed |
 |---|---|---|
 | {{req_id}} | {{requirement}} | {{how}} |
+
+---
+
+## 9. Diagrams
+
+<details>
+<summary>📋 Guidance</summary>
+
+Standard diagrams for the Data Architecture. Individual diagram references also appear inline in §2 (Conceptual Data Model), §3 (Logical Data Model), and §5 (Data Flows). This section provides a consolidated status view. Diagrams are stored in `diagrams/` relative to the engagement root. Use `/ea-diagram` to create or edit. See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid starters.
+
+</details>
+
+| Diagram | File | Status |
+|---|---|---|
+| Conceptual Data Model | `../../diagrams/data-architecture-conceptual-data-model.mmd` | ❌ Missing |
+| Data Flow Diagram | `../../diagrams/data-architecture-data-flow.mmd` | ❌ Missing |
+
+*Use `/ea-diagram` to create. Run `/ea-generate png` to render for export.*
 
 ---
 
