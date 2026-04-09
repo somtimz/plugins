@@ -167,6 +167,25 @@ List requirements from the Requirements Register that this artifact addresses.
 
 ---
 
+## 9. Diagrams
+
+<details>
+<summary>📋 Guidance</summary>
+
+Standard diagrams for the Business Architecture. Diagrams are stored in `diagrams/` relative to the engagement root and embedded in exported documents via `/ea-generate`. Use `/ea-diagram` to create or edit. See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid starters.
+
+</details>
+
+| Diagram | File | Status |
+|---|---|---|
+| Capability Map | `../../diagrams/business-architecture-capability-map.mmd` | ❌ Missing |
+| Business Process Flow | `../../diagrams/business-architecture-process-flow.mmd` | ❌ Missing |
+| Organisation Map | `../../diagrams/business-architecture-org-map.mmd` | ❌ Missing |
+
+*Use `/ea-diagram` to create. Run `/ea-generate png` to render for export.*
+
+---
+
 ---
 
 ## Appendix A3 — Decision Log

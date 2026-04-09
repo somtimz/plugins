@@ -242,4 +242,38 @@ If the user selects `a` or `s`:
 - Never invent content — only apply revisions derived directly from the grill output
 - If a revision touches a field that references other artifacts (e.g. adds a GAP-NNN or REQ-NNN ID), flag it: `⚠️ This adds a reference to [ID] — verify it exists in the source artifact before saving`
 
-After all revisions are applied or the user skips Step 7, ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-next.md` and output the recommendation.
+After all revisions are applied or the user skips Step 7, proceed to Step 8.
+
+---
+
+### Step 8 — Diagram Coverage
+
+Check whether the expected diagrams for this artifact type exist and are referenced.
+
+1. **Look up expected diagrams.** Read `skills/ea-artifact-templates/references/diagram-catalogue.md` — find the section for this artifact type and note the expected diagram names and standard filenames.
+
+2. **Check what is present.** For each expected diagram:
+   - Check the artifact frontmatter `diagrams: []` for a matching path
+   - Search the artifact body for an inline reference (`../diagrams/...`)
+   - Check `EA-projects/{slug}/diagrams/` for a file matching the standard filename pattern (`{artifact-id}-*.mmd` or `{artifact-id}-*.png`)
+
+3. **Report coverage:**
+   ```
+   ## Diagram Coverage — [Artifact Name]
+
+   | Diagram | Expected File | Status |
+   |---|---|---|
+   | Motivation Map | architecture-vision-motivation-map.mmd | ✅ Present |
+   | Stakeholder Grid | architecture-vision-stakeholder-grid.mmd | ❌ Missing |
+   ```
+   Status values: ✅ Present | ⚠️ Source only (not rendered) | ❌ Missing
+
+4. **For each ❌ Missing diagram:** state in one sentence what it would show and offer to create it:
+   > "The Stakeholder Power/Interest Grid would show stakeholder positioning by influence and interest. Create it now? (y/n)"
+   - If yes: invoke `/ea-diagram` with the standard filename, the relevant artifact section as context, and the Mermaid starter from the diagram catalogue.
+   - If no: continue.
+
+5. **For each ⚠️ Source only:** offer to render it:
+   > "Found `architecture-vision-motivation-map.mmd` but no rendered image. Run `/ea-generate png` to produce a `.png` for export."
+
+After Step 8 is complete, ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-next.md` and output the recommendation.

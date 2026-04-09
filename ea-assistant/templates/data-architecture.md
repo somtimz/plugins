@@ -211,6 +211,24 @@ data architecture decisions are driven by stated requirements, not just technica
 
 ---
 
+## 9. Diagrams
+
+<details>
+<summary>📋 Guidance</summary>
+
+Standard diagrams for the Data Architecture. Individual diagram references also appear inline in §2 (Conceptual Data Model), §3 (Logical Data Model), and §5 (Data Flows). This section provides a consolidated status view. Diagrams are stored in `diagrams/` relative to the engagement root. Use `/ea-diagram` to create or edit. See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid starters.
+
+</details>
+
+| Diagram | File | Status |
+|---|---|---|
+| Conceptual Data Model | `../../diagrams/data-architecture-conceptual-data-model.mmd` | ❌ Missing |
+| Data Flow Diagram | `../../diagrams/data-architecture-data-flow.mmd` | ❌ Missing |
+
+*Use `/ea-diagram` to create. Run `/ea-generate png` to render for export.*
+
+---
+
 ---
 
 ## Appendix A3 — Decision Log

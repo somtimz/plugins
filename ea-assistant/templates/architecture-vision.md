@@ -309,6 +309,24 @@ Typically: approve Statement of Architecture Work, proceed to Phase B/C/D.
 
 ---
 
+## 16. Diagrams
+
+<details>
+<summary>📋 Guidance</summary>
+
+Standard diagrams for the Architecture Vision. Diagrams are stored in `diagrams/` relative to the engagement root and embedded in exported documents via `/ea-generate`. Use `/ea-diagram` to create or edit. See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid starters.
+
+</details>
+
+| Diagram | File | Status |
+|---|---|---|
+| Motivation Map | `../../diagrams/architecture-vision-motivation-map.mmd` | ❌ Missing |
+| Stakeholder Power/Interest Grid | `../../diagrams/architecture-vision-stakeholder-grid.mmd` | ❌ Missing |
+
+*Use `/ea-diagram` to create. Run `/ea-generate png` to render for export.*
+
+---
+
 ---
 
 ## Appendix A3 — Decision Log

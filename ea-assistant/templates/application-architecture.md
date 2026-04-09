@@ -193,6 +193,24 @@ Every significant architectural decision should be traceable to at least one req
 
 ---
 
+## 8. Diagrams
+
+<details>
+<summary>📋 Guidance</summary>
+
+Standard diagrams for the Application Architecture. Diagrams are stored in `diagrams/` relative to the engagement root and embedded in exported documents via `/ea-generate`. Use `/ea-diagram` to create or edit. See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid starters.
+
+</details>
+
+| Diagram | File | Status |
+|---|---|---|
+| Application Cooperation View | `../../diagrams/application-architecture-cooperation.mmd` | ❌ Missing |
+| Application Component Map | `../../diagrams/application-architecture-component-map.mmd` | ❌ Missing |
+
+*Use `/ea-diagram` to create. Run `/ea-generate png` to render for export.*
+
+---
+
 ---
 
 ## Appendix A3 — Decision Log
