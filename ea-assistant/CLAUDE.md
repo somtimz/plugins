@@ -210,8 +210,9 @@ Capability Gaps (missing/immature capabilities) prevent Goals and trigger Phase 
 | `ea-facilitator` | Phase navigation, next-action decisions | Q&A, writing artifact fields |
 | `ea-interviewer` | Structured Q&A, all interview modes | Phase navigation decisions |
 | `ea-roadmap` | Roadmap creation/review (3 modes) | Other artifact types |
-| `ea-document-analyst` | EA mapping layer — what to extract, where it goes | Format extraction (owns: ea-document-ingestion skill) |
-| `ea-document-ingestion` (skill) | Format layer — how to read each file type | EA mapping decisions |
+| `ea-document-converter` | Format conversion — converts uploads to `.md`/`.mmd` intermediates in `uploads/converted/` | EA mapping, artifact writes |
+| `ea-document-analyst` | EA mapping layer — what to extract, where it goes | Format conversion (delegates to ea-document-converter) |
+| `ea-document-ingestion` (skill) | Pipeline protocol — orchestrates converter → analyst → artifact write sequence | EA mapping decisions, format conversion |
 | `ea-consistency-checker` | Cross-artifact consistency | Artifact creation |
 
 ---

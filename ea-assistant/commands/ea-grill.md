@@ -82,8 +82,8 @@ Before starting the grill, present a one-paragraph framing to the user:
 **Skill:** [skill description — one line]
 
 I've loaded the artifact. I'll now act as [role from skill] and review it one question at a time.
-After each of your answers I'll push back, identify weaknesses, and suggest stronger positions.
-When the review is complete I'll produce a structured critique.
+After each of your answers I'll push back and identify weaknesses — I will NOT propose edits during the Q&A.
+All proposed revisions are collected and presented at the end (Step 7), where you can accept, edit, or reject each one.
 
 Ready? Here is my first question.
 ```
@@ -101,6 +101,8 @@ For example:
 - If reviewing an Architecture Principles artifact and a principle lacks an Implications section, probe whether the team understands the practical consequences.
 
 Follow the selected skill's interviewing protocol exactly: one question at a time, with the question framing, recommended answer, and what a board member / critic / red-teamer would worry about.
+
+**During Q&A — do NOT propose specific text edits or artifact changes.** Your role here is to challenge, probe, and record findings. After each user answer: acknowledge it, push back on weaknesses, note the finding internally, then ask the next question. All proposed revisions are batched and presented in Step 7 with `y/n/edit` confirmation per revision.
 
 When asking questions, actively use the loaded context — do not treat it as passive background:
 - **Brainstorm notes:** If a session noted a concern that the artifact should address, challenge whether it has been resolved.

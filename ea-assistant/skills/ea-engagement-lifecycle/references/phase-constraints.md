@@ -105,10 +105,12 @@ None required at this phase — this phase establishes the foundation for tracea
 ### Traceability
 | Rule | Severity |
 |---|---|
-| Every G-NNN must link to at least one DRV-NNN (`drives` relationship) | Warning |
+| Every G-NNN must link to at least one DRV-NNN (`Business Driver(s)` column) | Warning |
+| Every DRV-NNN must be referenced by at least one G-NNN (`Linked Goals` column) — orphan driver | Warning |
 | Every OBJ-NNN must link to at least one G-NNN (`operationalises` relationship) | Warning |
-| Every STR-NNN must reference at least one G-NNN in its `supports` list | Warning |
-| Every ISS-NNN must reference at least one G-NNN it threatens | Info |
+| Every STR-NNN must reference at least one G-NNN in its `Supports Goal(s)` column | Warning |
+| Every G-NNN must be referenced by at least one STR-NNN (`Linked Strategies` column) — goal with no delivery strategy | Warning |
+| Every ISS-NNN must reference at least one G-NNN it threatens (`Threatens Goal(s)` column) | Warning |
 | Every PRB-NNN must reference at least one OBJ-NNN it blocks | Info |
 
 ### Blocking Gates

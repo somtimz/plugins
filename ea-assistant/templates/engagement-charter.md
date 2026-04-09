@@ -288,21 +288,21 @@ to populate engagement.json simultaneously.
 
 *Forces — external or internal — making this engagement necessary now.*
 
-| ID | Driver | Type | Priority | Notes |
-|---|---|---|---|---|
-| DRV-001 | {{driver_description}} | External / Internal / Regulatory / Strategic | High / Medium / Low | {{notes}} |
-| DRV-002 | {{driver_description}} | External / Internal / Regulatory / Strategic | High / Medium / Low | {{notes}} |
-| DRV-003 | {{driver_description}} | External / Internal / Regulatory / Strategic | High / Medium / Low | {{notes}} |
+| ID | Driver | Type | Priority | Notes | Linked Goals |
+|---|---|---|---|---|---|
+| DRV-001 | {{driver_description}} | External / Internal / Regulatory / Strategic | High / Medium / Low | {{notes}} | G-NNN |
+| DRV-002 | {{driver_description}} | External / Internal / Regulatory / Strategic | High / Medium / Low | {{notes}} | G-NNN |
+| DRV-003 | {{driver_description}} | External / Internal / Regulatory / Strategic | High / Medium / Low | {{notes}} | G-NNN |
 
 ### 6.3 Goals
 
 *Broad, qualitative outcomes the engagement must achieve. Each goal responds to one or more drivers.*
 
-| ID | Goal Statement | Linked Drivers | Owner | Priority |
-|---|---|---|---|---|
-| G-001 | {{goal_statement}} | DRV-NNN | {{owner}} | High / Medium / Low |
-| G-002 | {{goal_statement}} | DRV-NNN | {{owner}} | High / Medium / Low |
-| G-003 | {{goal_statement}} | DRV-NNN | {{owner}} | High / Medium / Low |
+| ID | Goal Statement | Linked Drivers | Linked Strategies | Owner | Priority |
+|---|---|---|---|---|---|
+| G-001 | {{goal_statement}} | DRV-NNN | STR-NNN | {{owner}} | High / Medium / Low |
+| G-002 | {{goal_statement}} | DRV-NNN | STR-NNN | {{owner}} | High / Medium / Low |
+| G-003 | {{goal_statement}} | DRV-NNN | STR-NNN | {{owner}} | High / Medium / Low |
 
 ### 6.4 Objectives
 

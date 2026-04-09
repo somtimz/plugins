@@ -69,10 +69,10 @@ Force: Opportunity / Threat / Mandate.
 
 </details>
 
-| ID | Driver | Type | Force | Impact on Strategy |
-|---|---|---|---|---|
-| DRV-001 | {{driver_1}} | Internal / External | Opportunity / Threat / Mandate | {{impact_1}} |
-| DRV-002 | {{driver_2}} | Internal / External | Opportunity / Threat / Mandate | {{impact_2}} |
+| ID | Driver | Type | Force | Impact on Strategy | Linked Goals |
+|---|---|---|---|---|---|
+| DRV-001 | {{driver_1}} | Internal / External | Opportunity / Threat / Mandate | {{impact_1}} | G-00N |
+| DRV-002 | {{driver_2}} | Internal / External | Opportunity / Threat / Mandate | {{impact_2}} | G-00N |
 
 ---
 
@@ -87,10 +87,10 @@ this goal necessary. Goals are the primary anchor for Issues (the barriers that 
 
 </details>
 
-| ID | Goal | Business Driver(s) |
-|---|---|---|
-| G-001 | {{goal_1}} | DRV-00N |
-| G-002 | {{goal_2}} | DRV-00N |
+| ID | Goal | Business Driver(s) | Linked Strategies |
+|---|---|---|---|
+| G-001 | {{goal_1}} | DRV-00N | STR-00N |
+| G-002 | {{goal_2}} | DRV-00N | STR-00N |
 
 ---
 
