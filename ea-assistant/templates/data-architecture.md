@@ -136,14 +136,19 @@ destination, frequency, volume (where significant), and transformation or enrich
 occurs in transit. Highlight cross-boundary flows that have governance or compliance implications.
 Include a data flow diagram reference.
 
+**State column is mandatory.** Use `Current` for flows that exist today, `Planned (Target)` for
+flows that are part of the target architecture but not yet implemented, and `Deprecated` for
+flows being decommissioned. This prevents contradictions between the data flows table and the
+Gap Analysis — a flow listed as Current must not also appear as a gap to be built.
+
 </details>
 
 *Reference diagram:* `../diagrams/{{data_flow_diagram}}`
 
-| Flow ID | Description | Source | Destination | Frequency | Classification |
-|---|---|---|---|---|---|
-| DF-001 | {{description}} | {{source}} | {{destination}} | Real-time / Batch / On-demand | {{classification}} |
-| DF-002 | {{description}} | {{source}} | {{destination}} | Real-time / Batch / On-demand | {{classification}} |
+| Flow ID | Description | Source | Destination | Frequency | State | Classification |
+|---|---|---|---|---|---|---|
+| DF-001 | {{description}} | {{source}} | {{destination}} | Real-time / Batch / On-demand | Current / Planned (Target) / Deprecated | {{classification}} |
+| DF-002 | {{description}} | {{source}} | {{destination}} | Real-time / Batch / On-demand | Current / Planned (Target) / Deprecated | {{classification}} |
 
 ---
 
