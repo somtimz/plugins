@@ -357,6 +357,14 @@ ADRs are standalone documents capturing significant architecture decisions — t
 
 ---
 
+## EA Plugin Workflows
+
+When running any EA command, first check that at least one engagement exists in `EA-projects/`. If none exist, offer to create one with `/ea-new` rather than displaying an empty state.
+
+## UI Generation
+
+For browser-based UIs (brainstorm pads, interview forms), always write plain HTML files to `EA-projects/{slug}/ui/` rather than rendering React artifacts. Open via `file://` path or a simple HTTP server. The `ea-interview-ui` skill handles this automatically when `uiMode` is unset (defaults to HTML file mode).
+
 ## Development Conventions
 
 - **Validate frontmatter before every commit:** `~/.bun/bin/bun .github/scripts/validate-frontmatter.ts ea-assistant/`

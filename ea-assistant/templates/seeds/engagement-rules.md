@@ -23,3 +23,7 @@
 
 - Use the unified ID scheme: DRV-NNN, G-NNN, OBJ-NNN, STR-NNN, MET-NNN, ISS-NNN, PRB-NNN, RIS-NNN, ADR-NNN, REQ-NNN, WP-NNN, GAP-NNN, CON-NNN.
 - Do not use domain-prefixed variants (BG-, DG-, AG-, TG-, BO-, etc.) — these are obsolete.
+
+## UI
+
+- Brainstorm and interview UIs are written as plain HTML files to `ui/` — never as React artifacts. Open via `file://` path.
