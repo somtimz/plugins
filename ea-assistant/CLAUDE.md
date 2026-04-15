@@ -68,7 +68,7 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 ## Plugin Structure
 
 ```
-agents/          8 agents (ea-facilitator, ea-interviewer, ea-roadmap, ea-document-analyst, ...)
+agents/          9 agents (ea-facilitator, ea-interviewer, ea-roadmap, ea-document-analyst, ...)
 commands/        27 commands (see Command Reference above)
 skills/          8 skill directories (ea-artifact-templates, ea-engagement-lifecycle, zachman-framework, ...)
 templates/       31 TOGAF artifact templates (.md)
@@ -215,6 +215,9 @@ Capability Gaps (missing/immature capabilities) prevent Goals and trigger Phase 
 | `ea-document-analyst` | EA mapping layer — what to extract, where it goes | Format conversion (delegates to ea-document-converter) |
 | `ea-document-ingestion` (skill) | Pipeline protocol — orchestrates converter → analyst → artifact write sequence | EA mapping decisions, format conversion |
 | `ea-consistency-checker` | Cross-artifact consistency | Artifact creation |
+| `ea-advisor` | TOGAF/Zachman/ArchiMate advisory, framework Q&A | Phase navigation, artifact writing |
+| `ea-diagram` | Architecture diagram creation/editing/interpretation (Mermaid, Graphviz, Draw.io, ArchiMate) | EA mapping, artifact writes |
+| `ea-requirements-analyst` | Document parsing → structured requirements register, ADM phase coverage map, Zachman coverage matrix | Phase navigation, interview facilitation |
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 name: ea-grill
 description: Deep-review an EA artifact using a grill-me skill — stress-test, boardroom simulation, pre-mortem, decision critique, or design critique
-argument-hint: "[artifact-name] [--skill stress-test|boardroom|premortem|decision|design|boardroom-strategy]"
+argument-hint: "[artifact-name] [--skill stress-test|premortem|decision|design|software-design|infra-design|artifact|diagram|boardroom-strategy]"
 allowed-tools: [Read, Glob, Bash]
 ---
 
@@ -36,7 +36,7 @@ If `--skill` was provided, use that skill. Otherwise, recommend a skill based on
 | Migration Plan | `grill-me-premortem` | Red-teams the migration — finds failure modes before they occur |
 | Gap Analysis | `grill-me-stress-test` | Tests whether gaps are correctly identified and prioritised |
 | Architecture Contract | `grill-me-decision` | Reviews the commitment and its governance implications |
-| Compliance Assessment | `grill-me-boardroom` | Simulates a board / audit panel reviewing compliance posture |
+| Compliance Assessment | `grill-me-boardroom-strategy` | Simulates a board / audit panel reviewing compliance posture |
 | Stakeholder Map | `grill-me-design` | Tests whether stakeholder concerns, incentives, and engagement levels are realistic |
 | Requirements Register | `grill-me-stress-test` | Tests whether requirements are complete, traceable, and achievable |
 | Decision Register | `grill-me-decision` | Reviews whether decisions are defensible, owned, and governed |
@@ -118,7 +118,6 @@ When asking questions, actively use the loaded context — do not treat it as pa
 When the review is complete (or the user types `done` or `finish`), produce the skill's structured output as specified:
 
 - **stress-test** → refined strategy summary, top 5 unresolved risks, hardest objection, next decision required
-- **boardroom** → 10 toughest questions, weakest answers, board-ready 2-minute summary
 - **premortem** → top failure modes, early warning signs, safeguards, proceed/pause/redesign verdict
 - **decision** → decision statement, options analysis, recommendation, risks, next steps
 - **design** → strengths, design flaws, recommended revisions, unresolved design bets
