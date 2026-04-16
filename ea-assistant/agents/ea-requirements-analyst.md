@@ -84,13 +84,14 @@ For every extracted item assign:
 |---|---|
 | ID | Category prefix + zero-padded sequence (e.g. FR-001, DRV-001) |
 | Category | FR / NFR / CON / PRI / ASS / DRV |
+| Sub-type | For FR: Business / System / Data / Integration / Reporting — leave blank for non-FR categories |
 | Priority | High / Medium / Low |
 | ADM Phase | Preliminary / A / B / C / D / E / F / G / H |
 | Zachman Cell | Row (Planner/Owner/Designer/Builder/Implementer/Worker) × Column (What/How/Where/Who/When/Why) |
-| Source | Exact quoted phrase from the document |
+| Source | Exact quoted phrase from the document (provenance only) |
 | Status | Draft |
 
-**Business Functional Requirements:** FR includes both system-level and business-process-level functional requirements. Where a requirement describes what the business must do (not a specific system), note sub-type `Business` in the Source field (e.g. "Source: … [Business FR]"). Use the same `FR-NNN` prefix.
+**Business Functional Requirements:** FR includes both system-level and business-process-level functional requirements. Where a requirement describes what the business must do (not a specific system), set Sub-type to `Business` in the Sub-type field. Use the same `FR-NNN` prefix. Keep the Source field for provenance (the exact quoted phrase) only.
 
 **Business Drivers (DRV):** Assign DRV-NNN to forces, trends, or imperatives that motivate the architecture work rather than specifying a solution behaviour. DRV items map to ADM Phase Preliminary / A and Zachman R1,C6 (Contextual/Why). After extraction, flag DRV items for the Architecture Vision — recommend the user also run `/ea-interview start phase A` to populate the Drivers section.
 

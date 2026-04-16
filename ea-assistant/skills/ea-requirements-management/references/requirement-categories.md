@@ -251,7 +251,7 @@ A Business Driver is a force, trend, challenge, or strategic imperative that mot
 ### Relationship to Requirements
 Drivers motivate Goals, which in turn spawn Objectives, which generate Requirements. The chain is:
 
-```
+```text
 Business Driver (DRV) → Goal (G) → Objective (OBJ) → Requirement (FR/NFR/CON)
 ```
 
