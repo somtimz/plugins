@@ -8,7 +8,7 @@ This reference defines the taxonomy of requirement types used by the EA Assistan
 
 Enterprise architecture work deals with requirements at multiple levels of abstraction. Not all requirements are functional system requirements in the traditional software engineering sense. Architecture requirements include the full spectrum from strategic constraints to detailed data quality rules.
 
-The EA Assistant classifies requirements into five primary categories:
+The EA Assistant classifies requirements into five primary categories, plus one motivational category:
 
 | Category | Code Prefix | Primary Concern |
 |---|---|---|
@@ -17,6 +17,7 @@ The EA Assistant classifies requirements into five primary categories:
 | Constraint | CON | What limits or restricts the solution space |
 | Principle | PRI | Normative statements that govern decisions |
 | Assumption | ASS | Statements accepted as true without proof |
+| Business Driver | DRV | Forces or imperatives that motivate the architecture work |
 
 Additionally, two derived types are used for traceability:
 
@@ -234,6 +235,53 @@ An Assumption is a statement that is accepted as true for the purposes of the ar
 
 ---
 
+---
+
+## Business Drivers (DRV)
+
+### Definition
+A Business Driver is a force, trend, challenge, or strategic imperative that motivates the organisation to initiate or change its architecture. Drivers provide the strategic "why" behind all requirements — they are not requirements themselves but the reason requirements exist.
+
+### Characteristics
+- Describes an external or internal pressure (e.g. regulatory change, competitive threat, cost target, technology obsolescence)
+- Typically expressed as a present-tense statement of reality or urgency
+- Not verifiable as "satisfied" in the same way a requirement is — success is measured by the goals and objectives that respond to the driver
+- Should be owned by a named business stakeholder or executive sponsor
+
+### Relationship to Requirements
+Drivers motivate Goals, which in turn spawn Objectives, which generate Requirements. The chain is:
+
+```
+Business Driver (DRV) → Goal (G) → Objective (OBJ) → Requirement (FR/NFR/CON)
+```
+
+When the `ea-requirements-analyst` extracts DRV items from documents, it flags them for the Architecture Vision's Drivers section rather than writing them directly into the requirements register. They are tracked separately with DRV-NNN IDs in the engagement's motivation framework.
+
+### TOGAF Mapping
+- Primary artefact: **Architecture Vision** (Phase A) — Business Drivers section
+- Also: **Statement of Architecture Work** — Motivation section
+- Continuously referenced in **Requirements Management** as the root cause behind all requirements
+
+### Zachman Mapping
+- Primarily: Row 1, Column 6 (Contextual / Why) — why the enterprise is initiating change
+
+### Language Patterns (for document extraction)
+- "driven by", "in response to", "strategic imperative", "business imperative", "key driver"
+- "market pressure", "regulatory change", "due to the need to", "competitive pressure"
+- "because of", "triggered by", "arising from", "in light of"
+
+### Examples
+
+**DRV-001:** Increasing regulatory scrutiny under the new data sovereignty legislation requires the organisation to demonstrate provenance and residency of all customer data by Q3 2026.
+
+**DRV-002:** Competitor adoption of real-time personalisation is eroding the organisation's market share in the 18–35 demographic, requiring a step-change in digital experience capability.
+
+**DRV-003:** The organisation's legacy ERP platform reaches vendor end-of-support in December 2027, creating a hard deadline for modernisation and migration.
+
+**DRV-004:** A mandate from the Executive Leadership Team to reduce operational IT costs by 20% over three years is driving consolidation of duplicate systems and rationalisation of the vendor estate.
+
+---
+
 ## Cross-Category Mapping Summary
 
 | Category | TOGAF Phase Focus | TOGAF Artefact | Zachman Primary Cell | Zachman Secondary |
@@ -243,3 +291,4 @@ An Assumption is a statement that is accepted as true for the purposes of the ar
 | Constraint (CON) | Prelim, A | Statement of Architecture Work | R1,C6 | R4,C3 |
 | Principle (PRI) | Prelim | Architecture Principles Catalogue | R1,C6 | R2,C6 |
 | Assumption (ASS) | A, Req. Mgmt | Architecture Requirements Specification | R1,C6 | — |
+| Business Driver (DRV) | Prelim, A | Architecture Vision | R1,C6 | — |
