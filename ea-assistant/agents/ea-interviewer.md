@@ -92,6 +92,7 @@ Additional interview-specific config behaviour:
         a: {text}        Log as a governance decision (Appendix A3)
         govern / g       Update A3 governance state
         b: / brainstorm  Start a freeform brainstorm pause
+        r: {query}       Research a topic mid-interview; findings surfaced inline
         ?  / help        Show this guide + current artifact context
       ────────────────────────────────────────────────
       ```
@@ -199,6 +200,7 @@ For each question in order:
    - `opt-out` → apply **Opt-Out (question)** handler (see below); re-ask current question after
    - `opt-out artifact` → apply **Opt-Out (artifact)** handler (see below); end interview
    - `?` or `help` → apply **Contextual Help** handler (see below); re-ask current question after
+   - `r: {query}` or `research: {query}` → apply **Research Pause** handler (see below); re-ask current question after
 
 7b. **Cross-topic check** (before writing to the artifact — applies to Answered answers only):
    Apply the Cross-Topic Detection rules (see section below). If a signal is detected, present the flag and handle the response. After handling, continue immediately to step 8.
@@ -436,6 +438,48 @@ When triggered:
    - Immediately scan the newly added notes for relevance to the *current* question and all remaining questions.
    - Resume: "We were on Question {N} of {total}: {question text}"
 4. The just-captured thoughts are available as context for all remaining questions in the session — apply the same `💭` and `💡` surfacing rules and shown-notes tracking.
+
+**Research Pause Handler (`r: {query}` / `research: {query}`):**
+
+At any point during a Text interview, the user can trigger a research pause by typing `r: {query}` or `research: {query}` (e.g., `r: what are the regulatory drivers for EU data governance`).
+
+When triggered:
+
+1. Extract the query string from the input.
+2. Acknowledge: `🔍 Research pause — looking up: "{query}"`
+3. Search `ResearchAndReferences/research-index.md` for items whose tags or title contain terms from the query. If matching items are found, read each item's content and summarise the most relevant points (cite title + key points, max 3–5 bullets per item).
+4. Perform a targeted synthesis on the query — draw on training knowledge, cite sources where possible, flag confidence level (High / Medium / Low).
+5. Present findings:
+   ```
+   ## Research Findings: {query}
+
+   **From engagement library:**
+   - {matched item title}: {key points} [or "No matching items in ResearchAndReferences/"]
+
+   **Broader synthesis:**
+   - {key finding 1}
+   - {key finding 2}
+   - {key finding 3}
+
+   Confidence: {High / Medium / Low} — {one-sentence caveat if Medium or Low}
+   ```
+6. Offer to save:
+   > `Save these findings to ResearchAndReferences? (y / n / edit title)`
+   - `y` → write `ResearchAndReferences/{slug}-research-{YYYYMMDD}.md` with frontmatter:
+     ```yaml
+     researchType: note
+     title: {query}
+     addedDate: {today ISO 8601}
+     tags: [{current artifact type}, {current phase}]
+     ```
+     Append an entry to `ResearchAndReferences/research-index.md`. Confirm: "Saved to ResearchAndReferences."
+   - `n` → findings remain in-session context only; continue without saving.
+   - `edit title` → prompt: "Title for this research note?" then save with the user's title.
+7. Resume: `Resuming — Q{N} of {total}: {question text}`
+
+The saved (or unsaved) findings are available as context for all remaining questions in this session — the interviewer should reference them if relevant to subsequent answers.
+
+---
 
 **Contextual Help Handler (`?` / `help`):**
 

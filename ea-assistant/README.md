@@ -20,7 +20,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Artifact generation** — all TOGAF artifacts from templates, guided by interviews
 - **Format export** — generate Word (.docx), PowerPoint (.pptx), Mermaid source, PNG, and SVG from any artifact; diagrams automatically embedded in docx/pptx deliverables
 - **Phase interviews** — curated question bank for each ADM phase (Text, Web, or Display mode) with output routing to artifacts; ID scheme reference and section markers for Phase A
-- **Interview shortcuts** — single-key shortcuts for defaults, skip, N/A, opt-out, brainstorm, A3 logging, and governance transitions; type `?` at any prompt for contextual help
+- **Interview shortcuts** — single-key shortcuts for defaults, skip, N/A, opt-out, brainstorm, research, A3 logging, and governance transitions; type `?` at any prompt for contextual help
 - **Contextual help** — type `?` during any interview to see the artifact's purpose, value, current progress, and a link to the EA concepts reference
 - **EA concepts reference** — canonical definitions of all 13 EA concepts (Vision, Mission, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Problem, Capability Model, Operating Model, Metrics) with full motivation chain model, TOGAF/ArchiMate alignment, and disambiguation checklist; grounded in *EA Strategic Context: Terms, Concepts, and Relationship Models*
 - **Cross-topic detection** — flags answers that belong in a different artifact and offers to route them correctly or save for later
@@ -159,6 +159,7 @@ Type these at any interview prompt:
 | `govern` / `g` | Update A3 governance state |
 | `b:` / `brainstorm` | Start a freeform brainstorm pause |
 | `resume` / `done` | End brainstorm and return to the interview |
+| `r: {query}` / `research: {query}` | Research a topic mid-interview; findings surfaced inline with option to save to ResearchAndReferences |
 | `?` / `help` | Show artifact purpose, current progress, and shortcuts |
 | `concepts` | Show EA concepts quick reference (Principle/Goal/Objective/Strategy/Plan/Risk/Issue/Problem) |
 

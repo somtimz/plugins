@@ -114,6 +114,7 @@ Type these at any interview prompt:
 | `govern` / `g` | Update governance state of an A3 decision row |
 | `b:` / `brainstorm` | Start a freeform brainstorm pause |
 | `resume` / `done` | End brainstorm and return to the interview |
+| `r: {query}` / `research: {query}` | Research a topic mid-interview; findings surfaced inline with option to save to ResearchAndReferences |
 | `?` / `help` | Show this guide + current artifact context and purpose |
 | `concepts` | Show the EA concepts quick reference (Vision/Mission/Principle/Goal/Objective/Strategy/Plan/Risk/Issue/Problem/Capability Model/Operating Model/Metrics) |
 
@@ -144,6 +145,10 @@ Type these at any interview prompt:
 • Use `/ea-research` to add whitepapers, notes, or URL references to
   the engagement library. Run `/ea-research apply` to synthesise
   research against any artifact and apply findings with y/n/edit.
+• Type `r: {query}` at any interview or brainstorm prompt to trigger
+  an inline research pause — the interviewer searches your engagement
+  library and synthesises findings, then offers to save them to
+  ResearchAndReferences before resuming.
 • Use `/ea-adrs` to manage Architecture Decision Records. The interviewer
   suggests an ADR automatically when a significant decision is detected.
 • Use `/ea-zachman` to classify and review engagement content across the

@@ -191,6 +191,32 @@ Capture freeform brainstorm notes for the active EA engagement.
    If the user says yes: invoke `/ea-diagram` with a brief from the brainstorm notes and the appropriate Mermaid starter from the catalogue.
    If the user says no or there are no relevant diagrams: continue silently to step 8.
 
+7b. **Research during brainstorm.** At any point — before launching the pad, while waiting for the user to paste results, or after pasting — the user can type `r: {query}` or `research: {query}` in the chat to trigger an inline research pause:
+
+   1. Extract the query string.
+   2. Acknowledge: `🔍 Research pause — looking up: "{query}"`
+   3. Search `ResearchAndReferences/research-index.md` for items whose tags or title match terms in the query. Summarise matching items (title + key points, max 3–5 bullets each). Show "No matching items in ResearchAndReferences/" if none found.
+   4. Perform a targeted synthesis on the query, flag confidence level (High / Medium / Low).
+   5. Present findings:
+      ```
+      ## Research Findings: {query}
+
+      **From engagement library:**
+      - {matched item title}: {key points}
+
+      **Broader synthesis:**
+      - {key finding 1}
+      - {key finding 2}
+
+      Confidence: {High / Medium / Low}
+      ```
+   6. Ask: `Save to ResearchAndReferences? (y / n / edit title)`
+      - `y` → write `ResearchAndReferences/{slug}-research-{YYYYMMDD}.md` with frontmatter (`researchType: note`, `title: {query}`, `addedDate: today`, `tags: [{phase}]`). Append entry to `research-index.md`.
+      - `n` → findings available in-session only.
+      - `edit title` → prompt for title, then save.
+   7. If the brainstorm pad has not been launched yet: ask "Would you like to add these findings to the brainstorm pad as prefilled context?" If yes, add them as a `prefilled` entry with `source: "research: {query}"` before launching.
+      If the pad is already open or results have been pasted: note the findings are available in-session for the interviewer to reference.
+
 8. **Confirm.** After saving:
    > "Saved. These notes will be available when you run `/ea-interview` — the interviewer will reference relevant thoughts as it asks questions."
 
