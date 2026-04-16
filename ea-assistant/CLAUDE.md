@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.21 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.22 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -218,7 +218,7 @@ Capability Gaps (missing/immature capabilities) prevent Goals and trigger Phase 
 | `ea-consistency-checker` | Cross-artifact consistency | Artifact creation |
 | `ea-advisor` | TOGAF/Zachman/ArchiMate advisory, framework Q&A | Phase navigation, artifact writing |
 | `ea-diagram` | Architecture diagram creation/editing/interpretation (Mermaid, Graphviz, Draw.io, ArchiMate) | EA mapping, artifact writes |
-| `ea-requirements-analyst` | Document parsing → structured requirements register, ADM phase coverage map, Zachman coverage matrix | Phase navigation, interview facilitation |
+| `ea-requirements-analyst` | Document parsing → structured requirements register (FR/NFR/CON/PRI/ASS/DRV), ADM phase coverage map, Zachman coverage matrix, `requirements-index.json` population | Phase navigation, interview facilitation |
 
 ---
 

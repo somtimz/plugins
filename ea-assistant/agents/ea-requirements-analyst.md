@@ -82,19 +82,24 @@ For every extracted item assign:
 
 | Field | Value |
 |---|---|
-| ID | Category prefix + zero-padded sequence (e.g. FR-001) |
-| Category | FR / NFR / CON / PRI / ASS |
-| Priority | Must / Should / Could |
+| ID | Category prefix + zero-padded sequence (e.g. FR-001, DRV-001) |
+| Category | FR / NFR / CON / PRI / ASS / DRV |
+| Sub-type | For FR: Business / System / Data / Integration / Reporting — leave blank for non-FR categories |
+| Priority | High / Medium / Low |
 | ADM Phase | Preliminary / A / B / C / D / E / F / G / H |
 | Zachman Cell | Row (Planner/Owner/Designer/Builder/Implementer/Worker) × Column (What/How/Where/Who/When/Why) |
-| Source | Exact quoted phrase from the document |
+| Source | Exact quoted phrase from the document (provenance only) |
 | Status | Draft |
+
+**Business Functional Requirements:** FR includes both system-level and business-process-level functional requirements. Where a requirement describes what the business must do (not a specific system), set Sub-type to `Business` in the Sub-type field. Use the same `FR-NNN` prefix. Keep the Source field for provenance (the exact quoted phrase) only.
+
+**Business Drivers (DRV):** Assign DRV-NNN to forces, trends, or imperatives that motivate the architecture work rather than specifying a solution behaviour. DRV items map to ADM Phase Preliminary / A and Zachman R1,C6 (Contextual/Why). After extraction, flag DRV items for the Architecture Vision — recommend the user also run `/ea-interview start phase A` to populate the Drivers section.
 
 ### Step 6 — Produce the Requirements Register
 Output a markdown table:
 
-| ID | Requirement | Category | Priority | ADM Phase | Zachman Cell | Status | Source |
-|---|---|---|---|---|---|---|---|
+| ID | Requirement | Category | Sub-type | Priority | ADM Phase | Zachman Cell | Status | Source |
+|---|---|---|---|---|---|---|---|---|
 
 Prefix the entire table with:
 > 🤖 **AI Draft — Review Required**
@@ -136,7 +141,14 @@ Ask: "Shall I write these outputs to the project?" and wait for explicit confirm
 On confirmation:
 1. Write the requirements register markdown to `EA-projects/{slug}/requirements/requirements-register.md`.
 2. If a register already exists, offer to append new items (avoiding ID collisions) or replace.
-3. Update `engagement.json` — add an entry under `"analysis_runs"` with: `{ "timestamp": "…", "source_file": "…", "items_extracted": n, "agent": "ea-requirements-analyst" }`.
+3. Write or update `EA-projects/{slug}/requirements/requirements-index.json` using the `ea-requirements-management` skill schema:
+   - Read any existing index to determine the next REQ-NNN sequence number.
+   - Exclude DRV items — they are not tracked in the requirements index.
+   - For each non-DRV item, emit an object with fields: `id` (REQ-NNN), `title` (first 10 words of the requirement), `statement` (full text), `category` (FR→"Functional", NFR→"Non-Functional", CON→"Constraint", PRI→"Principle", ASS→"Assumption"), `scope` ("Project"), `status` ("Draft"), `priority`, `phase`, `source`, `linkedArtifacts` ([]), `derivedFrom` ([]), `waiverJustification` (""), `sourceFile` ("requirements-register.md").
+   - Never overwrite existing index entries; only append new ones.
+   - Update `lastSynced` to the current timestamp.
+4. Update `engagement.json` — add an entry under `"analysis_runs"` with: `{ "timestamp": "…", "source_file": "…", "items_extracted": n, "agent": "ea-requirements-analyst" }`.
+5. If DRV items were extracted, display a notice: "X business drivers were extracted. Recommend adding them to your Architecture Vision — run `/ea-interview start phase A` to populate the Drivers section."
 
 ## Content Policy
 
@@ -150,14 +162,15 @@ On confirmation:
 
 | Language pattern | Category | Default priority |
 |---|---|---|
-| "must", "shall", "required to" | FR or NFR | Must |
-| "should", "is expected to", "ought to" | NFR | Should |
-| "could", "may", "optionally" | FR or NFR | Could |
-| "cannot", "must not", "prohibited", "not permitted" | CON | Must |
-| "limited to", "restricted to", "capped at" | CON | Must |
-| "assumes", "assuming that", "it is assumed" | ASS | Should |
-| "in order to achieve", "to support", "to enable" | PRI or FR | Should (PRI if strategic; FR if operational) |
-| "target", "goal", "objective" | PRI | Should |
+| "must", "shall", "required to" | FR or NFR | High |
+| "should", "is expected to", "ought to" | NFR | Medium |
+| "could", "may", "optionally" | FR or NFR | Low |
+| "cannot", "must not", "prohibited", "not permitted" | CON | High |
+| "limited to", "restricted to", "capped at" | CON | High |
+| "assumes", "assuming that", "it is assumed" | ASS | Medium |
+| "in order to achieve", "to support", "to enable" | PRI or FR | Medium (PRI if strategic; FR if operational) |
+| "target", "goal", "objective" | PRI | Medium |
+| "driven by", "in response to", "strategic imperative", "business imperative", "key driver", "market pressure", "regulatory change", "due to", "because of the need to" | DRV | High |
 
 When a single sentence contains both a goal and a constraint, split it into two items.
 
