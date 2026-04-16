@@ -262,7 +262,28 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 1. What are the primary business functions performed by the organisation or the area in scope?
 2. Walk me through the key end-to-end business processes — from customer/trigger to outcome.
 3. Where are the biggest pain points or inefficiencies in current business operations?
-4. What capabilities are missing that are needed to achieve the target state?
+4. Let's build the capability model systematically — this is the core Phase B deliverable.
+
+   a. **Level 1 — Domains:** What are the major capability domains relevant to this engagement?
+      (e.g. Customer Management, Operations, Finance, Technology, Compliance — agree 4–8 domains)
+      Assign each a CAP-NNN ID starting at CAP-001.
+
+   b. **Level 2 — Capabilities:** For each domain, what specific capabilities must the organisation have to deliver value in that domain?
+      Assign sequential CAP-NNN IDs continuing from the L1 IDs.
+
+   c. **Level 3 — Sub-capabilities:** For any L2 capability where detail matters for gap analysis, what sub-capabilities exist beneath it?
+      Only elicit L3 where there is a known gap or a Phase B deliverable that requires it.
+
+   d. **Maturity Assessment:** For each L2 and L3 capability, rate the current maturity:
+      - **Absent** — this capability does not exist today
+      - **Immature** — exists but ad hoc, inconsistent, or person-dependent
+      - **Developing** — repeatable and documented but not optimised
+      - **Mature** — optimised, governed, and performing well
+
+   e. **Target Maturity:** What maturity level does each capability need to reach to support the engagement's strategies and goals?
+
+   f. **Strategic Alignment:** Which STR-NNN or G-NNN does each capability support?
+      Any capability with no strategic anchor should be flagged for removal or reclassification.
 5. How is the organisation structured — what divisions, teams, or geographies are involved?
 6. What are the priority business outcomes this architecture must support?
 7. What does the business need to look like in three to five years?
@@ -282,7 +303,11 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 | Primary business functions | Business Architecture | `{{business_functions}}` |
 | Key end-to-end processes | Business Architecture | `{{key_processes}}` |
 | Pain points/inefficiencies | Gap Analysis | `{{current_state_gaps}}` |
-| Missing capabilities | Business Architecture | `{{capability_gaps}}` |
+| Capability domains (L1, CAP-NNN) | Business Architecture | `§3 Business Capabilities` (Level L1) |
+| Capabilities (L2, CAP-NNN) | Business Architecture | `§3 Business Capabilities` (Level L2) |
+| Sub-capabilities (L3, CAP-NNN) | Business Architecture | `§3 Business Capabilities` (Level L3) |
+| Capability maturity assessments | Business Architecture + Gap Analysis | `§3` maturity columns + `§ Capability Gap Register` |
+| Capability-to-strategy links | Business Architecture | `Supports (STR-NNN / G-NNN)` column |
 | Gap Analysis | Gap Analysis | `{{business_gaps}}` |
 | Organisation structure | Business Architecture | `{{org_structure}}` |
 | Priority business outcomes | Business Architecture | `{{business_outcomes}}` |
@@ -292,9 +317,11 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 | Business metrics | engagement.json + Business Capability Map | `metrics.Business` + `{{business_metrics}}` |
 
 **Facilitation Notes:**
+- Work top-down: agree L1 domains first (with the group), then populate L2 capabilities for the domains most relevant to the engagement scope. Don't attempt to enumerate all L3 sub-capabilities — only go to L3 where there is a known gap or a Phase B deliverable that requires it.
 - Run a capability mapping workshop using a whiteboard or collaborative tool — asking participants to place capabilities on a heat map (invest/maintain/retire) surfaces priorities faster than questions alone.
 - Process walk-throughs are best done with operational staff, not just managers; the "how it actually works" often differs significantly from the "how it should work" described by leadership.
 - When identifying gaps, ask "what would you do if you had no constraints?" to surface aspirational capabilities before applying reality checks.
+- Every L2/L3 capability where Current Maturity < Target Maturity is a Capability Gap — ensure it appears in the Gap Analysis Capability Gap Register with a Prevents (G-NNN/OBJ-NNN) link.
 - The KPIs question links business architecture to measurable outcomes — use answers to define gap analysis criteria.
 
 **§D Diagrams — ask at close of session:**

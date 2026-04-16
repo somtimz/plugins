@@ -145,12 +145,12 @@ quadrantChart
 %% 🤖 AI Draft — Review Required
 graph TD
   L0["🏢 Organisation Name"]
-  CAP1["📦 Capability Domain A"]
-  CAP2["📦 Capability Domain B"]
-  CAP3["📦 Capability Domain C"]
-  CAP1A["📦 Sub-Capability A1"]
-  CAP1B["📦 Sub-Capability A2"]
-  CAP2A["📦 Sub-Capability B1"]
+  CAP1["📦 CAP-001\nCapability Domain A"]
+  CAP2["📦 CAP-002\nCapability Domain B"]
+  CAP3["📦 CAP-003\nCapability Domain C"]
+  CAP1A["📦 CAP-004\nSub-Capability A1"]
+  CAP1B["📦 CAP-005\nSub-Capability A2"]
+  CAP2A["📦 CAP-006\nSub-Capability B1"]
   L0 --> CAP1
   L0 --> CAP2
   L0 --> CAP3
@@ -158,11 +158,12 @@ graph TD
   CAP1 --> CAP1B
   CAP2 --> CAP2A
   style CAP1A fill:#ff9999
-  style CAP2A fill:#ffcc66
-  style CAP1B fill:#99cc99
+  style CAP2A fill:#ff9933
+  style CAP1B fill:#ffcc66
+  style CAP1 fill:#99cc99
 ```
 
-> Colour guide: 🔴 `#ff9999` = Initial/Gap &nbsp; 🟡 `#ffcc66` = Developing &nbsp; 🟢 `#99cc99` = Defined/Managed
+> Colour guide: 🔴 `#ff9999` = Absent &nbsp; 🟠 `#ff9933` = Immature &nbsp; 🟡 `#ffcc66` = Developing &nbsp; 🟢 `#99cc99` = Mature
 
 ---
 

@@ -386,7 +386,9 @@ A Capability Model is a stable, hierarchical map of what the organisation must b
 
 **Structural characteristics:**
 - Organised as a hierarchy: Level 1 (domain) → Level 2 (capability) → Level 3 (sub-capability)
+- Each capability is assigned a **CAP-NNN** ID on creation during Phase B — IDs are sequential across the engagement
 - Each capability has a name, brief description, and maturity level (Absent / Immature / Developing / Mature)
+- Each capability includes a **Supports** field referencing the STR-NNN strategies or G-NNN goals it enables — this is the explicit traceability link from strategy to capability; a capability with no strategic anchor should be flagged for removal or reclassification
 - Independent of how the capability is currently delivered — what, not how or who
 - Stable across reorganisations; changes only when business outcomes change
 

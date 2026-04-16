@@ -142,7 +142,8 @@ None required at this phase — this phase establishes the foundation for tracea
 |---|---|
 | Baseline business architecture section must be populated | Blocking |
 | Target business architecture section must be populated | Blocking |
-| Capability model section must be present and populated | Warning |
+| Capability model must define at least one L1 domain with a CAP-NNN ID and a maturity level | Warning |
+| All capabilities must use the maturity scale: Absent / Immature / Developing / Mature | Warning |
 | Gap analysis section must list at least one gap | Warning |
 | Appendix A3 — Decision Log must be present | Warning |
 
@@ -151,6 +152,8 @@ None required at this phase — this phase establishes the foundation for tracea
 |---|---|
 | Target business architecture must be traceable to at least one G-NNN or OBJ-NNN from Phase A | Blocking |
 | Every GAP-NNN must reference the G-NNN or OBJ-NNN it prevents or blocks | Warning |
+| Every CAP-NNN in the Capability Model must have a non-empty Supports value referencing at least one G-NNN or STR-NNN | Warning |
+| Every capability gap (Current Maturity < Target Maturity) must appear in the Capability Gap Register with a Prevents (G-NNN / OBJ-NNN) link | Warning |
 | Every REQ-NNN in scope for Business must appear in the Requirements Register | Warning |
 
 ### Blocking Gates

@@ -71,15 +71,28 @@ Include a diagram reference if available.
 <details>
 <summary>📋 Guidance</summary>
 
-List the business capabilities relevant to this engagement.
-A capability is an ability to achieve a business outcome, not a process or function.
-Use ArchiMate Capability elements from the Strategy layer.
+Define capabilities using a three-level hierarchy. Each capability gets a CAP-NNN ID.
+
+- **L1** — capability domain (broadest grouping, e.g. Customer Management, Operations, Finance)
+- **L2** — capability within a domain (the primary unit of analysis)
+- **L3** — sub-capability (only add where a known gap or deliverable requires it)
+
+**Maturity scale:**
+- **Absent** — capability does not exist today
+- **Immature** — exists but ad hoc, inconsistent, or person-dependent
+- **Developing** — repeatable and documented but not optimised
+- **Mature** — optimised, governed, and performing well
+
+**Supports column:** link each capability to the STR-NNN strategy or G-NNN goal it enables.
+A capability with no strategic anchor should be flagged for removal or reclassification.
 
 </details>
 
-| Capability | Description | Current Maturity | Target Maturity |
-|---|---|---|---|
-| {{capability_1}} | {{description}} | Initial/Developing/Defined/Managed | {{target}} |
+| CAP-NNN | Level | Capability | Description | Current Maturity | Target Maturity | Supports (STR-NNN / G-NNN) |
+|---|---|---|---|---|---|---|
+| CAP-001 | L1 | {{domain_name}} | {{domain_description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} |
+| CAP-002 | L2 | {{capability_name}} | {{description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} |
+| CAP-003 | L3 | {{sub_capability_name}} | {{description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} |
 
 ---
 

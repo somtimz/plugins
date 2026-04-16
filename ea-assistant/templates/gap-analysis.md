@@ -80,6 +80,26 @@ Categories: Missing capability, Retiring component, Consolidation, New requireme
 
 ---
 
+## Capability Gap Register
+
+<details>
+<summary>📋 Guidance</summary>
+
+Capability gaps are the primary output of Phase B gap analysis. Each row represents a capability
+that is absent or below the required maturity level. These gaps prevent Goals from being achieved
+and drive Work Package definitions in Phase E.
+
+Populate from Business Architecture §3 — copy any row where Current Maturity is below Target
+Maturity. Link each gap to the G-NNN or OBJ-NNN it prevents.
+
+</details>
+
+| CAP-NNN | Capability | L1 Domain | Current Maturity | Target Maturity | Prevents (G-NNN / OBJ-NNN) | Priority |
+|---|---|---|---|---|---|---|
+| CAP-001 | {{capability_name}} | {{domain}} | Absent / Immature / Developing | {{target}} | {{G-NNN}} | High / Med / Low |
+
+---
+
 ## Zachman Coverage Analysis
 
 <details>
