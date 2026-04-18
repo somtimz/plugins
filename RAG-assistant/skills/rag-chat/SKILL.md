@@ -1,5 +1,5 @@
 ---
-name: RAG Chat
+name: rag-chat
 version: 0.1.0
 description: >
   Use this skill when the user wants to ask natural-language questions about their

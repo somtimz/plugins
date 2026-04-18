@@ -1,6 +1,7 @@
 ---
 name: ea-decisions
 description: Generate or view a Decision Register by aggregating all Appendix A3 decision rows from across all artifacts in the active engagement. Supports filtering by audience, owner, domain, authority, cost, impact, risk, subject, status, or source artifact.
+allowed-tools: [Read, Write, Glob]
 ---
 
 You are executing the `/ea-decisions` command. Load the `ea-engagement-lifecycle` skill and the `ea-artifact-templates` skill for context.

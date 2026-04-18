@@ -1,5 +1,5 @@
 ---
-name: Document Ingestion Pipeline
+name: document-ingestion-pipeline
 version: 0.1.0
 description: >
   Use this skill when the user wants to ingest, embed, or index documents into a vector

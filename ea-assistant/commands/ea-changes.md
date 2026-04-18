@@ -1,6 +1,7 @@
 ---
 name: ea-changes
 description: Generate or view a Change Register by aggregating all Architecture Change Request artifacts in the active engagement. Supports filtering by status, type, domain, risk, owner, and phase.
+allowed-tools: [Read, Write, Glob, Bash]
 ---
 
 You are executing the `/ea-changes` command. Load the `ea-engagement-lifecycle` skill and the `ea-artifact-templates` skill for context.
