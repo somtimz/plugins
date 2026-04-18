@@ -92,6 +92,7 @@ All static data is in `references/`. Read these rather than relying on memory:
 - **`references/phase-inputs-outputs.md`** — input/output tables per phase with quality gates
 - **`references/phase-constraints.md`** — plugin-level per-phase constraints: required artifacts, ID rules, traceability rules, and blocking gates; read by `ea-facilitator` on phase entry, `ea-interviewer` at session start, and `ea-consistency-checker` during validation
 - **`references/adm-tailoring.md`** — tailoring ADM for agile, programme, capability, and security contexts
+- **`references/ai-security-guidance.md`** — AI/GenAI security guidance for TOGAF ADM: ISO/IEC 42001 (AIMS), NIST AI RMF, and OWASP Top 10 for LLMs mapped per phase; load when the engagement involves AI or agentic systems, or when the user asks about AI security architecture
 
 ## Lifecycle Workflow
 
