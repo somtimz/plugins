@@ -175,10 +175,14 @@ Type these at any interview prompt:
 ### Research in an engagement — two agents
 
 **`ea-research` agent** — EA-aware research intelligence. Use it for:
-- "What should I research before Phase D?" (phase research planning)
-- "Synthesise the vendor reports into a comparison matrix" (multi-source synthesis)
+- "Quick research: what are the key risks of cloud-first for financial services?" (1-2 search fast lookup with confidence scores)
+- "Deep research: investigate zero-trust architecture options for Phase D" (structured 4-phase investigation — planning, searches, analysis, synthesis report)
+- "What should I research before Phase D?" (phase research planning — recommends a backlog, no searches)
+- "Synthesise the vendor reports into a comparison matrix" (consolidates existing library items — no searches)
 - "Are there gaps or outdated sources in our research library?" (quality audit)
 - "Which research items influenced the Phase D technology choices?" (impact tracing)
+
+Unlike `@research-agent`, the `ea-research` agent is EA-context-aware: it reads the active engagement, current phase, and open decisions before responding.
 
 **`@research-agent`** — General deep research. Use it when you need
 evidence, citations, or deeper investigation before populating an artifact.

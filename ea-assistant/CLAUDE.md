@@ -68,7 +68,7 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 ## Plugin Structure
 
 ```
-agents/          10 agents (ea-facilitator, ea-interviewer, ea-roadmap, ea-document-analyst, ...)
+agents/          10 agents (ea-facilitator, ea-interviewer, ea-roadmap, ea-document-analyst, ea-research, ...)
 commands/        27 commands (see Command Reference above)
 skills/          8 skill directories (ea-artifact-templates, ea-engagement-lifecycle, zachman-framework, ...)
 templates/       31 TOGAF artifact templates (.md)
