@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.22
+**Version:** 0.9.23
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -618,6 +618,7 @@ EA-projects/
 | `ea-document-analyst` | EA mapping layer — extracts content from uploaded documents and maps to artifacts (no dedicated command) | Ask Claude: "Analyse the uploaded documents" |
 | `ea-advisor` | Answers EA methodology questions — TOGAF, Zachman, ArchiMate (no dedicated command) | Ask any methodology question in chat |
 | `ea-diagram` | Creates, edits, and interprets architecture diagrams (Mermaid, Graphviz, Draw.io, ArchiMate); standard diagram catalogue per artifact type; offers mmdc render after saving | `/ea-generate mermaid|png|svg`, ask Claude: "Create a diagram for..." |
+| `ea-research` | EA-aware research support — quick lookup (1-2 searches), deep 4-phase investigation (planning → execution → analysis → synthesis), phase research planning, multi-source synthesis, research quality audit, impact tracing | Ask: "Quick research: ...", "Deep research: ...", "What should I research for Phase X?", "Synthesise the vendor reports", "Quality check our research" |
 
 ---
 
