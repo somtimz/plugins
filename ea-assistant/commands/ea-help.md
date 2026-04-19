@@ -172,9 +172,15 @@ Type these at any interview prompt:
   point to the single-source-of-truth reference files for concepts and
   phase guidance. Run `/ea-migrate` if the file is missing.
 
-### Using the Research Agent during an engagement
+### Research in an engagement — two agents
 
-The `@research-agent` is available at any point in an EA engagement. Use it when you need
+**`ea-research` agent** — EA-aware research intelligence. Use it for:
+- "What should I research before Phase D?" (phase research planning)
+- "Synthesise the vendor reports into a comparison matrix" (multi-source synthesis)
+- "Are there gaps or outdated sources in our research library?" (quality audit)
+- "Which research items influenced the Phase D technology choices?" (impact tracing)
+
+**`@research-agent`** — General deep research. Use it when you need
 evidence, citations, or deeper investigation before populating an artifact.
 
 | When | Example |

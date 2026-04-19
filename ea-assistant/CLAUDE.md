@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.22 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.23 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -45,7 +45,7 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 | `/ea-help` | ea-facilitator | List commands and getting-started guide |
 | `/ea-interview` | ea-interviewer | Structured Q&A for any artifact / ADM phase |
 | `/ea-brainstorm` | ea-facilitator | Capture freeform thoughts for current phase |
-| `/ea-research` | ea-document-analyst | Add/apply research documents and links |
+| `/ea-research` | ea-research | Add/apply research documents and links; proactive phase research planning and synthesis |
 | `/ea-artifact` | ea-facilitator | Create, view, or list artifacts |
 | `/ea-review` | ea-facilitator | Open artifact for review; track review state |
 | `/ea-grill` | ea-interviewer | Deep-review artifact (9 grill-me skills) |
@@ -68,7 +68,7 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 ## Plugin Structure
 
 ```
-agents/          9 agents (ea-facilitator, ea-interviewer, ea-roadmap, ea-document-analyst, ...)
+agents/          10 agents (ea-facilitator, ea-interviewer, ea-roadmap, ea-document-analyst, ...)
 commands/        27 commands (see Command Reference above)
 skills/          8 skill directories (ea-artifact-templates, ea-engagement-lifecycle, zachman-framework, ...)
 templates/       31 TOGAF artifact templates (.md)
@@ -219,6 +219,7 @@ Capability Gaps (missing/immature capabilities) prevent Goals and trigger Phase 
 | `ea-advisor` | TOGAF/Zachman/ArchiMate advisory, framework Q&A | Phase navigation, artifact writing |
 | `ea-diagram` | Architecture diagram creation/editing/interpretation (Mermaid, Graphviz, Draw.io, ArchiMate) | EA mapping, artifact writes |
 | `ea-requirements-analyst` | Document parsing → structured requirements register (FR/NFR/CON/PRI/ASS/DRV), ADM phase coverage map, Zachman coverage matrix, `requirements-index.json` population | Phase navigation, interview facilitation |
+| `ea-research` | Proactive research planning (what to study per phase), multi-source synthesis, research quality audit, research impact traceability | Applying individual research items to artifacts (that's `/ea-research apply`), format conversion |
 
 ---
 
