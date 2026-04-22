@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.24 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.25 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -53,6 +53,7 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 | `/ea-notes` | ea-facilitator | List, view, edit, or delete interview notes, brainstorm notes, and review files |
 | `/ea-consistency` | ea-consistency-checker | Focused consistency check: cross-artifact contradictions, within-artifact section inconsistencies, ID reference validation |
 | `/ea-engage-review` | ea-consistency-checker | Full engagement: consistency + traceability |
+| `/ea-security-review` | ea-security-auditor | Full engagement or single-artifact security audit — SABSA, ISO 27001, NIST CSF 2.0 coverage |
 | `/ea-publish` | ea-facilitator | Publish artifacts into a consolidated document |
 | `/ea-decisions` | ea-facilitator | Decision Register — aggregates all A3 rows |
 | `/ea-adrs` | ea-facilitator | ADR Register — create, update, track ADRs |
@@ -68,9 +69,9 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 ## Plugin Structure
 
 ```
-agents/          10 agents (ea-facilitator, ea-interviewer, ea-roadmap, ea-document-analyst, ea-research, ...)
-commands/        27 commands (see Command Reference above)
-skills/          8 skill directories (ea-artifact-templates, ea-engagement-lifecycle, zachman-framework, ...)
+agents/          12 agents (ea-facilitator, ea-interviewer, ea-roadmap, ea-document-analyst, ea-research, ...)
+commands/        28 commands (see Command Reference above)
+skills/          9 skill directories (ea-artifact-templates, ea-engagement-lifecycle, zachman-framework, ...)
 templates/       31 TOGAF artifact templates (.md)
 scripts/         Python scripts for Word/PPTX generation
 docs/PRD.md      Authoritative product requirements (v0.9.12)
@@ -161,6 +162,7 @@ links: []              # named refs: [{label: "Context Diagram", path: "../../di
 | `ea-generation` | .docx/.pptx generation workflow, JSON extraction protocol | /ea-generate |
 | `ea-document-ingestion` | Format layer — how to read each file type (PDF, DOCX, PPTX, etc.) | ea-document-analyst |
 | `archimate-notation` | ArchiMate 3.x element types, notation rules | ea-facilitator |
+| `ea-security` | SABSA ADM mapping, ISO 27001 controls, NIST CSF functions, artifact security checklists, security interview questions | ea-security-advisor, ea-security-auditor, ea-interviewer |
 
 ---
 
@@ -220,6 +222,8 @@ Capability Gaps (missing/immature capabilities) prevent Goals and trigger Phase 
 | `ea-diagram` | Architecture diagram creation/editing/interpretation (Mermaid, Graphviz, Draw.io, ArchiMate) | EA mapping, artifact writes |
 | `ea-requirements-analyst` | Document parsing → structured requirements register (FR/NFR/CON/PRI/ASS/DRV), ADM phase coverage map, Zachman coverage matrix, `requirements-index.json` population | Phase navigation, interview facilitation |
 | `ea-research` | Proactive research planning (what to study per phase), multi-source synthesis, research quality audit, research impact traceability | Applying individual research items to artifacts (that's `/ea-research apply`), format conversion |
+| `ea-security-advisor` | SABSA/ISO 27001/NIST CSF Q&A, security architecture decisions | Phase navigation, artifact writing |
+| `ea-security-auditor` | Security control gap detection, SABSA/ISO/NIST coverage audit | Artifact creation, security Q&A |
 
 ---
 

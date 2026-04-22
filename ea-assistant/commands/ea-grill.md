@@ -1,7 +1,7 @@
 ---
 name: ea-grill
 description: Deep-review an EA artifact using a grill-me skill — stress-test, boardroom simulation, pre-mortem, decision critique, or design critique
-argument-hint: "[artifact-name] [--skill stress-test|premortem|decision|design|software-design|infra-design|artifact|diagram|boardroom-strategy]"
+argument-hint: "[artifact-name] [--skill stress-test|premortem|decision|design|software-design|infra-design|artifact|diagram|boardroom-strategy] | security <artifact-id>"
 allowed-tools: [Read, Glob, Bash]
 ---
 
@@ -10,6 +10,15 @@ Deeply review an EA artifact using a grill-me skill.
 ## Instructions
 
 If no engagement is active in context, prompt the user to run `/ea-open` first.
+
+---
+
+### Argument Parsing — Mode Selection
+
+Check the arguments provided:
+
+- If `security` appears as an argument (in any position, e.g. `/ea-grill security <artifact-id>` or `/ea-grill <artifact-id> security`), extract the artifact ID (the non-`security` argument) and jump to **[Security Mode](#security-mode)** below. Do not proceed to Step 1.
+- Otherwise, continue to Step 1 (standard grill workflow).
 
 ---
 
@@ -276,3 +285,61 @@ Check whether the expected diagrams for this artifact type exist and are referen
    > "Found `architecture-vision-motivation-map.mmd` but no rendered image. Run `/ea-generate png` to produce a `.png` for export."
 
 After Step 8 is complete, ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-next.md` and output the recommendation.
+
+---
+
+## Security Mode
+
+**Triggered by:** `/ea-grill security <artifact-id>` or `/ea-grill <artifact-id> security`
+
+**Difference from `/ea-security-review`:** This mode is interactive — findings are walked through one at a time with `y/n/edit` confirmation, and accepted fixes are applied to the artifact immediately. `/ea-security-review` produces a read-only report.
+
+### SM-1 — Load the artifact
+
+Locate the artifact file in `EA-projects/{slug}/artifacts/` using the provided artifact ID. Load full artifact-scoped context using **Scope A** from `skills/ea-engagement-lifecycle/references/context-loading.md`. Announce loaded context to the user.
+
+### SM-2 — Dispatch `ea-security-auditor`
+
+Invoke the `ea-security-auditor` agent with **Scope A** (single artifact). Pass the full artifact content. The auditor produces a structured list of security findings in the form:
+
+```
+Finding S-W1: <title>
+Gap: <what is missing or wrong>
+Suggested fix: <specific text or structural change to apply>
+```
+
+Present a summary to the user:
+```
+## Security Audit — [Artifact Name]
+
+ea-security-auditor identified [N] finding(s). I'll walk through each one now.
+Accept (y), skip (n), or provide your own text (edit) for each suggested fix.
+```
+
+### SM-3 — Interactive finding walkthrough
+
+For each finding, present:
+
+```
+Finding S-W1: Authentication model undefined
+Gap: No auth model specified in Application Architecture
+Suggested fix: Add authentication model section specifying SSO via Azure AD (MFA required)
+Apply this fix? (y/n/edit)
+```
+
+- **`y`** — apply the suggested fix text to the artifact, confirm applied, continue to next finding
+- **`n`** — skip without change, continue to next finding
+- **`edit`** — prompt the user: "Enter your replacement text:", apply that text instead, confirm applied, continue
+
+### SM-4 — Version bump and close
+
+After all findings are processed:
+
+1. Bump the artifact `version` by a patch increment (e.g. `0.3` → `0.4`)
+2. Update `lastModified` in frontmatter to today's date
+3. Set `reviewStatus` to `In Review` if it was `Not Reviewed` or `Needs Revision`; warn before writing to an `Approved` artifact: `⚠️ This artifact is Approved. Applying fixes will reset reviewStatus to In Review. Continue? (y/n)`
+4. Confirm: `Security grill complete — [N] fix(es) applied, version bumped to [new version]`
+
+**Constraints (same as Step 7):**
+- Never invent content — only apply fixes derived from auditor output or user-supplied text
+- If a fix references an ID (GAP-NNN, REQ-NNN, etc.), flag it: `⚠️ This adds a reference to [ID] — verify it exists before saving`
