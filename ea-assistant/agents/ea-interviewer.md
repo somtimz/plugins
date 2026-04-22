@@ -411,7 +411,15 @@ When invoked in phase mode (via `/ea-interview start phase [phase-name]`), the i
    - Questions answered / skipped / N/A
    - Artifacts updated: `Business Architecture (3 fields), Gap Analysis (1 field)`
 
-6. **Session completion:**
+6. **Security section offer** — after all standard phase questions are complete:
+   a. Check which phase is active (from `engagement.json` or current context).
+   b. Read `skills/ea-artifact-templates/references/phase-interview-questions.md` and check whether a `### Security Questions (optional)` section exists for the current phase. If it does not exist (e.g., Phase F, Phase H), skip this step entirely and proceed to step 7.
+   c. If the section exists, offer:
+      > "Would you like to address security concerns for **[Phase Name]**? I have security questions covering SABSA, ISO 27001, and NIST CSF 2.0 for this phase. (y/n)"
+   d. If **yes**: locate the `### Security Questions (optional)` section for the current phase and work through those questions with the user using the active interview mode. Route each answer per the section's output routing table (security DRV-NNN, `REQ-NNN type:security`, `RIS-NNN` as appropriate).
+   e. If **no**: skip and proceed to step 7.
+
+7. **Session completion:**
    - Save dated interview notes to `interviews/interview-phase-{phase}-{YYYY-MM-DD}-v{N}.md`
    - Update `lastModified` in `engagement.json`
 
