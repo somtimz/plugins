@@ -35,6 +35,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Artifact compliance** — automatic compliance check when opening any artifact; offer to remediate missing fields/sections or accept as-is with sensible defaults
 - **Pre-publish compliance** — `/ea-publish` runs compliance scan on all selected artifacts before assembly; non-compliant items flagged with option to proceed or remediate
 - **Review & consistency** — per-artifact review workflow; cross-artifact consistency checking; dedicated `/ea-consistency` command with ID reference registry (broken refs, orphaned IDs) and within-artifact section contradiction detection; post-save compliance + consistency prompt after every artifact write
+- **Security architecture** — `/ea-security-review` audits artifacts against SABSA layer coverage, ISO 27001:2022 control domains, and NIST CSF 2.0 functions; `/ea-grill security` provides interactive single-artifact security review with applied fixes; `ea-security-advisor` agent answers SABSA/ISO/NIST Q&A and security architecture decision trade-offs
 - **Consolidated reporting** — merge all artifacts into a single Markdown or Word document; opted-out and non-standard items flagged inline
 - **Research agent integration** — invoke `@research-agent` at any point during interviews for evidence-based validation of drivers, risks, technology choices, or assumptions; invoke `ea-research` agent for proactive phase research planning, multi-source synthesis, and research quality audits
 - **Document ingestion** — upload existing docs and diagrams to inform artifacts; format extraction (docx, pdf, xlsx, csv, drawio, mmd) handled by `ea-document-ingestion` skill; EA content mapping handled by `ea-document-analyst` agent
@@ -136,6 +137,7 @@ uiMode: html
 | `/ea-research [mode]` | Research library — add documents, notes, links; apply findings to artifacts |
 | `/ea-consistency [options]` | Focused consistency check — cross-artifact contradictions, ID reference validation (`--ids`), or single-artifact within-section check (`artifact <id>`) |
 | `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman |
+| `/ea-security-review [<artifact-id>] [--framework sabsa\|iso\|nist]` | Security audit — SABSA layer coverage, ISO 27001:2022 domain alignment, NIST CSF 2.0 function analysis; full engagement by default |
 | `/ea-reorganize [--report]` | Move flat-path artifacts into their correct phase subfolders; update engagement.json paths |
 | `/ea-migrate [--report]` | Align a legacy engagement to the current plugin version conventions |
 | `/ea-grill [artifact] [--skill]` | Deep-review an artifact using a grill-me skill; apply findings one revision at a time |
