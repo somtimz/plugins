@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.23
+**Version:** 0.9.25
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -493,7 +493,15 @@ Each engagement folder contains `.claude/rules/ea-engagement.md` — a small rul
 
 The file is seeded by `/ea-new`, backfilled silently by `/ea-open` for legacy engagements, and detected as a gap by `/ea-migrate` if absent.
 
-### 5.24 Engagement CLAUDE.md
+### 5.24 Security Architecture (v0.9.25)
+
+`/ea-security-review` provides a structured security audit aligned to SABSA, ISO 27001, and NIST CSF 2.0. It operates across a full engagement or against a single artifact.
+
+- **`ea-security-auditor`** — detects security control gaps, maps artifacts to SABSA ADM layers, ISO 27001 Annex A controls, and NIST CSF 2.0 functions; produces a prioritised remediation report
+- **`ea-security-advisor`** — answers security architecture Q&A in engagement context; supports security decisions and ADR threshold scoring for security-relevant choices
+- **`ea-security` skill** — provides SABSA ADM mapping tables, ISO 27001 control reference, NIST CSF function definitions, per-artifact security checklists, and security interview question banks consumed by ea-interviewer
+
+### 5.25 Engagement CLAUDE.md
 
 The per-engagement `CLAUDE.md` is a **pointer document**, not a data dump. It contains identity fields, a one-sentence vision, engagement state counts (artifact totals, open decisions, research items), a pointer table to content locations, and a quick-command reference. Full strategic detail (goals, objectives, strategies, drivers) lives in `engagement.json → direction` and artifact files only — it is never copied into CLAUDE.md.
 
@@ -602,6 +610,7 @@ EA-projects/
 | `/ea-migrate` | `[--report]` | Align legacy engagement to current plugin version conventions |
 | `/ea-publish` | `[markdown|word]` | Consolidated report via Pandoc; pre-publish compliance check |
 | `/ea-config` | `[section]` | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md |
+| `/ea-security-review` | `[artifact-id] [--report]` | Security audit — SABSA ADM mapping, ISO 27001 Annex A, and NIST CSF 2.0 coverage; full engagement or single artifact |
 | `/ea-help` | — | Command reference, interview shortcuts, research agent guide |
 
 ---
@@ -619,6 +628,8 @@ EA-projects/
 | `ea-advisor` | Answers EA methodology questions — TOGAF, Zachman, ArchiMate (no dedicated command) | Ask any methodology question in chat |
 | `ea-diagram` | Creates, edits, and interprets architecture diagrams (Mermaid, Graphviz, Draw.io, ArchiMate); standard diagram catalogue per artifact type; offers mmdc render after saving | `/ea-generate mermaid|png|svg`, ask Claude: "Create a diagram for..." |
 | `ea-research` | EA-aware research support — quick lookup (1-2 searches), deep 4-phase investigation (planning → execution → analysis → synthesis), phase research planning, multi-source synthesis, research quality audit, impact tracing | Ask: "Quick research: ...", "Deep research: ...", "What should I research for Phase X?", "Synthesise the vendor reports", "Quality check our research" |
+| `ea-security-advisor` | Answers security architecture Q&A in engagement context; supports SABSA/ISO 27001/NIST CSF decisions and ADR threshold scoring | Ask any security architecture question in chat |
+| `ea-security-auditor` | Security control gap detection; maps artifacts to SABSA, ISO 27001 Annex A, NIST CSF 2.0; produces prioritised remediation report | `/ea-security-review` |
 
 ---
 
