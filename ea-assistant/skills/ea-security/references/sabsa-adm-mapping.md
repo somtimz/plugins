@@ -18,7 +18,7 @@ SABSA (Sherwood Applied Business Security Architecture) is a risk-driven securit
 | SABSA Layer | ADM Phase | Security Architecture Deliverable | Key Questions |
 |---|---|---|---|
 | Contextual (Why) | Prelim / Phase A | Security vision, business security attributes, security drivers (DRV-NNN type:security) | Why does security matter to this business? What are the regulatory drivers? |
-| Conceptual (What) | Phase B | Security policies, logical security model, security principles, business security architecture | What are the security policies? What security standards apply? |
+| Conceptual (What) | Phase B | Security policies, security principles, business security architecture, business security attributes model | What are the security policies? What security standards apply? |
 | Logical (How) | Phase C (Data + App) | Security services, data classification scheme, auth/authz model, audit logging requirements | How will identity and access be managed? How is data classified and protected? |
 | Physical (With What) | Phase D | Security mechanisms, PKI, network segmentation, endpoint hardening, encryption at rest/in transit | What security products/technologies implement the logical model? |
 | Component (Which) | Phase E–F | Security product/tool selection, implementation sequence, security work packages (WP-NNN) | Which specific products, versions, and configurations? |

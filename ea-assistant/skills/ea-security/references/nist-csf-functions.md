@@ -2,7 +2,7 @@
 
 ## 1. Overview
 
-NIST Cybersecurity Framework 2.0 (CSF 2.0, released February 2024) is an outcome-based framework for managing cybersecurity risk. It is structured as 6 functions, 22 categories, and approximately 106 subcategories. CSF 2.0 adds the Govern (GV) function — new in this version — which elevates cybersecurity governance to the top level, reflecting that cybersecurity risk is a business risk.
+NIST Cybersecurity Framework 2.0 (CSF 2.0, released February 2024) is an outcome-based framework for managing cybersecurity risk. It is structured as 6 functions, 22 categories, and 106 subcategories. CSF 2.0 adds the Govern (GV) function — new in this version — which elevates cybersecurity governance to the top level, reflecting that cybersecurity risk is a business risk.
 
 The framework is outcome-based and non-prescriptive: it describes what good looks like, not how to achieve it. Organisations map their existing controls and practices to the CSF to identify gaps and communicate maturity. CSF originated in US critical infrastructure sectors but is now widely adopted globally across both public and private sector organisations of all sizes.
 
@@ -45,7 +45,7 @@ Covers identity management, awareness and training, data security, platform secu
 - **PR.PS** — Platform Security: drives Technology Architecture (hardening standards, patch management)
 - **PR.IR** — Technology Infrastructure Resilience: drives Technology Architecture (backup, redundancy, availability controls)
 
-### DE — Detect (3 categories)
+### DE — Detect (2 categories)
 
 Covers continuous monitoring and adverse event analysis. Maps to Phase D Technology Architecture. Key categories:
 
@@ -57,9 +57,11 @@ Covers continuous monitoring and adverse event analysis. Maps to Phase D Technol
 Covers incident response planning, incident analysis, incident response reporting, and mitigation. Maps to Phase G governance artifacts. Key categories:
 
 - **RS.MA** — Incident Management: drives Implementation Governance Plan (security incident procedures)
+- **RS.AN** — Incident Analysis: drives Business Architecture security review process (investigation procedures, evidence collection)
 - **RS.CO** — Incident Response Reporting and Communication: drives Governance Framework (notification obligations, GDPR 72-hour breach reporting)
+- **RS.MI** — Incident Mitigation: drives Architecture Roadmap / Change Register (containment and eradication actions)
 
-### RC — Recover (3 categories)
+### RC — Recover (2 categories)
 
 Covers incident recovery planning and communication during recovery. Maps to Phase G and Phase H. Key categories:
 

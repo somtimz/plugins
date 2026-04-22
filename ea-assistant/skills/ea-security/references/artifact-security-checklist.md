@@ -110,6 +110,15 @@ Per-artifact security control checklist for use by ea-security-auditor, /ea-secu
 
 ---
 
+## Migration Plan (Phase F)
+
+- [ ] Data migration security controls specified (encryption during transfer, access logging) **(Warning)**
+- [ ] Interim state security risks assessed and captured as RIS-NNN **(Warning)**
+- [ ] Decommissioning security obligations defined (secure data disposal per A.8.10) **(Warning)**
+- [ ] Security roles and responsibilities during migration documented **(Warning)**
+
+---
+
 ## Compliance Assessment (Phase G)
 
 - [ ] All four ISO 27001:2022 domains (A.5–A.8) are addressed **(Critical)**
