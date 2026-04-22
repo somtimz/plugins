@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.23
+**Version:** 0.9.24
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -32,12 +32,12 @@ Enterprise Architecture engagements typically span 3–6 months, involve 5–15 
 
 The **EA Practitioner** is the primary user. All design decisions should favour this user when trade-offs arise.
 
-| Priority | User | Role | Primary Need | Entry Point |
-|---|---|---|---|---|
-| 1 | **EA Practitioner** | Lead architect running the engagement | Structured workflow, artifact generation, traceability | `/ea-new`, `/ea-open`, `/ea-phase` |
-| 2 | **EA Facilitator** | Runs stakeholder interviews (may be same person as practitioner) | Question bank, guided interview flow, session notes | `/ea-interview`, `/ea-brainstorm` |
-| 3 | **Sponsor** | Authorises the engagement; provides strategic direction | Consolidated reports, Decision Register filtered to their level | `/ea-publish`, `/ea-decisions --audience executive` |
-| 4 | **Business Analyst** | Captures and manages architecture requirements | Requirements Register with motivation traceability | `/ea-requirements` |
+| Priority | User                 | Role                                                             | Primary Need                                                    | Entry Point                                         |
+| -------- | -------------------- | ---------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------- |
+| 1        | **EA Practitioner**  | Lead architect running the engagement                            | Structured workflow, artifact generation, traceability          | `/ea-new`, `/ea-open`, `/ea-phase`                  |
+| 2        | **EA Facilitator**   | Runs stakeholder interviews (may be same person as practitioner) | Question bank, guided interview flow, session notes             | `/ea-interview`, `/ea-brainstorm`                   |
+| 3        | **Sponsor**          | Authorises the engagement; provides strategic direction          | Consolidated reports, Decision Register filtered to their level | `/ea-publish`, `/ea-decisions --audience executive` |
+| 4        | **Business Analyst** | Captures and manages architecture requirements                   | Requirements Register with motivation traceability              | `/ea-requirements`                                  |
 
 > Stakeholders (non-sponsor) participate in interviews but do not use the tool directly — they interact via the Web or Voice interview form.
 
