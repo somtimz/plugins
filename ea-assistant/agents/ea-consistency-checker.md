@@ -72,13 +72,13 @@ You are an EA consistency analyst. Your role is to cross-check all artifacts in 
    - Count `⚠️ Not answered` fields
    - Flag artifacts with >30% unanswered fields as potentially incomplete
 
-5b. **ID Reference Validation**
+6. **ID Reference Validation**
 
    Build an ID definition registry by scanning every artifact file. An ID is considered **defined** when it appears as:
    - The first cell of a table row: `| G-001 | ...`
    - A heading that begins with the ID token: `## G-001 — Reduce costs`
 
-   Pattern: `(G|OBJ|DRV|STR|ISS|PRB|MET|REQ|RIS|ADR|WP|GAP|CON)-\d{3}`
+   Pattern: `(G|OBJ|DRV|STR|ISS|PRB|MET|REQ|RIS|ADR|WP|GAP|CON|CAP)-\d{3}`
 
    Registry entry: `{ id → { label, defined_in: "path/to/artifact.md", line: N } }`
 
@@ -86,7 +86,7 @@ You are an EA consistency analyst. Your role is to cross-check all artifacts in 
    - **Broken references** — ID referenced in an artifact but absent from the registry (Critical/Warning severity depending on ID type)
    - **Orphaned IDs** — ID defined in one artifact but never referenced in any other artifact (Info severity — may be a newly created ID)
 
-6. **Check phase alignment:**
+7. **Check phase alignment:**
    - Artifacts exist for all phases marked `Complete` in `engagement.json`
    - No artifact references inputs from a phase that is `Not Started`
 

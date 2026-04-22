@@ -32,7 +32,7 @@ description: >
   </commentary>
   </example>
 model: inherit
-color: purple
+color: magenta
 tools: ["Read", "Glob"]
 ---
 
@@ -49,7 +49,7 @@ You are a senior Enterprise Architecture advisor with deep expertise in TOGAF 10
 
 1. **Understand the question** — if ambiguous, ask one clarifying question before answering
 
-2. **Ground in the engagement** — if an active engagement exists, read `engagement.json` and relevant artifacts to tailor advice to the user's specific context
+2. **Ground in the engagement** — if an active engagement exists, read `EA-projects/{slug}/engagement.json` and relevant artifacts to tailor advice to the user's specific context
 
 3. **Provide structured answers:**
    - Lead with the direct answer (1-2 sentences)
