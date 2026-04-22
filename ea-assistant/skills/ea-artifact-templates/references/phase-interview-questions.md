@@ -150,6 +150,25 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 If the user describes content, offer to launch `/ea-diagram` immediately. Output routing: diagram files → `diagrams/`, filename added to Engagement Charter frontmatter `diagrams: []`.
 See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid starters.
 
+### Security Questions (optional)
+> Offer this section after completing the standard phase questions. Ask: "Would you like to address security concerns for the Preliminary Phase? (y/n)"
+
+**SABSA focus:** Contextual — governance, obligations, and existing security posture
+
+1. What security governance model applies to this organisation? (e.g., CISO-led, committee-based, outsourced)
+2. Who holds security decision authority — who can approve exceptions, set policy, and sign off on architecture security sections?
+3. What security policies already exist? Are they current and enforced?
+4. What compliance obligations apply? (e.g., GDPR, PCI-DSS, ISO 27001, HIPAA, sector regulation)
+5. Is there an existing ISMS or security programme this engagement must align with?
+6. What is the current security maturity tier? (NIST CSF: Partial / Risk Informed / Repeatable / Adaptive)
+
+**Output routing:**
+| Answer | Output |
+|---|---|
+| Governance model and decision authority | Architecture Principles (security governance section) |
+| Existing policies and compliance obligations | Governance Framework (security notes), DRV-NNN type:security |
+| Current maturity tier | Architecture Vision (security baseline section) |
+
 ---
 
 ## Phase A — Architecture Vision Interview
@@ -252,6 +271,26 @@ Assign IDs sequentially within each prefix as responses are confirmed. Record ID
 If the user describes content, offer to launch `/ea-diagram` immediately. Output routing: diagram files → `diagrams/`, filenames added to Architecture Vision frontmatter `diagrams: []`.
 See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid starters.
 
+### Security Questions (optional)
+> Offer this section after completing the standard phase questions. Ask: "Would you like to address security concerns for Phase A? (y/n)"
+
+**SABSA focus:** Contextual — security vision, drivers, and top-level risk
+
+1. What are the primary security drivers for this engagement? Are they regulatory, contractual, or risk-driven?
+2. Who are the security stakeholders? (CISO, DPO, compliance officer, risk committee, board audit committee)
+3. What are the top 3 security risks at the engagement level? What keeps the CISO awake at night?
+4. What security principles should constrain all downstream architecture decisions?
+5. Is there an existing security architecture or security reference model that this engagement must align with?
+6. Are there any known security incidents or breaches in this organisation's recent history that should inform the architecture?
+
+**Output routing:**
+| Answer | Output |
+|---|---|
+| Security drivers | DRV-NNN type:security in Requirements Register |
+| Security stakeholders | Stakeholder Map (security authority roles) |
+| Top-level security risks | RIS-NNN type:security, category:security in Risk Register |
+| Security principles | Architecture Principles (security section) |
+
 ---
 
 ## Phase B — Business Architecture Interview
@@ -332,6 +371,24 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 
 If the user describes content, offer to launch `/ea-diagram` immediately. Output routing: diagram files → `diagrams/`, filenames added to Business Architecture frontmatter `diagrams: []`.
 See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid starters.
+
+### Security Questions (optional)
+> Offer this section after completing the standard phase questions. Ask: "Would you like to address security concerns for Phase B? (y/n)"
+
+**SABSA focus:** Conceptual — security policies, business security attributes, organisational model
+
+1. What are the business security attributes required? (confidentiality, integrity, availability, auditability, accountability, non-repudiation — which matter most and why?)
+2. What security policies govern this business domain? Are they documented and enforced?
+3. How are security roles and responsibilities organised? Is there a clear RACI for security decisions?
+4. What are the security-sensitive business processes — processes where a failure would cause regulatory, financial, or reputational harm?
+5. What third-party or supply chain relationships introduce security risk?
+
+**Output routing:**
+| Answer | Output |
+|---|---|
+| Business security attributes | Business Architecture (security section), REQ-NNN type:security, source:business policy |
+| Security roles and RACI | Business Architecture (security RACI), Governance Framework |
+| Security-sensitive processes | Business Architecture (process security notes), RIS-NNN |
 
 ---
 
@@ -483,6 +540,46 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 If the user describes content, offer to launch `/ea-diagram` immediately. Output routing: diagram files → `diagrams/`, filenames added to the relevant artifact frontmatter `diagrams: []`.
 See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid starters.
 
+### Security Questions — C-Data (optional)
+> Offer this section after completing the standard Phase C data questions. Ask: "Would you like to address security concerns for Phase C Data Architecture? (y/n)"
+
+**SABSA focus:** Logical — data classification, protection services, and privacy obligations
+
+1. What data classification levels apply? (e.g., Public / Internal / Confidential / Restricted — or organisation-specific scheme)
+2. What data is most sensitive or regulated? (personal data, payment data, health data, IP, classified)
+3. What are the encryption requirements — at rest and in transit? Are there approved algorithms or key lengths?
+4. What data retention and deletion obligations exist? What triggers deletion?
+5. What privacy requirements apply? Is GDPR Article 25 (privacy by design and by default) a relevant obligation?
+6. Where does data reside — jurisdiction constraints, cross-border transfer restrictions?
+
+**Output routing:**
+| Answer | Output |
+|---|---|
+| Data classification scheme | Data Architecture (classification table) |
+| Encryption at rest and in transit | Data Architecture (encryption specification), REQ-NNN type:security, category:data-protection |
+| Retention and deletion | Data Architecture (retention policy), REQ-NNN type:security, source:ISO27001, control:A.8.10 |
+| Privacy requirements | Data Architecture (privacy notes), REQ-NNN type:security, category:privacy |
+
+### Security Questions — C-App (optional)
+> Offer this section after completing the standard Phase C application questions. Ask: "Would you like to address security concerns for Phase C Application Architecture? (y/n)"
+
+**SABSA focus:** Logical — identity, access, audit, and secure development
+
+1. What authentication model is required? (SSO, MFA, federated identity, protocol: SAML / OIDC / Kerberos)
+2. What authorisation model applies? (RBAC, ABAC, policy-based — what granularity of access control is needed?)
+3. What audit logging is required? Who needs to see logs, for how long, and in what format?
+4. How are APIs secured? (OAuth 2.0, mTLS, API gateway, rate limiting)
+5. What are the secure coding standards for this application? (OWASP, SSDLC, code review requirements)
+6. What is the approach to vulnerability management — SAST, DAST, penetration testing frequency?
+
+**Output routing:**
+| Answer | Output |
+|---|---|
+| Authentication model | Application Architecture (auth model section), REQ-NNN type:security, category:access-control |
+| Authorisation model | Application Architecture (authz model), REQ-NNN type:security, source:ISO27001, control:A.5.15 |
+| Audit logging | Application Architecture (logging requirements), REQ-NNN type:security, source:ISO27001, control:A.8.15 |
+| API security | Application Architecture (API security section) |
+
 ---
 
 ## Phase D — Technology Architecture Interview
@@ -535,6 +632,26 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 
 If the user describes content, offer to launch `/ea-diagram` immediately. Output routing: diagram files → `diagrams/`, filenames added to Technology Architecture frontmatter `diagrams: []`.
 See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid starters.
+
+### Security Questions (optional)
+> Offer this section after completing the standard phase questions. Ask: "Would you like to address security concerns for Phase D? (y/n)"
+
+**SABSA focus:** Physical — security mechanisms, network controls, monitoring, and infrastructure
+
+1. What network segmentation model is required? (zones, DMZ, micro-segmentation, air-gapped segments)
+2. What PKI and certificate management approach is used? (internal CA, public CA, certificate lifecycle)
+3. What endpoint hardening standards apply? (CIS Benchmarks, vendor hardening guides, mobile device management)
+4. What security monitoring and SIEM tools are in scope? What log sources are required?
+5. What physical security controls apply to infrastructure? (data centre, co-location, cloud physical security)
+6. What backup and recovery controls are required? (RTO, RPO, backup encryption, offsite storage)
+
+**Output routing:**
+| Answer | Output |
+|---|---|
+| Network segmentation | Technology Architecture (network security section) |
+| PKI and certificate management | Technology Architecture (PKI section), REQ-NNN type:security, source:ISO27001, control:A.8.24 |
+| SIEM and monitoring | Technology Architecture (monitoring section), RIS-NNN (infrastructure security risks) |
+| Backup and recovery | Technology Architecture (resilience section), REQ-NNN type:security, source:NIST-CSF, control:RC.RP |
 
 ---
 
@@ -594,6 +711,24 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 
 If the user describes content, offer to launch `/ea-diagram` immediately. Output routing: diagram files → `diagrams/`, filenames added to Architecture Roadmap frontmatter `diagrams: []`.
 See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid starters.
+
+### Security Questions (optional)
+> Offer this section after completing the standard phase questions. Ask: "Would you like to address security concerns for Phase E? (y/n)"
+
+**SABSA focus:** Component — security gap analysis and work package sequencing
+
+1. What security gaps have been identified against the target architecture?
+2. Which security work packages are highest priority — what cannot go live without being addressed?
+3. Are there security dependencies that constrain the roadmap sequence? (e.g., IAM must be in place before application migration)
+4. What security products or tools are being selected to implement the Physical layer controls?
+5. Are any security capabilities being deferred to a later iteration, and is that risk-accepted?
+
+**Output routing:**
+| Answer | Output |
+|---|---|
+| Security gaps | Gap Analysis (security gaps section) |
+| Security work packages | Architecture Roadmap (WP-NNN type:security) |
+| Security dependencies | Architecture Roadmap (sequencing notes) |
 
 ---
 
@@ -687,6 +822,26 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for a Mermaid
 - Ask for examples of how past deviations were handled to understand the real governance culture rather than the stated policy.
 - Reporting cadence questions should result in a concrete schedule, not a generic answer like "regularly" — pin down frequency and format.
 - Contract enforcement is often overlooked in internal engagements; make it explicit even when no external vendor is involved.
+
+### Security Questions (optional)
+> Offer this section after completing the standard phase questions. Ask: "Would you like to address security concerns for Phase G? (y/n)"
+
+**SABSA focus:** Operational — security operations model, compliance, and incident management
+
+1. How will security compliance be assessed during implementation? Who performs the assessment?
+2. Who is responsible for security operations once the architecture is live? (internal SOC, MSSP, hybrid)
+3. What security monitoring and alerting is in place — or needs to be stood up — before go-live?
+4. How are security incidents managed? Is there a tested incident response plan?
+5. Is an ISO 27001 Statement of Applicability required? Who is responsible for maintaining it?
+6. What are the security acceptance criteria for the Implementation Governance Plan — what must be true before sign-off?
+
+**Output routing:**
+| Answer | Output |
+|---|---|
+| Compliance assessment approach | Compliance Assessment (Phase G artifact) |
+| Security operations model | Implementation Governance Plan (security operations section) |
+| Incident response | Governance Framework (incident management), Implementation Governance Plan |
+| Statement of Applicability | Compliance Assessment (SoA reference or draft) |
 
 ---
 

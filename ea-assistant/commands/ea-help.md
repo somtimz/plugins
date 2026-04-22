@@ -92,6 +92,7 @@ You have existing engagements. Common next steps:
 | `/ea-notes [mode]` | List, view, edit, or delete interview notes, brainstorm notes, and review files |
 | `/ea-consistency [options]` | Focused consistency check — cross-artifact contradictions, within-artifact section inconsistencies, or ID reference scan only (`--ids`) |
 | `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman |
+| `/ea-security-review` | Security audit — SABSA, ISO 27001, and NIST CSF 2.0 coverage across the engagement or a single artifact |
 | `/ea-reorganize [--report]` | Move flat-path artifacts into correct phase subfolders; update engagement.json paths |
 | `/ea-migrate [--report]` | Align legacy engagement to current plugin version conventions |
 | `/ea-publish` | Merge artifacts into a consolidated report |
