@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.25 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.26 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -60,6 +60,7 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 | `/ea-risks` | ea-facilitator | Risk Register — aggregate, rate, track RIS-NNN |
 | `/ea-changes` | ea-facilitator | Change Register — aggregate all ACR artifacts |
 | `/ea-concerns` | ea-facilitator | Concerns Register — aggregate all A4 rows |
+| `/ea-direction` | ea-facilitator | Direction Register — Goals, Objectives, Strategies aggregated from artifacts |
 | `/ea-requirements` | ea-facilitator | Requirement management and artifact sync |
 | `/ea-zachman` | ea-facilitator | Zachman Diagram — generate, review, gap, classify |
 | `/ea-generate` | ea-facilitator | Generate .docx / .pptx / .mmd / .png / .svg |
@@ -70,7 +71,7 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 
 ```
 agents/          12 agents (ea-facilitator, ea-interviewer, ea-roadmap, ea-document-analyst, ea-research, ...)
-commands/        28 commands (see Command Reference above)
+commands/        29 commands (see Command Reference above)
 skills/          9 skill directories (ea-artifact-templates, ea-engagement-lifecycle, zachman-framework, ...)
 templates/       31 TOGAF artifact templates (.md)
 scripts/         Python scripts for Word/PPTX generation
