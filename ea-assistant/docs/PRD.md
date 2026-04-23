@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.25
+**Version:** 0.9.26
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -602,6 +602,7 @@ EA-projects/
 | `/ea-risks` | `[generate|status|update RIS-NNN <field> <value>]` | Generate and maintain Risk Register by scanning all artifacts |
 | `/ea-changes` | `[generate|status|update <ACR-ID> <field> <value>]` | Generate Change Register aggregating all Phase H ACR artifacts |
 | `/ea-concerns` | — | Manage CON-NNN stakeholder concerns (Appendix A4) |
+| `/ea-direction` | `[goals\|objectives\|strategies] [--domain Business\|Data\|Application\|Technology]` | Display Direction Register — Goals, Objectives, Strategies aggregated from motivation artifacts; filters by item type or inferred domain |
 | `/ea-zachman` | `[generate|review|gap|interview|classify <artifact>]` | Manage Zachman 6×6 classification diagram |
 | `/ea-research` | `[add|note|link|list|view <item>|apply [artifact-id]]` | Manage research library; synthesise research against deliverables |
 | `/ea-consistency` | `[artifact <id>] [--ids] [--report]` | Focused consistency check — cross-artifact, within-artifact section contradictions, or ID reference scan only |
