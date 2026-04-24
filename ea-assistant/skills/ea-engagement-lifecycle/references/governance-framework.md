@@ -124,16 +124,9 @@ The TOGAF ADM transitions between these two processes between **Phase E** (outpu
 
 ## Governance Roles
 
-Six roles are involved in architecture governance:
+The full role catalogue (ROLE-001 to ROLE-015) is defined in `references/role-catalogue.md`. That file is the authoritative source for all role definitions, responsibilities, RACI defaults, triggering events, cadence, and escalation paths. Do not redefine roles here.
 
-| Role | Responsibilities |
-|------|-----------------|
-| **Stakeholder** | Owner of the architecture. Provides priority, preference, and direction. Holds all decision rights regarding the target architecture, and any relief from or enforcement of the target. |
-| **Stakeholder Agent** | Representative of the Stakeholder — acts on their behalf in governance forums. |
-| **Subject Matter Expert (SME)** | Possesses specialised knowledge about the enterprise or its environment. Provides knowledge, advice, and validation of interpretation. |
-| **Implementer** | Responsible for all change activity — from transformative capital projects to incremental operational changes. Holds all decision rights about proposed implementation choices (design, product selection, change sequence). |
-| **Architect (Practitioner)** | Developer of the target architecture. Provides recommendations when non-compliance with the target is identified. |
-| **Auditor** | Performs systematic reviews of both the target and implementation. Audits should occur at multiple stages to catch errors before correction costs exceed value realisation. May operate within a formal ARB or as a peer reviewer. |
+The six foundational governance roles from the TOGAF governance model (Stakeholder, Stakeholder Agent, SME, Implementer, Enterprise Architect, Auditor) correspond to ROLE-001 through ROLE-006 in the catalogue. The catalogue extends these with domain architect sub-roles and delivery/ownership roles (ROLE-007 to ROLE-015).
 
 ---
 

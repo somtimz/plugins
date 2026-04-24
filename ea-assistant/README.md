@@ -133,6 +133,7 @@ uiMode: html
 | `/ea-risks [mode]` | Generate and maintain a cross-cutting Risk Register from all artifact risk sections |
 | `/ea-changes [mode]` | Generate Change Register aggregating Phase H ACR artifacts |
 | `/ea-concerns` | Manage CON-NNN stakeholder concerns and objections (Appendix A4) |
+| `/ea-roles [ROLE-ID\|--domain\|--generate\|--update]` | Role Catalogue — list, filter, and generate role assignments with RACI, triggers, and calendar |
 | `/ea-zachman [mode]` | Manage the Zachman 6×6 classification diagram — generate, review, gap, interview, classify |
 | `/ea-research [mode]` | Research library — add documents, notes, links; apply findings to artifacts |
 | `/ea-consistency [options]` | Focused consistency check — cross-artifact contradictions, ID reference validation (`--ids`), or single-artifact within-section check (`artifact <id>`) |
