@@ -66,6 +66,7 @@ Applies only to named artifact types:
 | Traceability Matrix | Two-section structure (Corporate / Project) present | T3-TRACE |
 | Data Architecture | Data Flows table includes a `State` column (Current / Planned / Deprecated); every DF-NNN row has a non-blank State value | T3-DF-STATE |
 | Architecture Vision, Business/Data/App/Tech Architecture, Gap Analysis, Consolidated Gap Analysis, Architecture Roadmap, Statement of Architecture Work, Migration Plan, Compliance Assessment, Requirements Register, Engagement Charter, Governance Framework, Implementation Governance Plan, Communications Plan, Architecture Definition Document, Transition Architectures | `## Appendix A5 — Related Architecture Decisions` section present | T3-ADR |
+| Same artifact list as T3-A3 | Any A3 row with `Authority = Strategic` has no corresponding `#### A3.N — {Item}` block and no sentinel `*(rationale not captured)*` below the A3 table. Surfaces in: `/ea-artifact view`, `/ea-engage-review`, `/ea-grill` — not checked during `/ea-interview` (rationale is captured live). | T3-RATIONALE |
 
 ---
 
@@ -141,6 +142,7 @@ Apply all required changes to bring the artifact up to the current standard. **P
 | T3-REQ (missing scope column) | Note: offer to run `/ea-requirements migrate` to add Corporate/Project scope |
 | T3-TRACE (missing sections) | Note: offer to regenerate via `/ea-requirements trace` |
 | T3-DF-STATE (missing State column or blank State values) | Add `State` column to the Data Flows table header; for each DF-NNN row prompt the user: "Is this flow Current, Planned (Target), or Deprecated?" — do not guess |
+| T3-RATIONALE (Strategic A3 entries without rationale) | Run `/ea-decisions rationale --artifact {artifact-name} --authority strategic` to capture missing rationale interactively; or add `#### A3.N — {Item}` blocks manually below the A3 table |
 
 After applying all remediations:
 - Update `lastModified` in both the artifact frontmatter and `engagement.json`

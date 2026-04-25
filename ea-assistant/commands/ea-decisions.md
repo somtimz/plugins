@@ -1,6 +1,6 @@
 ---
 name: ea-decisions
-description: Generate or view a Decision Register by aggregating all Appendix A3 decision rows from across all artifacts in the active engagement. Supports filtering by audience, owner, domain, authority, cost, impact, risk, subject, status, or source artifact.
+description: Generate or view a Decision Register by aggregating all Appendix A3 decision rows from across all artifacts in the active engagement. Supports filtering by audience, owner, domain, authority, cost, impact, risk, subject, status, or source artifact. Use `rationale` mode to capture missing A3.N reasoning blocks interactively.
 allowed-tools: [Read, Write, Glob]
 ---
 
@@ -49,6 +49,55 @@ Accepted flags (all optional, combinable):
 If `--audience` is combined with other flags, the explicit flags further narrow the audience preset (intersection, not union).
 
 If no arguments given, default to `generate` mode with no filters and audience = All.
+
+---
+
+## Mode: `rationale`
+
+Invoked as: `/ea-decisions rationale [--artifact <name>] [--authority strategic]`
+
+Catch-up pass for A3 entries that were created before the rationale capture flow was in place, or where the user skipped rationale during the interview and wants to revisit.
+
+1. Resolve the active engagement (same as `generate` Step 1).
+
+2. Scan all artifact files for A3 rows (same as `generate` Step 3). Apply `--artifact` and/or `--authority` flags to narrow scope.
+
+3. For each A3 row, check whether an `#### A3.N — {Item}` block exists below the A3 table in the same file (case-insensitive match). Also check for a sentinel `*(rationale not captured)*` line within that block. Entries with a full A3.N block are already documented — skip them. Entries with a sentinel are flagged as "skipped previously" and offered for revisit.
+
+4. Present a summary of gaps:
+   ```
+   {N} decisions have no rationale documented:
+   
+   1. Architecture Vision — Cloud vendor (Strategic, Technology, High cost)
+   2. Architecture Vision — Integration pattern (Strategic, Application, Med cost)
+   3. Business Architecture — Org model (Strategic, Business, High cost)
+   
+   Capture reasoning for each? (y / skip / quit)
+   ```
+   If zero gaps: output "All A3 entries have rationale documented." and stop.
+
+5. For each entry the user confirms (y):
+   - Show the combined rationale prompt (same format as the interview flow in `ea-interview.md`):
+     ```
+     **{Item} → {Value}** ({State})
+     
+     - **Alternatives considered:** 
+     - **Rationale:** 
+     - **Tradeoffs accepted:** 
+     - **Implications:** 
+     ```
+   - Parse the response; `skip` writes sentinel block; any content writes a partial or full A3.N block
+   - Write the block to the source artifact file, below the A3 table and before the next `##`-level heading
+   - If a sentinel already existed, replace it with the new block
+
+6. Report at end: `{N} reviewed — {M} documented, {K} skipped`
+
+**Flags:**
+
+| Flag | Effect |
+|---|---|
+| `--artifact <name>` | Scope to one artifact (case-insensitive partial match on artifact name) |
+| `--authority strategic` | Only show Strategic-authority entries missing rationale |
 
 ---
 
@@ -105,6 +154,42 @@ Populate the `decision-register.md` template with the filtered data:
 - Record applied filters in `filters:` frontmatter field (e.g. `authority=strategic, impact=high`)
 - Set `generated:` to today's date
 - The **Full Decision Index** always shows all rows in the filtered set regardless of audience preset
+
+### Step 5b — Collect and Render Decision Detail
+
+After rendering all standard sections (Summary, By Authority, By Domain, etc.), build a **Decision Detail** section.
+
+For each decision row in the filtered dataset:
+1. Load the source artifact file.
+2. Search for `#### A3.N — {Item}` below the A3 table (case-insensitive match on the Item field value).
+3. Extract all bullet lines from the block, stopping at the next `####` or `##` heading.
+4. Exclude entries where the block contains only `*(rationale not captured)*`.
+5. If `--audience executive`: include only Strategic + High Impact entries in Decision Detail.
+
+**Order:** Strategic first, then Tactical, then Operational; within each tier, High Impact before Medium, then Low.
+
+**Decision Detail format:**
+
+```markdown
+## Decision Detail
+
+Decisions with documented rationale, ordered by authority then impact.
+
+---
+
+### {Item} — {Value}
+**Source:** {sourceArtifact} · **Authority:** {Authority} · **Domain:** {Domain}
+**Cost:** {Cost} · **Impact:** {Impact} · **Risk:** {Risk} · **Owner:** {Owner} · **State:** {State}
+
+- **Rationale:** ...
+- **Alternatives:** ...
+- **Tradeoffs accepted:** ...
+- **Implications:** ...
+
+---
+```
+
+If no decisions in the filtered set have A3.N blocks (or all have only sentinels), omit the Decision Detail section entirely.
 
 ### Step 6 — Output Format
 

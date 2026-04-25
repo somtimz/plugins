@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.27 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.28 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -34,37 +34,37 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 
 ## Command Reference
 
-| Command | Primary Agent | Purpose |
-|---|---|---|
-| `/ea-new` | ea-facilitator | Create a new engagement project |
-| `/ea-open` | ea-facilitator | Open or switch between engagements |
-| `/ea-status` | ea-facilitator | Dashboard: all engagements and progress |
-| `/ea-phase` | ea-facilitator | Start, edit, or resume an ADM phase |
-| `/ea-migrate` | ea-facilitator | Detect and resolve version alignment gaps |
-| `/ea-config` | ea-facilitator | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md |
-| `/ea-help` | ea-facilitator | List commands and getting-started guide |
-| `/ea-interview` | ea-interviewer | Structured Q&A for any artifact / ADM phase |
-| `/ea-brainstorm` | ea-facilitator | Capture freeform thoughts for current phase |
-| `/ea-research` | ea-research | Add/apply research documents and links; proactive phase research planning and synthesis |
-| `/ea-artifact` | ea-facilitator | Create, view, or list artifacts |
-| `/ea-review` | ea-facilitator | Open artifact for review; track review state |
-| `/ea-grill` | ea-interviewer | Deep-review artifact (9 grill-me skills) |
-| `/ea-next` | ea-facilitator | Suggest the single most valuable next action based on engagement state |
-| `/ea-notes` | ea-facilitator | List, view, edit, or delete interview notes, brainstorm notes, and review files |
-| `/ea-consistency` | ea-consistency-checker | Focused consistency check: cross-artifact contradictions, within-artifact section inconsistencies, ID reference validation |
-| `/ea-engage-review` | ea-consistency-checker | Full engagement: consistency + traceability |
-| `/ea-security-review` | ea-security-auditor | Full engagement or single-artifact security audit — SABSA, ISO 27001, NIST CSF 2.0 coverage |
-| `/ea-publish` | ea-facilitator | Publish artifacts into a consolidated document |
-| `/ea-decisions` | ea-facilitator | Decision Register — aggregates all A3 rows |
-| `/ea-adrs` | ea-facilitator | ADR Register — create, update, track ADRs |
-| `/ea-risks` | ea-facilitator | Risk Register — aggregate, rate, track RIS-NNN |
-| `/ea-changes` | ea-facilitator | Change Register — aggregate all ACR artifacts |
-| `/ea-concerns` | ea-facilitator | Concerns Register — aggregate all A4 rows |
-| `/ea-roles` | ea-facilitator | Role Catalogue — list, filter, generate, and update role assignments |
-| `/ea-direction` | ea-facilitator | Direction Register — Goals, Objectives, Strategies aggregated from artifacts |
-| `/ea-requirements` | ea-facilitator | Requirement management and artifact sync |
-| `/ea-zachman` | ea-facilitator | Zachman Diagram — generate, review, gap, classify |
-| `/ea-generate` | ea-facilitator | Generate .docx / .pptx / .mmd / .png / .svg |
+| Command               | Primary Agent          | Purpose                                                                                                                    |
+| --------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `/ea-new`             | ea-facilitator         | Create a new engagement project                                                                                            |
+| `/ea-open`            | ea-facilitator         | Open or switch between engagements                                                                                         |
+| `/ea-status`          | ea-facilitator         | Dashboard: all engagements and progress                                                                                    |
+| `/ea-phase`           | ea-facilitator         | Start, edit, or resume an ADM phase                                                                                        |
+| `/ea-migrate`         | ea-facilitator         | Detect and resolve version alignment gaps                                                                                  |
+| `/ea-config`          | ea-facilitator         | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md                                               |
+| `/ea-help`            | ea-facilitator         | List commands and getting-started guide                                                                                    |
+| `/ea-interview`       | ea-interviewer         | Structured Q&A for any artifact / ADM phase                                                                                |
+| `/ea-brainstorm`      | ea-facilitator         | Capture freeform thoughts for current phase                                                                                |
+| `/ea-research`        | ea-research            | Add/apply research documents and links; proactive phase research planning and synthesis                                    |
+| `/ea-artifact`        | ea-facilitator         | Create, view, or list artifacts                                                                                            |
+| `/ea-review`          | ea-facilitator         | Open artifact for review; track review state                                                                               |
+| `/ea-grill`           | ea-interviewer         | Deep-review artifact (9 grill-me skills)                                                                                   |
+| `/ea-next`            | ea-facilitator         | Suggest the single most valuable next action based on engagement state                                                     |
+| `/ea-notes`           | ea-facilitator         | List, view, edit, or delete interview notes, brainstorm notes, and review files                                            |
+| `/ea-consistency`     | ea-consistency-checker | Focused consistency check: cross-artifact contradictions, within-artifact section inconsistencies, ID reference validation |
+| `/ea-engage-review`   | ea-consistency-checker | Full engagement: consistency + traceability                                                                                |
+| `/ea-security-review` | ea-security-auditor    | Full engagement or single-artifact security audit — SABSA, ISO 27001, NIST CSF 2.0 coverage                                |
+| `/ea-publish`         | ea-facilitator         | Publish artifacts into a consolidated document                                                                             |
+| `/ea-decisions`       | ea-facilitator         | Decision Register — aggregates all A3 rows                                                                                 |
+| `/ea-adrs`            | ea-facilitator         | ADR Register — create, update, track ADRs                                                                                  |
+| `/ea-risks`           | ea-facilitator         | Risk Register — aggregate, rate, track RIS-NNN                                                                             |
+| `/ea-changes`         | ea-facilitator         | Change Register — aggregate all ACR artifacts                                                                              |
+| `/ea-concerns`        | ea-facilitator         | Concerns Register — aggregate all A4 rows                                                                                  |
+| `/ea-roles`           | ea-facilitator         | Role Catalogue — list, filter, generate, and update role assignments                                                       |
+| `/ea-direction`       | ea-facilitator         | Direction Register — Goals, Objectives, Strategies aggregated from artifacts                                               |
+| `/ea-requirements`    | ea-facilitator         | Requirement management and artifact sync                                                                                   |
+| `/ea-zachman`         | ea-facilitator         | Zachman Diagram — generate, review, gap, classify                                                                          |
+| `/ea-generate`        | ea-facilitator         | Generate .docx / .pptx / .mmd / .png / .svg                                                                                |
 
 ---
 
@@ -336,6 +336,7 @@ ADRs are standalone documents capturing significant architecture decisions — t
 
 **ADR vs A3 Decision Log:**
 - **A3** = governance state tracking inside an artifact (who decided what, at what authority, verified or not)
+- **A3.N** = rationale detail block below the A3 table — one per decision, captures Rationale, Alternatives, Tradeoffs, Implications inline; created by `ea-interviewer` after `a: {text}` capture, or backfilled via `/ea-decisions rationale`
 - **ADR** = standalone full-context document (situation, options analysis, rationale, consequences)
 - Link them: A3 row `Notes` column should reference the ADR-NNN ID
 
@@ -361,6 +362,7 @@ ADRs are standalone documents capturing significant architecture decisions — t
 |---|---|---|
 | T3-A3 | Architecture Vision, Business/Data/App/Tech Architecture, Gap Analysis, Consolidated Gap Analysis, Architecture Roadmap, Statement of Architecture Work, Migration Plan, Engagement Charter, Governance Framework, Implementation Governance Plan, Communications Plan, Architecture Definition Document, Transition Architectures | `## Appendix A3 — Decision Log` section present |
 | T3-A5-ADR | Same artifact list as T3-A3 | `## Appendix A5 — Related Architecture Decisions` section present |
+| T3-RATIONALE | Same artifact list as T3-A3 | Any A3 row with `Authority = Strategic` has no `#### A3.N — {Item}` block and no sentinel `*(rationale not captured)*` — surfaces in `/ea-artifact view`, `/ea-engage-review`, `/ea-grill` |
 | T3-ROAD-SA | Architecture Roadmap | `## Strategic Alignment` section with at least one non-placeholder row |
 | T3-ROAD-WP | Architecture Roadmap | At least one WP has non-empty `Advances Goals/Objectives` or `Executes Strategies` |
 | T3-REQ | Requirements Register | Scope column present (Corporate / Project) |

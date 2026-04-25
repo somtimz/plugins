@@ -1,7 +1,7 @@
 ---
 name: ea-artifact-templates
 description: This skill should be used when the user asks to "create an artifact", "generate the architecture vision", "start a new artifact from a template", "what template should I use", "populate this artifact", or when any TOGAF artifact needs to be created or populated. Provides template selection, placeholder conventions, and guidance text marking standards for all EA artifacts.
-version: 0.3.0
+version: 0.3.1
 ---
 
 # EA Artifact Templates
@@ -103,6 +103,34 @@ Every artifact that supports a Decision Log uses this standard table in `## Appe
 | **Subject** | Free text | Short tag (e.g. "Cloud strategy", "Data governance", "API design") for topic-based filtering |
 
 A3 rows are the source data for `/ea-decisions`.
+
+### A3.N Decision Rationale Blocks
+
+Each A3 decision row may have an accompanying rationale block written directly below the A3 table. These blocks capture the reasoning behind a decision and are expected for all Strategic-authority decisions.
+
+**Format:** One block per decision, anchored by the `Item` field value (case-insensitive match):
+
+```markdown
+#### A3.N — {Item value}
+- **Rationale:** Why this decision was made
+- **Alternatives:** Other options considered and why they were rejected
+- **Tradeoffs accepted:** What was sacrificed by choosing this option
+- **Implications:** Downstream effects to monitor or act on
+```
+
+**Rules:**
+- All four fields are optional — a partial block with only Rationale or Tradeoffs is valid; omit empty bullet lines
+- Anchor header must be exactly `#### A3.N — {Item}` with the Item value matching the A3 row (case-insensitive)
+- When a user explicitly skips rationale capture, write a sentinel block instead of a full block:
+  ```
+  #### A3.N — {Item value}
+  *(rationale not captured)*
+  ```
+- Sentinel blocks are excluded from `/ea-decisions` Decision Detail output and from the T3-RATIONALE compliance warning
+- All A3.N blocks for a given artifact are written below the A3 table, before the next `##`-level heading
+
+**Created by:** `/ea-interview` (immediately after `a: {text}` capture); `/ea-decisions rationale` (catch-up pass for existing A3 entries)
+**Consumed by:** `/ea-decisions generate` (Decision Detail section); compliance rule T3-RATIONALE
 
 ### Appendix Schema — A4 Stakeholder Concerns & Objections
 
