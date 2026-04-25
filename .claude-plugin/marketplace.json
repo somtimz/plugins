@@ -8,8 +8,8 @@
   "plugins": [
     {
       "name": "ea-assistant",
-      "description": "End-to-end Enterprise Architecture engagement management — TOGAF 10 ADM lifecycle, Zachman classification, ArchiMate notation. Structured phase interviews, artifact generation, motivation framework (Drivers/Goals/Objectives/Issues/Problems), Decision Register, ADR management, Risk Register, roadmap agent, grill-me integration, consistency checking, and consolidated reporting.",
-      "version": "0.9.26",
+      "description": "End-to-end Enterprise Architecture engagement management \u2014 TOGAF 10 ADM lifecycle, Zachman classification, ArchiMate notation. Structured phase interviews, artifact generation, motivation framework (Drivers/Goals/Objectives/Issues/Problems), Decision Register, ADR management, Risk Register, roadmap agent, grill-me integration, consistency checking, and consolidated reporting.",
+      "version": "0.9.28",
       "author": {
         "name": "Costa Pissaris",
         "email": "cpissaris@gmail.com"
@@ -20,7 +20,7 @@
     },
     {
       "name": "RAG-assistant",
-      "description": "Conversational RAG assistant — ingests local and SharePoint documents into a ChromaDB vector store and exposes a web UI for natural-language Q&A, document management, and pipeline control.",
+      "description": "Conversational RAG assistant \u2014 ingests local and SharePoint documents into a ChromaDB vector store and exposes a web UI for natural-language Q&A, document management, and pipeline control.",
       "version": "0.1.0",
       "author": {
         "name": "Costa Pissaris",
@@ -32,7 +32,7 @@
     },
     {
       "name": "research-agent",
-      "description": "A Lead Research Analyst agent that conducts deep, evidence-based research into topics, codebases, and documents — with confidence scoring, contradiction detection, and executive-ready synthesis.",
+      "description": "A Lead Research Analyst agent that conducts deep, evidence-based research into topics, codebases, and documents \u2014 with confidence scoring, contradiction detection, and executive-ready synthesis.",
       "version": "0.1.0",
       "author": {
         "name": "Costa Pissaris",
@@ -44,7 +44,7 @@
     },
     {
       "name": "grill-me",
-      "description": "Nine interview skills for stress-testing strategies, decisions, risks, and designs — strategic stress-test, pre-mortem and risk review, decision memo, boardroom strategy, service/software/infrastructure design critique, artifact review, and diagram review.",
+      "description": "Nine interview skills for stress-testing strategies, decisions, risks, and designs \u2014 strategic stress-test, pre-mortem and risk review, decision memo, boardroom strategy, service/software/infrastructure design critique, artifact review, and diagram review.",
       "version": "0.4.0",
       "author": {
         "name": "Costa Pissaris",
@@ -56,7 +56,7 @@
     },
     {
       "name": "ITIL-assistant",
-      "description": "ITIL v4 Change Management assistant — create, manage, and review Change Requests with CAB approval workflow.",
+      "description": "ITIL v4 Change Management assistant \u2014 create, manage, and review Change Requests with CAB approval workflow.",
       "version": "0.1.0",
       "author": {
         "name": "Costa Pissaris",

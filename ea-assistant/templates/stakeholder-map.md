@@ -46,9 +46,9 @@ Include both supporters and potential resistors.
 
 </details>
 
-| ID | Name | Role / Title | Organisation Unit | Interest | Influence | Engagement |
+| ID | Name | Role / Title (ROLE-NNN) | Organisation Unit | Interest | Influence | Engagement |
 |---|---|---|---|---|---|---|
-| S001 | {{name}} | {{role}} | {{unit}} | {{interest}} | High/Med/Low | Sponsor/Responsible/Consulted/Informed |
+| S001 | {{name}} | {{role}} (ROLE-NNN) | {{unit}} | {{interest}} | High/Med/Low | Sponsor/Responsible/Consulted/Informed |
 
 ---
 

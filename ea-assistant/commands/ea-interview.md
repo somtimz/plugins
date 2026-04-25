@@ -185,6 +185,36 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
 
 ---
 
+### A3 Decision Rationale Capture
+
+When the user types `a: {text}` during any interview, the `ea-interviewer` agent must follow this protocol **immediately after logging the A3 row**, before asking for governance classification (Authority/Domain/Cost/Impact/Risk):
+
+1. Confirm the capture:
+   ```
+   Logged: **{Item} → {Value}** (🔄 Provisional)
+
+   Capture the reasoning? Fill in any or all — type `skip` to skip all:
+
+   - **Alternatives considered:** 
+   - **Rationale:** 
+   - **Tradeoffs accepted:** 
+   - **Implications:** 
+   ```
+
+2. Parse the user's response:
+   - Extract whichever of the four fields the user provided (partial responses are valid)
+   - `skip` (or pressing Enter with no input) → write sentinel only
+
+3. Write the A3.N block to the artifact file, below the A3 table and before the next `##`-level heading:
+   - If the user provided any fields: write a `#### A3.N — {Item}` block with only the populated bullet lines
+   - If `skip`: write `#### A3.N — {Item}\n*(rationale not captured)*`
+
+4. Continue with governance classification (Authority/Domain/Cost/Impact/Risk) as usual.
+
+The A3.N block format is defined in `skills/ea-artifact-templates/SKILL.md` under "A3.N Decision Rationale Blocks".
+
+---
+
 ### Interview Notes Format
 
 All interview sessions produce dated, versioned notes:

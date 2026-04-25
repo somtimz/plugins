@@ -26,13 +26,13 @@ All six fields are required on every artifact. Tags are a list of 3–6 lowercas
 
 Which architecture domain this artifact primarily covers.
 
-| Value | Definition |
-|---|---|
-| `Business` | Business processes, capabilities, organisation structure, operating model |
-| `Data` | Information architecture, data models, data flows, data governance |
-| `Application` | Application portfolio, system integrations, APIs, software capabilities |
-| `Technology` | Infrastructure, platforms, networks, cloud, security, operations |
-| `Cross-cutting` | Spans multiple domains, or applies to the engagement as a whole |
+| Value           | Definition                                                                |
+| --------------- | ------------------------------------------------------------------------- |
+| `Business`      | Business processes, capabilities, organisation structure, operating model |
+| `Data`          | Information architecture, data models, data flows, data governance        |
+| `Application`   | Application portfolio, system integrations, APIs, software capabilities   |
+| `Technology`    | Infrastructure, platforms, networks, cloud, security, operations          |
+| `Cross-cutting` | Spans multiple domains, or applies to the engagement as a whole           |
 
 **Rule:** Use `Cross-cutting` whenever an artifact addresses concerns across two or more domains, or when it is engagement-wide (e.g., Architecture Vision, Roadmap, Governance artifacts).
 
@@ -42,14 +42,14 @@ Which architecture domain this artifact primarily covers.
 
 What the artifact *does* in the EA process.
 
-| Value | Definition | Examples |
-|---|---|---|
-| `Strategy` | Sets direction — defines why and what at the highest level | Architecture Vision, Architecture Principles, Governance Framework, Business Model Canvas |
-| `Analysis` | Assesses current state, requirements, or stakeholder landscape | Gap Analysis, Requirements Register, Stakeholder Map, Traceability Matrix |
-| `Design` | Defines the target architecture in a specific domain | Business Architecture, Data Architecture, Application Architecture, Technology Architecture |
-| `Planning` | Coordinates delivery — sequences work and manages transitions | Architecture Roadmap, Migration Plan, Statement of Architecture Work, Consolidated Report |
-| `Governance` | Controls conformance, change, and decision-making | Compliance Assessment, Architecture Contract, Implementation Governance Plan, Change Request |
-| `Register` | Aggregated cross-artifact views — generated on demand | Decision Register, Risk Register, Change Register |
+| Value        | Definition                                                     | Examples                                                                                     |
+| ------------ | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `Strategy`   | Sets direction — defines why and what at the highest level     | Architecture Vision, Architecture Principles, Governance Framework, Business Model Canvas    |
+| `Analysis`   | Assesses current state, requirements, or stakeholder landscape | Gap Analysis, Requirements Register, Stakeholder Map, Traceability Matrix                    |
+| `Design`     | Defines the target architecture in a specific domain           | Business Architecture, Data Architecture, Application Architecture, Technology Architecture  |
+| `Planning`   | Coordinates delivery — sequences work and manages transitions  | Architecture Roadmap, Migration Plan, Statement of Architecture Work, Consolidated Report    |
+| `Governance` | Controls conformance, change, and decision-making              | Compliance Assessment, Architecture Contract, Implementation Governance Plan, Change Request |
+| `Register`   | Aggregated cross-artifact views — generated on demand          | Decision Register, Risk Register, Change Register                                            |
 
 ---
 

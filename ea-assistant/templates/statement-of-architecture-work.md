@@ -131,6 +131,10 @@ List all roles involved in the engagement. Clarify who is Responsible, Accountab
 and Informed (RACI) for key decisions and deliverables. Include both the architecture team and
 client-side stakeholders who have obligations.
 
+Role titles should align to the canonical catalogue (ROLE-NNN IDs) in
+`skills/ea-engagement-lifecycle/references/role-catalogue.md`. Use `/ea-roles --generate`
+to create a full Role Catalogue artifact for this engagement.
+
 </details>
 
 | Role | Name | Organisation | RACI for Deliverables | RACI for Decisions |
