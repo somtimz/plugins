@@ -241,13 +241,11 @@ a conscious decision was made not to mitigate.
 
 ## Source Artifact Cross-Reference
 
+*Generated dynamically from actual sources — one row per artifact that contributed risks.*
+
 | Source Artifact | Risks Contributed |
 |---|---|
-| Architecture Vision | {{RIS_ids}} |
-| Statement of Architecture Work | {{RIS_ids}} |
-| Migration Plan | {{RIS_ids}} |
-| Architecture Compliance Assessment | {{RIS_ids}} |
-| Other | {{RIS_ids}} |
+| {{source_artifact}} | {{RIS_ids}} |
 
 ---
 
