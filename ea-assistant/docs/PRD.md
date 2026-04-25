@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.27
+**Version:** 0.9.28
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -177,7 +177,7 @@ Vision, Mission, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Proble
 
 Artifacts are populated from interview answers, uploaded documents, or explicit user input. No AI-generated content is written to an artifact without a `🤖 AI Draft — Review Required` marker.
 
-**23 TOGAF artifact templates:**
+**24 TOGAF artifact templates:**
 
 | Artifact | Phase | A3 | A4 | A5 |
 |---|---|---|---|---|
@@ -204,6 +204,7 @@ Artifacts are populated from interview answers, uploaded documents, or explicit 
 | Architecture Decision Record | Cross-cutting | — | — | — |
 | ADR Register | Cross-cutting | — | — | — |
 | Zachman Diagram | Cross-cutting | — | — | ✓ |
+| Role Catalogue | A / Cross-cutting | — | — | — |
 
 **Appendix columns:** A3 = Decision Log; A4 = Stakeholder Concerns & Objections; A5 = Related Architecture Decisions
 
@@ -280,6 +281,24 @@ Provisional ──────────────────────�
 
 **Filter flags:** `--audience`, `--owner`, `--domain`, `--authority`, `--cost`, `--impact`, `--risk`, `--subject`, `--status`
 **Audience presets:** `executive` / `architect` / `business` / `technical`
+
+**A3.N Decision Rationale Blocks (v0.9.28)**
+
+Each A3 decision row may have a rationale detail block written directly below the A3 table, capturing the reasoning behind the decision:
+
+```markdown
+#### A3.N — {Item value}
+- **Rationale:** Why this decision was made
+- **Alternatives:** Other options considered and why they were rejected
+- **Tradeoffs accepted:** What was sacrificed by choosing this option
+- **Implications:** Downstream effects to monitor
+```
+
+- All four fields are optional; partial blocks (e.g., only Rationale + Tradeoffs) are valid
+- When a user explicitly skips, a sentinel `*(rationale not captured)*` is written instead
+- **Created by:** `/ea-interview` — immediately after `a: {text}` capture and before governance classification; `/ea-decisions rationale` — interactive catch-up pass for existing A3 entries
+- **Compliance rule T3-RATIONALE:** Strategic-authority A3 entries without a rationale block (and without a sentinel) surface as a T2 warning in `/ea-artifact view`, `/ea-engage-review`, and `/ea-grill`
+- **`/ea-decisions generate`** appends a **Decision Detail** section to the register — one card per decision with a documented A3.N block, ordered by Authority then Impact; respects `--audience` filter
 
 ### 5.8 Artifact Review and Grill
 
@@ -393,9 +412,10 @@ These will gain dedicated commands and workflow integration in a future version.
 
 ADRs are standalone documents capturing significant architecture decisions — technology/vendor selection, pattern choices, make-vs-buy, data governance, security architecture, or any decision that is hard to reverse.
 
-**ADR vs A3 Decision Log:**
+**ADR vs A3 vs A3.N:**
 - **A3** = governance state tracking inside an artifact (who decided what, at what authority, verified or not)
-- **ADR** = standalone full-context document (situation, options analysis, rationale, consequences)
+- **A3.N** = inline rationale detail block below the A3 table — Rationale, Alternatives, Tradeoffs, Implications per decision; lightweight middle tier between A3 and ADR
+- **ADR** = standalone full-context document (situation, options analysis, rationale, consequences) — created when 2+ threshold indicators apply
 - **A5** = cross-reference appendix inside artifacts listing related ADR-NNN IDs
 
 **ADR lifecycle:** `Candidate → In Progress → Completed → Superseded (by ADR-NNN) | Deprecated`
@@ -505,6 +525,26 @@ The file is seeded by `/ea-new`, backfilled silently by `/ea-open` for legacy en
 
 The per-engagement `CLAUDE.md` is a **pointer document**, not a data dump. It contains identity fields, a one-sentence vision, engagement state counts (artifact totals, open decisions, research items), a pointer table to content locations, and a quick-command reference. Full strategic detail (goals, objectives, strategies, drivers) lives in `engagement.json → direction` and artifact files only — it is never copied into CLAUDE.md.
 
+### 5.26 Role Catalogue (v0.9.27)
+
+`/ea-roles` provides access to a canonical 15-role catalogue covering all EA engagement roles and generates a per-engagement Role Catalogue artifact.
+
+**Canonical role set:** 15 roles across four domains — Governance, Architecture, Business, and Delivery — with full attribute profiles: description, responsibilities, typical tasks, RACI defaults, triggering events, cadence, and escalation path.
+
+**Source:** `skills/ea-engagement-lifecycle/references/role-catalogue.md`
+
+**`/ea-roles` modes:**
+
+| Invocation | Effect |
+|---|---|
+| `/ea-roles` | Summary table — all 15 roles with ID, name, domain, one-line description |
+| `/ea-roles <ROLE-ID>` | Full entry for one role (all extended attributes) |
+| `/ea-roles --domain <domain>` | Filtered summary; valid domains: `governance`, `architecture`, `business`, `data`, `application`, `delivery` |
+| `/ea-roles --generate` | Generate `role-catalogue.md` artifact in the active engagement (`artifacts/phase-a/`) |
+| `/ea-roles --update <ROLE-ID>` | Assign a named individual and organisation unit to a role in the engagement's Role Catalogue |
+
+**Template:** `templates/role-catalogue.md`
+
 ---
 
 ## 6. Data Model
@@ -597,11 +637,12 @@ EA-projects/
 | `/ea-review` | `[artifact]` | Open artifact for review; runs compliance check; update review status |
 | `/ea-grill` | `[artifact] [--skill name]` | Deep-review artifact using a grill-me skill; auto-selects skill by type; apply findings with y/n/edit |
 | `/ea-requirements` | `[list|add|edit|waive]` | Manage architecture requirements; corporate (read-only) and project scope |
-| `/ea-decisions` | `[--audience] [--owner] [--domain] [--status] [--cost] [--impact] [--risk]` | Generate Decision Register from all A3 logs with filters |
+| `/ea-decisions` | `[generate|status|rationale] [--audience] [--owner] [--domain] [--status] [--cost] [--impact] [--risk] [--artifact] [--authority]` | Generate Decision Register from all A3 logs; `rationale` mode backfills missing A3.N reasoning blocks |
 | `/ea-adrs` | `[generate|status|new|update ADR-NNN <field> <value>]` | Manage Architecture Decision Records; auto-suggested by interviewer at 2+ threshold indicators |
 | `/ea-risks` | `[generate|status|update RIS-NNN <field> <value>]` | Generate and maintain Risk Register by scanning all artifacts |
 | `/ea-changes` | `[generate|status|update <ACR-ID> <field> <value>]` | Generate Change Register aggregating all Phase H ACR artifacts |
 | `/ea-concerns` | — | Manage CON-NNN stakeholder concerns (Appendix A4) |
+| `/ea-roles` | `[ROLE-ID] [--domain] [--generate] [--update ROLE-ID]` | Canonical 15-role catalogue — list, filter by domain, generate Role Catalogue artifact, assign named individuals |
 | `/ea-direction` | `[goals\|objectives\|strategies] [--domain Business\|Data\|Application\|Technology]` | Display Direction Register — Goals, Objectives, Strategies aggregated from motivation artifacts; filters by item type or inferred domain |
 | `/ea-zachman` | `[generate|review|gap|interview|classify <artifact>]` | Manage Zachman 6×6 classification diagram |
 | `/ea-research` | `[add|note|link|list|view <item>|apply [artifact-id]]` | Manage research library; synthesise research against deliverables |
@@ -643,6 +684,7 @@ EA-projects/
 | Content policy | Throughout interview | No AI content without `🤖` marker; no overwrite of Approved fields without confirmation |
 | Opt-out audit | Ongoing | Every exclusion tracked with reason + timestamp in `engagement.json → optOuts[]`; surfaced in `/ea-status` and published reports |
 | ADR threshold | During interview (post-answer) | After each answer, `ea-interviewer` scores 8 indicators; if 2+ match → suggest `/ea-adrs new` with pre-populated metadata; adds ADR-NNN to A3 Notes |
+| A3.N rationale coverage (T3-RATIONALE) | On `/ea-artifact view`, `/ea-engage-review`, `/ea-grill` | Any A3 row with `Authority = Strategic` and no A3.N block (and no sentinel) surfaces as a T2 warning; remediated via `/ea-decisions rationale` |
 | Migration alignment | On `/ea-open` | Lightweight gap scan comparing `lastMigratedVersion` to current plugin version; displays count of detectable gaps; run `/ea-migrate` to align |
 
 ---
