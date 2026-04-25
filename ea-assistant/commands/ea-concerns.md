@@ -1,7 +1,7 @@
 ---
 name: ea-concerns
-description: Generate or view the Concerns Register by aggregating all stakeholder concerns and objections from Appendix A4 across all artifacts in the active engagement. Supports filtering by status, category, source, and artifact.
-argument-hint: "[generate|status] [--status addressed|partial|attention|all] [--category scope|goal|approach|feasibility|risk|stakeholder|other] [--source \"name\"] [--artifact \"name\"]"
+description: Generate or view the Concerns Register by aggregating all stakeholder concerns and objections from Appendix A4 across all artifacts in the active engagement. Use `close CON-NNN` to interactively resolve a concern and update its source artifact.
+argument-hint: "[generate|status|close CON-NNN] [--status addressed|partial|attention|all] [--category ...] [--partial] [--response \"text\"]"
 allowed-tools: [Read, Write, Glob]
 ---
 
@@ -29,6 +29,7 @@ The Concerns Register aggregates all rows from every `## Appendix A4 — Stakeho
 |---|---|---|
 | `generate` | `/ea-concerns` or `/ea-concerns generate` | Scan all artifacts, aggregate concerns, write register file |
 | `status` | `/ea-concerns status` | Inline summary only — no file written |
+| `close` | `/ea-concerns close CON-NNN` | Interactively resolve a concern and write the update to its source artifact |
 
 **Filter flags:**
 
@@ -168,6 +169,105 @@ After generating, if any Risk-eligible concerns were flagged, offer:
 
 ---
 
+## Mode: `close CON-NNN`
+
+Invoked as: `/ea-concerns close CON-NNN [--partial] [--response "text"]`
+
+Resolves a concern by updating its Status, Response, and Action/Owner fields in the source artifact's A4 table.
+
+**Flags:**
+
+| Flag | Effect |
+|---|---|
+| `--partial` | Sets Status to `Partially Addressed` instead of `Addressed` |
+| `--response "text"` | Pre-fills the Response field; skips the response prompt |
+
+### Step A — Resolve Active Engagement
+
+Same as `generate` Step 1.
+
+### Step B — Locate CON-NNN
+
+1. Scan all `*.md` files in `EA-projects/{slug}/artifacts/` (exclude `*.review.md` and `concerns-register-*.md`) for an A4 table row whose ID column matches `CON-NNN` (exact, case-insensitive).
+2. Record the source artifact file path and the full row content.
+3. If not found: `"CON-NNN not found in any A4 appendix. Run /ea-concerns status to list all concern IDs."` — stop.
+4. If found in multiple artifacts: list all matches and ask the user to select which to update.
+
+### Step C — Show Current State
+
+```
+Concern found in: {Artifact Name}
+
+  ID:         CON-NNN
+  Concern:    {concern text}
+  Raised By:  {source}
+  Category:   {category}
+  Status:     {current status}
+  Response:   {current response or —}
+  Action:     {current action / owner or —}
+```
+
+If `Status` is already `Addressed`: warn before continuing:
+```
+⚠️ CON-NNN is already Addressed. Update anyway? (y/n)
+```
+If user answers `n`: stop without changes.
+
+### Step D — Prompt for Response
+
+Skip this step if `--response` flag was provided.
+
+```
+Response — where or how is this concern addressed?
+(e.g. "§5 Constraints — added as a hard constraint", "ADR-007 addresses this",
+"Accepted by sponsor — out of scope for this engagement")
+```
+
+Response is required. If the user provides an empty input, re-prompt once. On second empty input: `"Cancelled — concern not updated."` — stop.
+
+### Step E — Confirm the Change
+
+```
+Apply this change? (y/n)
+
+  CON-NNN in {Artifact Name}:
+  Status:   {current}  →  {Addressed | Partially Addressed}
+  Response: {response text}
+  Action:   {current action}  →  —
+```
+
+For `Partially Addressed`: leave existing Action/Owner unchanged (or prompt if currently `—`).
+
+If the user answers `n`: stop without changes.
+
+### Step F — Write Update to Source Artifact
+
+1. Find the A4 table row matching `CON-NNN` in the source artifact file.
+2. Update the row in place:
+   - `Status` → `Addressed` (default) or `Partially Addressed` (if `--partial`)
+   - `Response` → response text
+   - `Action / Owner` → `—` (for Addressed); preserve existing value for Partially Addressed
+3. Update `lastModified` in the artifact's YAML frontmatter to the current ISO 8601 timestamp.
+
+### Step G — Update engagement.json
+
+Find the entry in `engagement.json → artifacts[]` whose `file` matches the source artifact path. Update its `lastModified` to the current ISO 8601 timestamp.
+
+### Step H — Confirm and Offer Next Steps
+
+```
+Closed CON-NNN in {Artifact Name} — Status: {Addressed | Partially Addressed}
+Response: "{response text}"
+```
+
+If `Category = Risk` and no matching RIS-NNN was found in any `risk-register-*.md`:
+```
+⚠️ This concern is categorised as Risk. If a corresponding RIS-NNN exists in the
+Risk Register, run `/ea-risks update RIS-NNN status Closed` to mark it resolved.
+```
+
+---
+
 ## Edge Cases
 
 | Scenario | Handling |
@@ -177,3 +277,9 @@ After generating, if any Risk-eligible concerns were flagged, offer:
 | Concern already in Risk Register | Note in the register: `✓ Registered as {RIS-NNN}` in the Risk-Eligible column |
 | Duplicate CON-NNN across artifacts | Keep both; note: "Duplicate ID — re-numbering applied in this register: CON-NNN (from {artifact})" |
 | All concerns are Addressed | Still write register; celebrate: "All {N} concerns have documented responses." |
+| `close`: CON-NNN not found | `"CON-NNN not found in any A4 appendix."` — stop |
+| `close`: CON-NNN in multiple artifacts | List matches with source artifact name; prompt user to select one |
+| `close`: concern already Addressed | Warn: "CON-NNN is already Addressed. Update anyway? (y/n)" |
+| `close`: response prompt left empty twice | `"Cancelled — concern not updated."` — stop without writes |
+| `close`: source artifact is Approved | Warn before write: "This artifact is Approved. Updating it will not change reviewStatus. Proceed? (y/n)" |
+| `close --partial`: Action/Owner is empty | Prompt: "Action / Owner for this partially addressed concern:" before confirming |
