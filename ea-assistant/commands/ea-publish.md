@@ -147,7 +147,20 @@ If any opt-outs exist (artifact or question level), add:
 
 #### Each Artifact Section
 
-Open each artifact section with a status header showing its individual status and date:
+Before inserting each artifact's content, rewrite its links for the consolidated document context:
+
+| Link type | Example | Action |
+|---|---|---|
+| External URL | `[TOGAF](https://...)` | Keep as-is — pandoc preserves clickable hyperlinks |
+| Same-document section anchor | `[Goals](#3-goals)` | Keep as-is |
+| Relative link to an **included** artifact | `[Arch Vision](../phase-a/architecture-vision.md)` | Rewrite to internal anchor: `[Arch Vision](#architecture-vision)` |
+| Relative link to an **included** artifact + section | `[Goals](../phase-a/architecture-vision.md#3-goals)` | Rewrite to section anchor: `[Goals](#3-goals)` |
+| Relative link to an artifact **not included** | `[Tech Architecture](../phase-d/technology-architecture.md)` | Strip link, keep display text: `Technology Architecture` |
+| Relative image | `![diagram](../../diagrams/context.png)` | Resolve to absolute path |
+
+Anchor derivation: the consolidated document uses `## {Artifact Name}` as each artifact's heading. The corresponding anchor is the heading text lowercased with spaces replaced by hyphens (e.g., `## Architecture Vision` → `#architecture-vision`).
+
+Open each artifact section with a status header:
 
 ```markdown
 ---
@@ -156,7 +169,7 @@ Open each artifact section with a status header showing its individual status an
 
 > **Phase {phase}  ·  {status badge}  ·  Last modified: {lastModified date}**
 
-{artifact content as-is — do NOT alter}
+{artifact content with links rewritten per table above}
 ```
 
 Status badges for section headers:

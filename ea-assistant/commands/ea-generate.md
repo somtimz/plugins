@@ -23,8 +23,20 @@ Recommend the primary format for the artifact type (see `skills/ea-generation/re
 
 1. Read the artifact file from `engagement.json → artifacts[].file`
 2. **Resolve relative image links** — for each `![alt](relative-path)` in the body, resolve to an absolute path before extraction
-3. Parse into a content JSON object per the schema in `skills/ea-generation/references/content-extraction-schema.md`
-4. Write extracted JSON to `/tmp/ea-gen-{artifact-id}.json`
+3. **Rewrite cross-artifact and relative text links** — apply the following rules to every `[display](target)` link in the body before extraction:
+
+   | Link type | Example | Action |
+   |---|---|---|
+   | External URL | `[TOGAF](https://...)` | Keep as-is — pandoc and python-docx preserve clickable hyperlinks |
+   | Same-document section anchor | `[Goals](#3-goals)` | Keep as-is — pandoc resolves internal anchors in docx/pdf |
+   | Relative artifact link | `[Arch Vision](../phase-a/architecture-vision.md)` | Strip link, keep display text only: `Architecture Vision` |
+   | Relative artifact + section | `[Goals](../phase-a/architecture-vision.md#3-goals)` | Strip link, keep display text only: `Goals` |
+   | Relative path, no display text | `[../phase-a/architecture-vision.md](../phase-a/architecture-vision.md)` | Replace with the prettified artifact name: `Architecture Vision` |
+
+   **Rule:** any link whose target starts with `./`, `../`, or a relative filename (no `http`) and is not an image is a relative file link — strip the link target and keep only the display text.
+
+4. Parse into a content JSON object per the schema in `skills/ea-generation/references/content-extraction-schema.md`
+5. Write extracted JSON to `/tmp/ea-gen-{artifact-id}.json`
 
 ### Step 4: Generate Output
 
