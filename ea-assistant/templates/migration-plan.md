@@ -111,6 +111,12 @@ the next wave starts).
 | **Exit Criteria** | {{wave_1_exit_criteria}} |
 | **Key Dependencies** | {{wave_1_dependencies}} |
 
+#### Wave 1 Resource Summary
+
+| Resource | Required | Available | Gap |
+|---|---|---|---|
+| {{role}} | {{fte_required}} | {{fte_available}} | None / ⚠️ {{gap_description}} |
+
 ### Wave 2: {{wave_2_name}}
 
 | Field | Value |
@@ -121,6 +127,12 @@ the next wave starts).
 | **Entry Criteria** | {{wave_2_entry_criteria}} |
 | **Exit Criteria** | {{wave_2_exit_criteria}} |
 | **Key Dependencies** | {{wave_2_dependencies}} |
+
+#### Wave 2 Resource Summary
+
+| Resource | Required | Available | Gap |
+|---|---|---|---|
+| {{role}} | {{fte_required}} | {{fte_available}} | None / ⚠️ {{gap_description}} |
 
 *Reference diagram:* `../diagrams/{{wave_plan_diagram}}`
 

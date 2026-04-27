@@ -2,7 +2,7 @@
 
 ## How to Use This Reference
 
-This file is the canonical source for EA concepts that are frequently confused during interviews and artifact creation: **Vision**, **Mission**, **Principle**, **Goal**, **Objective**, **Strategy**, **Plan**, **Risk**, **Issue**, **Problem**, **Capability Model**, **Operating Model**, and **Metrics**. When the `ea-interviewer` agent detects concept confusion it cites this file. All commands and skills that capture direction, decisions, or risks should use these definitions — do not redefine them inline.
+This file is the canonical source for EA concepts that are frequently confused during interviews and artifact creation: **Vision**, **Mission**, **Principle**, **Goal**, **Objective**, **Strategy**, **Plan**, **Risk**, **Issue**, **Problem**, **Opportunity**, **Capability Model**, **Operating Model**, and **Metrics**. When the `ea-interviewer` agent detects concept confusion it cites this file. All commands and skills that capture direction, decisions, or risks should use these definitions — do not redefine them inline.
 
 > 📎 Source: `references/ea-concepts-source.pdf` — *Enterprise Architecture Strategic Context: Terms, Concepts, and Relationship Models*. The definitions, relationships, and model diagrams in this file are grounded in that document.
 
@@ -635,12 +635,82 @@ Not every motivation concept gets its own document. They are distributed across 
 
 | Artifact | Motivation concepts hosted |
 |---|---|
-| **Architecture Vision** | Mission, Vision, Business Drivers (DRV), Goals (G), Objectives (OBJ), Strategies (STR), Issues (ISS), Problems (PRB), Metrics (MET), Risks |
+| **Architecture Vision** | Mission, Vision, Business Drivers (DRV), Goals (G), Objectives (OBJ), Strategies (STR), Issues (ISS), Problems (PRB), Opportunities (OPP), Metrics (MET), Risks |
 | **Architecture Principles** | Derived from Mission, Vision, and Strategies — normative rules that operationalize strategic intent |
 | **Engagement Charter** | Mission, Vision, high-level goals, constraints, scope boundaries — the mandate frame |
 | **Statement of Architecture Work** | Scope, constraints, objectives, success criteria — the delivery commitment |
 | **Stakeholder Map** | Stakeholder concerns mapped to goals and issues |
 | **Requirements Register** | Formalized goals, issues, and needs — the formal bridge from motivation to execution; every REQ traces to a DRV, G, OBJ, ISS, or PRB |
-| **Gap Analysis** | Issues and problems expressed as baseline-to-target gaps |
-| **Architecture Roadmap** | Goals, objectives, and strategies realized as sequenced work packages |
+| **Gap Analysis** | Issues and problems expressed as baseline-to-target gaps; capability gaps may surface as Opportunities |
+| **Architecture Roadmap** | Goals, objectives, and strategies realized as sequenced work packages; Opportunities (OPP) elaborated into WPs |
+
+---
+
+## Opportunity (OPP-NNN)
+
+### Definition
+
+An **Opportunity** is a specific, actionable possibility to exploit a favourable condition, close a capability gap in a value-generating way, or pursue something the organisation could not or did not do before. It answers the question: *"What could we do that we currently cannot — and that would advance a goal?"*
+
+Opportunities are identified in Phase A and elaborated into Work Packages in Phase E.
+
+### Distinction from related concepts
+
+| Concept | Focus | Prompt |
+|---|---|---|
+| **Driver (DRV)** | A force making the engagement necessary | "Why do we need this engagement?" |
+| **Goal (G)** | A desired qualitative outcome | "Where do we want to be?" |
+| **Opportunity (OPP)** | A specific action to exploit a favourable condition | "What could we do that we cannot do today?" |
+| **Work Package (WP)** | Delivery of an Opportunity or gap closure | "How do we realise the opportunity?" |
+| **Capability Gap (GAP)** | The shortfall between current and target state | "What are we missing?" |
+
+A **Driver** may classify as "Opportunity type" (vs Threat or Mandate) — but an OPP-NNN is more specific: it names the concrete possibility to exploit, not just the context.
+
+A **Capability Gap** (GAP-NNN) describes what's missing; an OPP-NNN describes what becomes possible if it's closed.
+
+### Types
+
+| Type | Meaning | Example |
+|---|---|---|
+| **Exploit** | Capitalise on an existing favourable condition | "Deploy GenAI on our proprietary dataset before competitors" |
+| **Enhance** | Amplify a current capability to capture more value | "Extend our data platform to enable real-time analytics" |
+| **Emerge** | Pursue a possibility not previously in scope | "New regulatory sandbox allows us to pilot services not previously permitted" |
+
+### Relationships
+
+```
+Business Driver (DRV) ──classifies as Opportunity──► OPP-NNN
+                                                          │
+                                          advances Goal (G-NNN)
+                                                          │
+                                     elaborated into WP-NNN (Phase E)
+                                                          │
+                                        links to GAP-NNN if applicable
+```
+
+### TOGAF placement
+
+- **Phase A (Architecture Vision)** — Opportunities identified as part of strategic context; captured in §7 Opportunities table
+- **Phase E (Opportunities & Solutions)** — Each OPP-NNN elaborated into one or more WP-NNN work packages
+- **Phase F (Migration Planning)** — OPP-NNN/WP-NNN sequenced into migration waves
+
+### ID scheme
+
+`OPP-NNN` — sequential, unified, domain-agnostic. Example: `OPP-001`, `OPP-002`.
+
+### Architecture Vision table format
+
+```markdown
+| ID | Opportunity | Driver(s) | Type | Priority | Linked Goal(s) |
+|---|---|---|---|---|---|
+| OPP-001 | {opportunity statement} | DRV-001 | Exploit / Enhance / Emerge | High / Med / Low | G-001 |
+```
+
+### Disambiguation checklist
+
+- Is it a force making the engagement necessary? → It's a **Driver (DRV)**
+- Is it a desired qualitative outcome? → It's a **Goal (G)**
+- Is it the shortfall between current and target state? → It's a **Capability Gap (GAP)**
+- Is it a concrete delivery item? → It's a **Work Package (WP)**
+- Is it a specific, actionable possibility not currently exploited? → It's an **Opportunity (OPP)**
 | **Architecture Definition Document (B–D)** | Strategies realized as architectural design choices; goals/objectives as success criteria |

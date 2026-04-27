@@ -150,7 +150,24 @@ Issues, not derived from them.
 
 ---
 
-## 7. Strategic Direction Summary
+## 7. Opportunities
+
+<details>
+<summary>📋 Guidance</summary>
+
+An Opportunity is a specific, actionable possibility to exploit a favourable condition or close a capability gap in a value-generating way — something the organisation could do that it currently cannot. Opportunities are distinct from Goals (which state desired outcomes) and Drivers (which describe why the engagement is needed). Each OPP-NNN should advance at least one Goal and, in Phase E, be elaborated into one or more Work Packages (WP-NNN).
+
+Types: **Exploit** (capitalise on existing advantage) / **Enhance** (amplify current capability) / **Emerge** (pursue something not previously in scope).
+
+</details>
+
+| ID | Opportunity | Driver(s) | Type | Priority | Linked Goal(s) |
+|---|---|---|---|---|---|
+| OPP-001 | {{opportunity_1}} | DRV-00N | Exploit / Enhance / Emerge | High / Med / Low | G-00N |
+
+---
+
+## 8. Strategic Direction Summary
 
 <details>
 <summary>📋 Guidance</summary>
@@ -179,7 +196,7 @@ stakeholders who need the full motivation chain without reading individual secti
 
 ---
 
-## 8. Scope
+## 9. Scope
 
 <details>
 <summary>📋 Guidance</summary>
@@ -200,7 +217,7 @@ Be specific about organisational units, systems, geographies, and time horizons.
 
 ---
 
-## 9. Stakeholders
+## 10. Stakeholders
 
 <details>
 <summary>📋 Guidance</summary>
@@ -217,7 +234,7 @@ This feeds directly into the Stakeholder Map artifact.
 
 ---
 
-## 10. Architecture Principles
+## 11. Architecture Principles
 
 <details>
 <summary>📋 Guidance</summary>
@@ -235,7 +252,7 @@ Summary:
 
 ---
 
-## 11. Constraints
+## 12. Constraints
 
 <details>
 <summary>📋 Guidance</summary>
@@ -251,7 +268,7 @@ Distinguish between hard constraints (non-negotiable) and soft constraints (pref
 
 ---
 
-## 12. Assumptions
+## 13. Assumptions
 
 <details>
 <summary>📋 Guidance</summary>
@@ -264,7 +281,7 @@ List the assumptions being made. These should be validated and updated throughou
 
 ---
 
-## 13. High-Level Target Architecture
+## 14. High-Level Target Architecture
 
 <details>
 <summary>📋 Guidance</summary>
@@ -280,7 +297,7 @@ Reference diagrams stored in the diagrams/ folder. Avoid detailed design at this
 
 ---
 
-## 14. Key Risks
+## 15. Key Risks
 
 <details>
 <summary>📋 Guidance</summary>
@@ -295,7 +312,7 @@ Identify the top 3-5 risks to the architecture or engagement. Include mitigation
 
 ---
 
-## 15. Next Steps
+## 16. Next Steps
 
 <details>
 <summary>📋 Guidance</summary>
@@ -309,7 +326,7 @@ Typically: approve Statement of Architecture Work, proceed to Phase B/C/D.
 
 ---
 
-## 16. Diagrams
+## 17. Diagrams
 
 <details>
 <summary>📋 Guidance</summary>

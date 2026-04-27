@@ -186,6 +186,7 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 | PRB-NNN | Problem | PRB-001 | OBJ-NNN (blocks objective) |
 | STR-NNN | Strategy | STR-001 | G-NNN (approach to achieve goal) |
 | MET-NNN | Metric | MET-001 | OBJ-NNN (measures objective) |
+| OPP-NNN | Opportunity | OPP-001 | DRV-NNN + G-NNN (specific possibility to exploit) |
 
 Assign IDs sequentially within each prefix as responses are confirmed. Record IDs in the Architecture Vision template and in `engagement.json` where applicable.
 
@@ -219,14 +220,28 @@ Assign IDs sequentially within each prefix as responses are confirmed. Record ID
    - Assign each confirmed problem a PRB-NNN ID and link it to the objective(s) it blocks.
    - If a response is too broad and unfixable directly ("we have poor data culture"), it is an **Issue** — move it up.
 
-*§1 Executive Summary / §8 Scope / §9–§15 — scope, constraints, and risks:*
-9. What does success look like at the end of this engagement? → §1 Executive Summary
-10. Who are the key stakeholders and what are their primary concerns? → §9 Stakeholders + Stakeholder Map
-11. What is explicitly in scope and out of scope for this engagement? → §8 Scope
-12. What known constraints or assumptions should be documented upfront? → §11 Constraints + §12 Assumptions
-13. What existing architecture assets, decisions, or documents are relevant? → Statement of Architecture Work §3
-14. What is the desired timeline for completing this work? → §8 Scope (Time Horizon) + SoAW
-15. What are the biggest risks that could derail this engagement? → §14 Key Risks
+*Inter-element connections — run after Issues and Problems are captured:*
+> **After Issues:** "Do any of these issues, if resolved, unlock something the organisation could not do before — beyond just removing the barrier? If so, that's an Opportunity — capture it as OPP-NNN."
+> **After Problems:** "Does each problem link clearly to an objective it's blocking? Could resolving any of them create a new capability or market possibility worth tracking as an Opportunity?"
+
+*§7 Opportunities — specific, actionable possibilities to exploit:*
+9. Given the drivers, goals, and gaps identified: what specific things could this engagement make possible that the organisation cannot currently do? (e.g. "Real-time personalisation using our existing data platform", "Self-service supplier onboarding — currently takes 3 weeks manually")
+   - Classify each as: **Exploit** (capitalise on existing advantage), **Enhance** (amplify current capability), or **Emerge** (something not previously in scope).
+   - Assign each confirmed opportunity an OPP-NNN ID and link it to the driver(s) and goal(s) it advances.
+   - An opportunity must advance at least one goal. If it advances no goal, either a goal is missing or the item is not architecture-relevant.
+
+*Inter-element connections — run after Risks are captured (§15 Key Risks):*
+> **After Risks:** "For each Critical or High risk — which goal does it threaten? Link it now (G-NNN). And: does this risk also suggest a defensive opportunity worth capturing as OPP-NNN?"
+> **After Metrics:** "For each metric — what is the current baseline? If unknown, flag it as a data gap. An unmeasured baseline is itself a benefits realisation risk."
+
+*§1 Executive Summary / §9 Scope / §10–§16 — scope, constraints, and risks:*
+10. What does success look like at the end of this engagement? → §1 Executive Summary
+11. Who are the key stakeholders and what are their primary concerns? → §10 Stakeholders + Stakeholder Map
+12. What is explicitly in scope and out of scope for this engagement? → §9 Scope
+13. What known constraints or assumptions should be documented upfront? → §12 Constraints + §13 Assumptions
+14. What existing architecture assets, decisions, or documents are relevant? → Statement of Architecture Work §3
+15. What is the desired timeline for completing this work? → §9 Scope (Time Horizon) + SoAW
+16. What are the biggest risks that could derail this engagement? → §15 Key Risks
 
 **Output Routing:**
 
@@ -238,19 +253,20 @@ Assign IDs sequentially within each prefix as responses are confirmed. Record ID
 | Objectives | Architecture Vision + engagement.json | `§4 Objectives` (OBJ-NNN rows) + `direction.objectives[]` |
 | Systemic issues | Architecture Vision | `§5 Issues` (ISS-NNN rows) |
 | Specific problems | Architecture Vision | `§6 Problems` (PRB-NNN rows) |
+| Opportunities | Architecture Vision | `§7 Opportunities` (OPP-NNN rows) |
 | Performance metrics | engagement.json | `metrics[]` linked to OBJ-NNN |
 | Success criteria | Architecture Vision | `§1 Executive Summary` + `§3 Goals` |
 | Key stakeholders | Stakeholder Map | `{{stakeholder_list}}` |
 | Stakeholder concerns | Stakeholder Map | `{{stakeholder_concerns}}` |
-| Strategies | Architecture Vision + engagement.json | `§7 Strategic Direction Summary` (STR-NNN rows) + `direction.strategies[]` |
-| Metrics | engagement.json | `§7 Strategic Direction Summary` (MET-NNN rows) + `metrics[]` |
-| In-scope items | Architecture Vision | `§8 Scope — {{scope_in}}` |
-| Out-of-scope items | Architecture Vision | `§8 Scope — {{scope_out}}` |
+| Strategies | Architecture Vision + engagement.json | `§8 Strategic Direction Summary` (STR-NNN rows) + `direction.strategies[]` |
+| Metrics | engagement.json | `§8 Strategic Direction Summary` (MET-NNN rows) + `metrics[]` |
+| In-scope items | Architecture Vision | `§9 Scope — {{scope_in}}` |
+| Out-of-scope items | Architecture Vision | `§9 Scope — {{scope_out}}` |
 | Constraints | Statement of Architecture Work | `{{constraints}}` |
 | Assumptions | Statement of Architecture Work | `{{assumptions}}` |
 | Existing architecture assets | Statement of Architecture Work | `§3 Approach` (reference existing assets as inputs) |
 | Timeline | Statement of Architecture Work | `{{timeline}}` |
-| Key risks | Architecture Vision | `§14 Key Risks` (table rows) |
+| Key risks | Architecture Vision | `§15 Key Risks` (table rows) |
 | Strategies | engagement.json | `direction.strategies[]` |
 
 **Facilitation Notes:**
@@ -659,7 +675,7 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 
 **Goal:** Prioritise work packages and build the initial architecture roadmap, grounded in the Goals, Objectives, and Strategies established in Phase A.
 
-**Pre-session preparation:** Load the Architecture Vision and read §3 Goals (G-NNN), §4 Objectives (OBJ-NNN), and §7 Strategic Direction Summary (STR-NNN) before starting. Present this list to participants so work package prioritisation is anchored to stated intent.
+**Pre-session preparation:** Load the Architecture Vision and read §3 Goals (G-NNN), §4 Objectives (OBJ-NNN), §7 Opportunities (OPP-NNN), and §8 Strategic Direction Summary (STR-NNN) before starting. Present this list to participants so work package prioritisation is anchored to stated intent.
 
 **Key questions:**
 
@@ -669,25 +685,36 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 
 *Opportunity and gap coverage*
 3. Which capability gaps identified in earlier phases are the highest priority to close?
-4. What projects are already in flight that this roadmap must align with or avoid conflicting with?
+4. For each high-priority gap — does it represent an Opportunity (OPP-NNN) to capture, not just a problem to fix? Assign an OPP-NNN if so, and link it to the work package it will be addressed by.
+   - If an OPP-NNN was already recorded in Phase A, link the WP to it now.
+   - If no OPP-NNN exists yet, create one and add it to Architecture Vision §7.
+5. What projects are already in flight that this roadmap must align with or avoid conflicting with?
+
+*Resources and capacity*
+6. For each proposed work package: what roles and skills are needed to deliver it? Estimate FTE required and identify any skill gaps or vendor/partner dependencies.
+   - Record: Roles, FTE estimate, skill dependencies, vendor/partner — in the WP's `Resources Required` field in the Architecture Roadmap.
+   - Flag any WP where required resources are not confirmed as a delivery risk.
 
 *Constraints and sequencing*
-5. What is the available investment budget and target delivery timeline?
+7. What is the available investment budget and target delivery timeline?
 6. What sequencing dependencies exist — which changes must happen before others can begin?
-7. What are acceptable transition states — what does "good enough for now" look like at each stage?
-8. If the budget were halved, which Goals and work packages would you protect, and which would you defer?
+8. What sequencing dependencies exist — which changes must happen before others can begin?
+9. What are acceptable transition states — what does "good enough for now" look like at each stage?
+10. If the budget were halved, which Goals and work packages would you protect, and which would you defer?
 
 *Risk*
-9. What are the biggest risks to delivering this roadmap — and do any of those risks directly threaten a Goal or Strategy?
+11. What are the biggest risks to delivering this roadmap — and do any of those risks directly threaten a Goal or Strategy?
 
 **Output Routing:**
 
 | Response Topic | Target Artifact | Target Field |
 |---|---|---|
-| Goals/strategies addressed by the roadmap | Architecture Roadmap | Strategic Alignment table (G-NNN / OBJ-NNN / STR-NNN column) |
+| Goals/strategies addressed by the roadmap | Architecture Roadmap | Strategic Alignment table (G-NNN / OBJ-NNN / STR-NNN / OPP-NNN column) |
 | Goals/strategies with no covering WP | Architecture Roadmap | `{{unaddressed_items}}` |
 | Goals/strategies per work package | Architecture Roadmap | WP table `{{g_obj_ids}}` / `{{str_ids}}` per WP |
+| Opportunities per work package | Architecture Roadmap | WP table Strategic Alignment (OPP-NNN) |
 | Priority capability gaps | Architecture Roadmap | `{{priority_gaps}}` |
+| WP resource requirements | Architecture Roadmap | WP `Resources Required` + `Capacity note` fields |
 | In-flight projects | Architecture Roadmap | `{{existing_projects}}` |
 | Investment budget | Architecture Roadmap | `{{investment_budget}}` |
 | Target timeline | Architecture Roadmap | `{{delivery_timeline}}` |
@@ -739,7 +766,12 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 **Key questions:**
 1. How should the work packages be grouped into delivery waves — what natural groupings exist based on dependency, risk, or business value?
 2. For each wave, what resources and skills are required, and are they available within the planned timeframe?
+   - For each role: what is required vs. what is confirmed? Record gaps in the Wave Resource Summary table.
+   - Are vendor or partner commitments in place for this wave? If not, flag as a delivery risk.
 3. What is the organisation's capacity for change — how much disruption can be absorbed per wave without affecting business operations?
+
+*Resource validation — run after all waves are defined:*
+> "Looking across all waves: where are the resource peaks? Are there any waves where multiple high-FTE work packages overlap? Flag overlapping peaks as scheduling risks in the Risk Register."
 4. How will data be migrated for each wave? (select all that apply)
    - [ ] ETL — batch extract, transform, and load jobs
    - [ ] Replication — continuous sync from source to target system
@@ -765,8 +797,9 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 | Response Topic | Target Artifact | Target Field |
 |---|---|---|
 | Wave groupings | Migration Plan | `{{wave_1_name}}` / `{{wave_2_name}}` |
-| Resource requirements per wave | Migration Plan | `{{migration_overview}}` |
+| Resource requirements per wave | Migration Plan | Wave Resource Summary table (role / required / available / gap) |
 | Organisational change capacity | Migration Plan | `{{migration_overview}}` |
+| Resource peak conflicts across waves | Risk Register (via `/ea-risks add`) | New RIS-NNN — delivery risk |
 | Data migration approach | Migration Plan | `{{data_migration_approach}}` |
 | Cut-over approach | Migration Plan | `{{cutover_approach}}` |
 | Rollback triggers | Migration Plan | `{{trigger_1}}` / `{{trigger_2}}` |
