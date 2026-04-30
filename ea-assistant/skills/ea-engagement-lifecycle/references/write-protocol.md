@@ -42,6 +42,51 @@ Never write `YYYY-MM-DDTHH:MM:SSZ` with zeroed time (`T00:00:00Z`) — always ca
 
 ---
 
+## Parallel Safety
+
+### Read-only agents — safe to dispatch in parallel
+
+These agents never write `engagement.json` and can be dispatched simultaneously without contention:
+
+| Agent | Notes |
+|---|---|
+| `ea-consistency-checker` | Read-only |
+| `ea-security-auditor` | Writes only a final report file to a unique path |
+| `ea-advisor` | Read-only |
+| `ea-diagram` | Writes diagram files to unique paths |
+| `ea-research` (list / view / apply modes) | apply mode writes a synthesis report to a unique path |
+| `ea-engage-review` | Single `lastModified` write only — safe if it is the only writer |
+
+### Coordinator pattern — parallel write agents
+
+When a coordinator (typically `ea-facilitator`) dispatches multiple agents in parallel where any agent needs to register artifacts or update `engagement.json`:
+
+1. **Dispatch in parallel** for primary work — artifact `.md` files, generation outputs, analysis
+2. **Agents return structured registration data** rather than writing `engagement.json` directly when running as sub-agents
+3. **Coordinator applies updates sequentially** — re-read `engagement.json` fresh before each registration write
+4. **Single `lastModified` update** — update once after all registrations are applied, not per-registration
+
+**Registration data format** — sub-agents return this in their output when acting under a coordinator:
+
+```json
+{
+  "engagementRegistrations": [
+    { "op": "addArtifact", "entry": { "id": "...", "file": "...", "phase": "...", "status": "Draft" } },
+    { "op": "updateArtifactStatus", "id": "...", "status": "Draft", "lastModified": "..." }
+  ]
+}
+```
+
+### Known safe parallel combinations
+
+| Combination | Why safe |
+|---|---|
+| Any read-only agent + any write agent | Read-only agent never touches `engagement.json` |
+| `ea-risks generate` + `ea-adrs generate` + `ea-concerns generate` | Each writes a different dated output file; only `artifacts[]` registration creates contention — use coordinator pattern for the registration step |
+| `ea-consistency-checker` + `ea-security-auditor` | Both read-only |
+
+---
+
 ## Post-Artifact-Save Sequence
 
 Every agent or command that writes or updates an artifact `.md` file in `artifacts/**/*.md` must run this sequence immediately after the write succeeds. It does **not** apply to read-only operations, or to generated register files (risk-register, adr-register, change-register, zachman-diagram).

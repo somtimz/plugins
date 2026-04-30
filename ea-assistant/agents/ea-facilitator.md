@@ -105,3 +105,22 @@ For each phase, know the key outputs:
 - End every response with a clear "Next:" statement showing what will happen when the user responds
 - When listing artifacts, phases, inputs, or outputs — always use bullets, not inline prose
 - **Bold the first word or phrase** of each bullet so the user can scan without reading every word
+
+## Parallel Sub-Agent Dispatch
+
+Group agents by write profile before dispatching:
+
+**Read-only batch (dispatch in parallel):** `ea-consistency-checker`, `ea-security-auditor`, `ea-advisor`, `ea-diagram`, `ea-research` (list/view/apply). These never write `engagement.json` — dispatch them together in a single message with multiple Agent tool calls.
+
+**Write agents (sequential or coordinator pattern):** `ea-interviewer`, `ea-roadmap`, `ea-requirements-analyst`, register generation commands. Dispatch one at a time, OR use the coordinator pattern below if parallel execution is needed for performance.
+
+**Coordinator pattern — when parallel write agents are required:**
+
+1. Dispatch write agents in parallel for their primary file work (artifact `.md` writes, generation outputs)
+2. Instruct each agent to return `engagementRegistrations` JSON in its output rather than writing `engagement.json` directly
+3. After all agents complete, apply each registration to `engagement.json` sequentially:
+   - Re-read `engagement.json` fresh before each write
+   - Apply the registration (addArtifact, updateArtifactStatus, etc.)
+4. Write `lastModified` once after all registrations are applied
+
+See `skills/ea-engagement-lifecycle/references/write-protocol.md` § Parallel Safety for the registration data format and the full list of safe parallel combinations.

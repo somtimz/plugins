@@ -176,3 +176,4 @@ See `references/write-protocol.md` for the full ownership table. Key rules:
 - Write only the section you own
 - Update `lastModified` on every write
 - Never delete from `optOuts[]`, `artifacts[]`, or `analysis_runs` — append only
+- For parallel agent dispatch, see `## Parallel Safety` in `write-protocol.md`
