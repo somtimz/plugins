@@ -101,6 +101,39 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
 
 ---
 
+### Mode: `start engagement`
+
+Capture the full engagement direction in one cross-phase session before any TOGAF phase work begins. Equivalent to Preliminary + Phase A combined, routing all outputs to `engagement.json → direction` only — no phase-specific artifacts are created.
+
+1. **Load question bank.** Read `skills/ea-artifact-templates/references/phase-interview-questions.md`. Merge questions from Preliminary and Phase A into this sequence:
+
+   - **Part 1 — Organisation & Mandate** (Prelim Q1–7): organisation context, engagement type, scope, constraints, assumptions
+   - **Part 2 — Stakeholders** (Prelim Q8–11): related programmes, affected internal/external orgs, regulatory bodies
+   - **Part 3 — Motivation** (Prelim Q12–17 + Phase A §2–§6): drivers (with evidence), vision, mission, goals (with rationale), objectives, strategies, issues (with evidence and raised-by), problems (with evidence and raised-by)
+   - **Part 4 — Opportunities & Metrics** (Phase A §7): opportunities, success measures, baseline sources
+   - **Part 5 — Programme & Risks** (Prelim Q18–20 + Phase A §10–§16): programme structure, timeline, constraints, assumptions, key risks
+
+2. **Check for cross-cutting brainstorm notes.** Look for `EA-projects/{slug}/artifacts/cross-cutting/notes/brainstorm/brainstorm-notes.md`. If found, pass to `ea-interviewer` as pre-context — items tagged `[ISS?]`/`[PRB?]` should be promoted to formal ISS-NNN/PRB-NNN entries during this session.
+
+3. **Check for prior engagement interview notes.** Look for any `artifacts/cross-cutting/notes/interviews/interview-engagement-*` files. If found, ask: "Prior engagement interview notes found (v{N}, {date}). Resume from these, or start fresh?"
+
+4. **Select interview mode** — same as other modes (Text / Web / Display).
+
+5. **Hand off to `ea-interviewer`** in engagement mode with:
+   - The merged question list (sequenced as above)
+   - Cross-cutting brainstorm notes (if available)
+   - Any pre-existing answers from prior engagement interview notes
+   - The selected mode
+
+6. **On completion:**
+   - Save notes to `artifacts/cross-cutting/notes/interviews/interview-engagement-{YYYY-MM-DD}-v{N}.md`
+   - Route confirmed answers to `engagement.json → direction`: `vision`, `mission`, `drivers[]`, `goals[]`, `objectives[]`, `strategies[]`, `issues[]`, `problems[]`, `opportunities[]`
+   - Do **not** create or update any phase-specific artifact files — this session populates the direction layer only
+   - Update `lastModified` in `engagement.json`
+   - Confirm: "Engagement interview complete — direction captured in `engagement.json`. When you start Preliminary phase work, run `/ea-interview start phase Prelim`; when you start Phase A, run `/ea-interview start phase A`. Your answers will be available as pre-loaded context in both sessions."
+
+---
+
 ### Mode: `export [artifact-name]`
 
 1. Load the artifact and extract all questions (placeholder fields + guidance-derived questions).

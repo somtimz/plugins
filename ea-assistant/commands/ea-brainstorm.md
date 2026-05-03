@@ -26,7 +26,8 @@ Capture freeform brainstorm notes for the active EA engagement.
    | `F` | `phase-f` |
    | `G` | `phase-g` |
    | `H` | `phase-h` |
-   | (none) | `cross-cutting` |
+   | `engagement` | `cross-cutting` |
+   | (none, and `currentPhase` is not set) | `cross-cutting` (engagement mode) |
 
    Brainstorm notes path: `EA-projects/{slug}/artifacts/{phase-folder}/notes/brainstorm/brainstorm-notes.md`
 
@@ -41,6 +42,11 @@ Capture freeform brainstorm notes for the active EA engagement.
    - `F` → Migration Planning
    - `G` → Implementation Governance
    - `H` → Architecture Change Management
+   - `engagement` → `"Engagement — Cross-Phase Strategic Context"`
+   - (none, no `currentPhase` set) → `"Engagement — Cross-Phase Strategic Context"` (engagement mode inferred)
+
+   If engagement mode is inferred (no argument and no active phase), announce before continuing:
+   > "No phase is active — opening an engagement-level brainstorm pad. Captures strategic context before phase work begins."
 
    Note the phase scope for use in the session header and opening prompt.
 
@@ -55,6 +61,7 @@ Capture freeform brainstorm notes for the active EA engagement.
 
    - **Artifact-scoped** (invoked from `/ea-interview` before a specific artifact): read the artifact template and extract all `{{placeholder}}` field names as question texts. If the artifact file already exists, also read it to skip fields that are already answered.
    - **Phase-scoped** (phase argument provided): read `skills/ea-artifact-templates/references/phase-interview-questions.md` for the relevant phase. Extract up to 8 key questions in order.
+   - **Engagement-scoped** (engagement mode): read Preliminary Parts 1–3 and Phase A §2–§6 from `phase-interview-questions.md`. Extract up to 10 key questions covering org context, drivers, goals, issues, and problems.
    - **Unscoped**: omit — leave `questions: null`.
 
    For each question, assign a `category` based on its topic:
@@ -93,12 +100,13 @@ Capture freeform brainstorm notes for the active EA engagement.
 
 4. **Build `BRAINSTORM_DATA` and launch the brainstorm pad.**
 
-   Construct the `BRAINSTORM_DATA` object based on the resolved phase. Use the table below to look up the phase-specific values. If no phase argument was provided, set all fields to `null`. Include `questions` (from step 3b) and `prefilled` (from step 3c) in the object.
+   Construct the `BRAINSTORM_DATA` object based on the resolved phase. Use the table below to look up the phase-specific values. If the phase resolved to engagement mode, use the `Engagement` row. Include `questions` (from step 3b) and `prefilled` (from step 3c) in the object.
 
    **Phase hint table:**
 
    | Phase | subtitle | concerns hint | goals hint | constraints hint | opportunities hint | assumptions hint | metrics hint | other hint |
    |---|---|---|---|---|---|---|---|---|
+   | Engagement | Focus on pre-phase strategic context — direction and stakeholder landscape before detailed phase work begins. | Misaligned sponsor expectations, unclear mandate, unresolved stakeholder conflicts, strategic threats with no owner | Vision and mission alignment, strategic goals, high-level desired outcomes for the engagement | Regulatory obligations, budget envelope, board-level constraints, engagement scope boundaries | Capabilities the org lacks but could gain, untapped value, quick wins before phase work | Stakeholder availability, current-state baseline, org readiness, assumptions the engagement depends on | Engagement-level KPIs, benefits realisation targets, success indicators | Engagement type, governance context, related programmes, key stakeholder relationships |
    | Preliminary | Focus on governance readiness and framework setup. | Governance gaps, lack of sponsorship, conflicting stakeholder expectations | What does architecture success look like for this organisation? | Existing standards, budget, team capacity, compliance mandates | Capability improvements, standardisation wins, quick governance wins | Organisational readiness, stakeholder availability, framework maturity | Governance effectiveness measures, architecture maturity indicators | Tailoring needs, external references, special context |
    | Architecture Requirements Management | Focus on capturing and tracing requirements across the engagement. | Requirements volatility, conflicting stakeholder needs, traceability gaps | Complete, traceable requirements baseline, Zachman cell coverage | Requirements sign-off process, change control, scope boundaries | Requirement pattern reuse, automated traceability, shared requirements repo | Stakeholder availability for validation, scope stability, documentation quality | Requirements coverage %, traceability completeness, sign-off velocity | Corporate vs project requirements distinction, waiver candidates, source documents |
    | Architecture Vision | Focus on strategic intent and the problem being solved. | Scope creep, misaligned stakeholder expectations, unclear success criteria | Strategic objectives, high-level outcomes, business problem being solved | Time-to-value, budget envelope, regulatory obligations | Business value propositions, capability gaps to close, quick wins | Current state baseline, stakeholder alignment, sponsor commitment | Executive KPIs, time-to-value signals, adoption rate, cost reduction targets | Risk appetite, key stakeholders, governance context |
@@ -122,6 +130,7 @@ Capture freeform brainstorm notes for the active EA engagement.
    Load the `ea-interview-ui` skill and present the **Brainstorm Pad** artifact with the constructed `BRAINSTORM_DATA`.
 
    - If phase-scoped, announce: "Opening a brainstorm pad scoped to {Phase Name}. Fill in thoughts freely across any category, then click 'Done' and paste the results back."
+   - If engagement-scoped: "Opening an engagement-level brainstorm pad — captures strategic context before phase work begins. Fill in thoughts freely, then click 'Done' and paste the results back."
    - If not phase-scoped: "Opening the brainstorm pad. Fill in any thoughts across the categories, then click 'Done' and paste the results back."
    - The app handles all input — do not run a parallel chat Q&A.
 
