@@ -74,9 +74,9 @@ Categories: Missing capability, Retiring component, Consolidation, New requireme
 
 </details>
 
-| Gap ID | Description | Category | Priority | Baseline State | Target State | Effort |
-|---|---|---|---|---|---|---|
-| GAP-001 | {{description}} | Missing capability | High/Med/Low | {{baseline}} | {{target}} | High/Med/Low |
+| Gap ID | Description | Category | Priority | Baseline State | Target State | Effort | Evidence |
+|---|---|---|---|---|---|---|---|
+| GAP-001 | {{description}} | Missing capability | High/Med/Low | {{baseline}} | {{target}} | High/Med/Low | {{evidence}} |
 
 ---
 
@@ -94,9 +94,9 @@ Maturity. Link each gap to the G-NNN or OBJ-NNN it prevents.
 
 </details>
 
-| CAP-NNN | Capability | L1 Domain | Current Maturity | Target Maturity | Prevents (G-NNN / OBJ-NNN) | Priority |
-|---|---|---|---|---|---|---|
-| CAP-001 | {{capability_name}} | {{domain}} | Absent / Immature / Developing | {{target}} | {{G-NNN}} | High / Med / Low |
+| CAP-NNN | Capability | L1 Domain | Current Maturity | Target Maturity | Prevents (G-NNN / OBJ-NNN) | Priority | Evidence |
+|---|---|---|---|---|---|---|---|
+| CAP-001 | {{capability_name}} | {{domain}} | Absent / Immature / Developing | {{target}} | {{G-NNN}} | High / Med / Low | {{evidence}} |
 
 ---
 

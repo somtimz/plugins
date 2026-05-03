@@ -89,10 +89,10 @@ The "Domain" column indicates which domain-level analysis originated the gap.
 
 </details>
 
-| Gap ID | Domain | Description | Category | Priority | Baseline State | Target State | Effort | Related Gaps |
-|---|---|---|---|---|---|---|---|---|
-| GAP-001 | Business | {{description}} | Missing capability | High | {{baseline}} | {{target}} | High | — |
-| GAP-002 | Data | {{description}} | {{category}} | {{priority}} | {{baseline}} | {{target}} | {{effort}} | GAP-001 |
+| Gap ID | Domain | Description | Category | Priority | Baseline State | Target State | Effort | Evidence | Related Gaps |
+|---|---|---|---|---|---|---|---|---|---|
+| GAP-001 | Business | {{description}} | Missing capability | High | {{baseline}} | {{target}} | High | {{evidence}} | — |
+| GAP-002 | Data | {{description}} | {{category}} | {{priority}} | {{baseline}} | {{target}} | {{effort}} | {{evidence}} | GAP-001 |
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: ea-direction
-description: Display the Direction Register — Goals, Objectives, Strategies, and Opportunities — aggregated from artifacts in the active engagement. Supports filtering by domain or item type.
+description: Display the Direction Register — Goals, Objectives, Strategies, Opportunities, Issues, and Problems — aggregated from artifacts in the active engagement. Supports filtering by domain or item type.
 allowed-tools: [Read, Bash, Glob]
 ---
 
@@ -8,7 +8,7 @@ You are executing the `/ea-direction` command. Load the `ea-engagement-lifecycle
 
 ## Overview
 
-The Direction Register aggregates all Goals (`G-NNN`), Objectives (`OBJ-NNN`), Strategies (`STR-NNN`), and Opportunities (`OPP-NNN`) from motivation-layer artifacts across the active engagement into a single cross-artifact view. Items are parsed from artifact sections — not from `engagement.json`. The command is read-only; no file is written.
+The Direction Register aggregates all Goals (`G-NNN`), Objectives (`OBJ-NNN`), Strategies (`STR-NNN`), Opportunities (`OPP-NNN`), Issues (`ISS-NNN`), and Problems (`PRB-NNN`) from motivation-layer artifacts across the active engagement into a single cross-artifact view. Items are parsed from artifact sections — not from `engagement.json`. The command is read-only; no file is written.
 
 ---
 
@@ -30,6 +30,8 @@ The Direction Register aggregates all Goals (`G-NNN`), Objectives (`OBJ-NNN`), S
 | `objectives` | Objectives table only |
 | `strategies` | Strategies table only |
 | `opportunities` | Opportunities table only |
+| `issues` | Issues table only |
+| `problems` | Problems table only |
 
 Arguments are combinable: `/ea-direction goals --domain Business`
 
@@ -57,6 +59,8 @@ For each file, scan for these section types:
 | **Objectives** | Heading containing "Objectives", AND next table has rows matching `OBJ-\d+` in first cell |
 | **Strategies** | Heading containing "Strategies", AND next table has rows matching `STR-\d+` in first cell |
 | **Opportunities** | Heading containing "Opportunities", AND next table has rows matching `OPP-\d+` in first cell |
+| **Issues** | Heading containing "Issues" (case-insensitive, excluding "Issues & Problems" when Problems also present), AND next table has rows matching `ISS-\d+` in first cell |
+| **Problems** | Heading containing "Problems" (case-insensitive), AND next table has rows matching `PRB-\d+` in first cell |
 
 ### 3c — Parse table rows
 
@@ -77,8 +81,14 @@ Objectives: `| ID | Objective | Measure | Target | Deadline | Linked Goal |`
 Strategies: `| ID | Strategy | Supports Goal(s) |`
 - Map to: id, statement, supports
 
-Opportunities: `| ID | Opportunity | Driver(s) | Type | Priority | Linked Goal(s) |`
-- Map to: id, statement, drivers, type, priority, linkedGoals
+Opportunities: `| ID | Opportunity | Driver(s) | Type | Priority | Linked Goal(s) | Rationale |`
+- Map to: id, statement, drivers, type, priority, linkedGoals, rationale
+
+Issues: `| ID | Issue | Area | Threatens Goal(s) | Evidence | Raised By |`
+- Map to: id, statement, area, threatensGoals, evidence, raisedBy
+
+Problems: `| ID | Problem | Observable Symptom | Blocks Objective(s) | Evidence | Raised By |`
+- Map to: id, statement, symptom, blocksObjectives, evidence, raisedBy
 
 If a row has fewer columns than expected (legacy or variant format), populate missing fields as `—`.
 
@@ -103,7 +113,7 @@ Tag each parsed item with:
 
 If the same ID (e.g. `G-001`) appears in multiple artifacts (e.g. Architecture Vision and Architecture Roadmap), keep the first occurrence and skip duplicates. The Architecture Vision is the canonical source — sort files so `architecture-vision*` is processed first.
 
-Collect into four unified lists: `allGoals`, `allObjectives`, `allStrategies`, `allOpportunities`.
+Collect into six unified lists: `allGoals`, `allObjectives`, `allStrategies`, `allOpportunities`, `allIssues`, `allProblems`.
 
 ---
 
@@ -146,14 +156,24 @@ Engagement: {name}  ·  Date: {YYYY-MM-DD}
 |---|---|---|---|---|---|---|---|
 | OPP-001 | ... | All | Exploit | High | DRV-001 | G-001 | Architecture Vision |
 
+### Issues (ISS-NNN) — Strategic Threats
+| ID | Statement | Area | Threatens Goal(s) | Evidence | Raised By | Source |
+|---|---|---|---|---|---|---|
+| ISS-001 | ... | Data | G-001 | Incident log: 12 P1s in 90 days | CTO | Architecture Vision |
+
+### Problems (PRB-NNN) — Tactical Blockers
+| ID | Statement | Symptom | Blocks Objective(s) | Evidence | Raised By | Source |
+|---|---|---|---|---|---|---|
+| PRB-001 | ... | 68% cart abandonment | OBJ-001 | Analytics report Feb 2026 | Product Lead | Architecture Vision |
+
 ---
-{N} goals · {N} objectives · {N} strategies · {N} opportunities from {N} artifact(s)
+{N} goals · {N} objectives · {N} strategies · {N} opportunities · {N} issues · {N} problems from {N} artifact(s)
 ```
 
 Formatting rules:
 - Null, empty, or absent fields: show `—`
-- If an item-type argument was given (e.g. `/ea-direction goals`), omit the other two sections entirely
-- Sort rows within each section by ID number (G-001, G-002, … OBJ-001, OBJ-002, … STR-001, STR-002, …)
+- If an item-type argument was given (e.g. `/ea-direction goals`), omit all other sections
+- Sort rows within each section by ID number (G-001, G-002, … OBJ-001, OBJ-002, … STR-001, STR-002, … ISS-001, ISS-002, … PRB-001, PRB-002, …)
 
 ---
 
@@ -162,7 +182,7 @@ Formatting rules:
 | Scenario | Handling |
 |---|---|
 | No artifacts directory or no `.md` files found | "No artifacts found in `EA-projects/{slug}/artifacts/`. Run `/ea-phase` to start a phase and create artifacts." |
-| Artifacts exist but none contain G/OBJ/STR/OPP sections | "No direction items found. Run `/ea-interview` on Phase A (Architecture Vision) to capture Goals, Objectives, Strategies, and Opportunities." |
+| Artifacts exist but none contain G/OBJ/STR/OPP/ISS/PRB sections | "No direction items found. Run `/ea-interview` on Phase A (Architecture Vision) to capture Goals, Objectives, Strategies, Opportunities, Issues, and Problems." |
 | Architecture Vision not yet created | Show items from any other artifact that has them; note at footer: "Architecture Vision not found — items sourced from: {list}" |
 | `--domain` returns no items | "No direction items found for domain {X}. Check that artifacts for that domain have been created and populated." |
 | All items are template placeholders | Treat as empty (same message as no items found) |

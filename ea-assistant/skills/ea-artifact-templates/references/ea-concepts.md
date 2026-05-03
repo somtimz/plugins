@@ -66,6 +66,7 @@ Key relationships:
 |---|---|---|---|---|
 | **Vision** | *What do we aspire to become?* | Long-term aspirational destination — the North Star; all Drivers and Strategies must align | Architecture Vision §1; Stakeholder Map | — |
 | **Mission** | *Why do we exist today?* | Fundamental purpose and scope of activity — bounds which Drivers are relevant | Architecture Vision §1; Stakeholder Map | — |
+| **Business Driver** | *Why do we need to change now?* | External or internal force making the engagement necessary — must be evidenced and traceable to at least one Goal | Architecture Vision §2; Engagement Charter §6.2 | — |
 | **Principle** | *What must always be true?* | Normative rule — applies to every future decision in its domain | Architecture Principles Catalogue (Prelim) | Principle (Motivation) |
 | **Goal** | *Where do we want to be?* | Desired future state — qualitative, no deadline required | Architecture Vision §3; domain artifacts | Goal (Motivation) |
 | **Objective** | *How far, and by when?* | Measurable, time-bound result — must have a measure, target, and deadline | Architecture Vision §4; domain artifacts | Outcome (Motivation) |
@@ -137,6 +138,34 @@ A Mission is a concise statement defining the organisation's fundamental purpose
 
 ---
 
+### Business Driver
+
+**What it IS:**
+A Business Driver is an external or internal force that makes the engagement necessary — it explains *why* the organisation needs to change now. Drivers are the bridge between the Mission (what we are) and the Goals (where we want to be). Every Driver must be evidenced: a driver without a verifiable source is an assumption, not a confirmed pressure.
+
+**Structural parts** (engagement.json `direction.drivers[]`):
+- **Statement** — one declarative sentence naming the force
+- **Type** — External (market, regulatory, technology shift) / Internal (cost, capacity, leadership mandate)
+- **Priority** — High / Medium / Low
+- **Evidence / Source** — the event, report, regulatory instrument, or stakeholder statement that confirms this driver is real and current (e.g. "FY25 Board Risk Report p.12", "APRA CPS 230 effective Jan 2025")
+- **Linked Goals** — G-NNN IDs this driver motivates
+
+**What it is NOT:**
+- Not a **Goal** — a driver is the force that creates pressure; a goal is the desired response to that pressure
+- Not an **Issue** — a driver is the external or internal context; an issue is the organisational consequence of failing to respond to it
+- Not a **Strategy** — a strategy is the chosen response; a driver is why a response is needed
+
+**Common confusions:**
+- "Increasing regulatory pressure" — this is a **Driver** ✓ (external force). The Goal it motivates might be "Achieve full regulatory compliance by Q2 2026"
+- "We need to reduce costs" — this could be a Driver (internal cost pressure) OR a Goal depending on framing. If it is the *force* creating pressure on the engagement, it's a Driver; if it is what the engagement aims to achieve, it's a Goal
+- "Our legacy platform is at end-of-life" — this is a Driver (internal technical force), not an Issue. The Issue is the *organisational consequence*: "Unplanned outages are increasing, threatening customer commitments"
+
+**TOGAF placement:** Architecture Vision §2 (Preliminary/Phase A); Engagement Charter §6.2. Drivers are captured in the Preliminary phase and refined in Phase A. All Drivers should be linked to at least one Goal — an unlinked Driver is out of scope or requires a new Goal.
+
+**ArchiMate:** `Driver` element in the Motivation aspect. Motivates `Assessment`, which in turn motivates `Goal`.
+
+---
+
 ### Principle
 
 **What it IS:**
@@ -175,6 +204,8 @@ A goal is a qualitative statement of a desired future state. It describes *where
 **Structural parts** (engagement.json `direction.goals[]`):
 - **Statement** — one declarative sentence describing the desired state
 - **Priority** — High / Medium / Low
+- **Rationale** — why this is a goal for this engagement (1–2 sentences; what happens if it is not achieved)
+- **Linked Drivers** — DRV-NNN IDs that motivate this goal
 
 **What it is NOT:**
 - Not an **Objective** — an objective is the measurable, time-bound version of a goal ("achieve 99.9% uptime by Q3 2026"); a goal is its qualitative parent
@@ -230,6 +261,8 @@ An issue is a broader, systemic concern that threatens the organisation's abilit
 - **Statement** — one sentence naming the systemic concern
 - **Area** — organisational, process, or technology domain most affected
 - **Threatens Goal(s)** — G-NNN IDs of the goals this issue puts at risk
+- **Evidence** — observable signal, event, or data point that confirms this issue exists (e.g. "incident log shows 12 P1 outages in 90 days")
+- **Raised By** — stakeholder or source that surfaced this issue
 
 **What it is NOT:**
 - Not a **Problem** — a problem is a specific, observable symptom with a direct fix; an issue is broader and systemic
@@ -255,6 +288,8 @@ A problem is a specific, observable, and fixable symptom that is actively blocki
 - **Statement** — one sentence naming the specific problem
 - **Observable Symptom** — what can be seen or measured today (ideally a number)
 - **Blocks Objective(s)** — OBJ-NNN IDs of the objectives this problem is preventing
+- **Evidence** — data point, incident, or measurement confirming the symptom is currently active
+- **Raised By** — stakeholder or source that identified this problem
 
 **What it is NOT:**
 - Not an **Issue** — an issue is broad and systemic; a problem is specific and fixable. Multiple problems can contribute to a single issue
@@ -456,6 +491,7 @@ Metrics close the loop between intention and evidence:
 - **Target** — desired value
 - **Deadline** — when the target must be reached
 - **Linked Objective(s)** — OBJ-NNN this metric tracks
+- **Baseline Source** — where the current-state measurement comes from (report, system, stakeholder estimate)
 
 **What it is NOT:**
 - Not an Objective — an Objective defines the target; a Metric measures whether the target is being reached
@@ -701,9 +737,9 @@ Business Driver (DRV) ──classifies as Opportunity──► OPP-NNN
 ### Architecture Vision table format
 
 ```markdown
-| ID | Opportunity | Driver(s) | Type | Priority | Linked Goal(s) |
-|---|---|---|---|---|---|
-| OPP-001 | {opportunity statement} | DRV-001 | Exploit / Enhance / Emerge | High / Med / Low | G-001 |
+| ID | Opportunity | Driver(s) | Type | Priority | Linked Goal(s) | Rationale |
+|---|---|---|---|---|---|---|
+| OPP-001 | {opportunity statement} | DRV-001 | Exploit / Enhance / Emerge | High / Med / Low | G-001 | {why this is actionable now} |
 ```
 
 ### Disambiguation checklist

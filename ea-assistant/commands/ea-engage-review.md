@@ -184,7 +184,7 @@ Options:
 ### Option 10 — Sync engagement
 
 1. Re-read `engagement.json`.
-2. Refresh `EA-projects/{slug}/CLAUDE.md` using the pointer-format template from `/ea-open` step 7 — updates Identity block (name, slug, phase, status, dates), Engagement State counts (artifact/phase/decision/research counts), and the Where to Find Content pointer table. Full goal/objective/strategy data is not repeated here — it lives in `engagement.json → direction`.
+2. Refresh `EA-projects/{slug}/CLAUDE.md` using the seed template at `templates/seeds/engagement-claude-md.md` — populate stable identity fields (organisation, slug, type, sponsor, started date), engagement context (vision, mission, scope), and static pointer tables only. Do **not** include current phase, status, artifact counts, or any other transitory state — these belong in `/ea-open` output, not CLAUDE.md.
 3. Update `engagement.json → lastModified` to now.
 4. Run Tier 1 compliance check on all artifacts — report any T1 failures.
 5. Confirm: "Sync complete — CLAUDE.md refreshed, {N} T1 failures noted (run /ea-review to fix)."
