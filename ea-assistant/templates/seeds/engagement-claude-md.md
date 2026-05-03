@@ -15,6 +15,7 @@
 ## Engagement Context
 
 **Vision:** {direction.vision — single sentence; or "Not captured yet"}
+**Mission:** {direction.mission — if captured; omit this line if empty}
 **Scope:** {scope}
 
 > Run `/ea-open` for current phase, artifact status, and next actions. Run `/ea-status` for the portfolio dashboard.
@@ -25,11 +26,14 @@
 |---|---|
 | Goals, objectives, strategies, drivers, issues | `engagement.json → direction` |
 | Artifact files | `artifacts/{phase-folder}/` (see Phase Folder Map) |
+| Cross-cutting registers (Risk, Decisions, ADRs) | `artifacts/cross-cutting/` |
 | Interview notes | `artifacts/{phase-folder}/notes/interviews/` |
 | Brainstorm notes | `artifacts/{phase-folder}/notes/brainstorm/brainstorm-notes.md` |
 | Review files | `artifacts/{phase-folder}/notes/reviews/` |
 | Research library | `ResearchAndReferences/research-index.md` |
+| Source documents / uploads | `uploads/` |
 | Diagrams | `diagrams/` |
+| Session config (stakeholders, preferences) | `.claude/rules/ea-local-config.md` |
 
 ## Phase Folder Map
 

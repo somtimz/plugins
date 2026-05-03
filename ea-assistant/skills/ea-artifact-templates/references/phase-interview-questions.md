@@ -57,6 +57,7 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 
 12. What external forces (market shifts, regulatory changes, competitive pressure, technology change) are creating pressure to act now? Assign each a DRV-NNN ID.
 13. What internal forces (cost pressure, strategic mandate, leadership change, capability gap) are pushing this engagement forward? Assign each a DRV-NNN ID.
+   - For each driver: what evidence, event, or data point confirms this is real pressure on the organisation right now? Note the source (report, incident, regulatory instrument, stakeholder statement). A driver without a verifiable source is an assumption — flag it.
 14. Given those drivers, what are the high-level outcomes this engagement must achieve? Capture each as a goal (G-NNN) — a qualitative statement of a desired future state.
 15. For each goal: what specific, measurable result would prove this goal is being achieved, and by when? Capture each as an objective (OBJ-NNN) with a measure and deadline.
 16. How does the organisation intend to achieve its goals? Capture the key approaches as strategies (STR-NNN), each linked to the goals it supports.
@@ -202,6 +203,7 @@ Assign IDs sequentially within each prefix as responses are confirmed. Record ID
    - If a response includes a specific number or deadline, it is an **Objective** — note it and handle in the next step.
    - If it describes an approach ("adopt cloud-first"), it is a **Strategy** — note it and record separately.
    - Assign each confirmed goal a G-NNN ID and note which driver(s) it responds to.
+   - For each goal: in one sentence, why is achieving it important for this engagement specifically? What happens if it is not achieved? (This is the goal's Rationale — captures the consequence of failure.)
 
 *§4 Objectives — the measurable, time-bound results that operationalise each goal:*
 5. For each goal captured: what is the specific, measurable result that would prove this goal is being achieved — and by when? (e.g. for "Achieve highly reliable platform operations" → "Reduce unplanned downtime to under 4 hours per quarter by Q4 2026")
@@ -214,11 +216,13 @@ Assign IDs sequentially within each prefix as responses are confirmed. Record ID
 7. For each goal: what broader, systemic concerns are currently preventing or threatening its achievement? (Patterns of dysfunction, capability gaps, unresolved conflicts — not single broken things.) (e.g. "Weak stakeholder alignment across business units", "Inconsistent data quality across operational systems")
    - Assign each confirmed issue an ISS-NNN ID and link it to the goal(s) it threatens.
    - If a response is too specific and fixable ("error rate is 30%"), it is a **Problem** — note it and handle in the next step.
+   - For each issue: what observable signal or event confirms this issue exists? Who raised or first identified it? (Evidence and source — an issue without evidence is an assumption.)
 
 *§6 Problems — the specific, observable symptoms that block objectives:*
 8. For each objective: what specific, measurable symptoms are actively blocking or undermining its delivery today? (e.g. "The monthly close process takes 15 days due to manual reconciliation", "Mobile checkout abandonment is 68% — 2× the industry benchmark")
    - Assign each confirmed problem a PRB-NNN ID and link it to the objective(s) it blocks.
    - If a response is too broad and unfixable directly ("we have poor data culture"), it is an **Issue** — move it up.
+   - For each problem: what data point, incident, or measurement confirms this symptom is currently active? Who raised or first identified it? (Evidence and source — a problem without evidence cannot be prioritised or verified later.)
 
 *Inter-element connections — run after Issues and Problems are captured:*
 > **After Issues:** "Do any of these issues, if resolved, unlock something the organisation could not do before — beyond just removing the barrier? If so, that's an Opportunity — capture it as OPP-NNN."

@@ -288,11 +288,11 @@ to populate engagement.json simultaneously.
 
 *Forces — external or internal — making this engagement necessary now.*
 
-| ID | Driver | Type | Priority | Notes | Linked Goals |
-|---|---|---|---|---|---|
-| DRV-001 | {{driver_description}} | External / Internal / Regulatory / Strategic | High / Medium / Low | {{notes}} | G-NNN |
-| DRV-002 | {{driver_description}} | External / Internal / Regulatory / Strategic | High / Medium / Low | {{notes}} | G-NNN |
-| DRV-003 | {{driver_description}} | External / Internal / Regulatory / Strategic | High / Medium / Low | {{notes}} | G-NNN |
+| ID | Driver | Type | Priority | Notes | Linked Goals | Evidence / Source |
+|---|---|---|---|---|---|---|
+| DRV-001 | {{driver_description}} | External / Internal / Regulatory / Strategic | High / Medium / Low | {{notes}} | G-NNN | {{evidence_1}} |
+| DRV-002 | {{driver_description}} | External / Internal / Regulatory / Strategic | High / Medium / Low | {{notes}} | G-NNN | {{evidence_2}} |
+| DRV-003 | {{driver_description}} | External / Internal / Regulatory / Strategic | High / Medium / Low | {{notes}} | G-NNN | {{evidence_3}} |
 
 ### 6.3 Goals
 
@@ -327,10 +327,10 @@ to populate engagement.json simultaneously.
 
 *Issues threaten goals (strategic risks); Problems block objectives (operational blockers).*
 
-| ID | Type | Statement | Threatens / Blocks | Owner | Status |
-|---|---|---|---|---|---|
-| ISS-001 | Issue | {{issue_statement}} | G-NNN | {{owner}} | Open / Being Addressed / Resolved |
-| PRB-001 | Problem | {{problem_statement}} | OBJ-NNN | {{owner}} | Open / Being Addressed / Resolved |
+| ID | Type | Statement | Threatens / Blocks | Evidence | Raised By | Owner | Status |
+|---|---|---|---|---|---|---|---|
+| ISS-001 | Issue | {{issue_statement}} | G-NNN | {{issue_evidence}} | {{issue_raised_by}} | {{owner}} | Open / Being Addressed / Resolved |
+| PRB-001 | Problem | {{problem_statement}} | OBJ-NNN | {{problem_evidence}} | {{problem_raised_by}} | {{owner}} | Open / Being Addressed / Resolved |
 
 ---
 

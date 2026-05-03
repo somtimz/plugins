@@ -34,51 +34,10 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 
 ## Command Reference
 
-| Command               | Primary Agent          | Purpose                                                                                                                    |
-| --------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `/ea-new`             | ea-facilitator         | Create a new engagement project                                                                                            |
-| `/ea-open`            | ea-facilitator         | Open or switch between engagements                                                                                         |
-| `/ea-status`          | ea-facilitator         | Dashboard: all engagements and progress                                                                                    |
-| `/ea-phase`           | ea-facilitator         | Start, edit, or resume an ADM phase                                                                                        |
-| `/ea-migrate`         | ea-facilitator         | Detect and resolve version alignment gaps                                                                                  |
-| `/ea-config`          | ea-facilitator         | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md                                               |
-| `/ea-help`            | ea-facilitator         | List commands and getting-started guide                                                                                    |
-| `/ea-interview`       | ea-interviewer         | Structured Q&A for any artifact / ADM phase                                                                                |
-| `/ea-brainstorm`      | ea-facilitator         | Capture freeform thoughts for current phase                                                                                |
-| `/ea-research`        | ea-research            | Add/apply research documents and links; proactive phase research planning and synthesis                                    |
-| `/ea-artifact`        | ea-facilitator         | Create, view, or list artifacts                                                                                            |
-| `/ea-review`          | ea-facilitator         | Open artifact for review; track review state                                                                               |
-| `/ea-grill`           | ea-interviewer         | Deep-review artifact (9 grill-me skills)                                                                                   |
-| `/ea-next`            | ea-facilitator         | Suggest the single most valuable next action based on engagement state                                                     |
-| `/ea-notes`           | ea-facilitator         | List, view, edit, or delete interview notes, brainstorm notes, and review files                                            |
-| `/ea-consistency`     | ea-consistency-checker | Focused consistency check: cross-artifact contradictions, within-artifact section inconsistencies, ID reference validation |
-| `/ea-engage-review`   | ea-consistency-checker | Full engagement: consistency + traceability                                                                                |
-| `/ea-security-review` | ea-security-auditor    | Full engagement or single-artifact security audit — SABSA, ISO 27001, NIST CSF 2.0 coverage                                |
-| `/ea-publish`         | ea-facilitator         | Publish artifacts into a consolidated document                                                                             |
-| `/ea-decisions`       | ea-facilitator         | Decision Register — aggregates all A3 rows                                                                                 |
-| `/ea-adrs`            | ea-facilitator         | ADR Register — create, update, track ADRs                                                                                  |
-| `/ea-risks`           | ea-facilitator         | Risk Register — aggregate, rate, track RIS-NNN                                                                             |
-| `/ea-changes`         | ea-facilitator         | Change Register — aggregate all ACR artifacts                                                                              |
-| `/ea-concerns`        | ea-facilitator         | Concerns Register — aggregate all A4 rows                                                                                  |
-| `/ea-roles`           | ea-facilitator         | Role Catalogue — list, filter, generate, and update role assignments                                                       |
-| `/ea-direction`       | ea-facilitator         | Direction Register — Goals, Objectives, Strategies aggregated from artifacts                                               |
-| `/ea-requirements`    | ea-facilitator         | Requirement management and artifact sync                                                                                   |
-| `/ea-zachman`         | ea-facilitator         | Zachman Diagram — generate, review, gap, classify                                                                          |
-| `/ea-generate`        | ea-facilitator         | Generate .docx / .pptx / .mmd / .png / .svg                                                                                |
+30 commands available — run `/ea-help` for the full table with agent assignments.
+Key entry points: `/ea-new` · `/ea-open` · `/ea-interview` · `/ea-grill` · `/ea-generate` · `/ea-status`
 
 ---
-
-## Plugin Structure
-
-```
-agents/          12 agents (ea-facilitator, ea-interviewer, ea-roadmap, ea-document-analyst, ea-research, ...)
-commands/        30 commands (see Command Reference above)
-skills/          9 skill directories (ea-artifact-templates, ea-engagement-lifecycle, zachman-framework, ...)
-templates/       31 TOGAF artifact templates (.md)
-scripts/         Python scripts for Word/PPTX generation
-docs/PRD.md      Authoritative product requirements (v0.9.12)
-hooks/hooks.json Plugin lifecycle hooks
-```
 
 ## Engagement Storage Layout
 
@@ -136,38 +95,6 @@ links: []              # named refs: [{label: "Context Diagram", path: "../../di
 
 ---
 
-## Key Reference Files
-
-| File | Purpose |
-|---|---|
-| `skills/ea-artifact-templates/references/ea-concepts.md` | Canonical definitions for all 14 EA concepts — **single source of truth**; do not redefine inline |
-| `skills/ea-artifact-templates/references/compliance-check.md` | Three-tier artifact compliance rules (T1/T2/T3); run on every artifact load |
-| `skills/ea-artifact-templates/references/phase-interview-questions.md` | Full question bank for every ADM phase with output routing tables |
-| `skills/ea-artifact-templates/references/cross-topic-detection.md` | 10-row signal map for detecting answers belonging in a different artifact |
-| `skills/ea-artifact-templates/references/diagram-catalogue.md` | Expected diagrams per artifact type, Mermaid starters, naming conventions — used by ea-interviewer (§D prompts), ea-brainstorm (step 7), ea-grill (Step 8) |
-| `skills/ea-artifact-templates/references/artifact-descriptions.md` | Purpose, audience, contents, and phase for every artifact type |
-| `skills/ea-engagement-lifecycle/SKILL.md` | ID scheme, facilitator style, opt-out rules |
-| `skills/ea-engagement-lifecycle/references/phase-constraints.md` | Per-phase runtime constraints: required artifacts, ID rules, traceability rules, blocking gates — read by ea-facilitator on phase entry, ea-interviewer at session start, ea-consistency-checker during validation |
-| `skills/ea-engagement-lifecycle/references/context-loading.md` | Context loading protocol — Scope A (artifact), Scope B (phase), Scope C (full) — used by ea-grill, ea-review, ea-consistency, ea-interview, ea-brainstorm |
-| `skills/ea-artifact-templates/SKILL.md` | A3 governance reference (states, transition rules) |
-| `docs/PRD.md` | Full feature spec, data model, agent table, quality gates, success metrics |
-
-## Skill Dependency Map
-
-| Skill | Provides | Primary consumers |
-|---|---|---|
-| `ea-artifact-templates` | Templates, compliance rules, A3/A4/A5 governance, concept definitions | ea-interviewer, /ea-artifact, /ea-grill |
-| `ea-engagement-lifecycle` | ID scheme, facilitator style, opt-out rules, session tracking | ea-facilitator, ea-interviewer |
-| `zachman-framework` | Zachman 6×6 classification methods and source mappings | ea-facilitator, /ea-zachman |
-| `ea-requirements-management` | REQ taxonomy, scope rules, sync protocol | /ea-requirements |
-| `ea-interview-ui` | React artifact UI for Web/Display interview mode | /ea-interview |
-| `ea-generation` | .docx/.pptx generation workflow, JSON extraction protocol | /ea-generate |
-| `ea-document-ingestion` | Format layer — how to read each file type (PDF, DOCX, PPTX, etc.) | ea-document-analyst |
-| `archimate-notation` | ArchiMate 3.x element types, notation rules | ea-facilitator |
-| `ea-security` | SABSA ADM mapping, ISO 27001 controls, NIST CSF functions, artifact security checklists, security interview questions | ea-security-advisor, ea-security-auditor, ea-interviewer |
-
----
-
 ## ID Scheme
 
 | Prefix | Concept | Example |
@@ -190,144 +117,16 @@ links: []              # named refs: [{label: "Context Diagram", path: "../../di
 
 **Do not use domain-prefixed IDs** (BG-/DG-/AG-/TG- etc.) — the scheme is unified and domain-agnostic.
 
-## Motivation Framework Chain
-
-```
-Vision → Mission → Business Drivers → Goals ← Strategies
-                                          ↓
-                              Issues (threaten)    Objectives ← Problems (block)
-                                                       ↓
-                                               Capability Model
-                                                       ↓
-                                                Operating Model
-                                                       ↓
-                                                   Metrics (leading/lagging)
-                                                       ↓
-                                             Requirements Register (traces all layers)
-```
-
-Capability Gaps (missing/immature capabilities) prevent Goals and trigger Phase E work packages.
-
 ---
 
 ## Agent Boundaries
 
-| Agent | Owns | Does NOT do |
-|---|---|---|
-| `ea-facilitator` | Phase navigation, next-action decisions | Q&A, writing artifact fields |
-| `ea-interviewer` | Structured Q&A, all interview modes | Phase navigation decisions |
-| `ea-roadmap` | Roadmap creation/review (3 modes) | Other artifact types |
-| `ea-document-converter` | Format conversion — converts uploads to `.md`/`.mmd` intermediates in `uploads/converted/` | EA mapping, artifact writes |
-| `ea-document-analyst` | EA mapping layer — what to extract, where it goes | Format conversion (delegates to ea-document-converter) |
-| `ea-document-ingestion` (skill) | Pipeline protocol — orchestrates converter → analyst → artifact write sequence | EA mapping decisions, format conversion |
-| `ea-consistency-checker` | Cross-artifact consistency | Artifact creation |
-| `ea-advisor` | TOGAF/Zachman/ArchiMate advisory, framework Q&A | Phase navigation, artifact writing |
-| `ea-diagram` | Architecture diagram creation/editing/interpretation (Mermaid, Graphviz, Draw.io, ArchiMate) | EA mapping, artifact writes |
-| `ea-requirements-analyst` | Document parsing → structured requirements register (FR/NFR/CON/PRI/ASS/DRV), ADM phase coverage map, Zachman coverage matrix, `requirements-index.json` population | Phase navigation, interview facilitation |
-| `ea-research` | Proactive research planning (what to study per phase), multi-source synthesis, research quality audit, research impact traceability | Applying individual research items to artifacts (that's `/ea-research apply`), format conversion |
-| `ea-security-advisor` | SABSA/ISO 27001/NIST CSF Q&A, security architecture decisions | Phase navigation, artifact writing |
-| `ea-security-auditor` | Security control gap detection, SABSA/ISO/NIST coverage audit | Artifact creation, security Q&A |
+`ea-facilitator` → phase navigation and next-action decisions only (not Q&A, not artifact writing).
+`ea-interviewer` → all structured Q&A only (not phase navigation).
+`ea-document-analyst` → EA mapping layer; delegates format conversion to `ea-document-converter`.
+For full ownership table, see individual agent definition files in `agents/`.
 
 ---
-
-## Architecture Roadmap — 3 Modes
-
-The `ea-roadmap` agent auto-selects based on engagement state:
-
-- **Review** — existing roadmap artifact found → check completeness, traceability, wave logic
-- **Artifact-informed** — source artifacts exist, no roadmap → read Vision G/OBJ/STR, Gap Analysis, Requirements Register; build goal/strategy coverage register; derive work packages; each WP anchored to at least one G/OBJ/STR
-- **Clean-slate** — no artifacts → 7-question elicitation sequence
-
-## /ea-grill Workflow
-
-Steps 1–6: load artifact → select skill → brief → run grill → produce output → offer to save review file
-**Step 7 (apply findings):** walk through each recommended revision with `y/n/edit` per revision; applied revisions bump artifact version (patch) and update `lastModified`; sets `reviewStatus: In Review` (if previously Not Reviewed or Needs Revision); Approved artifacts warn before write.
-
-## /ea-generate — Mermaid Image Rendering
-
-`/ea-generate png` and `/ea-generate svg` render `.mmd` files to images using mermaid-cli (`mmdc`).
-
-**Prerequisite:** `npm install -g @mermaid-js/mermaid-cli`
-Auto-fallback: `npx -y @mermaid-js/mermaid-cli` (downloads on first run if `mmdc` not on PATH)
-
-**Render single file:** `/ea-generate png diagrams/my-diagram.mmd`
-**Render all diagrams:** `/ea-generate png --all`
-**Options:** `--theme default|dark|forest|neutral|base` `--bg white|transparent|#rrggbb`
-
-**Batch script:** `scripts/render-mermaid.py` — direct Python invocation for bulk rendering
-```bash
-python3 ea-assistant/scripts/render-mermaid.py EA-projects/{slug}/diagrams/ --format png --theme default
-```
-
-**WSL2 note:** If Puppeteer/Chromium fails: `export PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable`
-
-## /ea-generate — Script Invocation
-
-Scripts: `scripts/generate-docx.py` and `scripts/generate-pptx.py`
-
-```bash
-# Locate script (CLAUDE_PLUGIN_ROOT is not set automatically)
-# Scripts are at ../../scripts relative to EA-projects/{slug}/, or find via:
-SCRIPT=$(find "$HOME/.claude" -name "generate-docx.py" -path "*/ea-assistant/scripts/*" | head -1)
-
-"$HOME/.ea-assistant-venv/bin/python" "$SCRIPT" \
-  --type {script-type} \
-  --engagement-dir EA-projects/{slug} \
-  --content @/tmp/ea-gen-{artifact-id}.json \
-  --diagrams @/tmp/ea-diagrams-{artifact-id}.json \
-  --output EA-projects/{slug}/artifacts/{artifact-id}.docx
-```
-
-**`--type` values:** `vision`, `gap-analysis`, `app-portfolio`, `requirements-register`, `roadmap`, `stakeholder-map` — must match script's `ARTIFACT_SECTIONS` keys.
-
-**JSON extraction:** Before calling the script, extract structured content from the artifact markdown into JSON. Keys must match `ARTIFACT_SECTIONS`. Strip headings, table markers, and frontmatter — pass plain text per section. If a section is absent, omit the key. Content is passed via `--content @file`, not via a non-existent `--input` flag.
-
-**`--diagrams`** is optional; pass `[{"title":"...", "path":"..."}]` or `@file.json`. Diagrams are embedded as a final appendix (docx) or appended as slides (pptx).
-
----
-
-## Research & References
-
-The `ResearchAndReferences/` folder is the engagement library for external context.
-
-**`/ea-research` modes:** `add` (paste document), `note` (freeform note), `link` (URL + summary), `list` (default, shows index), `view <item>` (full content), `apply [artifact-id]` (synthesise against deliverable)
-
-**Apply workflow:** loads selected research items + target artifact → identifies gaps, contradictions, enhancements → `y/n/edit` per revision → bumps artifact version (patch) → writes synthesis report to `ResearchAndReferences/synthesis-{artifact-id}-{date}.md`
-
-**Index file:** `ResearchAndReferences/research-index.md` — auto-maintained, tracks type/title/file/date/tags for every item
-
-## Risk Management
-
-The Risk Register (`templates/risk-register.md`) is a cross-cutting artifact generated by `/ea-risks`. It aggregates risks from all artifacts into a single register with RIS-NNN IDs, severity ratings, ownership, and mitigation tracking.
-
-**Risk sources scanned by `/ea-risks`:**
-- Architecture Vision — §14 Key Risks
-- Statement of Architecture Work — Risk section
-- Migration Plan — §4 Risk Register
-- Architecture Compliance Assessment — Outstanding Risks
-- Existing `risk-register-*.md` (curated RIS-NNN entries)
-
-**`/ea-risks` modes:** `generate` (default, writes file), `status` (inline summary), `update RIS-NNN <field> <value>` (single field update)
-
-**Risk rating:** Derived from Likelihood × Impact → Critical / High / Medium / Low (see template guidance block for matrix)
-
-## Zachman Diagram
-
-Cross-cutting classification artifact mapping all engagement content across the 6×6 grid (rows: Contextual → Functioning; columns: What / How / Where / Who / When / Why).
-
-**`/ea-zachman` modes:** `generate` (auto-populate from existing artifacts), `review` (inline coverage matrix), `gap` (prioritised gap list with remediation actions), `interview` (guided Q&A row by row), `classify <artifact>` (cell classification for any artifact)
-
-**Coverage indicator:** ✅ Populated / ⚠️ Partial / ❌ Empty / 🚫 Out of scope
-
-**Key source mappings:**
-- Architecture Vision → R1,C6 + R2,C6 (goals, drivers, strategies)
-- Business Architecture → R2,C2 + R2,C4 (processes, organisation)
-- Data Architecture → R2,C1 + R3,C1 + R4,C1 (semantic → logical → physical data)
-- Application Architecture → R3,C2 + R3,C3 + R3,C4 (functions, distribution, roles)
-- Technology Architecture → R4,C3 + R4,C2 (infrastructure, system design)
-- Requirements Register → R2,C6 + R3,C6 (motivation, business rules)
-
-**Row 6** is always 🚫 — it represents the running enterprise, observed not modelled.
 
 ## Architecture Decision Records
 
@@ -347,14 +146,6 @@ ADRs are standalone documents capturing significant architecture decisions — t
 
 **`## Appendix A5 — Related Architecture Decisions` section** is required (T3-ADR) on: Architecture Vision, Business/Data/App/Tech Architecture, Gap Analysis, Architecture Roadmap, SAoW, Migration Plan, Compliance Assessment, Requirements Register, Engagement Charter, Governance Framework, Implementation Governance Plan
 
-## Governance Artifacts
-
-| Template | Phase | Purpose | Command |
-|---|---|---|---|
-| `governance-framework.md` | Prelim | Enterprise governance structure: ARB ToR, decision rights, ADM tailoring, compliance process | `/ea-artifact create governance-framework` |
-| `implementation-governance-plan.md` | G | Engagement-specific governance: review schedule, checkpoints, waiver process, escalation | `/ea-artifact create implementation-governance-plan` |
-| `change-register.md` | H | Aggregated view of all ACR artifacts | `/ea-changes` (generated) |
-
 ---
 
 ## Compliance Rules (Tier 3 — Artifact-specific)
@@ -371,38 +162,15 @@ ADRs are standalone documents capturing significant architecture decisions — t
 
 ---
 
-## EA Plugin Workflows
-
-When running any EA command, first check that at least one engagement exists in `EA-projects/`. If none exist, offer to create one with `/ea-new` rather than displaying an empty state.
-
-## UI Generation
-
-For browser-based UIs (brainstorm pads, interview forms), always write plain HTML files to `EA-projects/{slug}/ui/` rather than rendering React artifacts. Open via `file://` path or a simple HTTP server. The `ea-interview-ui` skill handles this automatically when `uiMode` is unset (defaults to HTML file mode).
-
-## Development Conventions
-
-- **Validate frontmatter before every commit:** `~/.bun/bin/bun .github/scripts/validate-frontmatter.ts ea-assistant/`
-- **Agent frontmatter required:** `name`, `description`, `model`, `color`
-- **Skill frontmatter required:** `name`, `description`, `version`
-- **Command frontmatter required:** `name`, `description`
-- **Do not redefine concepts inline** — always reference `ea-concepts.md`
-- **Feature branches + PRs** for multi-file changes; direct commits to `main` for single-file fixes
-
 ## Documentation Update Checklist
 
-Before bumping `plugin.json` version and before pushing, always update these files to reflect new features, changed commands, or revised behaviour:
+Before bumping `plugin.json` version, update all six files:
 
 | File | What to update |
 |---|---|
-| `.claude-plugin/plugin.json` | Version number; description if feature set changed |
-| `../.claude-plugin/marketplace.json` | Version and description — **must exactly match `plugin.json`** |
-| `docs/PRD.md` | Version number; new sections for any new feature area; revised command/agent/template counts; quality gates if changed |
-| `commands/ea-help.md` | Commands table (add/remove rows); tips section (add tips for new features) |
-| `README.md` | Feature bullet list; commands table; prerequisite changes; project storage layout if changed |
-| `CLAUDE.md` (this file) | Version number; Plugin Structure counts; Command Reference table; ID scheme additions; new compliance rules; Skill Dependency Map |
-
-**`plugin.json` ↔ `marketplace.json` sync rule:** The `version` and `description` fields in `ea-assistant/.claude-plugin/plugin.json` and the corresponding entry in `.claude-plugin/marketplace.json` must always be identical. Update both in the same edit — never one without the other.
-
-**When a version bump is the only change** (no new features), update the version number in all six files only — no other edits needed.
-
-**When the docs are out of date**, bring them up to date before the next version bump — do not accumulate undocumented versions.
+| `.claude-plugin/plugin.json` | Version; description if changed |
+| `../.claude-plugin/marketplace.json` | Version + description — **must exactly match `plugin.json`** |
+| `docs/PRD.md` | Version; new feature sections; revised counts |
+| `commands/ea-help.md` | Commands table; tips |
+| `README.md` | Feature bullets; commands table |
+| `CLAUDE.md` (this file) | Version; Command Reference; ID scheme additions; new compliance rules |

@@ -58,7 +58,8 @@ Capture freeform brainstorm notes for the active EA engagement.
    - **Unscoped**: omit — leave `questions: null`.
 
    For each question, assign a `category` based on its topic:
-   - Questions about risks, blockers, stakeholder concerns → `"concerns"`
+   - Questions about ongoing failures, systemic threats, or known blockers → `"issues-problems"`
+   - Questions about risks, stakeholder concerns → `"concerns"`
    - Questions about vision, goals, objectives, outcomes → `"goals"`
    - Questions about budget, time, policy, org limits → `"constraints"`
    - Questions about improvements, gaps to close, new capabilities → `"opportunities"`
@@ -77,6 +78,18 @@ Capture freeform brainstorm notes for the active EA engagement.
 
    If any prefilled entries were found, announce before launching the pad:
    > "Found {N} pre-existing answer(s) from {source(s)}. These will appear in the brainstorm pad marked with 📄 — you can keep, edit, or replace them."
+
+3d. **Surface Issues and Problems explicitly.** Before launching the pad, ask two targeted questions in the chat (one at a time, wait for response):
+
+   > "Before we open the brainstorm pad — **what is currently threatening or preventing your goals?** These could be patterns of dysfunction, unresolved conflicts, or capability gaps. We'll capture them as potential Issues [ISS?]."
+
+   After the user responds, ask:
+
+   > "And **what specific symptoms or blockers are actively preventing measurable progress** today? Things you can observe or measure — error rates, delays, failure counts. We'll capture these as potential Problems [PRB?]."
+
+   Tag each response with `[ISS?]` or `[PRB?]` in the brainstorm pad's Issues & Problems category. These are not assigned ISS-NNN/PRB-NNN IDs here — IDs are assigned during `/ea-interview`. The tags flag them for formal assignment.
+
+   If the user says "none" or "skip", proceed silently to step 4.
 
 4. **Build `BRAINSTORM_DATA` and launch the brainstorm pad.**
 
@@ -141,7 +154,7 @@ Capture freeform brainstorm notes for the active EA engagement.
 
    If no conflicts are found, continue silently to step 6.
 
-6. **Save the pasted notes.** Parse the `BRAINSTORM NOTES` block from the user's paste. The categories are already structured by the app (Concerns / Goals & Vision / Constraints / Opportunities / Metrics / Assumptions / Other) — use them as-is; do not re-categorise.
+6. **Save the pasted notes.** Parse the `BRAINSTORM NOTES` block from the user's paste. The categories are already structured by the app (Issues & Problems / Concerns / Goals & Vision / Constraints / Opportunities / Metrics / Assumptions / Other) — use them as-is; do not re-categorise.
 
    **Append** a new session block to `EA-projects/{slug}/artifacts/{phase-folder}/notes/brainstorm/brainstorm-notes.md`. Never overwrite prior sessions. If the file does not exist, seed it from `templates/seeds/brainstorm-notes.md` (replace `{name}` → engagement name, `{phase}` → resolved phase label, `{today ISO 8601}` → today's date), then append the session block.
 
@@ -155,6 +168,10 @@ Capture freeform brainstorm notes for the active EA engagement.
    ---
 
    ## Session N — YYYY-MM-DD [Phase B — Business Architecture] (only if phase-scoped)
+
+   ### Issues & Problems
+   - [ISS?] {systemic concern threatening a goal}
+   - [PRB?] {specific observable symptom blocking an objective}
 
    ### Concerns
    - {thought}
@@ -177,6 +194,8 @@ Capture freeform brainstorm notes for the active EA engagement.
    ### Other
    - {thought}
    ```
+
+   Notes tagged `[ISS?]` and `[PRB?]` are pre-flagged for ISS-NNN/PRB-NNN assignment during the next `/ea-interview` session. The interviewer reads these tags and prompts for evidence and formal ID assignment.
 
    When creating the file for the first time, set `sessions: 1` in the frontmatter.
 

@@ -21,42 +21,46 @@
   "pluginVersion": "0.9.5",
   "lastMigratedVersion": "0.9.5",
   "direction": {
-    "Business": {
-      "goals": [
-        { "id": "G-001", "statement": "", "priority": "High | Medium | Low" }
-      ],
-      "objectives": [
-        { "id": "OBJ-001", "statement": "", "measure": "", "target": "", "deadline": "", "priority": "High | Medium | Low" }
-      ],
-      "strategies": [
-        { "id": "STR-001", "statement": "", "supports": ["G-001"], "priority": "High | Medium | Low" }
-      ]
-    },
-    "Data": { "goals": [], "objectives": [], "strategies": [] },
-    "Application": { "goals": [], "objectives": [], "strategies": [] },
-    "Technology": { "goals": [], "objectives": [], "strategies": [] }
-  },
-  "metrics": {
-    "Business": [
-      {
-        "id": "MET-001",
-        "name": "",
-        "type": "outcome | performance | activity",
-        "description": "",
-        "measure": "",
-        "baseline": "",
-        "target": "",
-        "deadline": "",
-        "frequency": "Daily | Weekly | Monthly | Quarterly",
-        "source": "",
-        "supports": ["G-001"],
-        "status": "Not Established | On Track | At Risk | Behind | Achieved"
-      }
+    "vision": "",
+    "mission": "",
+    "drivers": [
+      { "id": "DRV-001", "statement": "", "type": "External | Internal", "priority": "High | Medium | Low", "evidence": "", "linkedGoals": ["G-001"] }
     ],
-    "Data": [],
-    "Application": [],
-    "Technology": []
+    "goals": [
+      { "id": "G-001", "statement": "", "priority": "High | Medium | Low", "drivers": ["DRV-001"], "rationale": "" }
+    ],
+    "objectives": [
+      { "id": "OBJ-001", "statement": "", "measure": "", "target": "", "deadline": "", "priority": "High | Medium | Low", "linkedGoal": "G-001" }
+    ],
+    "strategies": [
+      { "id": "STR-001", "statement": "", "supports": ["G-001"], "priority": "High | Medium | Low" }
+    ],
+    "issues": [
+      { "id": "ISS-001", "statement": "", "area": "", "threatensGoals": ["G-001"], "evidence": "", "raisedBy": "" }
+    ],
+    "problems": [
+      { "id": "PRB-001", "statement": "", "symptom": "", "blocksObjectives": ["OBJ-001"], "evidence": "", "raisedBy": "" }
+    ],
+    "opportunities": [
+      { "id": "OPP-001", "statement": "", "drivers": ["DRV-001"], "type": "Exploit | Enhance | Emerge", "priority": "High | Medium | Low", "linkedGoals": ["G-001"], "rationale": "" }
+    ]
   },
+  "metrics": [
+    {
+      "id": "MET-001",
+      "name": "",
+      "type": "outcome | performance | activity",
+      "description": "",
+      "measure": "",
+      "baseline": "",
+      "baselineSource": "",
+      "target": "",
+      "deadline": "",
+      "frequency": "Daily | Weekly | Monthly | Quarterly",
+      "linkedTo": ["OBJ-001"],
+      "status": "Not Established | On Track | At Risk | Behind | Achieved"
+    }
+  ],
   "phases": {
     "Prelim":        { "status": "Not Started", "startedAt": null, "completedAt": null },
     "Requirements":  { "status": "Not Started", "startedAt": null, "completedAt": null },
@@ -82,18 +86,22 @@
 - `architectureDomains` — selected domains; defaults to all four if absent
 - `targetEndDate` — optional target completion date; defaults to `null`
 
-**v0.4.0 fields** — `direction`:
-- Domain-scoped object; keys match selected `architectureDomains`
-- Each domain: `{ goals: [], objectives: [], strategies: [] }`
-- **Goal** `{ id: G-NNN, statement, priority }` — WHERE you want to be (qualitative)
-- **Objective** `{ id: OBJ-NNN, statement, measure, target, deadline, priority }` — HOW FAR and BY WHEN (measurable)
+**v0.4.0 fields** — `direction` (flat structure, current):
+- Flat object at engagement level (not domain-scoped): `{ vision, mission, drivers[], goals[], objectives[], strategies[], issues[], problems[], opportunities[] }`
+- **Driver** `{ id: DRV-NNN, statement, type, priority, evidence?, linkedGoals[] }` — WHY the engagement is needed
+- **Goal** `{ id: G-NNN, statement, priority, drivers[], rationale? }` — WHERE you want to be (qualitative)
+- **Objective** `{ id: OBJ-NNN, statement, measure, target, deadline, priority, linkedGoal }` — HOW FAR and BY WHEN (measurable)
 - **Strategy** `{ id: STR-NNN, statement, supports: [id,...], priority }` — HOW you'll get there
-- IDs are unique across all domains; do not restart numbering per domain
+- **Issue** `{ id: ISS-NNN, statement, area, threatensGoals[], evidence?, raisedBy? }` — strategic threats to goals
+- **Problem** `{ id: PRB-NNN, statement, symptom, blocksObjectives[], evidence?, raisedBy? }` — tactical blockers of objectives
+- **Opportunity** `{ id: OPP-NNN, statement, drivers[], type, priority, linkedGoals[], rationale? }` — actionable possibilities
+- IDs are unique across the entire engagement; do not restart numbering per type
+- Fields marked `?` are optional — absent in legacy engagements; default to `""` or `[]` if missing
 - Items with empty `statement` are placeholders — MUST NOT be referenced in artifacts
 - See `skills/ea-artifact-templates/references/ea-concepts.md` for canonical definitions
 
-**v0.5.0 fields** — `metrics`:
-- Domain-scoped metrics array, tracking progress of direction items via `supports`
+**v0.5.0 fields** — `metrics` (flat array, current):
+- Flat array at engagement level (not domain-scoped); tracking progress against direction items
 
 | Metric type | Tracks | Example |
 |---|---|---|
@@ -102,9 +110,11 @@
 | `activity` | Whether a **strategy** is being executed | % of new workloads containerised |
 
 - Metric status: `Not Established` | `On Track` | `At Risk` | `Behind` | `Achieved`
-- IDs: `MET-NNN` (sequential across all domains)
+- IDs: `MET-NNN` (sequential)
+- `baselineSource` — optional; where the baseline measurement comes from
+- `linkedTo` — array of G-NNN or OBJ-NNN IDs this metric tracks
 - Metrics with empty `name` or `measure` are placeholders — MUST NOT be displayed in artifacts
-- Every objective should have at least one metric; a metric without a linked direction item is an orphan
+- Every objective should have at least one metric; a metric without a `linkedTo` entry is an orphan
 
 **v0.9.5 fields**:
 - `pluginVersion` — ea-assistant version that last opened this engagement (set by `/ea-open`); absent in legacy → treat as `"0.0.0"`

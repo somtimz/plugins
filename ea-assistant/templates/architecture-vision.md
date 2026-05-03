@@ -69,10 +69,10 @@ Force: Opportunity / Threat / Mandate.
 
 </details>
 
-| ID | Driver | Type | Force | Impact on Strategy | Linked Goals |
-|---|---|---|---|---|---|
-| DRV-001 | {{driver_1}} | Internal / External | Opportunity / Threat / Mandate | {{impact_1}} | G-00N |
-| DRV-002 | {{driver_2}} | Internal / External | Opportunity / Threat / Mandate | {{impact_2}} | G-00N |
+| ID | Driver | Type | Force | Impact on Strategy | Linked Goals | Evidence / Source |
+|---|---|---|---|---|---|---|
+| DRV-001 | {{driver_1}} | Internal / External | Opportunity / Threat / Mandate | {{impact_1}} | G-00N | {{evidence_1}} |
+| DRV-002 | {{driver_2}} | Internal / External | Opportunity / Threat / Mandate | {{impact_2}} | G-00N | {{evidence_2}} |
 
 ---
 
@@ -87,10 +87,10 @@ this goal necessary. Goals are the primary anchor for Issues (the barriers that 
 
 </details>
 
-| ID | Goal | Business Driver(s) | Linked Strategies |
-|---|---|---|---|
-| G-001 | {{goal_1}} | DRV-00N | STR-00N |
-| G-002 | {{goal_2}} | DRV-00N | STR-00N |
+| ID | Goal | Business Driver(s) | Linked Strategies | Rationale |
+|---|---|---|---|---|
+| G-001 | {{goal_1}} | DRV-00N | STR-00N | {{goal_rationale_1}} |
+| G-002 | {{goal_2}} | DRV-00N | STR-00N | {{goal_rationale_2}} |
 
 ---
 
@@ -124,10 +124,10 @@ They are parallel to Problems, not parents of them.
 
 </details>
 
-| ID | Issue | Area | Threatens Goal(s) |
-|---|---|---|---|
-| ISS-001 | {{issue_1}} | {{area_1}} | G-00N |
-| ISS-002 | {{issue_2}} | {{area_2}} | G-00N |
+| ID | Issue | Area | Threatens Goal(s) | Evidence | Raised By |
+|---|---|---|---|---|---|
+| ISS-001 | {{issue_1}} | {{area_1}} | G-00N | {{issue_evidence_1}} | {{issue_raised_by_1}} |
+| ISS-002 | {{issue_2}} | {{area_2}} | G-00N | {{issue_evidence_2}} | {{issue_raised_by_2}} |
 
 ---
 
@@ -143,10 +143,10 @@ Issues, not derived from them.
 
 </details>
 
-| ID | Problem | Observable Symptom | Blocks Objective(s) |
-|---|---|---|---|
-| PRB-001 | {{problem_1}} | {{symptom_1}} | OBJ-00N |
-| PRB-002 | {{problem_2}} | {{symptom_2}} | OBJ-00N |
+| ID | Problem | Observable Symptom | Blocks Objective(s) | Evidence | Raised By |
+|---|---|---|---|---|---|
+| PRB-001 | {{problem_1}} | {{symptom_1}} | OBJ-00N | {{problem_evidence_1}} | {{problem_raised_by_1}} |
+| PRB-002 | {{problem_2}} | {{symptom_2}} | OBJ-00N | {{problem_evidence_2}} | {{problem_raised_by_2}} |
 
 ---
 
@@ -161,9 +161,9 @@ Types: **Exploit** (capitalise on existing advantage) / **Enhance** (amplify cur
 
 </details>
 
-| ID | Opportunity | Driver(s) | Type | Priority | Linked Goal(s) |
-|---|---|---|---|---|---|
-| OPP-001 | {{opportunity_1}} | DRV-00N | Exploit / Enhance / Emerge | High / Med / Low | G-00N |
+| ID | Opportunity | Driver(s) | Type | Priority | Linked Goal(s) | Rationale |
+|---|---|---|---|---|---|---|
+| OPP-001 | {{opportunity_1}} | DRV-00N | Exploit / Enhance / Emerge | High / Med / Low | G-00N | {{opp_rationale_1}} |
 
 ---
 
@@ -188,9 +188,9 @@ stakeholders who need the full motivation chain without reading individual secti
 
 ### Key Metrics
 
-| ID | Metric | Type | Linked Objective | Baseline | Target |
-|---|---|---|---|---|---|
-| MET-001 | {{metric_1}} | Performance / Outcome / Activity | OBJ-00N | {{baseline_1}} | {{target_1}} |
+| ID | Metric | Type | Linked Objective | Baseline | Target | Baseline Source |
+|---|---|---|---|---|---|---|
+| MET-001 | {{metric_1}} | Performance / Outcome / Activity | OBJ-00N | {{baseline_1}} | {{target_1}} | {{baseline_source_1}} |
 
 > *Full direction data is maintained in `engagement.json → direction` and `metrics[]`.*
 
