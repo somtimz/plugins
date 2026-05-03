@@ -658,3 +658,109 @@ Use role IDs (ROLE-NNN) in the Stakeholder Map, Statement of Architecture Work �
 **Escalation Path:**
 - Escalates to: Application Architect (technical decisions), Stakeholder (strategic application portfolio decisions)
 - Coordinates with: Application Architect (ROLE-009)
+
+---
+
+## Councils and Governance Bodies
+
+These are collective bodies, not individual roles — they exercise architecture governance authority collectively. They have no ROLE-NNN ID. Reference them by name in governance calendars, RACI tables, and escalation paths.
+
+---
+
+### Architecture Review Board (ARB)
+
+**Purpose:** The strategic governance body for the engagement. The ARB holds collective authority over architecture decisions that are strategic or difficult to reverse — principle changes, platform selections, dispensation approvals, and major ACRs.
+
+**Duties:**
+- Review and approve, reject, or defer Strategic and Tactical architecture decisions
+- Approve changes to Architecture Principles
+- Grant or refuse dispensations and waivers raised under the Implementation Governance Plan
+- Review and endorse Architecture Change Requests (ACRs) with engagement-wide impact
+- Assess architecture compliance at phase gate reviews
+- Resolve cross-domain conflicts escalated by the Enterprise Architect
+
+**Typical Tasks:**
+- Monthly: review open decisions, dispensation requests, and ACRs submitted for approval
+- Per phase gate: assess artifact compliance; approve or withhold phase progression
+- Per ADR (Strategic authority): receive notification; endorse or challenge the decision
+- Per non-conformance: review remediation plans; approve or reject resolution approaches
+- Emergency session: assess and decide ACRs requiring immediate architecture deviation
+
+**Membership:**
+- **Chair:** Enterprise Architect (ROLE-006) or designated ARB Chair
+- **Core:** Stakeholder (ROLE-001) or Stakeholder Agent (ROLE-002); Auditor (ROLE-004)
+- **Extended (as required):** Domain Architects (ROLE-007 to ROLE-010); SMEs (ROLE-003); Delivery Lead (ROLE-012)
+
+**Cadence:** Monthly (standard); ad hoc for emergency ACRs and phase gates
+
+**Authority:** Approve / Reject / Defer / Escalate — within the scope defined by the Governance Framework §4 (ARB Terms of Reference)
+
+**Escalation:** Escalates to Stakeholder's governance layer (Board / C-suite) for decisions that exceed agreed ARB authority
+
+---
+
+### EA Working Group (AWG)
+
+**Purpose:** The operational coordination body for the architecture team. The AWG manages day-to-day architecture progress, cross-domain consistency, and in-progress decision tracking — below the threshold requiring ARB authority.
+
+**Duties:**
+- Coordinate architecture work across domains (Business, Data, Application, Technology)
+- Peer-review artifacts in progress before they move to formal "In Review" status
+- Track open concerns (CON-NNN), in-progress ADRs, and open A3 decision items
+- Align on cross-domain design choices; surface conflicts to the Enterprise Architect
+- Maintain cadence on interview scheduling, artifact completion, and phase milestones
+- Identify and escalate issues that require ARB authority or Stakeholder decision
+
+**Typical Tasks:**
+- Weekly: review artifact progress, outstanding decisions, and outputs from interviews in the prior week
+- Per artifact: informal peer review before the artifact changes status to "In Review"
+- Per interview completed: share outputs and context across domain architects for cross-domain alignment
+- Per ADR in progress: discuss options analysis; align on recommendation before the ADR is finalised
+- Per concern (CON-NNN): assess whether it warrants escalation or can be resolved at team level
+
+**Membership:**
+- **Chair:** Enterprise Architect (ROLE-006)
+- **Core:** Business Architect (ROLE-007); Data Architect (ROLE-008); Application Architect (ROLE-009); Technology Architect (ROLE-010); Business Analyst (ROLE-011)
+- **Extended (as required):** Stakeholder Agent (ROLE-002); SMEs (ROLE-003); Project Manager (ROLE-013)
+
+**Cadence:** Weekly (standard); additional sessions during intensive phase work or when multiple artifacts are in parallel review
+
+**Authority:** Operational — within patterns and principles approved by the ARB. Flags decisions that exceed operational authority to the ARB or Enterprise Architect.
+
+**Escalation:** Enterprise Architect escalates from AWG to ARB or Stakeholder as required
+
+---
+
+### Centre of Excellence (CoE)
+
+**Purpose:** The architecture Centre of Excellence is the custodian of EA standards, patterns, methods, and capability. Where the ARB makes decisions and the AWG coordinates work, the CoE builds the knowledge infrastructure that enables consistent, high-quality architecture practice across the organisation. It is a standing body that operates across engagements — not just within a single ADM cycle.
+
+**Duties:**
+- Establish, maintain, and publish architecture standards, patterns, and guidelines for use across engagements and delivery teams
+- Govern the architecture repository — artifact templates, reference architectures, decision records, and approved patterns
+- Define and maintain EA tooling, methods, and the ADM tailoring guide for the organisation
+- Measure and report architecture maturity across the portfolio (capability maturity, compliance rates, ADR coverage)
+- Provide training, coaching, and onboarding for architects and delivery teams new to EA practice
+- Facilitate architecture communities of practice; curate lessons learned across engagements
+- Identify emerging patterns, technology shifts, and industry standards for consideration as future principles or standards
+
+**Typical Tasks:**
+- Per engagement kickoff: provide applicable standards, reference architectures, and pre-approved patterns to the engagement team
+- Per phase: review new ADRs and patterns for promotion to the CoE knowledge base
+- Per engagement close: conduct post-engagement lessons-learned; update patterns, templates, or guidelines where warranted
+- Quarterly: publish architecture maturity assessment; report compliance trends; update technology radar
+- Annually: review and update Architecture Principles, EA method, and tailoring guides
+
+**Membership:**
+- **Lead:** Chief Architect or EA Practice Lead (organisational role, not a ROLE-NNN engagement role)
+- **Core:** Senior Enterprise Architects; Domain Architecture leads
+- **Extended:** Architecture Repository Owner; Governance/Compliance lead; Training/Enablement lead
+
+**Cadence:** Monthly for governance and standards review; quarterly for maturity reporting; continuous for knowledge base maintenance
+
+**Authority:** Standard-setting and publication — the CoE publishes standards that engagements must follow unless formally tailored via the ARB. The CoE does not hold decision authority over individual engagement decisions; that authority sits with the ARB and Stakeholder.
+
+**Relationship to other bodies:**
+- **ARB:** The CoE proposes new standards and principles to the ARB for approval; the ARB ratifies or returns with direction
+- **AWG:** The CoE provides reference materials and patterns to the AWG; the AWG surfaces engagement learnings back to the CoE
+- **Engagements:** The CoE provides the standards and templates that all engagements consume; it receives lessons learned in return
