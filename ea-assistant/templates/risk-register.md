@@ -66,6 +66,21 @@ Statuses:
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Status of key architecture risks: total count, severity distribution, and top risks requiring executive attention.
+Diagram: Risk heat map (likelihood × impact)
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## Risk Summary
 
 | Total | Critical | High | Medium | Low | Open | Monitoring | Accepted | Closed |

@@ -42,6 +42,21 @@ Rows are sourced from A3 tables; do not edit this document directly — regenera
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summary of all A3 governance decisions across the engagement: count by authority level and verification status.
+Diagram: Decision status summary chart
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## Summary
 
 | Total | Open | Verified | Voted | Fiat | Returned |

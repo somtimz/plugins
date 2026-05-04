@@ -41,6 +41,21 @@ the mandate, schedule, and acceptance criteria for the engagement.
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summary of the agreed scope of architecture work, key deliverables, and timeline for this engagement phase.
+Diagram: Engagement scope boundary or phase timeline diagram
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## 1. Purpose
 
 <details>

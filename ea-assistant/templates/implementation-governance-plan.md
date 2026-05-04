@@ -78,14 +78,14 @@ pile up with no agreed process.
 
 ---
 
-## 1. Executive Summary
+## Executive Summary
 
 <details>
 <summary>📋 Guidance</summary>
 
-Summarise in 3–5 sentences: what is being governed, who is responsible, and the key governance
-milestones. This section is the primary reference for executives and programme managers who
-need to understand governance obligations without reading the full plan.
+Summary of how architecture compliance will be monitored and enforced during implementation.
+Diagram: RACI or governance swimlane diagram
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
 
 </details>
 
@@ -93,7 +93,7 @@ need to understand governance obligations without reading the full plan.
 
 ---
 
-## 2. Governance Scope & Objectives
+## 1. Governance Scope & Objectives
 
 <details>
 <summary>📋 Guidance</summary>
@@ -125,7 +125,7 @@ This plan governs architecture conformance only. Programme delivery governance (
 
 ---
 
-## 3. Governance Structure
+## 2. Governance Structure
 
 <details>
 <summary>📋 Guidance</summary>
@@ -149,7 +149,7 @@ governance contacts. Always name individuals — "the architecture team" is not 
 
 ---
 
-## 4. Review Schedule
+## 3. Review Schedule
 
 <details>
 <summary>📋 Guidance</summary>
@@ -176,7 +176,7 @@ define one design review and one pre-deployment review per work package.
 
 ---
 
-## 5. Compliance Checkpoint Process
+## 4. Compliance Checkpoint Process
 
 <details>
 <summary>📋 Guidance</summary>
@@ -188,7 +188,7 @@ that just records them.
 
 </details>
 
-### 5.1 Standard Compliance Checkpoint Steps
+### 4.1 Standard Compliance Checkpoint Steps
 
 1. **Pre-review preparation (T-5 working days):** Delivery team submits artefacts to Lead Architect (solution design, relevant architecture diagrams, traceability to approved patterns).
 2. **Architecture review (T-2 working days):** Lead Architect and relevant Domain Architects review submitted artefacts against the Architecture Contract and approved patterns.
@@ -196,7 +196,7 @@ that just records them.
 4. **Gate decision:** {{gate_decision_process}}
 5. **Non-conformance handling:** {{non_conformance_handling}}
 
-### 5.2 Compliance Outcomes
+### 4.2 Compliance Outcomes
 
 | Outcome | Meaning | Required Action |
 |---|---|---|
@@ -207,7 +207,7 @@ that just records them.
 
 ---
 
-## 6. Waiver & Exception Process
+## 5. Waiver & Exception Process
 
 <details>
 <summary>📋 Guidance</summary>
@@ -243,7 +243,7 @@ for valid reasons) and non-conformances (unapproved deviations that must be reme
 
 ---
 
-## 7. Change Request Process
+## 6. Change Request Process
 
 <details>
 <summary>📋 Guidance</summary>
@@ -274,7 +274,7 @@ template for the actual request artefact.
 
 ---
 
-## 8. Escalation Paths
+## 7. Escalation Paths
 
 | Trigger | Escalation Path | Timeframe | Decision Maker |
 |---|---|---|---|
@@ -286,7 +286,7 @@ template for the actual request artefact.
 
 ---
 
-## 9. Reporting & Metrics
+## 8. Reporting & Metrics
 
 <details>
 <summary>📋 Guidance</summary>
@@ -313,7 +313,7 @@ governance meeting.
 
 ---
 
-## 10. Governance Calendar
+## 9. Governance Calendar
 
 <details>
 <summary>📋 Guidance</summary>

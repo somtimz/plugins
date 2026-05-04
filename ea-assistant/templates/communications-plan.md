@@ -38,6 +38,21 @@ interests, the Communications Plan defines how and when to engage them.
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summary of the communications approach: who needs to know what, and when.
+Diagram: Stakeholder communications timeline
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## 1. Purpose and Scope
 
 <details>

@@ -54,6 +54,21 @@ objectives, or programme structure require a formal Charter revision.
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Brief summary of the engagement mandate, scope, and intended outcomes. For an executive audience — avoid technical detail.
+Diagram: Scope boundary diagram: in/out of scope boxes
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## 1. Organisation Background
 
 <details>

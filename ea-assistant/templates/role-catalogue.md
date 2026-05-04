@@ -36,6 +36,21 @@ Role IDs (ROLE-NNN) refer to the canonical definitions in `skills/ea-engagement-
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Overview of the roles and governance bodies defined for this engagement and how they relate to architecture activities.
+Diagram: RACI overview or stakeholder role diagram
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## Active Roles
 
 <details>

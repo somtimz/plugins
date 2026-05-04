@@ -46,6 +46,21 @@ Based on the Business Model Canvas by Osterwalder & Pigneur (strategyzer.com).
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summary of the business model and how the architecture engagement supports or transforms it.
+Diagram: Business Model Canvas visual
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## 1. Customer Segments
 
 <details>

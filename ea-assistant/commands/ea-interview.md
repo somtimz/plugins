@@ -47,6 +47,11 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
    - Save dated notes to `artifacts/{phase-folder}/notes/interviews/interview-{artifact-id}-{YYYY-MM-DD}-v{N}.md`
    - Update the artifact file with confirmed answers
    - Update `lastModified` in `engagement.json`
+   - **Refresh Executive Summary:** Read the updated artifact. Draft a 3–5 sentence executive summary covering what was decided or described, and what is still open. Present:
+     > **Updated Executive Summary for {Artifact Name}:**
+     > {drafted summary}
+     > Accept? (y / edit / skip)
+     Apply or skip per user response. Only offer if the artifact has a `## Executive Summary` section.
    - Ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-next.md` and output the recommendation.
 
 ---
@@ -97,6 +102,7 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
    - Save dated notes to `artifacts/{phase-folder}/notes/interviews/interview-phase-{phase}-{YYYY-MM-DD}-v{N}.md`
    - Update target artifacts with confirmed answers (per output routing)
    - Update `lastModified` in `engagement.json`
+   - **Refresh Executive Summaries:** For each updated artifact that has a `## Executive Summary` section, draft a fresh 3–5 sentence executive summary and present: `Accept? (y / edit / skip)`. Apply per user response.
    - Ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-next.md` and output the recommendation.
 
 ---
@@ -196,6 +202,8 @@ Capture the full engagement direction in one cross-phase session before any TOGA
 
 5. Apply confirmed answers and save dated interview notes.
 
+6. **Refresh Executive Summary:** Read the updated artifact. Draft a 3–5 sentence executive summary and present: `Accept? (y / edit / skip)`. Apply per user response. Only offer if the artifact has a `## Executive Summary` section.
+
 ---
 
 ### Mode: `resume [artifact-name]`
@@ -215,6 +223,12 @@ Capture the full engagement direction in one cross-phase session before any TOGA
    - Unanswered questions from the selected notes
    - The selected mode (text / web / display)
    - Brainstorm notes path (if available): `brainstorm/brainstorm-notes.md`
+
+5. On interview completion:
+   - Save updated notes to `artifacts/{phase-folder}/notes/interviews/interview-{artifact-id}-{YYYY-MM-DD}-v{N}.md`
+   - Update the artifact file with newly confirmed answers
+   - Update `lastModified` in `engagement.json`
+   - **Refresh Executive Summary:** Read the updated artifact. Draft a 3–5 sentence executive summary and present: `Accept? (y / edit / skip)`. Apply per user response. Only offer if the artifact has a `## Executive Summary` section.
 
 ---
 

@@ -36,6 +36,21 @@ address the right concerns. Update throughout the engagement as new stakeholders
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Overview of the stakeholder landscape, key relationships, and engagement approach for this architecture programme.
+Diagram: Influence/interest grid or RACI summary
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## Stakeholder Register
 
 <details>

@@ -44,6 +44,21 @@ implementation decisions that may deviate from the agreed architecture.
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summary of agreed architecture commitments, compliance obligations, and governance approach for the implementation programme.
+Diagram: Governance and compliance summary table
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## 1. Contract Purpose
 
 <details>

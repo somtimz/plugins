@@ -36,6 +36,21 @@ Gaps feed directly into the Architecture Roadmap in Phase E.
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summary of gaps between current and target architecture for this domain, and priority action areas.
+Diagram: Gap heat map: domains × maturity levels, colour-coded by priority
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## Baseline Architecture Summary
 
 <details>

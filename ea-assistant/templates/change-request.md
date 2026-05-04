@@ -43,6 +43,21 @@ preventing uncontrolled architectural drift.
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summary of the proposed change: what is changing, why, and the expected impact on the architecture.
+Diagram: Impact assessment diagram (components affected)
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## 1. Change Description
 
 <details>

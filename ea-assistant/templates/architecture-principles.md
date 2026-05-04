@@ -69,6 +69,21 @@ the citizen's rights directly.
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summary of the guiding principles adopted and why they matter for decision-making.
+Diagram: Principles poster: 2-column card layout (principle name + statement)
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## Principle Categories
 
 <details>
