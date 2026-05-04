@@ -44,6 +44,21 @@ ACR artifacts are updated. Use `/ea-changes status` for a quick inline summary.
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Status summary of architecture change requests: open, approved, rejected, and in-progress.
+Diagram: Change request pipeline diagram
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## Summary
 
 | Status | Count |

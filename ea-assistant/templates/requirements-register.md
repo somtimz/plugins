@@ -42,6 +42,21 @@ Corporate requirements are prefixed with 🔒 to indicate read-only content.
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summary of the requirement landscape: total count, priority distribution, and key corporate requirements driving this engagement.
+Diagram: Requirements summary chart (count by priority/status)
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## Requirements Summary
 
 | Total | Corporate 🔒 | Project | Approved | Draft | Deferred | Waived | Rejected |

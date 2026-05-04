@@ -39,6 +39,21 @@ rollback. It is an input to implementation planning and must be kept current as 
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summary of migration waves, key dependencies, and risk areas to manage.
+Diagram: Migration wave diagram or Gantt chart
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## 1. Migration Overview
 
 <details>

@@ -44,6 +44,21 @@ and required remediation actions. Non-conformances must be tracked to closure.
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summary of the architecture compliance position: what is compliant, what has approved dispensations, and what requires attention.
+Diagram: Compliance scorecard by domain/principle
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## 1. Assessment Purpose
 
 <details>

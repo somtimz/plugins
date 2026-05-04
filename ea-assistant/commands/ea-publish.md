@@ -221,3 +221,70 @@ Report:
 - If opted-out artifacts were excluded: "⊘ {N} artifact(s) opted out and excluded: {names}. Run `/ea-open` to review or reverse opt-outs."
 - If opted-out questions appear in included artifacts: "⊘ {N} question(s) opted out within included artifacts — marked inline."
 - Overall document status
+
+---
+
+### Executive Mode (`--executive` flag)
+
+Triggered by `/ea-publish --executive` or `/ea-publish --executive word`.
+
+Produces an **Executive Architecture Pack** — one section per artifact containing only its Executive Summary and first diagram. Intended for sponsor briefings, board updates, and programme steering committees.
+
+**Steps 1–2 run as normal** (list and select artifacts), with this variation:
+- Default selection prompt: "Select artifacts for the Executive Architecture Pack (press Enter for all created artifacts)."
+
+**Step 2b (compliance check) is skipped.**
+
+**Step 3 (format):** Default is `both` (markdown + docx). Override with `word` or `markdown` argument.
+
+**Step 4 (document status):** Computed the same way — use the highest-severity status across selected artifacts.
+
+**Assembly — replaces Step 5:**
+
+Build the document using this structure:
+
+```markdown
+# {Engagement Name} — Executive Architecture Pack
+
+| Field        | Value                     |
+|--------------|---------------------------|
+| Organisation | {organisation}            |
+| Sponsor      | {sponsor}                 |
+| Published    | {today YYYY-MM-DD}        |
+| Status       | {derived document status} |
+| Scope        | {N} artifacts summarised  |
+
+---
+
+## Artifact Summaries
+
+---
+
+### {Artifact Name}
+
+> **Phase {phase}  ·  {status badge}  ·  Last modified: {date}**
+
+{content of the ## Executive Summary section from this artifact}
+
+{If the artifact frontmatter diagrams[] is non-empty: include the first entry as an image reference}
+
+---
+```
+
+For each artifact:
+- Extract the content of the `## Executive Summary` section (everything between the `## Executive Summary` heading and the next `##` heading or `---`).
+- If no `## Executive Summary` section exists: substitute `*No executive summary available for this artifact. Run \`/ea-summary refresh {artifact-name}\` to add one.*`
+- Include diagrams: if `diagrams[]` in frontmatter is non-empty, resolve the first path to an absolute path and include as `![{artifact-name} diagram]({absolute-path})`.
+
+**Step 6 — Write output:**
+- Markdown: `artifacts/executive-pack-{YYYY-MM-DD}.md`
+- Word: `artifacts/executive-pack-{YYYY-MM-DD}.docx` (using same pandoc step as Step 6)
+
+**Step 7 — Confirm:**
+```
+Executive Architecture Pack published.
+  Artifacts summarised:  {N}
+  Missing summaries:     {N} ({names, if any})
+  Output: artifacts/executive-pack-{date}.md
+          artifacts/executive-pack-{date}.docx
+```

@@ -51,6 +51,21 @@ Use `/ea-adrs update ADR-NNN <field> <value>` to update a single field.
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summary of architecture decisions made in this engagement: count by status and domain, and key decisions requiring executive awareness.
+Diagram: Decision timeline (key decisions only)
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## 1. Summary
 
 | Status | Count |

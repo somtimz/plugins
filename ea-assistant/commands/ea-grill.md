@@ -250,7 +250,24 @@ If the user selects `a` or `s`:
 - Never invent content — only apply revisions derived directly from the grill output
 - If a revision touches a field that references other artifacts (e.g. adds a GAP-NNN or REQ-NNN ID), flag it: `⚠️ This adds a reference to [ID] — verify it exists in the source artifact before saving`
 
-After all revisions are applied or the user skips Step 7, proceed to Step 8.
+After all revisions are applied or the user skips Step 7:
+
+### Executive Summary Refresh
+
+If any revisions were applied and the artifact has a `## Executive Summary` section:
+1. Read the updated artifact content.
+2. Draft a 3–5 sentence executive summary reflecting the current state of the artifact. Avoid technical jargon.
+3. Present to the user:
+   > **Updated Executive Summary for {Artifact Name}:**
+   > {drafted summary}
+   > Accept? (y / edit / skip)
+4. On `y`: write the summary to the `## Executive Summary` section.
+   On `edit`: show the text for editing; apply the user's version.
+   On `skip`: leave unchanged.
+
+If the artifact has no `## Executive Summary` section, skip this step silently.
+
+Then proceed to Step 8.
 
 ---
 

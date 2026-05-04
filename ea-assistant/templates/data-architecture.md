@@ -38,6 +38,21 @@ and master data management decisions.
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summary of key data assets, how they flow through the organisation, and what governance changes are required.
+Diagram: Conceptual data flow diagram or data domain map
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## 1. Data Context
 
 <details>

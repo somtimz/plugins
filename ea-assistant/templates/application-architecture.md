@@ -39,6 +39,21 @@ and build/buy/retire choices.
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Overview of the application portfolio: what is being retired, consolidated, or introduced, and why.
+Diagram: Application landscape heat map (domain × lifecycle state)
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## 1. Application Context
 
 <details>

@@ -66,6 +66,21 @@ other artifacts. Run `/ea-adrs status` for a quick portfolio view.
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Brief summary of this architecture decision, the chosen option, and the key tradeoff accepted.
+Diagram: Decision options comparison table or simple before/after diagram
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## 1. Status
 
 <details>

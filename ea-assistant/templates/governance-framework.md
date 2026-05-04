@@ -71,6 +71,21 @@ changes or the programme scope expands significantly.
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summary of the governance structure, key decision-making bodies, and how architecture decisions are approved.
+Diagram: Governance structure chart (ARB / AWG / CoE hierarchy)
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## 1. Purpose & Scope
 
 <details>

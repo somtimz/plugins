@@ -39,6 +39,21 @@ This matrix is generated or updated by /ea-requirements trace.
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summary of requirements traceability: what proportion of corporate and project requirements are addressed by architecture decisions.
+Diagram: Traceability coverage heat map
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## Coverage Summary
 
 | Total | Corporate 🔒 | Project | Fully Traced | Partially Traced | Not Traced |

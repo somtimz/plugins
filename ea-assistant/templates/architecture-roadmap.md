@@ -37,6 +37,21 @@ and is updated in Phase H as change requests are processed.
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+High-level overview of the transformation journey: key work packages, phases, and expected outcomes.
+Diagram: Roadmap timeline or swimlane diagram showing phases and major milestones
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## Strategic Alignment
 
 <details>

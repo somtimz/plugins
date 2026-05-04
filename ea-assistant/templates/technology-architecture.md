@@ -38,6 +38,21 @@ technology preferences alone. It must address security, resilience, and operatio
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summary of technology platform decisions and infrastructure changes required.
+Diagram: Technology stack or platform map diagram
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## 1. Technology Context
 
 <details>

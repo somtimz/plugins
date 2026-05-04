@@ -40,6 +40,21 @@ Each transition state should correspond to one or more work packages in the Arch
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summary of the transition states between baseline and target: how many steps, and what is achieved at each.
+Diagram: State-progression diagram: T0 → T1 → T2 → Target
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## Overview
 
 <details>

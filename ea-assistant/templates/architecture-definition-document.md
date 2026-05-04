@@ -50,6 +50,21 @@ Update `relatedArtifacts` in this document's frontmatter as domain artifacts are
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summary of the full architecture definition: baseline, target, rationale, and key decisions across all domains.
+Diagram: Multi-domain summary map or architecture overview diagram
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## Document Status
 
 | Chapter | Status | Source Artifact | Last Updated |

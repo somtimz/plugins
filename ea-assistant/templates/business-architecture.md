@@ -36,6 +36,21 @@ Phase B takes Architecture Vision as its primary input.
 
 ---
 
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Overview of the business model, key capabilities, and structural changes required. Written for an executive or business sponsor audience.
+Diagram: Capability map or value chain diagram showing current vs. target capability maturity
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
 ## 1. Business Context
 
 <details>
