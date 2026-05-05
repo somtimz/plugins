@@ -111,6 +111,23 @@ A capability with no strategic anchor should be flagged for removal or reclassif
 
 ---
 
+## 3a. Value Streams
+
+<details>
+<summary>📋 Guidance</summary>
+
+A value stream is an end-to-end set of activities that delivers a result of value to a stakeholder.
+Map each stream to the capabilities it exercises. One value stream may span multiple processes.
+A capability with no value stream is a candidate for removal or reclassification.
+
+</details>
+
+| Value Stream | Description | Trigger | End Outcome | Key Capabilities (CAP-NNN) | Strategic Link (G-NNN / STR-NNN) |
+|---|---|---|---|---|---|
+| {{value_stream_1}} | {{description}} | {{trigger}} | {{outcome}} | {{cap_ids}} | {{strategic_link}} |
+
+---
+
 ## 4. Business Processes
 
 <details>
@@ -129,6 +146,33 @@ Map to capabilities above. Include process diagrams in diagrams/ folder.
 - **Outputs:** {{outputs}}
 - **Actors:** {{actors}}
 - **Diagram:** `../diagrams/{{process_diagram}}`
+- **Value Stream:** {{which_value_stream}}
+
+**Steps:**
+
+| Step | Description | Actor | System / App | Decision / Rule |
+|---|---|---|---|---|
+| 1 | {{step_1}} | {{actor}} | {{system}} | {{decision_or_rule}} |
+
+- **Exceptions:** {{named_exception_paths}}
+- **SLA / Performance:** {{sla_or_performance_target}}
+
+---
+
+## 4a. Use Case Catalog
+
+<details>
+<summary>📋 Guidance</summary>
+
+A use case captures what an actor needs to accomplish, not how the system implements it.
+One sentence per main success scenario is sufficient at architecture level.
+Every use case with no covering capability (CAP-NNN) is a capability gap.
+
+</details>
+
+| UC-NNN | Use Case | Primary Actor | Goal | Trigger | Preconditions | Main Success Scenario | Capabilities (CAP-NNN) |
+|---|---|---|---|---|---|---|---|
+| UC-001 | {{use_case_name}} | {{actor}} | {{goal}} | {{trigger}} | {{preconditions}} | {{summary}} | {{cap_ids}} |
 
 ---
 

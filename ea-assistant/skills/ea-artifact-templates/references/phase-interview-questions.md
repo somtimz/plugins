@@ -320,6 +320,25 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 **Key questions:**
 1. What are the primary business functions performed by the organisation or the area in scope?
 2. Walk me through the key end-to-end business processes — from customer/trigger to outcome.
+
+   2a. For each key process: walk me through the steps.
+       — Who performs each step (actor / role / system)?
+       — Which application or system is used at each step?
+       — Where are the key decision points or business rules applied?
+       — What are the named exception paths (what can go wrong, and what happens next)?
+       — Is there an SLA or performance expectation for this process end-to-end?
+
+   2b. For each process: which value stream is it part of, and which capabilities does it exercise?
+       (This builds the capability-to-process cross-reference)
+
+3a. What are the end-to-end chains of activity that deliver value to your key stakeholders or customers?
+    — For each: what is the trigger, what is the end outcome, and which stakeholders benefit?
+    — Which value streams are most critical to the organisation's strategic goals (G-NNN)?
+
+3b. For each value stream: which business capabilities (CAP-NNN) are exercised along the path?
+    — Are there steps in the value stream where no existing capability covers the need?
+    — These gaps will become Capability Gaps in Phase B and GAP-NNN entries.
+
 3. Where are the biggest pain points or inefficiencies in current business operations?
 4. Let's build the capability model systematically — this is the core Phase B deliverable.
 
@@ -343,6 +362,22 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 
    f. **Strategic Alignment:** Which STR-NNN or G-NNN does each capability support?
       Any capability with no strategic anchor should be flagged for removal or reclassification.
+
+4a. Who are the primary actors that interact with this business domain?
+    (Actors are roles, not individuals: Customer, Supplier, Finance Officer, System, Regulator)
+
+4b. For each actor: what are the 3–5 most important things they need to accomplish in this domain?
+    — Capture each as a use case: "{Actor} needs to {goal}" — e.g. "Customer needs to submit a warranty claim"
+    — Assign each a UC-NNN ID.
+
+4c. For each use case: what triggers it, what must be true before it starts (preconditions), and what
+    does success look like for the actor?
+    — Summarise the main success scenario in one sentence.
+    — Are there named alternate paths or exceptions worth noting at architecture level?
+
+4d. For each use case: which capabilities (CAP-NNN) must the business have to support it?
+    — Any use case with no covering capability is a capability gap.
+
 5. How is the organisation structured — what divisions, teams, or geographies are involved?
 6. What are the priority business outcomes this architecture must support?
 7. What does the business need to look like in three to five years?
@@ -374,6 +409,13 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 | KPIs and metrics | Business Architecture | `{{performance_metrics}}` |
 | Business direction (goals, objectives, strategies) | engagement.json + Business Capability Map | `direction.Business` + `{{business_direction}}` |
 | Business metrics | engagement.json + Business Capability Map | `metrics.Business` + `{{business_metrics}}` |
+| Value streams | Business Architecture | `§3a Value Streams` |
+| Capability-to-value-stream linkage | Business Architecture | `§3a` + `§3 Supports column` |
+| Process steps / actors / systems / decisions | Business Architecture | `§4 Business Processes — Steps table` |
+| Process exceptions and SLAs | Business Architecture | `§4 Business Processes — Exceptions, SLA` |
+| Actors | Business Architecture | `§4a Use Case Catalog — Primary Actor` |
+| Use cases (UC-NNN) | Business Architecture | `§4a Use Case Catalog` |
+| Use case capability linkage | Business Architecture | `§4a + §3 CAP-NNN cross-reference` |
 
 **Facilitation Notes:**
 - Work top-down: agree L1 domains first (with the group), then populate L2 capabilities for the domains most relevant to the engagement scope. Don't attempt to enumerate all L3 sub-capabilities — only go to L3 where there is a known gap or a Phase B deliverable that requires it.
@@ -523,6 +565,53 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
     - **Application objective** example: "Decommission 3 legacy systems by Q2 2027"
     - **Application strategy** example: "Adopt SaaS-first for commodity capabilities"
 
+**Phase C — Application Architecture Design:**
+
+11. For each target application component: what is its primary responsibility?
+    What is NOT its responsibility — where is its boundary?
+
+12. What architecture pattern best describes the target application landscape?
+    - [ ] Modular Monolith — single deployable unit with well-defined internal modules
+    - [ ] Microservices — independently deployable services per bounded context
+    - [ ] Event-driven — services communicate via events / message bus
+    - [ ] Serverless — functions-as-a-service with no persistent application tier
+    - [ ] COTS / SaaS-led — mostly packaged software; custom code at the edges
+    - [ ] Hybrid — combination of above; describe which applies where
+    Why was this pattern chosen? What constraints drove the decision?
+
+13. For each significant application component: describe its internal structure.
+    — What are the major internal modules or layers?
+      (e.g. Presentation, Business Logic, Data Access, Integration Adapter)
+    — Which modules are most likely to change frequently?
+    — Which modules need to be independently scalable?
+
+14. What services or APIs does each component expose?
+    — For each: service name, purpose, consumers, protocol (REST / GraphQL / gRPC / event)
+    — What authentication / authorisation model applies?
+    — Is there an SLA (response time, availability)?
+
+15. Walk me through the user journey for the most business-critical use case (reference UC-NNN from
+    Business Architecture). Which application components are touched in sequence?
+    — What is the user interaction model (web UI / mobile / API / batch)?
+    — Where are the key latency or reliability sensitivity points?
+    — What happens if any one component is unavailable?
+
+16. For each architecturally significant component: what are the non-functional requirements?
+    — Performance: max response time, throughput (requests/sec or records/hr)
+    — Availability: uptime target (e.g. 99.9%), maintenance window
+    — Scalability: horizontal / vertical, auto-scale triggers
+    — Data volume: current and 3-year projected record counts
+
+17. How are events or state changes communicated between components?
+    — Is the primary pattern synchronous (request/response) or asynchronous (event/message)?
+    — What is the message broker or event bus (if any)?
+    — How are event schemas governed and versioned?
+
+18. What COTS / SaaS products are being adopted for commodity capabilities?
+    — For each: which business capability (CAP-NNN) does it replace or augment?
+    — What customisation or extension points will be used?
+    — What is the integration pattern for connecting COTS to the rest of the landscape?
+
 **Output Routing:**
 
 | Response Topic | Target Artifact | Target Field |
@@ -543,6 +632,13 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 | Data metrics | engagement.json + Logical Data Model | `metrics.Data` + `{{data_metrics}}` |
 | Application direction (goals, objectives, strategies) | engagement.json + Application Portfolio Catalogue | `direction.Application` + `{{application_direction}}` |
 | Application metrics | engagement.json + Application Portfolio Catalogue | `metrics.Application` + `{{application_metrics}}` |
+| Application pattern selection | Application Architecture | `§4 Application Components — Architecture Pattern` |
+| Component modules / layers | Application Architecture | `§4 Application Components — Internal Modules/Layers` |
+| Service / API contracts | Application Architecture | `§4 Application Components — Service Contracts` + `§5 API Catalog` |
+| User journeys through applications | Application Architecture | `§1a User Journeys & Use Cases` |
+| NFRs per component | Requirements Register | `REQ-NNN` type:non-functional, scope:application |
+| Event / async patterns | Application Architecture | `§5 Integration Architecture — Integration Pattern` |
+| COTS / SaaS decisions | Application Architecture | `§3 Target Application Landscape — Rationale` |
 
 **Facilitation Notes:**
 - Bring an application inventory template to the session pre-populated with known systems — asking people to add to a list is more productive than asking them to recall from memory.

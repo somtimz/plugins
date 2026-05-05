@@ -70,6 +70,23 @@ technical debt, unsupported systems). Reference the Business Architecture.
 
 ---
 
+## 1a. User Journeys & Use Cases
+
+<details>
+<summary>📋 Guidance</summary>
+
+Trace from the Business Architecture Use Case Catalog (UC-NNN). Every architecturally significant use case
+should map to at least one application component (APP-NNN). NFR Sensitivity drives quality attribute
+requirements — Performance / Availability / Security — that must appear in the Requirements Register.
+
+</details>
+
+| UC-NNN | Use Case | Primary Actor | Supported By (APP-NNN) | Key Interaction Points | NFR Sensitivity |
+|---|---|---|---|---|---|
+| UC-001 | {{use_case}} | {{actor}} | {{app_ids}} | {{interaction_points}} | Performance / Availability / Security / None |
+
+---
+
 ## 2. Current Application Portfolio
 
 <details>
@@ -129,9 +146,25 @@ Focus on the components that are new, changed, or architecturally significant.
 | **Responsibility** | {{responsibility}} |
 | **Owner** | {{owner}} |
 | **Deployment Model** | On-premise / SaaS / PaaS / IaaS |
+| **Architecture Pattern** | Microservices / Modular Monolith / Serverless / Event-driven / COTS / Hybrid |
 | **Key Interfaces** | {{interfaces}} |
 | **Data Managed** | {{data_managed}} |
 | **Replaces / Consolidates** | {{predecessor}} |
+
+**Internal Modules / Layers:**
+
+| Layer | Module | Responsibility |
+|---|---|---|
+| Presentation | {{module}} | {{responsibility}} |
+| Business Logic | {{module}} | {{responsibility}} |
+| Data | {{module}} | {{responsibility}} |
+| Integration | {{module}} | {{responsibility}} |
+
+**Service Contracts:**
+
+| Service / API | Type | Consumers | SLA |
+|---|---|---|---|
+| {{name}} | REST / GraphQL / Event / gRPC | {{consumers}} | {{sla}} |
 
 ### {{component_name_2}}
 
@@ -140,9 +173,25 @@ Focus on the components that are new, changed, or architecturally significant.
 | **Responsibility** | {{responsibility}} |
 | **Owner** | {{owner}} |
 | **Deployment Model** | On-premise / SaaS / PaaS / IaaS |
+| **Architecture Pattern** | Microservices / Modular Monolith / Serverless / Event-driven / COTS / Hybrid |
 | **Key Interfaces** | {{interfaces}} |
 | **Data Managed** | {{data_managed}} |
 | **Replaces / Consolidates** | {{predecessor}} |
+
+**Internal Modules / Layers:**
+
+| Layer | Module | Responsibility |
+|---|---|---|
+| Presentation | {{module}} | {{responsibility}} |
+| Business Logic | {{module}} | {{responsibility}} |
+| Data | {{module}} | {{responsibility}} |
+| Integration | {{module}} | {{responsibility}} |
+
+**Service Contracts:**
+
+| Service / API | Type | Consumers | SLA |
+|---|---|---|---|
+| {{name}} | REST / GraphQL / Event / gRPC | {{consumers}} | {{sla}} |
 
 ---
 
@@ -170,6 +219,12 @@ parties. Include an integration diagram.
 |---|---|---|---|---|---|
 | INT-001 | {{source}} | {{target}} | Sync API / Async Event / Batch | {{protocol}} | {{data}} |
 | INT-002 | {{source}} | {{target}} | Sync API / Async Event / Batch | {{protocol}} | {{data}} |
+
+### API Catalog
+
+| API ID | Name | Provider (APP) | Consumers | Type | Protocol | Auth Method | SLA |
+|---|---|---|---|---|---|---|---|
+| API-001 | {{name}} | {{provider}} | {{consumers}} | REST / GraphQL / Event / gRPC | {{protocol}} | OAuth2 / mTLS / API Key | {{sla}} |
 
 ---
 
