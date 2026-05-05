@@ -320,7 +320,28 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 **Key questions:**
 1. What are the primary business functions performed by the organisation or the area in scope?
 2. Walk me through the key end-to-end business processes — from customer/trigger to outcome.
+
+   *2a. For each key process: walk me through the steps.*
+   - Who performs each step (actor / role / system)?
+   - Which application or system is used at each step?
+   - Where are the key decision points or business rules applied?
+   - What are the named exception paths — what can go wrong, and what happens next?
+   - Is there an SLA or performance expectation for this process end-to-end?
+
+   *2b. For each process: which value stream (from Q3a) is it part of, and which capabilities does it exercise?*
+   (This builds the capability-to-process cross-reference that links §4 Processes to §3 Capabilities.)
+
 3. Where are the biggest pain points or inefficiencies in current business operations?
+
+3a. What are the end-to-end chains of activity that deliver value to your key stakeholders or customers?
+   - For each value stream: what is the trigger that starts it, what is the end outcome the stakeholder receives, and who benefits?
+   - Which value streams are most critical to the organisation's strategic goals (G-NNN)?
+   - Assign each a VS-NNN ID.
+
+   *3b. For each value stream: which business capabilities are exercised along the path?*
+   - Are there steps in the value stream where no existing capability covers the need?
+   - Flag any uncovered steps as capability gaps — these will become GAP-NNN entries.
+
 4. Let's build the capability model systematically — this is the core Phase B deliverable.
 
    a. **Level 1 — Domains:** What are the major capability domains relevant to this engagement?
@@ -343,6 +364,22 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 
    f. **Strategic Alignment:** Which STR-NNN or G-NNN does each capability support?
       Any capability with no strategic anchor should be flagged for removal or reclassification.
+
+4a. Who are the primary actors that interact with this business domain?
+    (Actors are roles, not individuals — examples: Customer, Supplier, Finance Officer, External Regulator, Internal System)
+
+4b. For each actor: what are the 3–5 most important things they need to accomplish in this domain?
+    - Capture each as a use case: "{Actor} needs to {goal}" — e.g. "Customer needs to submit a warranty claim"
+    - Assign each a UC-NNN ID sequentially.
+
+4c. For each use case: what triggers it, what must be true before it starts (preconditions), and what does success look like for the actor?
+    - Summarise the main success scenario in one sentence — the normal path from trigger to outcome.
+    - Are there named alternate paths or exception scenarios worth noting at architecture level?
+
+4d. For each use case: which capabilities (CAP-NNN) must the business have to support it?
+    - Any use case where no existing capability covers the need is a capability gap — flag it in §7 Gap Analysis.
+    - Link each UC-NNN to the value stream (VS-NNN) it contributes to.
+
 5. How is the organisation structured — what divisions, teams, or geographies are involved?
 6. What are the priority business outcomes this architecture must support?
 7. What does the business need to look like in three to five years?
@@ -360,13 +397,22 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 | Response Topic | Target Artifact | Target Field |
 |---|---|---|
 | Primary business functions | Business Architecture | `{{business_functions}}` |
-| Key end-to-end processes | Business Architecture | `{{key_processes}}` |
+| Key end-to-end processes | Business Architecture | `§4 Business Processes` |
+| Process steps, actors, systems, decisions | Business Architecture | `§4 Business Processes — Steps table` |
+| Process exceptions | Business Architecture | `§4 Business Processes — Exceptions` |
+| Process SLA / performance | Business Architecture | `§4 Business Processes — SLA / Performance` |
 | Pain points/inefficiencies | Gap Analysis | `{{current_state_gaps}}` |
+| Value streams (VS-NNN) | Business Architecture | `§3a Value Streams` |
+| Capability-to-value-stream linkage | Business Architecture | `§3a Key Capabilities column` + `§3 Supports column` |
 | Capability domains (L1, CAP-NNN) | Business Architecture | `§3 Business Capabilities` (Level L1) |
 | Capabilities (L2, CAP-NNN) | Business Architecture | `§3 Business Capabilities` (Level L2) |
 | Sub-capabilities (L3, CAP-NNN) | Business Architecture | `§3 Business Capabilities` (Level L3) |
-| Capability maturity assessments | Business Architecture + Gap Analysis | `§3` maturity columns + `§ Capability Gap Register` |
+| Capability maturity assessments | Business Architecture + Gap Analysis | `§3` maturity columns + `§7 Gap Analysis` |
 | Capability-to-strategy links | Business Architecture | `Supports (STR-NNN / G-NNN)` column |
+| Actors | Business Architecture | `§4a Use Case Catalog — Primary Actor` |
+| Use cases (UC-NNN) | Business Architecture | `§4a Use Case Catalog` |
+| Use case capability linkage | Business Architecture | `§4a Capabilities Used (CAP-NNN)` |
+| Use case value stream linkage | Business Architecture | `§4a` → `§3a VS-NNN` cross-reference |
 | Gap Analysis | Gap Analysis | `{{business_gaps}}` |
 | Organisation structure | Business Architecture | `{{org_structure}}` |
 | Priority business outcomes | Business Architecture | `{{business_outcomes}}` |
@@ -376,16 +422,21 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 | Business metrics | engagement.json + Business Capability Map | `metrics.Business` + `{{business_metrics}}` |
 
 **Facilitation Notes:**
-- Work top-down: agree L1 domains first (with the group), then populate L2 capabilities for the domains most relevant to the engagement scope. Don't attempt to enumerate all L3 sub-capabilities — only go to L3 where there is a known gap or a Phase B deliverable that requires it.
+- Recommended sequence: value streams (Q3a) → capability model (Q4) → process decomposition (Q2a) → use cases (Q4a). Value streams provide the organising context before drilling into capability and process detail.
+- Work top-down on capabilities: agree L1 domains first (with the group), then populate L2 capabilities for the domains most relevant to the engagement scope. Don't attempt to enumerate all L3 sub-capabilities — only go to L3 where there is a known gap or a Phase B deliverable that requires it.
 - Run a capability mapping workshop using a whiteboard or collaborative tool — asking participants to place capabilities on a heat map (invest/maintain/retire) surfaces priorities faster than questions alone.
-- Process walk-throughs are best done with operational staff, not just managers; the "how it actually works" often differs significantly from the "how it should work" described by leadership.
+- Process walk-throughs are best done with operational staff, not just managers; the "how it actually works" often differs significantly from the "how it should work" described by leadership. The Steps table in §4 is most accurately populated in a session with process owners, not IT leadership.
+- Decision / business rule capture (Q2a) frequently surfaces where compliance, exception handling, and system complexity live — these become inputs to application architecture component design.
+- Use case elicitation (Q4a) works well after the capability model is agreed — actors often emerge naturally from capability discussions ("who uses this capability?").
 - When identifying gaps, ask "what would you do if you had no constraints?" to surface aspirational capabilities before applying reality checks.
 - Every L2/L3 capability where Current Maturity < Target Maturity is a Capability Gap — ensure it appears in the Gap Analysis Capability Gap Register with a Prevents (G-NNN/OBJ-NNN) link.
+- Every use case with no covering capability is also a Capability Gap — flag it immediately in §7.
 - The KPIs question links business architecture to measurable outcomes — use answers to define gap analysis criteria.
 
 **§D Diagrams — ask at close of session:**
-> "Three diagrams are standard for the Business Architecture. Which would you like to create or describe now?"
+> "Four diagrams are standard for the Business Architecture. Which would you like to create or describe now?"
 - **Capability Map** — hierarchical heat map of business capabilities with maturity colouring (`business-architecture-capability-map.mmd`)
+- **Value Stream Map** — end-to-end chains of activity with capability overlays (`business-architecture-value-stream.mmd`)
 - **Business Process Flow** — swimlane for the most critical end-to-end process (`business-architecture-process-flow.mmd`)
 - **Organisation Map** — structure and roles in scope (`business-architecture-org-map.mmd`)
 
@@ -513,6 +564,51 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
    - [ ] Other: ___
 7. Who owns each application and each major data domain?
 8. What is the single biggest challenge you face with your data and application landscape today?
+
+**Application Architecture Design Questions:**
+
+9. For each target application component: what is its primary responsibility? And equally important — what is NOT its responsibility? Where is its boundary with adjacent components?
+
+10. What architecture pattern best describes the target application landscape?
+    - [ ] Modular Monolith — single deployable unit with well-defined internal modules
+    - [ ] Microservices — independently deployable services per bounded context
+    - [ ] Event-driven — services communicate primarily via events / message bus
+    - [ ] Serverless — functions-as-a-service with no persistent application tier
+    - [ ] COTS / SaaS-led — mostly packaged software; custom code only at the edges
+    - [ ] Hybrid — combination of above; describe which pattern applies where
+    Why was this pattern chosen? What constraints (cost, skills, timeline, regulatory) drove the decision?
+
+11. For each significant application component: describe its internal structure.
+    - What are the major internal modules or layers? (e.g. Presentation, Business Logic, Data Access, Integration Adapter)
+    - Which modules are most likely to change frequently — and should therefore be isolated from stable modules?
+    - Which modules need to be independently scalable?
+
+12. What services or APIs does each component expose to other components or external consumers?
+    - For each service: what does it do, what are the exact consumers, and what is the protocol (REST / GraphQL / gRPC / event)?
+    - What authentication and authorisation model applies to each API?
+    - Is there an SLA (max response time, availability target) that consumers depend on?
+
+13. Walk me through the user journey for the most business-critical use case (reference UC-NNN from Business Architecture). Which application components are touched in sequence?
+    - What is the user interaction model — web UI, mobile app, API call, or batch?
+    - Where are the key latency or reliability sensitivity points in this journey?
+    - What happens to the user journey if any one component is unavailable?
+
+14. For each architecturally significant component: what are the non-functional requirements?
+    - **Performance:** max acceptable response time; throughput (requests/sec or records/hr)
+    - **Availability:** uptime target (e.g. 99.9%); acceptable maintenance window
+    - **Scalability:** horizontal or vertical; what triggers a scale event?
+    - **Data volume:** current record counts and 3-year projected growth
+
+15. How are events or state changes communicated between components?
+    - Is the primary integration pattern synchronous (request/response) or asynchronous (event/message)?
+    - If asynchronous: what is the message broker or event bus? (e.g. Kafka, Azure Service Bus, AWS SQS)
+    - How are event schemas defined, documented, and versioned? Who is responsible for schema governance?
+
+16. What COTS or SaaS products are being adopted for commodity capabilities?
+    - For each: which business capability (CAP-NNN) does it replace or augment?
+    - What customisation or extension points will be used — and is customisation within the vendor's supported model?
+    - What is the integration pattern for connecting this COTS product to the broader application landscape?
+
 9. *(If Data direction not yet defined)* Capture Data direction using the three-type model:
    - **Data goal** example: "Have a single source of truth for customer data" (qualitative, no deadline)
    - **Data objective** example: "Reduce duplicate customer records by 90% by June 2026" (measurable + deadline)
@@ -528,17 +624,26 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 | Response Topic | Target Artifact | Target Field |
 |---|---|---|
 | Key data domains | Data Architecture | `{{data_domains}}` |
-| Applications per function | Application Architecture | `{{application_inventory}}` |
-| Strategic applications | Application Architecture | `{{strategic_applications}}` |
-| Replacement candidates | Application Architecture | `{{replacement_candidates}}` |
+| Applications per function | Application Architecture | `§2 Current Application Portfolio` |
+| Strategic applications | Application Architecture | `§3 Target Application Landscape` |
+| Replacement candidates | Application Architecture | `§3 Target Application Landscape — Status: Replace / Retire` |
 | Gap Analysis (application) | Gap Analysis | `{{application_gaps}}` |
 | Data duplication issues | Data Architecture | `{{data_quality_issues}}` |
-| Integration points | Application Architecture | `{{integration_points}}` |
+| Integration points | Application Architecture | `§5 Integration Architecture` |
 | Regulatory data requirements | Requirements Register | `{{data_regulatory_requirements}}` |
 | Data Architecture gaps | Gap Analysis | `{{data_gaps}}` |
-| Application ownership | Application Architecture | `{{application_ownership}}` |
+| Application ownership | Application Architecture | `§2 Current Application Portfolio` |
 | Data domain ownership | Data Architecture | `{{data_ownership}}` |
 | Key data/app challenge | Gap Analysis | `{{key_challenge}}` |
+| Component responsibilities and boundaries | Application Architecture | `§4 Application Components — Responsibility` |
+| Architecture pattern selection | Application Architecture | `§4 Application Components — Architecture Pattern` |
+| Component internal modules / layers | Application Architecture | `§4 Application Components — Internal Modules/Layers table` |
+| Service / API contracts | Application Architecture | `§4 Application Components — Service Contracts table` + `§5 API Catalog` |
+| User journeys through applications (UC-NNN) | Application Architecture | `§1a User Journeys & Use Cases` |
+| NFRs per component | Requirements Register | `REQ-NNN` type:non-functional, scope:application |
+| Integration pattern (sync / async) | Application Architecture | `§5 Integration Architecture — Integration Pattern` |
+| Event schema governance | Application Architecture | `§5 Integration Architecture — Integration Pattern` |
+| COTS / SaaS adoption decisions | Application Architecture | `§3 Target Application Landscape — Rationale` |
 | Data direction (goals, objectives, strategies) | engagement.json + Logical Data Model | `direction.Data` + `{{data_direction}}` |
 | Data metrics | engagement.json + Logical Data Model | `metrics.Data` + `{{data_metrics}}` |
 | Application direction (goals, objectives, strategies) | engagement.json + Application Portfolio Catalogue | `direction.Application` + `{{application_direction}}` |
@@ -549,13 +654,19 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 - The "strategic vs replacement" question often surfaces political tensions; frame it as investment prioritisation rather than a performance critique of existing systems.
 - Data ownership questions frequently reveal ungoverned domains — treat "no one owns it" as a gap finding, not an oversight to skip.
 - Ask for data flow diagrams or integration documentation after the session; verbal descriptions of integration points are rarely complete.
+- Run architecture pattern selection (Q10) as an explicit decision — it should go through the A3 Decision Log. Patterns chosen by default rather than by design are a significant governance gap.
+- Component boundary questions (Q9) are most productive with technical leads, not just architects — the people who implement components know where the real boundaries are.
+- Use case tracing (Q13) should be done for at least the top 3 critical use cases from the Business Architecture — single use case coverage is insufficient for system-of-systems design.
+- NFR elicitation (Q14) should be captured per component, not for the whole system — aggregate NFRs hide where the real engineering constraints are.
+- Event schema governance (Q15) is frequently neglected until integration breaks — establish ownership and versioning policy during Phase C, not during implementation.
 
 **§D Diagrams — ask at close of session:**
-> "Four diagrams are standard for Phase C. Which would you like to create or describe now?"
+> "Five diagrams are standard for Phase C. Which would you like to create or describe now?"
 - **Conceptual Data Model** — business-readable subject areas and their relationships (`data-architecture-conceptual-data-model.mmd`)
 - **Data Flow Diagram** — how data moves between systems and across boundaries (`data-architecture-data-flow.mmd`)
 - **Application Cooperation View** — integration topology showing how applications interact (`application-architecture-cooperation.mmd`)
 - **Application Component Map** — internal decomposition of key applications (`application-architecture-component-map.mmd`)
+- **User Journey Trace** — sequence diagram showing which components are touched for a critical use case (`application-architecture-journey-trace.mmd`)
 
 If the user describes content, offer to launch `/ea-diagram` immediately. Output routing: diagram files → `diagrams/`, filenames added to the relevant artifact frontmatter `diagrams: []`.
 See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid starters.

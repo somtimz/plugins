@@ -111,24 +111,82 @@ A capability with no strategic anchor should be flagged for removal or reclassif
 
 ---
 
+## 3a. Value Streams
+
+<details>
+<summary>📋 Guidance</summary>
+
+A value stream is an end-to-end set of activities that delivers a result of value to a stakeholder (customer, partner, regulator, or internal consumer). Value streams sit above processes — a single value stream typically spans multiple business processes and exercises several capabilities.
+
+Populate this section before detailing processes in §4 — value streams provide the organising context for process decomposition.
+
+- Every value stream must have a named trigger (what initiates it) and a named end outcome (what the stakeholder receives).
+- Map each value stream to the capabilities it exercises — this reveals which capabilities are strategically load-bearing.
+- Any step in a value stream with no covering capability is a capability gap — flag it for §7 Gap Analysis.
+
+</details>
+
+| VS-NNN | Value Stream | Description | Trigger | End Outcome | Key Capabilities (CAP-NNN) | Strategic Link (G-NNN / STR-NNN) |
+|---|---|---|---|---|---|---|
+| VS-001 | {{value_stream_name}} | {{description}} | {{trigger}} | {{end_outcome}} | {{cap_ids}} | {{strategic_link}} |
+
+---
+
 ## 4. Business Processes
 
 <details>
 <summary>📋 Guidance</summary>
 
-Describe the key business processes in scope.
-Map to capabilities above. Include process diagrams in diagrams/ folder.
+Describe the key business processes in scope. Map each process to the value stream it contributes to (§3a) and the capabilities it exercises (§3).
+
+For each process, capture the step-by-step flow using the Steps table — this is the primary architecture deliverable. Actors should be roles (not individuals). System/App column should reference APP-NNN IDs from the Application Architecture once available; use system names if IDs are not yet assigned.
+
+Decision / Rule column captures the business logic applied at each step — this is often where integration complexity, compliance requirements, and system boundaries emerge.
 
 </details>
 
 ### {{process_name}}
 
 - **Purpose:** {{purpose}}
+- **Value Stream:** {{VS-NNN — value stream this process contributes to}}
 - **Trigger:** {{trigger}}
 - **Inputs:** {{inputs}}
 - **Outputs:** {{outputs}}
 - **Actors:** {{actors}}
+- **SLA / Performance:** {{e.g. "Complete within 2 business days"}}
 - **Diagram:** `../diagrams/{{process_diagram}}`
+
+**Steps:**
+
+| Step | Description | Actor / Role | System / App | Decision / Business Rule |
+|---|---|---|---|---|
+| 1 | {{step_description}} | {{actor}} | {{system}} | {{decision_or_rule}} |
+| 2 | {{step_description}} | {{actor}} | {{system}} | {{decision_or_rule}} |
+
+**Exceptions:**
+- {{exception_name}}: {{what triggers it and what happens}}
+
+---
+
+## 4a. Use Case Catalog
+
+<details>
+<summary>📋 Guidance</summary>
+
+A use case captures what an actor needs to accomplish, not how the system implements it. Use cases bridge the business architecture (what capabilities are needed) and the application architecture (which components must support the actor's goal).
+
+- **Actors** are roles, not individuals: Customer, Supplier, Finance Officer, Regulator, External System.
+- **Goal** is the outcome the actor wants — stated from the actor's perspective.
+- **Main Success Scenario** — one sentence summarising the normal path to success. Detailed step-by-step flows belong in functional specifications, not here.
+- **Capabilities Used** — links to CAP-NNN entries. Any use case with no covering capability is a capability gap; flag it in §7.
+
+Assign UC-NNN IDs sequentially. These IDs are referenced in the Application Architecture (§1a) to trace which application components support each use case.
+
+</details>
+
+| UC-NNN | Use Case | Primary Actor | Goal | Trigger | Preconditions | Main Success Scenario | Capabilities Used (CAP-NNN) |
+|---|---|---|---|---|---|---|---|
+| UC-001 | {{use_case_name}} | {{actor}} | {{goal}} | {{trigger}} | {{preconditions}} | {{one-sentence summary}} | {{cap_ids}} |
 
 ---
 

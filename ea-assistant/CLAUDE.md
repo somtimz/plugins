@@ -114,6 +114,8 @@ links: []              # named refs: [{label: "Context Diagram", path: "../../di
 | ADR-NNN | Architecture Decision Record | ADR-001 |
 | OPP-NNN | Opportunity | OPP-001 |
 | CAP-NNN | Capability (Capability Model) | CAP-001 |
+| VS-NNN | Value Stream | VS-001 |
+| UC-NNN | Use Case | UC-001 |
 
 **Do not use domain-prefixed IDs** (BG-/DG-/AG-/TG- etc.) — the scheme is unified and domain-agnostic.
 

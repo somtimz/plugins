@@ -70,6 +70,27 @@ technical debt, unsupported systems). Reference the Business Architecture.
 
 ---
 
+## 1a. User Journeys & Use Cases
+
+<details>
+<summary>📋 Guidance</summary>
+
+Map the key user journeys this application landscape must support. Trace from the Business Architecture Use Case Catalog (UC-NNN). Every architecturally significant use case should resolve to at least one application component that owns its execution.
+
+- **Supported By** — list the APP-NNN IDs of the application components that jointly deliver this use case.
+- **Key Interaction Points** — the named touchpoints where the actor interacts with the application (e.g. "web portal checkout page", "mobile push notification", "batch import API").
+- **NFR Sensitivity** — the non-functional characteristic most at risk for this use case: Performance (latency / throughput), Availability (uptime / failover), Security (auth / data protection), or None (low sensitivity).
+
+Gaps: any UC-NNN from the Business Architecture that maps to no application component is an application architecture gap — add it to §6.
+
+</details>
+
+| UC-NNN | Use Case | Primary Actor | Supported By (APP-NNN) | Key Interaction Points | NFR Sensitivity |
+|---|---|---|---|---|---|
+| UC-001 | {{use_case}} | {{actor}} | {{app_ids}} | {{interaction_points}} | Performance / Availability / Security / None |
+
+---
+
 ## 2. Current Application Portfolio
 
 <details>
@@ -116,9 +137,11 @@ why a legacy system is being retained). Include a target landscape diagram.
 <details>
 <summary>📋 Guidance</summary>
 
-For each significant target application or component, describe its responsibilities,
-boundaries, and key interfaces. Use ArchiMate Application Component notation where applicable.
-Focus on the components that are new, changed, or architecturally significant.
+For each significant target application or component, describe its responsibilities, boundaries, internal structure, and service contracts. Use ArchiMate Application Component notation where applicable. Focus on components that are new, changed, or architecturally significant.
+
+- **Architecture Pattern** — the dominant structural style for this component.
+- **Internal Modules / Layers** — major internal divisions. Common layers: Presentation (UI / API surface), Business Logic (rules, workflows), Data Access (persistence, caching), Integration Adapter (outbound connectors). Only document layers that are architecturally distinct — don't invent layers that don't exist.
+- **Service Contracts** — the services this component exposes to other components or external consumers. Each service contract is a commitment — it implies versioning, SLA, and governance.
 
 </details>
 
@@ -128,10 +151,27 @@ Focus on the components that are new, changed, or architecturally significant.
 |---|---|
 | **Responsibility** | {{responsibility}} |
 | **Owner** | {{owner}} |
+| **Architecture Pattern** | Microservices / Modular Monolith / Serverless / Event-driven / COTS / Hybrid |
 | **Deployment Model** | On-premise / SaaS / PaaS / IaaS |
-| **Key Interfaces** | {{interfaces}} |
 | **Data Managed** | {{data_managed}} |
 | **Replaces / Consolidates** | {{predecessor}} |
+
+**Internal Modules / Layers:**
+
+| Layer | Module | Responsibility |
+|---|---|---|
+| Presentation | {{module}} | {{responsibility}} |
+| Business Logic | {{module}} | {{responsibility}} |
+| Data Access | {{module}} | {{responsibility}} |
+| Integration Adapter | {{module}} | {{responsibility}} |
+
+**Service Contracts:**
+
+| Service / API | Type | Consumers | SLA |
+|---|---|---|---|
+| {{service_name}} | REST / GraphQL / Event / gRPC | {{consumers}} | {{response_time, availability}} |
+
+---
 
 ### {{component_name_2}}
 
@@ -139,10 +179,24 @@ Focus on the components that are new, changed, or architecturally significant.
 |---|---|
 | **Responsibility** | {{responsibility}} |
 | **Owner** | {{owner}} |
+| **Architecture Pattern** | Microservices / Modular Monolith / Serverless / Event-driven / COTS / Hybrid |
 | **Deployment Model** | On-premise / SaaS / PaaS / IaaS |
-| **Key Interfaces** | {{interfaces}} |
 | **Data Managed** | {{data_managed}} |
 | **Replaces / Consolidates** | {{predecessor}} |
+
+**Internal Modules / Layers:**
+
+| Layer | Module | Responsibility |
+|---|---|---|
+| Presentation | {{module}} | {{responsibility}} |
+| Business Logic | {{module}} | {{responsibility}} |
+| Data Access | {{module}} | {{responsibility}} |
+
+**Service Contracts:**
+
+| Service / API | Type | Consumers | SLA |
+|---|---|---|---|
+| {{service_name}} | REST / GraphQL / Event / gRPC | {{consumers}} | {{response_time, availability}} |
 
 ---
 
@@ -170,6 +224,19 @@ parties. Include an integration diagram.
 |---|---|---|---|---|---|
 | INT-001 | {{source}} | {{target}} | Sync API / Async Event / Batch | {{protocol}} | {{data}} |
 | INT-002 | {{source}} | {{target}} | Sync API / Async Event / Batch | {{protocol}} | {{data}} |
+
+### API Catalog
+
+<details>
+<summary>📋 Guidance</summary>
+
+List all APIs exposed by application components to other components or external consumers. This catalog is the authoritative reference for integration teams and is the input to API gateway configuration. Include both internal (component-to-component) and external (partner / public) APIs. Omit database-level or internal library calls — only document service boundaries.
+
+</details>
+
+| API ID | Name | Provider (APP-NNN) | Consumers | Type | Protocol | Auth Method | SLA |
+|---|---|---|---|---|---|---|---|
+| API-001 | {{api_name}} | {{provider_app}} | {{consumers}} | REST / GraphQL / Event / gRPC | {{protocol}} | OAuth2 / mTLS / API Key / None | {{response_time, availability}} |
 
 ---
 
