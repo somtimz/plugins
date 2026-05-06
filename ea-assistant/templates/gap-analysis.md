@@ -118,9 +118,9 @@ Categories: Missing capability, Retiring component, Consolidation, New requireme
 
 </details>
 
-| Gap ID | Description | Category | Priority | Baseline State | Target State | Effort | Evidence |
-|---|---|---|---|---|---|---|---|
-| GAP-001 | {{description}} | Missing capability | High/Med/Low | {{baseline}} | {{target}} | High/Med/Low | {{evidence}} |
+| Gap ID | Description | Category | Priority | Baseline State | Target State | Effort | Evidence | Linked Decision | Resolution Path |
+|---|---|---|---|---|---|---|---|---|---|
+| GAP-001 | {{description}} | Missing capability | High/Med/Low | {{baseline}} | {{target}} | High/Med/Low | {{evidence}} | {{ADR-NNN / PAD-NNN / —}} | {{WP-NNN / Phase E / —}} |
 
 ---
 
@@ -138,9 +138,9 @@ Maturity. Link each gap to the G-NNN or OBJ-NNN it prevents.
 
 </details>
 
-| CAP-NNN | Capability | L1 Domain | Current Maturity | Target Maturity | Prevents (G-NNN / OBJ-NNN) | Priority | Evidence |
-|---|---|---|---|---|---|---|---|
-| CAP-001 | {{capability_name}} | {{domain}} | Absent / Immature / Developing | {{target}} | {{G-NNN}} | High / Med / Low | {{evidence}} |
+| CAP-NNN | Capability | L1 Domain | Current Maturity | Target Maturity | Prevents (G-NNN / OBJ-NNN) | Priority | Evidence | PAD-NNN | WP-NNN |
+|---|---|---|---|---|---|---|---|---|---|
+| CAP-001 | {{capability_name}} | {{domain}} | Absent / Immature / Developing | {{target}} | {{G-NNN}} | High / Med / Low | {{evidence}} | {{PAD-NNN / —}} | {{WP-NNN / —}} |
 
 ---
 
@@ -169,6 +169,49 @@ Legend: ✅ Covered | ⚠️ Partial | ⬜ Gap
 | Gap ID | Recommended Action | Phase | Owner |
 |---|---|---|---|
 | GAP-001 | {{action}} | E / F | {{owner}} |
+
+---
+
+## Gap-to-Decision Mapping
+
+<details>
+<summary>📋 Guidance</summary>
+
+Every gap that cannot be closed by a trivial or reversible action should trace to either:
+- A committed decision (A3 entry or ADR-NNN)
+- A pending decision (PAD-NNN) if evidence is insufficient
+- A work package (WP-NNN) in Phase E
+
+Gaps without a linked decision or work package are **orphan gaps** — they create hidden
+delivery risk. Flag orphan gaps explicitly.
+
+</details>
+
+| Gap ID | Decision Type | Decision ID | Status | Phase to Resolve | Owner |
+|---|---|---|---|---|---|
+| GAP-001 | Committed ADR | ADR-003 | Completed | Phase C | {{owner}} |
+| GAP-002 | Pending | PAD-001 | Open | Phase E | {{owner}} |
+| GAP-003 | Trivial / Reversible | — | N/A | Phase B | {{owner}} |
+
+**Orphan gaps (no linked decision or WP):** {{list_or_None}}
+
+---
+
+## Evidence Requirements for Gap Closure
+
+<details>
+<summary>📋 Guidance</summary>
+
+For each high-priority gap, define what evidence must be gathered before the gap can be
+closed. This prevents premature work package definition and ensures decisions are
+evidence-based. Evidence requirements should be specific and testable.
+
+</details>
+
+| Gap ID | Evidence Required | Current Status | Gathering Method | Target Date | Owner |
+|---|---|---|---|---|---|
+| GAP-001 | Benchmark confirming target performance | Missing | Vendor benchmark | {{date}} | {{owner}} |
+| GAP-002 | POC proving integration pattern | In Progress | 2-week spike | {{date}} | {{owner}} |
 
 ---
 

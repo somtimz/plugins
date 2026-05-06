@@ -11,6 +11,11 @@ reviewedBy: {{reviewed_by}}
 supersededBy: null
 templateVersion: 0.9.7
 lastModified: {{YYYY-MM-DD}}
+evidenceSufficiency: {{sufficient / partial / insufficient}}
+decisionTiming: {{now / defer-to-phase / defer-to-wp}}
+politicalAlignment: {{aligned / contested / fiat / deferred-governance}}
+linkedPad: {{PAD-NNN or null}}
+transitionArchitectureLink: {{T-NNN or null}}
 taxonomy:
   domain: Cross-cutting
   category: Governance
@@ -162,6 +167,37 @@ Order by importance: must-haves first, then nice-to-haves.
 
 ---
 
+## 3b. Evidence Assessment
+
+<details>
+<summary>📋 Guidance</summary>
+
+Before committing to a decision, assess whether the evidence available is sufficient to
+justify the choice. If evidence is insufficient, this ADR should remain in Candidate or
+In Progress status until the evidence is gathered, or the decision should be converted to
+a PAD-NNN (Pending Architecture Decision).
+
+Evidence types: benchmarks, POC results, vendor responses, regulatory opinions, production
+metrics, incident analysis, peer references, cost models, security reviews.
+
+For each option in §4, note the evidence quality supporting its assessment. If a MUST
+requirement disqualifies an option, state this explicitly and remove the option from
+consideration.
+
+</details>
+
+| Evidence Type | Status | Source | Confidence | Gap |
+|---|---|---|---|---|
+| {{type}} | ✅ Present / ⚠️ Partial / ❌ Missing | {{source}} | High / Med / Low | {{what_is_missing}} |
+
+**Overall evidence sufficiency:** {{Sufficient / Partial / Insufficient}}
+
+**Evidence gaps to close before decision:** {{gaps}}
+
+**Planned evidence gathering:** {{experiments_pocs_spikes}}
+
+---
+
 ## 4. Options Considered
 
 <details>
@@ -173,6 +209,9 @@ drivers. Avoid being superficial: if an option was rejected, explain exactly why
 
 A minimum of two options should be documented. If only one option exists, document why
 alternatives were not feasible.
+
+For each option, note the evidence quality supporting its assessment. If a MUST requirement
+disqualifies an option, state this explicitly and remove the option from consideration.
 
 </details>
 
@@ -257,6 +296,53 @@ of the ADR.
 
 ---
 
+## 5b. Decision Timing
+
+<details>
+<summary>📋 Guidance</summary>
+
+When was this decision made relative to the ADM phase? Was it made at the right time,
+too early (premature), or too late (reactive)? Decisions made too early risk rework;
+decisions made too late block delivery. Reference the Decide vs Defer Matrix.
+
+</details>
+
+| Factor | Assessment |
+|---|---|
+| Phase when decision was made | {{phase}} |
+| Phase when decision should optimally be made | {{optimal_phase}} |
+| Timing verdict | ✅ On time / ⚠️ Early / ❌ Late |
+| If early: risk of rework | {{description}} |
+| If late: delivery blockers created | {{description}} |
+
+**Related PAD-NNN:** {{PAD-NNN if this was deferred from an earlier phase}}
+
+---
+
+## 5c. Political Alignment
+
+<details>
+<summary>📋 Guidance</summary>
+
+Record whether this decision faced stakeholder pressure, political contestation, or was
+a fiat. This helps future architects understand whether the decision was evidence-based
+or governance-driven. Document the defensible evidence-based position independently of
+political pressure.
+
+</details>
+
+| Factor | Assessment |
+|---|---|
+| Stakeholder pressure | None / Moderate / Strong |
+| Evidence-based counter-case documented | Yes / No / N/A |
+| Governance forum reviewed | Yes / No — if yes, reference: {{ARB minute or forum}} |
+| Decision type | Consensus / Vote / Fiat / Delegated |
+| Political risk if reversed | High / Medium / Low |
+
+**Defensible governance position:** {{one-paragraph summary of the evidence-based case, independent of political pressure}}
+
+---
+
 ## 6. Rationale
 
 <details>
@@ -312,6 +398,21 @@ things are the way they are and what constraints they are working within.
 | Decision Needed | Priority | Suggested ADR | Owner |
 |---|---|---|---|
 | {{decision_needed}} | High / Med / Low | ADR-NNN (proposed) / — | {{owner}} |
+
+### 7d. Transition Architecture Linkage
+
+<details>
+<summary>📋 Guidance</summary>
+
+If this decision affects a transition state (intermediate plateau between baseline and
+target), document which transition architectures are impacted and how the decision enables
+or constrains them.
+
+</details>
+
+| Transition State | Impact | Enabling / Constraining |
+|---|---|---|
+| {{T1/T2/Target}} | {{description}} | Enabling / Constraining |
 
 ---
 

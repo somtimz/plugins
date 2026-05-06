@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.29 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.30 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -133,6 +133,7 @@ These are loaded automatically by `/ea-grill --skill practitioner|maturity|failu
 | CAP-NNN | Capability (Capability Model) | CAP-001 |
 | VS-NNN | Value Stream | VS-001 |
 | UC-NNN | Use Case | UC-001 |
+| PAD-NNN | Pending Architecture Decision | PAD-001 |
 
 **Do not use domain-prefixed IDs** (BG-/DG-/AG-/TG- etc.) — the scheme is unified and domain-agnostic.
 
@@ -167,7 +168,9 @@ ADRs are standalone documents capturing significant architecture decisions — t
 
 ---
 
-## Compliance Rules (Tier 3 — Artifact-specific)
+## Compliance Rules
+
+### Tier 3 — Artifact-specific
 
 | Rule | Artifact | Requirement |
 |---|---|---|
@@ -178,6 +181,22 @@ ADRs are standalone documents capturing significant architecture decisions — t
 | T3-ROAD-WP | Architecture Roadmap | At least one WP has non-empty `Advances Goals/Objectives` or `Executes Strategies` |
 | T3-REQ | Requirements Register | Scope column present (Corporate / Project) |
 | T3-TRACE | Traceability Matrix | Two-section structure (Corporate / Project) |
+
+### Tier 4 — Practitioner Compliance (L3+ engagements)
+
+| Rule | Applies to | Requirement |
+|---|---|---|
+| T4-ECON | All artifacts with A3 | Major strategic decisions include cost, risk, or value framing in rationale |
+| T4-LATENCY | All artifacts with A3 / ADR | Decision latency documented (time from identification to resolution, plus bottleneck) |
+| T4-OPTION | Architecture Vision, Roadmap, Data/App/Tech Architecture, Migration Plan | Hard-to-reverse choices include `Optionality` note on future flexibility |
+| T4-FITNESS | Technology Architecture, Application Architecture, Governance Framework, Implementation Governance Plan | Automated validation mechanism specified for every standard (CI check, policy-as-code, conformance test) |
+| T4-PREMAT | Architecture Vision, Statement of Architecture Work | Phase A contains only directional choices; specific tech choices flagged as premature and converted to PAD-NNN |
+| T4-EVID | All ADRs, Strategic A3 entries | Evidence Assessment table present with at least one row; overall sufficiency rated |
+| T4-POLIT | ADRs, A3 rows with Cost = High or Impact = High | Political Alignment note recording stakeholder pressure and defensible position |
+| T4-PAD | All PAD-NNN artifacts | Open PADs have expiry date within 90 days and defined resolution path |
+| T4-WPEVID | Architecture Roadmap | Work packages with Evidence Status = Insufficient are not scheduled in Wave 1 |
+
+**Maturity expectations:** L3 aspirational (T4-ECON, T4-EVID, T4-PREMAT encouraged); L4 expected (T4-ECON, T4-EVID, T4-PREMAT, T4-POLIT required); L5 enforced (all T4 rules including T4-PAD and T4-WPEVID).
 
 ---
 

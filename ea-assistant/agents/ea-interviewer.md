@@ -94,6 +94,7 @@ Additional interview-specific config behaviour:
         b: / brainstorm  Start a freeform brainstorm pause
         r: {query}       Research a topic mid-interview; findings surfaced inline
         e: {statement}   Economic framing pause — add cost/risk/value analysis
+        d: {statement}   Decide/Defer pause — assess if a decision is ready to commit
         ?  / help        Show this guide + current artifact context
       ────────────────────────────────────────────────
       ```
@@ -523,6 +524,88 @@ This pause helps ensure architecture content is legible in financial terms — a
 
 ---
 
+**Decide/Defer Pause Handler (`d: {statement}`):**
+
+At any point during a Text interview, the user can trigger a decision-quality pause by typing `d: {statement}` (e.g., `d: We should adopt a microservices architecture`).
+
+When triggered:
+
+1. Extract the statement string.
+2. Acknowledge: `⚖️ Decision quality pause — assessing: "{statement}"`
+3. Run the **5-factor Decide vs Defer assessment**:
+   ```
+   Decide vs Defer — 5-factor assessment
+
+   Factor 1 — Evidence: How much evidence supports this decision right now?
+     [ ] Strong — benchmarks, POCs, or reference implementations confirm the approach
+     [ ] Moderate — some data, but gaps remain
+     [ ] Weak — mostly opinion, analogy, or vendor claims
+
+   Factor 2 — Reversibility: If this decision is wrong, how hard is it to undo?
+     [ ] High — can reverse within 6 months with minimal cost
+     [ ] Medium — reversible within 12 months, moderate cost
+     [ ] Low — irreversible or very expensive to undo
+
+   Factor 3 — Impact: What is the blast radius if this decision is wrong?
+     [ ] Low — affects one team or system
+     [ ] Medium — affects multiple teams or a domain
+     [ ] High — affects the entire enterprise or is hard to reverse
+
+   Factor 4 — Urgency: What happens if we delay this decision by 90 days?
+     [ ] No harm — waiting improves evidence or alignment
+     [ ] Some cost — minor delay to downstream work
+     [ ] Critical — blocks committed deliverables or regulatory deadlines
+
+   Factor 5 — Capability: Do we have the skills and capacity to execute this now?
+     [ ] Ready — team has done this before
+     [ ] Learnable — training or coaching closes the gap
+     [ ] Gap — significant capability missing, may need external support
+   ```
+4. Prompt the user to rate each factor (1–3 or descriptive). If the user presses Enter for all factors, default to **Moderate / Medium / Medium / No harm / Learnable**.
+5. Compute the verdict based on the responses:
+
+   | Pattern | Verdict | Action |
+   |---|---|---|
+   | Evidence = Strong, Reversibility = High, Capability = Ready/Learnable | **Decide now** — sufficient evidence, low risk | Log to A3 as committed decision; offer to create ADR |
+   | Evidence = Weak OR Reversibility = Low OR Impact = High | **Defer** — create PAD-NNN | Offer to create a Pending Architecture Decision |
+   | Evidence = Moderate, Reversibility = Medium, Urgency = Some cost | **Decide with guardrails** — commit with constraints | Log to A3; add guardrails note; schedule evidence review |
+   | Any specific technology/pattern chosen in Phase A before B–D analysis | **Premature** — likely wrong timing | Flag as premature; convert to PAD-NNN with constraint boundaries |
+   | Urgency = Critical AND Evidence = Weak | **Risky commit** — high pressure, low evidence | Log to A3 with risk flag; require executive sign-off |
+
+6. Present the verdict and recommended action:
+   ```
+   Verdict: {verdict}
+   Rationale: {one-sentence rationale based on factor scores}
+   Recommended action: {action from table above}
+   ```
+
+7. Execute the recommended action:
+   - **Decide now:** proceed to A3 logging (same flow as `a:` handler).
+   - **Defer:** offer to create PAD-NNN:
+     ```
+     This decision should be deferred. Create a Pending Architecture Decision (PAD-NNN)?
+     A PAD captures the constraint boundaries, evidence needed, and resolution path
+     so the decision isn't forgotten or made prematurely.
+     (y / n)
+     ```
+     If **yes**: invoke `/ea-adrs new --type pad` (or equivalent PAD creation flow) with pre-populated fields:
+     - Title: derived from the statement
+     - Phase: current phase
+     - Constraint boundaries: any MUST requirements or principles from the interview context
+     - Evidence required: inferred from Weak/Moderate factors
+     - Resolution path: suggested phase/work package
+     - Expiry date: today + 90 days default
+     After creating the PAD, confirm the PAD-NNN ID and note it in the interview log.
+   - **Decide with guardrails:** log to A3 with a `Guardrails:` note (e.g., "Reversible within 6 months; review at Phase E").
+   - **Premature:** flag the concern and convert to PAD-NNN with `premature: true` and constraint boundaries.
+   - **Risky commit:** log to A3 with `Risk flag: Evidence insufficient under urgency pressure` and require executive sign-off note.
+
+8. Resume: `Resuming — Q{N} of {total}: {question text}`
+
+This pause prevents premature commitments, reduces decision rework, and links deferred decisions to the engagement's evidence pipeline.
+
+---
+
 **Contextual Help Handler (`?` / `help`):**
 
 When the user types `?` or `help` at any interview prompt:
@@ -674,15 +757,37 @@ When triggered:
 
    9. **Advanced decision quality check (optional, L3+):** After the A3 row is written and the ADR check is complete, if the decision has `Authority = Strategic` or `Cost = High` or `Risk = High`, offer:
    ```
-   💡 Practitioner check: Would you like to assess this decision's reversibility and blast radius?
-
-   Reversibility: Can this decision be undone within 6 months without major cost?
-   Blast radius: If this decision is wrong, how many teams or systems are affected?
+   💡 Practitioner check: Would you like to run the Decide vs Defer assessment on this decision?
+   This evaluates evidence, reversibility, impact, urgency, and capability to determine
+   whether the decision is ready to commit, should be deferred, or needs guardrails.
    ```
-   If the user accepts, capture their answers and append them as a note to the A3 row:
-   - `Reversibility: {High / Medium / Low} — {reason}`
-   - `Blast radius: {High / Medium / Low} — {affected teams/systems}`
-   This links to `practitioner-tips.md` deep tactic #8 (prefer reversible decisions) and Tip #40 (high-blast-radius decisions).
+   If the user accepts, run the same 5-factor assessment as the `d:` handler (see Decide/Defer Pause Handler above), adapted to the already-captured decision:
+
+   - **Factor 1 — Evidence:** What evidence supports this decision? (Strong / Moderate / Weak)
+   - **Factor 2 — Reversibility:** Can this be undone within 6 months without major cost? (High / Medium / Low)
+   - **Factor 3 — Impact:** If wrong, how many teams or systems are affected? (Low / Medium / High)
+   - **Factor 4 — Urgency:** What happens if delayed 90 days? (No harm / Some cost / Critical)
+   - **Factor 5 — Capability:** Does the team have the skills to execute? (Ready / Learnable / Gap)
+
+   Compute the verdict and present it with the same action table as the `d:` handler.
+
+   Append the assessment results as a structured note to the A3 row:
+   ```
+   Decide vs Defer Assessment:
+     Evidence: {rating} — {brief note}
+     Reversibility: {rating} — {brief note}
+     Impact: {rating} — {brief note}
+     Urgency: {rating} — {brief note}
+     Capability: {rating} — {brief note}
+     Verdict: {Decide now / Defer / Decide with guardrails / Premature / Risky commit}
+     Action: {action taken}
+   ```
+
+   If the verdict is **Defer** or **Premature**, update the A3 row `State` to `⏸️ Deferred` and create a PAD-NNN (or link to an existing one) in the `Notes` column.
+   If the verdict is **Decide with guardrails**, add a `Guardrails:` note to the A3 row.
+   If the verdict is **Risky commit**, add `Risk flag: Evidence insufficient under urgency pressure` and require executive sign-off in the `Notes` column.
+
+   This links to `practitioner-tips.md` Tip #51 (Decide vs Defer Matrix), Move #26 (5-factor assessment), and Move #27 (convert premature decisions to PADs).
 
 **Governance state transitions (A3 rows):**
 
