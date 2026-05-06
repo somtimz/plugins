@@ -18,6 +18,37 @@ relatedArtifacts: []
 diagrams: []
 links: []
 ---
+<details>
+<summary>🔒 TOGAF/ADM Compliance Status (author only — collapses on export)</summary>
+
+## Compliance Checklist
+
+| Requirement | Status | Notes |
+|---|---|---|
+| T3-A3 | ⚠️ Pending | |
+| T3-ADR | ⚠️ Pending | |
+| T3-RATIONALE | ⚠️ Pending | |
+| Decision rights defined | ⚠️ Pending | |
+| Escalation paths documented | ⚠️ Pending | |
+
+*This section is for author guidance only. Run `/ea-grill` to validate compliance.*
+
+</details>
+
+<details>
+<summary>💡 Practitioner Tip — Governance</summary>
+
+- **Federate decisions** — define which decisions are enterprise-level vs domain-level, and push domain decisions to domain architects. (Deep tactic #36)
+- Replace heavy approval gates with **explicit guardrails** — approved patterns, reference architectures, data ownership rules, and automated policy checks. (Deep tactic #37)
+- **Embed architects** in product teams, not a central pool — governance by presence, not by review. (Deep tactic #38)
+- Give solution architects **authority to approve designs within guardrails**. (Deep tactic #39)
+- **Measure governance by outcomes** — decision speed, delivery quality, and alignment, not checklist coverage. (Deep tactic #40)
+- Governance is **lightweight by design** — every review must justify its existence with a delivery outcome. (Tip #21)
+- Principles must be **enforceable**, not aspirational. If you cannot say "no" based on a principle, it is not a principle. (Tip #22)
+- Replace heavy gates with **guardrails** — pre-approved patterns and automated checks. (Tip #24)
+- Track architecture **KPIs with enterprise OKRs** — reuse rate, time-to-decision, pattern adoption. (Tip #25)
+
+</details>
 
 <details>
 <summary>📋 Guidance</summary>

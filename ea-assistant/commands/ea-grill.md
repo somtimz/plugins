@@ -51,6 +51,8 @@ If `--skill` was provided, use that skill. Otherwise, recommend a skill based on
 | Decision Register | `grill-me-decision` | Reviews whether decisions are defensible, owned, and governed |
 | Business Model Canvas | `grill-me-boardroom-strategy` | Needs full strategic + commercial + execution review |
 
+**Advanced mode overrides:** If the engagement is at L3+ maturity, the user may request an advanced review. When `--skill practitioner`, `--skill maturity`, or `--skill failure-mode` is specified, bypass the default recommendation and use the requested skill.
+
 Confirm the skill with the user before proceeding, and offer the full list as alternatives.
 The `--skill` argument accepts these short names (mapped to the full `grill-me-*` skill IDs):
 
@@ -65,6 +67,9 @@ The `--skill` argument accepts these short names (mapped to the full `grill-me-*
 | `artifact` | `grill-me-artifact` | Structured artifact review: section-by-section completeness, traceability chains, consistency |
 | `diagram` | `grill-me-diagram` | Visual design review: topology, missing components, anti-patterns, readability |
 | `boardroom-strategy` | `grill-me-boardroom-strategy` | Hybrid: strategic depth + board pressure + pre-mortem (most thorough) |
+| `practitioner` | `grill-me-practitioner` | Practitioner-level review: economic framing, decision quality, optionality, complexity reduction |
+| `maturity` | `grill-me-maturity` | Maturity assessment: evaluates artifact against L1–L5 model and suggests advancement steps |
+| `failure-mode` | `grill-me-failure-mode` | Failure-mode pre-mortem: detects symptoms of the 6 failure modes and suggests fixes |
 
 ---
 
@@ -135,6 +140,9 @@ When the review is complete (or the user types `done` or `finish`), produce the 
 - **artifact** → section-by-section completeness scorecard, traceability chain gaps, cross-artifact consistency issues, top recommended revisions
 - **diagram** → topology assessment, missing components, anti-patterns identified, readability issues, recommended structural changes
 - **boardroom-strategy** → executive summary, case for proceeding, case against, top unresolved risks, next decision required, 2-minute board-ready version
+- **practitioner** → economic framing assessment, decision quality scorecard, optionality audit, complexity heatmap, top 5 practitioner recommendations
+- **maturity** → current maturity level (L1–L5), gap analysis vs next level, specific advancement actions, blockers to progress
+- **failure-mode** → failure mode symptom scan (6 modes), root cause analysis for any detected, prevention recommendations, proceed/pause/redesign verdict
 
 Offer to save the output as a review note:
 ```

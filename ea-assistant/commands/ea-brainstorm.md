@@ -249,6 +249,24 @@ Capture freeform brainstorm notes for the active EA engagement.
    7. If the brainstorm pad has not been launched yet: ask "Would you like to add these findings to the brainstorm pad as prefilled context?" If yes, add them as a `prefilled` entry with `source: "research: {query}"` before launching.
       If the pad is already open or results have been pasted: note the findings are available in-session for the interviewer to reference.
 
+7c. **Advanced Practitioner Pause during brainstorm.** At any point, the user can type advanced-mode triggers in the chat to surface practitioner-level prompts:
+
+| Trigger | Mode | What it does |
+|---|---|---|
+| `p: {topic}` or `pattern: {topic}` | Pattern discovery | Loads `advanced-patterns.md`, finds the pattern most relevant to `{topic}`, and presents: pattern name, when to use it, how it applies to the current phase/artifact, and one implementation suggestion |
+| `f:` or `failure-mode:` | Failure-mode pre-mortem | Loads `failure-modes.md`, scans the 6 failure modes, and asks: "Which of these symptoms do you see in this engagement?" Present the detection checklist and let the user select |
+| `o:` or `optionality:` | Optionality exploration | Prompts: "What decision in this phase is hardest to reverse? How could you preserve future flexibility?" Reference `practitioner-tips.md` Tip #40 and deep tactic #8 |
+| `m:` or `maturity:` | Maturity assessment | Loads `adm-maturity-model.md`, asks: "What would this artifact look like at L3 vs L5?" Present the maturity indicators for the current phase and ask the user to self-assess |
+| `e:` or `economics:` | Economic framing | Prompts: "How would you express this in financial terms — cost, risk, value, or TCO?" Guide the user to quantify the economic dimension of their brainstorm thought |
+
+When triggered:
+1. Acknowledge: `🔮 Practitioner pause — {mode}: {topic or current phase}`
+2. Load the relevant reference file and extract the most relevant content for the current phase/artifact context.
+3. Present 1–3 focused prompts or questions that help the user apply the advanced concept.
+4. Accept the user's response and append it to the brainstorm notes under the `Other` category, tagged with `[{mode}]`.
+5. Ask: "Would you like to continue with the brainstorm, or run another practitioner pause?"
+6. If the user chooses to continue, return to the normal brainstorm flow.
+
 8. **Confirm.** After saving:
    > "Saved. These notes will be available when you run `/ea-interview` — the interviewer will reference relevant thoughts as it asks questions."
 

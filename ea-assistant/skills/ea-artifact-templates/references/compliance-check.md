@@ -70,6 +70,37 @@ Applies only to named artifact types:
 
 ---
 
+### Tier 4 — Practitioner Compliance (advanced)
+
+Tier 4 rules apply to mature engagements (L3+) and focus on economic reasoning, decision quality, and adaptive governance. These are **aspirational** at L3 and **expected** at L5.
+
+| # | Rule | Applies to | Compliant example | Non-compliant |
+|---|---|---|---|---|
+| T4-ECON | Economic traceability: Major strategic decisions (Authority = Strategic in A3) include cost, risk, or value framing in the rationale block | All artifacts with A3 | `#### A3.2 — Cloud Strategy … Rationale: Reduces TCO by 30% over 3 years; eliminates €2.1M legacy maintenance` | Rationale describes only technical benefits with no economic quantification |
+| T4-LATENCY | Decision latency documented: A3 or ADR captures how long the decision took from first identification to resolution, and identifies the bottleneck | All artifacts with A3 / ADR-NNN references | `Decision latency: 14 days (blocked by vendor legal review)` | No mention of decision duration or blocker |
+| T4-OPTION | Optionality preservation: Target-state choices that are hard to reverse (vendor lock-in, data model changes) include an `Optionality` note describing how the decision preserves future flexibility or why the risk is accepted | Architecture Vision, Roadmap, Data/App/Tech Architecture, Migration Plan | `Optionality: API-first design allows swapping vendor without consumer changes` | No discussion of reversibility or future flexibility |
+| T4-FITNESS | Fitness function coverage: For technology or application standards introduced in the architecture, at least one automated validation mechanism is specified or referenced (CI check, policy-as-code, conformance test) | Technology Architecture, Application Architecture, Governance Framework, Implementation Governance Plan | `Fitness function: API schema compliance validated via spectral in CI pipeline` | Standard is documented but no automated enforcement is described |
+
+**Note on compliance philosophy:** Compliance is a means, not an end. See `failure-modes.md` → Failure Mode 1 (The Documentation Trap). If your compliance process produces checklists without improving decision quality, it has become part of the problem.
+
+---
+
+## Maturity-Based Compliance Expectations
+
+Not every engagement needs to satisfy Tier 4 from day one. Use the maturity model (`adm-maturity-model.md`) to set realistic compliance targets:
+
+| Maturity Level | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Enforcement |
+|---|---|---|---|---|---|
+| **L1** — Compliance-oriented | Required | Required | Required (basic) | Not expected | Manual review |
+| **L2** — Tailored | Required | Required | Required | Not expected | Manual review |
+| **L3** — Integrated | Required | Required | Required | Aspirational — economic traceability encouraged | Manual + some automated |
+| **L4** — Value-driven | Required | Required | Required | Required — economic traceability expected; optionality required for irreversible decisions | Automated + selective manual |
+| **L5** — Adaptive | Required | Required | Required | Required — all T4 rules enforced | Fully automated with exception handling |
+
+**How to apply:** When an engagement is at L1–L2, run Tier 1–3 checks and report T4 as "advanced — optional." At L3+, surface T4 as recommendations. At L4+, treat T4 failures as warnings that block approval. At L5, T4 failures are blocking.
+
+---
+
 ## Compliance Check Procedure
 
 Run this check whenever an artifact is loaded for any of the following operations:

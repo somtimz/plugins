@@ -18,6 +18,22 @@ relatedArtifacts: []
 diagrams: []
 links: []
 ---
+<details>
+<summary>🔒 TOGAF/ADM Compliance Status (author only — collapses on export)</summary>
+
+## Compliance Checklist
+
+| Requirement | Status | Notes |
+|---|---|---|
+| T3-A3 | ⚠️ Pending | |
+| T3-A4 | ⚠️ Pending | |
+| T3-ADR | ⚠️ Pending | |
+| T3-RATIONALE | ⚠️ Pending | |
+| Linked to Architecture Vision | ⚠️ Pending | |
+
+*This section is for author guidance only. Run `/ea-grill` to validate compliance.*
+
+</details>
 
 <details>
 <summary>📋 Guidance</summary>
@@ -26,6 +42,17 @@ The Statement of Architecture Work (SoAW) is the formal agreement that defines t
 approach for an architecture engagement. It is produced in Phase A and approved by the sponsor
 before substantive architecture work begins. It is analogous to a project charter and establishes
 the mandate, schedule, and acceptance criteria for the engagement.
+
+</details>
+
+<details>
+<summary>💡 Practitioner Tip — SoAW</summary>
+
+- The SoAW is a **commitment device** — it should be uncomfortable enough that stakeholders think carefully before signing. (Tip #11)
+- **Timebox the architecture work** and define exit criteria — when is the architecture "good enough" to proceed? (Tip #12)
+- The SoAW must trace to the Architecture Vision — if the vision changes, the SoAW must be revisited. (Tip #5)
+- Define **clear decision rights and escalation paths** in the SoAW to prevent governance bottlenecks later. (Deep tactic #2)
+- Treat the Architecture Board as a **decision marketplace**, not a review committee — the SoAW should reflect this operating model. (Deep tactic #1)
 
 </details>
 

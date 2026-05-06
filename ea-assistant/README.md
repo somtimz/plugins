@@ -54,6 +54,11 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **TOGAF governance model** — two-layer governance reference (architecture governance vs programme governance) with phase-by-phase table; `ea-concepts.md` includes full motivation-concepts ADM lifecycle (where each concept is first captured, refined, realized, and adapted across Preliminary through Phase H)
 - **Research & References** — `/ea-research` manages a per-engagement library (documents, notes, links); `apply` mode synthesises research against any artifact — gaps and contradictions surfaced with `y/n/edit` revision workflow; synthesis reports saved to `ResearchAndReferences/`
 - **Diagram rendering** — render Mermaid (`.mmd`) files to PNG or SVG via mermaid-cli (`mmdc`); standard diagram catalogue per artifact type; batch render with `--all`
+- **Advanced practitioner content** — 50 high-impact TOGAF tips, 70 phase-by-phase deep tactics, 25 cross-cutting expert moves, 5-level maturity model (L1–L5), 7 advanced operating patterns, 6 failure modes at scale, elite architect day-to-day playbook, and synthesized white paper
+- **Practitioner grill modes** — `/ea-grill --skill practitioner` (economic framing + decision quality), `--skill maturity` (L1–L5 assessment), `--skill failure-mode` (symptom scan + pre-mortem)
+- **Advanced brainstorm pauses** — during `/ea-brainstorm`, type `p:`, `f:`, `o:`, `m:`, or `e:` to trigger pattern discovery, failure-mode scan, optionality exploration, maturity assessment, or economic framing
+- **Economic framing pause** — during `/ea-interview`, type `e: {statement}` to add cost/risk/value analysis to any answer; links to Tier 4 compliance (economic traceability)
+- **Tier 4 compliance** — advanced compliance rules for L3+ engagements: economic traceability, decision latency documentation, optionality preservation, fitness function coverage; maturity-based enforcement expectations
 
 ## Prerequisites
 

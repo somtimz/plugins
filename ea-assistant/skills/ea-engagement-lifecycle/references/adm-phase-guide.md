@@ -42,6 +42,22 @@ This guide provides a concise but complete reference for each phase of the TOGAF
 | Request for Architecture Work (template) | Template used to initiate architecture projects |
 | Tailored ADM | Documented customisation of ADM phases and deliverables for the organisation |
 
+### Deep Tactics
+- Treat the Architecture Board as a **decision marketplace**, not a review committee.
+- Define architecture services with **SLAs** — operate like a product team.
+- **Fund architecture as a persistent capability**, not a project overhead.
+- Build a **minimal but enforceable standards catalog** — start small, evolve fast.
+- Align architecture **KPIs with enterprise OKRs** (e.g., reuse rate, time-to-decision).
+
+### Hidden Mechanics
+- Architecture capability is the **platform** on which all future work runs. Under-invest here and everything downstream slows.
+- The standards catalog is a **living product** with consumers, owners, and adoption metrics — not a static document.
+
+### Maturity Indicators
+- **L1:** Architecture team is a project overhead; governance is ad-hoc
+- **L3:** Architecture team has defined services with SLAs; standards catalog is maintained
+- **L5:** Architecture capability is self-funding; governance is automated; standards are continuously pruned
+
 ---
 
 ## Phase A — Architecture Vision
@@ -81,6 +97,22 @@ This guide provides a concise but complete reference for each phase of the TOGAF
 | Value Chain Diagram | High-level view of business functions and value flow |
 | Solution Concept Diagram | Sketch of the proposed solution |
 
+### Deep Tactics
+- Use **"strategic tension"** (current vs desired state) to drive urgency — quantify the gap.
+- Build **multiple candidate visions** and force trade-off discussions early.
+- Validate vision with **real delivery constraints** (skills, vendors, legacy).
+- **Co-create the vision with business leaders** to secure ownership.
+- Define **success metrics before moving to Phase B**.
+
+### Hidden Mechanics
+- Phase A is a **political and economic instrument**, not just a descriptive exercise. Its purpose is to secure alignment and funding.
+- The Architecture Vision is a **negotiation tool**. Build it with stakeholders, not for them.
+
+### Maturity Indicators
+- **L1:** Vision is a static document produced by the architecture team
+- **L3:** Vision is co-created with business; multiple options are evaluated; success metrics are defined
+- **L5:** Vision is continuously updated; mini-ADM cycles validate assumptions before major investment
+
 ---
 
 ## Phase B — Business Architecture
@@ -119,6 +151,22 @@ This guide provides a concise but complete reference for each phase of the TOGAF
 | Business Process Catalogue | Documented business processes in scope |
 | Organisation Map | Structure of business units and relationships |
 | Business Gap Analysis | Gaps between baseline and target business architecture |
+
+### Deep Tactics
+- **Map capabilities to value streams** — don't model capabilities in isolation.
+- Identify **differentiating vs commodity capabilities** — optimize investment accordingly.
+- Use business architecture to **challenge org design**, not just reflect it.
+- Link capabilities directly to **KPIs and revenue/cost drivers**.
+- Focus on **"where to play" and "how to win"** — not just process diagrams.
+
+### Hidden Mechanics
+- Business architecture is a **compression function** — it compresses business ambiguity into coherent constraints.
+- Capabilities are the **bridge** between strategy and execution. If they are not linked to value streams, the bridge is broken.
+
+### Maturity Indicators
+- **L1:** Business architecture reflects current org chart and processes
+- **L3:** Capabilities are linked to value streams and KPIs; gap analysis prioritizes by business impact
+- **L5:** Capability heatmaps directly drive investment prioritization; org design is challenged by architecture
 
 ---
 
@@ -161,6 +209,22 @@ This guide provides a concise but complete reference for each phase of the TOGAF
 | Logical Data Model | Entity-relationship model at the logical level |
 | Application Communication Diagram | Integration and interface map |
 
+### Deep Tactics
+- Treat **data as a product** — define clear ownership, quality SLAs, and lifecycle governance for every critical data entity.
+- Design **interoperability early** — specify API contracts, event schemas, and integration patterns before selecting tools.
+- **Rationalize applications with measurable criteria** — retirement decisions need cost, risk, and duplication metrics, not just age.
+- Adopt **domain-oriented architectures** — align data and application boundaries with business domains to reduce coupling.
+- Enforce **clear boundaries** between data domains; ambiguous ownership creates silent integration debt.
+
+### Hidden Mechanics
+- Phase C is where **future integration cost is locked in**. Poor boundary decisions here multiply across every downstream phase.
+- Data architecture is a **power structure** — who owns what data determines who has authority in the organization.
+
+### Maturity Indicators
+- **L1:** Application inventory is a spreadsheet; data models are IT-owned
+- **L3:** Data domains have owners and quality SLAs; APIs are contract-first; application rationalization uses cost/risk metrics
+- **L5:** Data products are self-serve with automated quality checks; domain boundaries are continuously refined based on usage patterns
+
 ---
 
 ## Phase D — Technology Architecture
@@ -195,6 +259,22 @@ This guide provides a concise but complete reference for each phase of the TOGAF
 | Environments and Locations Diagram | Physical/logical deployment topology |
 | Platform Decomposition Diagram | Technology stack layers |
 | Technology Gap Analysis | Infrastructure and platform gaps |
+
+### Deep Tactics
+- **Standardize for leverage** — mandate core platforms only where they create economies of scale; allow flexibility at the edges.
+- Create **golden paths** — pre-approved, well-documented technology stacks that teams can adopt without central review.
+- Embed **observability and resilience** into technology standards from day one, not as afterthoughts.
+- Design for **failure modes** — every critical technology component needs a documented degraded-mode behavior.
+- Treat **cloud adoption as an operating model shift**, not just a hosting change — it changes team structures, funding, and decision rights.
+
+### Hidden Mechanics
+- Technology architecture is the **leverage layer** — good choices here multiply delivery capacity; bad choices create permanent drag.
+- Standards are a **product** with consumers, owners, and adoption metrics — not a static document.
+
+### Maturity Indicators
+- **L1:** Technology choices are project-driven; standards exist but are ignored
+- **L3:** Golden paths are documented and actively maintained; standards have owners and quarterly reviews
+- **L5:** Technology choices are self-service within guardrails; fitness functions validate conformance automatically
 
 ---
 
@@ -232,6 +312,22 @@ This guide provides a concise but complete reference for each phase of the TOGAF
 | Implementation Factor Assessment | Risks and constraints on implementation |
 | Work Package descriptions | Discrete units of architecture implementation work |
 
+### Deep Tactics
+- **Package work as value increments** — every work package must deliver measurable business value, not just close a technical gap.
+- Prioritize by **impact × feasibility** — high-impact, low-effort quick wins build momentum and credibility.
+- Design **transition architectures** deliberately — the path matters more than the ideal end state.
+- **Expose trade-offs explicitly** — when sequencing work, state what is deferred and the risk of deferral.
+- Align work packages to **funding cycles and capacity windows** — architecture that ignores budget reality is fantasy.
+
+### Hidden Mechanics
+- Phase E is where **architecture becomes an investment portfolio**. The quality of packaging and sequencing determines whether anything gets funded.
+- Transition architectures are **strategic instruments**, not temporary compromises — they define how the enterprise survives change.
+
+### Maturity Indicators
+- **L1:** Roadmap is a wish-list of projects; no clear sequencing logic
+- **L3:** Work packages are sized for value delivery; transition architectures are designed; quick wins are identified
+- **L5:** Roadmap is treated as an investment portfolio with economic tracking; transition states are continuously refined
+
 ---
 
 ## Phase F — Migration Planning
@@ -263,6 +359,22 @@ This guide provides a concise but complete reference for each phase of the TOGAF
 | Implementation and Migration Plan | Fully detailed, costed, and sequenced roadmap |
 | Prioritised Project List | Ranked list of implementation projects |
 | Benefits Realisation Plan | How and when benefits will be measured |
+
+### Deep Tactics
+- **Optimize for value delivery** — sequence migration so that business benefits arrive early and compound over time.
+- Quantify **risk exposure** per migration wave — know what breaks if a wave fails.
+- Align to **funding cycles** — architecture that cannot fit into annual budget processes rarely gets executed.
+- Define **exit criteria for legacy** — without clear retirement targets, old systems live forever.
+- Maintain **flexibility** — build rollback paths and off-ramps into the plan; no migration survives first contact with reality unchanged.
+
+### Hidden Mechanics
+- Phase F is the **economic negotiation** — this is where architecture must speak the language of finance (cost, risk, return, TCO).
+- The migration plan is a **contract between architecture and delivery** — it sets expectations that both sides must meet.
+
+### Maturity Indicators
+- **L1:** Migration plan is a Gantt chart with no economic justification
+- **L3:** Benefits realization is tracked; risk exposure is quantified per wave; legacy retirement has exit criteria
+- **L5:** Migration plan is continuously updated based on delivery feedback; economic tracking is automated
 
 ---
 
@@ -298,6 +410,22 @@ This guide provides a concise but complete reference for each phase of the TOGAF
 | Architecture Compliance Certificate | Sign-off artefact for conformant deliverables |
 | Updated Architecture Repository | As-built views and lessons learned |
 
+### Deep Tactics
+- Provide **embedded guidance**, not remote review — architects should sit with delivery teams, not gatekeep from a distance.
+- Use **automated checks** in CI/CD to validate conformance — reduce governance latency and increase consistency.
+- Focus governance effort on **high-risk, irreversible decisions** — don't review every line of code.
+- **Track deviations explicitly** — every deviation should be accepted (with risk sign-off) or remediated, not just documented.
+- **Measure governance by outcomes** — decision speed, delivery quality, and alignment, not checklist coverage.
+
+### Hidden Mechanics
+- Phase G is where **architecture intent meets delivery reality**. Without tight feedback loops, implementation drift is inevitable.
+- Governance that is not tied to **funding or deployment consequences** is performative — it produces evidence of compliance without ensuring alignment.
+
+### Maturity Indicators
+- **L1:** Governance is checklist-based and centralized; deviations are documented but rarely remediated
+- **L3:** Governance is selective and outcome-oriented; automated checks exist for core standards; deviations require explicit acceptance
+- **L5:** Governance is largely automated; architects are embedded partners; metrics tie governance to delivery outcomes
+
 ---
 
 ## Phase H — Architecture Change Management
@@ -331,6 +459,22 @@ This guide provides a concise but complete reference for each phase of the TOGAF
 | Change Request Log | Tracked register of all change requests |
 | Architecture Compliance Assessments (updated) | Ongoing conformance tracking |
 
+### Deep Tactics
+- Treat architecture as a **living system** — update target states continuously, not annually.
+- Monitor **leading indicators** (decision latency, technical debt velocity, pattern reuse rate) to trigger mini-ADM cycles before crises emerge.
+- Run **mini-ADM cycles** for incremental changes — don't force every change through a full waterfall.
+- **Retire obsolete architectures explicitly** — when a target is no longer relevant, kill it rather than letting it linger.
+- Feed **implementation learnings back** into principles, standards, and reference architectures.
+
+### Hidden Mechanics
+- Phase H is the **adaptation loop** — the mechanism that prevents architecture from becoming static and irrelevant.
+- Without Phase H discipline, the enterprise drifts into the **Static Target Architecture Illusion** — a fantasy future state that nobody believes.
+
+### Maturity Indicators
+- **L1:** Architecture is updated only during major projects; no systematic change management
+- **L3:** Mini-ADM cycles are used for incremental change; leading indicators are tracked; obsolete targets are retired
+- **L5:** Architecture is continuously adaptive; feedback loops are automated; the system optimizes for learning
+
 ---
 
 ## Requirements Management — The Central Hub
@@ -349,3 +493,19 @@ Requirements Management is not a phase but a continuous process that sits at the
 | Requirements Impact Assessment | Analysis of how a requirement affects the architecture |
 | Architecture Requirements Specification | Detailed requirements for architecture components |
 | Requirements Traceability Matrix | Linkage of requirements to architecture decisions and work packages |
+
+### Deep Tactics
+- Capture requirements **as they emerge** in any phase — don't wait for a formal requirements phase.
+- Assess **impact before priority** — a high-priority requirement with low architectural impact should not block design.
+- Link every requirement to **at least one architecture decision or work package** — orphan requirements create hidden gaps.
+- Maintain a **living Requirements Repository** — update it continuously, not just at phase boundaries.
+- Use requirements to **test the architecture** — if a requirement cannot be traced to a component, the architecture is incomplete.
+
+### Hidden Mechanics
+- Requirements Management is the **central nervous system** of the ADM — it coordinates signals across all phases.
+- Poor requirement traceability is the **root cause of scope creep** — untraced requirements reappear as "surprises" in implementation.
+
+### Maturity Indicators
+- **L1:** Requirements are captured in documents and updated manually; traceability is weak
+- **L3:** Requirements repository is linked to architecture repository; impact assessments are standard practice
+- **L5:** Requirements flow is automated; traceability is validated by fitness functions; impact is predicted before approval

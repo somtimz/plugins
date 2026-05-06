@@ -110,6 +110,13 @@ A Vision is a forward-looking, aspirational description of what the organisation
 
 **TOGAF placement:** Architecture Vision §1 Executive Summary; Stakeholder Map (as organisational context). Captured during Phase A as the strategic frame for the entire engagement. All Business Drivers should be validated against the Vision — Drivers that do not contribute to the Vision should be flagged.
 
+**Practitioner Notes:**
+- Treat the Vision as a **negotiation tool**, not a static deliverable. Build multiple candidate visions and force trade-off discussions early.
+- Frame the vision as a **story**: "From [current state] to [desired state] via [key choices]." Stories create emotional buy-in.
+- **Maturity marker (L1→L5):** L1 = single static vision; L3 = vision co-created with business; L5 = vision continuously updated based on implementation feedback
+- Quantify the **strategic tension** (current vs desired state gap) to drive urgency
+- Periodically reassess whether the vision is solving the *right* problem — if market conditions shift, the vision may need updating
+
 ---
 
 ### Mission
@@ -135,6 +142,12 @@ A Mission is a concise statement defining the organisation's fundamental purpose
 - "We will adopt API-first integration" — this is a **Strategy** (approach), not a Mission
 
 **TOGAF placement:** Architecture Vision §1 Executive Summary; Stakeholder Map. Captured as organisational context in Phase A. Used to validate that Business Drivers are within scope — a Driver that cannot be traced to the Mission is out of scope for this engagement unless the Mission is being updated.
+
+**Practitioner Notes:**
+- The Mission is a **scope boundary test**. If a Driver or Goal cannot be traced to the Mission, flag it as potential scope creep.
+- Mission statements are stable across engagements. Do not rewrite the Mission for every architecture cycle.
+- **Maturity marker (L1→L5):** L1 = Mission copied from corporate website; L3 = Mission validated with stakeholders; L5 = Mission co-evolved with architecture and org design
+- Use the Mission to **filter noise**: stakeholder requests outside the Mission are politely redirected
 
 ---
 
@@ -163,6 +176,13 @@ A Business Driver is an external or internal force that makes the engagement nec
 **TOGAF placement:** Architecture Vision §2 (Preliminary/Phase A); Engagement Charter §6.2. Drivers are captured in the Preliminary phase and refined in Phase A. All Drivers should be linked to at least one Goal — an unlinked Driver is out of scope or requires a new Goal.
 
 **ArchiMate:** `Driver` element in the Motivation aspect. Motivates `Assessment`, which in turn motivates `Goal`.
+
+**Practitioner Notes:**
+- Every Driver must be **evidenced**. A driver without a verifiable source is an assumption, not a confirmed pressure.
+- Anchor Drivers to **business outcomes**, not architecture artifacts. Each driver should link to at least one measurable Goal.
+- **Maturity marker (L1→L5):** L1 = drivers listed without evidence; L3 = drivers linked to KPIs and revenue/cost; L5 = drivers continuously validated against market and operational data
+- **Economic framing:** Quantify driver impact where possible ("Regulatory change X will cost $Y in non-compliance penalties by Z date")
+- Frame drivers around **business scenarios**, not technical stacks
 
 ---
 
@@ -194,6 +214,13 @@ A principle is a normative statement that governs all future architecture decisi
 
 **ArchiMate:** `Principle` element in the Motivation aspect. Motivates `Goals`, `Requirements`, and `Constraints`.
 
+**Practitioner Notes:**
+- Principles must be **enforceable constraints**, not aspirational statements. Each principle needs an enforcement mechanism.
+- Build a **minimal but enforceable standards catalog** — start small, evolve fast. Prune obsolete standards regularly.
+- **Maturity marker (L1→L5):** L1 = principles are wall art; L3 = principles filter decisions with documented exceptions; L5 = principles are enforced automatically in pipelines
+- **Failure mode watch:** Over-standardization (Failure Mode #5) — define core standards (mandatory) and flexible zones (experimental)
+- Separate **principles** (universal, durable) from **standards** (contextual, evolving) and **preferences** (optional)
+
 ---
 
 ### Goal
@@ -220,6 +247,13 @@ A goal is a qualitative statement of a desired future state. It describes *where
 **TOGAF placement:** `direction.goals[]` in `engagement.json`; Architecture Vision §3; referenced in domain architecture documents.
 
 **ArchiMate:** `Goal` element in the Motivation aspect. Realised by `Outcomes`, associated with `Requirements`.
+
+**Practitioner Notes:**
+- Use **value streams to validate** whether goals actually deliver outcomes. A Goal without a value stream trace is unvalidated.
+- Link goals directly to **KPIs and revenue/cost drivers** where possible.
+- **Maturity marker (L1→L5):** L1 = goals are generic and unmeasured; L3 = goals linked to metrics and value streams; L5 = goals continuously refined based on delivery feedback
+- Focus on **"where to play" and "how to win"** — not just process diagrams
+- **Economic framing:** Every Goal should have a "what happens if not achieved" statement that includes business impact
 
 ---
 
@@ -250,6 +284,13 @@ An objective is the measurable, time-bound operationalisation of a goal. It answ
 
 **ArchiMate:** `Outcome` element in the Motivation aspect. Associated with `Goal` (realisation relationship).
 
+**Practitioner Notes:**
+- Define **success metrics before moving to Phase B**. An Objective without a measure is just a Goal in disguise.
+- **Timebox** phase completion against objectives. If an objective cannot be met within the timebox, escalate or descope.
+- **Maturity marker (L1→L5):** L1 = objectives have measures but no baselines; L3 = objectives have baselines, targets, and deadlines; L5 = objectives are dynamically adjusted based on implementation learnings
+- Objectives are the **primary anchor for Problems**. If a problem cannot be linked to an Objective, it may be out of scope.
+- Track **decision latency** per objective — slow architecture = delayed value
+
 ---
 
 ### Issue
@@ -277,6 +318,12 @@ An issue is a broader, systemic concern that threatens the organisation's abilit
 
 **TOGAF placement:** Architecture Vision §5 (Phase A). Issues captured here feed into Gap Analysis, Risk assessments, and Requirements.
 
+**Practitioner Notes:**
+- Treat gaps as **opportunities to simplify**, not just deficits to fill. The best architecture often removes rather than adds.
+- Issues are **systemic concerns** — they have multiple contributing causes and no single fix.
+- **Maturity marker (L1→L5):** L1 = issues are vague complaints; L3 = issues linked to goals and root causes; L5 = issues proactively identified via leading indicators before they become crises
+- **Failure mode watch:** Documentation Trap — documenting issues without addressing systemic causes is waste
+
 ---
 
 ### Problem
@@ -302,6 +349,12 @@ A problem is a specific, observable, and fixable symptom that is actively blocki
 - "The vendor may not deliver" — this is a **Risk** (uncertain, future)
 
 **TOGAF placement:** Architecture Vision §6 (Phase A). Problems feed directly into Requirements — each problem should produce one or more architecture requirements.
+
+**Practitioner Notes:**
+- Problems are **specific, observable, and fixable** — if it is not fixable, it is an Issue, not a Problem.
+- **Hypothesis-driven approach:** Test assumptions about root causes before committing to solutions.
+- **Maturity marker (L1→L5):** L1 = problems described in vague terms; L3 = problems have measurable symptoms and linked objectives; L5 = problems are anticipated and prevented via fitness functions and automated checks
+- **Economic framing:** Quantify the cost of each problem (revenue lost, inefficiency, risk exposure) to prioritize fixes
 
 ---
 
@@ -329,6 +382,12 @@ A strategy is a chosen course of action or approach that the organisation will t
 
 **ArchiMate:** `Course of Action` element in the Motivation aspect. Realises `Goals` and `Objectives`.
 
+**Practitioner Notes:**
+- Use **capability-based planning** to bridge strategy and execution. Every strategy should map to capabilities that must be developed or enhanced.
+- Focus on **"where to play" and "how to win"** — strategies that do not answer these questions are not actionable.
+- **Maturity marker (L1→L5):** L1 = strategies are wish lists; L3 = strategies linked to capabilities and gaps; L5 = strategies continuously validated against market shifts and delivery outcomes
+- **Failure mode watch:** Static target architecture illusion — strategies that assume a fixed end-state will become obsolete
+
 ---
 
 ### Plan
@@ -353,6 +412,13 @@ A plan is a sequenced description of how a strategy will be executed. It specifi
 - "We plan to adopt Kubernetes" — this is a **Strategy** (chosen approach), not a plan. The plan would specify the migration waves, owners, and dates
 
 **ArchiMate:** No single dedicated element; plans are expressed through sequences of `Implementation Event`, `Work Package`, and `Deliverable` elements in the Implementation & Migration aspect.
+
+**Practitioner Notes:**
+- Decompose large transformations into **independently valuable increments**. Each increment should deliver standalone value.
+- Treat **migration planning as a product** — prioritize value delivery over technical dependency alone.
+- **Maturity marker (L1→L5):** L1 = static wish-list roadmap; L3 = roadmap aligned with agile increments and funding cycles; L5 = roadmap continuously updated with quick wins and feedback loops
+- Design for **optionality** — preserve future flexibility by abstracting vendor lock-in behind interfaces
+- Include **exit criteria** for legacy systems to avoid indefinite coexistence
 
 ---
 
@@ -389,6 +455,13 @@ A risk is an uncertain future event or condition that, if it occurs, will have a
 **TOGAF placement:** Architecture Vision (preliminary risks, §14); Statement of Architecture Work (risk register); Architecture Compliance Assessment (outstanding risks); Migration Plan (risk register per wave, §4). The consolidated **Risk Register** artifact aggregates all of the above into a single cross-cutting view — use `/ea-risks` to generate it. Risk likelihood and impact ratings also appear in the A3 Decision Log `Risk` column.
 
 **ArchiMate:** `Risk` element in the Motivation aspect (Strategy layer, introduced in ArchiMate 3.0). Associated with `Goal` and `Outcome` via influence relationships.
+
+**Practitioner Notes:**
+- **Quantify uncertainty** — do not hide it behind diagrams. Express risks in financial terms where possible.
+- Track architecture decisions (ADR-style) as first-class artifacts — risks often materialize when decision rationale is lost.
+- **Maturity marker (L1→L5):** L1 = risks documented but not acted on; L3 = risks linked to mitigation plans and owners; L5 = risks actively managed via systemic architecture decisions (e.g., reducing integration points)
+- Use architecture to **actively manage systemic risk**, not just document it
+- **Design for graceful degradation**, not just peak performance
 
 ---
 
@@ -439,6 +512,13 @@ A Capability Model is a stable, hierarchical map of what the organisation must b
 
 **TOGAF placement:** Business Architecture (Phase B) — the primary home. Referenced in Gap Analysis and Architecture Vision when summarising what the organisation must be able to do to achieve its Goals.
 
+**Practitioner Notes:**
+- **Map capabilities to value streams** — do not model capabilities in isolation. A capability without a value stream trace is unvalidated.
+- Identify **differentiating vs commodity capabilities** — optimize investment accordingly.
+- **Maturity marker (L1→L5):** L1 = capabilities reflect org chart; L3 = capabilities linked to value streams and KPIs; L5 = capability heatmaps directly drive investment prioritization
+- Use business architecture to **challenge org design**, not just reflect it
+- **Failure mode watch:** Centralized Bottleneck — if all capability decisions flow through a single authority, the model becomes a bottleneck rather than a tool
+
 ---
 
 ### Operating Model
@@ -463,6 +543,13 @@ The Operating Model is a high-level description of how the organisation function
 - Not a system architecture — the Operating Model operates at the business level; the Technology Architecture is its technical expression
 
 **TOGAF placement:** Business Architecture (Phase B) — particularly the Business Model Canvas and process views. Technology Architecture (Phase D) — the technical dimensions of the Operating Model.
+
+**Practitioner Notes:**
+- Align ADM phases with **agile increments** (e.g., Vision with PI planning, Opportunities with backlog shaping).
+- Treat **cloud adoption as an operating model shift**, not just a hosting change.
+- **Maturity marker (L1→L5):** L1 = operating model reflects current state only; L3 = target operating model designed with delivery teams; L5 = operating model co-evolves with architecture and org design
+- **Pattern:** Dual Operating System (Run vs Change) — separate stability-optimized and innovation-optimized operating models
+- Use the Operating Model to **influence team structures**, not just system structures
 
 ---
 
@@ -499,6 +586,13 @@ Metrics close the loop between intention and evidence:
 - Not a requirement — a requirement specifies what must be done; a metric measures whether it has been done successfully
 
 **TOGAF placement:** Architecture Vision §7 Strategic Direction Summary; referenced in Phase G (Implementation Governance) for compliance tracking; Phase H (Architecture Change Management) for performance feedback.
+
+**Practitioner Notes:**
+- **Measure success through delivery outcomes** (cycle time, quality, value), not artifact completeness.
+- Metrics close the feedback loop: they either **validate** strategy or **surface new Issues/Problems**.
+- **Maturity marker (L1→L5):** L1 = metrics are vanity metrics (artifact count); L3 = metrics linked to delivery outcomes and business KPIs; L5 = metrics automatically collected and trigger architecture adaptation
+- Align architecture KPIs with **enterprise OKRs** (e.g., reuse rate, time-to-decision)
+- Use **both leading and lagging metrics** — leading metrics for early action, lagging metrics for validation
 
 ---
 

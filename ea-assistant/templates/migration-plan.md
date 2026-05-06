@@ -18,6 +18,23 @@ relatedArtifacts: []
 diagrams: []
 links: []
 ---
+<details>
+<summary>🔒 TOGAF/ADM Compliance Status (author only — collapses on export)</summary>
+
+## Compliance Checklist
+
+| Requirement | Status | Notes |
+|---|---|---|
+| T3-A3 | ⚠️ Pending | |
+| T3-A4 | ⚠️ Pending | |
+| T3-ADR | ⚠️ Pending | |
+| T3-RATIONALE | ⚠️ Pending | |
+| Linked to Architecture Roadmap | ⚠️ Pending | |
+| Benefits realisation tracked | ⚠️ Pending | |
+
+*This section is for author guidance only. Run `/ea-grill` to validate compliance.*
+
+</details>
 
 <details>
 <summary>📋 Guidance</summary>
@@ -27,6 +44,19 @@ Architecture Roadmap (Phase E) and defines how they will be sequenced and execut
 transition from the baseline to the target architecture. Phase F focuses on the practical
 "how and when" of migration: sequencing, dependency management, wave planning, risk, and
 rollback. It is an input to implementation planning and must be kept current as delivery proceeds.
+
+</details>
+
+<details>
+<summary>💡 Practitioner Tip — Migration</summary>
+
+- **Optimize for value delivery** — sequence migration so that business benefits arrive early and compound over time. (Deep tactic #31)
+- Quantify **risk exposure** per migration wave — know what breaks if a wave fails. (Deep tactic #32)
+- Align to **funding cycles** — architecture that cannot fit into annual budget processes rarely gets executed. (Deep tactic #33)
+- Define **exit criteria for legacy** — without clear retirement targets, old systems live forever. (Deep tactic #34)
+- Maintain **flexibility** — build rollback paths and off-ramps into the plan; no migration survives first contact with reality unchanged. (Deep tactic #35)
+- Treat transition architectures as **strategic instruments**, not temporary compromises. (Tip #45)
+- The migration plan is a **contract between architecture and delivery** — it sets expectations that both sides must meet. (Tip #46)
 
 </details>
 

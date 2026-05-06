@@ -18,6 +18,22 @@ relatedArtifacts: []
 diagrams: []
 links: []
 ---
+<details>
+<summary>🔒 TOGAF/ADM Compliance Status (author only — collapses on export)</summary>
+
+## Compliance Checklist
+
+| Requirement | Status | Notes |
+|---|---|---|
+| T3-A3 | ⚠️ Pending | |
+| T3-A4 | ⚠️ Pending | |
+| T3-ADR | ⚠️ Pending | |
+| T3-RATIONALE | ⚠️ Pending | |
+| Linked to Statement of Architecture Work | ⚠️ Pending | |
+
+*This section is for author guidance only. Run `/ea-grill` to validate compliance.*
+
+</details>
 
 <details>
 <summary>📋 Guidance</summary>
@@ -26,6 +42,17 @@ The Architecture Vision is the primary output of Phase A. It defines the busines
 objectives, issues, problems, scope, stakeholders, constraints, and high-level target architecture
 for the engagement. It should be approved by the sponsor before proceeding to Phases B-D.
 Collapsible guidance blocks (📋 Guidance) are for the author only and collapse when exported.
+
+</details>
+
+<details>
+<summary>💡 Practitioner Tip — Phase A</summary>
+
+- **Treat the Vision as a negotiation tool**, not a static deliverable. Build multiple candidate visions and force trade-off discussions early. (Deep tactic #7)
+- **Co-create the vision with business leaders** to secure ownership — the vision built by the architecture team alone rarely survives first contact with the board. (Deep tactic #9)
+- **Define success metrics before moving to Phase B** — what must be true for this vision to be considered valid? (Deep tactic #10)
+- **Validate the vision with real delivery constraints** — skills, vendors, legacy — before asking for funding. (Deep tactic #8)
+- Use **"strategic tension"** (current vs desired state) to drive urgency — quantify the gap in economic terms. (Deep tactic #6)
 
 </details>
 
