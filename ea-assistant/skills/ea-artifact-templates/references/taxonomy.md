@@ -147,6 +147,9 @@ Free-form list of 3–6 lowercase kebab-case keywords. Tags should include:
 | architecture-decision-record | Cross-cutting | Governance | Architecture | Governance | Internal |
 | zachman-diagram | Cross-cutting | Analysis | Architecture | Reference | Internal |
 | engagement-charter | Cross-cutting | Strategy | Executive | Motivation | Confidential |
+| workshop-minutes | Cross-cutting | Governance | Architecture | Governance | Confidential |
+| arb-minutes | Cross-cutting | Governance | Governance | Governance | Confidential |
+| engagement-brief | Cross-cutting | Planning | Executive | Reference | Internal |
 
 ---
 
