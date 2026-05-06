@@ -96,3 +96,49 @@ Present a confirmation summary before applying any answers.
 - Mark all extracted content with its source file reference
 - Flag content that appears inconsistent with existing artifact data
 - If a document is ambiguous or poorly structured, ask the user for clarification before proceeding
+
+## EA Tool Model Extraction
+
+When the `ea-document-ingestion` skill detects an EA tool format (`.xmi`, `.archimate`, or LeanIX CSV/JSON), the file bypasses `ea-document-converter` and arrives here directly as a raw export file. Use the parsing guidance in `skills/ea-document-ingestion/references/ea-tool-format-guide.md` for the format-specific extraction method.
+
+**EA tool extraction workflow:**
+
+1. **Identify the format** from the file extension and content heuristics (see `ea-tool-format-guide.md`).
+
+2. **Parse and group elements** by type or layer:
+   - XMI: group by `xmi:type` and stereotype
+   - Archi: group by ArchiMate layer
+   - LeanIX: group by Fact Sheet type
+
+3. **Present element inventory** for user confirmation BEFORE mapping anything:
+   ```
+   Extracted from: current-state-model.archimate
+   ─────────────────────────────────────────────
+   Business layer:   15 elements  → Business Architecture
+   Application layer: 22 elements → Application Architecture
+   Technology layer:  18 elements → Technology Architecture
+   Motivation layer:   8 elements → Architecture Vision
+
+   Which element groups do you want to import? (all / select / none)
+   ```
+
+4. **For each confirmed group**, ask which artifact to populate and which section within that artifact.
+
+5. **Draft mapping summary** before writing — show the user exactly what will be added to which artifact section:
+   ```
+   Proposed mapping for Business Architecture:
+     § 4 Capability Model — 15 capabilities from Business layer
+       • Customer Management (active)
+       • Order Processing (active)
+       • Reporting & Analytics (phase-out)
+       ...
+
+   Apply this mapping? (yes / no / select)
+   ```
+
+6. **Write confirmed content** with source attribution: `📎 Source: uploads/{filename}`
+
+7. **Flag limitations** specific to the format:
+   - XMI: "Visual diagram layout is not available from XMI exports — only structural element data was extracted."
+   - Archi: "Element styling and custom layout are tool-specific and were not extracted."
+   - LeanIX: "This is a point-in-time snapshot from LeanIX — verify currency before using as the baseline."

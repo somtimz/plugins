@@ -83,6 +83,8 @@ You have existing engagements. Common next steps:
 | `/ea-requirements [action]` | Manage architecture requirements |
 | `/ea-decisions [options]` | Generate Decision Register from all A3 decision logs |
 | `/ea-adrs [mode]` | Manage Architecture Decision Records (generate, new, update) |
+| `/ea-arb [mode]` | ARB meeting minutes — new, list, view, close; propagate decisions to ADR register |
+| `/ea-workshop [mode]` | Facilitate a multi-stakeholder architecture workshop; captures decisions, actions, deferred items |
 | `/ea-risks [mode]` | Generate and maintain a cross-cutting Risk Register |
 | `/ea-changes [mode]` | Generate Change Register for Phase H ACR artifacts |
 | `/ea-concerns` | Manage CON-NNN stakeholder concerns (Appendix A4) |
@@ -143,7 +145,9 @@ Type these at any interview prompt:
   Use `/ea-publish` for a full consolidated document.
 • Upload documents to `EA-projects/{name}/uploads/` and the
   ea-document-analyst agent will extract architecture-relevant content
-  and map it to the appropriate artifact sections.
+  and map it to the appropriate artifact sections. EA tool exports
+  (.xmi, .archimate, LeanIX CSV/JSON) are detected and mapped
+  automatically — no manual format specification needed.
 • Type `?` at any interview prompt for contextual help including
   the artifact's purpose, value, and guidance on the current question.
 • Ask "let's build the roadmap" to start the ea-roadmap agent —

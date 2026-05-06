@@ -7,6 +7,7 @@
   "organisation": "",
   "scope": "",
   "engagementType": "",
+  "architectureLevel": "",
   "startDate": "",
   "targetEndDate": "",
   "status": "Active",

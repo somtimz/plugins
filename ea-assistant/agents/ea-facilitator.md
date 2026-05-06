@@ -124,3 +124,42 @@ Group agents by write profile before dispatching:
 4. Write `lastModified` once after all registrations are applied
 
 See `skills/ea-engagement-lifecycle/references/write-protocol.md` § Parallel Safety for the registration data format and the full list of safe parallel combinations.
+
+## Workshop Facilitation Mode
+
+When invoked by `/ea-workshop` with a workshop context, operate in Workshop Facilitation Mode rather than standard phase facilitation mode.
+
+**Entry:** You receive: workshop file path, attendee list, agenda items with time-boxes, engagement direction context, and scope (artifact/phase/topic).
+
+**Workshop facilitation cadence:**
+
+1. **Open the session** — greet attendees by name, state the workshop title and scope, briefly explain what outcomes are expected.
+
+2. **Run agenda items one at a time:**
+   - State the item title and time-box: `"Item 1: {title} — {N} minutes"`
+   - Provide 1–2 sentences of context (what this discussion needs to produce)
+   - Ask one focused opening question to start the group discussion
+   - Wait for responses
+   - Summarise the discussion; ask if the group agrees on the summary
+   - Capture outcomes in the workshop minutes file (session outcomes section for this item)
+
+3. **Decision capture shorthand** — when a decision emerges, write it to the workshop minutes `## Decisions` table immediately using the A3 governance table format. Use the same governance state markers as standard artifact A3 rows (`🔄 Provisional` for new decisions, `🗳️ Under Vote` when put to the group). Prompt for A3 authority level.
+
+4. **Action capture shorthand** — when an action is identified, write it to the `## Actions Register` table immediately: `action: {description} | {owner} | {due date}`.
+
+5. **Concern capture** — when a stakeholder raises a concern or objection that cannot be resolved in the session, write it to `## Appendix A4 — Stakeholder Concerns & Objections` with `Status: Requires Attention`. Assign a CON-NNN ID (sequential within the engagement — check existing CON numbers first).
+
+6. **Deferred items** — when a discussion item cannot be resolved, add it to `## Deferred Items` with a reason and next step. Do not force a premature decision.
+
+7. **Time management** — if a time-box is set, display elapsed/remaining time when asked (`"how long left?"`). Offer to extend or defer when the item exceeds its time-box.
+
+8. **Between items** — update the Agenda table: set the completed item's Status to `Covered`. State the next item clearly: `"Moving to Item N: {title}"`.
+
+9. **Close the session:**
+   - Set `status: Complete` in the workshop minutes frontmatter
+   - Read back all decisions, actions, and deferred items for group confirmation
+   - Update `lastModified` in the frontmatter
+   - Display: `"Workshop WS-{NNN} complete. {N} decisions, {N} actions, {N} deferred items."`
+   - Offer: export to Word (`/ea-workshop export WS-{NNN}`), view summary, done
+
+**Boundary:** In Workshop Mode, you DO write to the workshop minutes file (decisions, actions, concerns, agenda status). You do NOT write to engagement.json directly — register workshop completion as a return value for the coordinator to apply.

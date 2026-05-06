@@ -134,6 +134,8 @@ These are loaded automatically by `/ea-grill --skill practitioner|maturity|failu
 | VS-NNN | Value Stream | VS-001 |
 | UC-NNN | Use Case | UC-001 |
 | PAD-NNN | Pending Architecture Decision | PAD-001 |
+| WS-NNN | Workshop Minutes | WS-001 |
+| ARB-NNN | Architecture Review Board Meeting | ARB-001 |
 
 **Do not use domain-prefixed IDs** (BG-/DG-/AG-/TG- etc.) — the scheme is unified and domain-agnostic.
 
@@ -153,6 +155,8 @@ For full ownership table, see individual agent definition files in `agents/`.
 ADRs are standalone documents capturing significant architecture decisions — technology/vendor selection, pattern choices, make-vs-buy, data governance, security architecture, or any decision that is hard to reverse.
 
 **ADR lifecycle:** `Candidate → In Progress → Completed → Superseded (by ADR-NNN) | Deprecated`
+
+When an ADR is ratified at an ARB meeting, set `arbReference: ARB-NNN` via `/ea-adrs update ADR-NNN arbReference ARB-NNN` and update the ADR's `Governance Reference` (§5) to `ARB-{NNN}`. Use `/ea-arb close` to propagate ARB decisions to the ADR register in bulk.
 
 **ADR vs A3 Decision Log:**
 - **A3** = governance state tracking inside an artifact (who decided what, at what authority, verified or not)

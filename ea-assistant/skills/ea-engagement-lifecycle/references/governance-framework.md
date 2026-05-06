@@ -264,4 +264,23 @@ The cleanest formulation: **architecture governance governs the architecture; pr
 
 ---
 
+## ARB Meeting Minutes
+
+Architecture Review Board (ARB) meetings are the primary governance touchpoint for formal architecture decisions. Meeting minutes capture attendance, quorum, agenda, decisions, actions, and deferred items.
+
+**Storage:** `artifacts/cross-cutting/arb-minutes-{NNN}-{YYYY-MM-DD}.md` — always cross-cutting, never phase-scoped.
+
+**ID scheme:** `ARB-NNN` identifies a meeting (e.g. `ARB-001`). Individual decisions within a meeting are referenced as `ARB-001 Item 3`.
+
+**Integration with other registers:**
+- **ADR register** — ARB decisions that ratify an Architecture Decision Record update the ADR's `arbReference` field and `Governance Reference` (§5). Use `/ea-arb close` to propagate decisions.
+- **Concerns register** — Concerns raised at an ARB meeting become CON-NNN entries in the affected artifact's Appendix A4.
+- **Risk register** — Outstanding ARB actions past their due date can be escalated to the Risk Register as RIS-NNN entries.
+
+**Decision format:** ARB Decisions tables use their own format (Item / Decision / Vote / ADR Reference / Governance Authority / Outcome / Owner) rather than the A3 governance table format. The A3 format is for within-artifact governance tracking; ARB minutes are a governance forum record.
+
+**Quorum rules:** Defined per organisation. If quorum is not met, all decisions are recorded as `Provisional — pending quorum confirmation`. The `/ea-arb close` command enforces quorum resolution before setting status to `Approved`.
+
+**Managed via:** `/ea-arb` — new, list, view, close.
+
 *Source: Governance model adapted from [Conexiam — Basics of Enterprise Architecture Governance](https://conexiam.com/basics-of-enterprise-architecture-governance/).*

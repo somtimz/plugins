@@ -44,8 +44,29 @@ The converter stage produces a single canonical text representation regardless o
 | `.drawio` | `.mmd` | Draw.io diagrams |
 | `.excalidraw` | `.mmd` | Excalidraw diagrams |
 | `.png` / `.jpg` | `.md` (description + inferred diagram) | Architecture screenshots, scanned docs |
+| `.xmi` / `.uml` | `{stem}-extract.md` | Sparx Enterprise Architect model export (UML/XMI) |
+| `.archimate` | `{stem}-extract.md` | Archi model export (ArchiMate 3.x XML) |
+| `.json` / `.csv` (LeanIX) | `{stem}-extract.md` | LeanIX Fact Sheet export (JSON or CSV) |
 
 All uploaded files are stored in `EA-projects/{slug}/uploads/` before processing. Converted intermediates are written to `EA-projects/{slug}/uploads/converted/`.
+
+## EA Tool Format Detection
+
+The following formats are structured EA modelling tool exports and require specialized parsing distinct from document formats. When an EA tool format is detected:
+
+1. Skip the `ea-document-converter` agent — these formats are not documents
+2. Invoke `ea-document-analyst` directly with a format-specific extraction prompt
+3. Present an element inventory grouped by type or ArchiMate layer BEFORE any artifact population
+4. Require explicit user confirmation for each element group before writing
+
+**Detection rules:**
+- `.xmi` extension, OR `.xml` with `xmi:type` attributes or `<uml:Model>` root → Sparx EA XMI
+- `.archimate` extension → Archi XML model
+- `.json` with `data.allFactSheets` or `lxID` keys, OR `.csv` with `lxType` or `factSheetType` column → LeanIX export
+
+Two-pass detection: extension first; content heuristic second (handles `.xml` files that may or may not be XMI). If detection is ambiguous, ask the user to confirm the format before proceeding.
+
+See `references/ea-tool-format-guide.md` for complete parsing notes, element mappings, and known limitations per format.
 
 ## Document Processing Workflow
 
@@ -75,6 +96,9 @@ Invoke the `ea-document-converter` agent with the file path. The agent:
 | `.dot` | `{stem}.mmd` | Translate nodes/edges → Mermaid graph |
 | `.png` / `.jpg` | `{stem}.md` | View image → description + inferred Mermaid block |
 | `.md` / `.txt` / `.mmd` | Pass-through | Copied with conversion header |
+| `.xmi` / `.uml` | `{stem}-extract.md` | Skip converter — parse `<uml:Model>` → grouped element inventory |
+| `.archimate` | `{stem}-extract.md` | Skip converter — parse `<archimate:model>` → elements by ArchiMate layer |
+| `.json` / `.csv` (LeanIX) | `{stem}-extract.md` | Skip converter — parse Fact Sheets → grouped inventory by type |
 
 The converter adds a provenance comment to every output file:
 ```
@@ -115,3 +139,4 @@ When the uploaded document is a **completed interview Word form**:
 - **`agents/ea-document-converter.md`** — Full conversion logic and format-specific methods
 - **`references/file-format-guide.md`** — Detailed parsing notes per file format
 - **`references/interview-form-structure.md`** — Interview Word export/import format specification
+- **`references/ea-tool-format-guide.md`** — Parsing notes for EA tool export formats (Sparx XMI, Archi .archimate, LeanIX CSV/JSON)

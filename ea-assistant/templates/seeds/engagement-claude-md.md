@@ -9,6 +9,7 @@
 | Organisation | {organisation} |
 | Slug | {slug} |
 | Type | {engagementType} |
+| Architecture Level | {architectureLevel} |
 | Sponsor | {sponsor} |
 | Started | {startDate} |
 
