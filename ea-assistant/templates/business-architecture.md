@@ -18,6 +18,23 @@ relatedArtifacts: []
 diagrams: []
 links: []
 ---
+<details>
+<summary>🔒 TOGAF/ADM Compliance Status (author only — collapses on export)</summary>
+
+## Compliance Checklist
+
+| Requirement | Status | Notes |
+|---|---|---|
+| T3-A3 | ⚠️ Pending | |
+| T3-A4 | ⚠️ Pending | |
+| T3-ADR | ⚠️ Pending | |
+| T3-RATIONALE | ⚠️ Pending | |
+| Linked to Architecture Vision | ⚠️ Pending | |
+| Traces to Requirements Register | ⚠️ Pending | |
+
+*This section is for author guidance only. Run `/ea-grill` to validate compliance.*
+
+</details>
 
 <details>
 <summary>📋 Guidance</summary>
@@ -25,6 +42,18 @@ links: []
 The Business Architecture describes the business strategy, governance, organisation, and
 key business processes. It is the foundation for the Application and Technology architectures.
 Phase B takes Architecture Vision as its primary input.
+
+</details>
+
+<details>
+<summary>💡 Practitioner Tip — Phase B</summary>
+
+- **Map capabilities to value streams** — don't model capabilities in isolation. A capability without a value stream is a theory, not architecture. (Deep tactic #11)
+- Identify **differentiating vs commodity capabilities** — optimize investment accordingly; don't over-invest in commodity. (Deep tactic #12)
+- Use business architecture to **challenge org design**, not just reflect it. If the org structure prevents the target state, say so. (Deep tactic #13)
+- Link capabilities directly to **KPIs and revenue/cost drivers** — business architecture is a compression function that turns ambiguity into constraints. (Deep tactic #14)
+- Focus on **"where to play" and "how to win"** — not just process diagrams. (Deep tactic #15)
+- Gaps are **opportunities disguised as problems** — frame them as investments, not deficiencies. (Tip #18)
 
 </details>
 

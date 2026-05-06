@@ -18,6 +18,20 @@ relatedArtifacts: []
 diagrams: []
 links: []
 ---
+<details>
+<summary>🔒 TOGAF/ADM Compliance Status (author only — collapses on export)</summary>
+
+## Compliance Checklist
+
+| Requirement | Status | Notes |
+|---|---|---|
+| Segmentation complete | ⚠️ Pending | |
+| Power/interest grid populated | ⚠️ Pending | |
+| Communication strategy defined | ⚠️ Pending | |
+
+*This section is for author guidance only. Run `/ea-grill` to validate compliance.*
+
+</details>
 
 <details>
 <summary>📋 Guidance</summary>
@@ -25,6 +39,20 @@ links: []
 The Stakeholder Map identifies all stakeholders, their interests, influence, and required
 level of engagement. It is used to plan communications and ensure architecture decisions
 address the right concerns. Update throughout the engagement as new stakeholders are identified.
+
+</details>
+
+<details>
+<summary>💡 Practitioner Tip — Stakeholder Engagement</summary>
+
+- **Co-create the vision with business leaders** — stakeholders who help build the vision own it; those who receive it resist it. (Tip #33)
+- Map stakeholders by **power and interest**, not just by title — a senior executive with no interest in your scope is less relevant than a mid-level manager who controls a critical resource. (Tip #31)
+- **Speak the language of the audience** — executives want outcomes and risks; delivery teams want constraints and patterns. (Tip #32)
+- Build **informal networks** to drive adoption — lunch-and-learns, pairing with engineers, Slack channels for quick advice. (Deep tactic #46)
+- Make architecture **visible and accessible** — a new engineer should find and understand standards in under 30 minutes. (Deep tactic #47)
+- Influence team structures, not just system structures — **Conway's Law is a lever**, not a constraint. (Deep tactic #48)
+- Reward alignment with architecture, not just delivery speed. (Deep tactic #49)
+- **Use strategic tension** to drive urgency — quantify the gap between current and desired state. (Deep tactic #50)
 
 </details>
 

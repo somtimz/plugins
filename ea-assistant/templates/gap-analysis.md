@@ -18,6 +18,24 @@ relatedArtifacts: []
 diagrams: []
 links: []
 ---
+<details>
+<summary>🔒 TOGAF/ADM Compliance Status (author only — collapses on export)</summary>
+
+## Compliance Checklist
+
+| Requirement | Status | Notes |
+|---|---|---|
+| T3-A3 | ⚠️ Pending | |
+| T3-A4 | ⚠️ Pending | |
+| T3-ADR | ⚠️ Pending | |
+| T3-RATIONALE | ⚠️ Pending | |
+| Baseline documented | ⚠️ Pending | |
+| Target defined | ⚠️ Pending | |
+| Gap register populated | ⚠️ Pending | |
+
+*This section is for author guidance only. Run `/ea-grill` to validate compliance.*
+
+</details>
 
 <details>
 <summary>📋 Guidance</summary>
@@ -25,6 +43,17 @@ links: []
 Gap Analysis documents the differences between the Baseline (current) and Target architectures.
 A separate Gap Analysis is typically produced for each architecture domain (B, C-Data, C-App, D).
 Gaps feed directly into the Architecture Roadmap in Phase E.
+
+</details>
+
+<details>
+<summary>💡 Practitioner Tip — Gap Analysis</summary>
+
+- Gaps are **opportunities disguised as problems** — frame each gap as an investment case, not a deficiency report. (Tip #18)
+- Prioritize gaps by **business impact**, not by technical severity. A small technical gap that blocks a high-value capability is more important than a large gap in a commodity area. (Deep tactic #29)
+- Every gap must trace to at least one goal or objective — orphan gaps create orphan work packages. (Deep tactic #28)
+- Distinguish **capability gaps** (missing ability) from **implementation gaps** (missing execution) — they need different treatment. (Deep tactic #30)
+- Use gap analysis to **surface trade-offs** — closing one gap may create another. Make these visible. (Tip #19)
 
 </details>
 

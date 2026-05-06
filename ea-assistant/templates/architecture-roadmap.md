@@ -18,6 +18,24 @@ relatedArtifacts: []
 diagrams: []
 links: []
 ---
+<details>
+<summary>🔒 TOGAF/ADM Compliance Status (author only — collapses on export)</summary>
+
+## Compliance Checklist
+
+| Requirement | Status | Notes |
+|---|---|---|
+| T3-A3 | ⚠️ Pending | |
+| T3-A4 | ⚠️ Pending | |
+| T3-ADR | ⚠️ Pending | |
+| T3-RATIONALE | ⚠️ Pending | |
+| T3-ROAD-SA | ⚠️ Pending | |
+| T3-ROAD-WP | ⚠️ Pending | |
+| Linked to Architecture Vision | ⚠️ Pending | |
+
+*This section is for author guidance only. Run `/ea-grill` to validate compliance.*
+
+</details>
 
 <details>
 <summary>📋 Guidance</summary>
@@ -25,6 +43,19 @@ links: []
 The Architecture Roadmap lists individual work packages in priority order that together
 deliver the Target Architecture. It evolves from Phase E (initial) through Phase F (refined)
 and is updated in Phase H as change requests are processed.
+
+</details>
+
+<details>
+<summary>💡 Practitioner Tip — Roadmap</summary>
+
+- **Package work as value increments** — every work package must deliver measurable business value, not just close a technical gap. (Deep tactic #26)
+- Prioritize by **impact × feasibility** — high-impact, low-effort quick wins build momentum and credibility. (Deep tactic #27)
+- Design **transition architectures** deliberately — the path matters more than the ideal end state. (Deep tactic #28)
+- **Expose trade-offs explicitly** — when sequencing work, state what is deferred and the risk of deferral. (Deep tactic #29)
+- Align work packages to **funding cycles and capacity windows** — architecture that ignores budget reality is fantasy. (Deep tactic #30)
+- Replace heavy gates with **guardrails** — pre-approved patterns and automated checks allow local autonomy while protecting enterprise integrity. (Tip #24)
+- Treat transition architectures as **strategic instruments**, not temporary compromises. (Tip #45)
 
 </details>
 

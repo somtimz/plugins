@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.28 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.29 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -92,6 +92,23 @@ relatedArtifacts: []   # artifact IDs referenced (e.g. ["architecture-vision"])
 diagrams: []           # diagram paths from engagement root (e.g. ["diagrams/context.png"])
 links: []              # named refs: [{label: "Context Diagram", path: "../../diagrams/context.png"}]
 ```
+
+---
+
+## Advanced Practitioner References
+
+The following advanced practitioner content is available for L3+ engagements:
+
+| Reference | Purpose |
+|---|---|
+| `skills/ea-engagement-lifecycle/references/practitioner-tips.md` | Consolidated 50 tips + 70 deep tactics + 25 cross-cutting moves |
+| `skills/ea-engagement-lifecycle/references/adm-maturity-model.md` | 5-level maturity model (L1–L5) with indicators and advancement steps |
+| `skills/ea-engagement-lifecycle/references/advanced-patterns.md` | 7 advanced operating patterns (Dual OS, Intent-Based, Fitness Functions, etc.) |
+| `skills/ea-engagement-lifecycle/references/failure-modes.md` | 6 recurring failure modes with symptoms, fixes, and prevention |
+| `skills/ea-engagement-lifecycle/references/elite-architect-playbook.md` | Day-to-day behaviors and self-assessment for high-impact architects |
+| `docs/practitioner-white-paper.md` | Synthesized white paper for stakeholder communication |
+
+These are loaded automatically by `/ea-grill --skill practitioner|maturity|failure-mode`, `/ea-brainstorm` advanced pauses, and `/ea-interview` phase mode.
 
 ---
 

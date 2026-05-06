@@ -93,6 +93,7 @@ Additional interview-specific config behaviour:
         govern / g       Update A3 governance state
         b: / brainstorm  Start a freeform brainstorm pause
         r: {query}       Research a topic mid-interview; findings surfaced inline
+        e: {statement}   Economic framing pause — add cost/risk/value analysis
         ?  / help        Show this guide + current artifact context
       ────────────────────────────────────────────────
       ```
@@ -208,6 +209,7 @@ For each question in order:
 7c. **Concept-check** (applies to Answered answers only):
    If the answer uses an EA concept where another is clearly meant (e.g., a strategy stated as a principle, a goal stated as a plan), pause and prompt:
    > 💡 **Concept check:** What you've described sounds more like a **{correct concept}** than a **{used concept}**. See `skills/ea-artifact-templates/references/ea-concepts.md` for the distinction.
+   > **Maturity marker:** At L1, this confusion is common; at L3+, concepts are used precisely because they link to traceability chains and governance. See `ea-concepts.md` → **Practitioner Notes** for `{correct concept}` to understand how elite practitioners apply it.
    > Would you like to **1.** Reclassify this, or **2.** Record it as stated? (Press Enter to continue as-is.)
    Reclassify if the user selects 1 (ask which concept applies); otherwise proceed.
 
@@ -392,6 +394,13 @@ When invoked in phase mode (via `/ea-interview start phase [phase-name]`), the i
 
 1b. **Load brainstorm context** — check for `brainstorm/brainstorm-notes.md`. If found, load it and initialise the shown-notes list (same mechanism as artifact mode). Prioritise session blocks tagged with the current phase name when matching notes to questions. If not found, continue without comment.
 
+1c. **Load practitioner tips for the phase** — read `skills/ea-engagement-lifecycle/references/practitioner-tips.md` and extract the deep tactics and tips indexed for the current phase. Surface the most relevant 1–2 tips during orientation:
+   ```
+   💡 Practitioner tip for {phase}: {tip text}
+   {one sentence on why it matters for this interview}
+   ```
+   If the engagement is at L1–L2, present the tip as optional context: "This is an advanced practice — consider it if relevant." If at L3+, present it as guidance: "This is recommended practice at your maturity level."
+
 2. **Orient the user** — briefly explain which phase is being interviewed, how many questions, and that answers will be routed to relevant artifacts.
 
 2b. **Select interview mode** — if a `mode` was passed by the invoking command, use it directly. Otherwise, prompt the same four-option menu as artifact mode (Web default, Voice, Text, Display). Branch to the appropriate mode below.
@@ -486,6 +495,31 @@ When triggered:
 7. Resume: `Resuming — Q{N} of {total}: {question text}`
 
 The saved (or unsaved) findings are available as context for all remaining questions in this session — the interviewer should reference them if relevant to subsequent answers.
+
+---
+
+**Economic Framing Pause Handler (`e: {statement}`):**
+
+At any point during a Text interview, the user can trigger an economic framing pause by typing `e: {statement}` (e.g., `e: Moving to cloud will save money`).
+
+When triggered:
+
+1. Extract the statement string.
+2. Acknowledge: `💰 Economic framing pause — evaluating: "{statement}"`
+3. Prompt the user with structured economic questions:
+   ```
+   Let's frame this in economic terms:
+     - Cost: What is the estimated cost (build, run, change) of this over 3 years?
+     - Risk: What risk does this reduce or introduce? Quantify if possible.
+     - Value: What measurable value does this create — revenue, efficiency, optionality?
+     - TCO: How does this compare to the current state on total cost of ownership?
+   Press Enter to skip any field.
+   ```
+4. Capture the user's responses and append them as an inline note to the current answer (or to the interview notes if no current answer is being framed).
+5. Tag the note as `[Economic framing]` in the interview log.
+6. Resume: `Resuming — Q{N} of {total}: {question text}`
+
+This pause helps ensure architecture content is legible in financial terms — a key differentiator between L3+ and lower-maturity practice.
 
 ---
 
@@ -637,6 +671,18 @@ When triggered:
    - Related business drivers or goals: any DRV/G-NNN IDs found in the answer
    - Triggering artifact: current artifact name + current section
    After creating the ADR, add the ADR-NNN to the A3 row's `Notes` column.
+
+   9. **Advanced decision quality check (optional, L3+):** After the A3 row is written and the ADR check is complete, if the decision has `Authority = Strategic` or `Cost = High` or `Risk = High`, offer:
+   ```
+   💡 Practitioner check: Would you like to assess this decision's reversibility and blast radius?
+
+   Reversibility: Can this decision be undone within 6 months without major cost?
+   Blast radius: If this decision is wrong, how many teams or systems are affected?
+   ```
+   If the user accepts, capture their answers and append them as a note to the A3 row:
+   - `Reversibility: {High / Medium / Low} — {reason}`
+   - `Blast radius: {High / Medium / Low} — {affected teams/systems}`
+   This links to `practitioner-tips.md` deep tactic #8 (prefer reversible decisions) and Tip #40 (high-blast-radius decisions).
 
 **Governance state transitions (A3 rows):**
 

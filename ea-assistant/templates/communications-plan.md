@@ -18,6 +18,21 @@ relatedArtifacts: []
 diagrams: []
 links: []
 ---
+<details>
+<summary>🔒 TOGAF/ADM Compliance Status (author only — collapses on export)</summary>
+
+## Compliance Checklist
+
+| Requirement | Status | Notes |
+|---|---|---|
+| T3-A3 | ⚠️ Pending | |
+| T3-A4 | ⚠️ Pending | |
+| T3-ADR | ⚠️ Pending | |
+| T3-RATIONALE | ⚠️ Pending | |
+
+*This section is for author guidance only. Run `/ea-grill` to validate compliance.*
+
+</details>
 
 <details>
 <summary>📋 Guidance</summary>

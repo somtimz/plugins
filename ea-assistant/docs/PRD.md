@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.28
+**Version:** 0.9.29
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -326,8 +326,30 @@ Each A3 decision row may have a rationale detail block written directly below th
 | Any structured document | artifact |
 | Any diagram | diagram |
 | Executive presentation | boardroom-strategy |
+| Any artifact (L3+ engagement) | practitioner — economic framing, decision quality, optionality audit |
+| Any artifact (maturity check) | maturity — L1–L5 assessment with advancement steps |
+| Any artifact (pre-mortem) | failure-mode — symptom scan against 6 failure modes |
 
-### 5.9 Publishing
+### 5.9 Advanced Practitioner Content (v0.9.29)
+
+A comprehensive body of advanced TOGAF practitioner guidance is now integrated across the plugin:
+
+**Reference files:**
+- `practitioner-tips.md` — 50 original tips + 70 phase-by-phase deep tactics + 25 cross-cutting expert moves, indexed by ADM phase and artifact type
+- `adm-maturity-model.md` — 5-level maturity model (L1 Compliance → L5 Adaptive) with indicators, blockers, and advancement steps per level
+- `advanced-patterns.md` — 7 patterns: Dual Operating System, Architecture as Product, Intent-Based Architecture, Option Architecture, Fitness Functions, Capability Heatmap → Investment Engine, Fracture Plane Design
+- `failure-modes.md` — 6 failure modes: Documentation Trap, Centralized Bottleneck, Fake Governance, Misalignment with Finance, Over-Standardization, Static Target Illusion — each with symptoms, root cause, fix, prevention
+- `elite-architect-playbook.md` — Day-to-day behaviors: 70/30 conversation rule, interface control, systems thinking, simplicity as weapon, influence without authority, org design shaping
+- `practitioner-white-paper.md` — Synthesized white paper for executive communication: "Beyond Compliance: Using TOGAF as a High-Impact Enterprise Decision System"
+
+**Integration points:**
+- `adm-phase-guide.md` — each phase now includes Deep Tactics, Hidden Mechanics, and Maturity Indicators
+- `ea-concepts.md` — each concept now includes Practitioner Notes with maturity markers (L1→L5) and economic framing
+- `compliance-check.md` — Tier 4 advanced compliance rules (economic traceability, decision latency, optionality preservation, fitness function coverage) with maturity-based enforcement expectations
+- `phase-interview-questions.md` — advanced practitioner questions per phase (economic reasoning, decision quality, failure mode symptoms, maturity assessment)
+- All 32 artifact templates — collapsible compliance status block showing TOGAF/ADM requirements and completion status; 8 key templates include practitioner tip callouts
+
+### 5.10 Publishing
 
 - **Pre-publish compliance check** — all selected artifacts scanned before assembly; non-compliant items flagged with option to proceed or remediate
 - Consolidates artifacts in TOGAF ADM order (Prelim → Requirements → A → B → C-Data → C-App → D → E → F → G → H) into a single Markdown or Word document
@@ -340,7 +362,7 @@ Each A3 decision row may have a rationale detail block written directly below th
 - `/ea-generate [artifact] pptx` — uses **python-pptx** for PowerPoint export; requires `python-pptx`
 - `/ea-generate [artifact] mermaid` — renders Mermaid diagram source from artifact content
 
-### 5.10 Research Agent Integration
+### 5.11 Research Agent Integration
 
 - Invoke `@research-agent` at any interview prompt or during facilitation by typing `@research-agent` followed by the claim to validate
 - Validates business drivers, technology claims, risks, and assumptions with cited evidence
@@ -349,7 +371,7 @@ Each A3 decision row may have a rationale detail block written directly below th
 - Research prompts are shown automatically on driver, risk, and assumption questions when `researchPrompts: true` (default)
 - Documented in Phase A facilitation notes and `/ea-help`
 
-### 5.11 Architecture Roadmap Agent
+### 5.12 Architecture Roadmap Agent
 
 The `ea-roadmap` agent creates and manages the Architecture Roadmap artifact (Phase E/F). It auto-selects one of three modes based on what exists in the engagement:
 
@@ -363,7 +385,7 @@ In artifact-informed mode, **every candidate work package is anchored to at leas
 
 Invoke by asking Claude: *"Let's build the architecture roadmap"* or *"Review the current roadmap."*
 
-### 5.12 Document Ingestion Layer
+### 5.13 Document Ingestion Layer
 
 Document handling is split across two components with clear responsibilities:
 
@@ -374,7 +396,7 @@ This separation ensures format changes (e.g., adding .pptx support) only touch t
 
 Invoke by asking Claude: *"Analyse the uploaded documents"* or *"Use this document to populate the artifacts."*
 
-### 5.13 Undocumented Agents (Planned Features)
+### 5.14 Undocumented Agents (Planned Features)
 
 Two agents exist in the plugin but have no dedicated command workflow yet:
 
@@ -383,7 +405,7 @@ Two agents exist in the plugin but have no dedicated command workflow yet:
 
 These will gain dedicated commands and workflow integration in a future version.
 
-### 5.14 Risk Management
+### 5.15 Risk Management
 
 `/ea-risks` generates and maintains a cross-cutting Risk Register by scanning existing artifacts for risk content:
 
@@ -393,14 +415,14 @@ These will gain dedicated commands and workflow integration in a future version.
 - **Modes:** `generate` (default, writes file), `status` (inline summary), `update RIS-NNN <field> <value>`
 - **Template:** `risk-register.md`
 
-### 5.15 Architecture Change Management
+### 5.16 Architecture Change Management
 
 `/ea-changes` generates a Change Register (`change-register.md`) by aggregating all ACR (Architecture Change Request) artifacts for Phase H.
 
 - **Modes:** `generate` (default), `status` (inline summary), `update <ACR-ID> <field> <value>`
 - **Template:** `change-register.md` (aggregate view of all change request artifacts)
 
-### 5.16 Stakeholder Concerns & Objections
+### 5.17 Stakeholder Concerns & Objections
 
 `/ea-concerns` manages CON-NNN entries captured during stakeholder engagement. Concerns are stored in **Appendix A4** within each applicable artifact.
 
@@ -408,7 +430,7 @@ These will gain dedicated commands and workflow integration in a future version.
 - Records the concern statement, stakeholder, artifact context, and resolution status
 - Concerns feed into the Stakeholder Map and can trigger ADR threshold scoring
 
-### 5.17 Architecture Decision Records (ADR)
+### 5.18 Architecture Decision Records (ADR)
 
 ADRs are standalone documents capturing significant architecture decisions — technology/vendor selection, pattern choices, make-vs-buy, data governance, security architecture, or any decision that is hard to reverse.
 
@@ -426,7 +448,7 @@ ADRs are standalone documents capturing significant architecture decisions — t
 
 **Templates:** `architecture-decision-record.md` (individual ADR), `adr-register.md` (aggregate register)
 
-### 5.18 Zachman Diagram
+### 5.19 Zachman Diagram
 
 The Zachman Diagram is a cross-cutting classification artifact mapping all engagement content across the 6×6 grid (Rows: Contextual → Functioning; Columns: What / How / Where / Who / When / Why). Row 6 (Functioning) is always 🚫 — it represents the running enterprise, not a specification.
 
@@ -436,7 +458,7 @@ The Zachman Diagram is a cross-cutting classification artifact mapping all engag
 
 **Template:** `zachman-diagram.md`
 
-### 5.19 Governance Artifacts
+### 5.20 Governance Artifacts
 
 Three governance templates covering Preliminary through Phase H:
 
@@ -448,7 +470,7 @@ Three governance templates covering Preliminary through Phase H:
 
 Created via `/ea-artifact create <template-name>` or generated automatically by `/ea-changes`.
 
-### 5.20 Diagram Generation
+### 5.21 Diagram Generation
 
 Diagrams are generated and rendered through two paths:
 
@@ -464,7 +486,7 @@ Diagrams are generated and rendered through two paths:
 
 No prompt is shown — diagrams are included by default when they exist.
 
-### 5.21 Engagement Review and Migration
+### 5.22 Engagement Review and Migration
 
 **`/ea-engage-review`** runs a full-scope consistency, alignment, governance, and quality review for the active engagement. Produces an Engagement Review Report covering:
 - ADM phase coverage and artifact completeness
@@ -486,7 +508,7 @@ No prompt is shown — diagrams are included by default when they exist.
 
 **Post-artifact-save sequence:** After every artifact write, the writing agent or command automatically runs Tier 1/2/3 compliance silently. If failures are found, the user is offered inline remediation before proceeding. Regardless of compliance outcome, the user is then offered to run `/ea-consistency artifact <id>` or `/ea-engage-review`. This sequence does not apply to generated register files (risk-register, adr-register, change-register, zachman-diagram).
 
-### 5.22 Research & References
+### 5.23 Research & References
 
 The `ResearchAndReferences/` folder is the engagement library for external context: whitepapers, reference architectures, analyst reports, standards documents, repository links, and ad-hoc research notes.
 
@@ -502,7 +524,7 @@ The `ResearchAndReferences/` folder is the engagement library for external conte
 
 **Index file:** `ResearchAndReferences/research-index.md` — auto-maintained, tracks type/title/file/date/tags for every item. Created during `/ea-new` scaffolding; created silently by `/ea-open` for legacy engagements.
 
-### 5.23 Engagement Session Rules
+### 5.24 Engagement Session Rules
 
 Each engagement folder contains `.claude/rules/ea-engagement.md` — a small rules file loaded by Claude Code on every session in the engagement directory. It enforces persistent behavioural guardrails without duplicating them in CLAUDE.md or agent instructions:
 
@@ -513,7 +535,7 @@ Each engagement folder contains `.claude/rules/ea-engagement.md` — a small rul
 
 The file is seeded by `/ea-new`, backfilled silently by `/ea-open` for legacy engagements, and detected as a gap by `/ea-migrate` if absent.
 
-### 5.24 Security Architecture (v0.9.25)
+### 5.25 Security Architecture (v0.9.25)
 
 `/ea-security-review` provides a structured security audit aligned to SABSA, ISO 27001, and NIST CSF 2.0. It operates across a full engagement or against a single artifact.
 
@@ -521,11 +543,11 @@ The file is seeded by `/ea-new`, backfilled silently by `/ea-open` for legacy en
 - **`ea-security-advisor`** — answers security architecture Q&A in engagement context; supports security decisions and ADR threshold scoring for security-relevant choices
 - **`ea-security` skill** — provides SABSA ADM mapping tables, ISO 27001 control reference, NIST CSF function definitions, per-artifact security checklists, and security interview question banks consumed by ea-interviewer
 
-### 5.25 Engagement CLAUDE.md
+### 5.26 Engagement CLAUDE.md
 
 The per-engagement `CLAUDE.md` is a **pointer document**, not a data dump. It contains identity fields, a one-sentence vision, engagement state counts (artifact totals, open decisions, research items), a pointer table to content locations, and a quick-command reference. Full strategic detail (goals, objectives, strategies, drivers) lives in `engagement.json → direction` and artifact files only — it is never copied into CLAUDE.md.
 
-### 5.26 Role Catalogue (v0.9.27)
+### 5.27 Role Catalogue (v0.9.27)
 
 `/ea-roles` provides access to a canonical 15-role catalogue covering all EA engagement roles and generates a per-engagement Role Catalogue artifact.
 

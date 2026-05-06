@@ -164,6 +164,14 @@ Type these at any interview prompt:
   within-section label contradictions and broken ID refs.
 • Use `/ea-engage-review` for a full engagement health check — coverage,
   traceability, governance, ADR status, and Zachman completeness.
+• Use `/ea-grill --skill practitioner` for an economic framing and decision
+  quality review; `--skill maturity` to assess against the L1–L5 maturity model;
+  `--skill failure-mode` to run a pre-mortem against the 6 failure modes.
+• During `/ea-brainstorm`, type `p:`, `f:`, `o:`, `m:`, or `e:` to trigger
+  advanced practitioner pauses (pattern discovery, failure-mode scan, optionality
+  exploration, maturity assessment, economic framing).
+• During `/ea-interview`, type `e: {statement}` to trigger an economic framing
+  pause — add cost/risk/value analysis to any answer.
 • Use `/ea-config rules` to teach the engagement project-specific rules (e.g. naming
   conventions, methodology constraints, compliance requirements). Rules are written to
   `.claude/rules/ea-engagement.md` and loaded automatically by Claude Code each session.
