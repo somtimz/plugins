@@ -100,6 +100,10 @@ You have existing engagements. Common next steps:
 | `/ea-reorganize [--report]` | Move flat-path artifacts into correct phase subfolders; update engagement.json paths |
 | `/ea-migrate [--report]` | Align legacy engagement to current plugin version conventions |
 | `/ea-publish` | Merge artifacts into a consolidated report |
+| `/ea-summary [refresh\|status]` | Refresh or review per-artifact executive summaries |
+| `/ea-brief [--focus decisions\|risks\|gaps\|strategy] [--save]` | Synthesized one-page engagement brief — ranked decisions, gaps, risks, open concerns |
+| `/ea-workshop [start\|resume\|export\|list]` | Facilitated multi-stakeholder workshops — WS-NNN minutes, agenda, decisions, actions |
+| `/ea-arb [new\|list\|view\|close]` | ARB meeting minutes — ARB-NNN, quorum, decisions, propagate to ADR register |
 | `/ea-config [section]` | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md |
 | `/ea-help` | This guide |
 
