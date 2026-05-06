@@ -41,3 +41,16 @@ Deselecting a domain sets its corresponding ADM phase to "Not Applicable" and ex
 | H | Architecture Change Management | Change Requests, Updated Architecture |
 
 Phases can be started, edited, or resumed in any order. Navigation is non-linear.
+
+## Architecture Landscape Levels
+
+The `architectureLevel` field in `engagement.json` classifies the engagement by its scope and planning horizon. This is orthogonal to `engagementType` — any engagement type can operate at any landscape level.
+
+| Level | Typical Engagement Types | Planning Horizon | Primary Audience |
+|---|---|---|---|
+| Strategic | Greenfield, Brownfield | 5+ years | Board / C-suite |
+| Segment | Greenfield, Brownfield, Assessment-only | 2–5 years | Domain leadership |
+| Capability | Greenfield, Brownfield, Assessment-only, Migration | 1–3 years | Capability / Product owners |
+| Solution | Greenfield, Brownfield, Migration | Immediate | Project teams |
+
+For full level definitions, artifact depth expectations, and governance forum guidance, see `references/landscape-levels.md`.

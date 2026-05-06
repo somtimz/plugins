@@ -16,6 +16,13 @@ Create a new EA engagement project under `EA-projects/`.
    - **Organisation** (required) — organisation or business unit
    - **Scope** (required) — brief scope statement
    - **Engagement Type** (required) — Greenfield / Brownfield / Assessment-only / Migration
+   - **Architecture Level** (required) — the landscape level for this engagement:
+     1. `Strategic`  — enterprise-wide direction, 5+ years (board/C-suite audience)
+     2. `Segment`    — business domain/segment, 2–5 years (domain leadership audience)
+     3. `Capability` — specific business capability, 1–3 years (capability owner audience)
+     4. `Solution`   — specific project/initiative, immediate term (project/delivery audience)
+
+     Not sure? Answer these: Is this sponsored by the board or C-suite? → Strategic. A single business unit or domain? → Segment. A specific capability or product area? → Capability. A specific project or system? → Solution. See `skills/ea-engagement-lifecycle/references/landscape-levels.md` for full guidance.
    - **Start Date** (required, default: today's date) — offer today's date as default
    - **Status** (default: `Active`) — Active / On Hold / Planning
 
@@ -70,7 +77,7 @@ Create a new EA engagement project under `EA-projects/`.
    The EA interviewer surfaces relevant content from here during interviews.
    ```
 
-5. Write `EA-projects/{slug}/engagement.json` using the template in `templates/seeds/engagement-json.md`, populated with all collected fields. Set all ADM phases to `Not Started`. See `skills/ea-engagement-lifecycle/references/engagement-schema.md` for the full annotated schema.
+5. Write `EA-projects/{slug}/engagement.json` using the template in `templates/seeds/engagement-json.md`, populated with all collected fields including `architectureLevel`. Set all ADM phases to `Not Started`. See `skills/ea-engagement-lifecycle/references/engagement-schema.md` for the full annotated schema.
 
 6. Read `.claude/ea-assistant.local.md` if it exists and extract `requirementsRepoPath`. Store in `engagement.json`. If the file does not exist, set `requirementsRepoPath` to `""`.
 
@@ -80,5 +87,6 @@ Create a new EA engagement project under `EA-projects/`.
 
 8. Confirm success to the user and display:
    - Engagement name and slug
+   - Architecture Level: `{architectureLevel}`
    - Folder location: `EA-projects/{slug}/`
    - Offer to begin the **Preliminary phase** immediately or return to the main menu
