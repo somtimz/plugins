@@ -170,6 +170,14 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 | Existing policies and compliance obligations | Governance Framework (security notes), DRV-NNN type:security |
 | Current maturity tier | Architecture Vision (security baseline section) |
 
+### Decision Quality Questions
+> Ask these after completing the standard Preliminary Phase questions. They probe whether decisions are being made at the right time with sufficient evidence.
+
+1. **[DECISION]** Which decisions must be made in the Preliminary Phase, and which should be deferred to later phases? (Principles should be decided now; technology choices should not.)
+2. **[DECISION]** Are the architecture principles evidence-based — grounded in known constraints, regulatory requirements, or proven practice — or are they aspirational statements?
+3. **[DECISION]** Is there strong pressure to make specific technology or vendor commitments before Phase A? If so, how will you handle it? (Convert to PAD-NNN with constraint boundaries.)
+4. **[DECISION]** What evidence would change the principles you've defined? If none, the principles are assumptions — flag them.
+
 ---
 
 ## Phase A — Architecture Vision Interview
@@ -246,6 +254,14 @@ Assign IDs sequentially within each prefix as responses are confirmed. Record ID
 14. What existing architecture assets, decisions, or documents are relevant? → Statement of Architecture Work §3
 15. What is the desired timeline for completing this work? → §9 Scope (Time Horizon) + SoAW
 16. What are the biggest risks that could derail this engagement? → §15 Key Risks
+
+### Decision Quality Questions
+> Ask these after completing the standard Phase A questions. Phase A is for directional choices only — any specific technology or pattern commitment is premature.
+
+1. **[DECISION]** Have any specific technology choices, vendor selections, or implementation patterns been proposed in this phase? If yes, flag as premature and convert to PAD-NNN with constraint boundaries.
+2. **[DECISION]** For each strategy (STR-NNN): what evidence would be required before it can be treated as a committed decision rather than a directional hypothesis?
+3. **[DECISION]** Is there stakeholder pressure to make specific technology commitments now? What is the defensible governance position if challenged?
+4. **[DECISION]** Which decisions made in Phase A should be revisited after Phase B–D analysis? (All technology-specific choices; directional strategies with weak evidence.)
 
 **Output Routing:**
 
@@ -391,6 +407,15 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 
    Ask for goals first, then objectives for each goal, then strategies. If a response has a target number or deadline, classify it as an objective. If it describes an approach (e.g. "use agile delivery"), classify it as a strategy.
 10. For each Business objective captured, ask: "How will you measure this — what is the unit of measure, and where does the data come from? What is the current baseline?" Capture as a `performance` metric (`BM-`) linked to the objective. For goals, ask for a leading indicator — capture as an `outcome` metric. For strategies, ask for an activity measure — capture as an `activity` metric.
+
+### Decision Quality Questions
+> Ask these after completing the standard Phase B questions. Phase B is where capability gaps are identified — decisions on how to close them should be evidence-based.
+
+1. **[DECISION]** For each capability gap identified: what POC, benchmark, or reference implementation is required before committing to a closure approach?
+2. **[DECISION]** When a make-vs-buy or build-vs-configure choice is proposed, what evidence supports each option? Has a weighted scorecard been applied?
+3. **[DECISION]** What optionality is preserved in the target capability model? If a vendor or pattern is chosen, how hard is it to reverse or swap later?
+4. **[DECISION]** Are any decisions being made under strong stakeholder pressure? What is the defensible evidence-based position?
+5. **[DECISION]** Which capability gaps should be logged as PAD-NNN rather than committed decisions? (Gaps with weak evidence, high reversibility cost, or unclear impact.)
 
 **Output Routing:**
 
@@ -619,6 +644,16 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
     - **Application objective** example: "Decommission 3 legacy systems by Q2 2027"
     - **Application strategy** example: "Adopt SaaS-first for commodity capabilities"
 
+### Decision Quality Questions
+> Ask these after completing the standard Phase C questions. Data and application decisions are high-impact and often hard to reverse — evidence and optionality matter most here.
+
+1. **[DECISION]** For each technology or vendor selection proposed: what POC, benchmark, or reference implementation is required before commitment? Has it been scheduled?
+2. **[DECISION]** What is the reversibility of each chosen data model or application pattern? If wrong, how many downstream systems are affected?
+3. **[DECISION]** What optionality is preserved? (e.g., API-first design allows vendor swap; domain-driven boundaries allow technology change without consumer impact.)
+4. **[DECISION]** Are there MUST requirements that should disqualify any candidate option? Has a weighted scorecard been applied?
+5. **[DECISION]** Is there strong stakeholder pressure for a specific vendor or platform? What is the defensible evidence-based position?
+6. **[DECISION]** Which unresolved data or application decisions should be logged as PAD-NNN rather than committed now?
+
 **Output Routing:**
 
 | Response Topic | Target Artifact | Target Field |
@@ -734,6 +769,16 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
    Watch for common confusion: "move to the cloud" is a strategy if cloud is the approach to achieve availability or cost goals; it becomes a goal if the cloud-native state is itself the aspiration.
 10. For each Technology objective, ask: "How will you measure this — what is the unit, the baseline, and where does data come from?" Capture as a `performance` metric (`TM-`). For Technology strategies, ask for an activity measure (e.g., "% of workloads containerised") — capture as an `activity` metric.
 
+### Decision Quality Questions
+> Ask these after completing the standard Phase D questions. Technology choices are often the hardest to reverse — treat evidence and optionality as first-class concerns.
+
+1. **[DECISION]** For each technology standard or platform selected: what fitness function or automated conformance check will validate adoption?
+2. **[DECISION]** What is the reversibility of each technology commitment? (e.g., containerised workloads are more reversible than mainframe migrations.)
+3. **[DECISION]** What optionality is preserved? (e.g., multi-cloud abstraction, API-first design, domain-aligned data stores.)
+4. **[DECISION]** Are golden paths defined so teams can adopt standards without central review? What is the boundary between pre-approved and review-required choices?
+5. **[DECISION]** Is there vendor lock-in risk? What is the exit cost and timeline if the vendor relationship fails?
+6. **[DECISION]** Which technology decisions lack sufficient evidence and should be deferred as PAD-NNN?
+
 **Output Routing:**
 
 | Response Topic | Target Artifact | Target Field |
@@ -819,6 +864,16 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 
 *Risk*
 11. What are the biggest risks to delivering this roadmap — and do any of those risks directly threaten a Goal or Strategy?
+
+### Decision Quality Questions
+> Ask these after completing the standard Phase E questions. Phase E converts gaps and decisions into work packages — evidence-gating and PAD resolution are critical here.
+
+1. **[DECISION]** Are all PAD-NNN entries from earlier phases either resolved or linked to a work package? List any open PADs with expired target dates.
+2. **[DECISION]** For each work package: what evidence must be gathered before it starts? Is the evidence status sufficient, partial, or insufficient?
+3. **[DECISION]** Are work packages with insufficient evidence scheduled in Wave 1? If yes, flag as high-risk and require executive sign-off or guardrails.
+4. **[DECISION]** What is the decision reversibility of each work package? (High = can reverse with minimal cost; Low = irreversible or expensive.)
+5. **[DECISION]** Does every work package advance at least one goal or execute at least one strategy? Orphan work packages create delivery risk — flag them.
+6. **[DECISION]** Which transition architectures are deliberate value increments vs. temporary compromises? Document the value delivery mode for each.
 
 **Output Routing:**
 
@@ -907,6 +962,15 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 9. How will user transition and change management be handled across each wave?
 10. What dependencies exist with third-party vendors, regulators, or external systems that constrain the migration sequence?
 
+### Decision Quality Questions
+> Ask these after completing the standard Phase F questions. Migration decisions are often irreversible and expensive — timing and evidence quality matter.
+
+1. **[DECISION]** Are migration waves prioritised by evidence quality, not just impact? (Work packages with weak evidence should be deferred or given guardrails.)
+2. **[DECISION]** For each wave: what is the rollback cost and timeline? Is the decision reversible within the wave's budget?
+3. **[DECISION]** What is the minimum viable evidence required before each wave starts? Has it been gathered?
+4. **[DECISION]** Are there legacy exit criteria defined for every system being replaced? Without exit criteria, legacy systems live forever.
+5. **[DECISION]** Which migration decisions are being made under time pressure that may compromise evidence quality? Flag as risky commits.
+
 **Output Routing:**
 
 | Response Topic | Target Artifact | Target Field |
@@ -952,6 +1016,14 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for a Mermaid
 4. How will architecture requirements be enforced in contracts with delivery teams or vendors?
 5. How will project deviations from the approved architecture be handled?
 6. What tools or processes will be used to track compliance and issues?
+
+### Decision Quality Questions
+> Ask these after completing the standard Phase G questions. Governance is where decisions are enforced — deviations must be justified with evidence.
+
+1. **[DECISION]** Are deviations from the approved architecture justified with evidence, or are they exceptions without rationale? Unjustified deviations erode decision quality.
+2. **[DECISION]** Is governance effort focused on high-risk, irreversible decisions — or does it review everything equally? (Elite practice: guardrails for reversible, review for irreversible.)
+3. **[DECISION]** Are conformance checks automated (CI/CD, policy-as-code) or manual? Manual-only governance scales poorly and creates bottlenecks.
+4. **[DECISION]** How are PAD-NNN entries that expire during implementation handled? Are they escalated or silently ignored?
 
 **Output Routing:**
 
@@ -1004,6 +1076,15 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for a Mermaid
 4. Who is responsible for maintaining the architecture after this engagement concludes?
 5. What is the planned cadence for architecture reviews after delivery?
 6. How will lessons learned from this engagement be captured and used?
+
+### Decision Quality Questions
+> Ask these after completing the standard Phase H questions. Phase H is where decisions are revisited based on post-implementation evidence — adaptive governance depends on honest reassessment.
+
+1. **[DECISION]** Which decisions made earlier in the engagement should be revisited based on post-implementation evidence? (e.g., technology choices that underperformed, assumptions that proved wrong.)
+2. **[DECISION]** Are expired PAD-NNN entries reviewed and either resolved or formally closed? Orphan PADs create hidden delivery risk.
+3. **[DECISION]** What is the process for converting post-implementation learnings into updated principles, standards, or reference architectures?
+4. **[DECISION]** Are architecture decisions periodically stress-tested against new evidence? If not, the architecture becomes static and drifts from reality.
+5. **[DECISION]** Which decisions from this engagement would you make differently with hindsight? Capture as lessons learned and feed back into the engagement charter for future work.
 
 **Output Routing:**
 

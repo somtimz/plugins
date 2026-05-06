@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.29
+**Version:** 0.9.30
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -177,7 +177,7 @@ Vision, Mission, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Proble
 
 Artifacts are populated from interview answers, uploaded documents, or explicit user input. No AI-generated content is written to an artifact without a `🤖 AI Draft — Review Required` marker.
 
-**24 TOGAF artifact templates:**
+**25 TOGAF artifact templates:**
 
 | Artifact | Phase | A3 | A4 | A5 |
 |---|---|---|---|---|
@@ -202,6 +202,7 @@ Artifacts are populated from interview answers, uploaded documents, or explicit 
 | Compliance Assessment | G | — | — | ✓ |
 | Risk Register | Cross-cutting | — | — | — |
 | Architecture Decision Record | Cross-cutting | — | — | — |
+| Pending Architecture Decision (PAD) | Cross-cutting | — | — | — |
 | ADR Register | Cross-cutting | — | — | — |
 | Zachman Diagram | Cross-cutting | — | — | ✓ |
 | Role Catalogue | A / Cross-cutting | — | — | — |
@@ -566,6 +567,43 @@ The per-engagement `CLAUDE.md` is a **pointer document**, not a data dump. It co
 | `/ea-roles --update <ROLE-ID>` | Assign a named individual and organisation unit to a role in the engagement's Role Catalogue |
 
 **Template:** `templates/role-catalogue.md`
+
+### 5.28 Decide vs Defer Framework and PAD Management (v0.9.30)
+
+A structured decision-quality framework prevents premature commitments and reduces decision rework across the engagement lifecycle.
+
+**Decide vs Defer Matrix — 5-factor assessment:**
+
+| Factor | Question | Ratings |
+|---|---|---|
+| Evidence | How much evidence supports this decision? | Strong / Moderate / Weak |
+| Reversibility | Can this be undone within 6 months without major cost? | High / Medium / Low |
+| Impact | If wrong, how many teams or systems are affected? | Low / Medium / High |
+| Urgency | What happens if delayed 90 days? | No harm / Some cost / Critical |
+| Capability | Does the team have the skills to execute? | Ready / Learnable / Gap |
+
+**Verdicts and actions:**
+
+| Verdict | Condition | Action |
+|---|---|---|
+| **Decide now** | Evidence = Strong, Reversibility = High, Capability = Ready/Learnable | Log to A3 as committed; offer ADR |
+| **Defer** | Evidence = Weak OR Reversibility = Low OR Impact = High | Create PAD-NNN with constraint boundaries, evidence requirements, resolution path, expiry date |
+| **Decide with guardrails** | Evidence = Moderate, Reversibility = Medium, Urgency = Some cost | Log to A3 with guardrails note; schedule evidence review |
+| **Premature** | Specific tech/pattern in Phase A before B–D analysis | Flag as premature; convert to PAD-NNN with constraint boundaries |
+| **Risky commit** | Urgency = Critical AND Evidence = Weak | Log with risk flag; require executive sign-off |
+
+**PAD-NNN (Pending Architecture Decision) template:**
+- Lightweight deferred-decision artifact with constraint boundaries, candidate options, evidence required, resolution path, expiry date, and consequences of premature commitment
+- Created by `ea-interviewer` when user types `d: {statement}` during interview, or when a decision is flagged as premature
+- Linked to GAP-NNN, WP-NNN, and ADR-NNN via frontmatter fields
+- Compliance rule T4-PAD: open PADs must have expiry within 90 days and defined resolution path
+
+**Integration points:**
+- `ea-interviewer` — `d:` shortcut triggers 5-factor assessment inline during any interview; advanced decision quality check (post-A3 logging) runs the same assessment for Strategic/High-cost/High-risk decisions
+- `ea-grill` — Decision-Specific Grilling Protocol with 5 layers: Decide vs Defer Matrix, Premature Decision Detection, Evidence Sufficiency Check, Political Alignment Probe, Phase-Appropriateness Check
+- `phase-interview-questions.md` — `[DECISION]` quality questions added to all 10 phases probing evidence, optionality, reversibility, and political alignment
+- `compliance-check.md` — 5 new Tier 4 rules: T4-PREMAT (premature detection), T4-EVID (evidence quality), T4-POLIT (political alignment), T4-PAD (PAD hygiene), T4-WPEVID (work package evidence gating)
+- Artifact templates — ADR template includes Evidence Assessment, Decision Timing, and Political Alignment sections; Gap Analysis includes Gap-to-Decision Mapping and orphan gap flagging; Architecture Roadmap includes PAD Resolution Tracking and Evidence-Gated Prioritisation
 
 ---
 

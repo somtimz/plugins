@@ -143,6 +143,11 @@ Work packages close gaps identified in the Gap Analysis.
 | **Status** | Proposed / Approved / In Progress / Complete |
 | **Resources Required** | Roles: {{roles}}  ·  FTE estimate: {{fte_estimate}}  ·  Skill dependencies: {{skill_dependencies}}  ·  Vendor / partner: {{vendor_or_partner}} |
 | **Capacity note** | {{capacity_constraints_or_conflicts}} |
+| **Resolves PAD** | {{pad_ids}} |
+| **Evidence Required Before Start** | {{evidence_requirements}} |
+| **Evidence Status** | Sufficient / Partial / Insufficient |
+| **Decision Reversibility** | High / Medium / Low |
+| **Value Delivery** | Standalone / Cumulative / Enabling |
 
 ---
 
@@ -174,6 +179,47 @@ Explain the prioritisation criteria used to sequence work packages.
 </details>
 
 {{prioritisation_rationale}}
+
+---
+
+## PAD Resolution Tracking
+
+<details>
+<summary>📋 Guidance</summary>
+
+Work packages in Phase E must resolve Pending Architecture Decisions (PAD-NNN) from earlier
+phases. Track which PADs each work package resolves, and flag any PADs that remain open
+after their target work package completes.
+
+</details>
+
+| PAD-NNN | Description | Target WP | Resolution Status | Expiry Date | Risk if Expired |
+|---|---|---|---|---|---|
+| PAD-001 | {{description}} | WP-003 | Resolved / Open / Expired | {{date}} | {{risk}} |
+
+**Open PADs with expired target dates:** {{list_or_None}}
+
+---
+
+## Evidence-Gated Prioritisation
+
+<details>
+<summary>📋 Guidance</summary>
+
+Prioritise work packages not only by impact and feasibility, but by evidence sufficiency.
+Work packages with insufficient evidence should be flagged as high-risk or deferred until
+evidence is gathered. Evidence gating prevents scheduling work packages whose underlying
+decisions are still speculative.
+
+</details>
+
+| WP-NNN | Impact | Feasibility | Evidence Status | Prioritisation Verdict | Action |
+|---|---|---|---|---|---|
+| WP-001 | High | High | Sufficient | ✅ Proceed | — |
+| WP-002 | High | Medium | Insufficient | ⚠️ Defer — gather evidence | {{action}} |
+| WP-003 | Medium | High | Partial | ⚠️ Proceed with guardrails | {{guardrails}} |
+
+**Work packages blocked by insufficient evidence:** {{list_or_None}}
 
 ---
 

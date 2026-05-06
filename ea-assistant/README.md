@@ -58,7 +58,11 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Practitioner grill modes** — `/ea-grill --skill practitioner` (economic framing + decision quality), `--skill maturity` (L1–L5 assessment), `--skill failure-mode` (symptom scan + pre-mortem)
 - **Advanced brainstorm pauses** — during `/ea-brainstorm`, type `p:`, `f:`, `o:`, `m:`, or `e:` to trigger pattern discovery, failure-mode scan, optionality exploration, maturity assessment, or economic framing
 - **Economic framing pause** — during `/ea-interview`, type `e: {statement}` to add cost/risk/value analysis to any answer; links to Tier 4 compliance (economic traceability)
-- **Tier 4 compliance** — advanced compliance rules for L3+ engagements: economic traceability, decision latency documentation, optionality preservation, fitness function coverage; maturity-based enforcement expectations
+- **Decide vs Defer Framework** — 5-factor decision quality assessment (Evidence, Reversibility, Impact, Urgency, Capability) triggered by `d: {statement}` during interviews; prevents premature commitments, converts weak-evidence decisions to PAD-NNN, and adds guardrails to reversible decisions
+- **Pending Architecture Decision (PAD-NNN)** — lightweight deferred-decision artifact with constraint boundaries, candidate options, evidence requirements, resolution path, expiry date, and consequences of premature commitment; linked to GAP-NNN, WP-NNN, and ADR-NNN
+- **Evidence-gated prioritisation** — work packages with insufficient evidence flagged as high-risk or deferred from Wave 1; prevents speculative scheduling
+- **Political alignment documentation** — records stakeholder pressure and defensible evidence-based positions for high-impact decisions; surfaces in ADR and A3 assessments
+- **Tier 4 compliance** — advanced compliance rules for L3+ engagements: economic traceability, decision latency documentation, optionality preservation, fitness function coverage, premature decision detection, evidence quality assessment, political alignment, PAD hygiene, and work package evidence gating; maturity-based enforcement expectations
 
 ## Prerequisites
 
@@ -168,6 +172,8 @@ Type these at any interview prompt:
 | `b:` / `brainstorm` | Start a freeform brainstorm pause |
 | `resume` / `done` | End brainstorm and return to the interview |
 | `r: {query}` / `research: {query}` | Research a topic mid-interview; findings surfaced inline with option to save to ResearchAndReferences |
+| `e: {statement}` | Economic framing pause — add cost/risk/value analysis to any answer |
+| `d: {statement}` | Decide/Defer pause — 5-factor assessment; recommends: Decide now / Defer / Guardrails / Premature / Risky commit; offers to create PAD-NNN |
 | `?` / `help` | Show artifact purpose, current progress, and shortcuts |
 | `concepts` | Show EA concepts quick reference (Principle/Goal/Objective/Strategy/Plan/Risk/Issue/Problem) |
 

@@ -328,6 +328,24 @@ Each entry includes: **Why it matters**, **When to apply** (phase + artifact), *
 **Related concept:** Metric, Governance, Delivery.  
 **How to incorporate:** In `governance-framework.md`, replace "artifacts produced" metrics with "delivery outcomes" metrics (cycle time, defect rate, value realized).
 
+#### Tip 51 — Apply the Decide vs Defer Matrix to every significant architecture choice
+**Why it matters:** Premature decisions create rework and lock-in. Deferred decisions without resolution paths create delivery blockers. The five-factor matrix (Evidence, Reversibility, Impact, Urgency, Capability) forces disciplined timing.  
+**When to apply:** Any phase. Every artifact containing A3 entries or ADR references.  
+**Related concept:** Decision, Pending Architecture Decision, Architecture Decision Record.  
+**How to incorporate:** In every artifact with A3 entries, add a "Phase Appropriateness" note. In ADRs, include a "Decision Timing" section. Convert premature or low-evidence decisions to PAD-NNN entries with constraint boundaries and expiry dates.
+
+#### Tip 52 — Treat evidence as a first-class governance gate
+**Why it matters:** Decisions made on assumptions rather than evidence are the primary source of architecture rework. MUST requirements should act as disqualifiers, not just evaluation criteria.  
+**When to apply:** Phases A–E. ADR template, Gap Analysis, Architecture Roadmap.  
+**Related concept:** Requirement, Decision, Evidence Assessment.  
+**How to incorporate:** In ADR template §3b, require an Evidence Assessment table. In Gap Analysis, require Evidence Requirements per high-priority gap. In Architecture Roadmap, evidence-gate work packages.
+
+#### Tip 53 — Document political alignment explicitly — don't hide stakeholder pressure
+**Why it matters:** When decisions are driven by political pressure rather than architecture rationale, future architects cannot distinguish evidence-based choices from expedient ones. Documenting the political context preserves institutional memory.  
+**When to apply:** Any phase. ADR template §5c, A3 Decision Log notes.  
+**Related concept:** Stakeholder Concern, Governance, Decision.  
+**How to incorporate:** In ADRs, include a "Political Alignment" section recording stakeholder pressure, governance forum review, and the defensible evidence-based position. In A3 entries, note if a decision was a fiat.
+
 ---
 
 ## Part II: Phase-by-Phase Deep Tactics
@@ -447,6 +465,31 @@ Each entry includes: **Why it matters**, **When to apply** (phase + artifact), *
 **Move 23:** Reward teams for alignment with architecture, not just delivery speed.  
 **Move 24:** Make architecture visible and accessible — democratize it.  
 **Move 25:** Continuously refine your influencing skills — architecture is a social discipline.
+
+**Move 26:** Use the Decide vs Defer Matrix — Evidence × Reversibility × Impact × Urgency × Capability — to time every architecture decision correctly.
+
+- **Evidence:** What data, experiment, or proof supports this choice? (Sufficient / Partial / Insufficient)
+- **Reversibility:** Can it be undone within 6 months without major cost? (High / Medium / Low)
+- **Impact:** If wrong, how many teams or systems are affected? (High / Medium / Low)
+- **Urgency:** Is there a real deadline forcing commitment now? (High / Medium / Low)
+- **Capability:** Does the team have the skills to implement and operate? (Yes / Partial / No)
+
+Guidance:
+- Evidence + Reversibility = High → Safe to decide now
+- Evidence + Reversibility = Low → Defer to PAD-NNN
+- Urgency = High + Capability = No → Decide with guardrails and learning plan
+- Impact = High + Evidence = Insufficient → Do not commit without POC or spike
+
+**Move 27:** Convert premature decisions to constraint-boundary PADs instead of committed choices.
+
+When a stakeholder insists on a technology or pattern before the right phase:
+1. Capture the constraint boundary (what MUST be true, what MUST NOT happen)
+2. Document candidate options with preliminary assessment
+3. Set an expiry date and resolution path
+4. Create the PAD-NNN and link it to the relevant gap or work package
+5. Communicate the boundary to delivery teams so they can design within it
+
+This preserves political alignment while protecting architecture integrity.
 
 ---
 

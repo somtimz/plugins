@@ -125,6 +125,46 @@ When asking questions, actively use the loaded context — do not treat it as pa
 - **Research items:** If a research item contains findings that contradict or qualify an artifact claim, cite it: `[research: {title}]`
 - **Related artifacts:** If a cross-referenced artifact labels the same ID differently or states a contradicting fact, challenge the inconsistency.
 
+### Decision-Specific Grilling Protocol
+
+When the selected skill is `grill-me-decision` or when reviewing any artifact containing A3 Decision Log entries, ADR references, or technology/pattern choices, apply these additional challenge layers:
+
+**Layer 1 — Decide vs Defer Matrix**
+For each significant decision in the artifact, challenge using the five factors:
+- **Evidence:** "What evidence exists for this decision? Is it sufficient to justify commitment, or is this still an assumption?" If evidence is weak, probe: "Should this be a PAD-NNN (Pending Architecture Decision) rather than a committed A3 entry?"
+- **Reversibility:** "If this decision is wrong, how easily can it be reversed? What is the cost and timeline of reversal?" If hard to reverse and evidence is weak, flag as premature.
+- **Impact:** "What is the blast radius if this decision is wrong? How many teams, systems, or capabilities are affected?" Cross-reference with the A3 Impact classification.
+- **Urgency:** "Is there a real deadline forcing this decision now, or is the pressure artificial?" If artificial, challenge why it cannot be deferred.
+- **Capability:** "Does the team have the skills, data, and tools to implement and operate this decision? If not, what is the plan to close that gap before commitment?"
+
+**Layer 2 — Premature Decision Detection**
+When reviewing architecture patterns, technology selections, or vendor choices in Phases A–D:
+- If the artifact is Phase A and contains a technology/pattern decision (e.g., "microservices", "Kubernetes", "SAP S/4HANA"), challenge explicitly:
+  > "You are proposing a specific technology/pattern in Phase A, before business capabilities, data domains, or application boundaries are defined. This creates risk of rework if the downstream architecture contradicts this choice. Should this be a PAD-NNN with constraint boundaries instead?"
+- Reference the microservices example: "A microservices decision in Phase A without service boundary analysis is a classic premature decision — it forces decomposition before business domain analysis is complete."
+
+**Layer 3 — Evidence Sufficiency Check**
+For any decision with a stated rationale, challenge:
+- "What evidence would change this decision? Do you have it now?"
+- "What experiments, POCs, or spikes are planned to validate the assumptions behind this decision before it becomes binding?"
+- "Are there MUST requirements that act as disqualifiers? If a candidate option violates a MUST, is it still being considered?"
+
+**Layer 4 — Political Alignment Probe**
+When the artifact states "strong pressure to adopt X" or "stakeholder insists on Y":
+- "What is the defensible governance position if this decision is challenged? Can you articulate the evidence-based case for or against, independent of the political pressure?"
+- "Has the Architecture Board or governance forum reviewed this with the evidence presented, or was this a fiat decision?"
+- "What guardrails or constraint boundaries would make this politically driven decision architecturally safe?"
+
+**Layer 5 — Phase-Appropriateness Check**
+Map each decision to the phase-specific decision flow:
+- **Preliminary:** Can decide directly (principles, governance model). Challenge if too specific.
+- **Phase A:** Should be directional only. Challenge any specific technology or pattern choice.
+- **Phase B–D:** Decide where feasible (baseline-to-target gaps, capability needs). Log uncertainties as PAD-NNN entries.
+- **Phase E:** Convert gaps and PADs into work packages. Challenge any remaining unconverted PADs.
+- **Phase F:** Prioritize work packages by evidence quality. Challenge low-evidence packages.
+- **Phase G:** Enforce decided architecture. Challenge any unenforced deviations.
+- **Phase H:** Adapt based on evidence. Challenge decisions that are not being revisited despite new evidence.
+
 ---
 
 ### Step 6 — Produce the output
@@ -192,6 +232,10 @@ If the user selects `a` or `s`:
      - Feasibility doubt (cost, time, capability) → `Feasibility`
      - Risk or failure mode identified → `Risk`
      - Stakeholder alignment issue → `Stakeholder`
+     - Decision made before sufficient evidence or correct phase → `Premature`
+     - Insufficient evidence to justify commitment → `Evidence`
+     - Decision driven by stakeholder pressure rather than rationale → `Political`
+     - Should have been a PAD-NNN instead of committed decision → `Deferral`
      - Other → `Other`
    - Set `Status` based on whether the artifact has a documented response:
      - If the artifact section being challenged contains a clear answer → `Addressed`; record the section reference in `Response`
