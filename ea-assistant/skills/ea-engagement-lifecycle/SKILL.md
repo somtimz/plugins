@@ -1,7 +1,7 @@
 ---
 name: ea-engagement-lifecycle
 description: This skill should be used when the user asks to "start an EA engagement", "manage an EA project", "set up a new architecture engagement", "what phase are we in", "advance the ADM", "continue the engagement", "resume an EA project", or when working within any TOGAF ADM phase. Provides end-to-end lifecycle guidance for Enterprise Architecture engagements using TOGAF 10 as the backbone.
-version: 0.9.0
+version: 0.9.31
 ---
 
 # EA Engagement Lifecycle
@@ -37,6 +37,8 @@ EA-projects/
 │   └── ResearchAndReferences/
 └── .archive/
 ```
+
+Each phase folder and `cross-cutting/` may contain a `workshops/` subfolder created on demand, containing `workshop-minutes-{WS-NNN}-{YYYY-MM-DD}.md` files (managed by `/ea-workshop`).
 
 Each phase folder contains a `notes/` subfolder created on demand with three subdirectories:
 - `notes/interviews/` — dated interview note files (`interview-{artifact-id}-{YYYY-MM-DD}-v{N}.md`)
@@ -99,7 +101,7 @@ All static data is in `references/`. Read these rather than relying on memory:
 
 ### Starting a New Engagement
 
-1. Collect: Name, Description, Sponsor, Organisation, Scope, Engagement Type, Architecture Domains, Start Date, Target End Date (optional), Status
+1. Collect: Name, Description, Sponsor, Organisation, Scope, Engagement Type, Architecture Level, Architecture Domains, Start Date, Target End Date (optional), Status
 2. Generate slug: lowercase, hyphens, no spaces, max 60 chars
 3. **Capture direction per selected domain.** For each domain:
    - Goals (`G-NNN`) — where you want to be (qualitative)
@@ -168,6 +170,18 @@ Any AI-generated or suggested content MUST be marked:
 Unanswered fields: `⚠️ Not answered`
 Not applicable fields: `➖ Not applicable`
 Default answers accepted by user: value written + `✓ Default accepted`
+
+## Architecture Landscape Level
+
+The `architectureLevel` field in `engagement.json` classifies the engagement by its scope and planning horizon. The four levels — `Strategic`, `Segment`, `Capability`, `Solution` — determine artifact depth expectations, governance forum, and ADM tailoring.
+
+Load `references/landscape-levels.md` when:
+- The user asks about artifact depth, section completeness, or what detail is expected
+- The user asks which governance forum applies (ARB, portfolio board, project board)
+- The user asks about ADM tailoring for their engagement type
+- An artifact is being created or populated — check the Depth Expectation Matrix before starting
+
+**Fallback rule:** When `architectureLevel` is `null` or absent in an existing engagement, treat it as `Segment` for artifact depth purposes. This is non-blocking. At the next `/ea-config` interaction, prompt the user to set it via `Section 6 — Engagement Metadata`.
 
 ## Write Protocol
 

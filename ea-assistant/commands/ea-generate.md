@@ -19,6 +19,8 @@ If no artifact name was given, read `EA-projects/{slug}/engagement.json → arti
 
 Recommend the primary format for the artifact type (see `skills/ea-generation/references/artifact-type-mapping.md`). Offer: `docx`, `pptx`, `mermaid` (if available), `png`, `svg`. Omit mermaid/png/svg for non-Mermaid artifact types.
 
+> **EA Tool Export:** Export to Sparx EA (XMI), Archi (.archimate), or LeanIX format is not supported in this version — these formats require round-trip model fidelity beyond the scope of this command. For **import** from these tools, place the file in `EA-projects/{slug}/uploads/` — the ingestion pipeline detects and maps EA tool export formats automatically. See `skills/ea-document-ingestion/SKILL.md` for supported formats and detection rules.
+
 ### Step 3: Read and Extract Artifact Content
 
 1. Read the artifact file from `engagement.json → artifacts[].file`

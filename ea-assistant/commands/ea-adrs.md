@@ -180,6 +180,7 @@ If not found: `"ADR-NNN not found in EA-projects/{slug}/artifacts/. Use '/ea-adr
 | `reviewedBy` | any string |
 | `decisionDate` | `YYYY-MM-DD` format |
 | `supersededBy` | `ADR-NNN` (required when setting status to Superseded) |
+| `arbReference` | `ARB-NNN` | reference to the ARB meeting that ratified this decision |
 
 **Validation rules:**
 - Setting `status: Superseded` requires `supersededBy` to be provided and to reference an existing ADR
@@ -254,6 +255,8 @@ When the `ea-interviewer` or any artifact-creation command needs to include ADR 
 ```
 
 Pull the decision statement from the ADR's `## 5. Decision` section — first sentence of the `**Decision:**` field.
+
+**Governance Reference:** When an ADR has been ratified at an ARB meeting, set `arbReference: ARB-NNN` in the ADR frontmatter using `/ea-adrs update ADR-NNN arbReference ARB-NNN`. The `## 5. Decision` section's `Governance Reference` field should also be updated to `ARB-{NNN}`.
 
 ---
 

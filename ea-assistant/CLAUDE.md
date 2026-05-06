@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.30 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.31 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -34,8 +34,9 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 
 ## Command Reference
 
-30 commands available — run `/ea-help` for the full table with agent assignments.
+32 commands available — run `/ea-help` for the full table with agent assignments.
 Key entry points: `/ea-new` · `/ea-open` · `/ea-interview` · `/ea-grill` · `/ea-generate` · `/ea-status`
+New in v0.9.31: `/ea-workshop` (multi-stakeholder facilitation) · `/ea-arb` (ARB meeting minutes)
 
 ---
 
@@ -134,6 +135,8 @@ These are loaded automatically by `/ea-grill --skill practitioner|maturity|failu
 | VS-NNN | Value Stream | VS-001 |
 | UC-NNN | Use Case | UC-001 |
 | PAD-NNN | Pending Architecture Decision | PAD-001 |
+| WS-NNN | Workshop Minutes | WS-001 |
+| ARB-NNN | Architecture Review Board Meeting | ARB-001 |
 
 **Do not use domain-prefixed IDs** (BG-/DG-/AG-/TG- etc.) — the scheme is unified and domain-agnostic.
 
@@ -153,6 +156,8 @@ For full ownership table, see individual agent definition files in `agents/`.
 ADRs are standalone documents capturing significant architecture decisions — technology/vendor selection, pattern choices, make-vs-buy, data governance, security architecture, or any decision that is hard to reverse.
 
 **ADR lifecycle:** `Candidate → In Progress → Completed → Superseded (by ADR-NNN) | Deprecated`
+
+When an ADR is ratified at an ARB meeting, set `arbReference: ARB-NNN` via `/ea-adrs update ADR-NNN arbReference ARB-NNN` and update the ADR's `Governance Reference` (§5) to `ARB-{NNN}`. Use `/ea-arb close` to propagate ARB decisions to the ADR register in bulk.
 
 **ADR vs A3 Decision Log:**
 - **A3** = governance state tracking inside an artifact (who decided what, at what authority, verified or not)

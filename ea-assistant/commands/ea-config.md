@@ -50,7 +50,8 @@ When this command runs:
    - `optouts` → run Engagement Resolution, then jump to Section 3
    - `refresh` → run Engagement Resolution, then jump to Section 4
    - `local` → run Engagement Resolution, then jump to Section 5
-   - Anything else → display: `Unknown section "{arg}". Valid options: settings, rules, optouts, refresh, local.` and stop.
+   - `metadata` → run Engagement Resolution, then jump to Section 6
+   - Anything else → display: `Unknown section "{arg}". Valid options: settings, rules, optouts, refresh, local, metadata.` and stop.
 
 3. If no argument is provided, display the menu:
    ```
@@ -61,8 +62,9 @@ When this command runs:
    3. Opt-out management  (EA-projects/{slug}/engagement.json)
    4. Refresh CLAUDE.md   (EA-projects/{slug}/CLAUDE.md)
    5. Local config        (EA-projects/{slug}/.claude/rules/ea-local-config.md)
+   6. Engagement metadata (architectureLevel, engagementType, dates)
 
-   Select a section (1–5), or press Enter to exit:
+   Select a section (1–6), or press Enter to exit:
    ```
    Wait for input.
    - `1` → Section 1
@@ -70,6 +72,7 @@ When this command runs:
    - `3` → run Engagement Resolution, then Section 3
    - `4` → run Engagement Resolution, then Section 4
    - `5` → run Engagement Resolution, then Section 5
+   - `6` → run Engagement Resolution, then Section 6
    - Empty / Enter → exit with no output
 
 4. After completing any section, return to the menu (unless the user chose a direct subcommand).
@@ -298,3 +301,39 @@ This file is loaded automatically by Claude Code on every session. It is **never
 5. **Reset (`r`):** Warn: `⚠️ This will discard all content in ea-local-config.md. Type "reset" to confirm or press Enter to cancel.` If confirmed, re-seed from template.
 
 6. Return to the caller.
+
+## Section 6 — Engagement Metadata
+
+**Source:** `EA-projects/{slug}/engagement.json`
+
+Allows editing of key engagement classification fields that may need updating after creation.
+
+**Flow:**
+
+1. Read `EA-projects/{slug}/engagement.json`. If unreadable, display the read error and return to the caller.
+
+2. Extract and display the current metadata:
+   ```
+   Engagement Metadata — {slug}
+
+     architectureLevel    {value or "(not set)"}    (Strategic | Segment | Capability | Solution)
+     engagementType       {value}                   (Greenfield | Brownfield | Assessment-only | Migration)
+     status               {value}                   (Active | On Hold | Planning | Completed | Archived)
+     startDate            {value}
+     targetEndDate        {value or "(not set)"}
+
+   Say "set <field> to <value>" to update a field, or Enter to go back.
+   ```
+
+3. Wait for input.
+
+4. On `set <field> to <value>`:
+   - **`architectureLevel`** — validate against `Strategic`, `Segment`, `Capability`, `Solution`. If invalid: `Invalid value "{value}" for architectureLevel. Allowed: Strategic, Segment, Capability, Solution.` and re-prompt.
+   - **`engagementType`** — validate against `Greenfield`, `Brownfield`, `Assessment-only`, `Migration`.
+   - **`status`** — validate against `Active`, `On Hold`, `Planning`, `Completed`, `Archived`.
+   - **`startDate`**, **`targetEndDate`** — validate as `YYYY-MM-DD` format.
+   - On valid input: read `engagement.json` fresh, update the field, update `lastModified` to the current ISO 8601 timestamp, write the file.
+   - Confirm: `✓ {field} updated to "{value}"`
+   - Redisplay the metadata and re-prompt.
+
+5. On empty input: return to the caller.
