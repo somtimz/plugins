@@ -33,7 +33,9 @@ Select artifact to review:
      - **Option 1 (Achieve compliance):** apply all remediations preserving content, then load for review.
      - **Option 2 (Accept as-is):** apply minimal frontmatter defaults, set `complianceNote: accepted-non-standard`, then load for review. Add an informational banner at the top of the review display: `ℹ️ This artifact has {N} compliance gap(s) accepted as-is. Non-standard fields and missing sections will not affect the review workflow.`
      - **Option 3 (View details):** display full compliance report, then re-present Options 1 and 2.
-3. Load artifact-scoped context using **Scope A** from `skills/ea-engagement-lifecycle/references/context-loading.md`. This brings in related artifacts, phase notes, prior grill findings, and research items for use when suggesting review comments.
+3. Load artifact-scoped context using **Scope A** from `skills/ea-engagement-lifecycle/references/context-loading.md`. This brings in related artifacts, phase notes, prior grill findings, research items, and detail files for use when suggesting review comments.
+   - If any detail files were loaded (Scope A step 8), announce before showing review actions:
+     > "Linked detail files: {N} loaded. Open concerns: {N} — open issues: {N}. These will be surfaced as context when you add review comments."
 4. Read the review file `artifacts/{artifact-id}.review.md` if it exists
 5. Display the artifact content with existing review comments inline (if any)
 
@@ -57,6 +59,12 @@ Present the following options:
   **Comment:** {comment text}
   **Status:** Open
   ```
+- **Cross-reference in detail file:** After writing the comment, check whether the section name or comment text contains a recognised engagement ID (e.g. `G-001`, `WP-003`, `CAP-007`). If an ID is found, offer:
+  > "Add this comment to the detail file for {ID}? (y/n)"
+  - If accepted: check whether `artifacts/details/{ID}.md` exists.
+    - If not: create a stub using `templates/item-detail.md`.
+    - Append to the **Concerns** section: `- [review: {YYYY-MM-DD}] {comment text} — {reviewer}`
+    - Update `lastModified` in the detail file frontmatter.
 
 **b) Resolve a comment**
 - List open comments

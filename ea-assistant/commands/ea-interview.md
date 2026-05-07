@@ -258,6 +258,16 @@ When the user types `a: {text}` during any interview, the `ea-interviewer` agent
 
 4. Continue with governance classification (Authority/Domain/Cost/Impact/Risk) as usual.
 
+5. **Offer detail file recording** (for ID-bearing items):
+   After A3 governance classification is complete, if the item text, captured value, or assigned ISS-NNN / PRB-NNN contains a recognised ID pattern (e.g. `G-001`, `CAP-003`, `WP-007`), offer:
+   > "Record this in the detail file for {ID}? Creates one if needed. (y/n)"
+   - If accepted: check whether `artifacts/details/{ID}.md` exists.
+     - If not: silently create it using `templates/item-detail.md` (substitute frontmatter placeholders from engagement context and parent artifact).
+     - Append an entry to the **Issues** section (for ISS-NNN / PRB-NNN) or **Concerns** section (for A3 decisions or CON-NNN) in the format:
+       `- [interview: {YYYY-MM-DD}] {captured text} — {ISS-NNN / PRB-NNN / A3 reference}`
+     - Update `lastModified` in the detail file frontmatter to today's date.
+   - If no ID is present in the item, skip this step silently.
+
 The A3.N block format is defined in `skills/ea-artifact-templates/SKILL.md` under "A3.N Decision Rationale Blocks".
 
 ---

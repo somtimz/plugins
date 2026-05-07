@@ -1,7 +1,7 @@
 ---
 name: ea-detail
 description: Create, view, or list item detail files — extended narrative, rationale, risks, costs, issues, concerns, impact, and alternatives for individual engagement items
-argument-hint: "new <ID> [artifact-id] | view <ID> | list [phase]"
+argument-hint: "new <ID> [artifact-id] | view <ID> | list [phase] | sync <ID>"
 allowed-tools: [Read, Write, Glob, Bash]
 ---
 
@@ -155,6 +155,63 @@ Open and display a detail file.
    - **Update lastModified:** set `lastModified` in frontmatter to today's date. Confirm.
    - **Check consistency:** read the parent artifact; verify the `../details/{ID}.md` link exists in the expected table row. Report whether it is present or missing. If missing, offer to add it.
    - **Delete:** confirm — "This will permanently delete `artifacts/details/{ID}.md`. Continue? (y/n)". If yes, delete the file and remove the `[→](../details/{ID}.md)` link from the parent artifact's table (replace with `—`).
+
+---
+
+## Mode: `sync <ID>`
+
+Bidirectionally sync a detail file's Concerns and Issues sections with the parent artifact's Appendix A4 table.
+
+### Step 1 — Locate the detail file
+
+Check whether `EA-projects/{slug}/artifacts/details/{ID}.md` exists. If not: "No detail file found for {ID}. Create one first with `/ea-detail new {ID}`." — stop.
+
+### Step 2 — Extract references from detail file
+
+Read the detail file. Scan the **Concerns** section for `CON-NNN` references. Scan the **Issues** section for `ISS-NNN` and `PRB-NNN` references. Build two lists:
+- `detail_concerns` — all CON-NNN IDs found in the Concerns section
+- `detail_issues` — all ISS-NNN and PRB-NNN IDs found in the Issues section
+
+### Step 3 — Read parent artifact A4 table
+
+Read the parent artifact (from `parentArtifact` frontmatter field). Scan `## Appendix A4 — Stakeholder Concerns & Objections` for table rows whose ID or text can be associated with the current item's ID. Build:
+- `a4_concerns` — CON-NNN rows in A4 whose concern text, subject, or Raised By field references `{ID}`
+
+### Step 4 — Report sync gaps
+
+Compare the two sets and report:
+
+```
+Sync report — {ID} ({title})
+─────────────────────────────────────────────
+Detail file → A4 (concerns in detail file not in A4):
+  ⚠️ CON-002 referenced in detail file but not found in parent A4 table
+  ⚠️ CON-005 referenced in detail file but not found in parent A4 table
+
+A4 → Detail file (A4 concerns associated with this item but not in detail file):
+  ⚠️ CON-007 is in A4 and relates to {ID} — not referenced in detail file Concerns section
+
+✅ Issues section: no sync gaps found
+```
+
+If no gaps: "✅ {ID} is fully in sync — detail file and A4 are consistent."
+
+### Step 5 — Offer resolution
+
+```
+How would you like to resolve these gaps?
+
+  1. Push all (detail → A4) — add missing concerns from detail file to parent artifact A4
+  2. Pull all (A4 → detail) — add missing A4 concerns to detail file Concerns section
+  3. Both directions
+  4. Select individual items
+  5. Skip
+```
+
+Apply selected syncs:
+- **Push (detail → A4):** append new rows to the A4 table in the parent artifact using the concern text from the detail file entry; assign the next available CON-NNN if none exists; set `Raised By` to `detail file`, `Status` to `Requires Attention`.
+- **Pull (A4 → detail):** append `- CON-NNN: {concern text} — {Raised By}, {date}` to the detail file Concerns section.
+- Update `lastModified` in both the detail file and the parent artifact frontmatter.
 
 ---
 

@@ -175,3 +175,70 @@ When `/ea-detail new {ID}` is called without an artifact argument, use this tabl
 | `PAD` | Pending Architecture Decision | Scan all artifacts |
 
 If the parent artifact cannot be determined automatically, prompt the user to specify `{artifact-id}`.
+
+---
+
+## Session Recording
+
+When interview, review, brainstorm, or grill sessions surface concerns or issues related to a specific engagement item, those items may be recorded directly into the detail file's **Concerns** or **Issues** sections. This keeps item-level context in one canonical place rather than scattered across session notes.
+
+### Entry formats by session type
+
+| Session | Section | Format |
+|---|---|---|
+| Interview (A3 capture, ISS/PRB assignment) | Issues or Concerns | `- [interview: {YYYY-MM-DD}] {captured text} — {ISS-NNN / PRB-NNN / A3 ref}` |
+| Review (comment) | Concerns | `- [review: {YYYY-MM-DD}] {comment text} — {reviewer}` |
+| Brainstorm (`[ISS?]` / `[PRB?]` entries) | Issues | `- [brainstorm: {YYYY-MM-DD}] {entry text}` (retaining `[ISS?]`/`[PRB?]` marker) |
+| Grill (CON-NNN from A4) | Concerns | `- CON-NNN: {concern text} — {grill skill}, {YYYY-MM-DD}` |
+
+**Rules:**
+- Session recording is always **offer-based** — the user confirms before any write.
+- If a detail file does not exist when recording is accepted, create a stub from `templates/item-detail.md` first.
+- Do not overwrite existing entries — always append.
+- Update `lastModified` in the detail file frontmatter after every write.
+
+---
+
+## Sync Rules
+
+Detail file Concerns and Issues sections must stay in sync with the parent artifact's Appendix A4 table. Sync gaps occur when:
+
+1. **Detail file → A4 gap:** A `CON-NNN` referenced in a detail file's Concerns section has no matching row in the parent artifact's A4 table.
+2. **A4 → Detail file gap:** An A4 table row associated with an item (linkable via the Details column) is not referenced in that item's detail file Concerns section.
+
+**How to sync:**
+- Run `/ea-detail sync {ID}` to bidirectionally sync a single item.
+- Run `/ea-consistency --details` to scan all detail files for sync gaps (Check E) alongside link integrity (Check D).
+
+**Sync rules:**
+- A CON-NNN that exists only in a detail file is pushed to A4 with `Status: Requires Attention` and `Raised By: detail file`.
+- A CON-NNN that exists only in A4 is pulled to the detail file Concerns section with format `- CON-NNN: {concern text} — {Raised By}, {date}`.
+- ISS-NNN and PRB-NNN in the detail file Issues section are not synced to A4 — they are tracked in the engagement's Issues/Problems register via `/ea-interview`.
+
+---
+
+## Generation and Publishing
+
+Detail file content can be included in exported and published documents.
+
+### ea-generate (single artifact)
+
+Use the `--with-details` flag:
+```
+/ea-generate architecture-vision docx --with-details
+```
+
+When set:
+- All detail files linked from the artifact are read and passed to the Python generation script as a `detailFiles` JSON array.
+- The script embeds each detail file's content as a subsection after its relevant table row, or as **Appendix D — Item Detail Files** at the end of the document.
+- Without the flag: behaviour is identical to the pre-detail-file version (backward-compatible).
+
+### ea-publish (consolidated document)
+
+After selecting artifacts, choose how to include detail files:
+
+| Option | Effect |
+|---|---|
+| **Inline** | Detail content embedded after the relevant table section in each artifact |
+| **Appendix only** | `## Supplementary Item Detail` section at the end of the consolidated document |
+| **Exclude** | Detail files not included (default) |

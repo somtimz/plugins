@@ -15,10 +15,10 @@ Runs a focused consistency check on the active engagement. Unlike `/ea-engage-re
 
 | Args | Mode | What it checks |
 |---|---|---|
-| (none) | Full | Cross-artifact contradictions, naming consistency, requirement traceability, phase alignment, ID reference validation, detail file link integrity |
+| (none) | Full | Cross-artifact contradictions, naming consistency, requirement traceability, phase alignment, ID reference validation, detail file link integrity, detail/A4 content sync |
 | `artifact <id>` | Artifact | Within-artifact section consistency + ID refs scoped to that file |
 | `--ids` | IDs only | Fast scan — ID definition registry, broken references, orphaned IDs |
-| `--details` | Detail links only | Fast scan — broken detail file links, frontmatter mismatches, cross-artifact link consistency |
+| `--details` | Detail links + sync | Fast scan — broken detail file links, frontmatter mismatches, cross-artifact link consistency, detail/A4 content sync |
 | `--report` (added to any mode) | Report | Suppresses interactive menu; prints full report inline |
 
 ---
@@ -154,6 +154,41 @@ Cross-artifact inconsistencies: {N}
 ```
 
 This check runs automatically in **Full Mode** and can be run in isolation with `--details`.
+
+---
+
+### Detail File Content Sync Check (`--details` or included in Full Mode)
+
+**Check E — Detail File Content Sync**
+
+For each detail file in `EA-projects/{slug}/artifacts/details/`:
+
+1. **Extract concern references:** Scan the **Concerns** section for `CON-NNN` patterns. Scan the **Issues** section for `ISS-NNN` and `PRB-NNN` patterns.
+
+2. **Verify concerns exist in parent A4:**
+   - Read the parent artifact (from `parentArtifact` frontmatter).
+   - For each `CON-NNN` in the detail file Concerns section: check whether a matching row exists in `## Appendix A4`. If not: report `⚠️ Sync gap: CON-NNN in {ID}.md Concerns but not in {parent artifact} A4 table — run ea-detail sync {ID}`.
+
+3. **Verify A4 concerns are in detail file:**
+   - For each A4 row whose text or subject references the item's ID: check whether the detail file's Concerns section contains a `CON-NNN` reference for that row. If not: report `⚠️ Sync gap: CON-NNN in {parent artifact} A4 is associated with {ID} but not referenced in {ID}.md Concerns section`.
+
+Report format:
+
+```
+Check E — Detail File Content Sync
+───────────────────────────────────
+Detail files scanned: {N}
+Detail → A4 gaps (concerns in detail file missing from A4): {N}
+A4 → Detail gaps (A4 concerns associated with item but missing from detail file): {N}
+
+[findings listed]
+
+✅ All detail file content is in sync with parent A4 tables.
+```
+
+Offer for each gap: "Run `ea-detail sync {ID}` to resolve."
+
+This check runs automatically in **Full Mode** and as part of the `--details` mode (alongside Check D).
 
 ---
 
