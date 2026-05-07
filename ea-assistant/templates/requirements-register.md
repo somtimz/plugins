@@ -109,6 +109,7 @@ To formally waive a Corporate requirement, set Status to Waived and provide a ju
 | **ADM Phase** | {{phase}} |
 | **Zachman Cell** | Row {{N}} / Column {{N}} ({{description}}) |
 | **Linked Artifacts** | {{artifact_ids}} |
+| **Details** | — |
 
 ---
 
@@ -141,6 +142,7 @@ it responds to or refines — this maintains governance traceability.
 | **ADM Phase** | {{phase}} |
 | **Zachman Cell** | Row {{N}} / Column {{N}} ({{description}}) |
 | **Linked Artifacts** | {{artifact_ids}} |
+| **Details** | — |
 
 ---
 

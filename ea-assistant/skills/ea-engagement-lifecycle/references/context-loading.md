@@ -20,10 +20,11 @@ For a given `artifactId` and its `phase`:
 5. Read all files in `artifacts/{phase-folder}/notes/interviews/` matching `interview-{artifact-id}-*.md`
 6. Read all files in `artifacts/{phase-folder}/notes/reviews/` matching `grill-{artifact-id}-*.md`
 7. Read `ResearchAndReferences/research-index.md`; for each item tagged with this phase or a topic matching the artifact type, read the full item file
+8. **Load detail files:** Scan all tables in the focal artifact for `[→](../details/{ID}.md)` links. For each linked file that exists at `artifacts/details/{ID}.md`, read it and include its content as supplementary context for that item.
 
 Announce the loaded context before proceeding:
 ```
-Context loaded: {N} related artifacts · {N} interview notes · {N} brainstorm sessions · {N} review files · {N} research items
+Context loaded: {N} related artifacts · {N} interview notes · {N} brainstorm sessions · {N} review files · {N} research items · {N} detail files
 ```
 
 If none of a category exist, omit it from the announcement (e.g. "Context loaded: 2 related artifacts · 1 research item").
@@ -58,6 +59,7 @@ Context loaded: {N} phase artifacts · {N} interview notes · {N} brainstorm ses
 3. Glob `artifacts/**/notes/brainstorm/brainstorm-notes.md`
 4. Glob `artifacts/**/notes/reviews/*.md`
 5. Read `ResearchAndReferences/research-index.md` and all linked item files
+6. Glob `artifacts/details/*.md` — read all detail files
 
 Announce:
 ```
@@ -77,9 +79,11 @@ Apply loaded context as follows — do not surface it passively; use it to infor
 | Interview notes | Prior captured answers — flag divergence when artifact content contradicts what was answered in an interview session |
 | Review / grill files | Prior critique findings — check whether recommended revisions from earlier grills were actually applied |
 | Research items | External evidence — surface findings that support or contradict artifact claims; cite the item title and the specific claim |
+| Detail files | Extended narrative, rationale, risks, costs, issues, concerns, impact, and alternatives for individual items — use when asking deep questions about an item or when a stakeholder raises a concern about it; cite as `[detail: {ID}]` |
 
 **Citation format:** When referencing loaded context in output, use short inline citations:
 - `[interview {date}]` — from a dated interview notes file
 - `[brainstorm session {N}]` — from a brainstorm notes session block
 - `[review {date}]` — from a grill review file
 - `[research: {item-title}]` — from a research library item
+- `[detail: {ID}]` — from a detail file for a specific engagement item

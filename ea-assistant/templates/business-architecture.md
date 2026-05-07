@@ -132,11 +132,11 @@ A capability with no strategic anchor should be flagged for removal or reclassif
 
 </details>
 
-| CAP-NNN | Level | Capability | Description | Current Maturity | Target Maturity | Supports (STR-NNN / G-NNN) |
-|---|---|---|---|---|---|---|
-| CAP-001 | L1 | {{domain_name}} | {{domain_description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} |
-| CAP-002 | L2 | {{capability_name}} | {{description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} |
-| CAP-003 | L3 | {{sub_capability_name}} | {{description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} |
+| CAP-NNN | Level | Capability | Description | Current Maturity | Target Maturity | Supports (STR-NNN / G-NNN) | Details |
+|---|---|---|---|---|---|---|---|
+| CAP-001 | L1 | {{domain_name}} | {{domain_description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | — |
+| CAP-002 | L2 | {{capability_name}} | {{description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | — |
+| CAP-003 | L3 | {{sub_capability_name}} | {{description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | — |
 
 ---
 
@@ -155,9 +155,9 @@ Populate this section before detailing processes in §4 — value streams provid
 
 </details>
 
-| VS-NNN | Value Stream | Description | Trigger | End Outcome | Key Capabilities (CAP-NNN) | Strategic Link (G-NNN / STR-NNN) |
-|---|---|---|---|---|---|---|
-| VS-001 | {{value_stream_name}} | {{description}} | {{trigger}} | {{end_outcome}} | {{cap_ids}} | {{strategic_link}} |
+| VS-NNN | Value Stream | Description | Trigger | End Outcome | Key Capabilities (CAP-NNN) | Strategic Link (G-NNN / STR-NNN) | Details |
+|---|---|---|---|---|---|---|---|
+| VS-001 | {{value_stream_name}} | {{description}} | {{trigger}} | {{end_outcome}} | {{cap_ids}} | {{strategic_link}} | — |
 
 ---
 
@@ -213,9 +213,9 @@ Assign UC-NNN IDs sequentially. These IDs are referenced in the Application Arch
 
 </details>
 
-| UC-NNN | Use Case | Primary Actor | Goal | Trigger | Preconditions | Main Success Scenario | Capabilities Used (CAP-NNN) |
-|---|---|---|---|---|---|---|---|
-| UC-001 | {{use_case_name}} | {{actor}} | {{goal}} | {{trigger}} | {{preconditions}} | {{one-sentence summary}} | {{cap_ids}} |
+| UC-NNN | Use Case | Primary Actor | Goal | Trigger | Preconditions | Main Success Scenario | Capabilities Used (CAP-NNN) | Details |
+|---|---|---|---|---|---|---|---|---|
+| UC-001 | {{use_case_name}} | {{actor}} | {{goal}} | {{trigger}} | {{preconditions}} | {{one-sentence summary}} | {{cap_ids}} | — |
 
 ---
 

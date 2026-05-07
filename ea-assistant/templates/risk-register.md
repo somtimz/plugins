@@ -131,6 +131,7 @@ should have a named owner and a documented response plan with a target resolutio
 | **Owner** | {{name_and_role}} |
 | **Status** | Open / Monitoring / Accepted / Closed |
 | **Last Reviewed** | {{YYYY-MM-DD}} |
+| **Details** | — |
 
 ---
 
@@ -163,6 +164,7 @@ These should have documented mitigations and be reviewed at every architecture c
 | **Owner** | {{name_and_role}} |
 | **Status** | Open / Monitoring / Accepted / Closed |
 | **Last Reviewed** | {{YYYY-MM-DD}} |
+| **Details** | — |
 
 ---
 
