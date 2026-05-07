@@ -343,6 +343,20 @@ Capture freeform brainstorm notes for the active EA engagement.
    - Update `lastUpdated` to today's date
    - Append the new session block after all existing content
 
+6b. **Offer detail file recording for ID-bearing entries.** After saving the session, scan the newly written session's **Issues & Problems** and **Concerns** sections for entries that contain a recognised engagement ID pattern (e.g. `G-001`, `CAP-003`, `WP-007`).
+
+   If any ID-bearing entries are found, offer:
+   > "{N} brainstorm item(s) reference specific engagement IDs and can be linked to detail files:
+   >   - [ISS?] CAP-003: capability gap threatening operational efficiency
+   >   - [PRB?] G-001: measurable decline in goal attainment rate
+   > Record these in their item detail files? (y / n / select)"
+
+   - **y** — process all: for each ID-bearing entry, create the detail file if it does not exist (using `templates/item-detail.md`), then append to its Issues section: `- [brainstorm: {YYYY-MM-DD}] {entry text}` (retaining `[ISS?]`/`[PRB?]` marker). Update `lastModified` in each detail file.
+   - **select** — list entries and let the user choose which to record.
+   - **n** — skip silently; brainstorm entries remain in session notes only.
+
+   Entries without a recognisable ID are not surfaced — they remain in brainstorm notes for later review during `/ea-interview`.
+
 7. **Prompt for diagrams.** Before confirming, check whether any standard diagrams exist for the active phase by reading `skills/ea-artifact-templates/references/diagram-catalogue.md` (Coverage Table section). Then ask:
 
    > "Are there any diagrams or visual models that would help communicate these ideas? Standard diagrams for this phase:"

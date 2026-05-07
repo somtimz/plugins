@@ -44,6 +44,25 @@ Read `skills/ea-engagement-lifecycle/references/migration-gap-catalogue.md` for 
 - 3e — rules file and CLAUDE.md format gaps
 - 3f — artifact content gaps (Appendix A3/A4/A5)
 
+Additionally, run this engagement-specific scan:
+
+**3g — Missing detail files on high-priority items**
+
+Scan all artifact files for:
+- Risk Register: rows with `Rating: Critical` or `Rating: High`
+- Requirements Register: rows with `Priority: High`
+- Appendix A3 (Decision Log): rows with `Authority: Strategic`
+- Appendix A4 (Concerns): rows with `Status: Requires Attention`
+
+For each qualifying item, check whether `EA-projects/{slug}/artifacts/details/{ID}.md` exists. If not, report:
+
+```
+GAP-M-{NNN}  [Info]  {ID} ({type}, {priority/rating}) — no detail file
+             Suggested: run /ea-detail new {ID} to capture narrative, rationale, and risks
+```
+
+**Remediation for 3g:** Create stub detail files (frontmatter + empty section headers only, no content) for selected items. Stubs use `templates/item-detail.md` with placeholders replaced from source table data. The user can then populate them at any time with `/ea-detail view {ID}`.
+
 Track each gap found with: gap ID (GAP-M-NNN), type, affected file, severity, proposed remediation.
 
 ---
@@ -78,6 +97,10 @@ Rules file / CLAUDE.md gaps      {N gaps | ✅ None}
 Artifact content gaps            {N gaps | ✅ None}
   GAP-M-030  [Medium] architecture-vision.md — Appendix A4 missing
   GAP-M-040  [Low]    architecture-vision.md — Appendix A5 missing
+
+Missing detail files             {N gaps | ✅ None}
+  GAP-M-050  [Info]   RIS-001 (Risk, Critical) — no detail file
+  GAP-M-051  [Info]   G-002 (Goal, Strategic decision) — no detail file
 
 ════════════════════════════════════════════════════════════
 Total: {N} gaps — {N} Medium, {N} Low, {N} Info

@@ -83,6 +83,9 @@ Read the artifact file. Extract:
 
 Then load full artifact-scoped context using **Scope A** from `skills/ea-engagement-lifecycle/references/context-loading.md`. Announce the loaded context to the user before proceeding to Step 4.
 
+**Detail file challenge points:** If any detail files were loaded (Scope A step 8), scan them for content in the Issues and Concerns sections. Include these as additional challenge material during Step 5 — treat open items from detail files as known weaknesses the grill should probe. Announce:
+> "Detail files loaded: {N} — {N} open issues, {N} open concerns. These will be used as additional challenge points during the review."
+
 ---
 
 ### Step 4 — Brief the reviewer
@@ -249,6 +252,27 @@ If the user selects `a` or `s`:
 
 **Concerns that are `Category: Risk`:** After adding to A4, flag them:
 > "⚠️ [N] concern(s) in category Risk. Run `/ea-risks` to register them in the Risk Register."
+
+**Cross-reference CON-NNN to item detail files:** After all A4 rows are written, scan the concern text of each new CON-NNN for recognisable engagement ID patterns (e.g. `G-001`, `WP-003`, `CAP-007`). If any are found, offer:
+
+```
+Cross-reference {N} concern(s) in item detail files?
+
+  CON-001 → G-001 (Goal — Reduce operational costs)
+  CON-003 → WP-002 (Work Package — CRM Platform Replacement)
+
+Options:
+  (a) Add all — append each concern to its item's detail file Concerns section
+  (s) Select — choose which to cross-reference
+  (n) Skip
+```
+
+If `a` or `s` selected:
+- For each chosen CON-NNN: check whether `artifacts/details/{ID}.md` exists.
+  - If not: create a stub using `templates/item-detail.md`.
+  - Append to the **Concerns** section: `- CON-NNN: {concern text} — {grill skill}, {YYYY-MM-DD}`
+  - Update `lastModified` in the detail file frontmatter.
+- If the concern text does not clearly map to an ID, ask: "Which item ID does CON-NNN relate to? (enter ID or skip)"
 
 ---
 

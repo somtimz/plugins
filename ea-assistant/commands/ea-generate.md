@@ -1,7 +1,7 @@
 ---
 name: ea-generate
 description: Generate a formatted file (Word, PowerPoint, Mermaid diagram, or rendered image) from an EA artifact or .mmd file
-argument-hint: "[artifact-name] [docx|pptx|mermaid|png|svg] [--theme <theme>] [--bg <color>]"
+argument-hint: "[artifact-name] [docx|pptx|mermaid|png|svg] [--theme <theme>] [--bg <color>] [--with-details]"
 allowed-tools: [Read, Write, Bash]
 ---
 
@@ -39,6 +39,19 @@ Recommend the primary format for the artifact type (see `skills/ea-generation/re
 
 4. Parse into a content JSON object per the schema in `skills/ea-generation/references/content-extraction-schema.md`
 5. Write extracted JSON to `/tmp/ea-gen-{artifact-id}.json`
+
+**If `--with-details` flag is set:**
+
+After writing `/tmp/ea-gen-{artifact-id}.json`, load all detail files linked from this artifact:
+- Scan all tables in the artifact for `[→](../details/{ID}.md)` links.
+- For each linked file that exists at `EA-projects/{slug}/artifacts/details/{ID}.md`, read it and extract:
+  - Frontmatter: `item`, `type`, `title`
+  - All populated sections (Summary, Narrative, Rationale, Risks, Costs, Issues, Concerns, Impact, Alternatives)
+- Build a `detailFiles` array where each entry is `{ id, type, title, sections: { sectionName: content, ... } }`.
+- Write to `/tmp/ea-gen-{artifact-id}-details.json`.
+- Add `--detail-files @/tmp/ea-gen-{artifact-id}-details.json` to the Python script call in Step 4.
+- The script embeds each detail file's content as a subsection after the relevant table row, or as an **Appendix D — Item Detail Files** section at the end of the document if the artifact structure does not support inline embedding.
+- If no detail files are found: proceed without `--detail-files` (same as omitting the flag).
 
 ### Step 4: Generate Output
 

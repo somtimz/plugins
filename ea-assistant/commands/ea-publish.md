@@ -54,6 +54,34 @@ Enter numbers separated by commas (e.g. 1,2,3), a range (e.g. 1-4), or "all" for
 - If the selection includes Draft or In Review artifacts, warn: "⚠️ Your selection includes {N} artifact(s) that are not yet Approved. They will be included and marked accordingly."
 - Confirm the final selection before proceeding
 
+### Step 2c: Detail File Inclusion
+
+After the artifact selection is confirmed, collect all detail files linked from the selected artifacts:
+- Glob `EA-projects/{slug}/artifacts/details/*.md`
+- Cross-check each file's `parentArtifact` frontmatter against the selected artifact list
+
+If any detail files are found for the selected artifacts, ask:
+
+```
+Include item detail files in the published document?
+
+  {N} detail file(s) found across the selected artifacts:
+    G-001 — Reduce operational costs (Goal · Architecture Vision)
+    WP-003 — CRM Platform Replacement (Work Package · Architecture Roadmap)
+    ...
+
+Options:
+  (y) Inline — embed detail content after the relevant table section in each artifact
+  (a) Appendix only — add a "Supplementary Item Detail" appendix at the end of the document
+  (n) Exclude — do not include detail files (default)
+```
+
+- **Inline:** For each selected artifact, insert each linked detail file's content as a collapsible or indented subsection immediately after the table row it belongs to. Use a clear heading: `#### {ID} — {title} (Item Detail)`.
+- **Appendix only:** Append a new top-level section at the end of the consolidated document: `## Supplementary Item Detail` — one subsection per detail file ordered by ID.
+- **Exclude:** Skip detail files entirely (backward-compatible default).
+
+If no detail files exist for the selected artifacts, skip this step silently.
+
 ### Step 2b: Pre-Publish Compliance Check
 
 For each selected artifact, run a quick compliance scan (the same three-tier check used by artifact load: frontmatter fields, template structure, artifact-specific rules). Present a summary:
