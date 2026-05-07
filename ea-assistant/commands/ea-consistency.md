@@ -15,9 +15,10 @@ Runs a focused consistency check on the active engagement. Unlike `/ea-engage-re
 
 | Args | Mode | What it checks |
 |---|---|---|
-| (none) | Full | Cross-artifact contradictions, naming consistency, requirement traceability, phase alignment, ID reference validation |
+| (none) | Full | Cross-artifact contradictions, naming consistency, requirement traceability, phase alignment, ID reference validation, detail file link integrity |
 | `artifact <id>` | Artifact | Within-artifact section consistency + ID refs scoped to that file |
 | `--ids` | IDs only | Fast scan — ID definition registry, broken references, orphaned IDs |
+| `--details` | Detail links only | Fast scan — broken detail file links, frontmatter mismatches, cross-artifact link consistency |
 | `--report` (added to any mode) | Report | Suppresses interactive menu; prints full report inline |
 
 ---
@@ -52,8 +53,9 @@ After the agent produces its report, unless `--report` was specified, offer:
 What would you like to do?
 
   1. View full ID reference report
-  2. Deep-review an artifact        →  /ea-grill [artifact]
-  3. Full engagement review         →  /ea-engage-review
+  2. View detail file link report    →  /ea-consistency --details
+  3. Deep-review an artifact         →  /ea-grill [artifact]
+  4. Full engagement review          →  /ea-engage-review
   Enter a number or press Enter to close.
 ```
 
@@ -116,6 +118,42 @@ Unless `--report`, offer:
   2. Deep-review this artifact                →  /ea-grill {id}
   3. Continue
 ```
+
+---
+
+### Detail Link Integrity Check (`--details` or included in Full Mode)
+
+**Check D — Detail file link integrity**
+
+Scan all artifact files in `EA-projects/{slug}/artifacts/**/*.md` (excluding `/notes/`) for detail file links matching the pattern `../details/{ID}.md` (in both `[→](../details/{ID}.md)` and `[{ID}](../details/{ID}.md)` forms).
+
+For each link found:
+
+1. **Verify target file exists:** Check whether `EA-projects/{slug}/artifacts/details/{ID}.md` exists.
+   - If missing: report as a broken link: `⚠️ [artifact path] — link to ../details/{ID}.md but file does not exist`
+
+2. **Verify `item` frontmatter matches filename:** For each detail file that does exist, read its frontmatter and check that `item: {ID}` matches the filename `{ID}.md`.
+   - If mismatch: report: `⚠️ artifacts/details/{ID}.md — item frontmatter says '{actual}' but filename is '{ID}'`
+
+3. **Check cross-artifact consistency:** If the same ID is linked from multiple artifacts, verify all links point to the same canonical file `../details/{ID}.md`.
+   - If any artifact uses a different relative path or no link while another does: report: `ℹ️ {ID} is linked in {N} artifacts — verify the Details column is consistent across all references`
+
+Report format:
+
+```
+Check D — Detail File Link Integrity
+──────────────────────────────────────
+Detail files found: {N}
+Broken links: {N}
+Frontmatter mismatches: {N}
+Cross-artifact inconsistencies: {N}
+
+[findings listed]
+
+✅ All detail file links valid.
+```
+
+This check runs automatically in **Full Mode** and can be run in isolation with `--details`.
 
 ---
 

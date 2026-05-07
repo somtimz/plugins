@@ -1,7 +1,7 @@
 ---
 name: ea-artifact-templates
 description: This skill should be used when the user asks to "create an artifact", "generate the architecture vision", "start a new artifact from a template", "what template should I use", "populate this artifact", or when any TOGAF artifact needs to be created or populated. Provides template selection, placeholder conventions, and guidance text marking standards for all EA artifacts.
-version: 0.9.31
+version: 0.9.33
 ---
 
 # EA Artifact Templates
@@ -260,9 +260,38 @@ Guidance text is ALWAYS wrapped in `<!-- GUIDANCE: ... -->` HTML comments.
 It must NEVER be removed automatically — the author decides whether to keep or remove it.
 It does NOT appear in Word or HTML exports (HTML comments are not rendered).
 
+## Readability Guidelines
+
+Apply these rules when creating, populating, or reviewing artifact content:
+
+- **Tables are for summary/index only.** Keep tables to ≤ 8 columns. If a table would need more than 8 columns to capture all relevant fields, move the overflow to a detail file (see below).
+- **Narrative before tables.** Every table-heavy section should be preceded by 1–3 sentences of prose that summarise what the reader is about to see — the top finding, the dominant pattern, or the key implication. Avoid leading with a table and no context.
+- **Split large tables.** For sections with more than 10 rows, split by a natural dimension (e.g. High / Medium / Low priority, In Scope / Out of Scope, Business / Technical) to aid scanning.
+- **Avoid redundant columns.** Do not repeat information that is already expressed by the ID, the section heading, or the row label. Each column should add unique information.
+- **Detail on demand.** For items that require extended narrative, rationale, risks, costs, issues, concerns, impact, or alternatives, link to a detail file rather than expanding the table inline.
+
+## Item Detail Files
+
+Table rows in EA artifacts may optionally link to a companion detail file containing extended content. This keeps tables scannable while providing depth on demand.
+
+**Convention:**
+- Detail files live at `artifacts/details/{ID}.md` — one engagement-wide directory
+- Link from table: add a `Details` column with `[→](../details/{ID}.md)` when a detail file exists, or `—` when it does not
+- Create with: `/ea-detail new {ID} [{artifact-id}]`
+- Full convention: `references/detail-file-convention.md`
+
+**When to create a detail file:**
+- Item was contested, challenged in a grill, or raised stakeholder concerns
+- Item has non-trivial cost, risk, or dependency implications
+- Stakeholder asks "why?" or "what about X?" about a specific row
+- Item has alternatives that were considered but rejected
+
+**Context loading:** Skills that use Scope A (ea-grill, ea-review, ea-interview) automatically load linked detail files and cite them as `[detail: {ID}]`. See `skills/ea-engagement-lifecycle/references/context-loading.md`.
+
 ## Additional Resources
 
 - **`references/artifact-descriptions.md`** — Purpose, audience, and contents of each TOGAF artifact
 - **`references/template-authoring-guide.md`** — How to write and extend templates
 - **`references/ea-concepts.md`** — Canonical definitions and TOGAF/ArchiMate alignment for Principle, Goal, Objective, Strategy, Plan, and Risk. Load this when concept confusion is detected during interviews or artifact population.
 - **`references/compliance-check.md`** — Compliance rules (Tier 1/2/3), check procedure, remediation actions for Option 1 (achieve compliance) and Option 2 (accept as-is with defaults). Load this whenever an artifact is opened for interview, review, or viewing.
+- **`references/detail-file-convention.md`** — Detail file pattern: location, frontmatter, sections, linking rules, and how skills load and cite detail files.

@@ -92,12 +92,12 @@ Map this roadmap to the Goals, Objectives, and Strategies defined in Phase A. Ev
 
 </details>
 
-| ID | Goal / Objective / Strategy | Type | Addressed by Work Packages |
-|---|---|---|---|
-| {{G-001}} | {{goal_description}} | Goal | {{WP-NNN}} |
-| {{OBJ-001}} | {{objective_description}} | Objective | {{WP-NNN}} |
-| {{STR-001}} | {{strategy_description}} | Strategy | {{WP-NNN}} |
-| {{OPP-001}} | {{opportunity_description}} | Opportunity | {{WP-NNN}} |
+| ID | Goal / Objective / Strategy | Type | Addressed by Work Packages | Details |
+|---|---|---|---|---|
+| {{G-001}} | {{goal_description}} | Goal | {{WP-NNN}} | — |
+| {{OBJ-001}} | {{objective_description}} | Objective | {{WP-NNN}} | — |
+| {{STR-001}} | {{strategy_description}} | Strategy | {{WP-NNN}} | — |
+| {{OPP-001}} | {{opportunity_description}} | Opportunity | {{WP-NNN}} | — |
 
 **Unaddressed items:** {{list_any_goals_objectives_strategies_not_covered_or_None}}
 
@@ -148,6 +148,7 @@ Work packages close gaps identified in the Gap Analysis.
 | **Evidence Status** | Sufficient / Partial / Insufficient |
 | **Decision Reversibility** | High / Medium / Low |
 | **Value Delivery** | Standalone / Cumulative / Enabling |
+| **Details** | — |
 
 ---
 

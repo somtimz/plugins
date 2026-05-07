@@ -117,6 +117,7 @@ Add or remove categories as appropriate.
 | **Statement** | {{principle_statement}} |
 | **Rationale** | {{rationale}} |
 | **Implications** | {{implications}} |
+| **Details** | — |
 
 ---
 
@@ -129,6 +130,7 @@ Add or remove categories as appropriate.
 | **Statement** | {{principle_statement}} |
 | **Rationale** | {{rationale}} |
 | **Implications** | {{implications}} |
+| **Details** | — |
 
 ---
 
@@ -141,6 +143,7 @@ Add or remove categories as appropriate.
 | **Statement** | {{principle_statement}} |
 | **Rationale** | {{rationale}} |
 | **Implications** | {{implications}} |
+| **Details** | — |
 
 ---
 
@@ -153,15 +156,16 @@ Add or remove categories as appropriate.
 | **Statement** | {{principle_statement}} |
 | **Rationale** | {{rationale}} |
 | **Implications** | {{implications}} |
+| **Details** | — |
 
 ---
 
 ## Principles Summary
 
-| ID | Category | Principle | Status |
-|---|---|---|---|
-| BP-01 | Business | {{name}} | Draft/Approved |
-| DP-01 | Data | {{name}} | Draft/Approved |
+| ID | Category | Principle | Status | Details |
+|---|---|---|---|---|
+| BP-01 | Business | {{name}} | Draft/Approved | — |
+| DP-01 | Data | {{name}} | Draft/Approved | — |
 
 ---
 
