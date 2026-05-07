@@ -175,7 +175,7 @@ Apply all required changes to bring the artifact up to the current standard. **P
 | T2-3 (unreplaced frontmatter tokens) | Replace `{{engagement_name}}` etc. from `engagement.json`; leave body tokens intact |
 | T3-A3 (missing Appendix A3) | Append the standard A3 section at the end of the artifact, before the footer line |
 | T3-A4 (missing Appendix A4) | Append the standard A4 section after A3 (or before the footer line if A3 is absent) |
-| T3-REQ (missing scope column) | Note: offer to run `/ea-requirements migrate` to add Corporate/Project scope |
+| T3-REQ (missing scope column) | Note: offer to run `/ea-requirements migrate` to add Enterprise/Program scope |
 | T3-TRACE (missing sections) | Note: offer to regenerate via `/ea-requirements trace` |
 | T3-DF-STATE (missing State column or blank State values) | Add `State` column to the Data Flows table header; for each DF-NNN row prompt the user: "Is this flow Current, Planned (Target), or Deprecated?" — do not guess |
 | T3-RATIONALE (Strategic A3 entries without rationale) | Run `/ea-decisions rationale --artifact {artifact-name} --authority strategic` to capture missing rationale interactively; or add `#### A3.N — {Item}` blocks manually below the A3 table |

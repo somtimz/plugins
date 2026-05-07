@@ -27,7 +27,7 @@ links: []
 |---|---|---|
 | T3-ADR | ⚠️ Pending | |
 | T3-REQ | ⚠️ Pending | |
-| Scope column present (Corporate / Project) | ⚠️ Pending | |
+| Scope column present (Enterprise / Program) | ⚠️ Pending | |
 
 *This section is for author guidance only. Run `/ea-grill` to validate compliance.*
 
@@ -38,12 +38,14 @@ links: []
 
 The Architecture Requirements Register captures all architecture requirements for this engagement.
 Requirements are grouped by scope:
-  - Corporate: enterprise-wide standards, principles, or regulatory mandates synced from the
+  - Enterprise: organisation-wide standards, principles, or regulatory mandates synced from the
     shared repo. Content fields (statement, category, priority) are read-only — only status,
     linked artifacts, and waiver justification may be updated locally.
-  - Project: engagement-specific requirements captured during this project. Fully editable.
+  - Program: engagement-specific requirements captured during this program. Fully editable.
 Sync from the shared requirements repository using /ea-requirements sync.
-Corporate requirements are prefixed with 🔒 to indicate read-only content.
+Enterprise requirements are prefixed with 🔒 to indicate read-only content.
+Non-functional requirements (NFRs) should have a populated NFR Sub-Type and Measurable Target.
+Use /ea-interview start phase requirements to run a guided NFR discovery session.
 
 </details>
 
@@ -73,21 +75,27 @@ Run `/ea-summary refresh` to regenerate this section from current artifact conte
 
 ## Requirements Summary
 
-| Total | Corporate 🔒 | Project | Approved | Draft | Deferred | Waived | Rejected |
+| Total | Enterprise 🔒 | Program | Approved | Draft | Deferred | Waived | Rejected |
 |---|---|---|---|---|---|---|---|
-| {{total}} | {{corporate}} | {{project}} | {{approved}} | {{draft}} | {{deferred}} | {{waived}} | {{rejected}} |
+| {{total}} | {{enterprise}} | {{program}} | {{approved}} | {{draft}} | {{deferred}} | {{waived}} | {{rejected}} |
 
 ---
 
-## Corporate Requirements
+> **NFR Coverage Checklist** — before marking this register complete, confirm at least one entry exists for each applicable NFR category:
+> ☐ Availability &nbsp; ☐ Reliability &nbsp; ☐ Performance &nbsp; ☐ Security &nbsp; ☐ Usability &nbsp; ☐ Maintainability &nbsp; ☐ Portability &nbsp; ☐ Compatibility &nbsp; ☐ Recoverability
+> Run `/ea-grill requirements-register --skill requirements` for a full NFR coverage review.
+
+---
+
+## Enterprise Requirements
 
 <details>
 <summary>📋 Guidance</summary>
 
-Corporate requirements are synced from the shared requirements repository.
+Enterprise requirements are synced from the shared requirements repository.
 Content fields are read-only — only Status, Linked Artifacts, and Waiver Justification
 may be changed locally. Prefix each ID with 🔒 in headings and tables.
-To formally waive a Corporate requirement, set Status to Waived and provide a justification.
+To formally waive an Enterprise requirement, set Status to Waived and provide a justification.
 
 </details>
 
@@ -98,9 +106,11 @@ To formally waive a Corporate requirement, set Status to Waived and provide a ju
 | Field | Value |
 |---|---|
 | **ID** | REQ-001 |
-| **Scope** | Corporate 🔒 |
+| **Scope** | Enterprise 🔒 |
 | **Statement** | {{requirement_statement}} |
 | **Category** | Functional / Non-Functional / Constraint / Principle |
+| **NFR Sub-Type** | Performance / Reliability / Availability / Usability / Security / Maintainability / Portability / Compatibility / Recoverability — or ➖ Not applicable |
+| **Measurable Target** | {{sla_or_threshold — e.g. 99.9% uptime, <200ms p95, RTO 4h}} — or ➖ Not applicable |
 | **Priority** | High / Medium / Low |
 | **Source** | {{source_document}} |
 | **Motivation** | DRV-NNN / ISS-NNN / PRB-NNN / G-NNN / OBJ-NNN (link to the driver, issue, problem, goal, or objective in Architecture Vision that makes this requirement necessary) |
@@ -113,13 +123,13 @@ To formally waive a Corporate requirement, set Status to Waived and provide a ju
 
 ---
 
-## Project Requirements
+## Program Requirements
 
 <details>
 <summary>📋 Guidance</summary>
 
-Project requirements are captured during this engagement and are fully editable.
-Use the Derived From field to link a Project requirement to the Corporate requirement
+Program requirements are captured during this engagement and are fully editable.
+Use the Derived From field to link a Program requirement to the Enterprise requirement
 it responds to or refines — this maintains governance traceability.
 
 </details>
@@ -131,14 +141,16 @@ it responds to or refines — this maintains governance traceability.
 | Field | Value |
 |---|---|
 | **ID** | REQ-00N |
-| **Scope** | Project |
+| **Scope** | Program |
 | **Statement** | {{requirement_statement}} |
 | **Category** | Functional / Non-Functional / Constraint / Principle |
+| **NFR Sub-Type** | Performance / Reliability / Availability / Usability / Security / Maintainability / Portability / Compatibility / Recoverability — or ➖ Not applicable |
+| **Measurable Target** | {{sla_or_threshold — e.g. 99.9% uptime, <200ms p95, RTO 4h}} — or ➖ Not applicable |
 | **Priority** | High / Medium / Low |
 | **Source** | {{source_stakeholder_or_document}} |
 | **Motivation** | DRV-NNN / ISS-NNN / PRB-NNN / G-NNN / OBJ-NNN (link to the driver, issue, problem, goal, or objective in Architecture Vision that makes this requirement necessary) |
 | **Status** | Draft / Approved / Deferred / Rejected |
-| **Derived From** | {{corporate_req_id — leave blank if not derived from a Corporate requirement}} |
+| **Derived From** | {{enterprise_req_id — leave blank if not derived from an Enterprise requirement}} |
 | **ADM Phase** | {{phase}} |
 | **Zachman Cell** | Row {{N}} / Column {{N}} ({{description}}) |
 | **Linked Artifacts** | {{artifact_ids}} |
@@ -158,8 +170,8 @@ It shows which artifacts address each requirement, grouped by scope.
 
 | Req ID | Scope | Requirement | Arch Vision | Biz Arch | Data | App | Tech |
 |---|---|---|---|---|---|---|---|
-| 🔒REQ-001 | Corporate | {{title}} | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| REQ-00N | Project | {{title}} | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| 🔒REQ-001 | Enterprise | {{title}} | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| REQ-00N | Program | {{title}} | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 
 Legend: ✅ Addressed | ⚠️ Partial | ⬜ Not addressed | 🚫 Waived
 

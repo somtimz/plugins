@@ -36,14 +36,16 @@ The `requirementsRepoPath` in `engagement.json` points to a shared folder (curre
 
 ---
 
-## 🔒REQ-001: {{requirement_title}}   ← Corporate example
+## 🔒REQ-001: {{requirement_title}}   ← Enterprise example
 
 | Field | Value |
 |---|---|
 | **ID** | REQ-001 |
-| **Scope** | Corporate 🔒 |
+| **Scope** | Enterprise 🔒 |
 | **Statement** | {{requirement_statement}} |
 | **Category** | Functional / Non-Functional / Constraint / Principle |
+| **NFR Sub-Type** | Performance / Reliability / Availability / Usability / Security / Maintainability / Portability / Compatibility / Recoverability — or ➖ Not applicable |
+| **Measurable Target** | {{sla_or_threshold}} — or ➖ Not applicable |
 | **Priority** | High / Medium / Low |
 | **Source** | {{source_document_or_stakeholder}} |
 | **Status** | Draft / Approved / Deferred / Waived / Rejected |
@@ -54,18 +56,20 @@ The `requirementsRepoPath` in `engagement.json` points to a shared folder (curre
 
 ---
 
-## REQ-00N: {{requirement_title}}   ← Project example
+## REQ-00N: {{requirement_title}}   ← Program example
 
 | Field | Value |
 |---|---|
 | **ID** | REQ-00N |
-| **Scope** | Project |
+| **Scope** | Program |
 | **Statement** | {{requirement_statement}} |
 | **Category** | Functional / Non-Functional / Constraint / Principle |
+| **NFR Sub-Type** | Performance / Reliability / Availability / Usability / Security / Maintainability / Portability / Compatibility / Recoverability — or ➖ Not applicable |
+| **Measurable Target** | {{sla_or_threshold}} — or ➖ Not applicable |
 | **Priority** | High / Medium / Low |
 | **Source** | {{source_stakeholder_or_document}} |
 | **Status** | Draft / Approved / Deferred / Rejected |
-| **Derived From** | {{corporate_req_id — leave blank if not derived from a Corporate requirement}} |
+| **Derived From** | {{enterprise_req_id — leave blank if not derived from an Enterprise requirement}} |
 | **ADM Phase** | {{phase_where_relevant}} |
 | **Zachman Cell** | {{row}} / {{column}} |
 | **Linked Artifacts** | {{artifact_ids}} |
@@ -85,7 +89,9 @@ The `requirementsRepoPath` in `engagement.json` points to a shared folder (curre
       "title": "",
       "statement": "",
       "category": "Functional | Non-Functional | Constraint | Principle | Assumption",
-      "scope": "Corporate | Project",
+      "scope": "Enterprise | Program",
+      "nfrSubType": "Performance | Reliability | Availability | Usability | Security | Maintainability | Portability | Compatibility | Recoverability | null",
+      "measurableTarget": "",
       "status": "Draft | Approved | Deferred | Rejected | Waived",
       "priority": "High | Medium | Low",
       "phase": "A",
@@ -99,41 +105,43 @@ The `requirementsRepoPath` in `engagement.json` points to a shared folder (curre
 }
 ```
 
-**Fields added vs. previous schema:** `statement`, `category`, `scope`, `source`, `derivedFrom`, `waiverJustification`. `Waived` added to status enum.
+**Fields added vs. previous schema:** `statement`, `category`, `scope`, `source`, `derivedFrom`, `waiverJustification`. `Waived` added to status enum. `nfrSubType` and `measurableTarget` added in v0.9.35 — null/empty for non-NFR requirements.
 
-## Corporate Requirement Edit Protection
+## Enterprise Requirement Edit Protection
 
-Requirements with `scope: "Corporate"` have restricted editability. The following rules apply:
+Requirements with `scope: "Enterprise"` have restricted editability. The following rules apply:
 
 **Read-only fields (content is authoritative from the shared repo):**
-- `title`, `statement`, `category`, `priority`, `source`, `phase`
+- `title`, `statement`, `category`, `priority`, `source`, `phase`, `nfrSubType`, `measurableTarget`
 
 **Editable fields (engagement-specific state):**
 - `status`, `linkedArtifacts`, `derivedFrom`, `waiverJustification`
 
 **Waived status rules:**
-- `Waived` status may only be set when `waiverJustification` is non-empty. Enforce this before writing to the index for Corporate-scoped requirements. If the field is blank, prompt: "A waiver justification is required for Corporate requirements. Please enter the justification."
-- For Project-scoped requirements, `waiverJustification` is strongly recommended but not enforced.
-- A re-sync must never overwrite `status`, `waiverJustification`, or `linkedArtifacts` on an existing Corporate record, even if the source has different values.
+- `Waived` status may only be set when `waiverJustification` is non-empty. Enforce this before writing to the index for Enterprise-scoped requirements. If the field is blank, prompt: "A waiver justification is required for Enterprise requirements. Please enter the justification."
+- For Program-scoped requirements, `waiverJustification` is strongly recommended but not enforced.
+- A re-sync must never overwrite `status`, `waiverJustification`, or `linkedArtifacts` on an existing Enterprise record, even if the source has different values.
 
-**Display:** Prefix Corporate requirement IDs with 🔒 in all list and table views to indicate read-only content.
+**Display:** Prefix Enterprise requirement IDs with 🔒 in all list and table views to indicate read-only content.
 
 ## Backward Compatibility
 
 When reading a `requirements-index.json` where entries are missing the `scope` field (engagements created before this version):
 
 1. Apply a migration heuristic per entry:
-   - If the entry's `sourceFile` matches a file path under `requirementsRepoPath` → infer `scope: "Corporate"`
-   - Otherwise → infer `scope: "Project"`
+   - If the entry's `sourceFile` matches a file path under `requirementsRepoPath` → infer `scope: "Enterprise"`
+   - Otherwise → infer `scope: "Program"`
 2. Write the inferred `scope` values on the next write operation (lazy, one-time migration — do not trigger a separate write just for migration)
 3. When unscoped records are detected, display a banner:
    > "Note: X requirements are missing scope classification. Inferred scope has been applied — run `/ea-requirements list` to review."
 
+**Legacy scope values:** If entries use the old values `"Corporate"` or `"Project"` (pre-v0.9.35), treat them as `"Enterprise"` and `"Program"` respectively on read. Rewrite to the new values on the next write operation. Run `/ea-migrate` for a bulk rename.
+
 ### Scope Reclassification on Re-sync
 
-If a Project-scoped record matches an incoming Corporate record on re-sync (same ID, incoming `scope` is Corporate):
+If a Program-scoped record matches an incoming Enterprise record on re-sync (same ID, incoming `scope` is Enterprise):
 - Flag as a scope reclassification conflict
-- Prompt: "REQ-XXX was Project-scoped and is now Corporate in the shared repo. Confirming will make its content fields read-only. Confirm reclassification?"
+- Prompt: "REQ-XXX was Program-scoped and is now Enterprise in the shared repo. Confirming will make its content fields read-only. Confirm reclassification?"
 - Only reclassify on explicit user confirmation
 
 ## Syncing from the Requirements Repository
@@ -146,7 +154,7 @@ The requirements repository may contain mixed formats: Markdown, Word (.docx), E
 2. Scan the directory for supported files: `.md`, `.docx`, `.xlsx`, `.csv`
 3. For each file, extract requirements using the `ea-document-ingestion` skill
 4. Present extracted requirements to the user for review and confirmation
-5. Merge approved requirements into `requirements.md` and `requirements-index.json`. Set `scope: "Corporate"` on all sync-imported records. Never overwrite `status`, `linkedArtifacts`, or `waiverJustification` of existing Corporate records during re-sync.
+5. Merge approved requirements into `requirements.md` and `requirements-index.json`. Set `scope: "Enterprise"` on all sync-imported records. Never overwrite `status`, `linkedArtifacts`, or `waiverJustification` of existing Enterprise records during re-sync.
 6. Update `lastSynced` timestamp
 7. Flag conflicts where a repo requirement differs from a locally edited version
 
@@ -182,7 +190,7 @@ Generate a traceability matrix on demand:
 The Architecture Requirements phase runs in two modes:
 
 **Initial capture (before Phase A):**
-1. Sync from requirements repo — all synced records are automatically tagged `scope: "Corporate"`
+1. Sync from requirements repo — all synced records are automatically tagged `scope: "Enterprise"`
 2. Conduct requirements interview using `ea-interviewer` agent
 3. Classify each requirement (functional, non-functional, constraint, principle)
 4. Assign Zachman cell classification
