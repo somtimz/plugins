@@ -151,6 +151,8 @@ Free-form list of 3–6 lowercase kebab-case keywords. Tags should include:
 | arb-minutes | Cross-cutting | Governance | Governance | Governance | Confidential |
 | engagement-brief | Cross-cutting | Planning | Executive | Reference | Internal |
 
+> **Note — item-detail.md:** The `item-detail.md` template generates per-item companion files (`artifacts/details/{ID}.md`) and is intentionally excluded from the canonical taxonomy map above. Detail files are not standalone artifacts and are not listed in `/ea-artifact list`. See `detail-file-convention.md` for their structure and lifecycle.
+
 ---
 
 ## Using the Taxonomy

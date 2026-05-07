@@ -83,6 +83,7 @@ All links in artifact markdown use paths relative to the artifact file at `artif
 | Different-phase artifact | `../{phase-folder}/{artifact-id}.md` |
 | Upload | `../../uploads/{filename}` |
 | Research document | `../../ResearchAndReferences/{filename}.md` |
+| Detail file | `../details/{ID}.md` |
 
 ### Artifact Metadata Fields
 
@@ -124,7 +125,7 @@ These are loaded automatically by `/ea-grill --skill practitioner|maturity|failu
 | ISS-NNN | Issue | ISS-001 |
 | PRB-NNN | Problem | PRB-001 |
 | WP-NNN | Work Package (roadmap) | WP-001 |
-| GAP-NNN | Gap (Gap Analysis) | GAP-001 |
+| GAP-NNN | Gap (Gap Analysis); migration gaps use GAP-M-NNN | GAP-001 |
 | REQ-NNN | Requirement | REQ-001 |
 | RIS-NNN | Risk | RIS-001 |
 | CON-NNN | Stakeholder Concern / Objection | CON-001 |
@@ -136,6 +137,8 @@ These are loaded automatically by `/ea-grill --skill practitioner|maturity|failu
 | PAD-NNN | Pending Architecture Decision | PAD-001 |
 | WS-NNN | Workshop Minutes | WS-001 |
 | ARB-NNN | Architecture Review Board Meeting | ARB-001 |
+| ACR-NNN | Architecture Change Request | ACR-001 |
+| ROLE-NNN | Role Catalogue Entry | ROLE-001 |
 
 **Do not use domain-prefixed IDs** (BG-/DG-/AG-/TG- etc.) — the scheme is unified and domain-agnostic.
 
