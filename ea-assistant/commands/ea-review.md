@@ -34,6 +34,7 @@ Select artifact to review:
      - **Option 2 (Accept as-is):** apply minimal frontmatter defaults, set `complianceNote: accepted-non-standard`, then load for review. Add an informational banner at the top of the review display: `ℹ️ This artifact has {N} compliance gap(s) accepted as-is. Non-standard fields and missing sections will not affect the review workflow.`
      - **Option 3 (View details):** display full compliance report, then re-present Options 1 and 2.
 3. Load artifact-scoped context using **Scope A** from `skills/ea-engagement-lifecycle/references/context-loading.md`. This brings in related artifacts, phase notes, prior grill findings, research items, and detail files for use when suggesting review comments.
+4. Load `skills/ea-artifact-templates/references/publish-quality.md` silently. This enables the quality check action (f) below.
    - If any detail files were loaded (Scope A step 8), announce before showing review actions:
      > "Linked detail files: {N} loaded. Open concerns: {N} — open issues: {N}. These will be surfaced as context when you add review comments."
 4. Read the review file `artifacts/{artifact-id}.review.md` if it exists
@@ -80,6 +81,21 @@ Present the following options:
 
 **e) Export review for offline**
 - Export artifact + review comments as a single Markdown or Word document
+
+**f) Run quality check**
+- Scan the artifact against all rules in `publish-quality.md` (loaded at step 4 above).
+- Report using the same format as Step 5b in `/ea-publish`, scoped to this artifact only:
+  ```
+  Quality Check: {Artifact Name}
+  ────────────────────────────────────────
+  Tables too wide (>8 cols):     {N}
+  Header-only tables:            {N}
+  Placeholder text found:        {N}
+  Broken image paths:            {N}
+  Sections missing narrative:    {N}
+  ```
+- For each finding, offer: "Add as a review comment? (y/n)"
+  - If yes: append to `{artifact-id}.review.md` using the standard comment format with `Reviewer: Quality Check (automated)` and `Section:` set to the flagged section name.
 
 ### Review File Format
 

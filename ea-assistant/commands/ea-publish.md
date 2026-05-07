@@ -214,6 +214,56 @@ If the artifact has open review comments (in its `.review.md` file), append:
 {review comments content}
 ```
 
+### Step 5b: Readability Pass
+
+Load `skills/ea-artifact-templates/references/publish-quality.md`.
+
+Scan the assembled document against all rules in that file. Produce a readability report:
+
+```
+Readability Pass
+────────────────────────────────────────
+Tables too wide (>8 cols):     {N}  [list artifact/section]
+Tables too long (>10 rows):    {N}  [list]
+Header-only tables:            {N}  [list]
+Placeholder text found:        {N}  [list]
+Broken image paths:            {N}  [list]
+Sections missing narrative:    {N}  [list]
+Terminology inconsistencies:   {N}  [list]
+```
+
+If any **Blocking** issues exist (placeholder text, `⚠️ Not answered` fields, broken image paths):
+- List each occurrence explicitly (artifact section + text snippet).
+- Ask: "These issues should be resolved before publishing. Choose an option:"
+  - **(f) Fix now** — walk through each issue interactively; patch the source artifact and re-assemble the affected section.
+  - **(m) Mark and continue** — insert `<!-- ⚠️ PUBLISH QUALITY ISSUE: {description} -->` inline at each occurrence; add a `## Publication Quality Notes` section immediately after the cover page listing all issues with locations.
+  - **(a) Abort** — stop; do not write output files.
+
+Non-blocking issues (Warning, Advisory): Add each to the `## Publication Quality Notes` section without blocking. If there are no blocking issues and at least one non-blocking issue, create the Publication Quality Notes section automatically.
+
+If all checks pass, continue silently.
+
+### Step 5c: Rewrite Pass
+
+Ask the user:
+
+```
+Run a readability rewrite? This will:
+  - Add brief narrative introductions to sections that open directly with a table
+  - Add transition sentences between back-to-back sections with no prose
+  - Standardise terminology flagged as inconsistent
+
+  (y) Yes — apply rewrite   (n) No — skip   (p) Preview first
+```
+
+- **(y) Yes:** Apply the rewrite to the assembled document in-memory. Each inserted passage is tagged `<!-- ai-inserted -->` so it is identifiable in the source.
+- **(p) Preview:** Show the first 3 proposed insertions with before/after context; ask to confirm before applying all.
+- **(n) No:** Skip; proceed to Step 6.
+
+**Executive Mode (`--executive`):** Step 5b runs in reduced scope — blocking checks only (placeholder text and broken image paths; skip narrative and terminology checks). Step 5c is skipped entirely.
+
+---
+
 ### Step 6: Write Output
 
 - Markdown: `artifacts/consolidated-report-{YYYY-MM-DD}.md`

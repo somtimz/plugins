@@ -19,6 +19,7 @@ Runs a focused consistency check on the active engagement. Unlike `/ea-engage-re
 | `artifact <id>` | Artifact | Within-artifact section consistency + ID refs scoped to that file |
 | `--ids` | IDs only | Fast scan — ID definition registry, broken references, orphaned IDs |
 | `--details` | Detail links + sync | Fast scan — broken detail file links, frontmatter mismatches, cross-artifact link consistency, detail/A4 content sync |
+| `--quality` | Quality | Readability + content completeness scan across all artifacts |
 | `--report` (added to any mode) | Report | Suppresses interactive menu; prints full report inline |
 
 ---
@@ -233,4 +234,42 @@ Unless `--report`, offer:
 ```
   1. Run full consistency check  →  /ea-consistency
   2. Continue
+```
+
+---
+
+### Quality Mode (`--quality`)
+
+Load `skills/ea-artifact-templates/references/publish-quality.md`.
+
+Scan every artifact in `EA-projects/{slug}/artifacts/**/*.md`, excluding `*.review.md`, files in `notes/` subdirectories, and files in `details/`.
+
+Apply all rules from publish-quality.md to each artifact. Aggregate findings:
+
+```
+Quality Scan — {engagement name}
+──────────────────────────────────────────
+Artifacts scanned: {N}
+Artifacts with issues: {N}
+
+{Artifact Name}
+  ⚠️ Table too wide: §{section} — {N} columns (max 8)
+  ⚠️ Placeholder text: §{section} — "{{requirement_statement}}"
+  ℹ️ Section opens with table: §{section} — add narrative introduction
+
+✅ {Artifact Name} — no issues found.
+```
+
+Severity display:
+- `⚠️` — Blocking or Warning findings
+- `ℹ️` — Advisory findings
+- `✅` — artifact passed all checks
+
+`--quality` can be combined with `--report` to print the full report inline without the interactive menu.
+
+Unless `--report`, offer:
+```
+  1. Run a full consistency check  →  /ea-consistency
+  2. Review an artifact            →  /ea-review {id}
+  3. Continue
 ```
