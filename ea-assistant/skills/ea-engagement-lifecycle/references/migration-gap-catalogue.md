@@ -13,6 +13,7 @@ Reference for `/ea-migrate`. Defines all gap checks, severity levels, and remedi
 | `engagementType` field present | Absent (pre-0.2.0) | Low |
 | `architectureDomains` field present | Absent (pre-0.2.0) | Low |
 | `optOuts` field present | Absent (pre-0.8.0) | Low |
+| `architectureLevel` field present | Absent (pre-0.9.28) | Low |
 
 **Remediations:**
 - `pluginVersion` absent → add `"pluginVersion": "{current_version}"`
@@ -22,6 +23,7 @@ Reference for `/ea-migrate`. Defines all gap checks, severity levels, and remedi
 - `engagementType` absent → add `"engagementType": null`
 - `architectureDomains` absent → add `"architectureDomains": ["Business","Data","Application","Technology"]`
 - `optOuts` absent → add `"optOuts": []`
+- `architectureLevel` absent → add `"architectureLevel": null`; inform: "Set this via `/ea-config metadata` — allowed values: Strategic, Segment, Capability, Solution. Defaults to Segment until set."
 
 ## 3b — Expected Artifacts Missing
 
@@ -82,7 +84,7 @@ For each artifact `.md` in `EA-projects/{slug}/artifacts/` and phase subdirector
 | `## Appendix A4 — Stakeholder Concerns & Objections` present | Architecture Vision, Business/Data/App/Tech Architecture, Gap Analysis, Roadmap, SAoW, Migration Plan, Engagement Charter, Governance Framework, Implementation Governance Plan | Section absent | 0.9.3 | Medium |
 | `## Appendix A5 — Related Architecture Decisions` present | Architecture Vision, Business/Data/App/Tech Architecture, Gap Analysis, Architecture Roadmap, SAoW, Migration Plan, Compliance Assessment, Requirements Register, Engagement Charter, Governance Framework, Implementation Governance Plan | Section absent | 0.9.7 | Low |
 
-**Appendix remediation:** See `skills/ea-artifact-templates/references/appendix-templates.md` for the markdown blocks to inject. Ordering: A3 → A4 → A5 (A3 first; A4 after A3; A5 before A3 if A3 is absent).
+**Appendix remediation:** See `skills/ea-artifact-templates/references/appendix-templates.md` for the markdown blocks to inject. Ordering: A3 → A4 → A5. Place each missing appendix after any existing lower-numbered appendix, or before any existing higher-numbered one. If none exist, append at the document end.
 
 ## Handling Special Cases
 

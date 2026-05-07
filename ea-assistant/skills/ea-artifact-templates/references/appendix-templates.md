@@ -46,7 +46,7 @@ Record all stakeholder concerns, objections, and tough questions raised about th
 
 ## Appendix A5 — Related Architecture Decisions
 
-Inject before Appendix A3 (or before footer if neither A3 nor A4 present):
+Inject after Appendix A4 (or after A3 if A4 is absent; or at end of document if neither present):
 
 ```markdown
 ## Appendix A5 — Related Architecture Decisions
