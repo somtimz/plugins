@@ -83,8 +83,6 @@ You have existing engagements. Common next steps:
 | `/ea-requirements [action]` | Manage architecture requirements |
 | `/ea-decisions [options]` | Generate Decision Register from all A3 decision logs |
 | `/ea-adrs [mode]` | Manage Architecture Decision Records (generate, new, update) |
-| `/ea-arb [mode]` | ARB meeting minutes — new, list, view, close; propagate decisions to ADR register |
-| `/ea-workshop [mode]` | Facilitate a multi-stakeholder architecture workshop; captures decisions, actions, deferred items |
 | `/ea-risks [mode]` | Generate and maintain a cross-cutting Risk Register |
 | `/ea-changes [mode]` | Generate Change Register for Phase H ACR artifacts |
 | `/ea-concerns` | Manage CON-NNN stakeholder concerns (Appendix A4) |
