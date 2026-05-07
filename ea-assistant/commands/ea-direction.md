@@ -26,6 +26,7 @@ The Direction Register aggregates all Goals (`G-NNN`), Objectives (`OBJ-NNN`), S
 |---|---|
 | *(none)* | Full register — all artifacts, all item types |
 | `--domain Business\|Data\|Application\|Technology` | Filter by inferred domain (see Domain Mapping below) |
+| `--quality` | Run quality scan on all parsed items after rendering the register |
 | `goals` | Goals table only |
 | `objectives` | Objectives table only |
 | `strategies` | Strategies table only |
@@ -177,7 +178,42 @@ Formatting rules:
 
 ---
 
-## Step 6 — Edge Cases
+## Step 6 — Quality Scan (`--quality` only)
+
+Load `skills/ea-engagement-lifecycle/references/grill-direction-quality.md`.
+
+Apply all rules to every item in `allGoals`, `allObjectives`, `allStrategies`, `allOpportunities`, `allIssues`, `allProblems`. Also evaluate `vision` and `mission` from `engagement.json` if available.
+
+Group and report using the Summary Format from grill-direction-quality.md:
+
+```
+Direction Quality Scan — {engagement name}
+──────────────────────────────────────────────
+Items assessed: {N}   Issues found: {N}
+
+⚠️ Warnings (address before Phase A)
+  DRV-001: Missing evidence — "Regulatory change forces platform upgrade"
+  OBJ-002: Missing measure, target, and deadline — cannot be validated
+  G-003: Isolated — not linked to any driver
+  ISS-001: Reads as Problem (specific/measurable) — consider reclassifying as PRB-NNN
+
+ℹ️ Advisory
+  G-001: Ambiguous — "Improve performance" needs context (performance of what, for whom?)
+  STR-002: Phrasing reads as outcome, not approach — consider "Adopt X" framing
+
+✅ {N} items passed all checks.
+```
+
+After the report, offer:
+```
+  1. Open an item for revision   →  /ea-interview start {artifact-name}
+  2. Deep-review direction items →  /ea-grill {artifact-name} --skill direction
+  3. Continue
+```
+
+---
+
+## Step 7 — Edge Cases
 
 | Scenario | Handling |
 |---|---|

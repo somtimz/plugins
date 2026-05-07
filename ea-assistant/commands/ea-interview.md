@@ -130,6 +130,34 @@ Capture the full engagement direction in one cross-phase session before any TOGA
    - Cross-cutting brainstorm notes (if available)
    - Any pre-existing answers from prior engagement interview notes
    - The selected mode
+   - The direction quality rules from `skills/ea-engagement-lifecycle/references/grill-direction-quality.md` — loaded for inline challenge during Part 3
+
+   **Direction Quality Challenge — Part 3 only:** After the user provides each direction item during Part 3 (Motivation), before writing it to `engagement.json`, apply the direction quality rules:
+   - **Miscategorization detected:** Challenge directly — "This reads more like a {correct type} than a {entered type}. A {entered type} should {defining characteristic}. Would you like to reclassify it, or keep it as entered?"
+   - **Missing evidence (Driver, Issue, Problem):** Prompt — "This item needs supporting evidence. Can you cite a source, metric, or document?" If the user skips, note the item with `⚠️ Evidence pending` in the interview notes.
+   - **Ambiguous phrasing (Advisory):** Prompt — "This statement could mean different things. Could you be more specific about '{vague element}'?" If the user declines, note `ℹ️ Phrasing advisory` in the interview notes.
+   - **Isolated item:** Inform — "This item has no linked {goals/drivers/objectives} yet. You can add links now or address this in `/ea-direction --quality` after the session."
+   - Do **not** block progress — if the user declines to revise any item, accept it and continue. Flag it for the Direction Quality Summary below.
+
+   **Direction Quality Summary — end of Part 3:** After all Part 3 items are captured, before moving to Part 4, present:
+   ```
+   Direction Quality Summary
+   ─────────────────────────────────────────────
+   Items captured: {N}   Flagged for attention: {N}
+
+   ⚠️ Warnings (address before Phase A):
+     DRV-001: Evidence pending — add source before Architecture Vision
+     G-002: Reads as Objective (contains deadline) — consider reclassifying
+     OBJ-001: Missing measure and deadline — cannot be validated as-is
+
+   ℹ️ Advisory (can proceed, worth revisiting):
+     STR-001: Phrasing reads as outcome — consider "Adopt X" framing
+
+   ✅ {N} items are well-formed.
+
+   These will appear in /ea-direction --quality. Continue to Part 4? (y / revisit flagged items)
+   ```
+   If "revisit flagged items" is chosen: step through each flagged item one at a time and allow the user to revise or accept it as-is.
 
 6. **On completion:**
    - Save notes to `artifacts/cross-cutting/notes/interviews/interview-engagement-{YYYY-MM-DD}-v{N}.md`
