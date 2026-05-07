@@ -100,23 +100,152 @@ Capture freeform brainstorm notes for the active EA engagement.
 
 4. **Build `BRAINSTORM_DATA` and launch the brainstorm pad.**
 
-   Construct the `BRAINSTORM_DATA` object based on the resolved phase. Use the table below to look up the phase-specific values. If the phase resolved to engagement mode, use the `Engagement` row. Include `questions` (from step 3b) and `prefilled` (from step 3c) in the object.
+   Construct the `BRAINSTORM_DATA` object based on the resolved phase. Find the relevant `### Phase Name` section below for the phase-specific hint values. If the phase resolved to engagement mode, use the `### Engagement` section. Include `questions` (from step 3b) and `prefilled` (from step 3c) in the object.
 
-   **Phase hint table:**
+   **Phase hints:**
 
-   | Phase | subtitle | concerns hint | goals hint | constraints hint | opportunities hint | assumptions hint | metrics hint | other hint |
-   |---|---|---|---|---|---|---|---|---|
-   | Engagement | Focus on pre-phase strategic context — direction and stakeholder landscape before detailed phase work begins. | Misaligned sponsor expectations, unclear mandate, unresolved stakeholder conflicts, strategic threats with no owner | Vision and mission alignment, strategic goals, high-level desired outcomes for the engagement | Regulatory obligations, budget envelope, board-level constraints, engagement scope boundaries | Capabilities the org lacks but could gain, untapped value, quick wins before phase work | Stakeholder availability, current-state baseline, org readiness, assumptions the engagement depends on | Engagement-level KPIs, benefits realisation targets, success indicators | Engagement type, governance context, related programmes, key stakeholder relationships |
-   | Preliminary | Focus on governance readiness and framework setup. | Governance gaps, lack of sponsorship, conflicting stakeholder expectations | What does architecture success look like for this organisation? | Existing standards, budget, team capacity, compliance mandates | Capability improvements, standardisation wins, quick governance wins | Organisational readiness, stakeholder availability, framework maturity | Governance effectiveness measures, architecture maturity indicators | Tailoring needs, external references, special context |
-   | Architecture Requirements Management | Focus on capturing and tracing requirements across the engagement. | Requirements volatility, conflicting stakeholder needs, traceability gaps | Complete, traceable requirements baseline, Zachman cell coverage | Requirements sign-off process, change control, scope boundaries | Requirement pattern reuse, automated traceability, shared requirements repo | Stakeholder availability for validation, scope stability, documentation quality | Requirements coverage %, traceability completeness, sign-off velocity | Corporate vs project requirements distinction, waiver candidates, source documents |
-   | Architecture Vision | Focus on strategic intent and the problem being solved. | Scope creep, misaligned stakeholder expectations, unclear success criteria | Strategic objectives, high-level outcomes, business problem being solved | Time-to-value, budget envelope, regulatory obligations | Business value propositions, capability gaps to close, quick wins | Current state baseline, stakeholder alignment, sponsor commitment | Executive KPIs, time-to-value signals, adoption rate, cost reduction targets | Risk appetite, key stakeholders, governance context |
-   | Business Architecture | Focus on capabilities, processes, value streams, use cases, and operating model. | Process silos, duplicate capabilities, unclear ownership, change resistance, process steps owned by wrong actor, use case flows that span multiple siloed systems, business rules buried in spreadsheets or tribal knowledge | Target business capabilities, operating model improvements, value streams end-to-end, clear use case coverage for each key actor, capabilities mapped to owning processes | Org structure, existing processes, HR and change capacity | Process optimisation, capability consolidation, new value streams, digitise manual process steps, expose business services via API, consolidate duplicate processes serving the same actor goal | Business process stability, workforce capacity to change, sponsor commitment | Business capability maturity, process cycle time, customer satisfaction scores | Business Model Canvas inputs, stakeholder concerns, regulatory context, use case actors and goals |
-   | Information Systems Architecture | Focus on data and application landscape, component design, service contracts, and user journeys. | Data quality, application sprawl, integration complexity, legacy constraints, application components with unclear boundaries, API contracts undocumented or unstable, synchronous coupling creating brittle integrations | Target data landscape, application rationalisation, integration patterns, clear component responsibilities with explicit service contracts, user journeys traceable through the application landscape, event-driven backbone for async flows | Existing contracts, data sovereignty, system lifespans | API enablement, data product opportunities, application consolidation, decompose monolith along bounded contexts, introduce API gateway for external consumers, move commodity capabilities to SaaS | Data ownership clarity, system inventory accuracy, integration maturity | Data quality scores, API throughput, integration error rates, system uptime | Migration complexity, system interdependencies, vendor relationships, use case traceability to application components |
-   | Technology Architecture | Focus on platform, infrastructure, and technical decisions. | Platform lock-in, security posture, technical debt, skills gaps | Target platform, infrastructure principles, cloud/hybrid strategy | Existing infrastructure, vendor agreements, security policies | Cloud adoption, automation, platform standardisation, cost optimisation | Cloud readiness, vendor support timelines, network capacity | Infrastructure uptime, deployment frequency, security posture scores, cost per workload | Technology radar inputs, emerging tech candidates, decommission targets |
-   | Opportunities & Solutions | Focus on solution options and delivery sequencing. | Sequencing dependencies, transition risks, resource constraints for delivery | Target solution portfolio, delivery waves, architecture packages | Budget cycles, programme capacity, dependency ordering | Quick win projects, building-block reuse, parallel workstreams | Programme delivery capacity, funding approval timelines, vendor availability | Work package delivery velocity, benefits realisation milestones, gap-closure rate | Work package candidates, gap-closure priorities, make-vs-buy considerations |
-   | Migration Planning | Focus on transition sequencing and cut-over safety. | Cut-over risk, data migration integrity, rollback complexity | Migration sequence, transition architectures, steady-state target | Downtime windows, data volume, parallel-run costs | Phased delivery value, incremental decommissioning, user adoption sequencing | Migration tool readiness, data cleanliness, testing environment availability | Migration completion %, cutover defect rate, parallel-run duration, rollback trigger thresholds | Contingency plans, stakeholder communication needs, pilot candidates |
-   | Implementation Governance | Focus on keeping delivery aligned with architecture intent. | Compliance drift, change requests undermining architecture, delivery gaps | Architecture compliance, decision quality, governance effectiveness | Project autonomy limits, governance overhead, review capacity | Architecture review streamlining, compliance automation, pattern library | Project team architecture awareness, governance authority, escalation paths | Compliance assessment pass rate, dispensation volume, review cycle time | Dispensation criteria, review frequency, architecture board composition |
-   | Architecture Change Management | Focus on monitoring for drift and triggering ADM re-entry. | Unplanned architecture drift, technology obsolescence, stakeholder fatigue | Architecture refresh cycle, change trigger criteria, continuous improvement | Change capacity, ongoing programme commitments, architecture team bandwidth | Lessons-learned integration, architecture pattern updates, tooling improvements | Change velocity, stakeholder engagement sustainability, capability maturity | Architecture debt backlog size, drift incident rate, re-entry trigger frequency | Sunset criteria, ADM re-entry triggers, architecture debt backlog |
+   ### Engagement
+   *Focus on pre-phase strategic context — direction and stakeholder landscape before detailed phase work begins.*
+
+   | Dimension | Hint |
+   |---|---|
+   | Concerns | Misaligned sponsor expectations, unclear mandate, unresolved stakeholder conflicts, strategic threats with no owner |
+   | Goals | Vision and mission alignment, strategic goals, high-level desired outcomes for the engagement |
+   | Constraints | Regulatory obligations, budget envelope, board-level constraints, engagement scope boundaries |
+   | Opportunities | Capabilities the org lacks but could gain, untapped value, quick wins before phase work |
+   | Assumptions | Stakeholder availability, current-state baseline, org readiness, assumptions the engagement depends on |
+   | Metrics | Engagement-level KPIs, benefits realisation targets, success indicators |
+   | Other | Engagement type, governance context, related programmes, key stakeholder relationships |
+
+   ### Preliminary
+   *Focus on governance readiness and framework setup.*
+
+   | Dimension | Hint |
+   |---|---|
+   | Concerns | Governance gaps, lack of sponsorship, conflicting stakeholder expectations |
+   | Goals | What does architecture success look like for this organisation? |
+   | Constraints | Existing standards, budget, team capacity, compliance mandates |
+   | Opportunities | Capability improvements, standardisation wins, quick governance wins |
+   | Assumptions | Organisational readiness, stakeholder availability, framework maturity |
+   | Metrics | Governance effectiveness measures, architecture maturity indicators |
+   | Other | Tailoring needs, external references, special context |
+
+   ### Architecture Requirements Management
+   *Focus on capturing and tracing requirements across the engagement.*
+
+   | Dimension | Hint |
+   |---|---|
+   | Concerns | Requirements volatility, conflicting stakeholder needs, traceability gaps |
+   | Goals | Complete, traceable requirements baseline, Zachman cell coverage |
+   | Constraints | Requirements sign-off process, change control, scope boundaries |
+   | Opportunities | Requirement pattern reuse, automated traceability, shared requirements repo |
+   | Assumptions | Stakeholder availability for validation, scope stability, documentation quality |
+   | Metrics | Requirements coverage %, traceability completeness, sign-off velocity |
+   | Other | Corporate vs project requirements distinction, waiver candidates, source documents |
+
+   ### Architecture Vision
+   *Focus on strategic intent and the problem being solved.*
+
+   | Dimension | Hint |
+   |---|---|
+   | Concerns | Scope creep, misaligned stakeholder expectations, unclear success criteria |
+   | Goals | Strategic objectives, high-level outcomes, business problem being solved |
+   | Constraints | Time-to-value, budget envelope, regulatory obligations |
+   | Opportunities | Business value propositions, capability gaps to close, quick wins |
+   | Assumptions | Current state baseline, stakeholder alignment, sponsor commitment |
+   | Metrics | Executive KPIs, time-to-value signals, adoption rate, cost reduction targets |
+   | Other | Risk appetite, key stakeholders, governance context |
+
+   ### Business Architecture
+   *Focus on capabilities, processes, value streams, use cases, and operating model.*
+
+   | Dimension | Hint |
+   |---|---|
+   | Concerns | Process silos, duplicate capabilities, unclear ownership, change resistance, process steps owned by wrong actor, use case flows that span multiple siloed systems, business rules buried in spreadsheets or tribal knowledge |
+   | Goals | Target business capabilities, operating model improvements, value streams end-to-end, clear use case coverage for each key actor, capabilities mapped to owning processes |
+   | Constraints | Org structure, existing processes, HR and change capacity |
+   | Opportunities | Process optimisation, capability consolidation, new value streams, digitise manual process steps, expose business services via API, consolidate duplicate processes serving the same actor goal |
+   | Assumptions | Business process stability, workforce capacity to change, sponsor commitment |
+   | Metrics | Business capability maturity, process cycle time, customer satisfaction scores |
+   | Other | Business Model Canvas inputs, stakeholder concerns, regulatory context, use case actors and goals |
+
+   ### Information Systems Architecture
+   *Focus on data and application landscape, component design, service contracts, and user journeys.*
+
+   | Dimension | Hint |
+   |---|---|
+   | Concerns | Data quality, application sprawl, integration complexity, legacy constraints, application components with unclear boundaries, API contracts undocumented or unstable, synchronous coupling creating brittle integrations |
+   | Goals | Target data landscape, application rationalisation, integration patterns, clear component responsibilities with explicit service contracts, user journeys traceable through the application landscape, event-driven backbone for async flows |
+   | Constraints | Existing contracts, data sovereignty, system lifespans |
+   | Opportunities | API enablement, data product opportunities, application consolidation, decompose monolith along bounded contexts, introduce API gateway for external consumers, move commodity capabilities to SaaS |
+   | Assumptions | Data ownership clarity, system inventory accuracy, integration maturity |
+   | Metrics | Data quality scores, API throughput, integration error rates, system uptime |
+   | Other | Migration complexity, system interdependencies, vendor relationships, use case traceability to application components |
+
+   ### Technology Architecture
+   *Focus on platform, infrastructure, and technical decisions.*
+
+   | Dimension | Hint |
+   |---|---|
+   | Concerns | Platform lock-in, security posture, technical debt, skills gaps |
+   | Goals | Target platform, infrastructure principles, cloud/hybrid strategy |
+   | Constraints | Existing infrastructure, vendor agreements, security policies |
+   | Opportunities | Cloud adoption, automation, platform standardisation, cost optimisation |
+   | Assumptions | Cloud readiness, vendor support timelines, network capacity |
+   | Metrics | Infrastructure uptime, deployment frequency, security posture scores, cost per workload |
+   | Other | Technology radar inputs, emerging tech candidates, decommission targets |
+
+   ### Opportunities & Solutions
+   *Focus on solution options and delivery sequencing.*
+
+   | Dimension | Hint |
+   |---|---|
+   | Concerns | Sequencing dependencies, transition risks, resource constraints for delivery |
+   | Goals | Target solution portfolio, delivery waves, architecture packages |
+   | Constraints | Budget cycles, programme capacity, dependency ordering |
+   | Opportunities | Quick win projects, building-block reuse, parallel workstreams |
+   | Assumptions | Programme delivery capacity, funding approval timelines, vendor availability |
+   | Metrics | Work package delivery velocity, benefits realisation milestones, gap-closure rate |
+   | Other | Work package candidates, gap-closure priorities, make-vs-buy considerations |
+
+   ### Migration Planning
+   *Focus on transition sequencing and cut-over safety.*
+
+   | Dimension | Hint |
+   |---|---|
+   | Concerns | Cut-over risk, data migration integrity, rollback complexity |
+   | Goals | Migration sequence, transition architectures, steady-state target |
+   | Constraints | Downtime windows, data volume, parallel-run costs |
+   | Opportunities | Phased delivery value, incremental decommissioning, user adoption sequencing |
+   | Assumptions | Migration tool readiness, data cleanliness, testing environment availability |
+   | Metrics | Migration completion %, cutover defect rate, parallel-run duration, rollback trigger thresholds |
+   | Other | Contingency plans, stakeholder communication needs, pilot candidates |
+
+   ### Implementation Governance
+   *Focus on keeping delivery aligned with architecture intent.*
+
+   | Dimension | Hint |
+   |---|---|
+   | Concerns | Compliance drift, change requests undermining architecture, delivery gaps |
+   | Goals | Architecture compliance, decision quality, governance effectiveness |
+   | Constraints | Project autonomy limits, governance overhead, review capacity |
+   | Opportunities | Architecture review streamlining, compliance automation, pattern library |
+   | Assumptions | Project team architecture awareness, governance authority, escalation paths |
+   | Metrics | Compliance assessment pass rate, dispensation volume, review cycle time |
+   | Other | Dispensation criteria, review frequency, architecture board composition |
+
+   ### Architecture Change Management
+   *Focus on monitoring for drift and triggering ADM re-entry.*
+
+   | Dimension | Hint |
+   |---|---|
+   | Concerns | Unplanned architecture drift, technology obsolescence, stakeholder fatigue |
+   | Goals | Architecture refresh cycle, change trigger criteria, continuous improvement |
+   | Constraints | Change capacity, ongoing programme commitments, architecture team bandwidth |
+   | Opportunities | Lessons-learned integration, architecture pattern updates, tooling improvements |
+   | Assumptions | Change velocity, stakeholder engagement sustainability, capability maturity |
+   | Metrics | Architecture debt backlog size, drift incident rate, re-entry trigger frequency |
+   | Other | Sunset criteria, ADM re-entry triggers, architecture debt backlog |
 
    Set `BRAINSTORM_DATA.phase` to the full phase label (e.g. `"Phase D — Technology Architecture"`). If the phase has no letter prefix (Preliminary, Requirements), use just the name (e.g. `"Preliminary"`).
 
