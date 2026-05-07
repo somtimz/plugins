@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.34 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.37 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -186,8 +186,8 @@ When an ADR is ratified at an ARB meeting, set `arbReference: ARB-NNN` via `/ea-
 | T3-RATIONALE | Same artifact list as T3-A3 | Any A3 row with `Authority = Strategic` has no `#### A3.N — {Item}` block and no sentinel `*(rationale not captured)*` — surfaces in `/ea-artifact view`, `/ea-engage-review`, `/ea-grill` |
 | T3-ROAD-SA | Architecture Roadmap | `## Strategic Alignment` section with at least one non-placeholder row |
 | T3-ROAD-WP | Architecture Roadmap | At least one WP has non-empty `Advances Goals/Objectives` or `Executes Strategies` |
-| T3-REQ | Requirements Register | Scope column present (Corporate / Project) |
-| T3-TRACE | Traceability Matrix | Two-section structure (Corporate / Project) |
+| T3-REQ | Requirements Register | Scope column present (Enterprise / Program) |
+| T3-TRACE | Traceability Matrix | Two-section structure (Enterprise / Program) |
 
 ### Tier 4 — Practitioner Compliance (L3+ engagements)
 

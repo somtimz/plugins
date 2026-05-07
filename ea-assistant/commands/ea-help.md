@@ -87,7 +87,7 @@ You have existing engagements. Common next steps:
 | `/ea-changes [mode]` | Generate Change Register for Phase H ACR artifacts |
 | `/ea-concerns` | Manage CON-NNN stakeholder concerns (Appendix A4) |
 | `/ea-roles [ROLE-ID\|--domain\|--generate\|--update]` | Role Catalogue — list, filter, and generate role assignments with RACI, triggers, and calendar |
-| `/ea-direction [goals\|objectives\|strategies] [--domain X]` | View Direction Register — Goals, Objectives, Strategies from motivation artifacts |
+| `/ea-direction [goals\|objectives\|strategies] [--domain X] [--quality]` | View Direction Register — Goals, Objectives, Strategies from motivation artifacts; `--quality` scans all items for miscategorization, missing evidence, and isolation |
 | `/ea-zachman [mode]` | Manage the Zachman 6×6 classification diagram (generate, review, gap, interview, classify) |
 | `/ea-research [mode]` | Research library — add, note, link, list, view, apply findings to artifacts |
 | `/ea-next` | Suggest the single most valuable next action for the active engagement |

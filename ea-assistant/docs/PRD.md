@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.34
+**Version:** 0.9.37
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -597,6 +597,50 @@ A structured decision-quality framework prevents premature commitments and reduc
 - Created by `ea-interviewer` when user types `d: {statement}` during interview, or when a decision is flagged as premature
 - Linked to GAP-NNN, WP-NNN, and ADR-NNN via frontmatter fields
 - Compliance rule T4-PAD: open PADs must have expiry within 90 days and defined resolution path
+
+---
+
+### 5.29 Enterprise/Program Requirements Split and NFR Sub-Types (v0.9.35)
+
+Requirements scope terminology aligned to standard EA language: Corporate → **Enterprise** (org-wide standards, read-only content), Project → **Program** (engagement-specific, fully editable). Legacy `requirements-index.json` files with old values are automatically migrated on next write; `/ea-migrate` scan 3h offers bulk rename.
+
+**NFR sub-type classification:** Non-Functional Requirements now carry two mandatory fields:
+- **NFR Sub-Type** — one of 9 ISO/IEC 25010 categories: Availability, Reliability, Performance, Security, Usability, Maintainability, Portability, Compatibility, Recoverability
+- **Measurable Target** — quantifiable threshold (e.g. 99.9% uptime, RTO 4h, <200ms p95 response time)
+
+A **NFR Coverage Checklist** in the requirements register template tracks which categories have at least one entry. `/ea-interview start phase requirements` runs a structured NFR discovery session with one discovery question and measurable target prompt per category. `/ea-grill --skill requirements` produces an NFR coverage scorecard (9 categories × covered/missing/no target), traceability gap list, and proceed/pause/rework verdict.
+
+---
+
+### 5.30 Publish Readability Pass and Quality Modes (v0.9.36)
+
+Shared quality rules defined in `skills/ea-artifact-templates/references/publish-quality.md` and applied at three touchpoints:
+
+**`/ea-publish` Steps 5b + 5c:**
+- **Readability Pass (5b):** Scans the assembled consolidated document for blocking issues (placeholder text, `⚠️ Not answered` fields, broken image paths) and non-blocking issues (oversized tables, sections lacking narrative, terminology inconsistencies). Blocking issues trigger a fix/mark/abort choice. Non-blocking issues appear in a `## Publication Quality Notes` section.
+- **Rewrite Pass (5c):** AI-assisted pass adds brief narrative introductions to sections that open with a table, transition sentences between back-to-back sections, and standardises inconsistent terminology. Each insertion is tagged `<!-- ai-inserted -->`. Executive Mode (`--executive`) runs blocking checks only; skips the rewrite pass.
+
+**`/ea-review` action (f) — per-artifact quality check:** Scans the open artifact against publish-quality.md rules and reports table sizes, placeholder text, broken images, and narrative gaps scoped to that artifact. Each finding can be added as a review comment with one keystroke.
+
+**`/ea-consistency --quality`:** Engagement-wide quality scan across all artifacts. Aggregates findings by artifact with ⚠️/ℹ️/✅ severity markers. Combinable with `--report` for inline output.
+
+---
+
+### 5.31 Direction Statement Quality (v0.9.37)
+
+Quality rules for all 9 direction item types defined in `skills/ea-engagement-lifecycle/references/grill-direction-quality.md`. Applied at three touchpoints:
+
+**Four concern categories:**
+- **Miscategorization** — detects items entered in the wrong bucket (e.g. a measurable time-bound statement as a Goal instead of an Objective, a course-of-action statement as a Goal instead of a Strategy)
+- **Missing evidence** — Drivers, Issues, and Problems must cite supporting evidence; flagged if the evidence field is empty
+- **Isolated items** — items with no links to other direction elements (orphan Goals, unlinked Strategies, etc.)
+- **Ambiguous phrasing** — vague or generic statements ("Improve performance", "Enhance customer experience") flagged as Advisory
+
+**`/ea-direction --quality`:** Engagement-wide scan across all parsed direction items; groups findings by severity (⚠️ Warning / ℹ️ Advisory / ✅ clean); offers jump to revision or grill.
+
+**`/ea-grill --skill direction`:** Interactive deep review of direction items in any artifact; each item type has dedicated challenge questions; added to Architecture Vision recommended skill note.
+
+**`/ea-interview start engagement` — Part 3 inline challenge:** After each direction item is captured during the Motivation part, the interviewer applies quality rules inline: miscategorization is challenged immediately with a reclassification offer; missing evidence prompts for a citation; ambiguous phrasing is flagged. Items declined for revision are noted with a `⚠️ Quality flag` tag. At the end of Part 3, a **Direction Quality Summary** is presented before proceeding to Part 4, with option to revisit flagged items.
 
 **Integration points:**
 - `ea-interviewer` — `d:` shortcut triggers 5-factor assessment inline during any interview; advanced decision quality check (post-A3 logging) runs the same assessment for Strategic/High-cost/High-risk decisions
