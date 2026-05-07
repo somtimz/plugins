@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.30
+**Version:** 0.9.34
 **Status:** Current
 **Author:** Costa Pissaris
 

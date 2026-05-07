@@ -94,7 +94,8 @@ You have existing engagements. Common next steps:
 | `/ea-research [mode]` | Research library — add, note, link, list, view, apply findings to artifacts |
 | `/ea-next` | Suggest the single most valuable next action for the active engagement |
 | `/ea-notes [mode]` | List, view, edit, or delete interview notes, brainstorm notes, and review files |
-| `/ea-consistency [options]` | Focused consistency check — cross-artifact contradictions, within-artifact section inconsistencies, or ID reference scan only (`--ids`) |
+| `/ea-detail new\|view\|list\|sync` | Create, view, list, or sync optional item detail files — extended narrative, rationale, risks, costs, issues, concerns, impact, and alternatives for individual engagement items |
+| `/ea-consistency [options]` | Focused consistency check — cross-artifact contradictions, within-artifact section inconsistencies, or ID reference scan only (`--ids`); `--details` validates detail file link integrity and A4 sync |
 | `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman |
 | `/ea-security-review` | Security audit — SABSA, ISO 27001, and NIST CSF 2.0 coverage across the engagement or a single artifact |
 | `/ea-reorganize [--report]` | Move flat-path artifacts into correct phase subfolders; update engagement.json paths |
