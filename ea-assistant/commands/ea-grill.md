@@ -34,7 +34,7 @@ If `--skill` was provided, use that skill. Otherwise, recommend a skill based on
 
 | Artifact | Recommended Skill | Reason |
 |---|---|---|
-| Architecture Vision | `grill-me-boardroom-strategy` | Needs strategic depth + board pressure + pre-mortem — the most comprehensive review |
+| Architecture Vision | `grill-me-boardroom-strategy` | Needs strategic depth + board pressure + pre-mortem — the most comprehensive review. For direction-only quality review (categorization, phrasing, evidence, isolation), use `--skill direction` |
 | Statement of Architecture Work | `grill-me-decision` | A formal commitment — review as a decision memo |
 | Architecture Principles | `grill-me-stress-test` | Each principle needs to survive assumption testing |
 | Business Architecture | `grill-me-design` | Reviews for user needs, incentives, edge cases, and unintended consequences |
@@ -51,7 +51,7 @@ If `--skill` was provided, use that skill. Otherwise, recommend a skill based on
 | Decision Register | `grill-me-decision` | Reviews whether decisions are defensible, owned, and governed |
 | Business Model Canvas | `grill-me-boardroom-strategy` | Needs full strategic + commercial + execution review |
 
-**Advanced mode overrides:** If the engagement is at L3+ maturity, the user may request an advanced review. When `--skill practitioner`, `--skill maturity`, `--skill failure-mode`, or `--skill requirements` is specified, bypass the default recommendation and use the requested skill.
+**Advanced mode overrides:** If the engagement is at L3+ maturity, the user may request an advanced review. When `--skill practitioner`, `--skill maturity`, `--skill failure-mode`, `--skill requirements`, or `--skill direction` is specified, bypass the default recommendation and use the requested skill.
 
 Confirm the skill with the user before proceeding, and offer the full list as alternatives.
 The `--skill` argument accepts these short names (mapped to the full `grill-me-*` skill IDs):
@@ -71,6 +71,7 @@ The `--skill` argument accepts these short names (mapped to the full `grill-me-*
 | `maturity` | `grill-me-maturity` | Maturity assessment: evaluates artifact against L1–L5 model and suggests advancement steps |
 | `failure-mode` | `grill-me-failure-mode` | Failure-mode pre-mortem: detects symptoms of the 6 failure modes and suggests fixes |
 | `requirements` | `grill-me-requirements` | Requirements quality: NFR coverage scorecard, measurability, traceability, consistency, feasibility — load from `skills/ea-engagement-lifecycle/references/grill-requirements-skill.md` |
+| `direction` | `grill-direction-quality` | Direction item quality: categorization correctness, phrasing quality, evidence rigour, isolation — load from `skills/ea-engagement-lifecycle/references/grill-direction-quality.md` |
 
 ---
 
@@ -188,6 +189,7 @@ When the review is complete (or the user types `done` or `finish`), produce the 
 - **maturity** → current maturity level (L1–L5), gap analysis vs next level, specific advancement actions, blockers to progress
 - **failure-mode** → failure mode symptom scan (6 modes), root cause analysis for any detected, prevention recommendations, proceed/pause/redesign verdict
 - **requirements** → NFR coverage scorecard (9 categories × covered/no target/missing), traceability gap list, top 5 quality findings, proceed/pause/rework verdict
+- **direction** → quality scan per direction item: categorization flags, missing evidence, isolation warnings, phrasing advisories, summary counts (warnings / advisories / clean)
 
 Offer to save the output as a review note:
 ```

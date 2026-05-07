@@ -1,6 +1,10 @@
 {
   "name": "ea-assistant",
-  "version": "0.9.36",
+<<<<<<< HEAD
+  "version": "0.9.37",
+=======
+  "version": "0.9.37",
+>>>>>>> 1394146 (feat(ea-assistant): direction statement quality — categorization, phrasing, evidence, isolation (v0.9.37))
   "description": "End-to-end Enterprise Architecture engagement management — TOGAF 10 ADM lifecycle, Zachman classification, ArchiMate notation. Architecture landscape levels (Strategic/Segment/Capability/Solution), structured phase interviews, artifact generation, motivation framework, Decision Register, ADR management, ARB meeting minutes, workshop facilitation, Risk Register, EA tool import (Sparx XMI, Archi, LeanIX), engagement brief, and consolidated reporting.",
   "author": {
     "name": "Costa Pissaris",
