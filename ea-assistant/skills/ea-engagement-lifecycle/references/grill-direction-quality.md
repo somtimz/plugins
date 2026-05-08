@@ -80,6 +80,7 @@ Direction Quality: {ID} — {item type}
 | WHERE, not HOW | Statement describes a course of action ("Adopt…", "Invest in…", "Partner with…", "Migrate to…") | Warning — Miscategorization (likely a Strategy) |
 | Not vague | Statement is generic with no qualifying context ("Improve performance", "Enhance customer experience", "Be more agile") | Advisory — Ambiguous |
 | Links to at least one driver | `drivers` field is empty | Warning — Isolated |
+| **Two Layers** — subject is governance / EA capability stated as business goal | Statement describes "governance process", "architecture standard", "review board", "reference architecture", or "how we design solutions" without the `EA` prefix | Warning — Miscategorization (likely an EA-layer item, not a Business Goal) |
 
 **Categorization guide:** A Goal describes WHERE the organisation wants to be — a qualitative destination with no built-in deadline. If it is measurable with a specific target and deadline → it is an Objective. If it describes a course of action chosen to reach a destination → it is a Strategy.
 
@@ -87,6 +88,7 @@ Direction Quality: {ID} — {item type}
 - "Is this a destination or a path? 'Become a data-driven organisation' is a destination. 'Adopt a data platform' is a path."
 - "Could this goal exist without any specific technology or approach? If removing the technology mention makes it meaningless, it may be a Strategy."
 - "What driver motivates this goal? If there is no driver, what forces this to be a priority now?"
+- **Two Layers test:** "Would this still exist if the EA team were disbanded? If yes → it's a Business Goal. If no → it's an EA Goal (e.g., 'Establish AI governance' is an EA capability, not a business outcome)."
 
 ---
 

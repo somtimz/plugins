@@ -208,6 +208,17 @@ For each question in order:
    Apply the Cross-Topic Detection rules (see section below). If a signal is detected, present the flag and handle the response. After handling, continue immediately to step 8.
 
 7c. **Concept-check** (applies to Answered answers only):
+
+   **7c-1. Two Layers check:**
+   If the answer describes a subject that belongs in the **EA / TOGAF layer** (governance, standards, review boards, reference architectures, architecture processes) but is being captured in a **business-layer artifact or field** (e.g., Business Architecture Use Case, Business Goal), OR vice versa (a business operation captured as an EA capability), pause and prompt:
+   > ⚠️ **Two Layers signal:** What you've described sounds like it belongs in the **{correct layer}** rather than the **{current layer}**. See `skills/ea-artifact-templates/references/ea-concepts.md` → **Two Layers of Intent: Business Change vs EA Enablement** for the distinction.
+   > **Quick test:** Would this still exist if the EA team were disbanded? If **yes** → it's Business Architecture. If **no** → it's EA / TOGAF.
+   > **1.** Reclassify this as **{correct layer}** (e.g., `EA Capability Use Case` or `Business Use Case`)
+   > **2.** Record it as stated
+   > *(Press Enter to continue as-is.)*
+   Reclassify if the user selects 1 (ask which concept applies); otherwise proceed.
+
+   **7c-2. Generic concept check:**
    If the answer uses an EA concept where another is clearly meant (e.g., a strategy stated as a principle, a goal stated as a plan), pause and prompt:
    > 💡 **Concept check:** What you've described sounds more like a **{correct concept}** than a **{used concept}**. See `skills/ea-artifact-templates/references/ea-concepts.md` for the distinction.
    > **Maturity marker:** At L1, this confusion is common; at L3+, concepts are used precisely because they link to traceability chains and governance. See `ea-concepts.md` → **Practitioner Notes** for `{correct concept}` to understand how elite practitioners apply it.

@@ -430,6 +430,7 @@ A goal is a qualitative statement of a desired future state. It describes *where
 - Not an **Objective** — an objective is the measurable, time-bound version of a goal ("achieve 99.9% uptime by Q3 2026"); a goal is its qualitative parent
 - Not a **Strategy** — a strategy says how to pursue a goal, not what the goal is
 - Not a **Principle** — a principle governs decisions; a goal defines a destination
+- Not an **EA Goal** — an EA Goal describes architecture capability outcomes (e.g., "Establish AI governance" or "Define architecture standards"), not business outcomes. See **Two Layers of Intent**.
 
 **Common confusions:**
 - "We want 99.9% uptime" — the number makes this an **Objective**, not a goal. The goal is "Achieve highly reliable platform operations"; the objective is the measurable target
@@ -939,6 +940,7 @@ A Use Case is a discrete goal pursued by a specific actor (user, system, or exte
 - Not a **User Story** — a user story is a lightweight placeholder ("As a X, I want Y so that Z"); a use case is a structured analysis artifact with flows and exceptions
 - Not a **Value Stream** — a value stream is end-to-end stakeholder delivery; a use case is a discrete actor goal
 - Not a **Requirement** — a requirement is a formalised need ("the system must..."); a use case is the scenario that generates the requirement
+- Not an **EA Capability Use Case** — a use case about "how we govern" or "how we standardize solutions" (e.g., "Define governance process for AI projects") belongs in the Governance Framework or Architecture Principles, not the Business Architecture. See **Two Layers of Intent**.
 
 **Common confusions:**
 - "Customer places an order" — this is a **Use Case** ✓ (actor goal, discrete, consumes processes)

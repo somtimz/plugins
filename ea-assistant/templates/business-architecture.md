@@ -54,6 +54,7 @@ Phase B takes Architecture Vision as its primary input.
 - Link capabilities directly to **KPIs and revenue/cost drivers** — business architecture is a compression function that turns ambiguity into constraints. (Deep tactic #14)
 - Focus on **"where to play" and "how to win"** — not just process diagrams. (Deep tactic #15)
 - Gaps are **opportunities disguised as problems** — frame them as investments, not deficiencies. (Tip #18)
+- **Two Layers check** — ensure Use Cases, Requirements, and Goals in this artifact describe *business operations* (what the business does), not *EA governance* (how architecture is governed). If a Use Case subject is "governance process," "review board," or "standard," it belongs in the EA / TOGAF layer (Governance Framework, Architecture Principles) — not here. See `ea-concepts.md` → **Two Layers of Intent**.
 
 </details>
 
@@ -212,6 +213,8 @@ A use case captures what an actor needs to accomplish, not how the system implem
 - **Main Success Scenario** — one sentence summarising the normal path to success. Detailed step-by-step flows belong in functional specifications, not here.
 - **Capabilities Used** — links to CAP-NNN entries. Any use case with no covering capability is a capability gap; flag it in §7.
 - **Requirements generation** — every use case must generate at least one REQ-NNN requirement. A use case with no requirements is a modeling gap — flag it.
+
+**⚠️ Two Layers check:** If the use case subject is "how we govern" or "how we standardize solutions" (e.g., "Define governance process for AI projects") rather than "what the actor needs" (e.g., "Auto-triage cases with AI"), it is an **EA Capability Use Case** — route it to the Governance Framework or Architecture Principles, not the Business Architecture. See `ea-concepts.md` → **Two Layers of Intent**.
 
 Assign UC-NNN IDs sequentially. These IDs are referenced in the Application Architecture (§1a) to trace which application components support each use case.
 

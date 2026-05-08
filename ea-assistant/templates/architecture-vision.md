@@ -53,6 +53,7 @@ Collapsible guidance blocks (📋 Guidance) are for the author only and collapse
 - **Define success metrics before moving to Phase B** — what must be true for this vision to be considered valid? (Deep tactic #10)
 - **Validate the vision with real delivery constraints** — skills, vendors, legacy — before asking for funding. (Deep tactic #8)
 - Use **"strategic tension"** (current vs desired state) to drive urgency — quantify the gap in economic terms. (Deep tactic #6)
+- **Two Layers check** — Goals and Objectives in this artifact should describe *business outcomes* (what the organisation wants to achieve). If a goal subject is "architecture governance," "EA capability," or "standardisation process," it belongs in the EA / TOGAF layer — reclassify as an EA Goal or move to Governance Framework. See `ea-concepts.md` → **Two Layers of Intent**.
 
 </details>
 
@@ -111,6 +112,8 @@ Force: Opportunity / Threat / Mandate.
 Goals are broad, qualitative outcomes the strategy is intended to achieve. They answer "where do
 we want to be?" Each goal should trace to one or more business drivers — the forces that made
 this goal necessary. Goals are the primary anchor for Issues (the barriers that threaten them).
+
+**⚠️ Two Layers check:** A goal about "Establish AI governance" or "Define architecture standards" is an **EA Goal** (EA layer), not a Business Goal. Apply the quick test: *Would this still exist if the EA team were disbanded?* If no → it belongs in the Governance Framework or Architecture Principles. See `ea-concepts.md` → **Two Layers of Intent**.
 
 </details>
 

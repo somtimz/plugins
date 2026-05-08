@@ -33,8 +33,8 @@ const BRAINSTORM_DATA = {
 // ─── Default Categories ────────────────────────────────────────────────────────
 
 const DEFAULT_CATEGORIES = [
-  { id: "concerns",      label: "Concerns",        emoji: "⚠️", hint: "Risks, worries, unknowns" },
-  { id: "goals",         label: "Goals & Vision",   emoji: "🎯", hint: "Desired outcomes, strategic intent" },
+  { id: "concerns",      label: "Concerns",        emoji: "⚠️", hint: "Risks, worries, unknowns — include layer-mixing concerns (business vs EA governance goals getting confused)" },
+  { id: "goals",         label: "Goals & Vision",   emoji: "🎯", hint: "Desired outcomes, strategic intent — apply the 'Two Layers' test: would this still exist without the EA team?" },
   { id: "constraints",   label: "Constraints",      emoji: "🔒", hint: "Budget, time, tech, or organisational limits" },
   { id: "opportunities", label: "Opportunities",    emoji: "💡", hint: "Potential wins, improvements, innovations" },
   { id: "assumptions",   label: "Assumptions",      emoji: "🔮", hint: "Things taken as true without confirmation" },

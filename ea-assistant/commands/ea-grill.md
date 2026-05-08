@@ -119,6 +119,13 @@ For example:
 - If reviewing a Migration Plan and Wave 1 has no rollback procedure, ask directly about that gap.
 - If reviewing an Architecture Principles artifact and a principle lacks an Implications section, probe whether the team understands the practical consequences.
 
+**Two Layers challenge (for Business Architecture, Architecture Vision, Requirements Register, and Stakeholder Map):**
+When grilling an artifact that captures business-layer concepts, actively check for mixed-layer content:
+- If a Business Architecture Use Case describes a "governance process," "review board," or "architecture standard," challenge: *"This subject is EA / TOGAF governance — it would disappear if the EA team were disbanded. Should this be an EA Capability Use Case in the Governance Framework instead?"*
+- If an Architecture Vision Goal is about "establishing EA governance," "defining architecture standards," or "building EA capability," challenge: *"This is an EA Goal — it belongs in the Governance Framework or Architecture Principles, not the business strategy. Is this a business outcome or an EA enabler?"*
+- If a Requirements Register requirement's subject is governance, standard, or EA process, challenge: *"Is this a Business Requirement (what the business needs) or an Architecture Requirement (how EA governs solutions)?"*
+Reference `ea-concepts.md` → **Two Layers of Intent** for the naming conventions and quick test.
+
 Follow the selected skill's interviewing protocol exactly: one question at a time, with the question framing, recommended answer, and what a board member / critic / red-teamer would worry about.
 
 **During Q&A — do NOT propose specific text edits or artifact changes.** Your role here is to challenge, probe, and record findings. After each user answer: acknowledge it, push back on weaknesses, note the finding internally, then ask the next question. All proposed revisions are batched and presented in Step 7 with `y/n/edit` confirmation per revision.

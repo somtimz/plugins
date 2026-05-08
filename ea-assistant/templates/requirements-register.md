@@ -47,6 +47,8 @@ Enterprise requirements are prefixed with 🔒 to indicate read-only content.
 Non-functional requirements (NFRs) should have a populated NFR Sub-Type and Measurable Target.
 Use /ea-interview start phase requirements to run a guided NFR discovery session.
 
+**⚠️ Two Layers check:** Distinguish `Business Requirements` (what the business needs to achieve, e.g., "Reduce case-handling time by 40%") from `Architecture Requirements` (how the EA function governs solution design, e.g., "All AI models must pass bias audit"). The Requirements Register primarily holds **Business Requirements**; Architecture Requirements belong in the Governance Framework or Architecture Principles. See `ea-concepts.md` → **Two Layers of Intent**.
+
 </details>
 
 # Architecture Requirements Register

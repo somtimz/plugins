@@ -29,7 +29,9 @@ Used by `ea-interviewer` at step 7b (Text mode) and before routing in Phase Inte
 |---|---|
 | Architecture Principles | Technology product/vendor names, version numbers → Technology Architecture; specific process descriptions → Business Architecture; "must…" / "shall…" statements → Requirements Register; risk language ("we might fail…") → Architecture Vision |
 | Architecture Vision | Specific technology platform names → Technology Architecture; detailed process steps → Business Architecture; data entity names or schemas → Data Architecture; delivery timelines, waves, or phased rollout → Architecture Roadmap |
+| Architecture Vision | EA-layer signals (governance process, architecture standard, review board, reference architecture, model validation framework) → Architecture Principles or Governance Framework (EA layer); see **Two Layers signal** below |
 | Business Architecture | Specific application or system names → Application Architecture; data entity definitions or schemas → Data Architecture; cloud or infrastructure decisions → Technology Architecture; regulatory/compliance requirements → Requirements Register |
+| Business Architecture | EA-layer signals (governance, standard, review board, reference architecture, architecture process, approval workflow for solutions) → Governance Framework or Architecture Principles (EA layer); see **Two Layers signal** below |
 | Data Architecture | Specific application or system names → Application Architecture; infrastructure or platform choices → Technology Architecture; data governance policies stated as binding rules → Architecture Principles |
 | Application Architecture | Infrastructure or platform choices → Technology Architecture; data modelling or entity definitions → Data Architecture; integration standards stated as binding rules → Architecture Principles |
 | Technology Architecture | Business process or capability descriptions → Business Architecture; data entity or model descriptions → Data Architecture; governance rules stated as principles → Architecture Principles |
@@ -47,9 +49,12 @@ Used by `ea-interviewer` at step 7b (Text mode) and before routing in Phase Inte
 - **Requirement:** "must…", "shall…", "the system needs to…", "compliance requires…", "regulatory requirement"
 - **Risk:** "we might…", "if X fails…", "the risk is…", likelihood/impact language ("high likelihood", "critical impact")
 - **Direction:** goal/objective/strategy language during a non-Vision/non-direction interview ("our goal is…", "our strategy is…", "we want to achieve…")
+- **Two Layers (EA-layer):** "governance process", "architecture standard", "reference architecture", "review board", "approval workflow", "model validation", "compliance framework" — when captured in a business-layer artifact (Business Architecture, Business Model Canvas, Stakeholder Map) → Governance Framework, Architecture Principles, or Implementation Governance Plan
+- **Two Layers (Business-layer):** "customer journey", "revenue stream", "order-to-cash", "case management", "customer onboarding" — when captured in an EA-layer artifact (Architecture Principles, Governance Framework, Compliance Assessment) → Business Architecture or Business Model Canvas
 
 ## Do NOT Flag
 
 - Direction items (goals/objectives/strategies) during Phase A or Phase B interviews — these are expected content for those phases
 - General contextual statements not attributable to a specific artifact field
 - Answers to questions that explicitly ask for cross-domain context (e.g., a constraints question in Architecture Vision that legitimately invites technology references)
+- Answers to questions that explicitly ask for governance, standards, or EA capability context (e.g., a "Governance Framework" or "Architecture Principles" question that legitimately invites EA-layer content)

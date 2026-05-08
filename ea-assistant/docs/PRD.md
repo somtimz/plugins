@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.40
+**Version:** 0.9.41
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -717,6 +717,22 @@ A validated Mermaid diagram inserted into the `## Two Layers of Intent` section 
 - **Cross-layer dotted edges:** Business Goals informed by Principles; Projects governed by EA Capability Use Cases; Implementations comply with Architecture Requirements; Governance Processes enforce Projects; Architecture Decisions guide Implementations.
 
 **Purpose:** Makes the artifact-type separation immediately visual for stakeholders and interviewers.
+
+### 5.35 Two Layers Integration — Cross-Artifact, Interview, Grill, and Brainstorm (v0.9.41)
+
+The Two Layers of Intent distinction (business change vs EA enablement) is now woven into every touchpoint where concepts are captured or reviewed.
+
+**Updated files:**
+- `agents/ea-interviewer.md` — Step 7c-1 adds an explicit **Two Layers check** before the generic concept check. Detects when an answer describes an EA-layer subject (governance, standard, review board, reference architecture) but is being captured in a business-layer artifact/field, or vice versa. Surfaces the "Would this still exist without the EA team?" quick test and offers reclassification.
+- `skills/ea-artifact-templates/references/cross-topic-detection.md` — New signal categories: **Two Layers (EA-layer)** detects governance/standard/review-board content in business-layer artifacts and routes to Governance Framework or Architecture Principles; **Two Layers (Business-layer)** detects customer journey/revenue stream content in EA-layer artifacts and routes to Business Architecture. Added to Signal Map and Signal Detection Cues.
+- `skills/ea-artifact-templates/references/phase-interview-questions.md` — Phase A Goals question and Phase B Use Cases question each include a **Layer test** that flags EA-layer subjects masquerading as business concepts.
+- `skills/ea-engagement-lifecycle/references/grill-direction-quality.md` — Direction quality scan now includes a **Two Layers** categorization warning and a **Two Layers test** probe question.
+- `skills/ea-interview-ui/references/brainstorm-app.jsx` — Brainstorm category hints updated: "Concerns" now flags layer-mixing concerns; "Goals & Vision" prompts the Two Layers test.
+- `commands/ea-grill.md` — New **Two Layers challenge** paragraph in Step 5: when grilling Business Architecture, Architecture Vision, Requirements Register, or Stakeholder Map, explicitly challenge mixed-layer content (e.g., "governance process" labeled as a Business Use Case).
+- `templates/business-architecture.md` — Practitioner Tip and Use Case Catalog guidance both include Two Layers checks.
+- `templates/architecture-vision.md` — Practitioner Tip and Goals guidance both include Two Layers checks.
+- `templates/requirements-register.md` — Guidance section includes Two Layers check for distinguishing Business Requirements from Architecture Requirements.
+- `templates/seeds/brainstorm-notes.md` — New **Two Layers of Intent — Brainstorm Prompt** section with the quick test and layer separation instructions.
 
 ---
 
