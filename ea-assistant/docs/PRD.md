@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.39
+**Version:** 0.9.40
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -705,6 +705,18 @@ New canonical section in `ea-concepts.md` that distinguishes **business architec
 **Disambiguation Checklist updated:** New step 0 — tests whether the subject belongs in the EA/TOGAF layer before applying concept-level tests.
 
 **Common Confusions table updated:** Two new rows covering the "Define governance process for AI projects" vs "Automate case management with AI" ambiguity.
+
+### 5.34 Mermaid Diagram — Business vs EA Artifact Separation (v0.9.40)
+
+A validated Mermaid diagram inserted into the `## Two Layers of Intent` section of `ea-concepts.md` between the Structural Model prose and the Naming Conventions table. The diagram renders three subgraphs (Business Architecture, Solution / Initiative, EA / TOGAF) with solid intra-domain arrows and dotted cross-cutting governance/enablement arrows, plus color-coded styling.
+
+**Diagram content:**
+- **Business Architecture** subgraph — Vision/Mission → Goals & Objectives → Capabilities → Value Streams & Processes → Business Use Cases → Business Requirements
+- **Solution / Initiative** subgraph — Projects & Epics → Solution Implementations
+- **EA / TOGAF** subgraph — Architecture Principles → Standards & Reference Architectures → EA Capability Use Cases → Architecture Requirements → Governance Processes → Architecture Decisions
+- **Cross-layer dotted edges:** Business Goals informed by Principles; Projects governed by EA Capability Use Cases; Implementations comply with Architecture Requirements; Governance Processes enforce Projects; Architecture Decisions guide Implementations.
+
+**Purpose:** Makes the artifact-type separation immediately visual for stakeholders and interviewers.
 
 ---
 

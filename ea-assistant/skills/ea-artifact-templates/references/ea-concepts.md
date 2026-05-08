@@ -113,6 +113,63 @@ Layer 4 — EA / TOGAF (cross-cutting)
 - **EA artifacts** describe the rules, standards, and governance mechanisms that ensure solution initiatives conform to architecture direction.
 - The two layers are **linked, not competing:** a Business Goal drives a solution initiative, which is then **governed by** an EA Use Case or Architecture Requirement.
 
+### Visual Model
+
+The diagram below shows the three domains (Business Architecture, Solution / Initiative, EA / TOGAF) and how they relate. Solid arrows show flow within a domain; dotted arrows show cross-cutting governance and enablement relationships.
+
+```mermaid
+graph TB
+    subgraph Business["Business Architecture — Change"]
+        direction TB
+        B1[Vision / Mission]
+        B2[Goals & Objectives]
+        B3[Business Capabilities]
+        B4[Value Streams & Processes]
+        B5[Business Use Cases]
+        B6[Business Requirements]
+    end
+
+    subgraph Solution["Solution / Initiative"]
+        direction TB
+        S1[Projects & Epics]
+        S2[Solution Implementations]
+    end
+
+    subgraph EA["EA / TOGAF — Control & Enablement"]
+        direction TB
+        E1[Architecture Principles]
+        E2[Standards & Reference Architectures]
+        E3[EA Capability Use Cases]
+        E4[Architecture Requirements]
+        E5[Governance Processes]
+        E6[Architecture Decisions]
+    end
+
+    B1 --> B2
+    B2 --> B3
+    B3 --> B4
+    B4 --> B5
+    B5 --> B6
+    B6 --> S1
+    S1 --> S2
+
+    E1 --> E2
+    E2 --> E3
+    E3 --> E4
+    E4 --> E5
+    E5 --> E6
+
+    B2 -.->|informed by| E1
+    S1 -.->|governed by| E3
+    S2 -.->|complies with| E4
+    E5 -.->|enforces| S1
+    E6 -.->|guides| S2
+
+    style Business fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    style Solution fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    style EA fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+```
+
 ### Naming Conventions
 
 Use explicit prefixes to remove ambiguity. Both layers should still use the unified ID scheme (G-NNN, UC-NNN, REQ-NNN, etc.) — the prefix is for human readability in artifact titles and tables.
