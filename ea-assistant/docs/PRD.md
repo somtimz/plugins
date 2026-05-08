@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.38
+**Version:** 0.9.39
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -122,25 +122,25 @@ Vision, Mission, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Proble
 
 **Disambiguation summary:**
 
-| Concept | Qualitative or Measurable | Time-bound | Owns a mitigation | Links to |
-|---|---|---|---|---|
-| Vision | Aspirational (future state) | No | No | Inspires Mission and Drivers |
-| Mission | Declarative (present purpose) | No | No | Bounds Drivers and Goals |
-| Principle | Rule (non-negotiable) | No | No | Architecture decisions |
-| Goal | Qualitative | No | No | Drivers |
-| Objective | Measurable | Yes | No | Goals |
-| Strategy | Directional | No | No | Goals (STR-NNN) |
-| Plan | Ordered action set | Yes | No | Strategies |
-| Issue | Qualitative (systemic barrier) | No | Yes (action plan) | Goals (threatens) |
-| Problem | Specific symptom | No | Yes (requirement) | Objectives (blocks) |
-| Risk | Potential future event | No | Yes (mitigation) | Goals or Objectives |
-| Capability Model | What the org does | No | No | Informed by Objectives and Strategies; exercises Value Streams; shapes Operating Model |
-| Capability Gap | Missing/immature capability | No | Yes (work package) | Prevents Goals; triggers Gap Analysis and Phase E WPs |
-| Value Stream | End-to-end value delivery | No | No | Composed of Business Processes; exercises Capabilities; links to Goals |
-| Business Process | Structured activity flow | No | No | Component of Value Streams; exercises Capabilities; generates Requirements |
-| Use Case | Actor goal + scenario | No | No | Consumes Processes; generates Requirements; links to Capabilities |
-| Operating Model | How the org functions | No | No | Shaped by Capability Model; measured by Metrics |
-| Metrics | Quantifiable measure (leading/lagging) | Yes (target + deadline) | No | Validates Objectives; surfaces new Issues and Problems |
+| Concept          | Qualitative or Measurable              | Time-bound              | Owns a mitigation  | Links to                                                                               |
+| ---------------- | -------------------------------------- | ----------------------- | ------------------ | -------------------------------------------------------------------------------------- |
+| Vision           | Aspirational (future state)            | No                      | No                 | Inspires Mission and Drivers                                                           |
+| Mission          | Declarative (present purpose)          | No                      | No                 | Bounds Drivers and Goals                                                               |
+| Principle        | Rule (non-negotiable)                  | No                      | No                 | Architecture decisions                                                                 |
+| Goal             | Qualitative                            | No                      | No                 | Drivers                                                                                |
+| Objective        | Measurable                             | Yes                     | No                 | Goals                                                                                  |
+| Strategy         | Directional                            | No                      | No                 | Goals (STR-NNN)                                                                        |
+| Plan             | Ordered action set                     | Yes                     | No                 | Strategies                                                                             |
+| Issue            | Qualitative (systemic barrier)         | No                      | Yes (action plan)  | Goals (threatens)                                                                      |
+| Problem          | Specific symptom                       | No                      | Yes (requirement)  | Objectives (blocks)                                                                    |
+| Risk             | Potential future event                 | No                      | Yes (mitigation)   | Goals or Objectives                                                                    |
+| Capability Model | What the org does                      | No                      | No                 | Informed by Objectives and Strategies; exercises Value Streams; shapes Operating Model |
+| Capability Gap   | Missing/immature capability            | No                      | Yes (work package) | Prevents Goals; triggers Gap Analysis and Phase E WPs                                  |
+| Value Stream     | End-to-end value delivery              | No                      | No                 | Composed of Business Processes; exercises Capabilities; links to Goals                 |
+| Business Process | Structured activity flow               | No                      | No                 | Component of Value Streams; exercises Capabilities; generates Requirements             |
+| Use Case         | Actor goal + scenario                  | No                      | No                 | Consumes Processes; generates Requirements; links to Capabilities                      |
+| Operating Model  | How the org functions                  | No                      | No                 | Shaped by Capability Model; measured by Metrics                                        |
+| Metrics          | Quantifiable measure (leading/lagging) | Yes (target + deadline) | No                 | Validates Objectives; surfaces new Issues and Problems                                 |
 
 ---
 
@@ -162,19 +162,19 @@ Vision, Mission, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Proble
 - Non-linear navigation — jump to any phase at any time
 - **Phase applicability** is determined by engagement type and domain selection at creation time:
 
-| Phase | Greenfield | Brownfield | Assessment-only | Migration |
-|---|---|---|---|---|
-| Prelim | Required | Required | Required | Required |
-| Requirements | Required | Required | Required | Required |
-| A — Architecture Vision | Required | Required | Required | Required |
-| B — Business Architecture | Required | Required | Optional | Required |
-| C — Data Architecture | Domain† | Domain† | Optional | Domain† |
-| C — Application Architecture | Domain† | Domain† | Optional | Domain† |
-| D — Technology Architecture | Domain† | Domain† | Optional | Domain† |
-| E — Opportunities & Solutions | Required | Required | Not Applicable | Required |
-| F — Migration Planning | Optional | Required | Not Applicable | Required |
-| G — Implementation Governance | Required | Required | Not Applicable | Required |
-| H — Architecture Change Mgmt | Optional | Required | Not Applicable | Optional |
+| Phase                         | Greenfield | Brownfield | Assessment-only | Migration |
+| ----------------------------- | ---------- | ---------- | --------------- | --------- |
+| Prelim                        | Required   | Required   | Required        | Required  |
+| Requirements                  | Required   | Required   | Required        | Required  |
+| A — Architecture Vision       | Required   | Required   | Required        | Required  |
+| B — Business Architecture     | Required   | Required   | Optional        | Required  |
+| C — Data Architecture         | Domain†    | Domain†    | Optional        | Domain†   |
+| C — Application Architecture  | Domain†    | Domain†    | Optional        | Domain†   |
+| D — Technology Architecture   | Domain†    | Domain†    | Optional        | Domain†   |
+| E — Opportunities & Solutions | Required   | Required   | Not Applicable  | Required  |
+| F — Migration Planning        | Optional   | Required   | Not Applicable  | Required  |
+| G — Implementation Governance | Required   | Required   | Not Applicable  | Required  |
+| H — Architecture Change Mgmt  | Optional   | Required   | Not Applicable  | Optional  |
 
 † *Domain-dependent*: phase is Required if the corresponding domain (Data / Application / Technology) was selected; Not Applicable if not selected.
 
@@ -197,33 +197,33 @@ Artifacts are populated from interview answers, uploaded documents, or explicit 
 
 **25 TOGAF artifact templates:**
 
-| Artifact | Phase | A3 | A4 | A5 |
-|---|---|---|---|---|
-| Architecture Principles | Prelim | — | — | — |
-| Engagement Charter | Prelim | — | — | ✓ |
-| Governance Framework | Prelim | — | — | ✓ |
-| Requirements Register (with Motivation field) | Requirements | — | — | ✓ |
-| Traceability Matrix | Requirements | — | — | — |
-| Architecture Vision (15 sections) | A | ✓ | ✓ | ✓ |
-| Statement of Architecture Work | A | ✓ | — | ✓ |
-| Stakeholder Map | A | — | — | — |
-| Business Architecture | B | ✓ | ✓ | ✓ |
-| Business Model Canvas | B | — | — | — |
-| Data Architecture | C-Data | ✓ | ✓ | ✓ |
-| Application Architecture | C-App | ✓ | ✓ | ✓ |
-| Technology Architecture | D | ✓ | ✓ | ✓ |
-| Gap Analysis | B–D | — | — | ✓ |
-| Architecture Roadmap (Strategic Alignment + per-WP goal/strategy links) | E | ✓ | — | ✓ |
-| Migration Plan | F | — | — | ✓ |
-| Architecture Contract | G | ✓ | — | — |
-| Implementation Governance Plan | G | — | — | ✓ |
-| Compliance Assessment | G | — | — | ✓ |
-| Risk Register | Cross-cutting | — | — | — |
-| Architecture Decision Record | Cross-cutting | — | — | — |
-| Pending Architecture Decision (PAD) | Cross-cutting | — | — | — |
-| ADR Register | Cross-cutting | — | — | — |
-| Zachman Diagram | Cross-cutting | — | — | ✓ |
-| Role Catalogue | A / Cross-cutting | — | — | — |
+| Artifact                                                                | Phase             | A3  | A4  | A5  |
+| ----------------------------------------------------------------------- | ----------------- | --- | --- | --- |
+| Architecture Principles                                                 | Prelim            | —   | —   | —   |
+| Engagement Charter                                                      | Prelim            | —   | —   | ✓   |
+| Governance Framework                                                    | Prelim            | —   | —   | ✓   |
+| Requirements Register (with Motivation field)                           | Requirements      | —   | —   | ✓   |
+| Traceability Matrix                                                     | Requirements      | —   | —   | —   |
+| Architecture Vision (15 sections)                                       | A                 | ✓   | ✓   | ✓   |
+| Statement of Architecture Work                                          | A                 | ✓   | —   | ✓   |
+| Stakeholder Map                                                         | A                 | —   | —   | —   |
+| Business Architecture                                                   | B                 | ✓   | ✓   | ✓   |
+| Business Model Canvas                                                   | B                 | —   | —   | —   |
+| Data Architecture                                                       | C-Data            | ✓   | ✓   | ✓   |
+| Application Architecture                                                | C-App             | ✓   | ✓   | ✓   |
+| Technology Architecture                                                 | D                 | ✓   | ✓   | ✓   |
+| Gap Analysis                                                            | B–D               | —   | —   | ✓   |
+| Architecture Roadmap (Strategic Alignment + per-WP goal/strategy links) | E                 | ✓   | —   | ✓   |
+| Migration Plan                                                          | F                 | —   | —   | ✓   |
+| Architecture Contract                                                   | G                 | ✓   | —   | —   |
+| Implementation Governance Plan                                          | G                 | —   | —   | ✓   |
+| Compliance Assessment                                                   | G                 | —   | —   | ✓   |
+| Risk Register                                                           | Cross-cutting     | —   | —   | —   |
+| Architecture Decision Record                                            | Cross-cutting     | —   | —   | —   |
+| Pending Architecture Decision (PAD)                                     | Cross-cutting     | —   | —   | —   |
+| ADR Register                                                            | Cross-cutting     | —   | —   | —   |
+| Zachman Diagram                                                         | Cross-cutting     | —   | —   | ✓   |
+| Role Catalogue                                                          | A / Cross-cutting | —   | —   | —   |
 
 **Appendix columns:** A3 = Decision Log; A4 = Stakeholder Concerns & Objections; A5 = Related Architecture Decisions
 
@@ -250,24 +250,24 @@ Artifacts are populated from interview answers, uploaded documents, or explicit 
 
 Controlled via `.claude/ea-assistant.local.md` in the working directory:
 
-| Setting | Options | Default | Effect |
-|---|---|---|---|
-| `facilitatorStyle` | `patient` / `direct` / `executive` | `patient` | Tone, pacing, acknowledgement, section pauses |
-| `audienceLevel` | `executive` / `architect` / `technical` / `mixed` | `mixed` | Terminology depth and TOGAF jargon level |
-| `requireConfirmBeforeRecord` | `true` / `false` | `false` | Confirm before writing each answer to artifact |
-| `researchPrompts` | `true` / `false` | `true` | Show `@research-agent` prompts on drivers/risks/assumptions |
-| `sessionSummary` | `true` / `false` | `true` | End-of-session topic/theme summary |
+| Setting                      | Options                                           | Default   | Effect                                                      |
+| ---------------------------- | ------------------------------------------------- | --------- | ----------------------------------------------------------- |
+| `facilitatorStyle`           | `patient` / `direct` / `executive`                | `patient` | Tone, pacing, acknowledgement, section pauses               |
+| `audienceLevel`              | `executive` / `architect` / `technical` / `mixed` | `mixed`   | Terminology depth and TOGAF jargon level                    |
+| `requireConfirmBeforeRecord` | `true` / `false`                                  | `false`   | Confirm before writing each answer to artifact              |
+| `researchPrompts`            | `true` / `false`                                  | `true`    | Show `@research-agent` prompts on drivers/risks/assumptions |
+| `sessionSummary`             | `true` / `false`                                  | `true`    | End-of-session topic/theme summary                          |
 
 **Style behaviour:**
 
-| | `patient` | `direct` | `executive` |
-|---|---|---|---|
-| Preamble | One sentence why question matters | Question only | Business-outcome framing |
-| Acknowledgement | Brief and warm | None | None |
-| Short answer | One gentle probe | Accept as-is | Accept as-is |
-| Examples | Proactive | On request | On request |
-| Transitions | "Anything else?" pause | None | Checkpoint every 5–7 Qs |
-| Jargon | TOGAF with gloss | Full TOGAF | Business language only |
+|                 | `patient`                         | `direct`      | `executive`              |
+| --------------- | --------------------------------- | ------------- | ------------------------ |
+| Preamble        | One sentence why question matters | Question only | Business-outcome framing |
+| Acknowledgement | Brief and warm                    | None          | None                     |
+| Short answer    | One gentle probe                  | Accept as-is  | Accept as-is             |
+| Examples        | Proactive                         | On request    | On request               |
+| Transitions     | "Anything else?" pause            | None          | Checkpoint every 5–7 Qs  |
+| Jargon          | TOGAF with gloss                  | Full TOGAF    | Business language only   |
 
 **Precedence:** When `facilitatorStyle` and `audienceLevel` conflict (e.g., `executive` style with `technical` audience), `audienceLevel` governs terminology depth and `facilitatorStyle` governs pacing and tone. The practitioner is responsible for setting a coherent combination.
 
@@ -279,14 +279,14 @@ Decisions captured during interviews are logged in **Appendix A3 Decision Log** 
 
 **Governance states and semantics:**
 
-| State | Meaning | Who sets it |
-|---|---|---|
-| `Provisional` | Decision recorded but not yet reviewed | Interviewer (automatic on A3 log) |
-| `Awaiting` | Under review; stakeholder confirmation or governance vote pending | EA Practitioner |
-| `Verified` | Confirmed correct by the responsible architect; no formal vote required | EA Practitioner |
-| `Voted` | Approved by a formal governance body or quorum | Sponsor / governance body |
-| `Fiat` | Accepted by executive authority without formal vote; sponsor directive | Sponsor |
-| `Returned` | Sent back for rework; reason must be recorded | Reviewer |
+| State         | Meaning                                                                 | Who sets it                       |
+| ------------- | ----------------------------------------------------------------------- | --------------------------------- |
+| `Provisional` | Decision recorded but not yet reviewed                                  | Interviewer (automatic on A3 log) |
+| `Awaiting`    | Under review; stakeholder confirmation or governance vote pending       | EA Practitioner                   |
+| `Verified`    | Confirmed correct by the responsible architect; no formal vote required | EA Practitioner                   |
+| `Voted`       | Approved by a formal governance body or quorum                          | Sponsor / governance body         |
+| `Fiat`        | Accepted by executive authority without formal vote; sponsor directive  | Sponsor                           |
+| `Returned`    | Sent back for rework; reason must be recorded                           | Reviewer                          |
 
 **Transition path:** Provisional may move directly to Verified, Voted, or Fiat when no formal review step is needed. Awaiting is an optional holding state used when stakeholder confirmation or a governance vote is pending before resolution. Returned sends the decision back to Provisional; a reason must be recorded.
 
@@ -334,20 +334,20 @@ Each A3 decision row may have a rationale detail block written directly below th
 
 **Grill skill routing (auto-selection):**
 
-| Artifact type | Default skill |
-|---|---|
-| Architecture Vision, Strategy | stress-test |
-| Architecture Roadmap, Migration Plan | premortem |
-| Architecture Principles, Decisions | decision |
-| Business Architecture, BMC | design |
-| Application Architecture | software-design |
-| Technology Architecture, Infra | infra-design |
-| Any structured document | artifact |
-| Any diagram | diagram |
-| Executive presentation | boardroom-strategy |
-| Any artifact (L3+ engagement) | practitioner — economic framing, decision quality, optionality audit |
-| Any artifact (maturity check) | maturity — L1–L5 assessment with advancement steps |
-| Any artifact (pre-mortem) | failure-mode — symptom scan against 6 failure modes |
+| Artifact type                        | Default skill                                                        |
+| ------------------------------------ | -------------------------------------------------------------------- |
+| Architecture Vision, Strategy        | stress-test                                                          |
+| Architecture Roadmap, Migration Plan | premortem                                                            |
+| Architecture Principles, Decisions   | decision                                                             |
+| Business Architecture, BMC           | design                                                               |
+| Application Architecture             | software-design                                                      |
+| Technology Architecture, Infra       | infra-design                                                         |
+| Any structured document              | artifact                                                             |
+| Any diagram                          | diagram                                                              |
+| Executive presentation               | boardroom-strategy                                                   |
+| Any artifact (L3+ engagement)        | practitioner — economic framing, decision quality, optionality audit |
+| Any artifact (maturity check)        | maturity — L1–L5 assessment with advancement steps                   |
+| Any artifact (pre-mortem)            | failure-mode — symptom scan against 6 failure modes                  |
 
 ### 5.9 Advanced Practitioner Content (v0.9.29)
 
@@ -394,11 +394,11 @@ A comprehensive body of advanced TOGAF practitioner guidance is now integrated a
 
 The `ea-roadmap` agent creates and manages the Architecture Roadmap artifact (Phase E/F). It auto-selects one of three modes based on what exists in the engagement:
 
-| Mode | Triggers when | Behaviour |
-|---|---|---|
-| **Review** | `artifacts/architecture-roadmap.md` exists | Checks completeness, traceability (GAP/REQ refs), wave/dependency logic; presents issues for fix |
-| **Artifact-informed** | Source artifacts exist, no roadmap yet | Reads Architecture Vision (G/OBJ/STR), Gap Analysis, Requirements Register → builds goal/strategy coverage register → derives candidate WPs → elicits wave/effort/owner → writes artifact |
-| **Clean-slate** | No artifacts at all | 7-question elicitation sequence (horizon → waves → WPs → plateaus → prioritisation) → writes artifact |
+| Mode                  | Triggers when                              | Behaviour                                                                                                                                                                                 |
+| --------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Review**            | `artifacts/architecture-roadmap.md` exists | Checks completeness, traceability (GAP/REQ refs), wave/dependency logic; presents issues for fix                                                                                          |
+| **Artifact-informed** | Source artifacts exist, no roadmap yet     | Reads Architecture Vision (G/OBJ/STR), Gap Analysis, Requirements Register → builds goal/strategy coverage register → derives candidate WPs → elicits wave/effort/owner → writes artifact |
+| **Clean-slate**       | No artifacts at all                        | 7-question elicitation sequence (horizon → waves → WPs → plateaus → prioritisation) → writes artifact                                                                                     |
 
 In artifact-informed mode, **every candidate work package is anchored to at least one Goal (G-NNN), Objective (OBJ-NNN), or Strategy (STR-NNN)** from the Architecture Vision before any WP is confirmed. Goals and Strategies with no covering WP are flagged as coverage gaps. This alignment is recorded in the Strategic Alignment section of the roadmap template and in the `Advances Goals/Objectives` and `Executes Strategies` fields of each WP.
 
@@ -688,6 +688,23 @@ G-NNN / STR-NNN ──► CAP-NNN ──► VS-NNN ──► Process ──► U
 **Business Architecture template updated:** New §8a Traceability Summary section with explicit chain guidance; enhanced guidance notes in §3 Capabilities, §3a Value Streams, and §4a Use Case Catalog with orphan/gap flagging rules.
 
 **Brainstorm pad updated:** Domain-specific category cards for Business Architecture (Value Streams, Use Cases, Processes), Data Architecture (Conceptual Data Model, Logical Data Model), and Technology Architecture (Platforms, Languages, Infrastructure, Network).
+
+### 5.33 Two Layers of Intent: Business Change vs EA Enablement (v0.9.39)
+
+New canonical section in `ea-concepts.md` that distinguishes **business architecture concepts** (what the business wants to achieve) from **EA/TOGAF program concepts** (how the EA function governs and enables that change). Addresses a common source of miscategorization where both layers use identical vocabulary (Goal, Use Case, Requirement) but describe different subjects.
+
+**New content:**
+- **Core distinction table** — Business Architecture = change; EA/TOGAF = control
+- **Structural model** — four-layer stack with EA sitting cross-cutting across the stack, not inside the business layer
+- **Naming conventions** — explicit prefixes (`Business Use Case`, `EA Capability Use Case`, `Architecture Requirement`) to remove ambiguity while retaining unified ID scheme
+- **Quick test** — "Would this still exist without the EA team?" to disambiguate any item
+- **Worked example** — AI in case management, cleanly separated into business layer (auto-triage, accuracy thresholds) and EA layer (governance process, model validation standards)
+- **Relationship mapping table** — how Business Goals drive solution initiatives that are governed by EA Capability Use Cases
+- **When to surface** — guidance for Phase A interviews, Phase B Business Architecture, `/ea-direction --quality`, and `/ea-grill`
+
+**Disambiguation Checklist updated:** New step 0 — tests whether the subject belongs in the EA/TOGAF layer before applying concept-level tests.
+
+**Common Confusions table updated:** Two new rows covering the "Define governance process for AI projects" vs "Automate case management with AI" ambiguity.
 
 ---
 
