@@ -67,7 +67,7 @@ Sponsor: {sponsor}  ·  {today's date}
 {Top 1–2 objectives — OBJ-NNN: {measurable target, deadline if present}}
 {Top 1–2 strategies — STR-NNN: {approach}}
 
-If direction is empty: ⚠️ No direction captured yet — run `/ea-interview` Phase A or `/ea-direction`.
+If direction is empty: ⚠️ No direction captured yet — run `/ea-interview` Phase A or `/ea-status --direction`.
 
 ---
 

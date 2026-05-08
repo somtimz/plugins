@@ -52,7 +52,7 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
      > {drafted summary}
      > Accept? (y / edit / skip)
      Apply or skip per user response. Only offer if the artifact has a `## Executive Summary` section.
-   - Ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-next.md` and output the recommendation.
+   - Ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-status.md (the --next flag section)` and output the recommendation.
 
 ---
 
@@ -103,7 +103,7 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
    - Update target artifacts with confirmed answers (per output routing)
    - Update `lastModified` in `engagement.json`
    - **Refresh Executive Summaries:** For each updated artifact that has a `## Executive Summary` section, draft a fresh 3–5 sentence executive summary and present: `Accept? (y / edit / skip)`. Apply per user response.
-   - Ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-next.md` and output the recommendation.
+   - Ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-status.md (the --next flag section)` and output the recommendation.
 
 ---
 
@@ -136,7 +136,7 @@ Capture the full engagement direction in one cross-phase session before any TOGA
    - **Miscategorization detected:** Challenge directly — "This reads more like a {correct type} than a {entered type}. A {entered type} should {defining characteristic}. Would you like to reclassify it, or keep it as entered?"
    - **Missing evidence (Driver, Issue, Problem):** Prompt — "This item needs supporting evidence. Can you cite a source, metric, or document?" If the user skips, note the item with `⚠️ Evidence pending` in the interview notes.
    - **Ambiguous phrasing (Advisory):** Prompt — "This statement could mean different things. Could you be more specific about '{vague element}'?" If the user declines, note `ℹ️ Phrasing advisory` in the interview notes.
-   - **Isolated item:** Inform — "This item has no linked {goals/drivers/objectives} yet. You can add links now or address this in `/ea-direction --quality` after the session."
+   - **Isolated item:** Inform — "This item has no linked {goals/drivers/objectives} yet. You can add links now or address this in `/ea-status --direction --quality` after the session."
    - Do **not** block progress — if the user declines to revise any item, accept it and continue. Flag it for the Direction Quality Summary below.
 
    **Direction Quality Summary — end of Part 3:** After all Part 3 items are captured, before moving to Part 4, present:
@@ -155,7 +155,7 @@ Capture the full engagement direction in one cross-phase session before any TOGA
 
    ✅ {N} items are well-formed.
 
-   These will appear in /ea-direction --quality. Continue to Part 4? (y / revisit flagged items)
+   These will appear in /ea-status --direction --quality. Continue to Part 4? (y / revisit flagged items)
    ```
    If "revisit flagged items" is chosen: step through each flagged item one at a time and allow the user to revise or accept it as-is.
 

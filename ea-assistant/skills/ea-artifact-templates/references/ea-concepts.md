@@ -117,58 +117,74 @@ Layer 4 — EA / TOGAF (cross-cutting)
 
 The diagram below shows the three domains (Business Architecture, Solution / Initiative, EA / TOGAF) and how they relate. Solid arrows show flow within a domain; dotted arrows show cross-cutting governance and enablement relationships.
 
+![[Pasted image 20260508120316.png]]
+
+Here's the Mermaid version.
+
 ```mermaid
-graph TB
-    subgraph Business["Business Architecture — Change"]
-        direction TB
-        B1[Vision / Mission]
-        B2[Goals & Objectives]
-        B3[Business Capabilities]
-        B4[Value Streams & Processes]
-        B5[Business Use Cases]
-        B6[Business Requirements]
+flowchart TD
+    subgraph L1["🔷 LAYER 1 — STRATEGY"]
+        direction LR
+        STR_D["📌 Strategic Driver"]:::strategy
+        STR_G["🎯 Strategic Goal"]:::strategy
+        STR_P["📐 Architecture Principle"]:::strategy
+        STR_D --> STR_G --> STR_P
     end
 
-    subgraph Solution["Solution / Initiative"]
-        direction TB
-        S1[Projects & Epics]
-        S2[Solution Implementations]
+    subgraph L2["🟢 LAYER 2 — BUSINESS ARCHITECTURE · Prefix: BIZ-"]
+        direction LR
+        BIZ_UC["Business Use Case"]:::biz
+        BIZ_CAP["Business Capability"]:::biz
+        BIZ_REQ["Business Requirement"]:::biz
+        BIZ_PROC["Business Process"]:::biz
+        BIZ_KPI["KPI / Metric"]:::biz
+        BIZ_STK["Stakeholder Map"]:::biz
     end
 
-    subgraph EA["EA / TOGAF — Control & Enablement"]
-        direction TB
-        E1[Architecture Principles]
-        E2[Standards & Reference Architectures]
-        E3[EA Capability Use Cases]
-        E4[Architecture Requirements]
-        E5[Governance Processes]
-        E6[Architecture Decisions]
+    subgraph L3["🟠 LAYER 3 — EA / TOGAF PROGRAM · Prefix: EA-"]
+        direction LR
+        EA_UC["EA Use Case"]:::ea
+        EA_REF["Reference Architecture"]:::ea
+        EA_AREQ["Architecture Requirement"]:::ea
+        EA_GOV["Governance Standard"]:::ea
+        EA_ADR["ADR (Decision Record)"]:::ea
+        EA_COMP["Compliance Checklist"]:::ea
     end
 
-    B1 --> B2
-    B2 --> B3
-    B3 --> B4
-    B4 --> B5
-    B5 --> B6
-    B6 --> S1
-    S1 --> S2
+    subgraph L4["🟣 LAYER 4 — SOLUTION / INITIATIVE · Prefix: SOL-"]
+        direction LR
+        SOL_INIT["Initiative / Project"]:::sol
+        SOL_ARCH["Solution Architecture"]:::sol
+        SOL_GAP["Gap Analysis"]:::sol
+        SOL_ROAD["Roadmap Item"]:::sol
+    end
 
-    E1 --> E2
-    E2 --> E3
-    E3 --> E4
-    E4 --> E5
-    E5 --> E6
+    subgraph TRACE["🔍 Traceability Example — AI Case Management"]
+        direction LR
+        T1["STR-001\nEfficiency"]:::strategy
+        T2["BIZ-UC-01\nAutomate"]:::biz
+        T3["SOL-001\nAI CMS"]:::sol
+        T4["EA-GOV-03\nAI Gov"]:::ea
+        T5["BIZ-REQ-07\nAccuracy"]:::biz
+        T6["EA-STD-05\nModel Audit"]:::ea
+        T7["SOL-001\nAI CMS"]:::sol
+        T1 --> T2 --> T3 --> T4
+        T5 --> T6 --> T7
+    end
 
-    B2 -.->|informed by| E1
-    S1 -.->|governed by| E3
-    S2 -.->|complies with| E4
-    E5 -.->|enforces| S1
-    E6 -.->|guides| S2
+    L1 -->|"feeds"| L2
+    L1 -->|"feeds"| L3
+    L2 -. "governs" .-> L3
+    L2 -->|"converges into"| L4
+    L3 -->|"converges into"| L4
+    L4 -->|"traced via"| TRACE
 
-    style Business fill:#e1f5fe,stroke:#01579b,stroke-width:2px
-    style Solution fill:#fff3e0,stroke:#e65100,stroke-width:2px
-    style EA fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef strategy fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a,font-weight:bold
+    classDef biz fill:#d1fae5,stroke:#10b981,color:#064e3b,font-weight:bold
+    classDef ea fill:#ffedd5,stroke:#f97316,color:#7c2d12,font-weight:bold
+    classDef sol fill:#ede9fe,stroke:#8b5cf6,color:#3b0764,font-weight:bold
 ```
+
 
 ### Naming Conventions
 

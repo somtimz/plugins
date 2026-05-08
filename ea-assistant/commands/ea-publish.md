@@ -351,7 +351,7 @@ Build the document using this structure:
 
 For each artifact:
 - Extract the content of the `## Executive Summary` section (everything between the `## Executive Summary` heading and the next `##` heading or `---`).
-- If no `## Executive Summary` section exists: substitute `*No executive summary available for this artifact. Run \`/ea-summary refresh {artifact-name}\` to add one.*`
+- If no `## Executive Summary` section exists: substitute `*No executive summary available for this artifact. Run \`/ea-artifact summary refresh {artifact-name}\` to add one.*`
 - Include diagrams: if `diagrams[]` in frontmatter is non-empty, resolve the first path to an absolute path and include as `![{artifact-name} diagram]({absolute-path})`.
 
 **Step 6 — Write output:**

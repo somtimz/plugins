@@ -40,7 +40,7 @@ Read `skills/ea-engagement-lifecycle/references/migration-gap-catalogue.md` for 
 - 3a — engagement.json schema gaps
 - 3b — expected artifacts missing
 - 3c — artifact frontmatter gaps (taxonomy, templateVersion)
-- 3d — phase-organized artifact structure (**detection only** — file moves are handled by `/ea-reorganize`)
+- 3d — phase-organized artifact structure (**detection only** — file moves are handled by `/ea-migrate --reorganize`)
 - 3e — rules file and CLAUDE.md format gaps
 - 3f — artifact content gaps (Appendix A3/A4/A5)
 
@@ -83,7 +83,7 @@ Missing artifacts                {N gaps | ✅ None}
   GAP-M-010  [Medium] Engagement Charter not present (introduced v0.9.5)
 
 Phase structure gaps             {N gaps | ✅ None}
-  GAP-M-015  [Medium] {N} artifacts at flat paths — run /ea-reorganize to move them
+  GAP-M-015  [Medium] {N} artifacts at flat paths — run /ea-migrate --reorganize to move them
   GAP-M-016  [Low]    architecture-vision.md — relatedArtifacts/diagrams/links fields absent
 
 Artifact frontmatter gaps        {N gaps | ✅ None}
@@ -156,3 +156,75 @@ After all remediations are applied or skipped:
 1. Update `engagement.json`: set `pluginVersion` and `lastMigratedVersion` to current version; update `lastModified`
 2. For each modified artifact: update `templateVersion` to current version and `lastModified` to now
 3. Report applied / skipped / remaining counts; suggest re-running if gaps remain
+
+---
+
+## Flag: --reorganize [--report] [--auto]
+
+Move flat-path artifacts in the active engagement into their correct phase subfolders and update all `engagement.json` file paths to match. This flag does one thing only — file moves. It does not patch frontmatter, add appendices, or touch `engagement.json` fields other than the `file` path of each moved artifact.
+
+**This flag never moves a file without the user's explicit approval** (unless `--auto` is given).
+
+Additional flags:
+- `--report` — list what would be moved; make no changes
+- `--auto` — apply all moves without per-file confirmation (still announces each move)
+
+### Phase Folder Mapping
+
+| `phase:` frontmatter value | Target folder |
+|---|---|
+| `Preliminary`, `Prelim`, `prelim` | `preliminary/` |
+| `Requirements`, `requirements` | `requirements/` |
+| `A`, `Phase A`, `Architecture Vision` | `phase-a/` |
+| `B`, `Phase B`, `Business Architecture` | `phase-b/` |
+| `C-Data`, `Phase C Data`, `C Data`, `Data Architecture` | `phase-c-data/` |
+| `C-App`, `Phase C App`, `C App`, `Application Architecture` | `phase-c-app/` |
+| `D`, `Phase D`, `Technology Architecture` | `phase-d/` |
+| `E`, `Phase E`, `B-D` | `phase-e/` |
+| `F`, `Phase F` | `phase-f/` |
+| `G`, `Phase G` | `phase-g/` |
+| `H`, `Phase H` | `phase-h/` |
+| `Cross-cutting`, `cross-cutting`, `Cross Cutting` | `cross-cutting/` |
+
+### Reorganize Steps
+
+1. **Resolve active engagement.** Check context for active slug; if none, scan `EA-projects/*/engagement.json` and ask. Read `engagement.json` and extract `name`, `slug`, and `artifacts[]`.
+
+2. **Find flat-path artifacts.** Identify artifacts whose `file` path in `engagement.json` matches `artifacts/{artifact-id}.md` (no phase subfolder). For each: read the artifact file, extract the `phase:` frontmatter field, look up the target folder. If `phase:` does not match any row: mark as **unmappable**.
+
+3. **Produce the reorganization plan:**
+   ```
+   ════════════════════════════════════════════════════════════
+   REORGANIZE — {engagement name}
+   ════════════════════════════════════════════════════════════
+
+   Artifacts to move               {N | ✅ None — already organized}
+     architecture-vision.md        artifacts/ → artifacts/phase-a/
+     business-architecture.md      artifacts/ → artifacts/phase-b/
+
+   Unmappable (phase: value not recognized)
+     some-artifact.md              phase: "Unknown" — set correct phase: in frontmatter, then re-run
+   ════════════════════════════════════════════════════════════
+   ```
+   Stop here if `--report` was specified or if there are no moveable artifacts.
+
+4. **Confirm and move.** If `--auto` is not set, ask per artifact:
+   ```
+   Move artifacts/architecture-vision.md → artifacts/phase-a/architecture-vision.md ? (y / n / all / quit)
+   ```
+   - `y` — move this file
+   - `n` — skip this file
+   - `all` — move all remaining without further prompts
+   - `quit` — stop without making any further changes
+
+   For each approved move:
+   - Create the target phase subfolder if it does not exist
+   - Move the file: `mv EA-projects/{slug}/artifacts/{artifact-id}.md EA-projects/{slug}/artifacts/{phase-folder}/{artifact-id}.md`
+   - Update the `file` field in `engagement.json → artifacts[]` for this artifact to the new path
+
+5. **Finalise.** Update `engagement.json` `lastModified` to now. Print a summary:
+   ```
+   Moved:      {N} artifacts
+   Skipped:    {N} artifacts
+   Unmappable: {N} artifacts (set phase: frontmatter and re-run)
+   ```

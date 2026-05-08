@@ -14,7 +14,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 
 - **Multi-engagement management** — create, open, track, edit, archive, and delete EA projects with engagement type classification (Greenfield/Brownfield/Assessment-only/Migration)
 - **Full ADM lifecycle** — start, edit, or resume any TOGAF ADM phase (Prelim, A–H)
-- **Motivation framework** — structured Business Drivers (DRV), Goals (G), Objectives (OBJ), Issues (ISS), and Problems (PRB) with ID-based traceability chains in the Architecture Vision (15 sections including Strategic Direction Summary with Strategies and Key Metrics); `/ea-direction --quality` scans all direction items for miscategorization, missing evidence, isolated items, and ambiguous phrasing; `/ea-grill --skill direction` runs an interactive direction quality review; inline quality challenge during engagement interviews flags and summarises issues before proceeding
+- **Motivation framework** — structured Business Drivers (DRV), Goals (G), Objectives (OBJ), Issues (ISS), and Problems (PRB) with ID-based traceability chains in the Architecture Vision (15 sections including Strategic Direction Summary with Strategies and Key Metrics); `/ea-status --direction --quality` scans all direction items for miscategorization, missing evidence, isolated items, and ambiguous phrasing; `/ea-grill --skill direction` runs an interactive direction quality review; inline quality challenge during engagement interviews flags and summarises issues before proceeding
 - **Business Model Canvas** — Phase B BMC template (9 building blocks) with 27-question interview bank and linkage table to Business Architecture elements
 - **Architecture Requirements** — manage requirements with Enterprise (read-only, waiveable) and Program (editable) scope distinction; NFR sub-type classification (9 ISO/IEC 25010 categories: Availability, Reliability, Performance, Security, Usability, Maintainability, Portability, Compatibility, Recoverability) with measurable target fields; Motivation field links each requirement to its driver, issue, problem, goal, or objective; `/ea-grill --skill requirements` produces NFR coverage scorecard and traceability gap list
 - **Artifact generation** — all TOGAF artifacts from templates, guided by interviews
@@ -131,13 +131,12 @@ uiMode: html
 |---|---|
 | `/ea-new` | Create a new EA engagement with guided setup, engagement type selection, domain scoping, and Preliminary phase scaffolding |
 | `/ea-open` | Open an engagement with full details, edit metadata/phases/artifacts, archive or delete |
-| `/ea-status` | Portfolio dashboard with type, domains, phase progress, artifact counts, opt-outs, and non-standard artifact flags |
+| `/ea-status` | Portfolio dashboard with type, domains, phase progress, artifact counts, opt-outs, and non-standard artifact flags; `--next` for next action; `--direction` for Direction Register |
 | `/ea-phase [phase]` | Start, edit, or resume an ADM phase |
-| `/ea-artifact [action]` | Create, view, or list artifacts; runs compliance check on view |
+| `/ea-artifact [action]` | Create, view, or list artifacts; runs compliance check on view; `summary [refresh\|status]` for executive summary management |
 | `/ea-brainstorm [phase]` | Capture freeform thoughts and context before or during interviews |
 | `/ea-interview [mode]` | Start or resume a stakeholder interview (artifact or phase mode; Text/Web/Display) |
 | `/ea-generate [artifact] [format]` | Export as docx, pptx, mermaid, png, or svg; diagrams embedded in docx/pptx by default |
-| `/ea-next` | Suggest the single most valuable next action based on current phase and artifact status |
 | `/ea-notes [mode]` | List, view, edit, or delete interview notes, brainstorm notes, and review files |
 | `/ea-review [artifact]` | Open an artifact for review and assessment; runs compliance check on load |
 | `/ea-requirements [action]` | Manage architecture requirements |
@@ -152,8 +151,7 @@ uiMode: html
 | `/ea-consistency [options]` | Focused consistency check — cross-artifact contradictions, ID reference validation (`--ids`), or single-artifact within-section check (`artifact <id>`) |
 | `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman |
 | `/ea-security-review [<artifact-id>] [--framework sabsa\|iso\|nist]` | Security audit — SABSA layer coverage, ISO 27001:2022 domain alignment, NIST CSF 2.0 function analysis; full engagement by default |
-| `/ea-reorganize [--report]` | Move flat-path artifacts into their correct phase subfolders; update engagement.json paths |
-| `/ea-migrate [--report]` | Align a legacy engagement to the current plugin version conventions |
+| `/ea-migrate [--report\|--reorganize]` | Align a legacy engagement to the current plugin version conventions; `--reorganize` moves flat-path artifacts into correct phase subfolders |
 | `/ea-grill [artifact] [--skill]` | Deep-review an artifact using a grill-me skill; apply findings one revision at a time |
 | `/ea-publish` | Merge all artifacts into a consolidated document; compliance pre-check, opted-out and non-standard items flagged |
 | `/ea-config [section]` | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md |

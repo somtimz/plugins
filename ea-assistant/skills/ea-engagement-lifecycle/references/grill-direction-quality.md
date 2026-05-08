@@ -1,6 +1,6 @@
 # Direction Quality Rules
 
-Reference for `/ea-direction --quality`, `/ea-grill --skill direction`, and `/ea-interview` Part 3 inline challenge.
+Reference for `/ea-status --direction --quality`, `/ea-grill --skill direction`, and `/ea-interview` Part 3 inline challenge.
 
 Defines quality checks for all direction item types: categorization correctness, phrasing quality, evidence requirements, and isolation (missing links).
 
@@ -185,7 +185,7 @@ Direction Quality: {ID} — {item type}
 
 ---
 
-## Summary Format (used by /ea-direction --quality and interview Part 3)
+## Summary Format (used by /ea-status --direction --quality and interview Part 3)
 
 ```
 Direction Quality Scan — {engagement name or 'Part 3 capture'}

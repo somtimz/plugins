@@ -54,24 +54,26 @@ If `--skill` was provided, use that skill. Otherwise, recommend a skill based on
 **Advanced mode overrides:** If the engagement is at L3+ maturity, the user may request an advanced review. When `--skill practitioner`, `--skill maturity`, `--skill failure-mode`, `--skill requirements`, or `--skill direction` is specified, bypass the default recommendation and use the requested skill.
 
 Confirm the skill with the user before proceeding, and offer the full list as alternatives.
-The `--skill` argument accepts these short names (mapped to the full `grill-me-*` skill IDs):
+The `--skill` argument accepts these short names:
 
 | Short name | Skill ID | What it does |
 |---|---|---|
-| `stress-test` | `ea-assistant:grill-me-stress-test` | Tests assumptions, surfaces risks, forces execution realism |
-| `premortem` | `ea-assistant:grill-me-premortem` | Generate new risks (pre-mortem) or review an existing risk register |
-| `decision` | `ea-assistant:grill-me-decision` | Decision memo extractor: options, criteria, tradeoffs, recommendation, next steps |
-| `design` | `ea-assistant:grill-me-design` | Design critique: user needs, failure points, edge cases, incentives, scalability (service/UX/org) |
-| `software-design` | `ea-assistant:grill-me-software-design` | Software architecture: patterns, coupling, APIs, data models, testability, operational readiness |
-| `infra-design` | `ea-assistant:grill-me-infra-design` | Infrastructure: topology, resilience, blast radius, cost, security boundaries, observability |
-| `artifact` | `ea-assistant:grill-me-artifact` | Structured artifact review: section-by-section completeness, traceability chains, consistency |
-| `diagram` | `ea-assistant:grill-me-diagram` | Visual design review: topology, missing components, anti-patterns, readability |
-| `boardroom-strategy` | `ea-assistant:grill-me-boardroom-strategy` | Hybrid: strategic depth + board pressure + pre-mortem (most thorough) |
+| `stress-test` | `ea-assistant:ea-grill-skills` | Tests assumptions, surfaces risks, forces execution realism |
+| `premortem` | `ea-assistant:ea-grill-skills` | Generate new risks (pre-mortem) or review an existing risk register |
+| `decision` | `ea-assistant:ea-grill-skills` | Decision memo extractor: options, criteria, tradeoffs, recommendation, next steps |
+| `design` | `ea-assistant:ea-grill-skills` | Design critique: user needs, failure points, edge cases, incentives, scalability (service/UX/org) |
+| `software-design` | `ea-assistant:ea-grill-skills` | Software architecture: patterns, coupling, APIs, data models, testability, operational readiness |
+| `infra-design` | `ea-assistant:ea-grill-skills` | Infrastructure: topology, resilience, blast radius, cost, security boundaries, observability |
+| `artifact` | `ea-assistant:ea-grill-skills` | Structured artifact review: section-by-section completeness, traceability chains, consistency |
+| `diagram` | `ea-assistant:ea-grill-skills` | Visual design review: topology, missing components, anti-patterns, readability |
+| `boardroom-strategy` | `ea-assistant:ea-grill-skills` | Hybrid: strategic depth + board pressure + pre-mortem (most thorough) |
 | `practitioner` | `grill-me-practitioner` | Practitioner-level review: economic framing, decision quality, optionality, complexity reduction |
 | `maturity` | `grill-me-maturity` | Maturity assessment: evaluates artifact against L1–L5 model and suggests advancement steps |
 | `failure-mode` | `grill-me-failure-mode` | Failure-mode pre-mortem: detects symptoms of the 6 failure modes and suggests fixes |
 | `requirements` | `grill-me-requirements` | Requirements quality: NFR coverage scorecard, measurability, traceability, consistency, feasibility — load from `skills/ea-engagement-lifecycle/references/grill-requirements-skill.md` |
 | `direction` | `grill-direction-quality` | Direction item quality: categorization correctness, phrasing quality, evidence rigour, isolation — load from `skills/ea-engagement-lifecycle/references/grill-direction-quality.md` |
+
+For the 9 core skills (stress-test through boardroom-strategy): after loading `ea-assistant:ea-grill-skills`, locate and follow the `## Mode: {short-name}` section that matches the requested skill. Ignore all other mode sections.
 
 ---
 
@@ -388,7 +390,7 @@ Check whether the expected diagrams for this artifact type exist and are referen
 5. **For each ⚠️ Source only:** offer to render it:
    > "Found `architecture-vision-motivation-map.mmd` but no rendered image. Run `/ea-generate png` to produce a `.png` for export."
 
-After Step 8 is complete, ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-next.md` and output the recommendation.
+After Step 8 is complete, ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-status.md (the --next flag section)` and output the recommendation.
 
 ---
 

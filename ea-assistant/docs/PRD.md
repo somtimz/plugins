@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.42
+**Version:** 0.9.43
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -717,6 +717,22 @@ A validated Mermaid diagram inserted into the `## Two Layers of Intent` section 
 - **Cross-layer dotted edges:** Business Goals informed by Principles; Projects governed by EA Capability Use Cases; Implementations comply with Architecture Requirements; Governance Processes enforce Projects; Architecture Decisions guide Implementations.
 
 **Purpose:** Makes the artifact-type separation immediately visual for stakeholders and interviewers.
+
+### 5.37 Plugin Streamlining (v0.9.43)
+
+Reduced slash command and skill count while preserving all existing behaviour.
+
+**Skills: 18 → 10** — The 9 individual `grill-me-*` skill directories are replaced by a single `skills/ea-grill-skills/SKILL.md` containing all 9 modes as named sections. `/ea-grill` loads the consolidated skill and jumps to the matching `## Mode:` section.
+
+**Commands: 35 → 31** — Four thin commands folded into existing hubs:
+- `ea-next` → `ea-status --next` (next-action algorithm now a flag on the dashboard command)
+- `ea-direction` → `ea-status --direction` (Direction Register now a flag on the dashboard command)
+- `ea-summary` → `ea-artifact summary` (executive summary management now a subcommand of the artifact hub)
+- `ea-reorganize` → `ea-migrate --reorganize` (file-move utility now a flag on the migration command)
+
+All cross-references in commands and skill reference files updated to use the new entry points.
+
+---
 
 ### 5.36 Bundled Grill-Me Skills (v0.9.42)
 
