@@ -14,6 +14,11 @@ lastModified: {{YYYY-MM-DD}}
   Fill in the sections that are relevant — not all sections apply to every item type.
   Sections left as placeholders will remain as-is; they do not block the engagement.
   Use /ea-detail view {ID} to open and /ea-detail new {ID} to create for a new item.
+
+  Item-type guidance:
+  - For CAP-NNN: include capability maturity rationale and value stream coverage (which VS-NNN exercises this capability).
+  - For VS-NNN: include trigger-to-outcome flow and capability exercise map (which CAP-NNN are exercised at each step).
+  - For UC-NNN: include actor analysis, process consumption trace, and requirement generation trace (which REQ-NNN were generated).
 -->
 
 # {{ID}}: {{item_title}}

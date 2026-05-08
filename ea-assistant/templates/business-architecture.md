@@ -5,7 +5,7 @@ phase: B
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-templateVersion: 0.9.5
+templateVersion: 0.9.6
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   domain: Business
@@ -130,6 +130,8 @@ Define capabilities using a three-level hierarchy. Each capability gets a CAP-NN
 **Supports column:** link each capability to the STR-NNN strategy or G-NNN goal it enables.
 A capability with no strategic anchor should be flagged for removal or reclassification.
 
+**A capability with no value stream exercising it is an orphan — flag it.** Every capability should be traceable to at least one value stream or one use case.
+
 </details>
 
 | CAP-NNN | Level | Capability | Description | Current Maturity | Target Maturity | Supports (STR-NNN / G-NNN) | Details |
@@ -152,6 +154,7 @@ Populate this section before detailing processes in §4 — value streams provid
 - Every value stream must have a named trigger (what initiates it) and a named end outcome (what the stakeholder receives).
 - Map each value stream to the capabilities it exercises — this reveals which capabilities are strategically load-bearing.
 - Any step in a value stream with no covering capability is a capability gap — flag it for §7 Gap Analysis.
+- Any value stream with no linked Goal or Strategy is an orphan — flag it.
 
 </details>
 
@@ -208,6 +211,7 @@ A use case captures what an actor needs to accomplish, not how the system implem
 - **Goal** is the outcome the actor wants — stated from the actor's perspective.
 - **Main Success Scenario** — one sentence summarising the normal path to success. Detailed step-by-step flows belong in functional specifications, not here.
 - **Capabilities Used** — links to CAP-NNN entries. Any use case with no covering capability is a capability gap; flag it in §7.
+- **Requirements generation** — every use case must generate at least one REQ-NNN requirement. A use case with no requirements is a modeling gap — flag it.
 
 Assign UC-NNN IDs sequentially. These IDs are referenced in the Application Architecture (§1a) to trace which application components support each use case.
 
@@ -279,6 +283,29 @@ List requirements from the Requirements Register that this artifact addresses.
 | Req ID | Requirement | How Addressed |
 |---|---|---|
 | {{req_id}} | {{requirement}} | {{how}} |
+
+---
+
+## 8a. Traceability Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+The Business Architecture is the bridge between strategic intent and execution. Every element in this artifact must trace forward to requirements and backward to direction. Use this summary to validate completeness:
+
+- **Every CAP-NNN** links to at least one G-NNN or STR-NNN (via the Supports column). A capability with no strategic anchor is an orphan.
+- **Every VS-NNN** exercises CAP-NNN capabilities and links to G-NNN/STR-NNN (via the Strategic Link column). A value stream with no linked Goal or Strategy is an orphan.
+- **Every Business Process** contributes to a VS-NNN value stream. A process with no parent value stream is an orphan.
+- **Every UC-NNN** consumes processes and generates REQ-NNN requirements. A use case with no requirements is a modeling gap.
+- **Every REQ-NNN** traces back through UC/CAP/VS to G-NNN/OBJ-NNN. A requirement with no upstream trace is an orphan.
+
+```
+G-NNN / STR-NNN ──► CAP-NNN ──► VS-NNN ──► Process ──► UC-NNN ──► REQ-NNN
+```
+
+Flag any orphan or gap in §7 Gap Analysis.
+
+</details>
 
 ---
 

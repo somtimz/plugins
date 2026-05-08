@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.37
+**Version:** 0.9.38
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -65,8 +65,25 @@ Problems (PRB) ──blocks──► Objectives (OBJ)
                         Capability Model          ◄── Capability Gap (prevents Goals)
                        (What the org does)
                                 │
-                            shapes
+                           exercises
                                 ▼
+                         Value Streams
+                    (End-to-end value delivery)
+                                │
+                            composed of
+                                ▼
+                         Business Processes
+                                │
+                         enables / consumed by
+                                ▼
+                          Use Cases
+                    (Actor goals supported)
+                                │
+                           generates
+                                ▼
+                     Requirements Register
+                    (traces to ALL layers above)
+                                ▲
                          Operating Model
                        (How the org functions)
                                 │
@@ -77,11 +94,6 @@ Problems (PRB) ──blocks──► Objectives (OBJ)
                  surfaces    identifies    evaluates
                      ▼            ▼             ▼
                 New Issues   New Problems   Cap. Maturity
-                                │
-                             defines
-                                ▼
-                     Requirements Register
-                    (traces to ALL layers above)
 ```
 
 - **Vision** — long-term aspirational destination (3–5 years); the "North Star" all Drivers and Strategies must align with
@@ -93,6 +105,9 @@ Problems (PRB) ──blocks──► Objectives (OBJ)
 - **Problems** — specific, observable symptoms that *block* objectives
 - **Strategies** — chosen approaches for achieving goals; recorded in §7 Strategic Direction Summary of the Architecture Vision (STR-NNN)
 - **Capability Model** — stable, hierarchical map of what the organisation must be able to do (people + process + info + tools), independent of org structure; informed by Objectives and Strategies
+- **Value Stream** — end-to-end chain of activities delivering stakeholder value from trigger to outcome; composed of Business Processes, exercises Capabilities
+- **Business Process** — structured, repeatable set of activities with defined actors, inputs, outputs, and decision points; component of a Value Stream
+- **Use Case** — discrete goal pursued by a specific actor; consumes Business Processes, generates Requirements
 - **Capability Gap** — a missing or immature capability that prevents Goals; identified through Gap Analysis; triggers Phase E work packages
 - **Operating Model** — how the organisation functions to deliver value (process, information, technology, governance); shaped by the Capability Model; measured by Metrics
 - **Metrics** — specific, quantifiable measures (leading or lagging) that validate whether Strategies are working and Goals/Objectives are being achieved; close the feedback loop by surfacing new Issues and Problems when performance falls below threshold
@@ -101,9 +116,9 @@ Requirements Register entries carry a Motivation field that links each requireme
 
 > 📎 Source framework: `skills/ea-artifact-templates/references/ea-concepts-source.pdf` — *Enterprise Architecture Strategic Context: Terms, Concepts, and Relationship Models*
 
-### EA Concepts (13 total)
+### EA Concepts (16 total)
 
-Vision, Mission, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Problem, Capability Model, Operating Model, Metrics — each with a formal definition, TOGAF phase placement, ArchiMate 3.x element, and a disambiguation checklist. Full definitions in `skills/ea-artifact-templates/references/ea-concepts.md`.
+Vision, Mission, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Problem, Opportunity, Capability Model, Value Stream, Business Process, Use Case, Operating Model, Metrics — each with a formal definition, TOGAF phase placement, ArchiMate 3.x element, and a disambiguation checklist. Full definitions in `skills/ea-artifact-templates/references/ea-concepts.md`.
 
 **Disambiguation summary:**
 
@@ -119,8 +134,11 @@ Vision, Mission, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Proble
 | Issue | Qualitative (systemic barrier) | No | Yes (action plan) | Goals (threatens) |
 | Problem | Specific symptom | No | Yes (requirement) | Objectives (blocks) |
 | Risk | Potential future event | No | Yes (mitigation) | Goals or Objectives |
-| Capability Model | What the org does | No | No | Informed by Objectives and Strategies; shapes Operating Model |
+| Capability Model | What the org does | No | No | Informed by Objectives and Strategies; exercises Value Streams; shapes Operating Model |
 | Capability Gap | Missing/immature capability | No | Yes (work package) | Prevents Goals; triggers Gap Analysis and Phase E WPs |
+| Value Stream | End-to-end value delivery | No | No | Composed of Business Processes; exercises Capabilities; links to Goals |
+| Business Process | Structured activity flow | No | No | Component of Value Streams; exercises Capabilities; generates Requirements |
+| Use Case | Actor goal + scenario | No | No | Consumes Processes; generates Requirements; links to Capabilities |
 | Operating Model | How the org functions | No | No | Shaped by Capability Model; measured by Metrics |
 | Metrics | Quantifiable measure (leading/lagging) | Yes (target + deadline) | No | Validates Objectives; surfaces new Issues and Problems |
 
@@ -648,6 +666,28 @@ Quality rules for all 9 direction item types defined in `skills/ea-engagement-li
 - `phase-interview-questions.md` — `[DECISION]` quality questions added to all 10 phases probing evidence, optionality, reversibility, and political alignment
 - `compliance-check.md` — 5 new Tier 4 rules: T4-PREMAT (premature detection), T4-EVID (evidence quality), T4-POLIT (political alignment), T4-PAD (PAD hygiene), T4-WPEVID (work package evidence gating)
 - Artifact templates — ADR template includes Evidence Assessment, Decision Timing, and Political Alignment sections; Gap Analysis includes Gap-to-Decision Mapping and orphan gap flagging; Architecture Roadmap includes PAD Resolution Tracking and Evidence-Gated Prioritisation
+
+### 5.32 Formal Concept Definitions for Value Stream, Business Process, and Use Case (v0.9.38)
+
+Three business-architecture-specific concepts elevated to first-class formal concept status in the canonical concept reference (`ea-concepts.md`), with full definitions, traceability chains, and updated artifact templates.
+
+**New concept definitions:**
+- **Value Stream (VS-NNN)** — end-to-end chain of activities delivering stakeholder value from trigger to outcome; composed of Business Processes, exercises Capabilities, traces to Goals and Strategies
+- **Business Process** — structured, repeatable set of activities with defined actors, inputs, outputs, and decision points; component of a Value Stream
+- **Use Case (UC-NNN)** — discrete goal pursued by a specific actor; consumes Business Processes, generates Requirements
+
+**Traceability chain:**
+```
+G-NNN / STR-NNN ──► CAP-NNN ──► VS-NNN ──► Process ──► UC-NNN ──► REQ-NNN
+```
+
+**Motivation Framework diagram updated:** Value Streams inserted between Capability Model and Operating Model; Business Processes and Use Cases inserted between Value Streams and Requirements Register.
+
+**Disambiguation table updated:** Three new rows in the PRD Core Concepts disambiguation summary; Quick Reference Table in `ea-concepts.md` expanded from 15 to 19 rows (including the 3 new concepts).
+
+**Business Architecture template updated:** New §8a Traceability Summary section with explicit chain guidance; enhanced guidance notes in §3 Capabilities, §3a Value Streams, and §4a Use Case Catalog with orphan/gap flagging rules.
+
+**Brainstorm pad updated:** Domain-specific category cards for Business Architecture (Value Streams, Use Cases, Processes), Data Architecture (Conceptual Data Model, Logical Data Model), and Technology Architecture (Platforms, Languages, Infrastructure, Network).
 
 ---
 

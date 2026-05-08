@@ -2,7 +2,7 @@
 
 ## How to Use This Reference
 
-This file is the canonical source for EA concepts that are frequently confused during interviews and artifact creation: **Vision**, **Mission**, **Principle**, **Goal**, **Objective**, **Strategy**, **Plan**, **Risk**, **Issue**, **Problem**, **Opportunity**, **Capability Model**, **Operating Model**, and **Metrics**. When the `ea-interviewer` agent detects concept confusion it cites this file. All commands and skills that capture direction, decisions, or risks should use these definitions — do not redefine them inline.
+This file is the canonical source for EA concepts that are frequently confused during interviews and artifact creation: **Vision**, **Mission**, **Principle**, **Goal**, **Objective**, **Strategy**, **Plan**, **Risk**, **Issue**, **Problem**, **Opportunity**, **Capability Model**, **Value Stream**, **Business Process**, **Use Case**, **Operating Model**, and **Metrics**. When the `ea-interviewer` agent detects concept confusion it cites this file. All commands and skills that capture direction, decisions, or risks should use these definitions — do not redefine them inline.
 
 > 📎 Source: `references/ea-concepts-source.pdf` — *Enterprise Architecture Strategic Context: Terms, Concepts, and Relationship Models*. The definitions, relationships, and model diagrams in this file are grounded in that document.
 
@@ -28,8 +28,25 @@ Problems (PRB) ──blocks──► Objectives (OBJ)
                         Capability Model          ◄── Capability Gap (prevents Goals)
                        (What the org does)
                                 │
-                            shapes
+                           exercises
                                 ▼
+                         Value Streams
+                    (End-to-end value delivery)
+                                │
+                            composed of
+                                ▼
+                         Business Processes
+                                │
+                         enables / consumed by
+                                ▼
+                          Use Cases
+                    (Actor goals supported)
+                                │
+                           generates
+                                ▼
+                     Requirements Register
+                    (traces to ALL layers above)
+                                ▲
                          Operating Model
                        (How the org functions)
                                 │
@@ -40,11 +57,6 @@ Problems (PRB) ──blocks──► Objectives (OBJ)
                  surfaces    identifies    evaluates
                      ▼            ▼             ▼
                 New Issues   New Problems   Cap. Maturity
-                                │
-                             defines
-                                ▼
-                     Requirements Register
-                    (traces to ALL layers above)
 ```
 
 Key relationships:
@@ -52,11 +64,14 @@ Key relationships:
 - **Business Drivers** drive Goals; **Issues** threaten Goals; **Strategies** achieve Goals
 - **Goals** are operationalized through Objectives; **Problems** block Objectives
 - **Objectives and Strategies** inform the Capability Model — what the org must be able to do
-- **Capability Model** shapes the Operating Model — how capabilities are organized and delivered
+- **Capability Model** exercises **Value Streams** — end-to-end chains that deliver stakeholder value
+- **Value Streams** are composed of **Business Processes** — structured activity flows with defined actors and steps
+- **Use Cases** consume **Business Processes** to achieve actor goals and generate **Requirements**
+- **Capability Model** shapes the **Operating Model** — how capabilities, processes, and value streams are organized and delivered
 - **Operating Model** performance is measured through Metrics
 - **Metrics** close the feedback loop: they validate success or surface new Issues, Problems, and Capability Maturity gaps
 - **Capability Gaps** (missing or immature capabilities) prevent Goals from being achieved — they are identified through the Capability Model and feed into the Gap Analysis
-- **Requirements Register** is the formal bridge from the strategic layer to execution; every requirement traces back to a Driver, Goal, Objective, Issue, Problem, Capability, Operating Model element, or Metric
+- **Requirements Register** is the formal bridge from the strategic layer to execution; every requirement traces back to a Driver, Goal, Objective, Issue, Problem, Capability, Value Stream, Process, Use Case, Operating Model element, or Metric
 
 ---
 
@@ -78,6 +93,9 @@ Key relationships:
 | **Capability Model** | *What must the organisation be able to do?* | Stable, hierarchical map of capabilities (people + process + info + tools) — independent of org structure or current systems | Business Architecture (Phase B); Capability Map | Resource (Active Structure) |
 | **Capability Gap** | *Which capabilities are missing or immature?* | Delta between required and current capability — prevents goals; feeds Gap Analysis | Gap Analysis (Phase B/C/D) | — |
 | **Operating Model** | *How does the organisation function to deliver value?* | Describes how process, information, technology, and governance are organized and coordinated | Business Architecture (Phase B); Technology Architecture (Phase D) | — |
+| **Value Stream** | *What end-to-end result does the stakeholder receive?* | End-to-end chain of activities delivering value from trigger to outcome — composed of processes, exercises capabilities | Business Architecture (Phase B); Value Stream Map | Value Stream (Strategy) |
+| **Business Process** | *How is value delivered step by step?* | Structured set of activities with defined actors, inputs, outputs, and decision points — component of a value stream | Business Architecture (Phase B); Process Flow | Business Process (Business) |
+| **Use Case** | *What does the actor need to accomplish?* | Discrete goal pursued by a specific actor — consumes processes, generates requirements | Business Architecture (Phase B); Use Case Catalog | — |
 | **Metrics** | *How do we know we are succeeding?* | Specific, quantifiable measures — leading (predictive) or lagging (outcome); validate strategies or surface new Issues and Problems | Architecture Vision §7; domain artifacts | — |
 
 ---
@@ -660,6 +678,111 @@ A Capability Gap is a delta between the capabilities the organisation currently 
 
 ---
 
+### Value Stream (VS-NNN)
+
+**What it IS:**
+A Value Stream is an end-to-end sequence of activities that delivers a measurable outcome to a stakeholder, from initial trigger to final value realisation. It answers the question: *"What end-to-end result does the stakeholder receive?*" Value Streams exercise capabilities — each step in the stream requires one or more capabilities to be present and mature. They are composed of Business Processes and trace directly to Goals and Strategies.
+
+**Distinguishing markers:**
+- Stakeholder-centric — defined from the outside in (what the recipient gets), not from the inside out (what the org does)
+- End-to-end — spans organisational boundaries, systems, and departments; no silo stops at a single team boundary
+- Trigger-to-outcome — has a clear starting event and a clear value-delivered state
+- Composed of Business Processes — a value stream is not a single process; it is a chain of processes
+- Exercises Capabilities — every step needs a capability; a step with no covering capability is a capability gap
+
+**What it is NOT:**
+- Not a **Business Process** — a process is a structured activity flow; a value stream is the end-to-end chain that contains multiple processes
+- Not a **Capability** — a capability is what the org *can* do; a value stream is how value is *delivered* using those capabilities
+- Not a **Use Case** — a use case is an actor's discrete goal; a value stream is the organisation's end-to-end delivery chain
+- Not a **Strategy** — a strategy is a chosen course of action; a value stream is the operational delivery mechanism
+
+**Common confusions:**
+- "Order-to-cash" — this is a **Value Stream** ✓ (end-to-end, stakeholder-centric, spans multiple processes)
+- "Process customer invoice" — this is a **Business Process** (a single structured activity, not end-to-end)
+- "Customer places an order" — this is a **Use Case** (an actor's discrete goal), not a value stream
+- "We will digitise order-to-cash" — this is a **Strategy** (a chosen approach), not a value stream
+
+**TOGAF placement:** Business Architecture (Phase B) — captured in the Value Stream Map. Each VS-NNN links to Goals (G-NNN) and Strategies (STR-NNN) via the Strategic Link column. VS-NNN entries trace to Capabilities (CAP-NNN) through the Capability Coverage column.
+
+**Practitioner Notes:**
+- A Value Stream with no linked Goal or Strategy is an **orphan** — flag it. Every value stream should trace to at least one strategic intent.
+- Any step in a value stream with no covering capability is a **capability gap** — flag it for Gap Analysis.
+- Value streams are the primary validation mechanism for Goals. A Goal without a value stream trace is unvalidated.
+- **Maturity marker (L1→L5):** L1 = value streams named but not mapped to processes; L3 = value streams mapped to processes with capability coverage; L5 = value streams continuously measured with cycle-time and defect metrics
+- Use value streams to find **process silos** — if a value stream crosses five organisational units and each has a different system, the integration pain is visible
+
+---
+
+### Business Process
+
+**What it IS:**
+A Business Process is a structured, repeatable set of activities with defined actors, inputs, outputs, decision points, and business rules that transforms inputs into outputs of value. It answers the question: *"How is value delivered step by step?*" Business Processes are components of Value Streams and exercise Capabilities.
+
+**Distinguishing markers:**
+- Structured and repeatable — not ad-hoc; follows a defined sequence
+- Has defined actors — who does what at each step
+- Has inputs and outputs — what goes in, what comes out
+- Has decision points — where the flow branches based on business rules
+- Component of a Value Stream — a single process does not deliver end-to-end value alone
+
+**What it is NOT:**
+- Not a **Value Stream** — a process is a single structured activity flow; a value stream is the end-to-end chain
+- Not a **Capability** — a capability is the organisational ability; a process is how that ability is exercised
+- Not a **Use Case** — a use case describes an actor's goal; a process describes the organisation's step-by-step activity
+- Not a **Procedure** — a procedure is a low-level instruction ("click here, then there"); a process is a business-level flow
+
+**Common confusions:**
+- "Process the loan application" — this is a **Business Process** ✓ (structured, repeatable, has actors and decision points)
+- "Customer applies for a loan" — this is a **Use Case** (actor's goal), not a process
+- "From application to disbursement" — this is a **Value Stream** (end-to-end), not a single process
+- "Click Submit, then verify identity" — this is a **Procedure** (low-level instruction), not a business process
+
+**TOGAF placement:** Business Architecture (Phase B) — captured in Process Flow diagrams and the Business Architecture artifact. Each process links to its parent Value Stream (VS-NNN) and to the Capabilities (CAP-NNN) it exercises.
+
+**Practitioner Notes:**
+- A process with no parent Value Stream is an **orphan** — it may be a shadow process or a missed value-stream step. Flag it.
+- Processes that duplicate steps across multiple value streams are a **consolidation opportunity**.
+- Business rules buried in spreadsheets or tribal knowledge are a **process documentation gap** — they should be explicit decision points.
+- **Maturity marker (L1→L5):** L1 = processes named but not documented; L3 = processes documented with actors, inputs, outputs, and decision points; L5 = processes automated with BPMN and measured with real-time metrics
+- Use processes to find **actor-boundary violations** — when a single process step requires three different departments, the hand-off cost is visible
+
+---
+
+### Use Case (UC-NNN)
+
+**What it IS:**
+A Use Case is a discrete goal pursued by a specific actor (user, system, or external entity) that is supported by one or more Business Processes. It answers the question: *"What does the actor need to accomplish?*" Use Cases consume Business Processes and generate Requirements. They are the primary bridge from the business domain to the requirements domain.
+
+**Distinguishing markers:**
+- Actor-centric — defined from the perspective of who wants something
+- Discrete and goal-oriented — has a clear start condition and a clear successful outcome
+- Consumes Business Processes — a use case may trigger one or more processes
+- Generates Requirements — every use case should produce at least one REQ-NNN
+- Links to Capabilities — the use case reveals which capabilities the actor needs
+
+**What it is NOT:**
+- Not a **Business Process** — a process is the organisation's step-by-step flow; a use case is the actor's goal
+- Not a **User Story** — a user story is a lightweight placeholder ("As a X, I want Y so that Z"); a use case is a structured analysis artifact with flows and exceptions
+- Not a **Value Stream** — a value stream is end-to-end stakeholder delivery; a use case is a discrete actor goal
+- Not a **Requirement** — a requirement is a formalised need ("the system must..."); a use case is the scenario that generates the requirement
+
+**Common confusions:**
+- "Customer places an order" — this is a **Use Case** ✓ (actor goal, discrete, consumes processes)
+- "Process customer order" — this is a **Business Process** (the org's flow), not a use case
+- "As a customer, I want to place an order so that I can receive products" — this is a **User Story** (lightweight placeholder), not a full use case
+- "The system must support order placement" — this is a **Requirement** (formalised need), not a use case
+
+**TOGAF placement:** Business Architecture (Phase B) — captured in the Use Case Catalog. Each UC-NNN links to the Processes it consumes, the Capabilities (CAP-NNN) it exercises, and the Requirements (REQ-NNN) it generates.
+
+**Practitioner Notes:**
+- Every use case must generate at least one REQ-NNN requirement. A use case with no requirements is a **modeling gap** — flag it.
+- Use cases that span multiple organisational silos reveal **integration pain** — the actor's goal is fragmented across systems.
+- Use cases with no linked capability reveal **capability gaps** — the actor's goal cannot be supported.
+- **Maturity marker (L1→L5):** L1 = use cases named but not documented; L3 = use cases documented with actors, preconditions, main flow, and exception flows; L5 = use cases traced to automated test scenarios and real user-journey analytics
+- Use the Use Case Catalog to validate **Requirements completeness** — if a REQ-NNN cannot be traced to a UC-NNN, it may be an orphaned or implicit requirement
+
+---
+
 ## Disambiguation Checklist
 
 Apply these tests in order. The first test that matches identifies the concept:
@@ -770,7 +893,8 @@ Not every motivation concept gets its own document. They are distributed across 
 | **Engagement Charter** | Mission, Vision, high-level goals, constraints, scope boundaries — the mandate frame |
 | **Statement of Architecture Work** | Scope, constraints, objectives, success criteria — the delivery commitment |
 | **Stakeholder Map** | Stakeholder concerns mapped to goals and issues |
-| **Requirements Register** | Formalized goals, issues, and needs — the formal bridge from motivation to execution; every REQ traces to a DRV, G, OBJ, ISS, or PRB |
+| **Business Architecture** | Capabilities (CAP), Value Streams (VS), Business Processes, Use Cases (UC), Operating Model |
+| **Requirements Register** | Formalized goals, issues, and needs — the formal bridge from motivation to execution; every REQ traces to a DRV, G, OBJ, ISS, PRB, CAP, VS, UC, or Process |
 | **Gap Analysis** | Issues and problems expressed as baseline-to-target gaps; capability gaps may surface as Opportunities |
 | **Architecture Roadmap** | Goals, objectives, and strategies realized as sequenced work packages; Opportunities (OPP) elaborated into WPs |
 
@@ -843,4 +967,3 @@ Business Driver (DRV) ──classifies as Opportunity──► OPP-NNN
 - Is it the shortfall between current and target state? → It's a **Capability Gap (GAP)**
 - Is it a concrete delivery item? → It's a **Work Package (WP)**
 - Is it a specific, actionable possibility not currently exploited? → It's an **Opportunity (OPP)**
-| **Architecture Definition Document (B–D)** | Strategies realized as architectural design choices; goals/objectives as success criteria |
