@@ -1,0 +1,392 @@
+---
+name: ea-grill-skills
+description: Nine grill modes bundled for ea-assistant — stress-test, premortem, decision, design, software-design, infra-design, artifact, diagram, boardroom-strategy. Load this skill and follow the ## Mode section matching the requested short name.
+version: 0.1.0
+---
+
+When this skill is loaded, locate the `## Mode: {short-name}` section that matches the mode requested by `/ea-grill` and follow it exclusively. Ignore all other mode sections.
+
+---
+
+## Mode: stress-test
+
+# Grill Me — Strategic Stress-Test
+
+Act as a skeptical strategy advisor. Interrogate this strategy one question at a time until the logic, assumptions, tradeoffs, risks, stakeholder impacts, and success metrics are clear and defensible.
+
+For each question:
+- explain what assumption you are testing
+- provide your recommended answer or 2-3 options
+- identify the risk if the issue is ignored
+
+Challenge vague thinking, political naivety, wishful assumptions, and missing execution detail.
+
+Do not summarize early. Keep going until the strategy is coherent, actionable, and resilient.
+
+At the end, provide:
+1. the refined strategy
+2. top 5 unresolved risks
+3. the hardest objection a board member would raise
+4. the next decision that must be made
+
+---
+
+## Mode: premortem
+
+# Grill Me — Pre-Mortem & Risk Review
+
+This skill operates in two modes. Ask the user which one before starting.
+
+### Mode Selection
+
+Present this choice at the start:
+
+> **How would you like to examine risk?**
+>
+> **1. Generate** — I'll assume your proposal has already failed 12 months from now and work backwards to surface failure modes, warning signs, and risks you haven't thought of. Best when you have a plan or proposal but no formal risk assessment yet.
+>
+> **2. Review** — Give me your existing risk register, risk section, or list of identified risks and I'll interrogate each one for completeness, credibility, and gaps. Best when you already have documented risks and want them stress-tested.
+
+If the user provides a risk register or artifact without choosing, default to **Review** mode.
+If the user describes a proposal or initiative without choosing, default to **Generate** mode.
+
+---
+
+### Premortem: Generate (Pre-Mortem)
+
+Red-team this proposal as if it has already failed 12 months from now.
+
+Ask one question at a time to uncover:
+- what failed
+- why warning signs were missed
+- which assumptions broke
+- what stakeholders resisted
+- what second-order effects emerged
+- what we should have done earlier
+
+Systematically probe risk categories the user may not have considered:
+- **delivery** — schedule, scope, dependencies, capacity
+- **technical** — architecture, integration, performance, security
+- **financial** — cost overrun, funding withdrawal, ROI shortfall
+- **political** — stakeholder resistance, sponsor change, competing priorities
+- **regulatory** — compliance gaps, policy changes, audit findings
+- **talent** — key-person dependency, skills gap, turnover
+- **vendor** — delivery failure, price escalation, lock-in, acquisition
+- **market** — demand shift, competitive response, timing
+
+For each question:
+- state the failure mode being tested
+- give likely warning indicators
+- recommend a mitigation
+
+At the end, provide a pre-mortem report with:
+1. top failure modes (ranked by likelihood × impact)
+2. early warning signs (what to monitor and when)
+3. recommended safeguards (each with an owner and trigger condition)
+4. risk interdependencies (which risks compound if one materialises)
+5. whether the plan should proceed, pause, or be redesigned
+
+---
+
+### Premortem: Review (Risk Critique)
+
+Read the provided risk register, risk section, or risk list in full before asking any questions.
+
+Then interrogate one risk at a time:
+
+**For each documented risk, challenge:**
+- **Specificity** — is the risk stated precisely enough to act on?
+- **Likelihood rating** — is this justified? What evidence supports the rating?
+- **Impact rating** — what is the actual blast radius?
+- **Mitigation quality** — is the mitigation real? A real mitigation is funded, owned, scheduled, and measurable.
+- **Mitigation ownership** — is there a named owner?
+- **Residual risk** — after mitigation, what risk remains?
+- **Risk appetite alignment** — is this level of residual risk consistent with the organisation's stated appetite?
+
+**Then check for systemic gaps:**
+- **Missing risk categories** — compare against the eight categories above. Flag empty categories.
+- **Interdependencies** — do any risks compound? Flag unacknowledged chains.
+- **Concentration** — are all risks in one category?
+- **Optimism bias** — are most risks rated Low likelihood? Are most mitigations "accept" or "monitor"?
+
+At the end, provide a risk critique with:
+1. risks that are well-documented and credible
+2. risks that are vague, under-rated, or have weak mitigations
+3. missing risks (categories not covered, interdependencies not identified)
+4. overall risk profile assessment (balanced / optimistic / concentrated / incomplete)
+5. recommended actions (prioritised by impact on decision quality)
+
+---
+
+## Mode: decision
+
+# Grill Me — Decision Memo Extractor
+
+Interview me one question at a time to produce a high-quality decision memo.
+
+Your goal is to clarify:
+- decision to be made
+- options considered
+- evaluation criteria
+- tradeoffs
+- risks
+- recommendation
+- implementation implications
+
+Do not ask generic questions. Ask only questions that improve the quality of the eventual recommendation.
+
+When enough information exists, stop questioning and produce:
+1. decision statement
+2. options analysis
+3. recommendation
+4. risks
+5. next steps
+
+---
+
+## Mode: design
+
+# Grill Me — Design Critique
+
+Act as a senior design critic. First restate your understanding of the design challenge. Then interrogate the design one question at a time.
+
+Probe for:
+- user needs
+- failure points
+- edge cases
+- friction
+- accessibility
+- incentives
+- scalability
+- unintended consequences
+
+Do not let me hide behind abstractions. Push for concrete examples, real users, and real constraints.
+
+For each question:
+- explain what design principle is being tested
+- offer a likely best-practice answer
+- note what weak design would look like
+
+At the end, provide:
+1. strengths
+2. design flaws
+3. recommended revisions
+4. unresolved design bets
+
+---
+
+## Mode: software-design
+
+# Grill Me — Software Design Critique
+
+Act as a senior software architect. First restate your understanding of the design. Then interrogate it one question at a time.
+
+Probe for:
+- architecture pattern fit (monolith, microservices, event-driven, layered, hexagonal — is the chosen pattern justified?)
+- coupling and cohesion (are boundaries drawn correctly? what breaks if this component changes?)
+- API contracts (are interfaces stable, versioned, and consumer-friendly?)
+- data model (is ownership clear? are there hidden shared-state problems?)
+- testability (can this be tested in isolation? what requires a full environment?)
+- scalability (where are the bottlenecks? what fails first under load?)
+- operational readiness (how is it deployed, observed, rolled back?)
+- security (where does trust cross a boundary? what is the blast radius of a compromise?)
+- tech debt and dependency risk (what assumptions are baked in? what is hardest to change later?)
+
+Do not accept hand-waving. Push for concrete examples, named components, and real constraints.
+
+For each question:
+- explain what architectural principle is being tested
+- offer the recommended answer or 2-3 viable options
+- note what weak or naive design looks like here
+
+At the end, provide:
+1. architectural strengths
+2. design flaws and risks
+3. recommended revisions (prioritised by impact)
+4. unresolved architectural bets (decisions that depend on assumptions not yet validated)
+
+---
+
+## Mode: infra-design
+
+# Grill Me — Infrastructure Design Critique
+
+Act as a senior infrastructure and platform engineer. First restate your understanding of the design. Then interrogate it one question at a time.
+
+Probe for:
+- topology (are the components and their relationships correct? what is the data path end-to-end?)
+- resilience and failover (what happens when each component fails? is there a single point of failure?)
+- blast radius (what is the worst-case scope of an incident? can failures be contained?)
+- scaling model (how does this grow? where does it hit a ceiling? what needs to be re-architected at 10× load?)
+- cost architecture (what drives cost? are there runaway cost risks at scale?)
+- security boundaries (network segmentation, IAM least privilege, secrets management, what can reach what?)
+- observability (what metrics, logs, and traces exist? can you diagnose an incident at 3am without access to the system?)
+- deployment and rollback (how is change delivered? how long does rollback take? what is the error budget?)
+- vendor lock-in (which components are portable? what is the exit cost if this vendor fails or raises prices?)
+- operational runbook gaps (what does on-call need to know that is not yet documented?)
+
+Do not accept architecture diagrams that skip over failure modes. Push for concrete failure scenarios, named components, and real traffic numbers.
+
+For each question:
+- explain what reliability or operational principle is being tested
+- offer the recommended answer or 2-3 viable options
+- note what an under-engineered or over-engineered design looks like here
+
+At the end, provide:
+1. resilience strengths
+2. reliability risks and operational gaps
+3. recommended revisions (prioritised by blast radius and likelihood)
+4. unresolved operational bets (assumptions about scale, failure modes, or vendor behaviour not yet validated)
+
+---
+
+## Mode: artifact
+
+# Grill Me — Artifact Review
+
+Act as a meticulous architecture reviewer. You will be given a structured artifact document. Read it in full before asking any questions.
+
+### Review Protocol
+
+First, assess the artifact structurally:
+- identify which sections are populated, empty, or contain only placeholder text
+- check frontmatter fields (artifact type, phase, status, version, date)
+- map all ID references (DRV-NNN, G-NNN, OBJ-NNN, ISS-NNN, PRB-NNN, REQ-NNN, GAP-NNN) and verify they resolve — flag dangling references
+- check traceability chains: do drivers link to goals? do goals link to objectives? do issues reference goals? do problems reference objectives?
+- note any section that contradicts another section in the same artifact
+
+Then interrogate the content one section at a time:
+- for each section, state what the section is supposed to achieve (per its guidance block)
+- challenge whether the content actually achieves that purpose
+- identify vague, circular, or unsupported claims
+- flag content that restates the question rather than answering it
+- push for specifics: named systems, real numbers, concrete stakeholders, actual dates
+
+For each question:
+- state which section you are reviewing and what quality you are testing
+- explain what good content looks like for this section
+- identify the specific weakness in the current content
+
+Do not let boilerplate pass. "Stakeholder engagement will be managed appropriately" is not an answer. Neither is a risk with no mitigation, a goal with no driver, or an objective with no measure.
+
+### Governance Anti-Pattern Checks
+
+After the section-by-section review, explicitly scan the artifact for these high-risk patterns:
+
+**Governance bypass patterns:**
+- "Non-response within N days is treated as approval to proceed" — any variant of this converts inaction into approval. Flag it.
+- Notification-only activation gates where a tier-based approval workflow exists elsewhere in the engagement.
+
+**Regulatory status inconsistency:**
+- If a regulation is described as "enacted" in one place and "anticipated / pending" in another, flag the conflict.
+
+**Classification scale mismatch:**
+- If the artifact defines or uses an impact/risk/likelihood scale, check that the same scale is used throughout this artifact and matches any scale used elsewhere in the engagement.
+
+**Categorical employee commitments:**
+- Statements like "staff roles are enhanced, not eliminated" are absolute. Flag absolute formulations that contradict more nuanced commitments elsewhere.
+
+**Cross-artifact target consistency:**
+- If the artifact states a quantified milestone, check whether the same metric appears elsewhere with a different target or timeline. Flag mismatches.
+
+**Binding vs advisory mitigations:**
+- Risk mitigations for high-consequence risks should be stated as binding conditions, not as recommended practices. Flag "should" or "is recommended" for Critical or Very High risks.
+
+**Constraints register completeness:**
+- If the artifact lists non-negotiable requirements, check that every such requirement appears in the Constraints Register.
+
+**Data flow State column:**
+- In data architecture artifacts, check that every data flow in the Flows table has an explicit State (Current / Planned / Target).
+
+---
+
+At the end, provide:
+1. a section-by-section scorecard (Complete / Partial / Empty / Inconsistent)
+2. traceability gaps (dangling or missing ID references)
+3. governance anti-patterns found — list each with the specific text and recommended fix
+4. the three weakest sections and why
+5. the three strongest sections and why
+6. recommended revisions (prioritised)
+7. overall verdict: Ready for review / Needs revision / Incomplete
+
+---
+
+## Mode: diagram
+
+# Grill Me — Diagram Review
+
+Act as a senior architecture reviewer specialising in visual models. You will be given a diagram (Mermaid code, ArchiMate model, Draw.io XML, an image, or a textual description of a diagram). Study it carefully before asking any questions.
+
+### Review Protocol
+
+First, assess the diagram structurally:
+- identify the diagram type (sequence, component, deployment, data flow, ArchiMate layered, process, state machine, network topology, etc.)
+- list all named components, actors, and data stores
+- list all relationships and their labels (or flag unlabeled ones)
+- identify orphaned nodes (components with no connections)
+- check for missing legend, title, or context annotation
+- if ArchiMate: check layer placement and whether elements are in the correct layer
+
+Then interrogate the content one concern at a time:
+- completeness: what is obviously missing? (error paths, fallback flows, security boundaries, monitoring, external dependencies, human actors)
+- failure modes: trace what happens when each key component fails — does the diagram show this?
+- data flow: is it clear what data moves between components, in what format, and who owns it?
+- security boundaries: where does trust change? are network boundaries, authentication points, and encryption shown?
+- scalability: does the diagram show how load distributes? where are the bottlenecks the diagram hides?
+- consistency: does the diagram match the text description in the artifact it belongs to?
+- readability: can someone unfamiliar with the system understand the diagram in under 2 minutes?
+
+For each question:
+- state which part of the diagram you are examining and what principle is being tested
+- explain what a well-drawn diagram would show here
+- identify the specific gap, ambiguity, or anti-pattern
+
+Common diagram anti-patterns to watch for:
+- the "happy path only" diagram — no error flows, no failure modes
+- the "magic cloud" — a component labelled "system" or "platform" that hides all complexity
+- the "spaghetti" — everything connects to everything with no clear data flow direction
+- the "layer cake lie" — ArchiMate elements placed in the wrong layer for visual convenience
+- the "missing human" — no actors, users, or operators shown despite being critical
+- the "one-way arrow" — request shown, response not shown (or vice versa)
+- the "phantom dependency" — a component that clearly needs data from another but has no drawn connection
+
+At the end, provide:
+1. diagram strengths (what it communicates well)
+2. structural issues (orphaned nodes, unlabeled relationships, missing legend)
+3. content gaps (missing failure paths, security boundaries, external dependencies)
+4. anti-patterns detected
+5. recommended revisions (prioritised by impact on understanding)
+6. overall verdict: Communicates clearly / Needs annotation / Misleading / Incomplete
+
+---
+
+## Mode: boardroom-strategy
+
+# Grill Me — Boardroom Strategy Grill
+
+Act as a skeptical board advisor and strategy coach.
+
+Interview me one question at a time about this proposal, initiative, or design until it is clear, defensible, and executable.
+
+Your job is to:
+- clarify objectives and success measures
+- expose hidden assumptions
+- test stakeholder reactions and incentives
+- surface operational, political, financial, and reputational risks
+- identify tradeoffs and second-order effects
+- challenge vague, weak, or overly optimistic reasoning
+
+For each question:
+- state what issue you are testing
+- provide your recommended answer or options
+- explain what a board member would worry about
+
+Rotate perspectives as needed: strategy, operations, finance, governance, public trust, talent, and execution.
+
+When the proposal is sufficiently tested, provide:
+1. a crisp executive summary
+2. the strongest case for proceeding
+3. the strongest case against proceeding
+4. top unresolved risks
+5. the next decision required
+6. a 2-minute board-ready version

@@ -13,18 +13,20 @@ EA Assistant is a Claude Code plugin. It has no runtime server — all behaviour
 ```
 ea-assistant/
 ├── .claude-plugin/plugin.json   # plugin identity and version
-├── agents/                      # autonomous sub-agents (.md)
-├── commands/                    # user-invokable slash commands (.md)
-├── skills/                      # reusable instruction libraries (SKILL.md per skill)
+├── agents/                      # autonomous sub-agents (.md) — 12 agents
+├── commands/                    # user-invokable slash commands (.md) — 31 commands
+├── skills/                      # reusable instruction libraries (SKILL.md per skill) — 10 skills
 │   ├── ea-artifact-templates/   # templates + reference files
 │   ├── ea-engagement-lifecycle/ # ID scheme, facilitator styles, opt-out rules
 │   ├── ea-document-ingestion/   # format-layer extraction (docx, pdf, xlsx, ...)
 │   ├── ea-generation/           # export/generation logic
+│   ├── ea-grill-skills/         # 9 grill modes bundled as named sections (stress-test, premortem, decision, design, software-design, infra-design, artifact, diagram, boardroom-strategy)
 │   ├── ea-interview-ui/         # React interview form artifacts
 │   ├── ea-requirements-management/
+│   ├── ea-security/             # SABSA, ISO 27001, NIST CSF reference material
 │   ├── archimate-notation/
 │   └── zachman-framework/
-├── templates/                   # TOGAF artifact .md templates (16)
+├── templates/                   # TOGAF artifact .md templates (37)
 ├── scripts/                     # Python generators (generate-docx.py, generate-pptx.py)
 ├── hooks/hooks.json             # plugin lifecycle hooks
 └── docs/                        # PRD.md, IMPLEMENTATION.md
@@ -108,6 +110,8 @@ When adding logic to an agent or command, check these files before writing anyth
    - `commands/ea-help.md` all-commands table
    - `docs/PRD.md` §7 commands table
 
+**Folding thin commands into hubs:** If a new command is read-only, display-only, or a one-off utility that naturally belongs under an existing hub (e.g. `ea-status`, `ea-artifact`, `ea-migrate`), prefer adding it as a `--flag` or subcommand rather than a new slash command. This keeps the visible command count lean. Update the hub command's `description` frontmatter field to mention the new flag.
+
 ---
 
 ## 5. Adding a New Agent
@@ -150,9 +154,11 @@ When adding logic to an agent or command, check these files before writing anyth
 
 2. Skills are reference material, not executable commands. Write them as clear prose or structured tables that agents and commands can cite. Avoid imperative step lists — those belong in commands.
 
-3. Bump version when the skill content changes materially.
+3. **Multi-mode skills:** If a skill has several distinct operating modes (e.g. `ea-grill-skills` with 9 modes), define each mode as a named `## Mode: {name}` section in a single SKILL.md rather than creating one skill directory per mode. The invoking command reads the skill and jumps to the matching section. This avoids skill directory proliferation.
 
-4. Validate frontmatter.
+4. Bump version when the skill content changes materially.
+
+5. Validate frontmatter.
 
 ---
 
@@ -420,7 +426,7 @@ These are known architectural trade-offs that have been consciously deferred. Ea
 
 **Status:** Deferred — potential future enhancement
 
-**The bet:** `ea-interviewer` is a 550+ line agent covering artifact interview, phase interview, 4 UI modes, cross-topic detection, concept-checking, A3 decision logging, governance transitions, inline brainstorm, opt-out handling, contextual help, and session logging. The bet is that Claude can reliably execute the full file without missing branches.
+**The bet:** `ea-interviewer` is a 800+ line agent covering artifact interview, phase interview, 4 UI modes, cross-topic detection, concept-checking, A3 decision logging, governance transitions, inline brainstorm, opt-out handling, contextual help, and session logging. The bet is that Claude can reliably execute the full file without missing branches.
 
 **Risk:** As the file grows, reliability degrades. Specific failure modes to watch for:
 - Cross-topic detection not firing during Text interviews

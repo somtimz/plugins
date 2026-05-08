@@ -58,12 +58,12 @@ For each artifact `.md` in `EA-projects/{slug}/artifacts/` and phase subdirector
 
 | Check | Gap if… | Introduced in | Severity | Remediated by |
 |---|---|---|---|---|
-| Artifact files in `artifacts/{phase-folder}/` | Any `artifacts[]` entry has file path directly in `artifacts/` (flat) | 1.0.0 | Medium | `/ea-reorganize` |
+| Artifact files in `artifacts/{phase-folder}/` | Any `artifacts[]` entry has file path directly in `artifacts/` (flat) | 1.0.0 | Medium | `/ea-migrate --reorganize` |
 | `relatedArtifacts:` field present | Field absent | 1.0.0 | Low | `/ea-migrate` |
 | `diagrams:` field present | Field absent | 1.0.0 | Low | `/ea-migrate` |
 | `links:` field present | Field absent | 1.0.0 | Low | `/ea-migrate` |
 
-**Flat-path detection (GAP-M-015):** Count artifacts with flat paths and report the total. Do **not** offer to move them here — direct the user to `/ea-reorganize` for all file moves.
+**Flat-path detection (GAP-M-015):** Count artifacts with flat paths and report the total. Do **not** offer to move them here — direct the user to `/ea-migrate --reorganize` for all file moves.
 
 **Missing fields remediation (GAP-M-016):** Inject `relatedArtifacts: []`, `diagrams: []`, `links: []` after the `tags:` line in the taxonomy block. Non-destructive — safe to auto-apply.
 

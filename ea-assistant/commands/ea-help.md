@@ -72,9 +72,9 @@ You have existing engagements. Common next steps:
 |---|---|
 | `/ea-new` | Create a new engagement |
 | `/ea-open` | Open, edit, archive, or delete an engagement |
-| `/ea-status` | Portfolio dashboard — progress, artifacts, phases, opt-outs |
+| `/ea-status` | Portfolio dashboard — progress, artifacts, phases, opt-outs; `--next` for next action; `--direction` for Direction Register |
 | `/ea-phase [phase]` | Start, edit, or resume an ADM phase |
-| `/ea-artifact [action]` | Create or list artifacts |
+| `/ea-artifact [action]` | Create, list, or view artifacts; `summary [refresh\|status]` for executive summary management |
 | `/ea-interview [mode]` | Stakeholder interviews (artifact or phase mode) |
 | `/ea-brainstorm [phase]` | Capture freeform thoughts and context for use during interviews |
 | `/ea-generate [artifact] [format]` | Export artifact as Word, PPTX, Mermaid, PNG, or SVG; embeds diagrams in docx/pptx by default |
@@ -87,19 +87,15 @@ You have existing engagements. Common next steps:
 | `/ea-changes [mode]` | Generate Change Register for Phase H ACR artifacts |
 | `/ea-concerns` | Manage CON-NNN stakeholder concerns (Appendix A4) |
 | `/ea-roles [ROLE-ID\|--domain\|--generate\|--update]` | Role Catalogue — list, filter, and generate role assignments with RACI, triggers, and calendar |
-| `/ea-direction [goals\|objectives\|strategies] [--domain X] [--quality]` | View Direction Register — Goals, Objectives, Strategies from motivation artifacts; `--quality` scans all items for miscategorization, missing evidence, and isolation |
 | `/ea-zachman [mode]` | Manage the Zachman 6×6 classification diagram (generate, review, gap, interview, classify) |
 | `/ea-research [mode]` | Research library — add, note, link, list, view, apply findings to artifacts |
-| `/ea-next` | Suggest the single most valuable next action for the active engagement |
 | `/ea-notes [mode]` | List, view, edit, or delete interview notes, brainstorm notes, and review files |
 | `/ea-detail new\|view\|list\|sync` | Create, view, list, or sync optional item detail files — extended narrative, rationale, risks, costs, issues, concerns, impact, and alternatives for individual engagement items |
 | `/ea-consistency [options]` | Focused consistency check — cross-artifact contradictions, within-artifact section inconsistencies, or ID reference scan only (`--ids`); `--details` validates detail file link integrity and A4 sync |
 | `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman |
 | `/ea-security-review` | Security audit — SABSA, ISO 27001, and NIST CSF 2.0 coverage across the engagement or a single artifact |
-| `/ea-reorganize [--report]` | Move flat-path artifacts into correct phase subfolders; update engagement.json paths |
-| `/ea-migrate [--report]` | Align legacy engagement to current plugin version conventions |
+| `/ea-migrate [--report\|--reorganize]` | Align legacy engagement to current plugin version conventions; `--reorganize` moves flat-path artifacts into correct phase subfolders |
 | `/ea-publish` | Merge artifacts into a consolidated report |
-| `/ea-summary [refresh\|status]` | Refresh or review per-artifact executive summaries |
 | `/ea-brief [--focus decisions\|risks\|gaps\|strategy] [--save]` | Synthesized one-page engagement brief — ranked decisions, gaps, risks, open concerns |
 | `/ea-workshop [start\|resume\|export\|list]` | Facilitated multi-stakeholder workshops — WS-NNN minutes, agenda, decisions, actions |
 | `/ea-arb [new\|list\|view\|close]` | ARB meeting minutes — ARB-NNN, quorum, decisions, propagate to ADR register |
