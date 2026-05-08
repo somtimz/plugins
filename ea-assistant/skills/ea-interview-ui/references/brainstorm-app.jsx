@@ -15,6 +15,11 @@ import { useState, useRef, useEffect } from "react";
 //         suggestions: ["Cloud-native platform with container-first deployment",
 //                       "Hybrid cloud balancing on-prem for regulated data and public cloud for scale"] },
 //       // ... other categories — suggestions is optional, null if omitted
+//       // New ids not in the default set create additional category cards:
+//       // { id: "platforms", label: "Platforms", emoji: "🏗️",
+//       //   hint: "Runtime platforms and execution environments",
+//       //   suggestions: ["Kubernetes for container orchestration",
+//       //                 "Serverless for event-driven workloads"] },
 //     ],
 //   };
 
@@ -36,15 +41,27 @@ const DEFAULT_CATEGORIES = [
   { id: "other",         label: "Other",            emoji: "📝", hint: "Anything that doesn't fit above" },
 ];
 
-// Merge phase-specific hint and suggestion overrides into the default category list
+// Merge phase-specific overrides and append new custom categories
+const _defaultIds = new Set(DEFAULT_CATEGORIES.map(c => c.id));
 const _catOverrides = BRAINSTORM_DATA.categories
   ? Object.fromEntries(BRAINSTORM_DATA.categories.map(c => [c.id, c]))
   : {};
-const CATEGORIES = DEFAULT_CATEGORIES.map(c => {
-  const ov = _catOverrides[c.id];
-  if (!ov) return c;
-  return { ...c, hint: ov.hint ?? c.hint, suggestions: ov.suggestions ?? null };
-});
+const CATEGORIES = [
+  ...DEFAULT_CATEGORIES.map(c => {
+    const ov = _catOverrides[c.id];
+    if (!ov) return c;
+    return { ...c, hint: ov.hint ?? c.hint, suggestions: ov.suggestions ?? null };
+  }),
+  ...(BRAINSTORM_DATA.categories || [])
+    .filter(c => !_defaultIds.has(c.id))
+    .map(c => ({
+      id: c.id,
+      label: c.label || c.id.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase()),
+      emoji: c.emoji || "📋",
+      hint: c.hint || "",
+      suggestions: c.suggestions ?? null,
+    })),
+];
 
 
 // ─── CategoryCard ─────────────────────────────────────────────────────────────

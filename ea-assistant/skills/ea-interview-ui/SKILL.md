@@ -4,7 +4,7 @@ description: >
   Render interactive React artifacts for EA interview sessions and brainstorming.
   Use the interview app when conducting structured Q&A for an artifact or phase.
   Use the brainstorm pad when capturing freeform engagement thoughts.
-version: 0.3.0
+version: 0.3.1
 ---
 
 # EA Interview UI Skill
@@ -118,6 +118,7 @@ const BRAINSTORM_DATA = {
   phase: "<phase label, e.g. 'Phase D — Technology Architecture'>",  // null = no badge
   subtitle: "<one-sentence focus prompt>",                            // null = generic subtitle
   categories: [   // null = use all generic defaults
+    // --- Override an existing default category ---
     { id: "concerns",      hint: "<phase-specific hint text>",
       suggestions: ["<common concern for this phase>", "<another common concern>"] },  // or omit/null
     { id: "goals",         hint: "<phase-specific hint text>",
@@ -130,12 +131,19 @@ const BRAINSTORM_DATA = {
       suggestions: null },
     { id: "other",         hint: "<phase-specific hint text>",
       suggestions: null },
+    // --- Add a new custom category (creates an extra card) ---
+    { id: "value-streams", label: "Value Streams", emoji: "🌊",
+      hint: "End-to-end chains that deliver stakeholder value",
+      suggestions: ["Order-to-cash value stream fragmented across 3 systems"] },
+    { id: "platforms",      label: "Platforms",    emoji: "🏗️",
+      hint: "Runtime platforms and execution environments",
+      suggestions: null },
   ],
   questions: [   // null if no artifact/phase context — upcoming interview questions shown as prompts
     {
       id: "q1",
       text: "<question that will be asked in the upcoming interview>",
-      category: "concerns | goals | constraints | opportunities | assumptions | other",
+      category: "concerns | goals | constraints | opportunities | assumptions | other | value-streams | use-cases | processes | conceptual-model | logical-model | platforms | languages | infrastructure | network",
     },
     // ... up to 8 questions
   ],
@@ -145,14 +153,14 @@ const BRAINSTORM_DATA = {
       questionText: "<full question text>",
       answer: "<pre-existing answer from document or artifact>",
       source: "<'artifact' or upload filename>",
-      category: "concerns | goals | constraints | opportunities | assumptions | other",
+      category: "concerns | goals | constraints | opportunities | assumptions | other | value-streams | use-cases | processes | conceptual-model | logical-model | platforms | languages | infrastructure | network",
     },
     // ...
   ],
 };
 ```
 
-Only `hint` and `suggestions` are overridden in `categories` — `label` and `emoji` are always taken from defaults. `suggestions` is optional: omit or set to `null` for categories where no common starters apply. When `suggestions` is set, the app renders a "💡 Thought starters" toggle inside the category card — clicking a starter adds it as a pre-filled thought entry the user can edit.
+Only `hint` and `suggestions` are overridden for default ids — `label` and `emoji` are always taken from `DEFAULT_CATEGORIES` in `brainstorm-app.jsx`. For **new ids** (not in the default set), the app creates an additional category card using the `label`, `emoji`, `hint`, and `suggestions` provided. If `label` is omitted, the id is converted to title-case. If `emoji` is omitted, it defaults to `📋`.
 
 **App behaviour for `questions`:** Within each category card, show a collapsible "📋 Upcoming questions" section (collapsed by default). List each question whose `category` matches the card. This gives the user context for what topics to brainstorm before the interview.
 
@@ -177,7 +185,8 @@ Only `hint` and `suggestions` are overridden in `categories` — `label` and `em
 6. Tell the user: "Brainstorm pad opened in your browser. Fill in your thoughts, click 'Done', then copy the notes and paste back here."
 
 **App behaviour (for reference):**
-- Six collapsible category cards: Concerns, Goals & Vision, Constraints, Opportunities, Assumptions, Other
+- Base set of six collapsible category cards: Concerns, Goals & Vision, Constraints, Opportunities, Assumptions, Other
+- Additional cards are rendered for any custom `id` in `BRAINSTORM_DATA.categories` that is not in the base set (e.g., Value Streams, Platforms)
 - Each card shows a phase-specific hint under its label when `BRAINSTORM_DATA.categories` is set
 - Phase badge shown in the header label when `BRAINSTORM_DATA.phase` is set
 - Each card has one or more text inputs; Enter adds a new thought; × removes one

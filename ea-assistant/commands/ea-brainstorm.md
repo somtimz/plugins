@@ -72,6 +72,15 @@ Capture freeform brainstorm notes for the active EA engagement.
    - Questions about improvements, gaps to close, new capabilities → `"opportunities"`
    - Questions about baseline state, stakeholder readiness, preconditions → `"assumptions"`
    - Questions about measurement, KPIs, targets, baselines, success indicators → `"metrics"`
+   - Questions about value streams, end-to-end stakeholder delivery chains → `"value-streams"`
+   - Questions about use cases, actors, user goals, or interaction scenarios → `"use-cases"`
+   - Questions about business processes, workflow steps, or process ownership → `"processes"`
+   - Questions about conceptual data model, subject areas, entity relationships, or business-readable data structure → `"conceptual-model"`
+   - Questions about logical data model, data attributes, normalisation, or storage structure → `"logical-model"`
+   - Questions about platforms, runtime environments, or execution hosts → `"platforms"`
+   - Questions about programming languages, frameworks, or runtime stacks → `"languages"`
+   - Questions about infrastructure, compute, storage, hosting, or physical/virtual environments → `"infrastructure"`
+   - Questions about network topology, segmentation, connectivity, or traffic patterns → `"network"`
    - All others → `"other"`
 
 3c. **Pull pre-existing answers from documents.** Check whether any answers already exist that should be surfaced in the pad:
@@ -169,6 +178,9 @@ Capture freeform brainstorm notes for the active EA engagement.
    | Assumptions | Business process stability, workforce capacity to change, sponsor commitment |
    | Metrics | Business capability maturity, process cycle time, customer satisfaction scores |
    | Other | Business Model Canvas inputs, stakeholder concerns, regulatory context, use case actors and goals |
+   | **Value Streams** | End-to-end chains of activity that deliver value to customers, stakeholders, or partners — from trigger to outcome |
+   | **Use Cases** | Discrete goals pursued by specific actors (users, systems, or external parties) interacting with the business |
+   | **Processes** | Business processes, their steps, owners, and the capabilities they exercise |
 
    ### Information Systems Architecture
    *Focus on data and application landscape, component design, service contracts, and user journeys.*
@@ -182,6 +194,8 @@ Capture freeform brainstorm notes for the active EA engagement.
    | Assumptions | Data ownership clarity, system inventory accuracy, integration maturity |
    | Metrics | Data quality scores, API throughput, integration error rates, system uptime |
    | Other | Migration complexity, system interdependencies, vendor relationships, use case traceability to application components |
+   | **Conceptual Data Model** | Business-readable subject areas, entities, and relationships — independent of technology |
+   | **Logical Data Model** | Structured data elements, attributes, and normalisation — how data is stored and related |
 
    ### Technology Architecture
    *Focus on platform, infrastructure, and technical decisions.*
@@ -195,6 +209,10 @@ Capture freeform brainstorm notes for the active EA engagement.
    | Assumptions | Cloud readiness, vendor support timelines, network capacity |
    | Metrics | Infrastructure uptime, deployment frequency, security posture scores, cost per workload |
    | Other | Technology radar inputs, emerging tech candidates, decommission targets |
+   | **Platforms** | Runtime platforms, execution environments, and hosting layers |
+   | **Languages** | Programming languages, frameworks, and runtime stacks in use or under consideration |
+   | **Infrastructure** | Compute, storage, and physical or virtual infrastructure — on-prem, cloud, or hybrid |
+   | **Network** | Network topology, segmentation, connectivity, and traffic patterns between systems and zones |
 
    ### Opportunities & Solutions
    *Focus on solution options and delivery sequencing.*
@@ -250,7 +268,14 @@ Capture freeform brainstorm notes for the active EA engagement.
 
    Set `BRAINSTORM_DATA.phase` to the full phase label (e.g. `"Phase D — Technology Architecture"`). If the phase has no letter prefix (Preliminary, Requirements), use just the name (e.g. `"Preliminary"`).
 
-   **Generate thought-starter suggestions for each category.** For each category, derive 2–4 short, concrete thought starters relevant to the phase and engagement context. These are pre-written thought entries the user can click to add without typing — they should be specific enough to be immediately useful, not just restatements of the hint. Use the hint as the seed, then concretise. Example for Technology Architecture / concerns:
+   **Inject domain-specific categories when scoped to a domain phase.** In addition to the six default categories, append extra entries to `BRAINSTORM_DATA.categories` when the resolved phase matches:
+   - **Phase B (Business Architecture):** `{ id: "value-streams", label: "Value Streams", emoji: "🌊", hint: "...", suggestions: [...] }`, `{ id: "use-cases", label: "Use Cases", emoji: "🎭", hint: "...", suggestions: [...] }`, `{ id: "processes", label: "Processes", emoji: "⚙️", hint: "...", suggestions: [...] }`
+   - **Phase C-Data (Data Architecture):** `{ id: "conceptual-model", label: "Conceptual Data Model", emoji: "🗺️", hint: "...", suggestions: [...] }`, `{ id: "logical-model", label: "Logical Data Model", emoji: "📊", hint: "...", suggestions: [...] }`
+   - **Phase D (Technology Architecture):** `{ id: "platforms", label: "Platforms", emoji: "🏗️", hint: "...", suggestions: [...] }`, `{ id: "languages", label: "Languages", emoji: "💻", hint: "...", suggestions: [...] }`, `{ id: "infrastructure", label: "Infrastructure", emoji: "🏢", hint: "...", suggestions: [...] }`, `{ id: "network", label: "Network", emoji: "🌐", hint: "...", suggestions: [...] }`
+
+   For each extra category, copy the hint from the corresponding row in the phase hint table above and generate 2–4 concrete thought starters. If no starters are relevant, set `suggestions: null`.
+
+   **Generate thought-starter suggestions for each category.** For each category (defaults + domain extras), derive 2–4 short, concrete thought starters relevant to the phase and engagement context. These are pre-written thought entries the user can click to add without typing — they should be specific enough to be immediately useful, not just restatements of the hint. Use the hint as the seed, then concretise. Example for Technology Architecture / concerns:
    - `"Legacy ERP creates vendor lock-in — no supported migration path before 2027"`
    - `"Security posture is reactive — no zero-trust or identity governance in place"`
    - `"Two key platform engineers leaving in Q3 — risk to delivery capacity"`
@@ -333,6 +358,8 @@ Capture freeform brainstorm notes for the active EA engagement.
    ### Other
    - {thought}
    ```
+
+   When the brainstorm pad includes domain-specific categories, additional sections may appear after the base set — for example `### Value Streams`, `### Use Cases`, `### Processes` (Phase B), `### Conceptual Data Model`, `### Logical Data Model` (Phase C-Data), or `### Platforms`, `### Languages`, `### Infrastructure`, `### Network` (Phase D). The app iterates over all categories dynamically, so these are included automatically when the user fills thoughts in them.
 
    Notes tagged `[ISS?]` and `[PRB?]` are pre-flagged for ISS-NNN/PRB-NNN assignment during the next `/ea-interview` session. The interviewer reads these tags and prompts for evidence and formal ID assignment.
 
