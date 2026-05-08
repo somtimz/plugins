@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.41
+**Version:** 0.9.42
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -717,6 +717,26 @@ A validated Mermaid diagram inserted into the `## Two Layers of Intent` section 
 - **Cross-layer dotted edges:** Business Goals informed by Principles; Projects governed by EA Capability Use Cases; Implementations comply with Architecture Requirements; Governance Processes enforce Projects; Architecture Decisions guide Implementations.
 
 **Purpose:** Makes the artifact-type separation immediately visual for stakeholders and interviewers.
+
+### 5.36 Bundled Grill-Me Skills (v0.9.42)
+
+The 9 core grill-me skills are now bundled directly inside ea-assistant, making it self-contained. Users no longer need the separate grill-me plugin installed for `/ea-grill` to function.
+
+**Added skills:**
+- `skills/grill-me-stress-test/SKILL.md`
+- `skills/grill-me-premortem/SKILL.md`
+- `skills/grill-me-decision/SKILL.md`
+- `skills/grill-me-design/SKILL.md`
+- `skills/grill-me-software-design/SKILL.md`
+- `skills/grill-me-infra-design/SKILL.md`
+- `skills/grill-me-artifact/SKILL.md`
+- `skills/grill-me-diagram/SKILL.md`
+- `skills/grill-me-boardroom-strategy/SKILL.md`
+
+**Updated files:**
+- `commands/ea-grill.md` — Skill ID column in Step 2 mapping table updated to use fully-qualified `ea-assistant:grill-me-*` names. The `practitioner`, `maturity`, `failure-mode`, `requirements`, and `direction` skills are unchanged (they load from reference files within ea-assistant).
+
+---
 
 ### 5.35 Two Layers Integration — Cross-Artifact, Interview, Grill, and Brainstorm (v0.9.41)
 
