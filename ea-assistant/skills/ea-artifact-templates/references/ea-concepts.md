@@ -447,6 +447,7 @@ A goal is a qualitative statement of a desired future state. It describes *where
 - **Maturity marker (L1→L5):** L1 = goals are generic and unmeasured; L3 = goals linked to metrics and value streams; L5 = goals continuously refined based on delivery feedback
 - Focus on **"where to play" and "how to win"** — not just process diagrams
 - **Economic framing:** Every Goal should have a "what happens if not achieved" statement that includes business impact
+- **Two Layers check:** Apply the quick test — *Would this still exist if the EA team were disbanded?* If no, it is an **EA Goal** and belongs in the Governance Framework or Architecture Principles, not the Architecture Vision.
 
 ---
 
@@ -956,6 +957,7 @@ A Use Case is a discrete goal pursued by a specific actor (user, system, or exte
 - Use cases with no linked capability reveal **capability gaps** — the actor's goal cannot be supported.
 - **Maturity marker (L1→L5):** L1 = use cases named but not documented; L3 = use cases documented with actors, preconditions, main flow, and exception flows; L5 = use cases traced to automated test scenarios and real user-journey analytics
 - Use the Use Case Catalog to validate **Requirements completeness** — if a REQ-NNN cannot be traced to a UC-NNN, it may be an orphaned or implicit requirement
+- **Two Layers check:** If the use case subject is "how we govern" or "how we standardize solutions" rather than "what the actor needs," it is an **EA Capability Use Case** — route it to the Governance Framework or Architecture Principles. See **Two Layers of Intent**.
 
 ---
 
