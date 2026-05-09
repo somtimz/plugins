@@ -300,6 +300,40 @@ The A3.N block format is defined in `skills/ea-artifact-templates/SKILL.md` unde
 
 ---
 
+### Note Capture Interrupt
+
+When the user's response starts with `n: ` (note prefix) at any point during the interview:
+
+1. Strip the `n: ` prefix to extract the note text.
+2. Determine the current phase folder from interview context (same phase mapping used elsewhere in this command).
+3. Determine N: glob `EA-projects/{slug}/artifacts/{phase-folder}/notes/adhoc/note-{YYYY-MM-DD}-*.md`, count existing files and add 1.
+4. Write `EA-projects/{slug}/artifacts/{phase-folder}/notes/adhoc/note-{YYYY-MM-DD}-{N}.md` with:
+   ```yaml
+   ---
+   type: adhoc
+   engagement: {name}
+   phase: {phase label}
+   date: {YYYY-MM-DD}
+   source: interview
+   parentArtifact: null
+   status: Open
+   resolvedDate: null
+   resolvedBy: []
+   crossPhase: false
+   ---
+   ```
+   Body: note text followed by `\n\n## Resolution\n\n*(not yet resolved)*`
+5. Confirm inline (do not break Q&A flow):
+   ```
+   📌 Note saved. _(`/ea-note resolve {path}` to record resolution when addressed)_
+   Resuming interview...
+   ```
+6. Re-present the current question exactly as it was shown before — do not advance to the next question.
+
+This interrupt is available in all interview modes (artifact, phase, engagement). It does not interact with A3 capture — `a:` and `n:` are independent prefixes.
+
+---
+
 ### Interview Notes Format
 
 All interview sessions produce dated, versioned notes:
