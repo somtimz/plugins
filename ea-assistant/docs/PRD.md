@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.44
+**Version:** 0.9.45
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -731,6 +731,18 @@ Reduced slash command and skill count while preserving all existing behaviour.
 - `ea-reorganize` → `ea-migrate --reorganize` (file-move utility now a flag on the migration command)
 
 All cross-references in commands and skill reference files updated to use the new entry points.
+
+---
+
+### 5.38 Ad-hoc Note Capture with Lifecycle (v0.9.45)
+
+**`/ea-note [text] [--artifact <id>] | resolve <path>`** — quick-capture notes from anywhere in the engagement lifecycle.
+
+- **Standalone capture:** Run `/ea-note` with or without inline text. The note is saved immediately to `artifacts/{phase}/notes/adhoc/` (or `cross-cutting/` if no phase active). A routing suggestion is offered after each save — classify as requirement, concern, ADR candidate, or cross-phase flag based on text content.
+- **Artifact annotation:** `--artifact <id>` to annotate a specific artifact. Choose inline (blockquote callout inserted into the artifact markdown) or linked (separate note file with frontmatter back-reference).
+- **Note lifecycle:** Every note includes `status: Open`, a `## Resolution` section, and lifecycle fields (`resolvedDate`, `resolvedBy`). Run `/ea-note resolve <path>` to walk through: resolved-by IDs, per-ID description, rationale, impact, and any residual unresolved impacts.
+- **Session interrupt:** Type `n: {text}` during any `/ea-interview` or `/ea-grill` session to capture a note without breaking flow — the session re-presents the current question or revision after confirming the save.
+- **Listing and management:** `/ea-notes list` now shows an Ad-hoc Notes section with Status column. `r) Resolve a note` action added to the notes menu.
 
 ---
 

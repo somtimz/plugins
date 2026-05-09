@@ -1,6 +1,6 @@
 ---
 name: ea-notes
-description: List, view, edit, or delete interview notes, brainstorm notes, and review files for the active engagement
+description: List, view, edit, delete, or resolve notes for the active engagement
 argument-hint: "[list [phase] | view <path> | edit <path> | delete <path>]"
 allowed-tools: [Read, Write, Glob, Bash]
 ---
@@ -23,6 +23,7 @@ Read `engagement.json` and extract the `slug` field. All paths in this command a
    - `.../notes/interviews/...` → Interview Note
    - `.../notes/brainstorm/...` → Brainstorm Note
    - `.../notes/reviews/...` → Review Note
+   - `.../notes/adhoc/...` → Ad-hoc Note
 
 3. Resolve the phase label from the path segment (e.g. `phase-a` → `Phase A`, `preliminary` → `Preliminary`, `cross-cutting` → `Cross-cutting`).
 
@@ -45,17 +46,40 @@ Read `engagement.json` and extract the `slug` field. All paths in this command a
 | Phase        | Artifact                    | Skill      | Date       | File path |
 |--------------|-----------------------------|------------|------------|-----------|
 | Phase A      | architecture-vision         | boardroom  | 2026-04-05 | artifacts/phase-a/notes/reviews/grill-architecture-vision-boardroom-2026-04-05.md |
+
+## Ad-hoc Notes
+| Phase        | Status   | Date       | Source     | File path |
+|--------------|----------|------------|------------|-----------|
+| Phase A      | Open     | 2026-05-09 | interview  | artifacts/phase-a/notes/adhoc/note-2026-05-09-1.md |
+| Cross-cutting| Resolved | 2026-05-08 | standalone | artifacts/cross-cutting/notes/adhoc/note-2026-05-08-1.md |
 ```
 
 For brainstorm notes, read the `sessions` and `lastUpdated` fields from frontmatter to populate the table.
 
-If no notes are found, show: "No notes found for this engagement yet. Run `/ea-brainstorm`, `/ea-interview`, or `/ea-grill` to create notes."
+For ad-hoc notes, read the `status` and `source` fields from frontmatter to populate the table. Sort Open notes before Resolved ones.
+
+If no notes are found, show: "No notes found for this engagement yet. Run `/ea-note`, `/ea-brainstorm`, `/ea-interview`, or `/ea-grill` to create notes."
 
 After displaying, offer a next-actions menu:
 ```
 What would you like to do?
-  v) View a note       e) Edit a note       d) Delete a note       q) Quit
+  v) View a note       e) Edit a note       d) Delete a note       r) Resolve a note       q) Quit
 ```
+
+When `r` is selected:
+- Prompt: "Enter the file path of the note to resolve (relative to `EA-projects/{slug}/`):"
+- Follow the resolve flow from `/ea-note resolve <path>`:
+  1. Read the note file. If `status` is already `Resolved`, display the current resolution section and ask: "Update resolution? (y/n)" If no, end cleanly.
+  2. Prompt in sequence (wait for each response before asking the next):
+     - **Resolved by:** "What resolved this note? Enter artifact IDs or item IDs (comma-separated, e.g. `STR-003, phase-b/business-architecture`):"
+     - **Description:** For each ID provided, ask: "What changed in {id}?" (one line each)
+     - **Rationale:** "Why was this the right resolution?"
+     - **Impact:** "What changed in the engagement as a result?"
+     - **Residual impacts:** "Any outstanding impacts still unresolved? (press Enter to skip)"
+  3. Update the note's frontmatter: `status: Resolved`, `resolvedDate: {today ISO 8601}`, `resolvedBy: [{ids}]`
+  4. Replace `*(not yet resolved)*` in the `## Resolution` section with the full populated resolution block (Status, Resolved By, Rationale, Impact, Residual Impacts).
+  5. Write the updated file.
+  6. Confirm: `✅ Note resolved — {path}`
 
 ---
 

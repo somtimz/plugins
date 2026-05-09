@@ -67,6 +67,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Evidence-gated prioritisation** — work packages with insufficient evidence flagged as high-risk or deferred from Wave 1; prevents speculative scheduling
 - **Political alignment documentation** — records stakeholder pressure and defensible evidence-based positions for high-impact decisions; surfaces in ADR and A3 assessments
 - **Tier 4 compliance** — advanced compliance rules for L3+ engagements: economic traceability, decision latency documentation, optionality preservation, fitness function coverage, premature decision detection, evidence quality assessment, political alignment, PAD hygiene, and work package evidence gating; maturity-based enforcement expectations
+- **Ad-hoc note capture** — `/ea-note [text] [--artifact <id>] | resolve <path>` quick-captures notes with Open/Resolved lifecycle from anywhere in the engagement; standalone notes routed to phase folder with classification suggestions; artifact annotations inserted inline or as linked files; `n:` interrupt prefix works during `/ea-interview` and `/ea-grill` without breaking session flow; `/ea-notes list` shows Ad-hoc Notes section with Status column
 
 ## Prerequisites
 
@@ -138,6 +139,7 @@ uiMode: html
 | `/ea-interview [mode]` | Start or resume a stakeholder interview (artifact or phase mode; Text/Web/Display) |
 | `/ea-generate [artifact] [format]` | Export as docx, pptx, mermaid, png, or svg; diagrams embedded in docx/pptx by default |
 | `/ea-notes [mode]` | List, view, edit, or delete interview notes, brainstorm notes, and review files |
+| `/ea-note [text] [--artifact <id>] \| resolve <path>` | Quick-capture an ad-hoc note with Open/Resolved lifecycle; `resolve` records resolution with rationale and impact; `n:` prefix works mid-interview or mid-grill |
 | `/ea-review [artifact]` | Open an artifact for review and assessment; runs compliance check on load |
 | `/ea-requirements [action]` | Manage architecture requirements |
 | `/ea-decisions [options]` | Generate a Decision Register from all A3 decision logs; filter by audience, owner, domain, authority, cost, impact, risk, subject, or status |

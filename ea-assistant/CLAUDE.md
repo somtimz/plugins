@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.44 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.45 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -34,7 +34,7 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 
 ## Command Reference
 
-36 commands available — run `/ea-help` for the full table with agent assignments.
+33 commands available — run `/ea-help` for the full table with agent assignments.
 Key entry points: `/ea-new` · `/ea-open` · `/ea-interview` · `/ea-grill` · `/ea-generate` · `/ea-status` · `/ea-brief`
 
 ---
