@@ -51,6 +51,9 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Item detail files** — optional per-item companion files (`artifacts/details/{ID}.md`) capture extended narrative, rationale, risks, costs, issues, concerns, impact, and alternatives for any ID-bearing table row; linked from source tables via `Details` column; loaded automatically as context by interview, grill, review, and brainstorm sessions
 - **Session capture to detail files** — interview, review, brainstorm, and grill sessions offer to record surfaced issues and concerns directly into the relevant item's detail file; grill cross-references new CON-NNN entries to item detail files after A4 population
 - **Detail file sync** — `/ea-detail sync <ID>` bidirectionally syncs a detail file's Concerns/Issues with the parent artifact's A4 table; `/ea-consistency --details` validates link integrity (Check D) and A4 content sync (Check E) across all detail files
+- **Detail file cross-linking** — `/ea-detail link {ID1} {ID2} [rel]` creates bidirectional links with automatic inverse labels; `relatedItems[]` frontmatter is the source of truth; `/ea-detail check` validates link integrity, back-link symmetry, table/frontmatter sync, and open notes
+- **Inline detail notes** — `/ea-note --detail {ID}` appends open `📌` annotations to a detail file's `## Notes` section; `/ea-detail note resolve {ID}` resolves them in-place; visible in `check`, `list`, and `index` output
+- **Detail file index** — `/ea-detail index` generates `artifacts/details/_index.md` grouped by type with cross-link and open-note columns
 - **Generate and publish with detail files** — `/ea-generate --with-details` embeds detail file content in exported .docx/.pptx; `/ea-publish` offers inline, appendix-only, or exclude options for detail files in consolidated documents
 - **Migration** — `/ea-migrate` aligns legacy engagements to the current plugin version; scan 3g flags high-priority items (Critical/High risks, High-priority requirements, Strategic decisions) lacking detail files; preview with `--report`
 - **Session rules** — each engagement folder is seeded with `.claude/rules/ea-engagement.md`: persistent guardrails loaded by Claude Code on every session (require `/ea-open`, protect Approved artifacts, enforce unified ID scheme, cite reference SSTs for concepts and phase guidance)
@@ -140,6 +143,7 @@ uiMode: html
 | `/ea-generate [artifact] [format]` | Export as docx, pptx, mermaid, png, or svg; diagrams embedded in docx/pptx by default |
 | `/ea-notes [mode]` | List, view, edit, or delete interview notes, brainstorm notes, and review files |
 | `/ea-note [text] [--artifact <id>] \| resolve <path>` | Quick-capture an ad-hoc note with Open/Resolved lifecycle; `resolve` records resolution with rationale and impact; `n:` prefix works mid-interview or mid-grill |
+| `/ea-detail new\|view\|list\|sync\|link\|check\|note resolve\|index` | Create, view, list, sync, cross-link, and integrity-check item detail files; generate type-grouped index; add and resolve inline notes |
 | `/ea-review [artifact]` | Open an artifact for review and assessment; runs compliance check on load |
 | `/ea-requirements [action]` | Manage architecture requirements |
 | `/ea-decisions [options]` | Generate a Decision Register from all A3 decision logs; filter by audience, owner, domain, authority, cost, impact, risk, subject, or status |

@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.45
+**Version:** 0.9.46
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -731,6 +731,21 @@ Reduced slash command and skill count while preserving all existing behaviour.
 - `ea-reorganize` → `ea-migrate --reorganize` (file-move utility now a flag on the migration command)
 
 All cross-references in commands and skill reference files updated to use the new entry points.
+
+---
+
+### 5.39 Detail File Cross-Linking and Inline Notes (v0.9.46)
+
+Bidirectional cross-linking between detail files, inline note annotations with Open/Resolved lifecycle, and a generated index.
+
+- **Cross-linking:** `relatedItems: []` frontmatter array is the machine-readable source of truth. A `## Related Items` table in each detail file renders links as human-readable markdown using same-directory relative paths.
+- **`/ea-detail link {ID1} {ID2} [relationship]`** — creates a bidirectional link with automatic inverse label. Handles legacy files missing `## Related Items`. Updates `lastModified` in both files.
+- **`/ea-detail check [ID]`** — four integrity checks: link existence, back-link symmetry, table/frontmatter sync (full-token matching), and open notes. Interactive fix for single-file mode.
+- **`/ea-detail note resolve {ID}`** — lists open `📌` notes in a detail file; user selects one and enters resolution text; blockquote updated in-place.
+- **`/ea-detail index`** — generates `artifacts/details/_index.md` grouped by type with Related Items and Open Notes columns.
+- **Updated `list` mode** — type-grouped output with `### {Type}` headings, `--type {type}` filter, Open Notes column, cross-link footer.
+- **Updated `view` mode** — related-items nav line after content; 5-action menu with "Resolve a note" option; consistency check extended to all 4 check types.
+- **`/ea-note --detail {ID}`** — appends inline open `📌` blockquote to a detail file's `## Notes` section; handles legacy files missing that section.
 
 ---
 

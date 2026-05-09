@@ -93,7 +93,7 @@ You have existing engagements. Common next steps:
 | `/ea-research [mode]` | Research library — add, note, link, list, view, apply findings to artifacts |
 | `/ea-notes [mode]` | List, view, edit, or delete interview notes, brainstorm notes, and review files |
 | `/ea-note [text] [--artifact <id>] \| resolve <path>` | Quick-capture an ad-hoc note with lifecycle (Open/Resolved) — inline annotation or linked note; `resolve` records resolution with rationale and impact |
-| `/ea-detail new\|view\|list\|sync` | Create, view, list, or sync optional item detail files — extended narrative, rationale, risks, costs, issues, concerns, impact, and alternatives for individual engagement items |
+| `/ea-detail new\|view\|list\|sync\|link\|check\|note resolve\|index` | Create, view, list, sync, cross-link, or integrity-check item detail files; generate index; add and resolve inline notes |
 | `/ea-consistency [options]` | Focused consistency check — cross-artifact contradictions, within-artifact section inconsistencies, or ID reference scan only (`--ids`); `--details` validates detail file link integrity and A4 sync |
 | `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman |
 | `/ea-security-review` | Security audit — SABSA, ISO 27001, and NIST CSF 2.0 coverage across the engagement or a single artifact |
