@@ -245,3 +245,95 @@ Only flag when both `nfrSubType` and `measurableTarget` are non-null and the tar
 **Bootstrap mechanism:** Scan phase-b artifacts for rows where REQ-NNN and CAP-NNN co-occur in the same table row or section. For each candidate pair found, propose: `Found CAP-003 co-mentioned with REQ-001 in Business Architecture — add link satisfiedBy? [Y/n]`. On Y: append link, update `lastUpdated`, write `traceability-index.json`, rebuild indexes, show updated matrix.
 
 **After view:** Return to the persistent menu (Step 3).
+
+---
+
+### View 5: Capability → Work Package
+
+**Entity sources:**
+- CAP-NNN: scan `EA-projects/{slug}/artifacts/phase-b/*.md`
+- WP-NNN: scan `EA-projects/{slug}/artifacts/phase-e/*.md` (Architecture Roadmap)
+
+**Render matrix:** rows = CAP-NNN, columns = WP-NNN, link type = `deliveredBy`
+
+**Gaps section:**
+
+For each CAP-NNN with no outgoing `deliveredBy` link:
+```
+⚠️ CAP-003 has no work package delivering it
+   → Add a work package via /ea-artifact or /ea-interview phase-e
+   → Or add: {"from":"CAP-003","to":"WP-XXX","type":"deliveredBy"}
+```
+
+For each WP-NNN with no incoming `deliveredBy` link:
+```
+⚠️ WP-004 does not deliver any capability
+   → Link to a capability or verify this WP is in scope
+```
+
+**Contradictions section:**
+
+Detect sequencing issues: if two capabilities A and B both appear in the phase-b artifact and A's description or the Architecture Vision implies A depends on B (e.g. "CAP-001 builds on CAP-003" or "CAP-001 requires CAP-003 to be in place"), but the WP delivering A (WP-001) is in an earlier wave than the WP delivering B (WP-004):
+```
+⚠️ CAP-001 (delivered by WP-001, Wave 1) references CAP-003 (delivered by WP-004, Wave 2) — verify Wave 1 delivery of CAP-001 is not blocked by Wave 2 delivery of CAP-003.
+   → Review roadmap sequencing via /ea-grill phase-e
+```
+Wave number is extracted from the WP row in the Roadmap artifact (look for a `Wave` or `Phase` column). Only flag when the wave numbers can be unambiguously read. If not found, skip contradiction detection for this view.
+
+**Bootstrap mechanism:** Scan phase-e (Roadmap) artifact for rows where CAP-NNN and WP-NNN co-occur in the same table row. For each candidate pair found, propose: `Found WP-002 co-mentioned with CAP-003 in Architecture Roadmap — add link deliveredBy? [Y/n]`. On Y: append link, update `lastUpdated`, write `traceability-index.json`, rebuild indexes, show updated matrix.
+
+**After view:** Return to the persistent menu (Step 3).
+
+---
+
+## Step 5 — Write Links
+
+When a user confirms a bootstrap suggestion or manually adds a link (by typing the JSON):
+
+1. Parse the link object: `{"from": "X", "to": "Y", "type": "Z"}`
+2. Validate that `type` is one of the five v1 types: `motivates`, `addresses`, `supports`, `satisfiedBy`, `deliveredBy`
+3. Check for duplicates: if an identical `from`/`to`/`type` triple already exists, skip and notify: `Link already exists — no change made.`
+4. Append to the `links` array in `traceability-index.json`
+5. Set `lastUpdated` to the current ISO 8601 timestamp
+6. Write the file
+7. Rebuild the outgoing and incoming indexes
+8. Recount gaps and return to menu
+
+---
+
+## Step 6 — Full Gap Report
+
+Triggered by menu option 6 or the `--gaps` argument.
+
+Run all five views silently (generate findings but do not render matrices). Collect all gap and contradiction findings. Print:
+
+```
+Full Gap Report — {engagement name}
+════════════════════════════════════════════════════
+Generated: {ISO timestamp}
+
+Summary
+───────────────────────────────────────────────────
+Driver → Goal             {N} gaps, {N} contradictions
+Goal → Strategy           {N} gaps, {N} contradictions
+Strategy → Requirement    {N} gaps, {N} contradictions
+Requirement → Capability  {N} gaps, {N} contradictions
+Capability → Work Package {N} gaps, {N} contradictions
+
+Total: {N} gaps, {N} contradictions
+
+── Gaps ────────────────────────────────────────────
+[All gap findings, grouped by view, with fix actions]
+
+── Contradictions ──────────────────────────────────
+[All contradiction findings, grouped by view]
+
+✅ No gaps found.   ← shown only if total gaps = 0
+```
+
+After the report, offer:
+```
+  1. Open a specific view  →  enter 1–5
+  2. Run /ea-consistency for artifact-level checks
+  Q. Quit
+```
