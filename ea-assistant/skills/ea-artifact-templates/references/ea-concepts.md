@@ -46,6 +46,26 @@ Problems (PRB) ──blocks──► Objectives (OBJ)
                                 ▼
                      Requirements Register
                     (traces to ALL layers above)
+                                │
+                           realised by
+                                ▼
+                  Architecture Building Blocks (ABB)
+                    (Logical, vendor-neutral components)
+                                │
+                          implemented by
+                                ▼
+                  Solution Building Blocks (SBB)
+                    (Concrete products and technologies)
+                                │
+                          delivered via
+                                ▼
+                       User Stories (STY)
+                    (Actor-centred delivery items)
+                                │
+                          broken into
+                                ▼
+                            Tasks
+                    (Atomic implementation steps)
                                 ▲
                          Operating Model
                        (How the org functions)
@@ -72,6 +92,8 @@ Key relationships:
 - **Metrics** close the feedback loop: they validate success or surface new Issues, Problems, and Capability Maturity gaps
 - **Capability Gaps** (missing or immature capabilities) prevent Goals from being achieved — they are identified through the Capability Model and feed into the Gap Analysis
 - **Requirements Register** is the formal bridge from the strategic layer to execution; every requirement traces back to a Driver, Goal, Objective, Issue, Problem, Capability, Value Stream, Process, Use Case, Operating Model element, or Metric
+- **Architecture Building Blocks (ABBs)** realise Requirements as logical, vendor-neutral components; ABBs are implemented by **Solution Building Blocks (SBBs)** — concrete products and technologies
+- **User Stories** translate SBBs into actor-centred delivery items that teams implement as **Tasks**
 
 ---
 
@@ -977,6 +999,92 @@ A Use Case is a discrete goal pursued by a specific actor (user, system, or exte
 
 ---
 
+### Architecture Building Block (ABB-NNN)
+
+An Architecture Building Block (ABB) is a named, reusable logical component of an architecture that provides a defined set of functions to meet one or more Requirements. ABBs describe *what logical capability is needed* without specifying *how* it is implemented — they are vendor-neutral and technology-agnostic at definition time.
+
+ABBs sit between Requirements and Solution Building Blocks:
+- **Above:** A Requirement defines what must be true; the ABB defines what logical piece satisfies it
+- **Below:** A Solution Building Block (SBB) is the concrete product or technology that implements the ABB
+
+**TOGAF placement:** Architecture Definition Document (Phase B–D); Gap Analysis (Phase E). ABBs form the Target Architecture's logical component model. They also appear as "baseline ABBs" in Gap Analysis when documenting the current-state architecture.
+
+**ArchiMate:** Application Component, Technology Node, or Grouping element in the Application or Technology layer — depending on whether the ABB is an application-level or infrastructure-level component.
+
+**ID scheme:** ABB-NNN (e.g. ABB-001). Sequential within the engagement.
+
+**Key attributes:**
+- Name — a noun phrase describing the logical function (e.g. "Immutable Log Store", "Drift Detection Engine")
+- Description — what it does and what functions it provides
+- Satisfies — REQ-NNN references it fulfils
+- Implemented by — SBB-NNN references (populated in Phase D / Gap Analysis)
+- Domain — which architecture layer it belongs to (Application / Technology / Data / Security)
+
+**What it is NOT:**
+- Not a **Requirement** — a requirement states a condition ("logs must be tamper-evident"); an ABB is the logical component that satisfies it ("Immutable Log Store with hash chaining")
+- Not a **Solution Building Block** — an ABB is logical and vendor-neutral; an SBB is the chosen product (e.g. "AWS S3 with Object Lock")
+- Not a **Capability** — a capability is the organisational ability; an ABB is the technical component that enables delivery of that capability
+- Not a **Use Case** — a use case is an actor goal; an ABB is the architectural component that supports its execution
+
+**Common confusions:**
+- "We need a backup service" — this is an ABB (logical) until a vendor is chosen; once you say "AWS Backup" it becomes an SBB
+- "The system must back up every 15 minutes" — this is a Requirement (the constraint), not an ABB
+- "Disaster Recovery Management" — this is a Capability (what the org must be able to do), not an ABB
+
+---
+
+### Solution Building Block (SBB-NNN)
+
+A Solution Building Block (SBB) is a concrete, vendor-specific implementation of an Architecture Building Block. Where an ABB defines the logical component needed ("Containerisation and Runtime Abstraction Layer"), the SBB is the specific product or technology chosen to fulfil it ("Docker + Kubernetes on AKS").
+
+SBBs are the output of technology/vendor selection decisions — they are what the team actually builds, configures, procures, or integrates.
+
+**TOGAF placement:** Technology Architecture (Phase D); Architecture Roadmap and Migration Plan (Phase E/F). SBBs also appear in the Gap Analysis when comparing baseline (current ABBs/SBBs) to target state.
+
+**ID scheme:** SBB-NNN (e.g. SBB-001). Sequential within the engagement.
+
+**Key attributes:**
+- Name — the specific product, tool, or technology (e.g. "AWS Backup", "Terraform IaC Templates", "Cloudflare DNS Failover")
+- Implements — ABB-NNN reference
+- Vendor / Source — who provides it (commercial, open source, custom-built)
+- Version / Release — if known at time of capture
+- Constraints — any lock-in, licensing, or compatibility constraints introduced
+
+**What it is NOT:**
+- Not an **ABB** — an ABB is the logical concept; the SBB is the physical choice
+- Not a **Requirement** — a requirement says "must be achievable within 4 hours"; an SBB is the chosen mechanism that achieves it
+
+**ArchiMate:** System Software, Device, or Technology Service in the Technology layer; Application Service or Application Component in the Application layer.
+
+---
+
+### User Story (STY-NNN)
+
+A User Story is a lightweight, actor-centred description of a deliverable unit of implementation work. It follows the format: *"As a {actor}, I want {goal} so that {benefit}."* User stories are the primary vehicle for translating Architecture Building Blocks into executable delivery items — they are what teams actually build in sprints or iterations.
+
+In a TOGAF engagement, user stories sit *below* Requirements: Requirements define what must be true; Stories define how teams implement the components that make it true.
+
+**TOGAF placement:** Architecture Roadmap (Phase E) and Migration Plan (Phase F) — where work is decomposed into delivery items. Stories may also appear as optional subsections within Requirements to show the implementation decomposition.
+
+**ID scheme:** STY-NNN (e.g. STY-001) when tracked formally. May be captured informally inline in Requirements without an ID.
+
+**Key attributes:**
+- Actor — who benefits
+- Goal — what they want to accomplish
+- Benefit — why it matters / what value it delivers
+- Acceptance criteria — how we know it is done (links to Sample Tests)
+- Implements — SBB-NNN or ABB-NNN reference
+- Satisfies — REQ-NNN reference
+
+**What it is NOT:**
+- Not a **Use Case** — a Use Case (UC-NNN) is a structured analysis artifact with main flow, alternatives, exceptions, actors, and preconditions; a User Story is a lightweight placeholder ("As a X, I want Y") without that structure. Use Cases generate Requirements; Stories implement them.
+- Not a **Requirement** — "As an operator, I want automated backups every 15 minutes" is a Story. The Requirement is "No more than 15 minutes of data loss (RPO ≤ 15 min)".
+- Not a **Task** — a task is an atomic implementation step under a story (configure backup schedule, test restore procedure, write runbook). Tasks have no IDs.
+
+**Enabler Stories:** A sub-type of User Story with no direct user-facing outcome — they support architectural runway (infrastructure setup, security hardening, compliance scaffolding). Tag as `[Enabler]` in the Story text.
+
+---
+
 ## Disambiguation Checklist
 
 Apply these tests in order. The first test that matches identifies the concept:
@@ -995,6 +1103,15 @@ Apply these tests in order. The first test that matches identifies the concept:
 11. **Is it a binding rule that governs architecture decisions — not a description of what the organisation wants or how it will get there?** → it is a **Principle**
 12. **Does it require a Rationale, Implications, and Owner to be complete?** → it is a **Principle** (TOGAF standard structure)
 
+**Step 13 — Is this an architecture component or implementation?**
+
+If you have identified something that is *not* a goal, objective, strategy, issue, problem, risk, capability, value stream, process, or use case — ask:
+
+1. Does it describe *what logical function is needed* without specifying a product? → **Architecture Building Block (ABB-NNN)**
+2. Does it name a specific product, tool, vendor, or technology? → **Solution Building Block (SBB-NNN)**
+3. Is it phrased "As a {actor}, I want {goal} so that {benefit}"? → **User Story (STY-NNN)**
+4. Is it a step-by-step action item (configure X, run Y, write Z)? → **Task** (captured under a Story, no ID)
+
 ---
 
 ## Common Confusions — Quick Reference
@@ -1011,6 +1128,9 @@ Apply these tests in order. The first test that matches identifies the concept:
 | "We should document all APIs" | **Standard** or **Principle** | A standard if prescriptive and auditable; a principle if it's a governance rule ("All integration surfaces must be documented and versioned") |
 | "Define governance process for AI projects" | **EA Capability Use Case** (EA layer) | Subject is "governance process" — how we standardize solutions. Not a Business Use Case, which would be "Auto-triage cases with AI" |
 | "Automate case management with AI" | **Business Goal** or **Business Use Case** (business layer) | Subject is a business operation. If framed as governance ("Establish AI case management standards") → EA layer |
+| "We need a backup service" | **ABB** (logical) → "Automated Backup Service" | No vendor named; describes function, not product |
+| "We will use AWS Backup" | **SBB** (physical) → "AWS Backup" | Specific vendor/product named; could be swapped for another |
+| "As an operator, I want automated backups every 15 minutes" | **User Story** (STY-NNN) | Actor + goal + benefit pattern; not a constraint or measurable condition |
 
 ---
 
@@ -1035,6 +1155,9 @@ Apply these tests in order. The first test that matches identifies the concept:
 | Operating Model | Business Architecture; Technology Architecture | B / D | Business | — |
 | Metrics | Architecture Vision §7; Phase G/H governance | A / G / H | Motivation | — |
 | Architecture Decision Record | ADR Register; individual ADR-NNN files; cross-referenced in artifact `## Appendix A5 — Related Architecture Decisions` sections | Any | — | — |
+| Architecture Building Block (ABB) | Architecture Definition Document; Gap Analysis; Business/App/Tech Architecture ABB sections | B–E | Application / Technology | Application Component; Technology Node |
+| Solution Building Block (SBB) | Technology Architecture (SBB Register); Gap Analysis; Migration Plan | D–F | Technology | System Software; Device; Technology Service |
+| User Story | Architecture Roadmap; Migration Plan; Requirements Register (Stories subsection) | E–F | Implementation & Migration | Work Package |
 
 ---
 
