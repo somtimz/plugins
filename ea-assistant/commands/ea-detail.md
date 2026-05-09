@@ -140,21 +140,27 @@ Open and display a detail file.
 1. Check whether `EA-projects/{slug}/artifacts/details/{ID}.md` exists.
    - If not found: offer to create it — "No detail file found for {ID}. Create one now with `/ea-detail new {ID}`?"
 2. Read the file and display its full content.
+   After displaying the content, if `relatedItems[]` in frontmatter is non-empty, show a navigation line:
+   ```
+   Related: {ID1} ({type1}), {ID2} ({type2}) — /ea-detail view {ID} to navigate
+   ```
 3. Offer actions:
    ```
    Detail file: {ID} — {title}
 
    1. Edit a section
    2. Update lastModified to today
-   3. Check consistency (verify parent artifact still references this file)
-   4. Delete this detail file
+   3. Check integrity (link validity, back-link symmetry, table sync, open notes)
+   4. Resolve a note
+   5. Delete this detail file
    Enter a number or press Enter to close.
    ```
 4. Handle selected action:
-   - **Edit a section:** prompt "Which section? (Summary / Narrative / Rationale / Risks / Costs / Issues / Concerns / Impact / Alternatives)". Show current content and accept replacement text.
+   - **Edit a section:** prompt "Which section? (Notes / Related Items / Summary / Narrative / Rationale / Risks / Costs / Issues / Concerns / Impact / Alternatives)". Show current content and accept replacement text.
    - **Update lastModified:** set `lastModified` in frontmatter to today's date. Confirm.
-   - **Check consistency:** read the parent artifact; verify the `../details/{ID}.md` link exists in the expected table row. Report whether it is present or missing. If missing, offer to add it.
-   - **Delete:** confirm — "This will permanently delete `artifacts/details/{ID}.md`. Continue? (y/n)". If yes, delete the file and remove the `[→](../details/{ID}.md)` link from the parent artifact's table (replace with `—`).
+   - **Check integrity:** run all four checks from the `check` mode against this single file (link integrity, back-link symmetry, table/frontmatter sync, open notes). Offer interactive fixes for any issues found.
+   - **Resolve a note:** run the `note resolve {ID}` mode for this file.
+   - **Delete:** confirm — "This will permanently delete `artifacts/details/{ID}.md`. Continue? (y/n)". If yes, delete the file, remove the `[→](../details/{ID}.md)` link from the parent artifact's table (replace with `—`), and remove this file's ID from `relatedItems[]` in any other detail files that reference it.
 
 ---
 
@@ -215,33 +221,41 @@ Apply selected syncs:
 
 ---
 
-## Mode: `list [phase]`
+## Mode: `list [phase] [--type {type}]`
 
-List all detail files in the engagement.
+List all detail files in the engagement, grouped by type.
 
-1. Glob `EA-projects/{slug}/artifacts/details/*.md`
-2. For each file, read the frontmatter to extract: `item`, `type`, `title`, `parentArtifact`, `lastModified`
-3. If `phase` argument is provided, filter by phase:
-   - Determine which phase folder the `parentArtifact` belongs to (e.g. `phase-a/`, `phase-b/`)
-   - Include only items whose parent artifact is in that phase folder
-4. Display as a table. Link the ID to the detail file and the Parent Artifact to the artifact file. Paths in links must be relative to `EA-projects/{slug}/`:
+1. Glob `EA-projects/{slug}/artifacts/details/*.md`. Exclude `_index.md`.
+2. For each file, read frontmatter: `item`, `type`, `title`, `parentArtifact`, `lastModified`, `relatedItems`. Count open notes by scanning `## Notes` for lines matching `— **Open**`.
+3. If `phase` argument is provided, filter by phase: include only items whose `parentArtifact` path starts with the matching phase folder (e.g. `phase-a/`, `requirements/`).
+4. If `--type {type}` argument is provided, filter to items whose `type` matches (case-insensitive, e.g. `--type goal`, `--type requirement`).
+5. Group remaining items by `type`. Sort groups alphabetically. Within each group sort by ID.
+6. Display with one type section per group:
 
 ```
 Detail Files — {Engagement Name}
 ─────────────────────────────────────────────────────────────
-| ID | Type | Title | Parent Artifact | Last Modified |
-|---|---|---|---|---|
-| [G-001](artifacts/details/G-001.md) | Goal | Reduce operational costs | [Architecture Vision](artifacts/phase-a/architecture-vision.md) | 2026-05-01 |
-| [CAP-003](artifacts/details/CAP-003.md) | Capability | Customer Data Management | [Business Architecture](artifacts/phase-b/business-architecture.md) | 2026-05-03 |
-| [WP-007](artifacts/details/WP-007.md) | Work Package | CRM Platform Replacement | [Architecture Roadmap](artifacts/phase-e/architecture-roadmap.md) | 2026-05-05 |
 
-3 detail file(s)
+### Goals
+| ID | Title | Open Notes | Parent Artifact | Last Modified |
+|---|---|---|---|---|
+| [G-001](artifacts/details/G-001.md) | Reduce operational costs | — | [Architecture Vision](artifacts/phase-a/architecture-vision.md) | 2026-05-01 |
+
+### Requirements
+| ID | Title | Open Notes | Parent Artifact | Last Modified |
+|---|---|---|---|---|
+| [REQ-003](artifacts/details/REQ-003.md) | Reduce licensing spend | 📌 1 open | [Requirements Register](artifacts/requirements/requirements-register.md) | 2026-05-03 |
+
+3 detail file(s) · 2 cross-links · 1 open note
 ```
 
-- ID link: `[{ID}](artifacts/details/{ID}.md)` — path from engagement root
-- Parent Artifact link: `[{parent_artifact_name}](artifacts/{parentArtifact})` — `parentArtifact` frontmatter value is already relative to `artifacts/`, so prefix with `artifacts/`
+Column rules:
+- ID: `[{ID}](artifacts/details/{ID}.md)` — path from engagement root.
+- Open Notes: `—` if zero; `📌 {N} open` if any.
+- Parent Artifact: `[{display name}](artifacts/{parentArtifact})` — prefix `parentArtifact` frontmatter value with `artifacts/`.
+- Cross-link count in footer: total entries across all `relatedItems[]` arrays ÷ 2.
 
-If no detail files exist:
+If no detail files match:
 ```
 No detail files found in this engagement.
 Create one with: /ea-detail new {ID}
