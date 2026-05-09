@@ -2,7 +2,7 @@
 name: ea-note
 description: Quick-capture a note, concern, or annotation — saved immediately with routing suggestions
 argument-hint: "[text] [--artifact <id>] | resolve <path>"
-allowed-tools: [Read, Write, Glob, Grep, Bash]
+allowed-tools: [Read, Write, Glob, Bash]
 ---
 
 Quick-capture a note for the active EA engagement, optionally linked to a specific artifact.
@@ -15,6 +15,8 @@ Check for `engagement.json` in context. If no engagement is active, prompt: "No 
 
 Read `engagement.json` and extract `slug`, `name`, and `currentPhase`. All paths in this command are relative to `EA-projects/{slug}/`.
 
+**If the argument begins with `resolve`, skip immediately to the [Mode: `resolve <path>`](#mode-resolve-path) section below.** Do not proceed to Step 2.
+
 ---
 
 ### Step 2 — Capture text
@@ -26,8 +28,6 @@ If no text was provided, prompt: "What's on your mind?"
 ---
 
 ### Step 3 — Determine mode
-
-**Check for `resolve` subcommand first.** If the argument begins with `resolve`, skip to the [Mode: `resolve <path>`](#mode-resolve-path) section below.
 
 **Resolve the phase folder** from `currentPhase` using this lookup table:
 
@@ -74,15 +74,15 @@ If no text was provided, prompt: "What's on your mind?"
 1. Read the artifact file.
 2. List its `##` section headers (ignore `###` and deeper).
 3. Ask: "Which section should this annotation appear under?"
-4. Append `\n> **Note ({YYYY-MM-DD}):** {text}` under that section heading in the artifact file.
+4. Insert `\n> **Note ({YYYY-MM-DD}):** {text}` at the end of that section's content, immediately before the next `##` heading (or at end of file if it is the last section).
 5. Write the updated artifact file.
 6. Confirm: `✅ Annotation saved — {artifact path}`
 7. Skip to Step 5 (routing suggestions).
 
 **Linked note (l):**
 
-1. Determine the next sequential `N` for today by globbing `artifacts/{phase-folder}/notes/adhoc/note-{artifact-id}-{YYYY-MM-DD}-*.md` in that folder and counting existing files.
-2. Build the note path: `artifacts/{phase-folder}/notes/adhoc/note-{artifact-id}-{YYYY-MM-DD}-{N}.md`
+1. Determine the next sequential `N` for today by globbing `artifacts/{phase-folder}/notes/adhoc/note-{artifact-id}-{YYYY-MM-DD}-*.md` in that folder, counting existing files, and adding 1 (e.g. if 3 files exist, N = 4).
+2. Build the note path: `artifacts/{phase-folder}/notes/adhoc/note-{artifact-id}-{YYYY-MM-DD}-{N}.md` — use the phase folder resolved from `currentPhase` in Step 1, not the artifact's own location.
 3. Write the note file with artifact-note frontmatter and body (see templates below).
 4. Read the artifact file's `links:` frontmatter array. Append `{note path}` to it and write the updated artifact file.
 5. Skip to Step 4.
@@ -91,7 +91,7 @@ If no text was provided, prompt: "What's on your mind?"
 
 #### Phase / cross-cutting mode (no `--artifact`)
 
-1. Determine the next sequential `N` for today by globbing `artifacts/{phase-folder}/notes/adhoc/note-{YYYY-MM-DD}-*.md` and counting existing files.
+1. Determine the next sequential `N` for today by globbing `artifacts/{phase-folder}/notes/adhoc/note-{YYYY-MM-DD}-*.md`, counting existing files, and adding 1 (e.g. if 3 files exist, N = 4).
 2. Build the note path: `artifacts/{phase-folder}/notes/adhoc/note-{YYYY-MM-DD}-{N}.md`
 3. Write the note file with adhoc frontmatter and body (see templates below).
 4. Continue to Step 4.
@@ -113,6 +113,7 @@ parentArtifact: null
 status: Open
 resolvedDate: null
 resolvedBy: []
+crossPhase: false
 ---
 ```
 
@@ -129,6 +130,7 @@ parentArtifact: {artifact-id}
 status: Open
 resolvedDate: null
 resolvedBy: []
+crossPhase: false
 ---
 ```
 
@@ -147,7 +149,7 @@ resolvedBy: []
 ### Step 4 — Confirm save
 
 ```
-✅ Note saved — artifacts/{phase-folder}/notes/adhoc/note-{date}-{N}.md
+✅ Note saved — artifacts/{phase-folder}/notes/adhoc/note-{YYYY-MM-DD}-{N}.md
 ```
 
 ---
@@ -164,7 +166,7 @@ Classify the note text against the signals below. Offer **one** relevant follow-
 | References a different phase (e.g. "in Phase B") | "Flag for that phase? (adds cross-phase marker)" |
 | No signal matches | "View all notes: `/ea-notes list`" |
 
-If the user selects the cross-phase marker offer, append `cross-phase: true` to the note's frontmatter and confirm.
+If the user selects the cross-phase marker offer, set `crossPhase: true` in the note's frontmatter (updating the existing field) and confirm.
 
 If no routing is selected, end cleanly — the note is already saved.
 
