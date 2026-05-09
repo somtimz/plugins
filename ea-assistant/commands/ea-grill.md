@@ -179,6 +179,14 @@ Map each decision to the phase-specific decision flow:
 - **Phase G:** Enforce decided architecture. Challenge any unenforced deviations.
 - **Phase H:** Adapt based on evidence. Challenge decisions that are not being revisited despite new evidence.
 
+**Layer 6 — Concept Type Validation**
+Check that every item is recorded under the correct concept type. Raise a finding for each mismatch:
+
+- **Capability vs Implementation (CAP-NNN):** Does the capability describe a business or technology ability (what the organisation can do) — or does it describe an implementation mechanism (how something is built)? A capability must be vendor-neutral and technology-agnostic. Flag: specific products, platform names, or build techniques in the capability name or description.
+- **Requirement vs Story (REQ-NNN / STY-NNN):** Is the item a verifiable, binding constraint ("must", "shall", "the system is required to") — or a delivery intent framed as user value ("as a X, I want Y so that Z")? Requirements belong in the Requirements Register (REQ-NNN); stories belong in the Stories subsection (STY-NNN). Flag: "as a" phrasing in a REQ row, or "must/shall" binding language in a STY row.
+- **ABB vs SBB (ABB-NNN / SBB-NNN):** Is the component a logical, vendor-neutral definition — or a specific vendor/product choice? An ABB names the logical capability ("Immutable Log Store"); an SBB names the concrete implementation ("AWS CloudTrail + S3 Glacier"). Flag: vendor names, version numbers, or brand names in an ABB field; purely logical descriptions (no product) in an SBB field.
+- **Story vs Task (STY-NNN):** Is the item a user-value statement (story) or an atomic implementation action (task)? Stories carry a STY-NNN ID and appear in the Stories table. Tasks are unnumbered bullets under a story. Flag: task-level actions ("configure X", "write script Y", "run migration Z") given a STY-NNN ID; story-level items buried as bullet points with no ID.
+
 ---
 
 ### Note Capture Interrupt

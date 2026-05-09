@@ -146,6 +146,42 @@ and the mechanism used (warm standby, pilot light, multi-region active-active, b
 
 ---
 
+## 3a. Architecture Building Blocks
+
+<details>
+<summary>📋 Guidance</summary>
+
+List the logical, vendor-neutral components (ABB-NNN) that realise technology requirements. ABBs describe WHAT capability is needed without specifying HOW it is implemented — that is captured in the SBB Register (§3b). Each ABB should reference the infrastructure component it supports (INF-NNN) and the requirement(s) it satisfies (REQ-NNN). Use `/ea-detail new ABB-NNN` for complex ABBs requiring extended rationale.
+
+Technology ABBs are typically drawn from: compute (container runtime, VM host), storage (object store, block store, immutable log), networking (load balancer, API gateway, service mesh), security (secrets manager, PKI), and observability (metrics collector, log aggregator, trace store).
+
+</details>
+
+| ABB-NNN | Name | Description | Supports (INF-NNN) | Satisfies (REQ-NNN) | Implemented by (SBB-NNN) |
+|---|---|---|---|---|---|
+| ABB-001 | {{abb_name}} | {{description}} | INF-001 | {{req_id}} | {{sbb_id}} |
+
+---
+
+## 3b. Solution Building Blocks Register
+
+<details>
+<summary>📋 Guidance</summary>
+
+List the concrete vendor-specific implementations (SBB-NNN) of each ABB. An SBB names the actual product, service, or tool chosen and records version, vendor, and any lock-in constraints. The SBB Register is the authoritative source for technology decisions — procurement, licensing, and implementation teams reference this directly. Each SBB must implement at least one ABB.
+
+- **Vendor / Source** — commercial vendor, open-source project, or internal build
+- **Version / Channel** — specific version or release channel (LTS, stable, managed)
+- **Constraints / Lock-in Risk** — proprietary APIs, egress costs, licensing restrictions, migration effort
+
+</details>
+
+| SBB-NNN | Name | Implements (ABB-NNN) | Vendor / Source | Version / Channel | Constraints / Lock-in Risk |
+|---|---|---|---|---|---|
+| SBB-001 | {{sbb_name}} | ABB-001 | {{vendor}} | {{version}} | {{constraints}} |
+
+---
+
 ## 4. Network Architecture
 
 <details>

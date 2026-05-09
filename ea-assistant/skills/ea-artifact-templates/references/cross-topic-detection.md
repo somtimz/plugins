@@ -35,7 +35,9 @@ Used by `ea-interviewer` at step 7b (Text mode) and before routing in Phase Inte
 | Data Architecture | Specific application or system names → Application Architecture; infrastructure or platform choices → Technology Architecture; data governance policies stated as binding rules → Architecture Principles |
 | Application Architecture | Infrastructure or platform choices → Technology Architecture; data modelling or entity definitions → Data Architecture; integration standards stated as binding rules → Architecture Principles |
 | Technology Architecture | Business process or capability descriptions → Business Architecture; data entity or model descriptions → Data Architecture; governance rules stated as principles → Architecture Principles |
-| Requirements Register | Implementation approaches or technology choices → Technology / Application Architecture; gap statements → Gap Analysis; direction (goals / objectives) → engagement.json |
+| Requirements Register | Implementation approaches or technology choices → Technology / Application Architecture; gap statements → Gap Analysis; direction (goals / objectives) → engagement.json; story-format language ("as a X, I want Y") → flag as STY-NNN in Stories subsection, not a REQ-NNN row |
+| Business / App / Tech Architecture (ABB field) | Vendor or product name in an ABB description → SBB Register (SBB-NNN); specific implementation detail in capability → ABB-NNN |
+| User Story (STY-NNN) | Binding obligation language ("must", "shall", "required to") inside a story → extract as REQ-NNN in Requirements Register |
 | Gap Analysis | Strategic direction or goal statements → Architecture Vision; technology decisions → Technology Architecture; new requirements → Requirements Register |
 | Architecture Roadmap | Cut-over or rollback procedures → Migration Plan; risk items → Architecture Vision or Statement of Architecture Work |
 | Migration Plan | Business goals or strategic rationale → Architecture Vision; requirements → Requirements Register |
@@ -51,6 +53,10 @@ Used by `ea-interviewer` at step 7b (Text mode) and before routing in Phase Inte
 - **Direction:** goal/objective/strategy language during a non-Vision/non-direction interview ("our goal is…", "our strategy is…", "we want to achieve…")
 - **Two Layers (EA-layer):** "governance process", "architecture standard", "reference architecture", "review board", "approval workflow", "model validation", "compliance framework" — when captured in a business-layer artifact (Business Architecture, Business Model Canvas, Stakeholder Map) → Governance Framework, Architecture Principles, or Implementation Governance Plan
 - **Two Layers (Business-layer):** "customer journey", "revenue stream", "order-to-cash", "case management", "customer onboarding" — when captured in an EA-layer artifact (Architecture Principles, Governance Framework, Compliance Assessment) → Business Architecture or Business Model Canvas
+- **User Story → Requirement:** "As a {role}, I want {goal} so that {benefit}" pattern, or story-format language ("acceptance criteria", "given/when/then", "BDD scenario") appearing in a Requirement field — the underlying need is a REQ-NNN; the story is a STY-NNN delivery item
+- **Vendor in ABB → SBB:** a vendor, product, or brand name (e.g. "AWS S3", "Vault by HashiCorp", "Datadog") appearing in an Architecture Building Block description — ABBs must be vendor-neutral; vendor specifics belong in an SBB-NNN entry in the SBB Register
+- **Implementation detail in Capability → ABB/SBB:** specific technical implementation language ("using Kubernetes", "deployed on Azure", "built with FastAPI") appearing in a capability description — capabilities describe WHAT is needed; implementation choices belong in ABB-NNN or SBB-NNN
+- **"Must/shall" language in Story → Requirement:** a user story (STY-NNN) that contains binding obligation language ("must", "shall", "the system is required to") — extract as a separate REQ-NNN; stories express desired behaviour, not contractual constraints
 
 ## Do NOT Flag
 

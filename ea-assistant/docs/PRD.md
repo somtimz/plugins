@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.46
+**Version:** 0.9.47
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -731,6 +731,21 @@ Reduced slash command and skill count while preserving all existing behaviour.
 - `ea-reorganize` → `ea-migrate --reorganize` (file-move utility now a flag on the migration command)
 
 All cross-references in commands and skill reference files updated to use the new entry points.
+
+---
+
+### 5.40 ABB, SBB, and User Story Concepts (v0.9.47)
+
+Introduced Architecture Building Blocks (ABB-NNN), Solution Building Blocks (SBB-NNN), and User Stories (STY-NNN) across the plugin to support the full TOGAF hierarchy: Capability → Requirement → ABB → SBB → Story → Task.
+
+- **New concepts in `ea-concepts.md`:** ABB-NNN, SBB-NNN, STY-NNN — each with full structured definition (What it IS, Structural parts, What it is NOT, Common confusions, Practitioner Notes, TOGAF placement, ArchiMate, ID scheme). Disambiguation checklist extended with Step 13 (ABB→SBB→Story→Task branch). Common Confusions table extended with 3 new rows. ASCII hierarchy diagram extended to show the full ABB→SBB→Story→Task tail.
+- **Requirements Register template:** NFR Sub-Type expanded from 9 to 19 values. Optional `### Sample Tests` and `### Stories` subsections added to both Enterprise and Program requirement blocks. `Sample Tests` column added to the Requirements Summary table.
+- **Business Architecture template:** Capability table expanded with `Capability Type` (Business / Technology) and `Domain` columns. Per-capability `#### ABBs for CAP-NNN` subsection template added with full ABB table.
+- **Application Architecture template:** Per-component `Architecture Building Blocks (ABBs)` table added to each application component block in §4.
+- **Technology Architecture template:** New `§3a Architecture Building Blocks` section with ABB table (INF-NNN reference column). New `§3b Solution Building Blocks Register` section with full SBB table (Vendor / Source, Version / Channel, Constraints / Lock-in Risk columns).
+- **Cross-topic detection:** 4 new signals added — User Story pattern in Requirement, vendor name in ABB, implementation detail in Capability, and "must/shall" language in Story. 3 new Signal Map rows.
+- **`/ea-grill`:** Layer 6 — Concept Type Validation added to Step 5, with four probe types: Capability vs Implementation, Requirement vs Story, ABB vs SBB, Story vs Task.
+- **ID Scheme:** ABB-NNN, SBB-NNN, STY-NNN registered in `CLAUDE.md`.
 
 ---
 
