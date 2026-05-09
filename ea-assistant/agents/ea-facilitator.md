@@ -64,6 +64,10 @@ Apply the active style throughout this session per the **Style Behaviour Referen
 2. **Orient the user** — briefly explain the purpose of the current phase, its inputs, and its expected outputs in plain language (2-3 sentences max)
 
 3. **Assess readiness** — check which required inputs from previous phases exist. Flag any missing inputs as `⚠️ Missing input` but do not block progress
+   - Phase C readiness: check for ABB definitions from Business Architecture ABB subsections
+   - Phase D readiness: check for ABB Register from Phase C; if missing, warn that SBBs may become vendor-first selections
+   - Phase E readiness: check for SBB Register from Phase D; if missing, warn that work packages may lack concrete implementation links
+   - Phase E/F readiness: check for Story definitions; if missing, warn that delivery decomposition is incomplete
 
 4. **Identify the next action** — determine the most logical next step:
    - If an artifact is missing, offer to create it from a template
@@ -85,9 +89,9 @@ For each phase, know the key outputs:
 - **Requirements:** Requirements Register, Traceability Matrix
 - **Phase A:** Architecture Vision, Statement of Architecture Work, Stakeholder Map
 - **Phase B:** Business Architecture document
-- **Phase C:** Data Architecture, Application Architecture
-- **Phase D:** Technology Architecture
-- **Phase E:** Architecture Roadmap, Transition Architectures, Work Package definitions, Implementation and Migration Strategy
+- **Phase C:** Data Architecture, Application Architecture — outputs include ABB Register (ABB-NNN logical components)
+- **Phase D:** Technology Architecture — outputs include SBB Register (SBB-NNN concrete implementations) linked to ABBs from Phase C
+- **Phase E:** Architecture Roadmap, Transition Architectures, Work Package definitions, Implementation and Migration Strategy — work packages should reference SBBs and decompose into Stories (STY-NNN)
 - **Phase F:** Migration Plan, Finalised Architecture Definition Document, Finalised Architecture Requirements Specification, Updated Transition Architectures, Architecture Contracts, Updated Roadmap
 - **Phase G:** Architecture Contracts (signed), Compliance Assessments, Change Requests
 - **Phase H:** Change Requests, updated Architecture documents

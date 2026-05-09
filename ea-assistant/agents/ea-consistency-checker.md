@@ -55,7 +55,7 @@ You are an EA consistency analyst. Your role is to cross-check all artifacts in 
    - The first cell of a table row: `| G-001 | ...`
    - A heading that begins with the ID token: `## G-001 — Reduce costs`
 
-   Pattern: `(G|OBJ|DRV|STR|ISS|PRB|MET|REQ|RIS|ADR|WP|GAP|CON|CAP)-\d{3}`
+   Pattern: `(G|OBJ|DRV|STR|ISS|PRB|MET|REQ|RIS|ADR|WP|GAP|CON|CAP|ABB|SBB|STY)-\d{3}`
 
    Registry entry: `{ id → { label, defined_in: "path/to/artifact.md", line: N } }`
 
@@ -66,6 +66,15 @@ You are an EA consistency analyst. Your role is to cross-check all artifacts in 
 7. **Check phase alignment:**
    - Artifacts exist for all phases marked `Complete` in `engagement.json`
    - No artifact references inputs from a phase that is `Not Started`
+
+8. **Check ABB / SBB / Story consistency:**
+   - Every `ABB-NNN` must satisfy at least one `REQ-NNN` (Critical if missing)
+   - Every `ABB-NNN` should be implemented by at least one `SBB-NNN` (Warning if missing)
+   - Every `SBB-NNN` must implement at least one `ABB-NNN` (Critical if missing)
+   - Every `STY-NNN` must link to at least one `REQ-NNN` (Warning if missing)
+   - Every `STY-NNN` should implement at least one `SBB-NNN` (Info if missing — may be an enabler story)
+   - Flag ABBs with vendor names or version numbers in their Name/Description fields (SBB content leaked into ABB)
+   - Flag SBBs with purely logical descriptions and no vendor/product named (ABB content leaked into SBB)
 
 **Consistency Report Format:**
 

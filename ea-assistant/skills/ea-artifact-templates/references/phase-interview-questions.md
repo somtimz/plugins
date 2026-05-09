@@ -646,6 +646,18 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
     - **Application objective** example: "Decommission 3 legacy systems by Q2 2027"
     - **Application strategy** example: "Adopt SaaS-first for commodity capabilities"
 
+**Architecture Building Block (ABB) questions:**
+> Ask these when defining the target application/data landscape. ABBs are logical, vendor-neutral components — do not name specific products here.
+
+11. For each significant application component identified: what is the logical function it provides — described without naming a vendor or product? (e.g. "Immutable Log Store", not "AWS CloudTrail")
+    - What requirement(s) (REQ-NNN) does this ABB satisfy?
+    - What is its architecture domain — Application or Data?
+    - Assign an ABB-NNN ID and capture in the ABB Register.
+
+12. For each ABB: is it reusable across multiple capabilities or is it single-purpose?
+    - Reusable ABBs should have a generic name and broad description.
+    - Single-purpose ABBs should trace to a specific capability (CAP-NNN) and requirement (REQ-NNN).
+
 ### Decision Quality Questions
 > Ask these after completing the standard Phase C questions. Data and application decisions are high-impact and often hard to reverse — evidence and optionality matter most here.
 
@@ -771,6 +783,20 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
    Watch for common confusion: "move to the cloud" is a strategy if cloud is the approach to achieve availability or cost goals; it becomes a goal if the cloud-native state is itself the aspiration.
 10. For each Technology objective, ask: "How will you measure this — what is the unit, the baseline, and where does data come from?" Capture as a `performance` metric (`TM-`). For Technology strategies, ask for an activity measure (e.g., "% of workloads containerised") — capture as an `activity` metric.
 
+**Solution Building Block (SBB) questions:**
+> Ask these when selecting concrete technologies. SBBs are vendor-specific implementations of ABBs.
+
+11. For each ABB-NNN defined in Phase C: what concrete product, service, or technology will implement it?
+    - What is the vendor or source? (commercial, open source, internal build)
+    - What version or release channel? (specific version, LTS, managed service)
+    - What lock-in constraints exist? (proprietary APIs, egress costs, licensing, data residency)
+    - Assign an SBB-NNN ID and capture in the SBB Register.
+    - **Anti-pattern check:** If an SBB is selected before its ABB is defined, flag as "vendor-first selection" and require the ABB to be backfilled.
+
+12. For each SBB: what is the exit cost and timeline if this vendor relationship fails?
+    - Is there an alternative SBB that could implement the same ABB?
+    - Capture alternatives as "backup SBB" references for risk planning.
+
 ### Decision Quality Questions
 > Ask these after completing the standard Phase D questions. Technology choices are often the hardest to reverse — treat evidence and optionality as first-class concerns.
 
@@ -866,6 +892,29 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 
 *Risk*
 11. What are the biggest risks to delivering this roadmap — and do any of those risks directly threaten a Goal or Strategy?
+
+**User Story (STY-NNN) questions:**
+> Ask these when decomposing work packages into delivery items. Stories translate SBBs into actor-centred work.
+
+12. For each SBB-NNN selected in Phase D: what user stories are needed to implement it?
+    - Who is the actor? (user, operator, customer, system)
+    - What does the actor want to accomplish? (goal)
+    - Why does it matter? (benefit)
+    - Format: "As a {actor}, I want {goal} so that {benefit}."
+    - Assign a STY-NNN ID and capture in the Requirements Register Stories subsection or Architecture Roadmap.
+
+13. For each story: what acceptance criteria confirm it is done?
+    - Measurable outcomes: "Given X, when Y, then Z"
+    - Link each criterion to a REQ-NNN measurable target where possible.
+
+14. Are there enabler stories — infrastructure, security, compliance scaffolding — with no direct user-facing outcome?
+    - Tag as `[Enabler]` and link to the SBB they support.
+    - Ensure enabler stories still trace to at least one REQ-NNN (e.g. a security requirement).
+
+15. For each story: what are the atomic implementation tasks?
+    - Tasks have no IDs; they are bullet points under the story.
+    - Example tasks: "Configure backup schedule", "Test restore procedure", "Write runbook"
+    - **Anti-pattern check:** If a story reads like a task ("Configure X", "Run Y"), it is not a story — rewrite as actor-goal-benefit or move to Tasks.
 
 ### Decision Quality Questions
 > Ask these after completing the standard Phase E questions. Phase E converts gaps and decisions into work packages — evidence-gating and PAD resolution are critical here.
@@ -1227,6 +1276,8 @@ These questions probe economic reasoning, decision quality, failure mode symptom
 3. **[ADVANCED]** What measurable criteria will be used to rationalize applications — cost, risk, duplication, or just age? (Deep tactic: rationalize with metrics)
 4. **[ADVANCED]** Do data and application boundaries align with business domains? (Pattern: Fracture Planes)
 5. **[ADVANCED]** Who owns each critical data domain — and what happens when ownership is ambiguous? (Hidden mechanic: data as power structure)
+6. **[ADVANCED]** Are ABBs defined before any vendor or product is named? (Tests vendor-first anti-pattern)
+7. **[ADVANCED]** Can every ABB trace to at least one REQ-NNN and one CAP-NNN? (Tests ABB validation)
 
 ### Phase D — Advanced
 1. **[ADVANCED]** Are technology standards core (mandatory enterprise-wide) or flexible (domain-specific)? Is there a defined flexible zone? (Deep tactic: standardize for leverage)
@@ -1234,6 +1285,9 @@ These questions probe economic reasoning, decision quality, failure mode symptom
 3. **[ADVANCED]** Is observability and resilience embedded in technology standards from day one? (Deep tactic: design for failure)
 4. **[ADVANCED]** How is cloud adoption changing team structures, funding, and decision rights — not just hosting? (Deep tactic: cloud as operating model)
 5. **[ADVANCED]** Do standards have consumers, owners, and adoption metrics — or are they static documents? (Hidden mechanic: standards as product)
+6. **[ADVANCED]** Is every SBB selected against a defined ABB, or are products chosen before logical components are named? (Tests vendor-first anti-pattern)
+7. **[ADVANCED]** For each SBB: what is the exit cost and timeline if the vendor relationship fails? (Tests lock-in awareness)
+8. **[ADVANCED]** Are fitness functions or conformance tests defined for each SBB before procurement? (Tests T4-FITNESS compliance)
 
 ### Phase E — Advanced
 1. **[ADVANCED]** Does every work package deliver measurable business value, not just close a technical gap? (Deep tactic: value increments)
@@ -1241,6 +1295,9 @@ These questions probe economic reasoning, decision quality, failure mode symptom
 3. **[ADVANCED]** What are the realistic transition architectures between baseline and target — not just the ideal end state? (Deep tactic: transition architectures)
 4. **[ADVANCED]** What trade-offs are explicit in the roadmap — what is deferred and what is the risk of deferral? (Deep tactic: expose trade-offs)
 5. **[ADVANCED]** If the budget were halved, which goals and work packages would you protect? (Tests economic reasoning)
+6. **[ADVANCED]** Does every story trace to at least one REQ-NNN and one SBB-NNN? (Tests story traceability)
+7. **[ADVANCED]** Are enabler stories explicitly tagged and linked to architectural runway requirements? (Tests architectural runway visibility)
+8. **[ADVANCED]** Is each story decomposable into 2–5 tasks, or are stories too large (epic-sized) or too small (task-level)? (Tests story sizing)
 
 ### Phase F — Advanced
 1. **[ADVANCED]** Is benefits realization tracked per wave — and how is it measured? (Deep tactic: optimize for value delivery)

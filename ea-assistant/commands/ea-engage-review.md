@@ -66,6 +66,23 @@ If the Architecture Roadmap exists, check each `STR-NNN` and `G-NNN` is referenc
 **4e — Metric → Objective linkage:**
 For each `MET-NNN` in `engagement.json → metrics`, verify it links to a `G-NNN` or `OBJ-NNN`. Flag metrics with no linked direction item.
 
+**4f — ABB coverage (Phase C/D):**
+Scan `phase-c*/**/*.md` and `phase-d*/**/*.md` for `ABB-\d{3}` tokens. For each ABB-NNN:
+- Check that it is implemented by at least one `SBB-NNN` (scan same files for `SBB-\d{3}` in the ABB's `Implemented by` column)
+- Check that it satisfies at least one `REQ-NNN` (scan `Satisfies` column)
+Flag orphan ABBs (no REQ, no SBB).
+
+**4g — SBB coverage (Phase D):**
+Scan `phase-d*/**/*.md` for `SBB-\d{3}` tokens. For each SBB-NNN:
+- Check that it implements at least one `ABB-NNN` (scan `Implements` column)
+Flag vendor-first SBBs (no ABB) as anti-pattern.
+
+**4h — Story coverage (Phase E):**
+Scan `requirements/*.md` and `phase-e*/**/*.md` for `STY-\d{3}` tokens. For each STY-NNN:
+- Check that it links to at least one `REQ-NNN` (scan `Satisfies` field)
+- Check that it implements at least one `SBB-NNN` (scan `Implements` field)
+Flag orphan stories (no REQ, no SBB).
+
 Summarise as: Fully aligned / Partially aligned / Gaps detected.
 
 ---
@@ -110,6 +127,10 @@ Generated: {YYYY-MM-DD}  |  Phase: {currentPhase}  |  Artifacts: {N}
 
 ## Alignment            {✅ Fully aligned | ⚠️ Partial | 🔴 Gaps detected}
   {list unlinked items — e.g. "DRV-002 has no Goal", "G-003 has no Work Package"}
+
+## Building Blocks      {✅ Complete | ⚠️ Partial | 🔴 Gaps detected}
+  {N} ABBs, {N} SBBs, {N} Stories
+  {list orphans — e.g. "ABB-001 has no SBB", "SBB-002 has no ABB", "STY-003 has no REQ"}
 
 ## Governance
   Open decisions:         {N} ({artifact list})
