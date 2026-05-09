@@ -102,3 +102,4 @@ Waived Enterprise requirements show 🚫 in all artifact cells (the waiver itsel
 
 2. Flag requirements with no artifact linkage (Waived requirements are excluded from untraced count)
 3. Offer to link a requirement to an artifact
+4. For the full interactive traceability explorer across the motivation chain (Driver → Goal → Strategy → Requirement → Capability → Work Package, with gap detection and contradictions), run `/ea-trace`.
