@@ -212,3 +212,44 @@ The Architecture Requirements phase runs in two modes:
 
 - **`references/requirement-categories.md`** — Taxonomy of requirement types with TOGAF alignment
 - **`references/sync-formats.md`** — Detailed parsing rules for Word, Excel, and CSV requirement formats
+
+## Traceability Graph
+
+Cross-entity links are stored in `EA-projects/{slug}/artifacts/requirements/traceability-index.json`. This file is separate from `requirements-index.json` and is created on first use by `/ea-trace`.
+
+### traceability-index.json Schema
+
+```json
+{
+  "lastUpdated": "YYYY-MM-DDTHH:MM:SSZ",
+  "links": [
+    {"from": "DRV-001", "to": "G-001",   "type": "motivates"},
+    {"from": "G-001",   "to": "STR-001", "type": "addresses"},
+    {"from": "STR-001", "to": "REQ-001", "type": "supports"},
+    {"from": "REQ-001", "to": "CAP-003", "type": "satisfiedBy"},
+    {"from": "CAP-003", "to": "WP-002",  "type": "deliveredBy"}
+  ]
+}
+```
+
+### Link Type Vocabulary (v1)
+
+| Type | From | To | Meaning |
+|---|---|---|---|
+| `motivates` | DRV-NNN | G-NNN | Driver motivates a goal |
+| `addresses` | G-NNN | STR-NNN | Goal is addressed by a strategy |
+| `supports` | STR-NNN | REQ-NNN | Requirement supports a strategy |
+| `satisfiedBy` | REQ-NNN | CAP-NNN | Requirement is satisfied by a capability |
+| `deliveredBy` | CAP-NNN | WP-NNN | Capability is delivered by a work package |
+
+Reserved for v2 (do not use in v1):
+
+| Type | From | To |
+|---|---|---|
+| `ownedBy` | REQ-NNN | Stakeholder name |
+| `measuredBy` | G-NNN | MET-NNN |
+| `enabledBy` | VS-NNN | CAP-NNN |
+
+### Backward Compatibility
+
+If `traceability-index.json` does not exist, create it with `{"lastUpdated": "", "links": []}` on first write. All entities will appear as gaps until links are added.
