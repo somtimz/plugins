@@ -6,6 +6,7 @@ engagement: {{engagement_name}}
 parentArtifact: {{parent_artifact_path}}
 created: {{YYYY-MM-DD}}
 lastModified: {{YYYY-MM-DD}}
+relatedItems: []
 ---
 
 <!-- GUIDANCE:
@@ -26,6 +27,24 @@ lastModified: {{YYYY-MM-DD}}
 **Type:** {{item_type}}
 **Parent Artifact:** [{{parent_artifact_name}}](../{{parent_artifact_path}})
 **Last Updated:** {{YYYY-MM-DD}}
+
+---
+
+## Notes
+
+<!-- GUIDANCE: Inline notes and flags for this item.
+     Add via /ea-note --detail {ID} or n: during sessions.
+     Resolve via /ea-detail note resolve {ID}. -->
+
+---
+
+## Related Items
+
+<!-- GUIDANCE: Cross-links to related detail files. Managed via /ea-detail link {ID1} {ID2}.
+     The relatedItems frontmatter field is the source of truth; this table is derived from it. -->
+
+| ID | Type | Title | Relationship |
+|---|---|---|---|
 
 ---
 
