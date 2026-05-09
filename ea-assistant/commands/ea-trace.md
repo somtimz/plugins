@@ -166,3 +166,82 @@ Only flag when the title or description contains obviously opposing terms. If am
 **Bootstrap mechanism:** Scan phase-b artifacts for rows where G-NNN and STR-NNN co-occur in the same table row or section. Propose each candidate pair for confirmation before linking.
 
 **After view:** Return to the persistent menu (Step 3).
+
+---
+
+### View 3: Strategy → Requirement
+
+**Entity sources:**
+- STR-NNN: scan `EA-projects/{slug}/artifacts/phase-b/*.md`
+- REQ-NNN: read `EA-projects/{slug}/artifacts/requirements/requirements-index.json` — include all requirements with status `Draft` or `Approved` only (exclude `Deferred`, `Rejected`, `Waived`)
+
+**Render matrix:** rows = STR-NNN, columns = REQ-NNN, link type = `supports`
+
+**Gaps section:**
+
+For each STR-NNN with no outgoing `supports` link:
+```
+⚠️ STR-001 has no requirements supporting it
+   → Derive requirements via /ea-requirements add or /ea-interview phase-b
+   → Or add a link: {"from":"STR-001","to":"REQ-XXX","type":"supports"}
+```
+
+For each active (Draft/Approved) REQ-NNN with no incoming `supports` link:
+```
+⚠️ REQ-003 is not linked to any strategy
+   → Bootstrap: [offer if co-occurrence found]
+   → Or link manually: add {"from":"STR-XXX","to":"REQ-003","type":"supports"}
+```
+
+**Contradictions section:**
+
+Two requirements with the same `nfrSubType` (e.g. both `Performance`) that both have `supports` links to the same STR-NNN but have different `measurableTarget` values:
+```
+⚠️ REQ-001 (Performance: <200ms p95) and REQ-004 (Performance: <500ms p95) both support STR-002 — conflicting NFR targets for the same strategy.
+   → Reconcile via /ea-grill or update one requirement's measurableTarget
+```
+Only flag when both `nfrSubType` and `measurableTarget` are non-null and the targets differ.
+
+**Bootstrap mechanism:** Scan phase-b artifacts for rows where STR-NNN and REQ-NNN co-occur in the same table row or section. For each candidate pair found, propose: `Found REQ-001 co-mentioned with STR-001 in Business Architecture — add link supports? [Y/n]`. On Y: append link, update `lastUpdated`, write `traceability-index.json`, rebuild indexes, show updated matrix.
+
+**After view:** Return to the persistent menu (Step 3).
+
+---
+
+### View 4: Requirement → Capability
+
+**Entity sources:**
+- REQ-NNN: read `requirements-index.json` — Draft and Approved only
+- CAP-NNN: scan `EA-projects/{slug}/artifacts/phase-b/*.md`
+
+**Render matrix:** rows = REQ-NNN, columns = CAP-NNN, link type = `satisfiedBy`
+
+**Gaps section:**
+
+For each active REQ-NNN with no outgoing `satisfiedBy` link:
+```
+⚠️ REQ-001 has no capability satisfying it
+   → Bootstrap: [offer if co-occurrence found]
+   → Or define a capability via /ea-interview phase-b
+   → Or add: {"from":"REQ-001","to":"CAP-XXX","type":"satisfiedBy"}
+```
+
+For each CAP-NNN with no incoming `satisfiedBy` link:
+```
+⚠️ CAP-005 is not linked to any requirement
+   → Verify this capability is in scope, or link it to a requirement
+```
+
+**Contradictions section:**
+
+Two requirements with the same `nfrSubType` both linked (`satisfiedBy`) to the same CAP-NNN but with different `measurableTarget` values:
+```
+⚠️ REQ-001 (Availability: 99.9%) and REQ-006 (Availability: 95%) both map to CAP-003 — conflicting NFR targets for the same capability.
+   → Reconcile targets or split into separate capabilities
+   → Resolve via /ea-grill
+```
+Only flag when both `nfrSubType` and `measurableTarget` are non-null and the targets differ.
+
+**Bootstrap mechanism:** Scan phase-b artifacts for rows where REQ-NNN and CAP-NNN co-occur in the same table row or section. For each candidate pair found, propose: `Found CAP-003 co-mentioned with REQ-001 in Business Architecture — add link satisfiedBy? [Y/n]`. On Y: append link, update `lastUpdated`, write `traceability-index.json`, rebuild indexes, show updated matrix.
+
+**After view:** Return to the persistent menu (Step 3).
