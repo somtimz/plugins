@@ -128,18 +128,36 @@ Define capabilities using a three-level hierarchy. Each capability gets a CAP-NN
 - **Developing** — repeatable and documented but not optimised
 - **Mature** — optimised, governed, and performing well
 
+**Capability Type column:**
+- `Business Capability` — directly delivers stakeholder value; would still exist if the EA team were disbanded (e.g. Order Management, Customer Onboarding, Claims Processing)
+- `Technology Capability` — enables or governs how the organisation operates; IT/EA-layer concern (e.g. Disaster Recovery, Security, Continuous Monitoring). Technology Capabilities trace to Phase C/D artifacts (Application Architecture, Technology Architecture); Business Capabilities drive Phase B directly.
+
+**Domain column:** grouping label for the capability (e.g. "Business Continuity", "Data Governance", "Customer Management", "Security Architecture"). Free text, used for grouping and reporting.
+
 **Supports column:** link each capability to the STR-NNN strategy or G-NNN goal it enables.
 A capability with no strategic anchor should be flagged for removal or reclassification.
 
 **A capability with no value stream exercising it is an orphan — flag it.** Every capability should be traceable to at least one value stream or one use case.
 
+**ABB subsections:** For each capability, add an optional `#### ABBs for CAP-NNN` subsection below the table listing the logical architecture components needed to realise it. ABBs are populated by Phase C/D architects; Phase B architects may leave these as placeholders.
+
 </details>
 
-| CAP-NNN | Level | Capability | Description | Current Maturity | Target Maturity | Supports (STR-NNN / G-NNN) | Details |
-|---|---|---|---|---|---|---|---|
-| CAP-001 | L1 | {{domain_name}} | {{domain_description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | — |
-| CAP-002 | L2 | {{capability_name}} | {{description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | — |
-| CAP-003 | L3 | {{sub_capability_name}} | {{description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | — |
+| CAP-NNN | Level | Capability Type | Domain | Capability | Description | Current Maturity | Target Maturity | Supports (STR-NNN / G-NNN) | Details |
+|---|---|---|---|---|---|---|---|---|---|
+| CAP-001 | L1 | Business Capability | Customer Management | {{domain_name}} | {{domain_description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | — |
+| CAP-002 | L2 | Business Capability | Customer Management | {{capability_name}} | {{description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | — |
+| CAP-003 | L3 | Technology Capability | Business Continuity | {{sub_capability_name}} | {{description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | — |
+
+<!-- GUIDANCE: For each capability, add an optional #### ABBs subsection below listing the logical
+     architecture components needed to realise it. ABBs are vendor-neutral logical components —
+     do not name specific products here (those are SBBs, documented in Phase D Technology Architecture).
+     ABBs are populated by Phase C/D architects; Phase B architects leave this as a placeholder. -->
+
+#### ABBs for CAP-NNN — {Capability Name}
+
+| ABB-NNN | Name | Description | Satisfies (REQ-NNN) | Implemented by (SBB-NNN) |
+|---|---|---|---|---|
 
 ---
 
@@ -296,7 +314,7 @@ List requirements from the Requirements Register that this artifact addresses.
 
 The Business Architecture is the bridge between strategic intent and execution. Every element in this artifact must trace forward to requirements and backward to direction. Use this summary to validate completeness:
 
-- **Every CAP-NNN** links to at least one G-NNN or STR-NNN (via the Supports column). A capability with no strategic anchor is an orphan.
+- **Every CAP-NNN** links to at least one G-NNN or STR-NNN (via the Supports column). A capability with no strategic anchor is an orphan. Business Capabilities trace primarily through Phase B; Technology Capabilities (Capability Type = Technology Capability) should additionally trace to Phase C/D artifacts (Application Architecture, Technology Architecture).
 - **Every VS-NNN** exercises CAP-NNN capabilities and links to G-NNN/STR-NNN (via the Strategic Link column). A value stream with no linked Goal or Strategy is an orphan.
 - **Every Business Process** contributes to a VS-NNN value stream. A process with no parent value stream is an orphan.
 - **Every UC-NNN** consumes processes and generates REQ-NNN requirements. A use case with no requirements is a modeling gap.

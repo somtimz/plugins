@@ -146,6 +146,23 @@ and the mechanism used (warm standby, pilot light, multi-region active-active, b
 
 ---
 
+## 3a. Architecture Building Blocks
+
+<details>
+<summary>📋 Guidance</summary>
+
+List the logical, vendor-neutral components (ABB-NNN) that realise technology requirements. ABBs describe WHAT capability is needed without specifying HOW it is implemented — that is captured in the Solution Building Blocks Register (near end of this document). Each ABB should reference the infrastructure component it supports (INF-NNN) and the requirement(s) it satisfies (REQ-NNN). Use `/ea-detail new ABB-NNN` for complex ABBs requiring extended rationale.
+
+Technology ABBs are typically drawn from: compute (container runtime, VM host), storage (object store, block store, immutable log), networking (load balancer, API gateway, service mesh), security (secrets manager, PKI), and observability (metrics collector, log aggregator, trace store).
+
+</details>
+
+| ABB-NNN | Name | Description | Satisfies (REQ-NNN) | Implemented by (SBB-NNN) |
+|---|---|---|---|---|
+| ABB-001 | {{abb_name}} | {{description}} | {{req_id}} | {{sbb_id}} |
+
+---
+
 ## 4. Network Architecture
 
 <details>
@@ -258,6 +275,18 @@ Standard diagrams for the Technology Architecture. Diagrams are stored in `diagr
 *Use `/ea-diagram` to create. Run `/ea-generate png` to render for export.*
 
 ---
+
+## Solution Building Blocks Register
+
+<!-- GUIDANCE: List the concrete vendor-specific implementations (SBB-NNN) of each ABB. An SBB names the actual product, service, or tool chosen and records version, vendor, and any lock-in constraints. The SBB Register is the authoritative source for technology decisions — procurement, licensing, and implementation teams reference this directly. Each SBB must implement at least one ABB.
+
+- **Vendor / Source** — commercial vendor, open-source project, or internal build
+- **Version** — specific version or release channel (LTS, stable, managed)
+- **Constraints / Lock-in Risk** — proprietary APIs, egress costs, licensing restrictions, migration effort. Run `/ea-grill` to probe lock-in risks when populating this register. -->
+
+| SBB-NNN | Name | Implements (ABB-NNN) | Vendor / Source | Version | Constraints / Lock-in Risk |
+|---|---|---|---|---|---|
+| SBB-001 | {{sbb_name}} | ABB-001 | {{vendor}} | {{version}} | {{constraints}} |
 
 ---
 

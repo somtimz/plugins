@@ -77,9 +77,11 @@ Run `/ea-summary refresh` to regenerate this section from current artifact conte
 
 ## Requirements Summary
 
-| Total | Enterprise 🔒 | Program | Approved | Draft | Deferred | Waived | Rejected |
-|---|---|---|---|---|---|---|---|
-| {{total}} | {{enterprise}} | {{program}} | {{approved}} | {{draft}} | {{deferred}} | {{waived}} | {{rejected}} |
+| Total | Enterprise 🔒 | Program | Approved | Draft | Deferred | Waived | Rejected | Sample Tests |
+|---|---|---|---|---|---|---|---|---|
+| {{total}} | {{enterprise}} | {{program}} | {{approved}} | {{draft}} | {{deferred}} | {{waived}} | {{rejected}} | ✅ {{N}} / ⬜ {{M}} |
+
+<!-- GUIDANCE: Sample Tests column — ✅ N = number of requirements with at least one sample test captured; ⬜ M = number with no tests. Regenerate via `/ea-requirements trace`. -->
 
 ---
 
@@ -111,7 +113,7 @@ To formally waive an Enterprise requirement, set Status to Waived and provide a 
 | **Scope** | Enterprise 🔒 |
 | **Statement** | {{requirement_statement}} |
 | **Category** | Functional / Non-Functional / Constraint / Principle |
-| **NFR Sub-Type** | Performance / Reliability / Availability / Usability / Security / Maintainability / Portability / Compatibility / Recoverability — or ➖ Not applicable |
+| **NFR Sub-Type** | Performance / Reliability / Availability / Usability / Security / Maintainability / Portability / Compatibility / Recoverability / Compliance / Quality / Process / Technical / Operational / Monitoring / Governance / Ethical / Legal / Resilience — or ➖ Not applicable |
 | **Measurable Target** | {{sla_or_threshold — e.g. 99.9% uptime, <200ms p95, RTO 4h}} — or ➖ Not applicable |
 | **Priority** | High / Medium / Low |
 | **Source** | {{source_document}} |
@@ -122,6 +124,24 @@ To formally waive an Enterprise requirement, set Status to Waived and provide a 
 | **Zachman Cell** | Row {{N}} / Column {{N}} ({{description}}) |
 | **Linked Artifacts** | {{artifact_ids}} |
 | **Details** | — |
+
+### Sample Tests
+
+<!-- GUIDANCE: Optional. List verification tests that confirm this requirement is met.
+     Each test should be independently executable and produce a clear pass/fail result.
+     Format: bullet list. Example: "Submit 1,000 decisions and verify all appear in audit log." -->
+
+*(no sample tests captured)*
+
+### Stories
+
+<!-- GUIDANCE: Optional. List user stories that implement the capability or component needed
+     to satisfy this requirement. Format: "As a {actor}, I want {goal} so that {benefit}."
+     Assign STY-NNN IDs for stories that need to be tracked formally.
+     Tasks (step-level implementation items) are captured under stories, not here. -->
+
+| STY-NNN | Story | Implements (SBB-NNN) | Tasks |
+|---|---|---|---|
 
 ---
 
@@ -146,7 +166,7 @@ it responds to or refines — this maintains governance traceability.
 | **Scope** | Program |
 | **Statement** | {{requirement_statement}} |
 | **Category** | Functional / Non-Functional / Constraint / Principle |
-| **NFR Sub-Type** | Performance / Reliability / Availability / Usability / Security / Maintainability / Portability / Compatibility / Recoverability — or ➖ Not applicable |
+| **NFR Sub-Type** | Performance / Reliability / Availability / Usability / Security / Maintainability / Portability / Compatibility / Recoverability / Compliance / Quality / Process / Technical / Operational / Monitoring / Governance / Ethical / Legal / Resilience — or ➖ Not applicable |
 | **Measurable Target** | {{sla_or_threshold — e.g. 99.9% uptime, <200ms p95, RTO 4h}} — or ➖ Not applicable |
 | **Priority** | High / Medium / Low |
 | **Source** | {{source_stakeholder_or_document}} |
@@ -157,6 +177,24 @@ it responds to or refines — this maintains governance traceability.
 | **Zachman Cell** | Row {{N}} / Column {{N}} ({{description}}) |
 | **Linked Artifacts** | {{artifact_ids}} |
 | **Details** | — |
+
+### Sample Tests
+
+<!-- GUIDANCE: Optional. List verification tests that confirm this requirement is met.
+     Each test should be independently executable and produce a clear pass/fail result.
+     Format: bullet list. Example: "Submit 1,000 decisions and verify all appear in audit log." -->
+
+*(no sample tests captured)*
+
+### Stories
+
+<!-- GUIDANCE: Optional. List user stories that implement the capability or component needed
+     to satisfy this requirement. Format: "As a {actor}, I want {goal} so that {benefit}."
+     Assign STY-NNN IDs for stories that need to be tracked formally.
+     Tasks (step-level implementation items) are captured under stories, not here. -->
+
+| STY-NNN | Story | Implements (SBB-NNN) | Tasks |
+|---|---|---|---|
 
 ---
 

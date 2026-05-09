@@ -188,6 +188,14 @@ For each significant target application or component, describe its responsibilit
 |---|---|---|---|
 | {{service_name}} | REST / GraphQL / Event / gRPC | {{consumers}} | {{response_time, availability}} |
 
+#### ABBs for {{component_name_1}}
+
+<!-- GUIDANCE: List the logical, vendor-neutral components (ABB-NNN) that realise requirements for this application component. Each ABB is implemented by one or more SBBs in the Technology Architecture. Use `/ea-detail new ABB-NNN` to create a detail file for complex ABBs. -->
+
+| ABB-NNN | Name | Description | Satisfies (REQ-NNN) | Implemented by (SBB-NNN) |
+|---|---|---|---|---|
+| *(none captured)* | — | — | — | — |
+
 ---
 
 ### {{component_name_2}}
@@ -214,6 +222,14 @@ For each significant target application or component, describe its responsibilit
 | Service / API | Type | Consumers | SLA |
 |---|---|---|---|
 | {{service_name}} | REST / GraphQL / Event / gRPC | {{consumers}} | {{response_time, availability}} |
+
+#### ABBs for {{component_name_2}}
+
+<!-- GUIDANCE: List the logical, vendor-neutral components (ABB-NNN) that realise requirements for this application component. Each ABB is implemented by one or more SBBs in the Technology Architecture. Use `/ea-detail new ABB-NNN` to create a detail file for complex ABBs. -->
+
+| ABB-NNN | Name | Description | Satisfies (REQ-NNN) | Implemented by (SBB-NNN) |
+|---|---|---|---|---|
+| *(none captured)* | — | — | — | — |
 
 ---
 
