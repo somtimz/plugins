@@ -224,19 +224,22 @@ List all detail files in the engagement.
 3. If `phase` argument is provided, filter by phase:
    - Determine which phase folder the `parentArtifact` belongs to (e.g. `phase-a/`, `phase-b/`)
    - Include only items whose parent artifact is in that phase folder
-4. Display as a table:
+4. Display as a table. Link the ID to the detail file and the Parent Artifact to the artifact file. Paths in links must be relative to `EA-projects/{slug}/`:
 
 ```
 Detail Files — {Engagement Name}
 ─────────────────────────────────────────────────────────────
 | ID | Type | Title | Parent Artifact | Last Modified |
 |---|---|---|---|---|
-| G-001 | Goal | Reduce operational costs | Architecture Vision | 2026-05-01 |
-| CAP-003 | Capability | Customer Data Management | Business Architecture | 2026-05-03 |
-| WP-007 | Work Package | CRM Platform Replacement | Architecture Roadmap | 2026-05-05 |
+| [G-001](artifacts/details/G-001.md) | Goal | Reduce operational costs | [Architecture Vision](artifacts/phase-a/architecture-vision.md) | 2026-05-01 |
+| [CAP-003](artifacts/details/CAP-003.md) | Capability | Customer Data Management | [Business Architecture](artifacts/phase-b/business-architecture.md) | 2026-05-03 |
+| [WP-007](artifacts/details/WP-007.md) | Work Package | CRM Platform Replacement | [Architecture Roadmap](artifacts/phase-e/architecture-roadmap.md) | 2026-05-05 |
 
-3 detail file(s) · Run /ea-detail view {ID} to open any file.
+3 detail file(s)
 ```
+
+- ID link: `[{ID}](artifacts/details/{ID}.md)` — path from engagement root
+- Parent Artifact link: `[{parent_artifact_name}](artifacts/{parentArtifact})` — `parentArtifact` frontmatter value is already relative to `artifacts/`, so prefix with `artifacts/`
 
 If no detail files exist:
 ```

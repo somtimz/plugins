@@ -24,7 +24,7 @@ lastModified: {{YYYY-MM-DD}}
 # {{ID}}: {{item_title}}
 
 **Type:** {{item_type}}
-**Parent Artifact:** [{{parent_artifact_name}}]({{parent_artifact_path}})
+**Parent Artifact:** [{{parent_artifact_name}}](../{{parent_artifact_path}})
 **Last Updated:** {{YYYY-MM-DD}}
 
 ---
