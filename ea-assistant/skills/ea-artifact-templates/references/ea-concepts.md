@@ -1053,6 +1053,7 @@ SBBs are the output of technology/vendor selection decisions — they are what t
 **What it is NOT:**
 - Not an **ABB** — an ABB is the logical concept; the SBB is the physical choice
 - Not a **Requirement** — a requirement says "must be achievable within 4 hours"; an SBB is the chosen mechanism that achieves it
+- Not a **User Story** — a user story is the delivery item that implements the SBB; the SBB is the component being delivered, not the work item that creates it
 
 **ArchiMate:** System Software, Device, or Technology Service in the Technology layer; Application Service or Application Component in the Application layer.
 
