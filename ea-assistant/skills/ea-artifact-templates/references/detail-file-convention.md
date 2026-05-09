@@ -242,3 +242,98 @@ After selecting artifacts, choose how to include detail files:
 | **Inline** | Detail content embedded after the relevant table section in each artifact |
 | **Appendix only** | `## Supplementary Item Detail` section at the end of the consolidated document |
 | **Exclude** | Detail files not included (default) |
+
+---
+
+## Cross-Linking
+
+### Data model
+
+Each detail file carries a `relatedItems: []` frontmatter array — the machine-readable source of truth for cross-links:
+
+```yaml
+relatedItems: ["G-001", "CAP-003"]
+```
+
+The `## Related Items` section renders those links as a human-readable table:
+
+```markdown
+## Related Items
+
+| ID | Type | Title | Relationship |
+|---|---|---|---|
+| [G-001](G-001.md) | Goal | Reduce operational costs | supports |
+| [CAP-003](CAP-003.md) | Capability | Customer Data Management | implemented by |
+```
+
+Links use same-directory relative paths — all detail files share `artifacts/details/`, so `G-001.md` links to `./G-001.md`.
+
+### Managing links
+
+Use `/ea-detail link {ID1} {ID2} [relationship]` to create a bidirectional link:
+
+1. Both files must exist — the command stops with an error if either is missing.
+2. The link is added to both files: `{ID2}` in `{ID1}`'s list and `{ID1}` in `{ID2}`'s list.
+3. The inverse label is applied automatically (see table below).
+4. `lastModified` is updated in both files.
+
+If a file was created before the `## Related Items` section existed, the command appends the section before the next `##` heading.
+
+### Relationship labels
+
+| Forward | Inverse |
+|---|---|
+| `supports` | `supported by` |
+| `implements` | `implemented by` |
+| `constrains` | `constrained by` |
+| `derived from` | `source of` |
+| `related` | `related` |
+
+If a label is not in this table, the inverse defaults to `related`.
+
+### Consistency rules
+
+`/ea-detail check [ID]` runs four checks:
+
+1. **Link integrity** — every ID in `relatedItems[]` maps to an existing `details/{ID}.md`.
+2. **Back-link symmetry** — if A links to B, B must link back to A.
+3. **Table/frontmatter sync** — every ID in `relatedItems[]` has a row in `## Related Items`, and every row has a matching `relatedItems[]` entry. Full-token matching: `G-001` must match `G-001` only, not `G-0010`.
+4. **Open notes** — flags files with unresolved `📌` annotations.
+
+With no argument, all detail files are checked. With an ID, only that file is checked with interactive fix options.
+
+---
+
+## Inline Notes
+
+### Format
+
+Notes live in the `## Notes` section of each detail file.
+
+Open:
+```markdown
+> 📌 **{YYYY-MM-DD}:** {note text} — **Open**
+```
+
+Resolved:
+```markdown
+> 📌 **{YYYY-MM-DD}:** {note text} — ~~**Open**~~ ✅ **Resolved {YYYY-MM-DD}:** {resolution text}
+```
+
+### Adding notes
+
+- `/ea-note --detail {ID}` — appends a new open `📌` blockquote to the `## Notes` section.
+- `n: {text}` during any session where a detail file is the focal context — same effect; source is set to the active session type (`interview`, `grill`, etc.).
+
+If a legacy file is missing the `## Notes` section, it is added before `## Summary`.
+
+### Resolving notes
+
+`/ea-detail note resolve {ID}` lists all open notes in the file (numbered). Select one, enter resolution text — the blockquote is updated in-place with the resolved format above. `lastModified` is updated.
+
+### Visibility
+
+- `/ea-detail check` — Check 4 flags files with open notes.
+- `/ea-detail list` — Open Notes column shows `—` or `📌 N open`.
+- `/ea-detail index` — Open Notes column in `_index.md` shows the same.
+- `/ea-detail view {ID}` — Action menu includes "Resolve a note" when open notes are present.

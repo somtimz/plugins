@@ -1,7 +1,7 @@
 ---
 name: ea-note
 description: Quick-capture a note, concern, or annotation — saved immediately with routing suggestions
-argument-hint: "[text] [--artifact <id>] | resolve <path>"
+argument-hint: "[text] [--artifact <id>] [--detail <id>] | resolve <path>"
 allowed-tools: [Read, Write, Glob, Bash]
 ---
 
@@ -60,6 +60,21 @@ If no text was provided, prompt: "What's on your mind?"
 | `G` | `Phase G — Implementation Governance` |
 | `H` | `Phase H — Architecture Change Management` |
 | (null or not set) | `Cross-cutting` |
+
+---
+
+#### Detail mode (when `--detail {ID}` is provided)
+
+1. Check whether `EA-projects/{slug}/artifacts/details/{ID}.md` exists. If not: "No detail file found for `{ID}`. Create it first with `/ea-detail new {ID}`." — stop.
+2. Read the detail file.
+3. If a `## Notes` section exists, locate its end: the `---` separator or next `##` heading that follows the section. If `## Notes` does not exist (legacy file created before this feature), append `\n\n## Notes\n` before the first `##` section after the header metadata block.
+4. Insert a new blockquote at the end of the `## Notes` section content, immediately before the closing `---` or next `##`:
+   `> 📌 **{YYYY-MM-DD}:** {text} — **Open**`
+5. Set `lastModified` in frontmatter to today's date.
+6. Write the file.
+7. Skip to Step 4 (confirm save), using path `artifacts/details/{ID}.md`.
+
+The routing suggestions in Step 5 still apply after the confirm.
 
 ---
 
@@ -148,6 +163,16 @@ crossPhase: false
 
 ### Step 4 — Confirm save
 
+Display the save confirmation, adapting the path and resolution shortcut by mode:
+
+**`--detail` mode:**
+```
+✅ Note saved — artifacts/details/{ID}.md
+
+_Shortcuts: `n: {text}` to capture during interviews/grill · `/ea-detail note resolve {ID}` to resolve_
+```
+
+**All other modes:**
 ```
 ✅ Note saved — artifacts/{phase-folder}/notes/adhoc/note-{YYYY-MM-DD}-{N}.md
 
