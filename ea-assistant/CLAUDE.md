@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.43 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.44 (plugin.json · docs/PRD.md)
 
 ---
 
