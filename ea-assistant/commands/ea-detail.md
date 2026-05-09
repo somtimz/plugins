@@ -1,7 +1,7 @@
 ---
 name: ea-detail
 description: Create, view, or list item detail files — extended narrative, rationale, risks, costs, issues, concerns, impact, and alternatives for individual engagement items
-argument-hint: "new <ID> [artifact-id] | view <ID> | list [phase] | sync <ID>"
+argument-hint: "new <ID> [artifact-id] | view <ID> | list [phase] [--type] | sync <ID> | link <ID1> <ID2> [rel] | check [ID] | note resolve <ID> | index"
 allowed-tools: [Read, Write, Glob, Bash]
 ---
 
@@ -245,4 +245,192 @@ If no detail files exist:
 ```
 No detail files found in this engagement.
 Create one with: /ea-detail new {ID}
+```
+
+---
+
+## Mode: `link {ID1} {ID2} [relationship]`
+
+Create a bidirectional cross-link between two detail files.
+
+### Step 1 — Validate both files
+
+Check whether both `EA-projects/{slug}/artifacts/details/{ID1}.md` and `EA-projects/{slug}/artifacts/details/{ID2}.md` exist. If either is missing, stop with: "Detail file not found: `{missing-ID}`. Create it first with `/ea-detail new {missing-ID}`."
+
+### Step 2 — Check for existing link
+
+Read `{ID1}.md` frontmatter `relatedItems[]`. If `{ID2}` is already present, stop with: "`{ID1}` already links to `{ID2}`. Run `/ea-detail view {ID1}` to see existing links."
+
+### Step 3 — Determine relationship labels
+
+`relationship` defaults to `related` if not provided. Derive the inverse label:
+
+| Forward | Inverse |
+|---|---|
+| `supports` | `supported by` |
+| `implements` | `implemented by` |
+| `constrains` | `constrained by` |
+| `derived from` | `source of` |
+| `related` | `related` |
+
+If the provided label is not in this table, set inverse to `related`.
+
+### Step 4 — Update ID1
+
+Read `EA-projects/{slug}/artifacts/details/{ID1}.md`:
+1. Add `{ID2}` to `relatedItems[]` frontmatter array.
+2. Locate the `## Related Items` table. Append a new row: `| [{ID2}]({ID2}.md) | {ID2-type} | {ID2-title} | {relationship} |` — read `type` and `title` from `{ID2}.md` frontmatter.
+3. Set `lastModified` to today's date.
+4. Write the file.
+
+### Step 5 — Update ID2
+
+Read `EA-projects/{slug}/artifacts/details/{ID2}.md`:
+1. Add `{ID1}` to `relatedItems[]` frontmatter array.
+2. Append a row to the `## Related Items` table: `| [{ID1}]({ID1}.md) | {ID1-type} | {ID1-title} | {inverse-relationship} |`
+3. Set `lastModified` to today's date.
+4. Write the file.
+
+### Step 6 — Confirm
+
+```
+✅ Linked {ID1} ↔ {ID2}
+   {ID1} → {ID2}: {relationship}
+   {ID2} → {ID1}: {inverse-relationship}
+```
+
+---
+
+## Mode: `check [ID]`
+
+Run link integrity and consistency checks on detail files.
+
+- With no argument: scan all `EA-projects/{slug}/artifacts/details/*.md`, excluding `_index.md`.
+- With `{ID}`: check only `EA-projects/{slug}/artifacts/details/{ID}.md`.
+
+### Four checks per file
+
+**Check 1 — Link integrity:** For every ID in `relatedItems[]`, verify `artifacts/details/{ID}.md` exists. Record missing files as broken links.
+
+**Check 2 — Back-link symmetry:** For every ID in `relatedItems[]` whose file exists, read that file's `relatedItems[]`. Verify the current file's ID is present. Record one-way links.
+
+**Check 3 — Table/frontmatter sync:** Compare IDs in `relatedItems[]` against link targets appearing as `[{ID}]({ID}.md)` in the `## Related Items` table. Record IDs in frontmatter but missing from the table, and IDs in the table but missing from frontmatter.
+
+**Check 4 — Open notes:** Scan `## Notes` for lines matching `— **Open**`. Count unresolved notes.
+
+### Report format
+
+```
+/ea-detail check — {Engagement Name}
+────────────────────────────────────────
+{ID}    ✅ {N} links · 0 open notes
+{ID}    ⚠️ broken link: {missing-ID} (file not found)
+{ID}    ⚠️ one-way link: {linked-ID} does not link back
+{ID}    ⚠️ table/frontmatter mismatch: {ID2} in relatedItems but missing from ## Related Items table
+{ID}    ⚠️ {N} open note(s) — earliest: {YYYY-MM-DD}
+
+{N} issue(s) found. Run /ea-detail check {ID} to fix interactively.
+```
+
+If no issues: `✅ All {N} detail file(s) passed integrity checks.`
+
+### Interactive fix (single-file mode only)
+
+After the report, offer to fix each issue:
+
+- **Broken link:** "Remove `{missing-ID}` from `{ID}`'s relatedItems? (y/n)" — If yes: remove from `relatedItems[]` and remove the matching row from `## Related Items` table.
+- **One-way link:** "Add back-link from `{linked-ID}` to `{ID}`? (y/n)" — If yes: add `{ID}` to `{linked-ID}`'s `relatedItems[]` and append a row to its `## Related Items` table with relationship `related`.
+- **Table/frontmatter mismatch:** "Sync `## Related Items` table to match frontmatter? (y/n)" — If yes: regenerate table rows from `relatedItems[]`, preserving existing relationship labels where present and defaulting to `related` for new entries.
+- **Open note:** "Navigate: `/ea-detail note resolve {ID}`"
+
+---
+
+## Mode: `note resolve {ID}`
+
+Resolve an open inline note in a detail file.
+
+### Step 1 — Locate the file
+
+Check whether `EA-projects/{slug}/artifacts/details/{ID}.md` exists. If not: "No detail file found for `{ID}`." — stop.
+
+### Step 2 — Find open notes
+
+Read the file. Scan the `## Notes` section for blockquote lines matching `> 📌 **{date}:** {text} — **Open**`. Build a numbered list.
+
+If none found: "No open notes in `{ID}`." — stop.
+
+### Step 3 — Select a note
+
+Display the numbered list:
+
+```
+Open notes in {ID}:
+  1. {YYYY-MM-DD}: {note text}
+  2. {YYYY-MM-DD}: {note text}
+Select a note to resolve (1–N):
+```
+
+### Step 4 — Collect resolution text
+
+Prompt: "Resolution: (describe what was done or decided)"
+
+### Step 5 — Update the file
+
+In the selected blockquote line, replace `— **Open**` with `— ~~**Open**~~ ✅ **Resolved {today}:** {resolution text}`.
+
+Set `lastModified` to today's date in frontmatter. Write the file.
+
+### Step 6 — Confirm
+
+```
+✅ Note resolved — artifacts/details/{ID}.md
+```
+
+---
+
+## Mode: `index`
+
+Generate `EA-projects/{slug}/artifacts/details/_index.md`. Overwrites any previous version.
+
+### Step 1 — Collect detail files
+
+Glob `EA-projects/{slug}/artifacts/details/*.md`. Exclude `_index.md`.
+
+For each file, read frontmatter: `item`, `type`, `title`, `parentArtifact`, `relatedItems`. Count open notes by scanning `## Notes` for lines matching `— **Open**`. Derive parent artifact display name by reading the `artifact:` frontmatter field of the parent artifact file; fall back to filename without extension.
+
+### Step 2 — Group by type
+
+Group items by `type`. Sort groups alphabetically by type name. Within each group sort by ID.
+
+### Step 3 — Write the index
+
+Write `EA-projects/{slug}/artifacts/details/_index.md` with this structure:
+
+```markdown
+# Detail File Index — {Engagement Name}
+_Generated: {YYYY-MM-DD} · {N} detail files · {M} cross-links · {K} open notes_
+
+---
+
+## {Type Group}
+
+| ID | Title | Related Items | Open Notes | Parent Artifact |
+|---|---|---|---|---|
+| [{ID}]({ID}.md) | {title} | [{related-ID}]({related-ID}.md), ... | — | [{artifact-name}](../{parentArtifact}) |
+| [{ID}]({ID}.md) | {title} | — | 📌 1 open | [{artifact-name}](../{parentArtifact}) |
+```
+
+Rules:
+- One `## {Type Group}` section per type with at least one detail file.
+- Related Items: comma-separated `[{ID}]({ID}.md)` links; `—` if `relatedItems` is empty.
+- Open Notes: `—` if none; `📌 {N} open` if count > 0.
+- Parent Artifact path from `details/` to `artifacts/{parentArtifact}`: use `../{parentArtifact}` (e.g. `../phase-a/architecture-vision.md`).
+- Cross-link count M = total entries across all `relatedItems[]` arrays ÷ 2 (each link counted once).
+- `_index.md` is excluded from all `check` operations — it is derived, not authoritative.
+
+### Step 4 — Confirm
+
+```
+✅ Index written — artifacts/details/_index.md
+   {N} detail files · {M} cross-links · {K} open notes
 ```
