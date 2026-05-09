@@ -150,6 +150,8 @@ crossPhase: false
 
 ```
 ✅ Note saved — artifacts/{phase-folder}/notes/adhoc/note-{YYYY-MM-DD}-{N}.md
+
+_Shortcuts: `n: {text}` to capture during interviews/grill · `/ea-note resolve {path}` to record resolution_
 ```
 
 ---
