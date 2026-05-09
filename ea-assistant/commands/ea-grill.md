@@ -181,6 +181,41 @@ Map each decision to the phase-specific decision flow:
 
 ---
 
+### Note Capture Interrupt
+
+At any point during the grill — during Q&A or the revision review loop in Step 7 — if the user's input starts with `n: ` (note prefix):
+
+1. Strip the `n: ` prefix to extract the note text.
+2. Determine the current phase folder from the active artifact's location (e.g. artifact at `artifacts/phase-a/...` → phase folder `phase-a`).
+3. Determine N: glob `EA-projects/{slug}/artifacts/{phase-folder}/notes/adhoc/note-{YYYY-MM-DD}-*.md`, count existing files and add 1.
+4. Write `EA-projects/{slug}/artifacts/{phase-folder}/notes/adhoc/note-{YYYY-MM-DD}-{N}.md` with:
+   ```yaml
+   ---
+   type: adhoc
+   engagement: {name}
+   phase: {phase label}
+   date: {YYYY-MM-DD}
+   source: grill
+   parentArtifact: {artifact-id being grilled}
+   status: Open
+   resolvedDate: null
+   resolvedBy: []
+   crossPhase: false
+   ---
+   ```
+   Body: note text followed by `\n\n## Resolution\n\n*(not yet resolved)*`
+5. Confirm inline without breaking the session flow:
+   ```
+   📌 Note saved. _(`/ea-note resolve {path}` to record resolution when addressed)_
+   ```
+6. Resume the session:
+   - **During Q&A:** Re-present the current question — do not advance to the next one.
+   - **During Step 7 revision loop:** Re-display the current revision and `Apply this revision? (y/n/edit)` prompt — do not advance to the next revision.
+
+This interrupt is available throughout the grill session and does not affect grill findings or revision state.
+
+---
+
 ### Step 6 — Produce the output
 
 When the review is complete (or the user types `done` or `finish`), produce the skill's structured output as specified:
