@@ -279,7 +279,7 @@ If the provided label is not in this table, set inverse to `related`.
 
 Read `EA-projects/{slug}/artifacts/details/{ID1}.md`:
 1. Add `{ID2}` to `relatedItems[]` frontmatter array.
-2. Locate the `## Related Items` table. Append a new row: `| [{ID2}]({ID2}.md) | {ID2-type} | {ID2-title} | {relationship} |` — read `type` and `title` from `{ID2}.md` frontmatter.
+2. Locate the `## Related Items` table. If the section does not exist in the file (legacy detail file created before this feature), append the following block before the next `##` heading or at end of file: `\n## Related Items\n\n| ID | Type | Title | Relationship |\n|---|---|---|---|\n`. Then append the new row: `| [{ID2}]({ID2}.md) | {ID2-type} | {ID2-title} | {relationship} |` — read `type` and `title` from `{ID2}.md` frontmatter.
 3. Set `lastModified` to today's date.
 4. Write the file.
 
@@ -287,7 +287,7 @@ Read `EA-projects/{slug}/artifacts/details/{ID1}.md`:
 
 Read `EA-projects/{slug}/artifacts/details/{ID2}.md`:
 1. Add `{ID1}` to `relatedItems[]` frontmatter array.
-2. Append a row to the `## Related Items` table: `| [{ID1}]({ID1}.md) | {ID1-type} | {ID1-title} | {inverse-relationship} |`
+2. Locate the `## Related Items` table. If the section does not exist in the file (legacy detail file), append the section header and empty table before the next `##` heading or at end of file (same as Step 4). Then append the new row: `| [{ID1}]({ID1}.md) | {ID1-type} | {ID1-title} | {inverse-relationship} |`
 3. Set `lastModified` to today's date.
 4. Write the file.
 
@@ -314,7 +314,7 @@ Run link integrity and consistency checks on detail files.
 
 **Check 2 — Back-link symmetry:** For every ID in `relatedItems[]` whose file exists, read that file's `relatedItems[]`. Verify the current file's ID is present. Record one-way links.
 
-**Check 3 — Table/frontmatter sync:** Compare IDs in `relatedItems[]` against link targets appearing as `[{ID}]({ID}.md)` in the `## Related Items` table. Record IDs in frontmatter but missing from the table, and IDs in the table but missing from frontmatter.
+**Check 3 — Table/frontmatter sync:** Compare IDs in `relatedItems[]` against link targets appearing as `[{ID}]({ID}.md)` in the `## Related Items` table. Use exact full-token matching — `G-001` must match `G-001` only, not `G-0010` or `G-001-alt`. Record IDs in frontmatter but missing from the table, and IDs in the table but missing from frontmatter.
 
 **Check 4 — Open notes:** Scan `## Notes` for lines matching `— **Open**`. Count unresolved notes.
 
