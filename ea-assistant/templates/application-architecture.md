@@ -188,14 +188,9 @@ For each significant target application or component, describe its responsibilit
 |---|---|---|---|
 | {{service_name}} | REST / GraphQL / Event / gRPC | {{consumers}} | {{response_time, availability}} |
 
-**Architecture Building Blocks (ABBs):**
+#### ABBs for {{component_name_1}}
 
-<details>
-<summary>📋 Guidance</summary>
-
-List the logical, vendor-neutral components (ABB-NNN) that realise requirements for this application component. Each ABB is implemented by one or more SBBs in the Technology Architecture. Use `/ea-detail new ABB-NNN` to create a detail file for complex ABBs.
-
-</details>
+<!-- GUIDANCE: List the logical, vendor-neutral components (ABB-NNN) that realise requirements for this application component. Each ABB is implemented by one or more SBBs in the Technology Architecture. Use `/ea-detail new ABB-NNN` to create a detail file for complex ABBs. -->
 
 | ABB-NNN | Name | Description | Satisfies (REQ-NNN) | Implemented by (SBB-NNN) |
 |---|---|---|---|---|
@@ -228,14 +223,9 @@ List the logical, vendor-neutral components (ABB-NNN) that realise requirements 
 |---|---|---|---|
 | {{service_name}} | REST / GraphQL / Event / gRPC | {{consumers}} | {{response_time, availability}} |
 
-**Architecture Building Blocks (ABBs):**
+#### ABBs for {{component_name_2}}
 
-<details>
-<summary>📋 Guidance</summary>
-
-List the logical, vendor-neutral components (ABB-NNN) that realise requirements for this application component. Each ABB is implemented by one or more SBBs in the Technology Architecture. Use `/ea-detail new ABB-NNN` to create a detail file for complex ABBs.
-
-</details>
+<!-- GUIDANCE: List the logical, vendor-neutral components (ABB-NNN) that realise requirements for this application component. Each ABB is implemented by one or more SBBs in the Technology Architecture. Use `/ea-detail new ABB-NNN` to create a detail file for complex ABBs. -->
 
 | ABB-NNN | Name | Description | Satisfies (REQ-NNN) | Implemented by (SBB-NNN) |
 |---|---|---|---|---|
