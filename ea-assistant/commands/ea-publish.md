@@ -137,6 +137,44 @@ Assemble included artifacts in standard TOGAF ADM order (skip any not selected):
 **ADM order for sorting:**
 Prelim → Requirements → A → B → C-Data → C-App → D → E → F → G → H
 
+#### Table of Contents
+
+Generate the ToC immediately after the Artifact Status Summary table and before the first artifact section. Use this exact format:
+
+```markdown
+## Table of Contents
+
+- [Artifact Status Summary](#artifact-status-summary)
+- [Architecture Principles](#architecture-principles)
+- [Architecture Vision](#architecture-vision)
+- [Business Architecture](#business-architecture)
+```
+
+**Rules:**
+
+1. First entry is always `[Artifact Status Summary](#artifact-status-summary)`.
+2. One entry per selected artifact, in ADM order (same order as document body).
+3. If appendices are present, add a final entry: `[Appendices](#appendices)`.
+4. Do NOT include the cover page or Table of Contents itself as entries.
+
+**Anchor derivation** — apply to every artifact display name to produce the link target:
+- Take the artifact's display name exactly as it appears in the `## {Artifact Name}` heading
+- Lowercase all characters
+- Replace every space with a hyphen `-`
+- Remove all characters that are not alphanumeric or hyphens (strip punctuation, special characters, emoji)
+- Collapse consecutive hyphens into one
+
+Examples:
+| Heading | Anchor |
+|---|---|
+| `## Architecture Vision` | `#architecture-vision` |
+| `## Business Architecture` | `#business-architecture` |
+| `## Phase C — Data Architecture` | `#phase-c--data-architecture` |
+| `## Requirements Register` | `#requirements-register` |
+| `## Artifact Status Summary` | `#artifact-status-summary` |
+
+The `## {Artifact Name}` heading in the document body **must use the same display name as the entry in the ToC** — do not add phase labels, status badges, or numbering to the `##` heading line itself (these go in the `> **Phase · status · date**` blockquote on the line immediately after).
+
 #### Cover Page
 
 ```markdown
