@@ -66,17 +66,6 @@ Problems (PRB) ──blocks──► Objectives (OBJ)
                                 ▼
                             Tasks
                     (Atomic implementation steps)
-                                ▲
-                         Operating Model
-                       (How the org functions)
-                                │
-                           measured by
-                                ▼
-                      Metrics (Leading & Lagging)
-                       /          |          \
-                 surfaces    identifies    evaluates
-                     ▼            ▼             ▼
-                New Issues   New Problems   Cap. Maturity
 ```
 
 Key relationships:
@@ -1001,6 +990,7 @@ A Use Case is a discrete goal pursued by a specific actor (user, system, or exte
 
 ### Architecture Building Block (ABB-NNN)
 
+**What it IS:**
 An Architecture Building Block (ABB) is a named, reusable logical component of an architecture that provides a defined set of functions to meet one or more Requirements. ABBs describe *what logical capability is needed* without specifying *how* it is implemented — they are vendor-neutral and technology-agnostic at definition time.
 
 ABBs sit between Requirements and Solution Building Blocks:
@@ -1013,7 +1003,7 @@ ABBs sit between Requirements and Solution Building Blocks:
 
 **ID scheme:** ABB-NNN (e.g. ABB-001). Sequential within the engagement.
 
-**Key attributes:**
+**Structural parts (artifact row):**
 - Name — a noun phrase describing the logical function (e.g. "Immutable Log Store", "Drift Detection Engine")
 - Description — what it does and what functions it provides
 - Satisfies — REQ-NNN references it fulfils
@@ -1035,15 +1025,18 @@ ABBs sit between Requirements and Solution Building Blocks:
 
 ### Solution Building Block (SBB-NNN)
 
+**What it IS:**
 A Solution Building Block (SBB) is a concrete, vendor-specific implementation of an Architecture Building Block. Where an ABB defines the logical component needed ("Containerisation and Runtime Abstraction Layer"), the SBB is the specific product or technology chosen to fulfil it ("Docker + Kubernetes on AKS").
 
 SBBs are the output of technology/vendor selection decisions — they are what the team actually builds, configures, procures, or integrates.
 
 **TOGAF placement:** Technology Architecture (Phase D); Architecture Roadmap and Migration Plan (Phase E/F). SBBs also appear in the Gap Analysis when comparing baseline (current ABBs/SBBs) to target state.
 
+**ArchiMate:** System Software, Device, or Technology Service in the Technology layer; Application Service or Application Component in the Application layer.
+
 **ID scheme:** SBB-NNN (e.g. SBB-001). Sequential within the engagement.
 
-**Key attributes:**
+**Structural parts (artifact row):**
 - Name — the specific product, tool, or technology (e.g. "AWS Backup", "Terraform IaC Templates", "Cloudflare DNS Failover")
 - Implements — ABB-NNN reference
 - Vendor / Source — who provides it (commercial, open source, custom-built)
@@ -1055,12 +1048,19 @@ SBBs are the output of technology/vendor selection decisions — they are what t
 - Not a **Requirement** — a requirement says "must be achievable within 4 hours"; an SBB is the chosen mechanism that achieves it
 - Not a **User Story** — a user story is the delivery item that implements the SBB; the SBB is the component being delivered, not the work item that creates it
 
-**ArchiMate:** System Software, Device, or Technology Service in the Technology layer; Application Service or Application Component in the Application layer.
+**Common confusions:**
+- "We will use Kubernetes" — this is an SBB. The ABB is "Container Orchestration Service". Don't skip defining the ABB; it preserves optionality if the vendor changes.
+- "We need a cloud storage solution" — this is an ABB until a product is chosen. Naming "AWS S3" converts it to an SBB.
+
+**Practitioner Notes:**
+- Lock-in risk lives in SBBs, not ABBs. When documenting SBBs, always capture the **Constraints** field — licensing terms, proprietary APIs, data residency requirements.
+- **Maturity marker (L1→L5):** L1 = SBBs chosen before ABBs are defined (vendor-first); L3 = ABBs defined first, SBBs selected against them; L5 = SBB selection is governed by fitness criteria derived from requirements
 
 ---
 
 ### User Story (STY-NNN)
 
+**What it IS:**
 A User Story is a lightweight, actor-centred description of a deliverable unit of implementation work. It follows the format: *"As a {actor}, I want {goal} so that {benefit}."* User stories are the primary vehicle for translating Architecture Building Blocks into executable delivery items — they are what teams actually build in sprints or iterations.
 
 In a TOGAF engagement, user stories sit *below* Requirements: Requirements define what must be true; Stories define how teams implement the components that make it true.
@@ -1069,7 +1069,7 @@ In a TOGAF engagement, user stories sit *below* Requirements: Requirements defin
 
 **ID scheme:** STY-NNN (e.g. STY-001) when tracked formally. May be captured informally inline in Requirements without an ID.
 
-**Key attributes:**
+**Structural parts (story format):**
 - Actor — who benefits
 - Goal — what they want to accomplish
 - Benefit — why it matters / what value it delivers
@@ -1082,7 +1082,13 @@ In a TOGAF engagement, user stories sit *below* Requirements: Requirements defin
 - Not a **Requirement** — "As an operator, I want automated backups every 15 minutes" is a Story. The Requirement is "No more than 15 minutes of data loss (RPO ≤ 15 min)".
 - Not a **Task** — a task is an atomic implementation step under a story (configure backup schedule, test restore procedure, write runbook). Tasks have no IDs.
 
-**Enabler Stories:** A sub-type of User Story with no direct user-facing outcome — they support architectural runway (infrastructure setup, security hardening, compliance scaffolding). Tag as `[Enabler]` in the Story text.
+**Common confusions:**
+- "The system must support order placement" — this is a **Requirement** (formalised need), not a story. The story would be: "As a customer, I want to place an order so I can receive my product."
+- "Configure backup schedule" — this is a **Task** (implementation step), not a story. It has no actor or benefit statement.
+
+**Practitioner Notes:**
+- Stories are the bridge between TOGAF architecture and Agile delivery. They should trace to at least one REQ-NNN — a story with no requirement link is delivering something the architecture did not ask for.
+- **Enabler Stories:** A sub-type with no direct user-facing outcome — they support architectural runway (infrastructure setup, security hardening, compliance scaffolding). Tag as `[Enabler]` in the story text.
 
 ---
 
