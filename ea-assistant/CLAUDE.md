@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.46 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.47 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -139,6 +139,9 @@ These are loaded automatically by `/ea-grill --skill practitioner|maturity|failu
 | ARB-NNN | Architecture Review Board Meeting | ARB-001 |
 | ACR-NNN | Architecture Change Request | ACR-001 |
 | ROLE-NNN | Role Catalogue Entry | ROLE-001 |
+| ABB-NNN | Architecture Building Block | ABB-001 |
+| SBB-NNN | Solution Building Block | SBB-001 |
+| STY-NNN | User Story | STY-001 |
 
 **Do not use domain-prefixed IDs** (BG-/DG-/AG-/TG- etc.) — the scheme is unified and domain-agnostic.
 
