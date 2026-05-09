@@ -64,6 +64,9 @@ When an existing `architecture-roadmap.md` exists:
    - Every `Closes Gaps` reference (GAP-NNN) — flag dangling references
    - Every `Addresses Requirements` reference (REQ-NNN) — flag dangling references
    - Every WP is assigned to at least one plateau
+   - Every WP that delivers SBBs should reference `SBB-NNN` — flag missing SBB links
+   - Every WP that delivers Stories should reference `STY-NNN` — flag missing story links
+   - Check ABB coverage: are all ABBs from Phase C/D represented in at least one WP?
 4. Check wave logic:
    - Wave 1 items have no unresolved dependencies on Wave 2/3 items
    - Dependencies form a valid sequence (no circular references)
@@ -101,6 +104,9 @@ Read available source artifacts in this priority order:
 | Requirements Register | REQ-NNN IDs, priority, phase applicability |
 | Business Architecture | Key capability changes, process impacts |
 | Application/Data/Technology Architecture | System changes, integration needs, technical debt |
+| ABB Register | ABB-NNN IDs, descriptions, satisfied requirements — flag ABBs not yet linked to WPs |
+| SBB Register | SBB-NNN IDs, vendors, lock-in constraints — map to WP procurement decisions |
+| Story Register | STY-NNN IDs, actors, acceptance criteria — decompose into WP delivery items |
 
 For each source read, note: file path, extraction date, items found.
 
@@ -136,11 +142,16 @@ Goals / Strategies coverage:
   ⚠️ No WP covers G-004 beyond cloud infra — review if WP-004 scope is sufficient
 
 Proposed Work Packages:
-- WP-001: Identity Platform Migration (G-002, STR-002; GAP-001, GAP-002; REQ-001, REQ-003)
-- WP-002: Data Integration Layer (G-003, STR-002; GAP-003; REQ-005, REQ-006)
+- WP-001: Identity Platform Migration (G-002, STR-002; GAP-001, GAP-002; REQ-001, REQ-003; SBB-001, SBB-002)
+- WP-002: Data Integration Layer (G-003, STR-002; GAP-003; REQ-005, REQ-006; SBB-003)
 - WP-003: Legacy Decommission — CRM (G-002, STR-001; GAP-004, GAP-005)
-- WP-004: Cloud Infrastructure Uplift (G-004, STR-003; GAP-006, GAP-007, GAP-008; REQ-011)
-- WP-005: Portal Modernisation (G-001; REQ-013, REQ-014, REQ-015)
+- WP-004: Cloud Infrastructure Uplift (G-004, STR-003; GAP-006, GAP-007, GAP-008; REQ-011; SBB-004, SBB-005)
+- WP-005: Portal Modernisation (G-001; REQ-013, REQ-014, REQ-015; STY-001, STY-002)
+
+Building Blocks Coverage:
+  ABBs: {N} ABB(s) mapped to WPs  |  {N} ABB(s) unassigned — review if orphaned
+  SBBs: {N} SBB(s) mapped to WPs  |  {N} SBB(s) unassigned
+  Stories: {N} Story(ies) mapped to WPs  |  {N} Story(ies) unassigned
 
 Shall I proceed with these as the starting set? (yes/no/edit)
 ```

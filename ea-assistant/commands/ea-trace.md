@@ -1,6 +1,6 @@
 ---
 name: ea-trace
-description: Interactive traceability views across the motivation chain — Driver → Goal → Strategy → Requirement → Capability → Work Package — with gap and contradiction detection
+description: Interactive traceability views across the motivation and implementation chain — Driver → Goal → Strategy → Requirement → Capability → Work Package, and Requirement → ABB → SBB → Story — with gap and contradiction detection
 argument-hint: "[--gaps]"
 allowed-tools: [Read, Write, Glob, Grep, Bash]
 ---
@@ -9,7 +9,11 @@ You are executing the `/ea-trace` command.
 
 ## Overview
 
-Renders traceability views across the EA motivation chain. Reads from `traceability-index.json` (graph of cross-entity links) and artifact files. Surfaces gaps (missing links) and contradictions (conflicting relationships) with suggested fix actions.
+Renders traceability views across the EA motivation chain and implementation chain. Reads from `traceability-index.json` (graph of cross-entity links) and artifact files. Surfaces gaps (missing links) and contradictions (conflicting relationships) with suggested fix actions.
+
+Two chains are traced:
+- **Motivation chain:** Driver → Goal → Strategy → Requirement → Capability → Work Package
+- **Implementation chain:** Requirement → ABB → SBB → Story
 
 **Modes:**
 
@@ -56,7 +60,10 @@ EA Traceability Views — {engagement name}
   3. Strategy → Requirement        ({N} gaps, {N} contradictions)
   4. Requirement → Capability      ({N} gaps)
   5. Capability → Work Package     ({N} gaps)
-  6. Full gap report               (all views, gaps + contradictions only)
+  6. Requirement → ABB             ({N} gaps)
+  7. ABB → SBB                     ({N} gaps)
+  8. SBB → Story                   ({N} gaps)
+  9. Full gap report               (all views, gaps + contradictions only)
   Q. Quit
 
 Enter a number:
@@ -286,12 +293,126 @@ Wave number is extracted from the WP row in the Roadmap artifact (look for a `Wa
 
 ---
 
+### View 6: Requirement → ABB
+
+**Entity sources:**
+- REQ-NNN: read `requirements-index.json` — Draft and Approved only
+- ABB-NNN: scan `EA-projects/{slug}/artifacts/phase-c*/**/*.md` and `EA-projects/{slug}/artifacts/phase-d*/**/*.md` for tokens matching `ABB-\d{3}`
+
+**Render matrix:** rows = REQ-NNN, columns = ABB-NNN, link type = `realisedBy`
+
+**Gaps section:**
+
+For each active REQ-NNN with no outgoing `realisedBy` link:
+```
+⚠️ REQ-001 has no ABB realising it
+   → Define an ABB via /ea-interview phase-c or phase-d
+   → Or add: {"from":"REQ-001","to":"ABB-XXX","type":"realisedBy"}
+```
+
+For each ABB-NNN with no incoming `realisedBy` link:
+```
+⚠️ ABB-003 is not linked to any requirement
+   → Verify this ABB is in scope, or link it to a requirement
+```
+
+**Contradictions section:**
+
+Two ABBs linked (`realisedBy`) to the same REQ-NNN but with overlapping or conflicting domain assignments (e.g. both ABBs claim to be the primary realisation of the same requirement in different architecture layers):
+```
+⚠️ ABB-001 (Application) and ABB-002 (Technology) both realise REQ-003 — verify this dual realisation is intentional, or split the requirement.
+   → Resolve via /ea-grill phase-c
+```
+Only flag when the ABB descriptions or domain fields clearly indicate overlapping scope.
+
+**Bootstrap mechanism:** Scan phase-c (Application Architecture) and phase-d (Technology Architecture) artifacts for rows where REQ-NNN and ABB-NNN co-occur in the same table row or section. For each candidate pair found, propose: `Found ABB-001 co-mentioned with REQ-001 in Technology Architecture — add link realisedBy? [Y/n]`. On Y: append link, update `lastUpdated`, write `traceability-index.json`, rebuild indexes, show updated matrix.
+
+**After view:** Return to the persistent menu (Step 3).
+
+---
+
+### View 7: ABB → SBB
+
+**Entity sources:**
+- ABB-NNN: scan `EA-projects/{slug}/artifacts/phase-c*/**/*.md` and `EA-projects/{slug}/artifacts/phase-d*/**/*.md` for tokens matching `ABB-\d{3}`
+- SBB-NNN: scan `EA-projects/{slug}/artifacts/phase-d*/**/*.md` for tokens matching `SBB-\d{3}` (Technology Architecture SBB Register)
+
+**Render matrix:** rows = ABB-NNN, columns = SBB-NNN, link type = `implementedBy`
+
+**Gaps section:**
+
+For each ABB-NNN with no outgoing `implementedBy` link:
+```
+⚠️ ABB-001 has no SBB implementing it
+   → Select an SBB via /ea-interview phase-d
+   → Or add: {"from":"ABB-001","to":"SBB-XXX","type":"implementedBy"}
+```
+
+For each SBB-NNN with no incoming `implementedBy` link:
+```
+⚠️ SBB-002 is not linked to any ABB
+   → Verify this SBB is in scope, or link it to an ABB
+   → An SBB without an ABB may indicate vendor-first selection — flag as anti-pattern
+```
+
+**Contradictions section:**
+
+Two SBBs linked (`implementedBy`) to the same ABB-NNN but with conflicting vendor constraints or overlapping functional scope:
+```
+⚠️ SBB-001 (AWS CloudTrail) and SBB-002 (Azure Monitor) both implement ABB-001 (Immutable Log Store) — verify multi-cloud intent, or consolidate to a single SBB per environment.
+   → Resolve via /ea-grill phase-d
+```
+
+**Bootstrap mechanism:** Scan Technology Architecture artifact SBB Register table for rows where ABB-NNN and SBB-NNN co-occur in the same table row. For each candidate pair found, propose: `Found SBB-001 co-mentioned with ABB-001 in Technology Architecture — add link implementedBy? [Y/n]`. On Y: append link, update `lastUpdated`, write `traceability-index.json`, rebuild indexes, show updated matrix.
+
+**After view:** Return to the persistent menu (Step 3).
+
+---
+
+### View 8: SBB → Story
+
+**Entity sources:**
+- SBB-NNN: scan `EA-projects/{slug}/artifacts/phase-d*/**/*.md` for tokens matching `SBB-\d{3}`
+- STY-NNN: scan `EA-projects/{slug}/artifacts/requirements/*.md` and `EA-projects/{slug}/artifacts/phase-e*/**/*.md` for tokens matching `STY-\d{3}`
+
+**Render matrix:** rows = SBB-NNN, columns = STY-NNN, link type = `deliveredAs`
+
+**Gaps section:**
+
+For each SBB-NNN with no outgoing `deliveredAs` link:
+```
+⚠️ SBB-001 has no story delivering it
+   → Create a story via /ea-interview phase-e or /ea-detail new STY-NNN
+   → Or add: {"from":"SBB-001","to":"STY-XXX","type":"deliveredAs"}
+```
+
+For each STY-NNN with no incoming `deliveredAs` link:
+```
+⚠️ STY-003 is not linked to any SBB
+   → Verify this story is in scope, or link it to an SBB
+   → A story without an SBB may be an enabler story — tag as [Enabler] if so
+```
+
+**Contradictions section:**
+
+Two stories linked (`deliveredAs`) to the same SBB-NNN but with conflicting acceptance criteria or actor goals:
+```
+⚠️ STY-001 ("As an operator, I want automated backups") and STY-002 ("As a security officer, I want encrypted backups") both deliver SBB-001 (AWS Backup) — verify both acceptance criteria are supported by the same SBB version.
+   → Resolve via /ea-grill phase-e
+```
+
+**Bootstrap mechanism:** Scan requirements and phase-e artifacts for rows where SBB-NNN and STY-NNN co-occur in the same table row or section. For each candidate pair found, propose: `Found STY-001 co-mentioned with SBB-001 in Requirements Register — add link deliveredAs? [Y/n]`. On Y: append link, update `lastUpdated`, write `traceability-index.json`, rebuild indexes, show updated matrix.
+
+**After view:** Return to the persistent menu (Step 3).
+
+---
+
 ## Step 5 — Write Links
 
 When a user confirms a bootstrap suggestion or manually adds a link (by typing the JSON):
 
 1. Parse the link object: `{"from": "X", "to": "Y", "type": "Z"}`
-2. Validate that `type` is one of the five v1 types: `motivates`, `addresses`, `supports`, `satisfiedBy`, `deliveredBy`
+2. Validate that `type` is one of the eight types: `motivates`, `addresses`, `supports`, `satisfiedBy`, `deliveredBy`, `realisedBy`, `implementedBy`, `deliveredAs`
 3. Check for duplicates: if an identical `from`/`to`/`type` triple already exists, skip and notify: `Link already exists — no change made.`
 4. Append to the `links` array in `traceability-index.json`
 5. Set `lastUpdated` to the current ISO 8601 timestamp
@@ -303,9 +424,9 @@ When a user confirms a bootstrap suggestion or manually adds a link (by typing t
 
 ## Step 6 — Full Gap Report
 
-Triggered by menu option 6 or the `--gaps` argument.
+Triggered by menu option 9 or the `--gaps` argument.
 
-Run all five views silently (generate findings but do not render matrices). Collect all gap and contradiction findings. Print:
+Run all eight views silently (generate findings but do not render matrices). Collect all gap and contradiction findings. Print:
 
 ```
 Full Gap Report — {engagement name}
@@ -319,6 +440,9 @@ Goal → Strategy           {N} gaps, {N} contradictions
 Strategy → Requirement    {N} gaps, {N} contradictions
 Requirement → Capability  {N} gaps, {N} contradictions
 Capability → Work Package {N} gaps, {N} contradictions
+Requirement → ABB         {N} gaps, {N} contradictions
+ABB → SBB                 {N} gaps, {N} contradictions
+SBB → Story               {N} gaps, {N} contradictions
 
 Total: {N} gaps, {N} contradictions
 
@@ -333,7 +457,7 @@ Total: {N} gaps, {N} contradictions
 
 After the report, offer:
 ```
-  1. Open a specific view  →  enter 1–5
+  1. Open a specific view  →  enter 1–8
   2. Run /ea-consistency for artifact-level checks
   Q. Quit
 ```

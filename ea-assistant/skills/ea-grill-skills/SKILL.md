@@ -251,8 +251,8 @@ Act as a meticulous architecture reviewer. You will be given a structured artifa
 First, assess the artifact structurally:
 - identify which sections are populated, empty, or contain only placeholder text
 - check frontmatter fields (artifact type, phase, status, version, date)
-- map all ID references (DRV-NNN, G-NNN, OBJ-NNN, ISS-NNN, PRB-NNN, REQ-NNN, GAP-NNN) and verify they resolve — flag dangling references
-- check traceability chains: do drivers link to goals? do goals link to objectives? do issues reference goals? do problems reference objectives?
+- map all ID references (DRV-NNN, G-NNN, OBJ-NNN, ISS-NNN, PRB-NNN, REQ-NNN, GAP-NNN, ABB-NNN, SBB-NNN, STY-NNN) and verify they resolve — flag dangling references
+- check traceability chains: do drivers link to goals? do goals link to objectives? do issues reference goals? do problems reference objectives? do requirements link to ABBs? do ABBs link to SBBs? do SBBs link to stories?
 - note any section that contradicts another section in the same artifact
 
 Then interrogate the content one section at a time:
@@ -297,6 +297,17 @@ After the section-by-section review, explicitly scan the artifact for these high
 
 **Data flow State column:**
 - In data architecture artifacts, check that every data flow in the Flows table has an explicit State (Current / Planned / Target).
+
+**ABB / SBB / Story anti-patterns:**
+- **Vendor-first selection:** SBB-NNN appears before its implementing ABB-NNN is defined, or an SBB is named without an ABB reference. Flag: "SBB without ABB — vendor-first anti-pattern."
+- **ABB leakage:** ABB name or description contains a vendor name, version number, or product name. Flag: "ABB contains vendor-specific language — rewrite as logical description."
+- **SBB leakage:** SBB name or description is purely logical with no vendor/product named. Flag: "SBB appears to be an ABB — no concrete implementation named."
+- **Story-task confusion:** STY-NNN text reads like a task ("configure X", "run Y", "write Z") rather than an actor-goal-benefit pattern. Flag: "Story reads like a task — rewrite as 'As a X, I want Y so that Z'."
+- **Orphan story:** STY-NNN with no REQ-NNN link and no SBB-NNN link. Flag: "Story has no traceability — link to requirement and SBB."
+- **Orphan ABB:** ABB-NNN with no REQ-NNN in Satisfies column. Flag: "ABB has no requirement — unvalidated logical component."
+- **Orphan SBB:** SBB-NNN with no ABB-NNN in Implements column. Flag: "SBB has no ABB — vendor-first selection."
+- **Lock-in blind spot:** SBB Constraints field is blank or contains generic text ("standard licensing", "none") when the product has known lock-in characteristics. Flag: "Lock-in constraints under-documented."
+- **Enabler story untagged:** Story with no actor-facing benefit and no `[Enabler]` tag. Flag: "Enabler story missing tag — add [Enabler] for clarity."
 
 ---
 
