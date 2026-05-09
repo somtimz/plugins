@@ -17,7 +17,7 @@ Read `engagement.json` and extract the `slug` field. All paths in this command a
 
 ### Mode: `list [phase]` (default)
 
-1. Glob `artifacts/**/notes/**/*.md` and `notes/adhoc/**/*.md` from the engagement root to discover all note files.
+1. Glob `artifacts/**/notes/**/*.md` from the engagement root to discover all note files.
 
 2. Classify each file by type from its path segment:
    - `.../notes/interviews/...` → Interview Note
