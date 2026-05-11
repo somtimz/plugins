@@ -434,7 +434,20 @@ These will gain dedicated commands and workflow integration in a future version.
 - **Modes:** `generate` (default, writes file), `status` (inline summary), `update RIS-NNN <field> <value>`
 - **Template:** `risk-register.md`
 
-### 5.16 Architecture Change Management
+### 5.16 Constraints Management
+
+`/ea-constraints` manages architecture constraints as first-class objects with dedicated `CST-NNN` IDs:
+
+- **First-class concept:** Constraints are distinct from requirements (which define outcomes) and risks (which are uncertain). Every constraint has a **Source** (policy, regulation, contract, or mandate) and an **Owner** (accountable person or role).
+- **CST-NNN ID scheme** — unified, domain-agnostic; distinct from `CON-NNN` (Stakeholder Concerns) and `REQ-NNN` (Requirements)
+- **Constraint types:** Technology, Regulatory, Budget, Timeline, Organisational, Interoperability
+- **Modes:** `list` (default, reads register), `add` (interactive capture), `update CST-NNN <field> <value>`, `trace` (artifact/SBB linkage), `impact` (assess bounded capabilities/work packages)
+- **Enterprise vs Program scope:** Enterprise constraints have read-only content fields (statement, type, source, owner); Program constraints are fully editable
+- **SBB traceability:** SBB records include `Referenced Constraints: [CST-NNN]` field linking vendor lock-in details back to canonical constraints
+- **Template:** `constraints-register.md`
+- **Skill:** `ea-constraints-management`
+
+### 5.17 Architecture Change Management
 
 `/ea-changes` generates a Change Register (`change-register.md`) by aggregating all ACR (Architecture Change Request) artifacts for Phase H.
 
@@ -904,6 +917,7 @@ EA-projects/
 | `/ea-review` | `[artifact]` | Open artifact for review; runs compliance check; update review status |
 | `/ea-grill` | `[artifact] [--skill name]` | Deep-review artifact using a grill-me skill; auto-selects skill by type; apply findings with y/n/edit |
 | `/ea-requirements` | `[list|add|edit|waive]` | Manage architecture requirements; corporate (read-only) and project scope |
+| `/ea-constraints` | `[list|add|update|trace|impact] [--type] [--status] [--priority] [--owner] [--phase]` | Manage architecture constraints (CST-NNN); trace to artifacts and SBBs; assess impact |
 | `/ea-decisions` | `[generate|status|rationale] [--audience] [--owner] [--domain] [--status] [--cost] [--impact] [--risk] [--artifact] [--authority]` | Generate Decision Register from all A3 logs; `rationale` mode backfills missing A3.N reasoning blocks |
 | `/ea-adrs` | `[generate|status|new|update ADR-NNN <field> <value>]` | Manage Architecture Decision Records; auto-suggested by interviewer at 2+ threshold indicators |
 | `/ea-risks` | `[generate|status|update RIS-NNN <field> <value>]` | Generate and maintain Risk Register by scanning all artifacts |

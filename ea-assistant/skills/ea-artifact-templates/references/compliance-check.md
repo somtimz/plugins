@@ -67,6 +67,9 @@ Applies only to named artifact types:
 | Data Architecture | Data Flows table includes a `State` column (Current / Planned / Deprecated); every DF-NNN row has a non-blank State value | T3-DF-STATE |
 | Architecture Vision, Business/Data/App/Tech Architecture, Gap Analysis, Consolidated Gap Analysis, Architecture Roadmap, Statement of Architecture Work, Migration Plan, Compliance Assessment, Requirements Register, Engagement Charter, Governance Framework, Implementation Governance Plan, Communications Plan, Architecture Definition Document, Transition Architectures | `## Appendix A5 — Related Architecture Decisions` section present | T3-ADR |
 | Same artifact list as T3-A3 | Any A3 row with `Authority = Strategic` has no corresponding `#### A3.N — {Item}` block and no sentinel `*(rationale not captured)*` below the A3 table. Surfaces in: `/ea-artifact view`, `/ea-engage-review`, `/ea-grill` — not checked during `/ea-interview` (rationale is captured live). | T3-RATIONALE |
+| Constraints Register | Type column present (Technology / Regulatory / Budget / Timeline / Organisational / Interoperability) | T3-CON |
+| Constraints Register | Every Active constraint has a non-empty Owner field | T3-CON-OWNER |
+| Technology Architecture, Application Architecture | Every SBB with a non-empty "Constraints / Lock-in Risk" field has a `Referenced Constraints: [CST-NNN]` link or a documented justification for why no CST-NNN exists | T3-CON-SBB |
 
 ---
 
@@ -85,6 +88,8 @@ Tier 4 rules apply to mature engagements (L3+) and focus on economic reasoning, 
 | T4-POLIT | Political alignment documented: High-impact or high-cost decisions include a Political Alignment note recording whether the decision faced stakeholder pressure and what the defensible evidence-based position is | ADRs, A3 rows with Cost = High or Impact = High | ADR §5c records "Strong pressure to adopt vendor X; defensible position = API-first design allows vendor swap" | No mention of stakeholder pressure or governance forum review |
 | T4-PAD | Pending decision hygiene: Open PAD-NNN entries have an expiry date within 90 days of creation and a defined resolution path | All PAD-NNN artifacts | PAD-001 has expiryDate: 2026-06-15 and resolutionPhase: Phase E | PAD-001 has no expiry date or resolution path |
 | T4-WPEVID | Work package evidence gating: Work packages with Evidence Status = Insufficient are not scheduled in Wave 1 | Architecture Roadmap | WP-002 has Evidence Status = Partial and is scheduled in Wave 2 with guardrails; WP-003 has Evidence Status = Insufficient and is flagged as deferred | WP-003 with no evidence is scheduled in Wave 1 without risk flag |
+| T4-CON-TRACE | Constraint traceability: Every High-priority Active constraint has at least one linked artifact or SBB reference | Constraints Register | CST-001 (High) has `Linked Artifacts: [technology-architecture-001]` and `SBB References: [SBB-003]` | CST-001 (High) has no linked artifacts and no SBB references |
+| T4-CON-IMPACT | Constraint impact assessment: Every Enterprise-scoped constraint has a non-empty Impact Assessment describing which capabilities, ABBs, or work packages are bounded | Constraints Register | CST-002 (Enterprise) has Impact Assessment: "Bounds CAP-007 (Claims Processing) and WP-003 (Core Platform Migration)" | CST-002 (Enterprise) has blank Impact Assessment |
 
 **Note on compliance philosophy:** Compliance is a means, not an end. See `failure-modes.md` → Failure Mode 1 (The Documentation Trap). If your compliance process produces checklists without improving decision quality, it has become part of the problem.
 

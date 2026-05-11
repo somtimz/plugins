@@ -297,6 +297,7 @@ Do not keep the two layers separate in your head — connect them structurally:
 | **Value Stream** | *What end-to-end result does the stakeholder receive?* | End-to-end chain of activities delivering value from trigger to outcome — composed of processes, exercises capabilities | Business Architecture (Phase B); Value Stream Map | Value Stream (Strategy) |
 | **Business Process** | *How is value delivered step by step?* | Structured set of activities with defined actors, inputs, outputs, and decision points — component of a value stream | Business Architecture (Phase B); Process Flow | Business Process (Business) |
 | **Use Case** | *What does the actor need to accomplish?* | Discrete goal pursued by a specific actor — consumes processes, generates requirements | Business Architecture (Phase B); Use Case Catalog | — |
+| **Constraint** | *What boundaries must we respect?* | Non-negotiable restriction on implementation choices — certain, sourced, and owned | Constraints Register; Architecture Vision; Principles | Constraint (Motivation) |
 | **Metrics** | *How do we know we are succeeding?* | Specific, quantifiable measures — leading (predictive) or lagging (outcome); validate strategies or surface new Issues and Problems | Architecture Vision §7; domain artifacts | — |
 
 ---
@@ -683,6 +684,53 @@ A risk is an uncertain future event or condition that, if it occurs, will have a
 - **Maturity marker (L1→L5):** L1 = risks documented but not acted on; L3 = risks linked to mitigation plans and owners; L5 = risks actively managed via systemic architecture decisions (e.g., reducing integration points)
 - Use architecture to **actively manage systemic risk**, not just document it
 - **Design for graceful degradation**, not just peak performance
+
+---
+
+### Constraint
+
+**What it IS:**
+A constraint is a non-negotiable restriction on the architecture or its implementation. It is **certain** — it will definitely apply regardless of decisions — and it limits the solution space by prohibiting or mandating specific choices. Every constraint must have a **Source** (the policy, regulation, contract, or mandate that created it) and an **Owner** (the person or role accountable for upholding it). Constraints answer *"What boundaries must we respect?"*
+
+**ID scheme:** `CST-NNN` (e.g., CST-001, CST-002). Assigned by `/ea-constraints generate` when constraints are aggregated into the Constraints Register. Constraints may first appear as free-text in SBB "Constraints/Lock-in Risk" fields or as `category: Constraint` rows in the Requirements Register; these are re-mapped to `CST-NNN` on aggregation.
+
+**Structural parts** (Constraints Register row):
+- **CST-NNN** — canonical constraint ID assigned on aggregation
+- **Type** — Technology / Regulatory / Budget / Timeline / Organisational / Interoperability
+- **Statement** — the restriction, phrased as a binding rule (e.g. "Must deploy within existing AWS account")
+- **Source** — the document, policy, regulation, contract, or stakeholder mandate that created this constraint
+- **Owner** — who is accountable for upholding and verifying compliance with this constraint
+- **Scope** — Enterprise 🔒 (organisation-wide) / Program (engagement-specific)
+- **Priority** — High / Medium / Low
+- **Status** — Active / Waived / Proposed
+- **Waiver Justification** — required if Status is Waived; explains why the constraint is not enforced for this engagement
+- **ADM Phase** — where identified
+- **Zachman Cell** — classification
+- **Linked Artifacts** — artifacts that must respect this constraint
+- **Impact Assessment** — which capabilities, ABBs, SBBs, or work packages are bounded by this constraint
+
+**What it is NOT:**
+- Not a **Risk** — a constraint is certain and non-negotiable; a risk is uncertain and conditional
+- Not a **Requirement** — a requirement defines *what* the architecture must achieve ("RTO < 4 hours"); a constraint restricts *how* it may be implemented ("Must use existing AWS account")
+- Not a **Principle** — a principle is a normative decision filter ("Technology choices must not create vendor dependency"); a constraint is an externally imposed boundary ("Budget capped at $2M")
+- Not an **Assumption** — an assumption is accepted as true for planning purposes but could be wrong; a constraint is binding regardless of belief
+
+**Common confusions:**
+- "The project must complete by 31 December 2026" — this is a **Constraint** ✓ (certain, non-negotiable deadline)
+- "We must handle 10,000 concurrent users" — this is a **Requirement** (verifiable outcome), not a constraint
+- "We cannot use on-premise infrastructure" — this is a **Constraint** ✓ (restricts implementation choices)
+- "Budget overrun is a risk" — this is a **Risk** (uncertain), not a constraint. "Budget is capped at $2M" — that is a **Constraint** (certain)
+
+**TOGAF placement:** Architecture Vision (engagement constraints, §11); Architecture Principles (principles may generate constraints); Requirements Register (category: Constraint — legacy location, now deprecated in favour of standalone Constraints Register). The consolidated **Constraints Register** artifact aggregates all constraints into a single cross-cutting view — use `/ea-constraints` to generate it.
+
+**ArchiMate:** `Constraint` element in the Motivation aspect. A restriction on implementation choices. Related to `Principle` (principles may motivate constraints) and `Requirement` (constraints bound which requirements can be satisfied).
+
+**Practitioner Notes:**
+- Every constraint must have a **named Owner**. Without an owner, a constraint is unenforceable.
+- Distinguish **Enterprise constraints** (organisation-wide, read-only content) from **Program constraints** (engagement-specific, fully editable). Enterprise constraints are prefixed with 🔒 in the register.
+- **Traceability check:** Every SBB should reference the CST-NNN constraints that bound its selection. An SBB with vendor lock-in but no linked constraint is an orphan.
+- **Maturity marker (L1→L5):** L1 = constraints buried in free-text; L3 = constraints catalogued with owners and sources; L5 = constraints enforced automatically in pipelines and validated at every architecture review
+- **Cross-artifact consistency:** If a constraint appears in both the Requirements Register (legacy) and the Constraints Register, the Constraints Register version is authoritative.
 
 ---
 

@@ -198,8 +198,8 @@ Markers are placed as the sole content of a section's response paragraph, or in 
 ```markdown
 | Constraint ID | Statement | Source |
 |---|---|---|
-| CON-001 | Must deploy within existing Azure tenancy | Architecture Review Board |
-| CON-002 | [PENDING] | [PENDING] |
+| CST-001 | Must deploy within existing Azure tenancy | Architecture Review Board |
+| CST-002 | [PENDING] | [PENDING] |
 ```
 
 A `[PENDING]` or `[N/A]` marker in any cell of a row marks that entire row as pending/not applicable.

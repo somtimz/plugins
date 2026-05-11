@@ -17,6 +17,7 @@
   "architectureDomains": ["Business", "Data", "Application", "Technology"],
   "currentPhase": "Prelim",
   "requirementsRepoPath": "",
+  "constraintsRepoPath": "",
   "lastModified": "YYYY-MM-DDTHH:MM:SSZ",
   "pluginVersion": "0.9.5",
   "lastMigratedVersion": "0.9.5",

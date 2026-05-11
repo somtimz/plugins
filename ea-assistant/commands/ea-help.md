@@ -82,6 +82,7 @@ You have existing engagements. Common next steps:
 | `/ea-review [artifact]` | Review and assess an artifact |
 | `/ea-grill [artifact] [--skill]` | Deep-review an artifact using a grill-me skill; then optionally apply findings back to the artifact one revision at a time |
 | `/ea-requirements [action]` | Manage architecture requirements |
+| `/ea-constraints [action]` | Manage architecture constraints — capture, trace, and assess impact on solution space |
 | `/ea-trace [--gaps]` | Interactive traceability views — motivation chain from drivers to work packages; `--gaps` for consolidated gap report only |
 | `/ea-decisions [options]` | Generate Decision Register from all A3 decision logs |
 | `/ea-adrs [mode]` | Manage Architecture Decision Records (generate, new, update) |

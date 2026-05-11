@@ -40,7 +40,7 @@ Scan all `.md` files in `EA-projects/{slug}/artifacts/` for SBB tables:
 
 | Artifact Pattern | Section to Scan | Row Format |
 |---|---|---|
-| `technology-architecture*.md` | Solution Building Blocks Register | `SBB-NNN | Name | Implements (ABB-NNN) | Vendor / Source | Version | Constraints / Lock-in Risk` |
+| `technology-architecture*.md` | Solution Building Blocks Register | `SBB-NNN | Name | Implements (ABB-NNN) | Vendor / Source | Version | Referenced Constraints: [CST-NNN] | Constraints / Lock-in Risk` |
 | `application-architecture*.md` | SBB Register or implementation sections | Same |
 | `gap-analysis*.md` | SBB comparison tables | Same |
 
@@ -115,7 +115,8 @@ Creating new SBB — SBB-{NNN}
 2. Implements (ABB-NNN this SBB realises — required):
 3. Vendor / Source (commercial vendor, open-source project, or internal build):
 4. Version (specific version, release channel, or "managed"):
-5. Constraints / Lock-in Risk (proprietary APIs, egress costs, licensing, data residency):
+5. Referenced Constraints (CST-NNN IDs that bound this SBB selection, comma-separated, or press Enter):
+6. Constraints / Lock-in Risk (vendor-specific detail: proprietary APIs, egress costs, licensing, data residency):
 ```
 
 ### Step 4 — Validate
@@ -145,12 +146,14 @@ Update a single field.
 | `implements` | ABB-NNN (single) |
 | `vendor` | any string |
 | `version` | any string |
+| `referencedConstraints` | comma-separated CST-NNN list |
 | `constraints` | any string |
 
 **Validation rules:**
 - Setting `name` to a logical description (no vendor) → warn about ABB leakage
 - Setting `implements` to a non-existent ABB → warn, allow as planned
-- Setting `constraints` → scan for lock-in keywords; if high-risk terms found, flag
+- Setting `referencedConstraints` → verify each CST-NNN exists in the engagement Constraints Register; if not found, warn and offer to create via `/ea-constraints add`
+- Setting `constraints` → scan for lock-in keywords; if high-risk terms found, flag. If `referencedConstraints` is empty, warn: "⚠️ This SBB has vendor lock-in detail but no referenced CST-NNN constraint. Link a constraint for traceability? (y/n)"
 
 **Procedure:**
 1. Find the SBB file matching `sbb-{NNN}*.md` or the SBB row in the register

@@ -49,6 +49,7 @@ Determine the `item_type` label from the prefix:
 | `CON` | Stakeholder Concern |
 | `ADR` | Architecture Decision Record |
 | `PAD` | Pending Architecture Decision |
+| `CST` | Constraint |
 
 ### Step 2 — Check for Existing File
 

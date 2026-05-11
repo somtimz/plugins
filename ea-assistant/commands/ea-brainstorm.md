@@ -345,6 +345,7 @@ Capture freeform brainstorm notes for the active EA engagement.
 
    ### Constraints
    - {thought}
+   - *(Promote to CST-NNN via `/ea-constraints add` when constraint is certain, sourced, and owned)*
 
    ### Opportunities
    - {thought}

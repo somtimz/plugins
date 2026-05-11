@@ -45,7 +45,8 @@ Offer: add a requirement, sync from repo, view traceability.
 
 1. Ask for:
    - Requirement statement (required)
-   - Category: Functional / Non-Functional / Constraint / Principle
+   - Category: Functional / Non-Functional / Principle
+     - **Deprecated:** `Constraint` category is deprecated for new capture. Use `/ea-constraints add` to create standalone constraints with `CST-NNN` IDs. Legacy `category: Constraint` rows remain valid for backward compatibility.
    - Priority: High / Medium / Low
    - Source: stakeholder name or document reference
    - ADM phase relevance

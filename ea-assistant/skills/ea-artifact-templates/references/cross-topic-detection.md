@@ -57,6 +57,9 @@ Used by `ea-interviewer` at step 7b (Text mode) and before routing in Phase Inte
 - **Vendor in ABB → SBB:** a vendor, product, or brand name (e.g. "AWS S3", "Vault by HashiCorp", "Datadog") appearing in an Architecture Building Block description — ABBs must be vendor-neutral; vendor specifics belong in an SBB-NNN entry in the SBB Register
 - **Implementation detail in Capability → ABB/SBB:** specific technical implementation language ("using Kubernetes", "deployed on Azure", "built with FastAPI") appearing in a capability description — capabilities describe WHAT is needed; implementation choices belong in ABB-NNN or SBB-NNN
 - **"Must/shall" language in Story → Requirement:** a user story (STY-NNN) that contains binding obligation language ("must", "shall", "the system is required to") — extract as a separate REQ-NNN; stories express desired behaviour, not contractual constraints
+- **Binding restriction language in Requirement → Constraint:** a requirement (REQ-NNN) row that describes an implementation restriction ("cannot use X", "must deploy within Y", "prohibited from Z", "limited to", "restricted to", "capped at") — extract as a separate CST-NNN in the Constraints Register; requirements define outcomes, not boundaries
+- **Constraint without CST-NNN → flag:** any artifact containing free-text constraint language ("must use existing AWS account", "budget capped at", "no new vendors") without a `CST-NNN` ID or `Referenced Constraints` field — prompt to create via `/ea-constraints add`
+- **SBB vendor lock-in without constraint source:** an SBB "Constraints / Lock-in Risk" field containing restriction text but no `Referenced Constraints: [CST-NNN]` link — flag as untraced; offer to create CST-NNN or link existing
 
 ## Do NOT Flag
 

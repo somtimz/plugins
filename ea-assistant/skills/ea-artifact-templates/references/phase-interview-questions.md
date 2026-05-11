@@ -113,7 +113,7 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 | Engagement type | Engagement Charter | `§2.2 Mandate` + `engagement.json → engagementType` |
 | Scope in/out | Engagement Charter | `§3 Scope & Boundaries` |
 | Assumptions | Engagement Charter | `§3.4 Assumptions` |
-| Constraints | Engagement Charter | `§3.5 Constraints` + Architecture Principles `{{regulatory_constraints}}` etc. |
+| Constraints | Engagement Charter / Constraints Register | `§3.5 Constraints` + `CST-NNN` entries via `/ea-constraints` |
 | Related engagements | Engagement Charter | `§4` |
 | Organisations affected | Engagement Charter | `§5` |
 | Business drivers (DRV-NNN) | Engagement Charter `§6.2` + Architecture Vision `§2` + `engagement.json → direction.drivers` | — |
@@ -283,7 +283,7 @@ Assign IDs sequentially within each prefix as responses are confirmed. Record ID
 | Metrics | engagement.json | `§8 Strategic Direction Summary` (MET-NNN rows) + `metrics[]` |
 | In-scope items | Architecture Vision | `§9 Scope — {{scope_in}}` |
 | Out-of-scope items | Architecture Vision | `§9 Scope — {{scope_out}}` |
-| Constraints | Statement of Architecture Work | `{{constraints}}` |
+| Constraints | Statement of Architecture Work / Constraints Register | `{{constraints}}` + `CST-NNN` via `/ea-constraints` |
 | Assumptions | Statement of Architecture Work | `{{assumptions}}` |
 | Existing architecture assets | Statement of Architecture Work | `§3 Approach` (reference existing assets as inputs) |
 | Timeline | Statement of Architecture Work | `{{timeline}}` |
@@ -816,7 +816,7 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 | Missing tech capabilities | Gap Analysis | `{{technology_gaps}}` |
 | Technology Architecture gaps | Gap Analysis | `{{tech_capability_gaps}}` |
 | Cloud strategy | Technology Architecture | `{{cloud_strategy}}` |
-| Technology constraints | Technology Architecture | `{{tech_constraints}}` |
+| Technology constraints | Technology Architecture / Constraints Register | `{{tech_constraints}}` + `CST-NNN` via `/ea-constraints` |
 | Requirements Register (tech) | Requirements Register | `{{technology_requirements}}` |
 | Future tech landscape | Technology Architecture | `{{future_tech_state}}` |
 | Technology debt | Gap Analysis | `{{tech_debt}}` |
@@ -827,7 +827,7 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 - Open with "what keeps you up at night about your current technology?" — this surfaces the real pain points faster than a structured inventory review.
 - Technology debt questions are best answered by infrastructure and platform engineers, not just IT leadership; schedule a separate technical session if needed.
 - Cloud strategy answers often reflect aspirations rather than funded plans; probe for budget commitment and timeline to distinguish strategy from wishful thinking.
-- Capture mandated standards as constraints in both Technology Architecture and the Requirements Register — they frequently constrain solution options in phases E and F.
+- Capture mandated standards as constraints in the Constraints Register (`CST-NNN`) and reference them in Technology Architecture SBB records — they frequently constrain solution options in phases E and F. Legacy `category: Constraint` in the Requirements Register is deprecated.
 
 **§D Diagrams — ask at close of session:**
 > "Two diagrams are standard for the Technology Architecture. Which would you like to create or describe now?"
@@ -1159,7 +1159,11 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for a Mermaid
 
 ## Requirements Phase — Architecture Requirements Discovery
 
-**Goal:** Discover and capture all architecture requirements — functional, non-functional, constraints, and assumptions. Run in phase mode (`/ea-interview start phase requirements`) before or alongside Phase A. All answers are written to the Requirements Register as REQ-NNN items.
+**Goal:** Discover and capture all architecture requirements — functional, non-functional, constraints, and assumptions. Run in phase mode (`/ea-interview start phase requirements`) before or alongside Phase A.
+
+- Functional and non-functional requirements are written to the Requirements Register as `REQ-NNN` items.
+- Constraints are written to the Constraints Register as `CST-NNN` items via `/ea-constraints add`.
+- Legacy `category: Constraint` in the Requirements Register remains valid for backward compatibility but is deprecated for new capture.
 
 **Before starting:** Ask for any existing requirements documents, standards registers, or service-level agreements. Start from what exists rather than from blank.
 

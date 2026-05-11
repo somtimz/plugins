@@ -124,6 +124,8 @@ A Non-Functional Requirement (NFR) specifies a quality attribute or operational 
 
 ## Constraints (CON)
 
+> **Deprecated for new capture.** Constraints are now first-class objects with `CST-NNN` IDs managed by `/ea-constraints`. The `category: Constraint` in the Requirements Register and local `CON-001` style IDs remain valid for backward compatibility but should not be used for new constraints.
+
 ### Definition
 A Constraint is a restriction on the solution space that is non-negotiable for the given engagement. It does not express a preference — it establishes a hard boundary that the architecture must operate within.
 

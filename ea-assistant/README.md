@@ -43,6 +43,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Architecture Roadmap agent** — three-mode roadmap creation: Review (existing artifact), Artifact-informed (reads Vision Goals/Strategies/Objectives + Gap Analysis + Requirements to seed work packages with strategic alignment), Clean-slate (direct elicitation with no prior artifacts); Strategic Alignment table in roadmap template links every G-NNN/OBJ-NNN/STR-NNN to covering work packages
 - **Phase E strategic alignment** — roadmap work packages explicitly link to Goals and Strategies from Phase A; interview questions anchor prioritisation to G-NNN/STR-NNN before addressing gaps and constraints
 - **ADM reference material** — detailed phase inputs/outputs, tailoring guidance for agile/programme/capability-based contexts
+- **Constraints Register** — `/ea-constraints` manages architecture constraints (CST-NNN) as first-class objects with Type, Source, Owner, and Impact Assessment; distinguishes constraints from requirements and risks; traces constraints to SBBs, artifacts, and work packages
 - **Risk Register** — `/ea-risks` generates a cross-cutting Risk Register (RIS-NNN) by scanning all artifacts for risk content; Likelihood × Impact severity matrix
 - **Architecture Decision Records** — `/ea-adrs` manages standalone ADRs (Candidate → Completed lifecycle); `ea-interviewer` auto-suggests ADRs at 2+ threshold indicators; Appendix A5 links artifacts to related ADRs
 - **Zachman Diagram** — `/ea-zachman` auto-populates and manages the 6×6 classification grid; generate, review, gap, interview, and classify modes
@@ -147,6 +148,7 @@ uiMode: html
 | `/ea-detail new\|view\|list\|sync\|link\|check\|note resolve\|index` | Create, view, list, sync, cross-link, and integrity-check item detail files; generate type-grouped index; add and resolve inline notes |
 | `/ea-review [artifact]` | Open an artifact for review and assessment; runs compliance check on load |
 | `/ea-requirements [action]` | Manage architecture requirements |
+| `/ea-constraints [action]` | Manage architecture constraints — capture, view, trace to artifacts, and assess impact on solution space |
 | `/ea-decisions [options]` | Generate a Decision Register from all A3 decision logs; filter by audience, owner, domain, authority, cost, impact, risk, subject, or status |
 | `/ea-adrs [mode]` | Manage Architecture Decision Records — generate register, create new ADR, update status |
 | `/ea-risks [mode]` | Generate and maintain a cross-cutting Risk Register from all artifact risk sections |
