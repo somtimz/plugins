@@ -145,9 +145,9 @@ A capability with no strategic anchor should be flagged for removal or reclassif
 
 | CAP-NNN | Level | Capability Type | Domain | Capability | Description | Current Maturity | Target Maturity | Supports (STR-NNN / G-NNN) | Details |
 |---|---|---|---|---|---|---|---|---|---|
-| CAP-001 | L1 | Business Capability | Customer Management | {{domain_name}} | {{domain_description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | — |
-| CAP-002 | L2 | Business Capability | Customer Management | {{capability_name}} | {{description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | — |
-| CAP-003 | L3 | Technology Capability | Business Continuity | {{sub_capability_name}} | {{description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | — |
+| [CAP-001](../details/CAP-001.md) | L1 | Business Capability | Customer Management | {{domain_name}} | {{domain_description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | [→](../details/CAP-001.md) |
+| [CAP-002](../details/CAP-002.md) | L2 | Business Capability | Customer Management | {{capability_name}} | {{description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | [→](../details/CAP-002.md) |
+| [CAP-003](../details/CAP-003.md) | L3 | Technology Capability | Business Continuity | {{sub_capability_name}} | {{description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | [→](../details/CAP-003.md) |
 
 <!-- GUIDANCE: For each capability, add an optional #### ABBs subsection below listing the logical
      architecture components needed to realise it. ABBs are vendor-neutral logical components —
@@ -179,7 +179,7 @@ Populate this section before detailing processes in §4 — value streams provid
 
 | VS-NNN | Value Stream | Description | Trigger | End Outcome | Key Capabilities (CAP-NNN) | Strategic Link (G-NNN / STR-NNN) | Details |
 |---|---|---|---|---|---|---|---|
-| VS-001 | {{value_stream_name}} | {{description}} | {{trigger}} | {{end_outcome}} | {{cap_ids}} | {{strategic_link}} | — |
+| [VS-001](../details/VS-001.md) | {{value_stream_name}} | {{description}} | {{trigger}} | {{end_outcome}} | {{cap_ids}} | {{strategic_link}} | [→](../details/VS-001.md) |
 
 ---
 
@@ -240,7 +240,7 @@ Assign UC-NNN IDs sequentially. These IDs are referenced in the Application Arch
 
 | UC-NNN | Use Case | Primary Actor | Goal | Trigger | Preconditions | Main Success Scenario | Capabilities Used (CAP-NNN) | Details |
 |---|---|---|---|---|---|---|---|---|
-| UC-001 | {{use_case_name}} | {{actor}} | {{goal}} | {{trigger}} | {{preconditions}} | {{one-sentence summary}} | {{cap_ids}} | — |
+| [UC-001](../details/UC-001.md) | {{use_case_name}} | {{actor}} | {{goal}} | {{trigger}} | {{preconditions}} | {{one-sentence summary}} | {{cap_ids}} | [→](../details/UC-001.md) |
 
 ---
 

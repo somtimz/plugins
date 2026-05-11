@@ -126,8 +126,8 @@ Each criterion must be objectively assessable — define what evidence will demo
 
 | Criteria ID | Description | Source | Evidence Required |
 |---|---|---|---|
-| ACR-001 | {{description}} | Architecture Contract | {{evidence_required}} |
-| ACR-002 | {{description}} | Architecture Contract | {{evidence_required}} |
+| [ACR-001](../details/ACR-001.md) | {{description}} | Architecture Contract | {{evidence_required}} |
+| [ACR-002](../details/ACR-002.md) | {{description}} | Architecture Contract | {{evidence_required}} |
 | {{criteria_id}} | {{description}} | {{source}} | {{evidence_required}} |
 
 ---
@@ -145,8 +145,8 @@ test results, code review observations) to support each finding.
 
 | Criteria ID | Finding | Evidence Reviewed | Compliance Status |
 |---|---|---|---|
-| ACR-001 | {{finding}} | {{evidence}} | Compliant / Partially Compliant / Non-Compliant / Not Assessed |
-| ACR-002 | {{finding}} | {{evidence}} | Compliant / Partially Compliant / Non-Compliant / Not Assessed |
+| [ACR-001](../details/ACR-001.md) | {{finding}} | {{evidence}} | Compliant / Partially Compliant / Non-Compliant / Not Assessed |
+| [ACR-002](../details/ACR-002.md) | {{finding}} | {{evidence}} | Compliant / Partially Compliant / Non-Compliant / Not Assessed |
 | {{criteria_id}} | {{finding}} | {{evidence}} | Compliant / Partially Compliant / Non-Compliant / Not Assessed |
 
 ### Overall Compliance Summary
@@ -168,8 +168,8 @@ closure — either by remediation or by a formal architecture waiver (documented
 
 | NC ID | Description | Criteria ID | Severity | Required Action | Target Resolution | Owner |
 |---|---|---|---|---|---|---|
-| NC-001 | {{description}} | ACR-xxx | Critical / Major / Minor | {{action}} | {{date}} | {{owner}} |
-| NC-002 | {{description}} | ACR-xxx | Critical / Major / Minor | {{action}} | {{date}} | {{owner}} |
+| [NC-001](../details/NC-001.md) | {{description}} | ACR-xxx | Critical / Major / Minor | {{action}} | {{date}} | {{owner}} |
+| [NC-002](../details/NC-002.md) | {{description}} | ACR-xxx | Critical / Major / Minor | {{action}} | {{date}} | {{owner}} |
 
 **Total Non-conformances:** {{nc_count}}
 **Critical:** {{critical_count}} | **Major:** {{major_count}} | **Minor:** {{minor_count}}
@@ -190,7 +190,7 @@ if this assessment feeds one.
 
 | Rec ID | Recommendation | Priority | Owner |
 |---|---|---|---|
-| REC-001 | {{recommendation}} | High / Med / Low | {{owner}} |
+| [REC-001](../details/REC-001.md) | {{recommendation}} | High / Med / Low | {{owner}} |
 
 ### Go / No-Go Recommendation
 <details>

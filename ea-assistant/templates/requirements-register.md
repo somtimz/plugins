@@ -109,7 +109,7 @@ To formally waive an Enterprise requirement, set Status to Waived and provide a 
 
 | Field | Value |
 |---|---|
-| **ID** | REQ-001 |
+| **ID** | [REQ-001](../details/REQ-001.md) |
 | **Scope** | Enterprise 🔒 |
 | **Statement** | {{requirement_statement}} |
 | **Category** | Functional / Non-Functional / Constraint / Principle |
@@ -123,7 +123,7 @@ To formally waive an Enterprise requirement, set Status to Waived and provide a 
 | **ADM Phase** | {{phase}} |
 | **Zachman Cell** | Row {{N}} / Column {{N}} ({{description}}) |
 | **Linked Artifacts** | {{artifact_ids}} |
-| **Details** | — |
+| **Details** | [→](../details/REQ-001.md) |
 
 ### Sample Tests
 

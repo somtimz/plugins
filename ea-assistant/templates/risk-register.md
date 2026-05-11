@@ -118,7 +118,7 @@ should have a named owner and a documented response plan with a target resolutio
 
 | Field | Value |
 |---|---|
-| **ID** | RIS-001 |
+| **ID** | [RIS-001](../details/RIS-001.md) |
 | **Description** | {{what_could_happen_and_why}} |
 | **Source** | {{artifact_name_where_risk_was_identified}} |
 | **Phase Identified** | {{ADM_phase}} |
@@ -131,7 +131,7 @@ should have a named owner and a documented response plan with a target resolutio
 | **Owner** | {{name_and_role}} |
 | **Status** | Open / Monitoring / Accepted / Closed |
 | **Last Reviewed** | {{YYYY-MM-DD}} |
-| **Details** | — |
+| **Details** | [→](../details/RIS-001.md) |
 
 ---
 
@@ -164,7 +164,7 @@ These should have documented mitigations and be reviewed at every architecture c
 | **Owner** | {{name_and_role}} |
 | **Status** | Open / Monitoring / Accepted / Closed |
 | **Last Reviewed** | {{YYYY-MM-DD}} |
-| **Details** | — |
+| **Details** | [→](../details/RIS-001.md) |
 
 ---
 

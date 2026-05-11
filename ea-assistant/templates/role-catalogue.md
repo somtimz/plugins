@@ -76,21 +76,21 @@ Remove unused role rows. If a role is shared across multiple individuals (e.g., 
 
 | Role ID | Role | Named Individual | Organisation Unit | RACI Override | Notes |
 |---------|------|-----------------|-------------------|---------------|-------|
-| ROLE-001 | Stakeholder | ⚠️ Not answered | ⚠️ Not answered | — | |
-| ROLE-002 | Stakeholder Agent | ⚠️ Not answered | ⚠️ Not answered | — | |
-| ROLE-003 | Subject Matter Expert (SME) | ⚠️ Not answered | ⚠️ Not answered | — | Multiple SMEs may be listed |
-| ROLE-004 | Auditor | ⚠️ Not answered | ⚠️ Not answered | — | |
-| ROLE-005 | Implementer | ⚠️ Not answered | ⚠️ Not answered | — | |
-| ROLE-006 | Enterprise Architect | ⚠️ Not answered | ⚠️ Not answered | — | |
-| ROLE-007 | Business Architect | ⚠️ Not answered | ⚠️ Not answered | — | |
-| ROLE-008 | Data Architect | ⚠️ Not answered | ⚠️ Not answered | — | |
-| ROLE-009 | Application Architect | ⚠️ Not answered | ⚠️ Not answered | — | |
-| ROLE-010 | Technology Architect | ⚠️ Not answered | ⚠️ Not answered | — | |
-| ROLE-011 | Business Analyst | ⚠️ Not answered | ⚠️ Not answered | — | |
-| ROLE-012 | Delivery Lead | ⚠️ Not answered | ⚠️ Not answered | — | |
-| ROLE-013 | Project Manager | ⚠️ Not answered | ⚠️ Not answered | — | |
-| ROLE-014 | Data Owner | ⚠️ Not answered | ⚠️ Not answered | — | Specify data domain in Notes |
-| ROLE-015 | Application Owner | ⚠️ Not answered | ⚠️ Not answered | — | Specify application in Notes |
+| [ROLE-001](../details/ROLE-001.md) | Stakeholder | ⚠️ Not answered | ⚠️ Not answered | — | |
+| [ROLE-002](../details/ROLE-002.md) | Stakeholder Agent | ⚠️ Not answered | ⚠️ Not answered | — | |
+| [ROLE-003](../details/ROLE-003.md) | Subject Matter Expert (SME) | ⚠️ Not answered | ⚠️ Not answered | — | Multiple SMEs may be listed |
+| [ROLE-004](../details/ROLE-004.md) | Auditor | ⚠️ Not answered | ⚠️ Not answered | — | |
+| [ROLE-005](../details/ROLE-005.md) | Implementer | ⚠️ Not answered | ⚠️ Not answered | — | |
+| [ROLE-006](../details/ROLE-006.md) | Enterprise Architect | ⚠️ Not answered | ⚠️ Not answered | — | |
+| [ROLE-007](../details/ROLE-007.md) | Business Architect | ⚠️ Not answered | ⚠️ Not answered | — | |
+| [ROLE-008](../details/ROLE-008.md) | Data Architect | ⚠️ Not answered | ⚠️ Not answered | — | |
+| [ROLE-009](../details/ROLE-009.md) | Application Architect | ⚠️ Not answered | ⚠️ Not answered | — | |
+| [ROLE-010](../details/ROLE-010.md) | Technology Architect | ⚠️ Not answered | ⚠️ Not answered | — | |
+| [ROLE-011](../details/ROLE-011.md) | Business Analyst | ⚠️ Not answered | ⚠️ Not answered | — | |
+| [ROLE-012](../details/ROLE-012.md) | Delivery Lead | ⚠️ Not answered | ⚠️ Not answered | — | |
+| [ROLE-013](../details/ROLE-013.md) | Project Manager | ⚠️ Not answered | ⚠️ Not answered | — | |
+| [ROLE-014](../details/ROLE-014.md) | Data Owner | ⚠️ Not answered | ⚠️ Not answered | — | Specify data domain in Notes |
+| [ROLE-015](../details/ROLE-015.md) | Application Owner | ⚠️ Not answered | ⚠️ Not answered | — | Specify application in Notes |
 
 ---
 

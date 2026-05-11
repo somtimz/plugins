@@ -164,8 +164,8 @@ Add or remove categories as appropriate.
 
 | ID | Category | Principle | Status | Details |
 |---|---|---|---|---|
-| BP-01 | Business | {{name}} | Draft/Approved | — |
-| DP-01 | Data | {{name}} | Draft/Approved | — |
+| [BP-01](../details/BP-01.md) | Business | {{name}} | Draft/Approved | [→](../details/BP-01.md) |
+| [DP-01](../details/DP-01.md) | Data | {{name}} | Draft/Approved | [→](../details/DP-01.md) |
 
 ---
 

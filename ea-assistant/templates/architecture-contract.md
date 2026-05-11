@@ -113,8 +113,8 @@ Architecture Board approval before implementation proceeds.
 
 | Req ID | Requirement | Source Artifact | Verification Method |
 |---|---|---|---|
-| ACR-001 | {{requirement}} | {{source_artifact}} | Design review / Test / Inspection |
-| ACR-002 | {{requirement}} | {{source_artifact}} | Design review / Test / Inspection |
+| [ACR-001](../details/ACR-001.md) | {{requirement}} | {{source_artifact}} | Design review / Test / Inspection |
+| [ACR-002](../details/ACR-002.md) | {{requirement}} | {{source_artifact}} | Design review / Test / Inspection |
 
 ### Advisory Guidance
 <details>
@@ -127,7 +127,7 @@ justified but does not require formal approval.
 
 | Guidance ID | Guidance | Rationale |
 |---|---|---|
-| ACG-001 | {{guidance}} | {{rationale}} |
+| [ACG-001](../details/ACG-001.md) | {{guidance}} | {{rationale}} |
 
 ---
 

@@ -99,8 +99,8 @@ Force: Opportunity / Threat / Mandate.
 
 | ID | Driver | Type | Force | Impact on Strategy | Linked Goals | Evidence / Source | Details |
 |---|---|---|---|---|---|---|---|
-| DRV-001 | {{driver_1}} | Internal / External | Opportunity / Threat / Mandate | {{impact_1}} | G-00N | {{evidence_1}} | — |
-| DRV-002 | {{driver_2}} | Internal / External | Opportunity / Threat / Mandate | {{impact_2}} | G-00N | {{evidence_2}} | — |
+| [DRV-001](../details/DRV-001.md) | {{driver_1}} | Internal / External | Opportunity / Threat / Mandate | {{impact_1}} | G-00N | {{evidence_1}} | [→](../details/DRV-001.md) |
+| [DRV-002](../details/DRV-002.md) | {{driver_2}} | Internal / External | Opportunity / Threat / Mandate | {{impact_2}} | G-00N | {{evidence_2}} | [→](../details/DRV-002.md) |
 
 ---
 
@@ -119,8 +119,8 @@ this goal necessary. Goals are the primary anchor for Issues (the barriers that 
 
 | ID | Goal | Business Driver(s) | Linked Strategies | Rationale | Details |
 |---|---|---|---|---|---|
-| G-001 | {{goal_1}} | DRV-00N | STR-00N | {{goal_rationale_1}} | — |
-| G-002 | {{goal_2}} | DRV-00N | STR-00N | {{goal_rationale_2}} | — |
+| [G-001](../details/G-001.md) | {{goal_1}} | DRV-00N | STR-00N | {{goal_rationale_1}} | [→](../details/G-001.md) |
+| [G-002](../details/G-002.md) | {{goal_2}} | DRV-00N | STR-00N | {{goal_rationale_2}} | [→](../details/G-002.md) |
 
 ---
 
@@ -137,8 +137,8 @@ a deadline. Objectives are the primary anchor for Problems (the specific symptom
 
 | ID | Objective | Measure | Target | Deadline | Linked Goal | Details |
 |---|---|---|---|---|---|---|
-| OBJ-001 | {{objective_1}} | {{measure_1}} | {{target_1}} | {{deadline_1}} | G-00N | — |
-| OBJ-002 | {{objective_2}} | {{measure_2}} | {{target_2}} | {{deadline_2}} | G-00N | — |
+| [OBJ-001](../details/OBJ-001.md) | {{objective_1}} | {{measure_1}} | {{target_1}} | {{deadline_1}} | G-00N | [→](../details/OBJ-001.md) |
+| [OBJ-002](../details/OBJ-002.md) | {{objective_2}} | {{measure_2}} | {{target_2}} | {{deadline_2}} | G-00N | [→](../details/OBJ-002.md) |
 
 ---
 
@@ -156,8 +156,8 @@ They are parallel to Problems, not parents of them.
 
 | ID | Issue | Area | Threatens Goal(s) | Evidence | Raised By | Details |
 |---|---|---|---|---|---|---|
-| ISS-001 | {{issue_1}} | {{area_1}} | G-00N | {{issue_evidence_1}} | {{issue_raised_by_1}} | — |
-| ISS-002 | {{issue_2}} | {{area_2}} | G-00N | {{issue_evidence_2}} | {{issue_raised_by_2}} | — |
+| [ISS-001](../details/ISS-001.md) | {{issue_1}} | {{area_1}} | G-00N | {{issue_evidence_1}} | {{issue_raised_by_1}} | [→](../details/ISS-001.md) |
+| [ISS-002](../details/ISS-002.md) | {{issue_2}} | {{area_2}} | G-00N | {{issue_evidence_2}} | {{issue_raised_by_2}} | [→](../details/ISS-002.md) |
 
 ---
 
@@ -175,8 +175,8 @@ Issues, not derived from them.
 
 | ID | Problem | Observable Symptom | Blocks Objective(s) | Evidence | Raised By | Details |
 |---|---|---|---|---|---|---|
-| PRB-001 | {{problem_1}} | {{symptom_1}} | OBJ-00N | {{problem_evidence_1}} | {{problem_raised_by_1}} | — |
-| PRB-002 | {{problem_2}} | {{symptom_2}} | OBJ-00N | {{problem_evidence_2}} | {{problem_raised_by_2}} | — |
+| [PRB-001](../details/PRB-001.md) | {{problem_1}} | {{symptom_1}} | OBJ-00N | {{problem_evidence_1}} | {{problem_raised_by_1}} | [→](../details/PRB-001.md) |
+| [PRB-002](../details/PRB-002.md) | {{problem_2}} | {{symptom_2}} | OBJ-00N | {{problem_evidence_2}} | {{problem_raised_by_2}} | [→](../details/PRB-002.md) |
 
 ---
 
@@ -193,7 +193,7 @@ Types: **Exploit** (capitalise on existing advantage) / **Enhance** (amplify cur
 
 | ID | Opportunity | Driver(s) | Type | Priority | Linked Goal(s) | Rationale | Details |
 |---|---|---|---|---|---|---|---|
-| OPP-001 | {{opportunity_1}} | DRV-00N | Exploit / Enhance / Emerge | High / Med / Low | G-00N | {{opp_rationale_1}} | — |
+| [OPP-001](../details/OPP-001.md) | {{opportunity_1}} | DRV-00N | Exploit / Enhance / Emerge | High / Med / Low | G-00N | {{opp_rationale_1}} | [→](../details/OPP-001.md) |
 
 ---
 
@@ -214,13 +214,13 @@ stakeholders who need the full motivation chain without reading individual secti
 
 | ID | Strategy | Supports Goal(s) | Details |
 |---|---|---|---|
-| STR-001 | {{strategy_1}} | G-00N | — |
+| [STR-001](../details/STR-001.md) | {{strategy_1}} | G-00N | [→](../details/STR-001.md) |
 
 ### Key Metrics
 
 | ID | Metric | Type | Linked Objective | Baseline | Target | Baseline Source |
 |---|---|---|---|---|---|---|
-| MET-001 | {{metric_1}} | Performance / Outcome / Activity | OBJ-00N | {{baseline_1}} | {{target_1}} | {{baseline_source_1}} |
+| [MET-001](../details/MET-001.md) | {{metric_1}} | Performance / Outcome / Activity | OBJ-00N | {{baseline_1}} | {{target_1}} | {{baseline_source_1}} |
 
 > *Full direction data is maintained in `engagement.json → direction` and `metrics[]`.*
 

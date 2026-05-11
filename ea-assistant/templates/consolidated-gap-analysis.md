@@ -106,8 +106,8 @@ The "Domain" column indicates which domain-level analysis originated the gap.
 
 | Gap ID | Domain | Description | Category | Priority | Baseline State | Target State | Effort | Evidence | Related Gaps |
 |---|---|---|---|---|---|---|---|---|---|
-| GAP-001 | Business | {{description}} | Missing capability | High | {{baseline}} | {{target}} | High | {{evidence}} | — |
-| GAP-002 | Data | {{description}} | {{category}} | {{priority}} | {{baseline}} | {{target}} | {{effort}} | {{evidence}} | GAP-001 |
+| [GAP-001](../details/GAP-001.md) | Business | {{description}} | Missing capability | High | {{baseline}} | {{target}} | High | {{evidence}} | [→](../details/GAP-001.md) |
+| [GAP-002](../details/GAP-002.md) | Data | {{description}} | {{category}} | {{priority}} | {{baseline}} | {{target}} | {{effort}} | {{evidence}} | GAP-001 |
 
 ---
 
@@ -124,7 +124,7 @@ work packages in the Architecture Roadmap.
 
 | Primary Gap | Dependent Gap | Dependency Type | Sequencing Implication |
 |---|---|---|---|
-| GAP-001 | GAP-004 | Prerequisite | GAP-001 must be closed before GAP-004 begins |
+| [GAP-001](../details/GAP-001.md) | GAP-004 | Prerequisite | GAP-001 must be closed before GAP-004 begins |
 
 ---
 

@@ -104,7 +104,7 @@ Gaps: any UC-NNN from the Business Architecture that maps to no application comp
 
 | UC-NNN | Use Case | Primary Actor | Supported By (APP-NNN) | Key Interaction Points | NFR Sensitivity |
 |---|---|---|---|---|---|
-| UC-001 | {{use_case}} | {{actor}} | {{app_ids}} | {{interaction_points}} | Performance / Availability / Security / None |
+| [UC-001](../details/UC-001.md) | {{use_case}} | {{actor}} | {{app_ids}} | {{interaction_points}} | Performance / Availability / Security / None |
 
 ---
 
@@ -121,8 +121,8 @@ the baseline. Flag applications that are end-of-life, unsupported, or candidates
 
 | App ID | Application Name | Function | Technology | Lifecycle Status | Capabilities Supported |
 |---|---|---|---|---|---|
-| APP-001 | {{app_name}} | {{function}} | {{technology}} | Current / Aging / EOL / Retiring | {{capabilities}} |
-| APP-002 | {{app_name}} | {{function}} | {{technology}} | Current / Aging / EOL / Retiring | {{capabilities}} |
+| [APP-001](../details/APP-001.md) | {{app_name}} | {{function}} | {{technology}} | Current / Aging / EOL / Retiring | {{capabilities}} |
+| [APP-002](../details/APP-002.md) | {{app_name}} | {{function}} | {{technology}} | Current / Aging / EOL / Retiring | {{capabilities}} |
 
 *Reference diagram:* `../diagrams/{{current_app_landscape_diagram}}`
 
@@ -255,8 +255,8 @@ parties. Include an integration diagram.
 
 | Integration ID | Source App | Target App | Pattern | Protocol | Data Exchanged |
 |---|---|---|---|---|---|
-| INT-001 | {{source}} | {{target}} | Sync API / Async Event / Batch | {{protocol}} | {{data}} |
-| INT-002 | {{source}} | {{target}} | Sync API / Async Event / Batch | {{protocol}} | {{data}} |
+| [INT-001](../details/INT-001.md) | {{source}} | {{target}} | Sync API / Async Event / Batch | {{protocol}} | {{data}} |
+| [INT-002](../details/INT-002.md) | {{source}} | {{target}} | Sync API / Async Event / Batch | {{protocol}} | {{data}} |
 
 ### API Catalog
 
@@ -269,7 +269,7 @@ List all APIs exposed by application components to other components or external 
 
 | API ID | Name | Provider (APP-NNN) | Consumers | Type | Protocol | Auth Method | SLA |
 |---|---|---|---|---|---|---|---|
-| API-001 | {{api_name}} | {{provider_app}} | {{consumers}} | REST / GraphQL / Event / gRPC | {{protocol}} | OAuth2 / mTLS / API Key / None | {{response_time, availability}} |
+| [API-001](../details/API-001.md) | {{api_name}} | {{provider_app}} | {{consumers}} | REST / GraphQL / Event / gRPC | {{protocol}} | OAuth2 / mTLS / API Key / None | {{response_time, availability}} |
 
 ---
 
@@ -288,7 +288,7 @@ shadow IT, applications without a clear owner. Reference the full Gap Analysis a
 
 | Gap ID | Description | Priority | Impact |
 |---|---|---|---|
-| GAP-001 | {{description}} | High / Med / Low | {{impact}} |
+| [GAP-001](../details/GAP-001.md) | {{description}} | High / Med / Low | {{impact}} |
 
 ---
 
