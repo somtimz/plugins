@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.47 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.48 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -15,6 +15,7 @@ These rules prevent the most common errors. Check them before writing any agent 
 - **Relative paths only** — all artifact paths are relative to `EA-projects/{slug}/`; never assume an absolute path
 - **State changes require engagement.json** — every phase transition, artifact registration, and opt-out must update `engagement.json`
 - **No duplicated logic** — cross-topic detection lives in `cross-topic-detection.md`; A3 governance rules live in `ea-artifact-templates/SKILL.md`; concept definitions live in `ea-concepts.md`; do not restate these inline
+- **Engagement discipline rules** — every project follows the 12 rules in `.claude/rules/ea-engagement.md` (seeded from `templates/seeds/engagement-rules.md`). For the canonical reference with citation guidance, see `skills/ea-engagement-lifecycle/references/engagement-rules-reference.md`
 
 ---
 
@@ -62,8 +63,9 @@ EA-projects/{slug}/
 │   │   └── notes/            # interviews/, brainstorm/, reviews/ for this phase
 │   ├── phase-h/              # Phase H: Change Request
 │   │   └── notes/
-│   └── cross-cutting/        # Risk Register, Decision Register, ADR Register, Zachman
-│       └── notes/            # unscoped notes (no active phase)
+│   ├── cross-cutting/        # Risk Register, Decision Register, ADR Register, Zachman, Constraints Register
+│   │   └── notes/            # unscoped notes (no active phase)
+│   └── details/              # per-item detail files (linked from artifact tables: ../details/{ID}.md)
 ├── diagrams/                 # .mmd, .dot, .drawio, .png, .svg
 ├── uploads/                  # source documents for ingestion
 ├── ResearchAndReferences/    # research documents, notes, links; research-index.md
