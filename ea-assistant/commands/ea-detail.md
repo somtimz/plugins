@@ -75,11 +75,34 @@ If no match is found in the expected artifact, scan all `artifacts/**/*.md` for 
 
 If still not found, proceed with `parentArtifact: unknown` and note: "Could not locate {ID} in any artifact — you can fill in the parent artifact path manually."
 
-### Step 4 — Extract Row Data
+### Step 4 — Extract Row Data and Related IDs
 
 Read the located parent artifact. Find the table row whose first cell contains `{ID}` (or `[{ID}](...)`). Extract:
 - The title or description from the second column (typically the item label or statement)
 - The artifact file path relative to `EA-projects/{slug}/`
+
+**Cross-link extraction:** Scan every cell in that table row for ID references (any `PREFIX-NNN` token where PREFIX is a recognised ID scheme prefix). Build a `relatedItems` list:
+
+| Detected pattern | Relationship label | Example |
+|---|---|---|
+| ID in column header contains "Goal" or "Linked Goal" | `drives` / `achieves` | `G-001` in a Goal column → `{id: "G-001", rel: "achieves"}` |
+| ID in column header contains "Objective" | `operationalizes` | `OBJ-001` in an Objective column → `{id: "OBJ-001", rel: "operationalizes"}` |
+| ID in column header contains "Strategy" | `executes` / `supports` | `STR-001` in a Strategy column → `{id: "STR-001", rel: "supports"}` |
+| ID in column header contains "Driver" | `driven by` | `DRV-001` in a Driver column → `{id: "DRV-001", rel: "driven by"}` |
+| ID in column header contains "Issue" | `threatens` | `ISS-001` in an Issue column → `{id: "ISS-001", rel: "threatens"}` |
+| ID in column header contains "Problem" | `blocks` | `PRB-001` in a Problem column → `{id: "PRB-001", rel: "blocks"}` |
+| ID in column header contains "Capability" or "CAP" | `exercises` / `requires` | `CAP-001` in a Capability column → `{id: "CAP-001", rel: "requires"}` |
+| ID in column header contains "Requirement" | `generates` / `satisfies` | `REQ-001` in a Requirement column → `{id: "REQ-001", rel: "satisfies"}` |
+| ID in column header contains "Risk" | `threatened by` | `RIS-001` in a Risk column → `{id: "RIS-001", rel: "threatened by"}` |
+| ID in column header contains "Constraint" | `bound by` | `CST-001` in a Constraint column → `{id: "CST-001", rel: "bound by"}` |
+| Any other ID found in the row | `relates to` | Generic fallback |
+
+**Rules:**
+- Do not add the item's own ID to `relatedItems`
+- Do not add duplicate IDs
+- Extract IDs from comma-separated lists (e.g., `G-001, G-002`)
+- Extract IDs from linked markdown (e.g., `[G-001](../details/G-001.md)`)
+- If the column header does not match any pattern above, use `relates to`
 
 ### Step 5 — Create the Detail File
 
@@ -93,6 +116,8 @@ Copy the detail file template from `templates/item-detail.md`. Replace all place
 - `{{parent_artifact_path}}` → relative path to parent artifact (e.g. `phase-a/architecture-vision.md`)
 - `{{parent_artifact_name}}` → display name derived from artifact frontmatter `artifact:` field
 - `{{YYYY-MM-DD}}` → today's date
+- `{{related_items}}` → YAML list from Step 4 cross-link extraction; if empty, keep `[]`
+- `{{related_items_table}}` → markdown table rows from Step 4 extraction; if empty, keep the header only
 
 Write to `EA-projects/{slug}/artifacts/details/{ID}.md`.
 
@@ -127,6 +152,7 @@ If yes:
 Type | {item_type}
 Title | {item_title}
 Parent | {parent_artifact_path}
+Related Items | {N} auto-detected from parent artifact table row
 
 Edit the file now to add narrative, rationale, risks, costs, issues, concerns, impact, and alternatives.
 Run /ea-detail view {ID} to open it again at any time.

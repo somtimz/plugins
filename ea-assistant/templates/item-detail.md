@@ -6,7 +6,7 @@ engagement: {{engagement_name}}
 parentArtifact: {{parent_artifact_path}}
 created: {{YYYY-MM-DD}}
 lastModified: {{YYYY-MM-DD}}
-relatedItems: []
+relatedItems: {{related_items}}
 ---
 
 <!-- GUIDANCE:
@@ -40,11 +40,14 @@ relatedItems: []
 
 ## Related Items
 
-<!-- GUIDANCE: Cross-links to related detail files. Managed via /ea-detail link {ID1} {ID2}.
+<!-- GUIDANCE: Cross-links to related detail files.
+     Auto-populated from the parent artifact table row on creation.
+     Managed via /ea-detail link {ID1} {ID2}.
      The relatedItems frontmatter field is the source of truth; this table is derived from it. -->
 
 | ID | Type | Title | Relationship |
 |---|---|---|---|
+{{related_items_table}}
 
 ---
 
