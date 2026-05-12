@@ -153,7 +153,14 @@ and the mechanism used (warm standby, pilot light, multi-region active-active, b
 
 List the logical, vendor-neutral components (ABB-NNN) that realise technology requirements. ABBs describe WHAT capability is needed without specifying HOW it is implemented — that is captured in the Solution Building Blocks Register (near end of this document). Each ABB should reference the infrastructure component it supports (INF-NNN) and the requirement(s) it satisfies (REQ-NNN). Use `/ea-detail new ABB-NNN` for complex ABBs requiring extended rationale.
 
+**Naming Convention:**
+- Use a **noun phrase** describing the logical function (e.g. "Immutable Log Store", not "Back up logs")
+- Must be **vendor-neutral and technology-agnostic** — no product names, brands, versions, or cloud-provider terms
+- Be specific enough to distinguish from other ABBs
+
 Technology ABBs are typically drawn from: compute (container runtime, VM host), storage (object store, block store, immutable log), networking (load balancer, API gateway, service mesh), security (secrets manager, PKI), and observability (metrics collector, log aggregator, trace store).
+
+See `skills/ea-artifact-templates/references/abb-catalogue.md` for a standard set of reusable ABB names.
 
 </details>
 

@@ -301,6 +301,7 @@ After the section-by-section review, explicitly scan the artifact for these high
 **ABB / SBB / Story anti-patterns:**
 - **Vendor-first selection:** SBB-NNN appears before its implementing ABB-NNN is defined, or an SBB is named without an ABB reference. Flag: "SBB without ABB — vendor-first anti-pattern."
 - **ABB leakage:** ABB name or description contains a vendor name, version number, or product name. Flag: "ABB contains vendor-specific language — rewrite as logical description."
+- **ABB naming:** ABB name uses a verb or action phrase (e.g. "Back up the database", "Authenticate users") rather than a noun phrase describing the logical component. Flag: "ABB name is a verb phrase — rewrite as noun phrase (e.g. 'Database Backup Service', 'Identity Authentication Service')."
 - **SBB leakage:** SBB name or description is purely logical with no vendor/product named. Flag: "SBB appears to be an ABB — no concrete implementation named."
 - **Story-task confusion:** STY-NNN text reads like a task ("configure X", "run Y", "write Z") rather than an actor-goal-benefit pattern. Flag: "Story reads like a task — rewrite as 'As a X, I want Y so that Z'."
 - **Orphan story:** STY-NNN with no REQ-NNN link and no SBB-NNN link. Flag: "Story has no traceability — link to requirement and SBB."

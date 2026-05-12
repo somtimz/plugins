@@ -190,7 +190,14 @@ For each significant target application or component, describe its responsibilit
 
 #### ABBs for {{component_name_1}}
 
-<!-- GUIDANCE: List the logical, vendor-neutral components (ABB-NNN) that realise requirements for this application component. Each ABB is implemented by one or more SBBs in the Technology Architecture. Use `/ea-detail new ABB-NNN` to create a detail file for complex ABBs. -->
+<!-- GUIDANCE: List the logical, vendor-neutral components (ABB-NNN) that realise requirements for this application component. Each ABB is implemented by one or more SBBs in the Technology Architecture. Use `/ea-detail new ABB-NNN` to create a detail file for complex ABBs.
+
+Naming Convention:
+- Use a noun phrase describing the logical function (e.g. "Immutable Log Store", not "Back up logs")
+- Must be vendor-neutral and technology-agnostic — no product names, brands, versions, or cloud-provider terms
+- If a vendor name appears in the Name or Description, it is SBB content — redirect to /ea-sbbs new
+- See `skills/ea-artifact-templates/references/abb-catalogue.md` for standard reusable ABB names
+-->
 
 | ABB-NNN | Name | Description | Satisfies (REQ-NNN) | Implemented by (SBB-NNN) |
 |---|---|---|---|---|
@@ -225,7 +232,14 @@ For each significant target application or component, describe its responsibilit
 
 #### ABBs for {{component_name_2}}
 
-<!-- GUIDANCE: List the logical, vendor-neutral components (ABB-NNN) that realise requirements for this application component. Each ABB is implemented by one or more SBBs in the Technology Architecture. Use `/ea-detail new ABB-NNN` to create a detail file for complex ABBs. -->
+<!-- GUIDANCE: List the logical, vendor-neutral components (ABB-NNN) that realise requirements for this application component. Each ABB is implemented by one or more SBBs in the Technology Architecture. Use `/ea-detail new ABB-NNN` to create a detail file for complex ABBs.
+
+Naming Convention:
+- Use a noun phrase describing the logical function (e.g. "Immutable Log Store", not "Back up logs")
+- Must be vendor-neutral and technology-agnostic — no product names, brands, versions, or cloud-provider terms
+- If a vendor name appears in the Name or Description, it is SBB content — redirect to /ea-sbbs new
+- See `skills/ea-artifact-templates/references/abb-catalogue.md` for standard reusable ABB names
+-->
 
 | ABB-NNN | Name | Description | Satisfies (REQ-NNN) | Implemented by (SBB-NNN) |
 |---|---|---|---|---|

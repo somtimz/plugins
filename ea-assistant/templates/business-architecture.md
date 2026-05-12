@@ -152,6 +152,13 @@ A capability with no strategic anchor should be flagged for removal or reclassif
 <!-- GUIDANCE: For each capability, add an optional #### ABBs subsection below listing the logical
      architecture components needed to realise it. ABBs are vendor-neutral logical components —
      do not name specific products here (those are SBBs, documented in Phase D Technology Architecture).
+
+     Naming Convention:
+     - Use a noun phrase describing the logical function (e.g. "Immutable Log Store", not "Back up logs")
+     - Must be vendor-neutral and technology-agnostic — no product names, brands, versions, or cloud-provider terms
+     - If a vendor name appears in the Name or Description, it is SBB content — redirect to /ea-sbbs new
+     - See `skills/ea-artifact-templates/references/abb-catalogue.md` for standard reusable ABB names
+
      ABBs are populated by Phase C/D architects; Phase B architects leave this as a placeholder. -->
 
 #### ABBs for CAP-NNN — {Capability Name}

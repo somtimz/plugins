@@ -17,6 +17,11 @@ Architecture Building Blocks (ABBs) are logical, vendor-neutral components defin
 - `new` — create a new ABB record interactively
 - `update ABB-NNN <field> <value>` — update a single field on an existing ABB
 
+**Naming Convention:**
+- Use a **noun phrase** describing the logical function (e.g. "Immutable Log Store", not "Back up logs")
+- Must be **vendor-neutral and technology-agnostic** — no product names, brands, versions, or cloud-provider terms
+- If a vendor name appears in the Name or Description, it is SBB content — redirect to `/ea-sbbs new`
+
 **Filters:**
 - `--domain` — filter by architecture domain
 - `--phase` — filter by ADM phase where ABB was defined
@@ -111,6 +116,7 @@ Find highest existing ABB-NNN. Assign next: `ABB-{NNN+1}` (zero-padded).
 Creating new ABB — ABB-{NNN}
 
 1. Name (noun phrase describing logical function, e.g. "Immutable Log Store"):
+   Tip: Check `skills/ea-artifact-templates/references/abb-catalogue.md` for standard ABB names to reuse.
 2. Domain (Business / Data / Application / Technology):
 3. Description (what it does, vendor-neutral):
 4. Satisfies (REQ-NNN IDs, comma-separated, or press Enter):

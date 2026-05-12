@@ -1058,6 +1058,26 @@ ABBs sit between Requirements and Solution Building Blocks:
 - Implemented by — SBB-NNN references (populated in Phase D / Gap Analysis)
 - Domain — which architecture layer it belongs to (Application / Technology / Data / Security)
 
+**Naming Convention:**
+- **Use a noun phrase** describing the logical function, not an action or a product name
+- **Be vendor-neutral and technology-agnostic** — no brands, products, versions, or cloud-provider-specific terms
+- **Be specific enough to distinguish from other ABBs** — prefer "Immutable Log Store" over "Log Service"
+- **Sequential IDs:** ABB-001, ABB-002, etc., within the engagement
+
+**Good examples:**
+- "Immutable Log Store"
+- "Drift Detection Engine"
+- "Automated Backup Service"
+- "Containerisation and Runtime Abstraction Layer"
+
+**Bad examples (why):**
+- "AWS Backup" → product name — belongs in SBB
+- "Container Orchestration using Kubernetes" → technology-specific — belongs in SBB
+- "Back up the database" → action/verb phrase — use noun form ("Database Backup Service")
+- "Disaster Recovery Management" → this is a Capability, not an ABB
+
+**Reference catalogue:** See `abb-catalogue.md` for a standard set of 30+ reusable ABBs organised by domain (Infrastructure, Identity & Security, Platform & Application, Data & Analytics, Operations & Support, End-User & Collaboration). Use it as a starting point to promote naming consistency and avoid reinventing common components.
+
 **What it is NOT:**
 - Not a **Requirement** — a requirement states a condition ("logs must be tamper-evident"); an ABB is the logical component that satisfies it ("Immutable Log Store with hash chaining")
 - Not a **Solution Building Block** — an ABB is logical and vendor-neutral; an SBB is the chosen product (e.g. "AWS S3 with Object Lock")

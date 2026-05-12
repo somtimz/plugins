@@ -649,7 +649,7 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 **Architecture Building Block (ABB) questions:**
 > Ask these when defining the target application/data landscape. ABBs are logical, vendor-neutral components — do not name specific products here.
 
-11. For each significant application component identified: what is the logical function it provides — described without naming a vendor or product? (e.g. "Immutable Log Store", not "AWS CloudTrail")
+11. For each significant application component identified: what is the logical function it provides — described without naming a vendor or product? (e.g. "Immutable Log Store", not "AWS CloudTrail"; use a noun phrase, not an action: "Database Backup Service", not "Back up the database")
     - What requirement(s) (REQ-NNN) does this ABB satisfy?
     - What is its architecture domain — Application or Data?
     - Assign an ABB-NNN ID and capture in the ABB Register.
