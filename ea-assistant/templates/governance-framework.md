@@ -357,6 +357,41 @@ location is better than a "correct" tool that nobody uses.
 
 ---
 
+## 8a. Policy Catalogue
+
+<details>
+<summary>📋 Guidance</summary>
+
+Document the policies that govern architecture work in this engagement. Policies are formal governance documents enacted by an authority — they authorise constraints (CST-NNN) but are not constraints themselves. This catalogue links policies to the constraints and principles they generate, creating end-to-end traceability from external mandate to architecture restriction.
+
+Distinguish:
+- **Enterprise policies** (organisation-wide, read-only) — enacted by board, regulator, or enterprise governance
+- **Engagement-specific policy interpretations** — how this engagement applies an enterprise policy
+
+**Cross-reference:** The full Policies Register is maintained via `/ea-policies`. This section is a summary for governance stakeholders who need a quick view of the policy landscape without reading the full register.
+
+</details>
+
+**Policies Summary:**
+
+| Scope | Count | Types |
+|---|---|---|
+| Enterprise 🔒 | {{N}} | {{types}} |
+| Divisional / Geographic | {{N}} | {{types}} |
+
+**Key Policies Driving This Engagement:**
+
+| POL-NNN | Title | Type | Authority | Effective Date | Linked Constraints | Status |
+|---|---|---|---|---|---|---|
+| POL-001 | {{title}} | {{type}} | {{authority}} | {{date}} | {{CST-NNN list}} | {{status}} |
+
+**Policy Governance:**
+- **Review Cycle:** Enterprise policies are reviewed {{review_cycle}}.
+- **Stale Policy Handling:** Policies past their Review Cycle are flagged in `/ea-policies list` and may invalidate linked constraints.
+- **Policy Change Escalation:** Changes to Enterprise policies require {{escalation_path}}.
+
+---
+
 ## 9. Escalation & Dispute Resolution
 
 <details>

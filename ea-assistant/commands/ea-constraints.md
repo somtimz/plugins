@@ -73,7 +73,7 @@ Creating new constraint — CST-{NNN}
 
 1. Type (Technology / Regulatory / Budget / Timeline / Organisational / Interoperability):
 2. Statement (the binding restriction, e.g. "Must deploy within existing AWS account"):
-3. Source (policy, regulation, contract, or stakeholder mandate that created this):
+3. Source (POL-NNN ID preferred, or policy/regulation/contract/mandate free-text):
 4. Owner (name and role — mandatory):
 5. Scope (Enterprise 🔒 / Program):
 6. Priority (High / Medium / Low):

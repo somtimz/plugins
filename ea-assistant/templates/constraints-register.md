@@ -39,10 +39,15 @@ links: []
 The Architecture Constraints Register captures all non-negotiable restrictions on the solution space for this engagement.
 
 Constraints are distinct from requirements (which define outcomes) and from risks (which are uncertain). Every constraint must have:
-  - a **Source** (policy, regulation, contract, or mandate)
+  - a **Source** (POL-NNN policy ID preferred, or policy/regulation/contract/mandate free-text)
   - an **Owner** (person or role accountable for upholding it)
 
 Constraints are grouped by Type: Technology, Regulatory, Budget, Timeline, Organisational, Interoperability.
+
+**Source field guidance:**
+- Preferred: link to a `POL-NNN` policy ID in the Policies Register (e.g. `POL-003`)
+- Acceptable: free-text if the policy is not yet catalogued (e.g. "Capital Expenditure Policy v3.1")
+- If a constraint's Source is a policy name that matches an existing POL-NNN, update the Source to the POL-NNN ID for traceability.
 
 **Scope:**
   - Enterprise 🔒: organisation-wide standards, principles, or regulatory mandates synced from the shared repo. Content fields (statement, type, source, owner) are read-only — only status, linked artifacts, waiver justification, and impact assessment may be updated locally.

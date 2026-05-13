@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.47
+**Version:** 0.9.49
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -446,6 +446,20 @@ These will gain dedicated commands and workflow integration in a future version.
 - **SBB traceability:** SBB records include `Referenced Constraints: [CST-NNN]` field linking vendor lock-in details back to canonical constraints
 - **Template:** `constraints-register.md`
 - **Skill:** `ea-constraints-management`
+
+### 5.16a Policies Management (v0.9.49)
+
+`/ea-policies` manages architecture policies as first-class governance documents with dedicated `POL-NNN` IDs:
+
+- **First-class concept:** Policies are formal governance documents or mandates enacted by an authority (board, regulator, CISO, governance body). They are the **authorising source** for constraints — policies generate CST-NNN constraints but do not directly restrict solution space.
+- **POL-NNN ID scheme** — unified, domain-agnostic; distinct from `CST-NNN` (constraints), `PRB-NNN` (problems), and `ADR-NNN` (decisions)
+- **Policy types:** Security, Procurement, Data Governance, Technology, Compliance, HR, Operational
+- **Modes:** `list` (default, reads register), `add` (interactive capture), `update POL-NNN <field> <value>`, `trace` (constraint/principle/SBB linkage), `impact` (assess bounded capabilities/ABBs/work packages through linked constraints)
+- **Enterprise vs Divisional scope:** Enterprise policies have read-only content fields (title, type, issuing authority, statement); Divisional/Geographic policies are fully editable
+- **Constraint traceability:** Policy records include `Linked Constraints: [CST-NNN]` field linking the policy to its derived constraints. Constraints prefer POL-NNN in their Source field over free-text.
+- **Stale policy check:** Policies with Review Cycle past due are flagged in `list` mode; may invalidate linked constraints
+- **Template:** `policies-register.md`
+- **Skill:** `ea-policies-management`
 
 ### 5.17 Architecture Change Management
 
@@ -918,6 +932,7 @@ EA-projects/
 | `/ea-grill` | `[artifact] [--skill name]` | Deep-review artifact using a grill-me skill; auto-selects skill by type; apply findings with y/n/edit |
 | `/ea-requirements` | `[list|add|edit|waive]` | Manage architecture requirements; corporate (read-only) and project scope |
 | `/ea-constraints` | `[list|add|update|trace|impact] [--type] [--status] [--priority] [--owner] [--phase]` | Manage architecture constraints (CST-NNN); trace to artifacts and SBBs; assess impact |
+| `/ea-policies` | `[list|add|update|trace|impact] [--type] [--scope] [--status]` | Manage architecture policies (POL-NNN); trace to constraints and principles; assess impact through linked constraints |
 | `/ea-decisions` | `[generate|status|rationale] [--audience] [--owner] [--domain] [--status] [--cost] [--impact] [--risk] [--artifact] [--authority]` | Generate Decision Register from all A3 logs; `rationale` mode backfills missing A3.N reasoning blocks |
 | `/ea-adrs` | `[generate|status|new|update ADR-NNN <field> <value>]` | Manage Architecture Decision Records; auto-suggested by interviewer at 2+ threshold indicators |
 | `/ea-risks` | `[generate|status|update RIS-NNN <field> <value>]` | Generate and maintain Risk Register by scanning all artifacts |

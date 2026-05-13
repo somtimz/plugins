@@ -117,6 +117,7 @@ Add or remove categories as appropriate.
 | **Statement** | {{principle_statement}} |
 | **Rationale** | {{rationale}} |
 | **Implications** | {{implications}} |
+| **Source Policy** | {{POL-NNN or policy name, if derived from an enterprise policy}} |
 | **Details** | — |
 
 ---
@@ -130,6 +131,7 @@ Add or remove categories as appropriate.
 | **Statement** | {{principle_statement}} |
 | **Rationale** | {{rationale}} |
 | **Implications** | {{implications}} |
+| **Source Policy** | {{POL-NNN or policy name, if derived from an enterprise policy}} |
 | **Details** | — |
 
 ---
@@ -143,6 +145,7 @@ Add or remove categories as appropriate.
 | **Statement** | {{principle_statement}} |
 | **Rationale** | {{rationale}} |
 | **Implications** | {{implications}} |
+| **Source Policy** | {{POL-NNN or policy name, if derived from an enterprise policy}} |
 | **Details** | — |
 
 ---
@@ -156,6 +159,7 @@ Add or remove categories as appropriate.
 | **Statement** | {{principle_statement}} |
 | **Rationale** | {{rationale}} |
 | **Implications** | {{implications}} |
+| **Source Policy** | {{POL-NNN or policy name, if derived from an enterprise policy}} |
 | **Details** | — |
 
 ---

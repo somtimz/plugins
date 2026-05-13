@@ -44,6 +44,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Phase E strategic alignment** — roadmap work packages explicitly link to Goals and Strategies from Phase A; interview questions anchor prioritisation to G-NNN/STR-NNN before addressing gaps and constraints
 - **ADM reference material** — detailed phase inputs/outputs, tailoring guidance for agile/programme/capability-based contexts
 - **Constraints Register** — `/ea-constraints` manages architecture constraints (CST-NNN) as first-class objects with Type, Source, Owner, and Impact Assessment; distinguishes constraints from requirements and risks; traces constraints to SBBs, artifacts, and work packages
+- **Policies Register** — `/ea-policies` manages architecture policies (POL-NNN) as first-class governance documents with Issuing Authority, Effective Date, Review Cycle, and Linked Constraints; distinguishes policies from principles and constraints; traces policies through linked CST-NNN constraints to capabilities, ABBs, and work packages
 - **Risk Register** — `/ea-risks` generates a cross-cutting Risk Register (RIS-NNN) by scanning all artifacts for risk content; Likelihood × Impact severity matrix
 - **Architecture Decision Records** — `/ea-adrs` manages standalone ADRs (Candidate → Completed lifecycle); `ea-interviewer` auto-suggests ADRs at 2+ threshold indicators; Appendix A5 links artifacts to related ADRs
 - **Zachman Diagram** — `/ea-zachman` auto-populates and manages the 6×6 classification grid; generate, review, gap, interview, and classify modes
@@ -149,6 +150,7 @@ uiMode: html
 | `/ea-review [artifact]` | Open an artifact for review and assessment; runs compliance check on load |
 | `/ea-requirements [action]` | Manage architecture requirements |
 | `/ea-constraints [action]` | Manage architecture constraints — capture, view, trace to artifacts, and assess impact on solution space |
+| `/ea-policies [mode]` | Manage architecture policies — capture governance documents, trace to constraints, and assess policy impact |
 | `/ea-decisions [options]` | Generate a Decision Register from all A3 decision logs; filter by audience, owner, domain, authority, cost, impact, risk, subject, or status |
 | `/ea-adrs [mode]` | Manage Architecture Decision Records — generate register, create new ADR, update status |
 | `/ea-risks [mode]` | Generate and maintain a cross-cutting Risk Register from all artifact risk sections |

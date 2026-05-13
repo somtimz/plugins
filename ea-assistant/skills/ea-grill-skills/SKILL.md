@@ -310,6 +310,13 @@ After the section-by-section review, explicitly scan the artifact for these high
 - **Lock-in blind spot:** SBB Constraints field is blank or contains generic text ("standard licensing", "none") when the product has known lock-in characteristics. Flag: "Lock-in constraints under-documented."
 - **Enabler story untagged:** Story with no actor-facing benefit and no `[Enabler]` tag. Flag: "Enabler story missing tag — add [Enabler] for clarity."
 
+**Policy anti-patterns:**
+- **Policy as constraint:** A POL-NNN entry phrased as a binding restriction rather than a governance document (e.g. "Budget is capped at $2M" with no authority or effective date). Flag: "Policy states a restriction — this belongs in a CST-NNN constraint derived from the policy."
+- **Constraint without policy source:** A constraint with Source = "Management decision" or blank — no traceable POL-NNN, regulation, contract, or mandate. Flag: "Constraint has no traceable source — add POL-NNN or document the mandate."
+- **Stale policy:** A policy with Review Cycle past due and Status = Enacted — may invalidate linked constraints. Flag: "Policy review overdue — may invalidate linked constraints."
+- **Orphan policy:** A policy with no linked CST-NNN constraints — the policy has not been operationalised into architecture rules. Flag: "Policy has no linked constraints — derive CST-NNN entries or document why none are needed."
+- **Principle without policy alignment:** A principle that is clearly derived from an enterprise policy but has no POL-NNN in its Source Policy field. Flag: "Principle aligned with enterprise policy — add POL-NNN for traceability."
+
 ---
 
 At the end, provide:

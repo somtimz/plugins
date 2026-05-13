@@ -35,7 +35,7 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 
 ## Command Reference
 
-33 commands available — run `/ea-help` for the full table with agent assignments.
+34 commands available — run `/ea-help` for the full table with agent assignments.
 Key entry points: `/ea-new` · `/ea-open` · `/ea-interview` · `/ea-grill` · `/ea-generate` · `/ea-status` · `/ea-brief`
 
 ---
@@ -144,6 +144,7 @@ These are loaded automatically by `/ea-grill --skill practitioner|maturity|failu
 | ABB-NNN | Architecture Building Block | ABB-001 |
 | SBB-NNN | Solution Building Block | SBB-001 |
 | CST-NNN | Constraint (restriction on implementation choices) | CST-001 |
+| POL-NNN | Policy (governance document or mandate) | POL-001 |
 | STY-NNN | User Story | STY-001 |
 
 **Do not use domain-prefixed IDs** (BG-/DG-/AG-/TG- etc.) — the scheme is unified and domain-agnostic.
