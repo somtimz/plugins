@@ -1129,7 +1129,7 @@ ABBs sit between Requirements and Solution Building Blocks:
 - "Back up the database" → action/verb phrase — use noun form ("Database Backup Service")
 - "Disaster Recovery Management" → this is a Capability, not an ABB
 
-**Reference catalogue:** See `abb-catalogue.md` for a standard set of 30+ reusable ABBs organised by domain (Infrastructure, Identity & Security, Platform & Application, Data & Analytics, Operations & Support, End-User & Collaboration). Use it as a starting point to promote naming consistency and avoid reinventing common components.
+**Reference catalogue:** See `abb-catalogue.md` for a standard set of 30+ reusable ABBs organised by domain (Infrastructure, Identity & Security, Platform & Application, Data & Analytics, Operations & Support, End-User & Collaboration, AI Systems & Applications). Use it as a starting point to promote naming consistency and avoid reinventing common components. For AI/ML engagements, the AI Systems & Applications domain covers model lifecycle, serving, governance, and observability patterns not present in traditional infrastructure catalogues.
 
 **What it is NOT:**
 - Not a **Requirement** — a requirement states a condition ("logs must be tamper-evident"); an ABB is the logical component that satisfies it ("Immutable Log Store with hash chaining")

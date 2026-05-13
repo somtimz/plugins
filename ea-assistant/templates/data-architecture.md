@@ -81,6 +81,8 @@ capabilities that depend on data, current data pain points (silos, quality issue
 regulatory or compliance obligations affecting data (GDPR, sector-specific), and strategic
 data ambitions (becoming data-driven, analytics, AI/ML).
 
+**AI/ML engagements:** If the engagement includes AI/ML, reference the AI Systems & Applications domain in `skills/ea-artifact-templates/references/abb-catalogue.md` for Data & Knowledge Layer ABBs. Foundational AI data ABBs include: Feature Store, Vector Database Service, Knowledge Repository, Data Labeling Service, AI Data Storage Service, AI Data Governance Service. These should appear in the Data Architecture alongside traditional data ABBs.
+
 </details>
 
 {{data_context}}

@@ -80,6 +80,70 @@ A reusable catalogue of vendor-neutral Architecture Building Blocks (ABBs) organ
 
 ---
 
+## AI Systems & Applications ABBs
+
+### Data & Knowledge Layer
+
+| ABB Name | Logical Function | Typical Categories |
+|---|---|---|
+| Data Ingestion Service | Connects to batch and streaming sources to collect raw data for training, inference, and evaluation | Batch connectors, streaming connectors, change-data-capture |
+| AI Data Storage Service | Provides tiered storage for raw, processed, and training-ready data optimised for ML workloads | Data lake, lakehouse, feature store, vector database |
+| Data Quality & Validation Service | Applies schema, drift, and anomaly checks to data before it enters the training or inference pipeline | Great expectations, anomaly detection, schema validation |
+| Data Labeling Service | Manages human-in-the-loop annotation, review, and quality assurance workflows for supervised learning datasets | Image annotation, text classification, sequence tagging |
+| Feature Store | Serves offline (training) and online (inference) features with versioning, lineage, and consistency guarantees | Offline store, online store, feature registry |
+| Vector Database Service | Stores and indexes high-dimensional embeddings to enable semantic search and retrieval-augmented generation | Dense retrieval, approximate nearest neighbour, hybrid search |
+| Knowledge Repository | Curates documents, wikis, and content sources used as grounding context for retrieval-augmented generation | Document ingestion, chunking, metadata tagging |
+| AI Data Governance Service | Maintains catalog, lineage, ownership, and policy enforcement across AI datasets and models | Data catalog, lineage tracking, access policy |
+
+### Model Development & Lifecycle (MLOps)
+
+| ABB Name | Logical Function | Typical Categories |
+|---|---|---|
+| Experiment Tracking Service | Records model runs, hyperparameters, metrics, and artifacts to enable reproducibility and comparison | Run logging, metric comparison, artifact versioning |
+| Model Registry | Manages model versioning, approval gates, and promotion from development through staging to production | Versioning, staging, approval workflow |
+| Training Orchestration Service | Schedules, scales, and monitors distributed training pipelines and resource allocation | Pipeline scheduling, distributed training, resource management |
+| Model Evaluation Service | Runs offline benchmarks, golden-set validation, and comparative analysis against prior model versions | Benchmark suite, golden-set evaluation, A/B test prep |
+| Responsible AI Policy Service | Enforces bias, safety, fairness, and red-teaming checks before model promotion | Bias detection, safety evaluation, red-teaming gate |
+| Reproducibility Service | Captures dataset snapshots, environment pinning, and dependency locking to ensure training reproducibility | Environment capture, dataset snapshot, dependency lock |
+
+### Serving & Runtime
+
+| ABB Name | Logical Function | Typical Categories |
+|---|---|---|
+| Model Serving Endpoint | Provides low-latency online inference with autoscaling, load balancing, and request routing | REST/gRPC endpoint, autoscaling, A/B routing |
+| Batch Inference Service | Executes large-scale offline scoring jobs against historical datasets | Scheduled batch, distributed scoring, result persistence |
+| Prompt Management Service | Stores, versions, and manages prompt templates, system instructions, and few-shot examples | Template versioning, prompt registry, A/B testing |
+| RAG Orchestrator | Coordinates retrieval, reranking, and generation steps in a retrieval-augmented generation pipeline | Retrieve, rerank, generate, context assembly |
+| Tool / Function Calling Layer | Connects model outputs to external systems, APIs, and business functions via structured function calling | API connectors, internal systems, business functions |
+| AI Caching Service | Caches responses, embeddings, and retrieval results to reduce latency and cost | Response cache, embedding cache, retrieval cache |
+
+### Security, Privacy, and Access Control
+
+| ABB Name | Logical Function | Typical Categories |
+|---|---|---|
+| AI Identity & Access Control | Enforces RBAC/ABAC over models, prompts, datasets, and inference endpoints | Model access, prompt access, dataset access |
+| AI Secrets & Key Management | Securely stores and rotates API keys, model credentials, and vault tokens used by AI services | Vault, KMS, secret rotation |
+| Data Privacy Controls | Detects, redacts, and tokenises PII in training data and inference inputs/outputs | PII detection, redaction, tokenisation |
+| AI Policy Enforcement Point | Applies guardrails, allow/deny lists, and content filters at the inference boundary | Guardrails, content filter, allow/deny |
+
+### Observability & Operations
+
+| ABB Name | Logical Function | Typical Categories |
+|---|---|---|
+| AI Observability Service | Collects latency, token usage, cost, throughput, and error rates from inference endpoints | Latency, tokens, cost, throughput |
+| Prompt / Response Logging Service | Logs prompts and responses with privacy controls, retention policies, and audit trails | Logging, privacy controls, retention |
+| Model Drift Monitoring Service | Detects feature drift, concept drift, and data quality degradation in production | Feature drift, concept drift, quality degradation |
+| AI Incident Management Service | Provides runbooks, automated rollbacks, and kill-switch capability for AI system failures | Runbooks, rollback, kill switch |
+
+### Application Layer (User-Facing)
+
+| ABB Name | Logical Function | Typical Categories |
+|---|---|---|
+| AI Application Front-End | Provides chat UI, copilot interfaces, and workflow UI for human-AI interaction | Chat, copilot, workflow UI |
+| Human-in-the-Loop Review Service | Manages approval queues, escalation paths, and feedback loops for AI-generated outputs | Approval queue, escalation, feedback |
+
+---
+
 ## Usage Notes
 
 - **Start from this catalogue** when defining ABBs in Phase C/D to promote reuse and naming consistency.
@@ -87,6 +151,7 @@ A reusable catalogue of vendor-neutral Architecture Building Blocks (ABBs) organ
 - **Map each ABB to at least one REQ-NNN** to ensure traceability.
 - **Split or combine** catalogue entries as needed for your engagement's granularity — e.g. "Database Services" can be split into "Relational Database Service" and "NoSQL Database Service" if both are required.
 - **Add domain-specific ABBs** not listed here; this catalogue covers common enterprise infrastructure, not industry-specific components.
+- **For AI/ML engagements**, use the AI Systems & Applications domain above. These ABBs follow the same noun-phrase, vendor-neutral, technology-agnostic rules as all other ABBs. Populate the AI domain in Phase C (Application) and Phase D (Technology) architecture. Map each AI ABB to at least one REQ-NNN; many AI ABBs trace to non-functional requirements (latency, privacy, explainability). SBBs for AI ABBs may include: SageMaker, Azure ML, Vertex AI, MLflow, Weights & Biases, LangChain, LlamaIndex, Pinecone, Chroma, etc.
 
 ---
 

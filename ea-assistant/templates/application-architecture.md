@@ -197,6 +197,7 @@ Naming Convention:
 - Must be vendor-neutral and technology-agnostic — no product names, brands, versions, or cloud-provider terms
 - If a vendor name appears in the Name or Description, it is SBB content — redirect to /ea-sbbs new
 - See `skills/ea-artifact-templates/references/abb-catalogue.md` for standard reusable ABB names
+- **AI/ML engagements:** If the engagement includes AI/ML, reference the AI Systems & Applications domain in the catalogue. Common Phase C ABBs for AI applications: RAG Orchestrator, Prompt Management Service, Model Serving Endpoint, AI Application Front-End, Human-in-the-Loop Review Service.
 -->
 
 | ABB-NNN | Name | Description | Satisfies (REQ-NNN) | Implemented by (SBB-NNN) |
@@ -239,6 +240,7 @@ Naming Convention:
 - Must be vendor-neutral and technology-agnostic — no product names, brands, versions, or cloud-provider terms
 - If a vendor name appears in the Name or Description, it is SBB content — redirect to /ea-sbbs new
 - See `skills/ea-artifact-templates/references/abb-catalogue.md` for standard reusable ABB names
+- **AI/ML engagements:** If the engagement includes AI/ML, reference the AI Systems & Applications domain in the catalogue. Common Phase C ABBs for AI applications: RAG Orchestrator, Prompt Management Service, Model Serving Endpoint, AI Application Front-End, Human-in-the-Loop Review Service.
 -->
 
 | ABB-NNN | Name | Description | Satisfies (REQ-NNN) | Implemented by (SBB-NNN) |

@@ -162,6 +162,8 @@ Technology ABBs are typically drawn from: compute (container runtime, VM host), 
 
 See `skills/ea-artifact-templates/references/abb-catalogue.md` for a standard set of reusable ABB names.
 
+**AI/ML engagements:** If the engagement scope includes AI/ML, include AI Systems & Applications ABBs from the catalogue — e.g., Model Serving Endpoint, Vector Database Service, RAG Orchestrator, Feature Store, AI Observability Service, Prompt Management Service. These sit alongside traditional infrastructure ABBs in the Technology Architecture.
+
 </details>
 
 | ABB-NNN | Name | Description | Satisfies (REQ-NNN) | Implemented by (SBB-NNN) |
