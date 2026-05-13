@@ -26,7 +26,8 @@
     "strategies": [],
     "issues": [],
     "problems": [],
-    "metrics": []
+    "metrics": [],
+    "policies": []
   },
   "optOuts": [],
   "phases": {

@@ -61,6 +61,9 @@ Used by `ea-interviewer` at step 7b (Text mode) and before routing in Phase Inte
 - **Binding restriction language in Requirement → Constraint:** a requirement (REQ-NNN) row that describes an implementation restriction ("cannot use X", "must deploy within Y", "prohibited from Z", "limited to", "restricted to", "capped at") — extract as a separate CST-NNN in the Constraints Register; requirements define outcomes, not boundaries
 - **Constraint without CST-NNN → flag:** any artifact containing free-text constraint language ("must use existing AWS account", "budget capped at", "no new vendors") without a `CST-NNN` ID or `Referenced Constraints` field — prompt to create via `/ea-constraints add`
 - **SBB vendor lock-in without constraint source:** an SBB "Constraints / Lock-in Risk" field containing restriction text but no `Referenced Constraints: [CST-NNN]` link — flag as untraced; offer to create CST-NNN or link existing
+- **Policy language without POL-NNN:** phrases like "in accordance with", "as required by", "under the", "compliant with", "governed by" followed by a policy name but with no POL-NNN ID — flag for policy capture via `/ea-policies add`
+- **Constraint without source policy:** a constraint whose Source is free-text and looks like a policy name ("Procurement Policy", "CISO Directive", "Board Mandate") but is not linked to a POL-NNN — suggest creating a POL-NNN or linking an existing one
+- **Policy phrased as constraint:** an entry with language like a governance document but structured as a binding restriction ("Budget is capped at $2M") — if it has an authority and effective date, it is a **Policy** (POL-NNN); the binding restriction belongs in a **Constraint** (CST-NNN) derived from it
 
 ## Do NOT Flag
 
