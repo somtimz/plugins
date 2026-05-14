@@ -1,7 +1,7 @@
 ---
 name: ea-grill
 description: Deep-review an EA artifact using a grill-me skill — stress-test, boardroom simulation, pre-mortem, decision critique, or design critique
-argument-hint: "[artifact-name] [--skill stress-test|premortem|decision|design|software-design|infra-design|artifact|diagram|boardroom-strategy] | security <artifact-id>"
+argument-hint: "[artifact-name] [--skill stress-test|premortem|decision|design|software-design|infra-design|artifact|diagram|boardroom-strategy] | security <artifact-id> | all [--skill <name>]"
 allowed-tools: [Read, Glob, Bash]
 ---
 
@@ -17,6 +17,7 @@ If no engagement is active in context, prompt the user to run `/ea-open` first.
 
 Check the arguments provided:
 
+- If `all` appears as an argument (e.g. `/ea-grill all` or `/ea-grill all --skill artifact`), jump to **[All Mode](#all-mode)** below. Do not proceed to Step 1.
 - If `security` appears as an argument (in any position, e.g. `/ea-grill security <artifact-id>` or `/ea-grill <artifact-id> security`), extract the artifact ID (the non-`security` argument) and jump to **[Security Mode](#security-mode)** below. Do not proceed to Step 1.
 - Otherwise, continue to Step 1 (standard grill workflow).
 
@@ -441,6 +442,84 @@ Check whether the expected diagrams for this artifact type exist and are referen
    > "Found `architecture-vision-motivation-map.mmd` but no rendered image. Run `/ea-generate png` to produce a `.png` for export."
 
 After Step 8 is complete, ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-status.md (the --next flag section)` and output the recommendation.
+
+---
+
+## All Mode
+
+**Triggered by:** `/ea-grill all` or `/ea-grill all --skill <name>`
+
+Runs a non-interactive structural review on every artifact in the engagement, saves a review file per artifact, and outputs a consolidated summary table. No Q&A, no apply loop, no A4 population, no version bumps.
+
+### AM-1 — Determine the skill
+
+If `--skill <name>` was provided, use that skill for all artifacts. Otherwise default to `artifact`.
+
+### AM-2 — Enumerate artifacts
+
+Glob `EA-projects/{slug}/artifacts/**/*.md`, then exclude:
+- Any path containing `/notes/`
+- Any path containing `/details/`
+
+Sort by phase folder order: `preliminary → requirements → phase-a → phase-b → phase-c-data → phase-c-app → phase-d → phase-e → phase-f → phase-g → phase-h → cross-cutting`.
+
+Announce:
+```
+## Grill All — [Engagement Name]
+
+Skill: [skill name]
+Artifacts found: [N]
+
+Reviewing each artifact non-interactively. Review files will be saved under each artifact's notes/reviews/ folder.
+```
+
+### AM-3 — Review each artifact
+
+For each artifact in turn:
+
+1. **Read** the artifact file in full.
+2. **Load** the artifact's frontmatter: `title`, `phase`, `status`, `version`.
+3. **Apply the `artifact` skill** (or the overriding `--skill`) directly to the artifact content — do not ask questions. Instead, produce the full structured output for that skill as if the review session were complete. For the `artifact` skill this means:
+   - Section-by-section scorecard (Complete / Partial / Empty / Inconsistent) for every populated section
+   - Traceability gaps (dangling or missing ID references)
+   - Governance anti-patterns found (each with specific text and recommended fix)
+   - Three weakest sections and why
+   - Three strongest sections and why
+   - Recommended revisions (prioritised, top 5 maximum per artifact to keep output scannable)
+   - Overall verdict: **Ready for review** / **Needs revision** / **Incomplete**
+4. **Save** the output as a review file:
+   `EA-projects/{slug}/artifacts/{phase-folder}/notes/reviews/grill-{artifact-id}-{skill}-{YYYY-MM-DD}.md`
+   with frontmatter:
+   ```yaml
+   ---
+   artifact: [artifact-id]
+   skill: [skill-name]
+   date: [YYYY-MM-DDTHH:MM:SSZ]
+   reviewer: ea-grill-all
+   ---
+   ```
+5. **Append a summary row** to the consolidated table (built in AM-4).
+
+If a review file for this artifact + skill + date already exists, skip that artifact and note it as `(skipped — already reviewed today)` in the summary.
+
+### AM-4 — Consolidated summary
+
+After all artifacts are processed, output:
+
+```
+## Grill All — Summary
+
+| Artifact | Phase | Status | Verdict | Findings | Review File |
+|---|---|---|---|---|---|
+| Architecture Vision | Phase A | Draft | Needs revision | 6 | notes/reviews/grill-architecture-vision-artifact-2026-05-14.md |
+| ...                 | ...     | ...   | ...           | ... | ... |
+
+**[N] artifacts reviewed. [N] Ready for review · [N] Needs revision · [N] Incomplete.**
+
+Run `/ea-grill <artifact-name>` on any artifact to walk through findings interactively and apply revisions.
+```
+
+Resolve `{phase-folder}` from each artifact's frontmatter `phase:` field using the Phase Folder Mapping table in `skills/ea-engagement-lifecycle/SKILL.md`.
 
 ---
 
