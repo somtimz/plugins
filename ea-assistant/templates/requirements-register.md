@@ -49,6 +49,18 @@ Use /ea-interview start phase requirements to run a guided NFR discovery session
 
 **⚠️ Two Layers check:** Distinguish `Business Requirements` (what the business needs to achieve, e.g., "Reduce case-handling time by 40%") from `Architecture Requirements` (how the EA function governs solution design, e.g., "All AI models must pass bias audit"). The Requirements Register primarily holds **Business Requirements**; Architecture Requirements belong in the Governance Framework or Architecture Principles. See `ea-concepts.md` → **Two Layers of Intent**.
 
+**Quality indicators:**
+- Non-functional requirements (NFRs) have a populated Measurable Target — "the system must be fast" is not an NFR; "95th-percentile response time under 2 seconds under peak load" is
+- Every requirement traces to an architecture domain artifact where it is addressed — orphan requirements are either not addressed or not tracked
+- Enterprise requirements are synced and current — run `/ea-requirements sync` before final review
+
+**Common mistakes:**
+- Requirements written as solutions ("the system must use a REST API") rather than needs ("the system must allow third-party applications to access customer data") — solution choices belong in ADRs, not requirements
+- NFRs without measurable targets — these cannot be verified in a Compliance Assessment
+- Missing scope classification (Enterprise / Program) — requirements without scope cannot be appropriately governed or waived
+
+**TOGAF reference:** TOGAF 10 Part III, Requirements Management (§24.7) — the Requirements Register is a continuous artifact maintained throughout the ADM cycle, feeding into each domain architecture phase and the Gap Analysis.
+
 </details>
 
 # Architecture Requirements Register
@@ -237,6 +249,39 @@ criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
 
 ---
 
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin.*
 *Requirements synced from: {{requirementsRepoPath}}*

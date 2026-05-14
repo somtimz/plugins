@@ -21,6 +21,8 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
 
 2. Load the artifact file and extract all `{{placeholder}}` fields as interview questions.
 
+2b. **Extract guidance context.** While the artifact file is loaded, scan it for all `<details><summary>📋 Guidance</summary>...</details>` blocks. For each block, record the nearest preceding section heading as the key. Build a `guidanceContext` map: `{section/field name} → {guidance text}` (plain text, tags stripped). Pass this map to the `ea-interviewer` agent alongside the question list. If no guidance blocks are found, pass `guidanceContext: null`.
+
 3. Resolve the phase folder for the artifact (read `phase:` from artifact frontmatter and map to the folder using the Phase Folder Mapping table in `skills/ea-engagement-lifecycle/SKILL.md`). Use this folder for all note paths in this mode.
 
    Load any existing dated interview notes from `artifacts/{phase-folder}/notes/interviews/` for this artifact. If notes exist, ask: "Previous interview notes found (v{N}, {date}). Resume from these, or start fresh?"
@@ -52,6 +54,7 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
      > {drafted summary}
      > Accept? (y / edit / skip)
      Apply or skip per user response. Only offer if the artifact has a `## Executive Summary` section.
+   - **Outstanding Tasks prompt:** Ask: "Were there any questions you skipped or fields you want to return to? I can add them to the artifact's Outstanding Tasks. (y/n)" — if yes, for each item the user names, append a `- [ ] {task description}` line to the `## Artifact Working Notes > Outstanding Tasks` section of the artifact. If the section does not yet exist, append the full Artifact Working Notes scaffold before adding tasks.
    - Ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-status.md (the --next flag section)` and output the recommendation.
 
 ---

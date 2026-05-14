@@ -125,6 +125,8 @@ Additional interview-specific config behaviour:
    - Announce: `💭 Brainstorm notes loaded — I'll surface relevant thoughts as we go.`
    - If not found, continue without comment.
 
+1c. **Load guidance context** — if a `guidanceContext` map was passed by the invoking command, hold it in memory. This map contains `{section heading} → {guidance text}` entries extracted from the artifact's `<details>📋 Guidance</details>` blocks. If `guidanceContext` is null or absent, continue without comment.
+
 2. **Select interview mode** — if a `mode` was passed by the invoking command, use it directly. Otherwise, prompt:
 
    > How would you like to conduct this interview?
@@ -181,6 +183,10 @@ For each question in order:
 
 1. Show the question header: `**Q{N}/{total}:** {question text}`
 2. If `context` exists, show on the next line: `> {context}`
+2b. **Guidance surfacing:** Check `guidanceContext` for an entry whose key matches the current question's section heading or field name (fuzzy match on leading words). If found, display before the brainstorm note:
+   > 💡 **What good looks like:** {first 2–3 sentences of the guidance text}
+   Keep this display concise — if the guidance is long (>3 sentences), show the first two and note `(type ? for full guidance)`.
+   Do not repeat this for subsequent questions in the same section — show it only on the first question under each new section heading.
 3. If `brainstormNote` matches, show: `💭 Brainstorm: {note}` (add to shown-notes list)
 4. If `existingAnswer` exists, show: `📎 Previous answer: {existingAnswer} — type **y** to keep, or enter a new answer`
 5. If `defaultAnswer` exists, show: `💡 Default: {defaultAnswer} — type **d** to accept`

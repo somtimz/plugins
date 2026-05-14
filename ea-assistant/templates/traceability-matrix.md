@@ -35,11 +35,21 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-The Requirements Traceability Matrix maps each architecture requirement to the artifacts
-that address it. Requirements are grouped by scope — Corporate first, Project second.
-Corporate requirements with status Waived are shown with 🚫 in all artifact cells;
-the waiver itself is the coverage action and they are excluded from the untraced count.
-This matrix is generated or updated by /ea-requirements trace.
+**Purpose:** The Requirements Traceability Matrix maps each architecture requirement (REQ-NNN) to the artifacts that address it, providing assurance that all requirements have been considered and either addressed or formally waived. It is the primary evidence of requirements completeness for governance reviews.
+
+**What to include:** All requirements from the Requirements Register (Corporate scope first, Project scope second), mapped to the architecture domain artifacts (Business, Data, Application, Technology) that address each requirement. Waived requirements are shown with 🚫 in all cells. This matrix is generated and updated by `/ea-requirements trace` — do not edit it manually.
+
+**Quality indicators:**
+- Untraced requirements (no cell has an artifact reference) are highlighted and actioned — either they are addressed in an artifact that needs to be linked, or they are a gap that must be planned for
+- Corporate requirements appear first — governance reviewers will check corporate requirements compliance before project-specific requirements
+- The matrix is updated after each domain architecture artifact is approved — a stale matrix does not reflect the current coverage state
+
+**Common mistakes:**
+- Leaving the traceability matrix until Phase G compliance review — by then, requirements gaps discovered here are expensive to address; trace continuously
+- Showing all requirements as covered without verifying the referenced artifacts actually address them — coverage must be substantive, not just a link for appearance
+- Not reflecting waivers — a Corporate requirement with no artifact reference and no 🚫 waiver indicator appears as an unaddressed gap
+
+**TOGAF reference:** TOGAF 10 Requirements Management (§24.7) — traceability is a continuous ADM activity; the Traceability Matrix provides the evidence base for confirming that architecture decisions address the stated requirements.
 
 </details>
 
@@ -134,6 +144,40 @@ are excluded from this section.
 {{traceability_notes}}
 
 ---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin.*
 *Use `/ea-requirements trace` to regenerate this matrix from current artifact data.*

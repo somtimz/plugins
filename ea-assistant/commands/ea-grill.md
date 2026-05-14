@@ -91,6 +91,19 @@ Then load full artifact-scoped context using **Scope A** from `skills/ea-engagem
 **Detail file challenge points:** If any detail files were loaded (Scope A step 8), scan them for content in the Issues and Concerns sections. Include these as additional challenge material during Step 5 — treat open items from detail files as known weaknesses the grill should probe. Announce:
 > "Detail files loaded: {N} — {N} open issues, {N} open concerns. These will be used as additional challenge points during the review."
 
+**Step 3b — Extract Section Guidance**
+
+After loading the artifact, scan the full file for all `<details><summary>📋 Guidance</summary>...</details>` blocks. For each block found, record the nearest preceding section heading (the last `## ` or `### ` line before the block) as the key.
+
+Build an internal map: `{section heading} → {guidance text}` — stripping the `<details>`, `<summary>`, and `</details>` tags to retain only the plain text content.
+
+If the artifact has no guidance blocks (e.g. auto-generated registers or older artifacts pre-dating this format), skip silently.
+
+Announce:
+> "Guidance blocks extracted: {N} section(s) with documented quality criteria. These will be used as scoring standards during the review."
+
+If N = 0, do not announce — skip silently.
+
 ---
 
 ### Step 4 — Brief the reviewer
@@ -384,6 +397,14 @@ If the user selects `a` or `s`:
    - Update `lastModified` to today's date
    - Set `reviewStatus` to `In Review` if it was `Not Reviewed` or `Needs Revision`, or keep existing if already `In Review` or `Approved`
    - Confirm: `Artifact updated — [N] revisions applied, version bumped to [new version]`
+
+5. **Populate Artifact Working Notes — Critiques.** After confirming the version bump, scan the grill findings for any issues that were surfaced but NOT resolved inline (i.e., the user typed `n` or skipped them). For each unresolved finding:
+   - Append a row to the artifact's `## Artifact Working Notes > Critiques` table:
+     `| {auto-number} | {section name} | {finding summary — one sentence} | ea-grill / {skill-name} | {YYYY-MM-DD} | Open |`
+   - This is additive — do not overwrite or delete existing rows.
+   - If the `## Artifact Working Notes` section does not yet exist in the artifact (pre-dates this feature), append the full section block at the end of the artifact before writing the critique rows.
+   - If all findings were resolved inline, skip this step silently.
+   - Announce: `📋 {N} unresolved finding(s) added to Artifact Working Notes — Critiques.` (omit if N = 0)
 
 **Constraints:**
 - Never apply a revision to an `Approved` artifact without explicit user confirmation — warn first: `⚠️ This artifact is Approved. Applying revisions will reset reviewStatus to In Review. Continue? (y/n)`

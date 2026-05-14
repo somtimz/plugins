@@ -331,3 +331,39 @@ Use `/ea-concerns` to generate a cross-artifact Concerns Register.
 ---
 
 *Use `/ea-decisions` to track this PAD alongside other decisions. Use `/ea-concerns` to manage concerns. Run `/ea-status` to surface open PADs and expiry dates.*
+
+---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*

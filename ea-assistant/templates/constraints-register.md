@@ -60,6 +60,18 @@ Constraints are grouped by Type: Technology, Regulatory, Budget, Timeline, Organ
 
 **⚠️ Two Layers check:** Distinguish `Business Constraints` (what the business must respect, e.g. "Must comply with GDPR") from `Architecture Constraints` (how the EA function governs solution design, e.g. "Must use approved cloud regions"). Both belong in the Constraints Register; the distinction is in Type and Source.
 
+**Quality indicators:**
+- Every active constraint has a named owner — a constraint without an owner is unenforceable
+- Enterprise-scope constraints reference POL-NNN IDs — free-text source is acceptable only when the policy has not yet been catalogued
+- Use `/ea-constraints trace` to verify that SBB selections reference the constraints that bound them; untraceable constraints are not actively governing design decisions
+
+**Common mistakes:**
+- Capturing requirements as constraints — a constraint is non-negotiable (if violated, the solution is not acceptable); a requirement is a stated need (can be prioritised and traded). "The system must respond within 2 seconds" is a requirement; "Must comply with GDPR" is a constraint
+- Constraints without expiry or review dates — regulatory and contractual constraints change; an undated constraint may be obsolete
+- Missing enterprise-scope constraints because they were not synced from the shared repository — always check for enterprise constraints before starting Phase B
+
+**TOGAF reference:** TOGAF 10 §23 (Preliminary Phase) and §26 (Phase B) — Architecture Constraints are identified progressively from the Preliminary Phase onward. The Constraints Register is a cross-cutting artifact maintained throughout the ADM cycle.
+
 </details>
 
 # Architecture Constraints Register
@@ -165,3 +177,39 @@ Run `/ea-summary refresh` to regenerate this section from current artifact conte
 | ADR ID | Title | Status |
 |---|---|---|
 | | | |
+
+---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*

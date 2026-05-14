@@ -37,14 +37,21 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-The Consolidated Gap Analysis is a Phase E artifact that aggregates and reconciles the
-domain-level gap analyses produced in Phases B, C, and D. It provides a single cross-domain
-view of all gaps, identifies interdependencies between domain gaps, and forms the primary
-input to the Architecture Roadmap and Transition Architectures.
+**Purpose:** The Consolidated Gap Analysis aggregates and reconciles domain-level gap analyses (from Phases B, C, and D) into a single cross-domain view. It identifies interdependencies between domain gaps, resolves conflicts where domain gaps overlap, and produces the prioritised gap list that drives the Architecture Roadmap work package structure.
 
-Do not replace domain gap analyses with this document — the domain-level analyses in
-phase-b/, phase-c-data/, phase-c-app/, and phase-d/ remain the authoritative per-domain
-records. This document consolidates and reconciles them.
+**What to include:** A consolidated gap register with all GAP-NNN entries from all domains, cross-domain dependencies (where a gap in one domain blocks or amplifies a gap in another), priority assignments informed by business impact across domains (not just within a domain), and the connection to Architecture Roadmap work packages (WP-NNN). Do not replace domain gap analyses — they remain authoritative per-domain records.
+
+**Quality indicators:**
+- Every gap from the domain-level gap analyses appears here — missing gaps mean the roadmap will be incomplete
+- Cross-domain dependencies are explicitly mapped — "GAP-B-003 (missing capability) depends on GAP-D-001 (missing platform) being resolved first"
+- Priority assignments are consistent across domains — if Business gap GAP-B-003 and Data gap GAP-D-001 both affect the same goal, they should have consistent priority weighting
+
+**Common mistakes:**
+- Consolidating only the text from domain analyses without synthesising cross-domain insights — the value of this artifact is the cross-domain view, not a concatenation
+- Assigning all gaps the same priority — if everything is high priority, nothing is; the consolidated view should enable sequencing decisions
+- Not connecting gaps to roadmap work packages — every gap must trace to a WP that will address it
+
+**TOGAF reference:** TOGAF 10 Part III, Phase E (§29) — the Consolidated Gap Analysis is the cross-domain synthesis that drives the Architecture Roadmap and Transition Architecture planning.
 
 </details>
 
@@ -182,5 +189,39 @@ direct feed from gap analysis to roadmap construction.
 | *(no related ADRs recorded)* | — | — | — |
 
 ---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin.*

@@ -90,6 +90,18 @@ architecture sets the conformance bar that delivery must meet. It does not repla
 Create this artifact before beginning Phase A. Review it whenever the governance structure
 changes or the programme scope expands significantly.
 
+**Quality indicators:**
+- Decision rights are specific enough that a reviewer can determine who approves a given decision type without asking — "the ARB approves all technology vendor selections above $50k" is specific; "the ARB approves significant decisions" is not
+- Escalation paths have named roles and timeframes — "unresolved disputes escalate to the Sponsor within 5 working days"
+- The framework distinguishes architecture governance from programme governance — if it conflates the two, delivery teams will experience governance friction
+
+**Common mistakes:**
+- Governance framework so heavyweight that architects avoid it — every review gate must justify its existence; default to trust-then-audit over review-then-approve
+- Missing the difference between architecture standards enforcement (this framework) and delivery conformance monitoring (Implementation Governance Plan, Phase G)
+- Framework created but never reviewed — revisit when programme scope changes, ARB composition changes, or governance is causing delivery friction
+
+**TOGAF reference:** TOGAF 10 Part III, Preliminary Phase (§23) — Architecture Governance. The governance framework is established in the Preliminary Phase and forms the operating environment for all subsequent ADM phases.
+
 </details>
 
 # Architecture Governance Framework
@@ -527,5 +539,39 @@ criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
 | *(no related ADRs recorded)* | — | — | — |
 
 ---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin. Use `/ea-decisions` to manage decisions and `/ea-concerns` to manage concerns.*

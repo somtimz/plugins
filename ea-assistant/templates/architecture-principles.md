@@ -34,10 +34,14 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-Architecture Principles define the rules and guidelines that govern architecture decisions.
-They should be agreed with the sponsor and key stakeholders before Phase A begins.
-Each principle has a Name, Statement, Rationale, and Implications.
-TOGAF recommends 9-15 principles. Too few lack guidance; too many become unmanageable.
+**Purpose:** Architecture Principles define the rules and guidelines that govern all architecture decisions in this engagement. They are established in the Preliminary Phase and remain stable across the ADM cycle — every design decision, ADR, and constraint must be reconcilable with the active principle set.
+
+**What to include:** Principles in each of the four TOGAF domains (Business, Data, Application, Technology) that are in scope for this engagement. Each principle requires four standard fields: Name, Statement (with modal verb — must/shall/will), Rationale (citing a business risk, policy, or driver), and Implications (what the principle requires AND what it prohibits). TOGAF recommends 9–15 principles; too few lack guidance, too many become unmanageable.
+
+**Quality indicators:**
+- Each principle statement can be used as a test: given a proposed design decision, you can say "this decision is/is not consistent with [principle]"
+- Implications include at least one thing the principle *prohibits* — principles that only describe what is required without stating what is ruled out are often ignored at review time
+- At least one principle per active architecture domain
 
 **Numbering:** If principles are numbered (P01, P02 …), the sequence must be gapless. A jump
 from P10 to P12 means P11 is missing — not deferred. Check the final catalogue before
@@ -69,6 +73,13 @@ to access an explanation, and to request human review. This is distinct from ope
 privacy principles (which govern how the organisation handles data) and from accountability
 principles (which govern human oversight of decisions). A citizen recourse principle addresses
 the citizen's rights directly.
+
+**Common mistakes:**
+- Principles that describe how something should be built ("all services must be deployed in containers") rather than a rule about design decisions — those belong in Constraints (CST-NNN) or SBB-NNN choices
+- More than 15 principles — quality over quantity; a long principle list is rarely enforced; consolidate where possible
+- Implications that are too vague to detect violations ("all teams must consider this") — implications should be specific enough to use in an architecture review
+
+**TOGAF reference:** TOGAF 10 Part III §3 — Architecture Principles. The four-domain structure (Business, Data, Application, Technology) and the four-field format (Name/Statement/Rationale/Implications) follow the TOGAF standard. For the structured register with BP/DP/AP/TP-NNN IDs, see the Principles Register artifact.
 
 </details>
 
@@ -172,5 +183,39 @@ Add or remove categories as appropriate.
 | [DP-01](../details/DP-01.md) | Data | {{name}} | Draft/Approved | [→](../details/DP-01.md) |
 
 ---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin.*

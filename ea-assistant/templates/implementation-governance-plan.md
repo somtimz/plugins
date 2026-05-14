@@ -80,6 +80,18 @@ evolves. Without this plan, Phase G governance becomes ad-hoc — architects are
 reviews at the wrong time, non-conformances are discovered too late, and change requests
 pile up with no agreed process.
 
+**Quality indicators:**
+- Every work package in the Architecture Roadmap has a scheduled compliance review checkpoint in this plan — there are no WPs that execute outside architecture oversight
+- Non-conformance handling has defined escalation paths with timeframes — "non-conformances unresolved within 10 working days escalate to the ARB"
+- Automated enforcement mechanisms are specified where available (CI pipeline checks, policy-as-code, conformance test suites) — manual-only governance does not scale
+
+**Common mistakes:**
+- Plan created at the start of Phase G but never updated — the delivery schedule changes; the governance plan must keep pace
+- Compliance reviews scheduled only at end-of-phase rather than at design, build, and pre-deployment gates — late reviews find conformance issues too late to fix economically
+- Treating all non-conformances as equal — trivial style deviations do not need ARB escalation; material architecture deviations do; the plan must define the threshold
+
+**TOGAF reference:** TOGAF 10 Part III, Phase G (§31) — Implementation Governance. The Implementation Governance Plan translates the abstract Governance Framework into a concrete, schedule-bound governance programme for delivery.
+
 </details>
 
 # Implementation Governance Plan
@@ -390,5 +402,39 @@ criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
 | *(no related ADRs recorded)* | — | — | — |
 
 ---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin. Use `/ea-decisions` to manage decisions, `/ea-concerns` to manage concerns, and `/ea-changes` to manage change requests.*

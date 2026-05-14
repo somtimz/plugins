@@ -38,10 +38,21 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-The Statement of Architecture Work (SoAW) is the formal agreement that defines the scope and
-approach for an architecture engagement. It is produced in Phase A and approved by the sponsor
-before substantive architecture work begins. It is analogous to a project charter and establishes
-the mandate, schedule, and acceptance criteria for the engagement.
+**Purpose:** The Statement of Architecture Work (SoAW) is the formal agreement that authorises the engagement — defining scope, approach, deliverables, schedule, and acceptance criteria. It is the engagement's mandate document. No substantive Phase B–D architecture work should begin before the SoAW is approved by the sponsor.
+
+**What to include:** Architecture scope (in-scope and out-of-scope), engagement objectives, deliverables list (with acceptance criteria for each), schedule, resource requirements, governance arrangements (who reviews, who approves), assumptions, and constraints. The SoAW must be consistent with and traceable to the Architecture Vision.
+
+**Quality indicators:**
+- Acceptance criteria are defined per deliverable — "the Architecture Vision is accepted when..." not just "the Architecture Vision is delivered"
+- Scope exclusions are explicit — unambiguous out-of-scope items prevent scope creep arguments later
+- The schedule is realistic and includes governance review gates, not just delivery milestones
+
+**Common mistakes:**
+- SoAW that lists deliverables without acceptance criteria — without them, "done" is undefined and sign-off becomes subjective
+- Scope described only in terms of architecture domains without reference to the specific business units, systems, or geography in scope
+- Not revisiting the SoAW if the Architecture Vision changes — the SoAW must remain consistent with the Vision throughout Phase A
+
+**TOGAF reference:** TOGAF 10 Part III, Phase A (§25.4) — Statement of Architecture Work. The formal authorisation document for the engagement; analogous to a project charter in project management terms.
 
 </details>
 
@@ -286,6 +297,40 @@ criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
 | *(no related ADRs recorded)* | — | — | — |
 
 ---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin.*
 *Use `/ea-concerns` to generate a cross-artifact Concerns Register from all A4 tables.*

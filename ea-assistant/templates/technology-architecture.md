@@ -39,11 +39,22 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-The Technology Architecture is the Phase D artifact describing the technology platforms,
-infrastructure components, and standards that host and connect the application and data
-layers. It translates application requirements into infrastructure and platform decisions.
-Technology Architecture should be driven by the Application Architecture outputs, not by
-technology preferences alone. It must address security, resilience, and operational concerns.
+**Purpose:** The Technology Architecture describes the technology platforms, infrastructure components, and standards that host and connect the application and data layers. It translates application requirements into infrastructure and platform decisions, and is the primary artifact for technology vendor selection, cloud strategy, and security architecture decisions.
+
+**What to include:** Infrastructure and platform baseline, target platform architecture (with SBB-NNN references for selected components), cloud/hosting strategy, security architecture (zones, controls, identity), resilience and operational standards, vendor selection rationale (ADR references), decommission plan for retiring infrastructure, and technology standards that constrain implementation. Technology Architecture is driven by Application Architecture outputs — not technology preferences alone.
+
+**Quality indicators:**
+- Platform choices reference ADRs — a vendor selection without a rationale is a governance gap
+- Security architecture is addressed explicitly — zones, identity management, and key controls are visible at this layer
+- End-of-life dates for baseline infrastructure are surfaced — an undated EOL risk is an unmanaged risk
+- The target platform choices are consistent with Technology Principles (TP-NNN); any deviation is noted with a waiver reference
+
+**Common mistakes:**
+- Technology preferences driving architecture choices before Application Architecture requirements are defined — this produces a solution looking for a problem
+- "Cloud-native" as a strategy without specifying which cloud, which services, and the exit strategy
+- Security treated as a separate concern appended at the end rather than integrated into the platform design
+
+**TOGAF reference:** TOGAF 10 Part III, Phase D (§28) — Technology Architecture. Phase D gate artifact; required before Phase E (Opportunities and Solutions) commences.
 
 </details>
 
@@ -354,6 +365,40 @@ criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
 | *(no related ADRs recorded)* | — | — | — |
 
 ---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin.*
 *Use `/ea-decisions` to generate a cross-artifact Decision Register from all A3 tables.*

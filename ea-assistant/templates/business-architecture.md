@@ -39,9 +39,21 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-The Business Architecture describes the business strategy, governance, organisation, and
-key business processes. It is the foundation for the Application and Technology architectures.
-Phase B takes Architecture Vision as its primary input.
+**Purpose:** The Business Architecture describes the business strategy, governance, organisation, and key business processes — both baseline and target. It is the foundation for the Application and Technology architectures; application and technology decisions made without a completed Business Architecture are frequently misaligned with business intent.
+
+**What to include:** Business capabilities (CAP-NNN), value streams (VS-NNN), operating model description, business processes, organisational model, use cases (UC-NNN), requirements (REQ-NNN), and gap analysis relative to the target. The Business Architecture takes the Architecture Vision as its primary input and must trace directly to the business drivers (DRV-NNN) and goals (G-NNN) established in Phase A.
+
+**Quality indicators:**
+- Capabilities are named at the right granularity — typically 3–5 levels of decomposition; "Manage Customer" is too broad, "Update Customer Address" is too granular
+- Every capability gap traces to a business driver or goal from the Architecture Vision
+- The operating model describes how the business will function, not just how it is currently structured
+
+**Common mistakes:**
+- Describing IT systems or applications in the Business Architecture — capabilities are business functions, not software components
+- Modelling only the current state without defining the target capability model — this produces a description of the problem, not an architecture
+- Org charts presented as the operating model — the operating model is about how work flows across roles, not the hierarchy
+
+**TOGAF reference:** TOGAF 10 Part III, Phase B (§26) — Business Architecture. The Phase B gate artifact; required before Phase C (Data and Application Architecture) commences.
 
 </details>
 
@@ -413,6 +425,40 @@ criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
 | *(no related ADRs recorded)* | — | — | — |
 
 ---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin.*
 *Use `/ea-decisions` to generate a cross-artifact Decision Register from all A3 tables.*

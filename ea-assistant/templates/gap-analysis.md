@@ -40,9 +40,21 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-Gap Analysis documents the differences between the Baseline (current) and Target architectures.
-A separate Gap Analysis is typically produced for each architecture domain (B, C-Data, C-App, D).
-Gaps feed directly into the Architecture Roadmap in Phase E.
+**Purpose:** Gap Analysis documents the differences between the Baseline (current) and Target architectures for a specific domain. Gaps are the primary input to the Architecture Roadmap — each gap must eventually be addressed by one or more work packages (WP-NNN). A domain without a gap analysis has no systematic link between its target architecture and the roadmap that will deliver it.
+
+**What to include:** Baseline architecture statement, target architecture statement, the gap register (GAP-NNN with type, priority, and traceability to goals), domain-specific gap diagrams where applicable, and the connection to roadmap work packages. Produce one Gap Analysis per active domain (B, C-Data, C-App, D); consolidate across domains in the Consolidated Gap Analysis.
+
+**Quality indicators:**
+- Every gap traces to at least one goal (G-NNN) or objective (OBJ-NNN) from the Architecture Vision — orphan gaps produce orphan work packages
+- Gaps are framed as investment opportunities, not just deficiency lists — "the absence of real-time inventory visibility prevents the fulfilment capability target (G-003)" is actionable; "inventory system is old" is not
+- Gap types are correctly classified: capability gap (missing ability), implementation gap (capability exists but not deployed), or quality gap (deployed but below standard)
+
+**Common mistakes:**
+- Gaps described in technical terms without business impact — a reviewer cannot prioritise them without knowing which business goal is blocked
+- Gaps with no assigned priority — all gaps cannot be high priority; the roadmap needs a basis for sequencing
+- Mixing baseline and target in the same cell of the gap table — keep baseline and target as distinct columns so the delta is explicit
+
+**TOGAF reference:** TOGAF 10 Part III, Phase E (§29) — Opportunities and Solutions. Gap Analysis is the primary Phase E analytical deliverable; each gap becomes an input to the Architecture Roadmap work package prioritisation.
 
 </details>
 
@@ -272,6 +284,40 @@ criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
 | *(no related ADRs recorded)* | — | — | — |
 
 ---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin.*
 *Use `/ea-concerns` to generate a cross-artifact Concerns Register from all A4 tables.*

@@ -38,10 +38,21 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-The Architecture Vision is the primary output of Phase A. It defines the business drivers, goals,
-objectives, issues, problems, scope, stakeholders, constraints, and high-level target architecture
-for the engagement. It should be approved by the sponsor before proceeding to Phases B-D.
-Collapsible guidance blocks (📋 Guidance) are for the author only and collapse when exported.
+**Purpose:** The Architecture Vision is the primary output of Phase A. It establishes the business case for the engagement, agrees the scope and constraints, and defines the high-level target architecture to a level sufficient for sponsor sign-off. It gates entry to Phases B–D — no domain architecture work should begin without an approved Architecture Vision.
+
+**What to include:** Business drivers (DRV-NNN), goals (G-NNN), objectives (OBJ-NNN), issues and problems (ISS/PRB-NNN), engagement scope, stakeholder map reference, constraints (CST-NNN), assumptions, and a high-level target state description across active architecture domains. The Architecture Vision does not contain detailed architecture — detailed analysis belongs in the domain artifacts.
+
+**Quality indicators:**
+- Every element is traceable: goals trace to drivers, objectives trace to goals, assumptions are labelled as assumptions
+- The target description is at the right abstraction level — principle-and-pattern statements, not system designs
+- The sponsor has explicitly reviewed and signed off before Phase B begins
+
+**Common mistakes:**
+- Including technology vendor or platform decisions in Phase A — these are premature; capture them as PAD-NNN items instead
+- Conflating goals (outcomes), objectives (measurable milestones), and drivers (external forces) — each has a distinct ID prefix for a reason
+- Writing the target in implementation terms ("we will use microservices") rather than architectural intent ("the target must support independent release pipelines per capability")
+
+**TOGAF reference:** TOGAF 10 Part III, Phase A (§25) — Architecture Vision. The Phase A gate artifact; required before Phase B commences.
 
 </details>
 
@@ -433,6 +444,40 @@ criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
 | *(no related ADRs recorded)* | — | — | — |
 
 ---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin.*
 *Sections marked ⚠️ are unanswered. Sections marked 🤖 contain AI-suggested content requiring review.*

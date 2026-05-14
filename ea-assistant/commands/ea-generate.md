@@ -24,6 +24,14 @@ Recommend the primary format for the artifact type (see `skills/ea-generation/re
 ### Step 3: Read and Extract Artifact Content
 
 1. Read the artifact file from `engagement.json → artifacts[].file`
+
+1b. **Strip internal-only sections before extraction.** Remove the following sections and all their content (sub-sections, tables, and bullet lists) from the in-memory content before any further processing. These sections are working-layer artifacts and must never appear in published outputs:
+   - `## Artifact Working Notes` (and all sub-sections: Comments, Critiques, Exceptions, Outstanding Tasks)
+   - Any `<details>...</details>` block (collapses guidance, compliance checklist, practitioner tips — all author-only)
+   - Any `<!-- GUIDANCE: ... -->` comment block
+
+   Perform this removal on the in-memory copy only — do not modify the source artifact file.
+
 2. **Resolve relative image links** — for each `![alt](relative-path)` in the body, resolve to an absolute path before extraction
 3. **Rewrite cross-artifact and relative text links** — apply the following rules to every `[display](target)` link in the body before extraction:
 

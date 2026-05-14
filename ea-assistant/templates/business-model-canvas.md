@@ -34,19 +34,21 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-The Business Model Canvas (BMC) describes how the organisation creates, delivers, and captures
-value. It is used in Phase B to ground the Business Architecture in the actual operating model
-of the business — before layering in capabilities, processes, and services.
+**Purpose:** The Business Model Canvas (BMC) describes how the organisation creates, delivers, and captures value. It is used in Phase B to ground the Business Architecture in the actual operating model before layering in capabilities, processes, and services. It makes business model assumptions explicit, enabling architects to identify which assumptions the target architecture is making.
 
-Use the BMC when the engagement involves significant business model change (Greenfield,
-Brownfield transformation), or when the current business model needs to be baselined before
-identifying gaps. For Assessment-only engagements, the BMC documents the current state.
+**What to include:** All nine building blocks — Customer Segments, Value Propositions, Channels, Customer Relationships, Revenue Streams, Key Resources, Key Activities, Key Partnerships, Cost Structure. Populate for both baseline (current state) and target (where significant business model change is involved). Note interdependencies between blocks as you populate them.
 
-The nine building blocks form a coherent whole — changes to one block typically affect others.
-Draw out dependencies as you populate the canvas (e.g., which Key Resources support which
-Value Propositions; which Channels serve which Customer Segments).
+**Quality indicators:**
+- Value Propositions are stated from the customer's perspective — "reduces order processing time from 3 days to same-day" not "we have a fast order processing system"
+- Revenue Streams and Cost Structure are quantified where possible — a BMC without financial grounding is strategic speculation
+- The nine blocks are internally consistent — Customer Segments match Channels match Customer Relationships; the canvas should read as a coherent business story
 
-Based on the Business Model Canvas by Osterwalder & Pigneur (strategyzer.com).
+**Common mistakes:**
+- Completing the BMC as a standalone exercise without connecting it to the Business Architecture capability model — the BMC describes *what* the business does; the capability model describes *how* it is organised to do it
+- Using the BMC for Assessment-only engagements without populating the current state — a target-only BMC has no baseline to measure gaps against
+- Leaving Revenue Streams and Cost Structure blank — these are often the most contested sections and the most important for investment decisions
+
+**TOGAF reference:** TOGAF 10 Phase B — the Business Model Canvas is a complementary tool to the Business Architecture; it is not a TOGAF-mandated artifact but provides the business model foundation that the Phase B capability model and operating model build upon.
 
 </details>
 
@@ -278,5 +280,39 @@ List requirements from the Requirements Register that this artifact addresses.
 | {{req_id}} | {{requirement}} | {{how}} |
 
 ---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin.*

@@ -67,6 +67,18 @@ Statuses:
   Accepted:   Risk acknowledged with no mitigation (owner accepts consequence)
   Closed:     Risk no longer applies (resolved, expired, or fully mitigated)
 
+**Quality indicators:**
+- Every risk has a named owner (a person, not a team) who is accountable for the mitigation
+- Critical and High risks have specific mitigations, not generic statements ("monitor closely" is not a mitigation for a High-impact risk)
+- The register is reviewed at every phase gate — stale risks (not reviewed in 60+ days) should be either updated or closed
+
+**Common mistakes:**
+- Accepting risks without documenting the consequence if they materialise — "Accepted" without a consequence statement is not risk management
+- Risk descriptions so vague they cannot be monitored ("risk of scope creep") — every risk should be specific enough that the owner knows what to watch for
+- No connection to architecture mitigations — where a risk is mitigated by an architecture decision (ADR-NNN), record the link
+
+**TOGAF reference:** TOGAF 10 §28 — Architecture Risk Management. The Risk Register is maintained as a cross-cutting artifact throughout the ADM cycle, from Architecture Vision through Phase H.
+
 </details>
 
 # Risk Register
@@ -297,3 +309,39 @@ tolerance thresholds. Use A3 rows for decisions with strategic or cross-artifact
 
 *This document was generated using the EA Assistant plugin.*
 *Run `/ea-risks` to refresh risk aggregation from all artifacts.*
+
+---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
