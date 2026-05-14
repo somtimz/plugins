@@ -39,12 +39,21 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-The Application Architecture is a Phase C artifact that describes the current and target
-application portfolio, the interactions between applications, and how applications deliver
-the capabilities identified in the Business Architecture. It sits between the Business
-Architecture (what the business needs) and the Technology Architecture (what infrastructure
-hosts it). Application Architecture drives integration decisions, rationalisation opportunities,
-and build/buy/retire choices.
+**Purpose:** The Application Architecture describes the current and target application portfolio, the interactions between applications, and how applications deliver the capabilities identified in the Business Architecture. It sits between the Business Architecture (what the business needs) and the Technology Architecture (what hosts it) — it is the primary artifact for rationalisation decisions, integration pattern choices, and build/buy/retire decisions.
+
+**What to include:** Baseline application portfolio (named systems with their capability coverage and integration points), target application portfolio (what is retained, decommissioned, replaced, or introduced), integration patterns chosen (with ADR references for significant choices), component diagrams, and the capability-to-application mapping from the Business Architecture. Identify coupling risks and rationalisation opportunities.
+
+**Quality indicators:**
+- Applications are named, not generic — "the CRM system" becomes "Salesforce Sales Cloud (v52)"
+- Every application in the target portfolio has a disposition: retain, extend, replace, decommission, or introduce
+- Integration patterns are justified — a direct point-to-point integration between 10+ systems should trigger a question about integration platform; document why or why not
+
+**Common mistakes:**
+- Including infrastructure (servers, cloud services, databases) in the Application Architecture — those belong in Technology Architecture
+- Application maps that show systems but not the flows between them — the flows reveal the coupling problems that motivate the architecture
+- Omitting the disposition of legacy systems — "retain" is a valid and important architectural decision, not an oversight
+
+**TOGAF reference:** TOGAF 10 Part III, Phase C (§27) — Information Systems Architecture, Application component. Produced in Phase C alongside Data Architecture; both are inputs to Phase D Technology Architecture.
 
 </details>
 
@@ -399,6 +408,40 @@ criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
 | *(no related ADRs recorded)* | — | — | — |
 
 ---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin.*
 *Use `/ea-decisions` to generate a cross-artifact Decision Register from all A3 tables.*

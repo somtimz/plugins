@@ -60,6 +60,9 @@ Capture freeform brainstorm notes for the active EA engagement.
 3b. **Pull upcoming interview questions.** Build a set of question prompts to show inside the pad as context:
 
    - **Artifact-scoped** (invoked from `/ea-interview` before a specific artifact): read the artifact template and extract all `{{placeholder}}` field names as question texts. If the artifact file already exists, also read it to skip fields that are already answered.
+     - **Also extract guidance context:** Scan the same artifact file (or template if not yet created) for all `<details><summary>📋 Guidance</summary>...</details>` blocks. Build a `guidanceContext` map: `{section heading} → {guidance text}` (plain text). For each brainstorm thought category in the pad that maps to a section in this artifact, prepend a quality anchor to the category hint:
+       > 📋 **What good looks like in this section:** {first 2 sentences of guidance text}
+     This anchors the brainstorm to the artifact's documented quality standard before the user captures thoughts.
    - **Phase-scoped** (phase argument provided): read `skills/ea-artifact-templates/references/phase-interview-questions.md` for the relevant phase. Extract up to 8 key questions in order.
    - **Engagement-scoped** (engagement mode): read Preliminary Parts 1–3 and Phase A §2–§6 from `phase-interview-questions.md`. Extract up to 10 key questions covering org context, drivers, goals, issues, and problems.
    - **Unscoped**: omit — leave `questions: null`.

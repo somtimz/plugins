@@ -35,11 +35,21 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-A Compliance Assessment is a Phase G artifact that evaluates whether an implemented (or
-in-progress) solution conforms to the agreed architecture. Assessments are typically triggered
-by scheduled review gates defined in the Architecture Contract, or by a concern raised by
-the architecture team. The output is an objective record of conformance, non-conformances,
-and required remediation actions. Non-conformances must be tracked to closure.
+**Purpose:** A Compliance Assessment records whether an implemented or in-progress solution conforms to the agreed architecture. It is the mechanism that transforms architecture governance from aspiration into evidence — a completed assessment is the architect's formal statement that a solution has been reviewed against the Architecture Contract and Architecture Principles.
+
+**What to include:** The assessment scope (which work packages and solution components were reviewed), the conformance criteria (which Architecture Contract clauses and Architecture Principles were assessed), the findings (conformant items, non-conformances with severity and remediation actions), and the overall conformance status. Non-conformances must be tracked to closure.
+
+**Quality indicators:**
+- Each finding references a specific criterion from the Architecture Contract or an Architecture Principle (BP/DP/AP/TP-NNN) — findings without a criterion cannot be challenged or defended
+- Non-conformance severity is assigned consistently — define the severity taxonomy in the Implementation Governance Plan and apply it here
+- Remediation actions have named owners and target dates — an unowned action is an unmanaged action
+
+**Common mistakes:**
+- Assessments conducted too late (post-deployment) — by then, non-conformances are expensive to fix; schedule assessments at design, pre-build, and pre-deployment gates
+- Non-conformances marked as "accepted" without a formal dispensation decision from the architecture authority
+- Overall conformance status of "Compliant" when there are open non-conformances — status must reflect actual state, not the desired state
+
+**TOGAF reference:** TOGAF 10 Part III, Phase G (§31) — Architecture Compliance Review. Compliance Assessments are the primary Phase G mechanism for maintaining architecture integrity during implementation.
 
 </details>
 
@@ -250,5 +260,38 @@ criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
 
 ---
 
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin.*

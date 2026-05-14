@@ -37,10 +37,20 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-The Decision Register aggregates all Appendix A3 Decision Log rows from every artifact
-in this engagement into a single cross-artifact view. It is generated on demand via
-/ea-decisions and can be tailored to any audience, decision maker, domain, or status.
-Rows are sourced from A3 tables; do not edit this document directly — regenerate it.
+**Purpose:** The Decision Register aggregates all Appendix A3 Decision Log rows from every artifact into a single cross-engagement view, enabling governance authorities to see the full decision landscape without navigating individual artifacts. It is the primary governance accountability tool: who decided what, at what authority level, and whether the rationale has been documented.
+
+**What to include:** All A3 Decision Log rows across all artifacts, organised by status, domain, or audience (use `/ea-decisions` with filters). Strategic decisions must have A3.N rationale blocks — the register surfaces which strategic decisions are missing rationale documentation. Do not edit this register directly — regenerate it from source A3 tables.
+
+**Quality indicators:**
+- Every Strategic decision has a linked A3.N rationale block in its source artifact — the register makes missing rationale visible
+- The register is regenerated at each phase gate to ensure currency — a stale decision register misleads governance authorities
+- Filter views are tailored to the audience — an ARB briefing view should show only Strategic decisions pending or recently ratified
+
+**Common mistakes:**
+- Using the Decision Register as the primary authoring surface — decisions are authored in artifact A3 tables; the register is a view, not a source
+- Including A3 entries for trivial decisions (wording changes, date corrections) — A3 should capture governance-material decisions only; the register reflects this discipline
+
+**TOGAF reference:** TOGAF 10 §38 — Architecture Governance. The Decision Register provides the governance audit trail of all significant decisions made across the ADM cycle, satisfying the governance accountability requirements.
 
 </details>
 
@@ -257,3 +267,39 @@ Sortable reference for architects and auditors.
 *This document was generated using the EA Assistant plugin via `/ea-decisions`.*
 *Source artifacts scanned: {{source_artifacts_scanned}}*
 *Regenerate with `/ea-decisions` to pick up new decisions from A3 tables.*
+
+---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*

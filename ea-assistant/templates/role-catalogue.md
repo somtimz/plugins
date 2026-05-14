@@ -34,9 +34,21 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-The Role Catalogue maps every role active in this engagement to a named individual, organisation, and RACI position. It supplements the Stakeholder Map (which tracks interests and influence) with governance-focused role assignments, triggering events, and meeting cadence.
+**Purpose:** The Role Catalogue maps every governance role active in this engagement to a named individual, organisation, and RACI position. It provides the operational reference for who does what — supplementing the Stakeholder Map (which tracks interests and influence) with precise governance accountability assignments, triggering events, and meeting cadence.
 
-Role IDs (ROLE-NNN) refer to the canonical definitions in `skills/ea-engagement-lifecycle/references/role-catalogue.md`. Remove rows for roles not active in this engagement. Add a RACI Override only when this engagement's governance structure differs from the canonical default.
+**What to include:** Rows for every active governance role (ROLE-NNN), with named individual, organisation, RACI position (Responsible/Accountable/Consulted/Informed), triggering events for this role, and meeting cadence. Remove rows for roles not active in this engagement. Only add RACI Overrides when this engagement's governance structure explicitly differs from the canonical defaults in `skills/ea-engagement-lifecycle/references/role-catalogue.md`.
+
+**Quality indicators:**
+- Every role has exactly one Accountable owner — if a role has two Accountable entries, accountability is unclear; resolve to one
+- Named individuals are current — a role catalogue with departed team members is a governance liability
+- Triggering events are specific enough that the role holder knows when to act without being told
+
+**Common mistakes:**
+- Listing only formal governance roles (ARB Chair, Sponsor) and omitting operational roles (Lead Architect, Domain Architect, SME) — the catalogue should cover all roles that participate in architecture governance
+- RACI assignments copied from the canonical without review — every engagement has governance nuances that may require overrides
+- Role catalogue not updated when team composition changes — a stale role catalogue produces governance confusion at review time
+
+**TOGAF reference:** TOGAF 10 Part III §23 — Architecture Capability Framework. Roles and responsibilities are defined in the Preliminary Phase as part of establishing the architecture practice capability.
 
 </details>
 
@@ -526,3 +538,39 @@ Governance bodies are collective entities — they are not individual roles and 
 | ADR ID | Title | Status | Relevance |
 |--------|-------|--------|-----------|
 | — | | | |
+
+---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*

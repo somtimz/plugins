@@ -40,9 +40,22 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-The Architecture Roadmap lists individual work packages in priority order that together
-deliver the Target Architecture. It evolves from Phase E (initial) through Phase F (refined)
-and is updated in Phase H as change requests are processed.
+**Purpose:** The Architecture Roadmap organises the work packages (WP-NNN) that collectively deliver the Target Architecture, sequenced by priority and grouped into delivery waves. It is the primary planning instrument for Phase E–F and the reference for Phase H change management. Every gap identified in the Gap Analysis must trace to at least one work package here.
+
+**What to include:** Work packages (WP-NNN) with priority, effort, dependencies, strategic alignment (goals/objectives they advance), evidence status, and the transition architecture state they contribute to. The roadmap must include a Strategic Alignment section (T3-ROAD-SA) and at least one WP must reference a goal or objective (T3-ROAD-WP). Waves group WPs into logical delivery increments.
+
+**Quality indicators:**
+- Every gap in the Gap Analysis maps to a WP in this roadmap — gaps without WPs are unplanned
+- WPs are sequenced by business value, not just technical dependency — quick wins in Wave 1 build delivery credibility
+- Dependencies are explicit: "WP-005 cannot start until WP-003 is complete and accepted"
+- Evidence status is rated for each WP — WPs with Insufficient evidence should not appear in Wave 1
+
+**Common mistakes:**
+- Work packages that deliver technical milestones but no business value — "upgrade the database" is not a roadmap item unless the upgrade enables a specific business capability
+- Roadmap without delivery waves — a flat priority list does not communicate the migration sequencing or transition architecture states
+- Missing strategic alignment — every WP should trace to at least one goal (G-NNN) or strategy (STR-NNN)
+
+**TOGAF reference:** TOGAF 10 Part III, Phase E (§29) and Phase F (§30) — Architecture Roadmap. Produced in Phase E, refined in Phase F, and updated in Phase H via the ACR process.
 
 </details>
 
@@ -281,6 +294,40 @@ criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
 | *(no related ADRs recorded)* | — | — | — |
 
 ---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin.*
 *Use `/ea-concerns` to generate a cross-artifact Concerns Register from all A4 tables.*

@@ -255,16 +255,23 @@ First, assess the artifact structurally:
 - check traceability chains: do drivers link to goals? do goals link to objectives? do issues reference goals? do problems reference objectives? do requirements link to ABBs? do ABBs link to SBBs? do SBBs link to stories?
 - note any section that contradicts another section in the same artifact
 
-Then interrogate the content one section at a time:
-- for each section, state what the section is supposed to achieve (per its guidance block)
-- challenge whether the content actually achieves that purpose
+Then interrogate the content one section at a time using **guidance-driven scoring**:
+
+**Before scoring each section:**
+1. Look up the section in the guidance map built in Step 3b of `ea-grill.md` (map of `{section heading} → {guidance text}`).
+2. If a guidance entry exists: state explicitly what the section is supposed to achieve **per its guidance block** — quote the key criterion from the guidance.
+3. Score the section against that specific criterion. Do not apply a generic "is this complete?" check — test against the purpose the guidance defines.
+4. If no guidance entry exists for a section: fall back to TOGAF best practice for the artifact type and announce: `*(No guidance block for this section — scoring against TOGAF best practice.)*`
+
+**Challenge each section:**
+- challenge whether the content actually achieves the stated purpose
 - identify vague, circular, or unsupported claims
 - flag content that restates the question rather than answering it
 - push for specifics: named systems, real numbers, concrete stakeholders, actual dates
 
 For each question:
 - state which section you are reviewing and what quality you are testing
-- explain what good content looks like for this section
+- quote the guidance criterion (or TOGAF standard) you are scoring against
 - identify the specific weakness in the current content
 
 Do not let boilerplate pass. "Stakeholder engagement will be managed appropriately" is not an answer. Neither is a risk with no mitigation, a goal with no driver, or an objective with no measure.

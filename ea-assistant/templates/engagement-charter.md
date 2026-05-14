@@ -38,22 +38,21 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-The Engagement Charter is the foundational Preliminary Phase artifact. It establishes the
-authoritative record of *why* the engagement exists, *what* it covers, *who* it affects,
-*how* it is structured, and *what* it is expected to deliver.
+**Purpose:** The Engagement Charter is the foundational Preliminary Phase artifact — the authoritative record of why the engagement exists, what it covers, who it affects, how it is structured, and what it is expected to deliver. It is the business case and mandate document that authorises all subsequent architecture work.
 
-The Charter differs from the Architecture Vision (Phase A):
-- The **Engagement Charter** covers the engagement or programme as a whole — it is the
-  business case and mandate document. It exists before any architecture work begins.
-- The **Architecture Vision** (Phase A) defines the target architecture and the strategy
-  for achieving it. It builds on the Charter's foundation.
+**What to include:** Engagement mandate and business case, scope boundaries (in/out), programme structure, stakeholder roles, deliverables and success criteria, budget authority, governance model, key assumptions, and constraints. The Charter differs from the Architecture Vision: the Charter is the programme mandate (exists before any architecture work begins); the Architecture Vision (Phase A) defines the target state and delivery strategy.
 
-In large programmes, the Charter covers the entire programme lifecycle; individual
-Architecture Visions may then be created for specific sub-programmes or delivery phases.
+**Quality indicators:**
+- Success criteria are defined in measurable business terms — "reduce order fulfilment cycle time by 30%" not "improve operations"
+- Scope boundaries are explicit — both what is in scope and what is explicitly excluded
+- The Charter has been formally approved by the programme sponsor before any Phase A work begins
 
-Once approved, the Charter is the baseline reference for scope management, benefits
-realisation, and governance throughout the engagement. Significant changes to scope,
-objectives, or programme structure require a formal Charter revision.
+**Common mistakes:**
+- Conflating the Charter with the Architecture Vision — they serve different purposes at different levels; the Charter exists before any architecture analysis
+- Success criteria that describe architecture deliverables ("the Architecture Vision is approved") rather than business outcomes
+- Omitting explicit scope exclusions — without them, boundary disputes occur in every subsequent phase
+
+**TOGAF reference:** TOGAF 10 Part III, Preliminary Phase (§23) — the Engagement Charter corresponds to the Architecture Mandate and the organisation of the Architecture Capability, established before the ADM cycle begins.
 
 </details>
 
@@ -656,5 +655,39 @@ criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
 | *(no related ADRs recorded)* | — | — | — |
 
 ---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin. Use `/ea-decisions` to manage decisions, `/ea-concerns` to manage concerns, and `/ea-risks` to manage the full risk register.*

@@ -34,12 +34,21 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-An Architecture Contract is a Phase G artifact representing the joint agreement between the
-architecture team and the implementation team on the deliverables, quality, and fitness-for-purpose
-of the solution. It is the primary governance instrument during implementation. Contracts should
-be established with each major delivery team or project implementing work packages from the
-Architecture Roadmap. They give the architecture team standing to review and challenge
-implementation decisions that may deviate from the agreed architecture.
+**Purpose:** An Architecture Contract is the joint agreement between the architecture team and the implementation team on what will be built, to what architecture standards, and how conformance will be verified. It gives the architecture team formal standing to review and challenge implementation decisions — without a contract, architecture reviews are advisory only and can be ignored.
+
+**What to include:** Reference to the approved Architecture Definition Document and relevant architecture domain artifacts, the specific principles and standards the implementation must conform to, the conformance verification approach (how and when reviews will occur), a deviation/dispensation process, and the acceptance criteria that must be met before the solution is approved for deployment.
+
+**Quality indicators:**
+- Conformance criteria are specific and testable — "the solution must expose all capabilities through versioned REST APIs conformant to the API Design Standard v2.1" is testable; "the solution must follow good practices" is not
+- The deviation process is documented — the contract should specify how the delivery team can request a formal dispensation, not just prohibit deviations
+- The contract is signed by both the architecture authority and the delivery team lead — unsigned contracts have no governance weight
+
+**Common mistakes:**
+- Contracts that list all architecture principles without identifying which ones are actively enforceable for this specific solution — this overwhelms delivery teams
+- No conformance schedule — "architecture will review at appropriate times" is not governance; define the gates upfront
+- Contracts created once and never revisited when the delivery team raises change requests
+
+**TOGAF reference:** TOGAF 10 Part III, Phase G (§31) — Architecture Contracts. The Architecture Contract is the primary governance instrument of Phase G; it operationalises the Architecture Governance Framework for a specific delivery project.
 
 </details>
 
@@ -216,5 +225,39 @@ terms of this Architecture Contract.
 | {{approver_role}} | {{approver_name}} | {{approver_org}} | | |
 
 ---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin.*

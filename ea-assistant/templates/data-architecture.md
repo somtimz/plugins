@@ -40,11 +40,21 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-The Data Architecture is a Phase C artifact describing how the organisation manages, stores,
-and moves data to meet business needs. It complements the Application Architecture and must
-be consistent with the Business Architecture (information objects) and Technology Architecture
-(storage and platform decisions). Data Architecture drives data governance, integration patterns,
-and master data management decisions.
+**Purpose:** The Data Architecture describes how the organisation manages, stores, and moves data to meet business needs. It defines data ownership, quality standards, classification, retention, and the information flows that support business capabilities. Data architecture decisions constrain both the Application Architecture (which systems own which data) and Technology Architecture (which platforms store and process it).
+
+**What to include:** Data domains and their owners, the canonical data model (conceptual level), data quality and classification standards, data lineage and flow diagrams, master data management approach, regulatory and sovereignty constraints, and the baseline-to-target delta. Reference the Business Architecture information objects as the business-level input.
+
+**Quality indicators:**
+- Every data domain has a named owner (a role, not a system)
+- Regulatory constraints (GDPR, data sovereignty, industry-specific) are explicitly surfaced where they affect architecture decisions
+- The data flow diagram shows flows between business domains, not just technical endpoints — a reader can trace where a Customer record goes from creation to reporting
+
+**Common mistakes:**
+- Specifying database technologies or storage products in the Data Architecture — those belong in Technology Architecture (platform decisions) or SBB-NNN entries
+- "Data must be high quality" without defining what quality means for each domain and how it will be measured
+- Omitting master data management — MDM decisions are among the hardest to reverse and most commonly deferred too long
+
+**TOGAF reference:** TOGAF 10 Part III, Phase C (§27) — Information Systems Architecture, Data component. Produced in parallel with or before Application Architecture in Phase C.
 
 </details>
 
@@ -326,6 +336,40 @@ criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
 | *(no related ADRs recorded)* | — | — | — |
 
 ---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin.*
 *Use `/ea-decisions` to generate a cross-artifact Decision Register from all A3 tables.*

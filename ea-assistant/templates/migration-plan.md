@@ -39,11 +39,21 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-The Migration Plan is the primary Phase F artifact. It takes the work packages from the
-Architecture Roadmap (Phase E) and defines how they will be sequenced and executed to
-transition from the baseline to the target architecture. Phase F focuses on the practical
-"how and when" of migration: sequencing, dependency management, wave planning, risk, and
-rollback. It is an input to implementation planning and must be kept current as delivery proceeds.
+**Purpose:** The Migration Plan converts the Architecture Roadmap's work packages into a sequenced, funded, risk-assessed execution plan. It answers how and when the transition from baseline to target architecture will occur — including wave structure, dependencies, rollback provisions, and the business benefits expected at each milestone.
+
+**What to include:** Wave structure (which WPs execute in each wave), sequencing rationale, inter-wave dependencies, resource and funding overview, migration risks with mitigations, rollback strategy per wave, and a benefits realisation tracker. The Migration Plan takes the Architecture Roadmap as its primary input and is the primary input to Programme and Project Management.
+
+**Quality indicators:**
+- Each wave delivers identifiable business value independently — a wave that only delivers infrastructure with no business benefit needs justification
+- Rollback strategy is defined per wave before the wave begins, not after a failure — architects who define rollback after go-live are not doing architecture
+- Benefits are tracked against the Architecture Vision goals (G-NNN) — if a wave completes but no goal advances, ask why
+
+**Common mistakes:**
+- Migration Plan that is a project plan — the Migration Plan is an architecture artifact describing the migration *architecture* (sequencing, dependencies, transition states); the project schedule lives in the PMO tooling
+- No rollback strategy — "we won't need to roll back" is not a plan
+- Wave sequencing driven by team availability rather than business value delivery — this is the most common cause of stakeholder disengagement with the roadmap
+
+**TOGAF reference:** TOGAF 10 Part III, Phase F (§30) — Migration Planning. The primary Phase F deliverable; produced alongside the finalised Architecture Roadmap and Transition Architectures.
 
 </details>
 
@@ -300,6 +310,40 @@ criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
 | *(no related ADRs recorded)* | — | — | — |
 
 ---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin.*
 *Use `/ea-concerns` to generate a cross-artifact Concerns Register from all A4 tables.*

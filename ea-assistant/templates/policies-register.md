@@ -61,6 +61,18 @@ Policies are grouped by Type: Security, Procurement, Data Governance, Technology
 
 **⚠️ Two Layers check:** Distinguish `Business Policies` (what the business must comply with, e.g. "GDPR Data Protection Policy") from `Architecture Policies` (how the EA function governs solution design, e.g. "Cloud-First Technology Policy"). Both belong in the Policies Register; the distinction is in Type and Issuing Authority.
 
+**Quality indicators:**
+- Every enacted policy has a named Issuing Authority (a specific body, not "the organisation")
+- Every active policy generates at least one CST-NNN constraint — a policy with no derived constraints has not been operationalised
+- Review cycles are populated and not overdue — stale policies may be generating invalid constraints
+
+**Common mistakes:**
+- Capturing requirements or principles as policies — a policy is an external or internal governance mandate issued by a specific authority; internal design guidelines are Architecture Principles
+- Policies with no Effective Date — without a date, there is no basis for determining whether a constraint derived from it is still valid
+- Missing enterprise-scope policies — check the shared repository before adding programme-scope policies to avoid duplication
+
+**TOGAF reference:** TOGAF 10 §38 — Architecture Governance. Policies are the governance mandates that give authority to Constraints; the Policy-to-Constraint-to-Design traceability chain is the mechanism for proving regulatory and governance compliance.
+
 </details>
 
 # Architecture Policies Register
@@ -184,3 +196,39 @@ Run `/ea-summary refresh` to regenerate this section from current artifact conte
 | ADR ID | Title | Status |
 |---|---|---|
 | | | |
+
+---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*

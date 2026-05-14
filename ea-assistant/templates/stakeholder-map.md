@@ -36,9 +36,21 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-The Stakeholder Map identifies all stakeholders, their interests, influence, and required
-level of engagement. It is used to plan communications and ensure architecture decisions
-address the right concerns. Update throughout the engagement as new stakeholders are identified.
+**Purpose:** The Stakeholder Map identifies all stakeholders, their architectural concerns, level of influence, and the engagement strategy required for each. It ensures that architecture decisions address the concerns of the right people and that communications are targeted to the right audience. This is a living artifact — update it as new stakeholders are identified or influence patterns change.
+
+**What to include:** Stakeholder identification (name/role), architectural concerns (CON-NNN references), power/interest classification, required engagement level (inform/consult/collaborate/decide), communication channel preference, and the current engagement status. The power/interest grid visualises priority stakeholders at a glance.
+
+**Quality indicators:**
+- Every identified concern (CON-NNN) is owned by a named stakeholder in this map — orphan concerns without owners are not managed
+- High-power/high-interest stakeholders have explicit engagement strategies, not just "keep informed"
+- The map is updated when significant stakeholder changes occur (new sponsor, team restructure, key stakeholder departure)
+
+**Common mistakes:**
+- Stakeholder map that only lists the obvious named contacts — the most influential stakeholders are sometimes informal (a technical lead, a long-tenured SME, a politically connected manager)
+- "Keep informed" as a strategy for all stakeholders — this homogenises engagement and fails to secure active support from decision-makers
+- Creating the stakeholder map once in Phase A and never revisiting it — stakeholder influence shifts significantly as the engagement progresses into delivery
+
+**TOGAF reference:** TOGAF 10 Part III, Phase A (§25.3) — Stakeholder Management. Stakeholder identification and concern management is a core Phase A activity; the Stakeholder Map is the primary artifact.
 
 </details>
 
@@ -153,5 +165,39 @@ Define how and when each stakeholder group will be engaged.
 | {{group}} | {{method}} | {{frequency}} | {{owner}} |
 
 ---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin.*

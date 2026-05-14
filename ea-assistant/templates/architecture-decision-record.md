@@ -43,32 +43,27 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-An Architecture Decision Record (ADR) is a standalone document capturing a significant
-architecture decision — one that has lasting consequences, involves meaningful trade-offs,
-or requires full options analysis and documented rationale.
+**Purpose:** An Architecture Decision Record (ADR) is a standalone document capturing a significant architecture decision — one that has lasting consequences, involves meaningful trade-offs, or requires full options analysis and documented rationale. Its primary purpose is to prevent the same decision from being re-litigated and to let future architects understand why the system is the way it is.
 
-**When to create an ADR (not an A3 Decision Log entry):**
-- Technology or vendor selection (cloud platform, database engine, integration middleware)
-- Architecture pattern or style choice (microservices, event-driven, CQRS, layered)
-- Make-vs-buy or build-vs-configure decisions
-- Data governance approach (ownership, sharing, sovereignty model)
-- Security or compliance architecture approach
-- Significant API or integration design choice
-- Any decision that is hard to reverse or whose rationale may be questioned later
+**What to include:** Decision context (what triggered it), the options considered (at least three for significant decisions), the chosen option and rationale, trade-offs accepted, consequences (positive and negative), and the evidence used to make the decision. The ADR must reference the Architecture Principles (BP/DP/AP/TP-NNN) that constrained the decision and any A3 Decision Log entries that correspond to it.
 
-**ADR vs. A3 Decision Log:**
-- The **A3 Decision Log** (within an artifact's appendix) tracks governance state —
-  who decided what, at what authority level, and whether it has been verified.
-- An **ADR** documents the full decision context: what situation triggered it, what
-  options were considered, why one was chosen, and what the consequences are.
-- They complement each other: log a high-level entry in A3; create an ADR for the
-  full documentation. Link them via the ADR-NNN ID.
+**When to create an ADR (vs. an A3 Decision Log entry):**
+- Technology or vendor selection; architecture pattern or style choice; make-vs-buy; data governance approach; security or compliance architecture; any decision that is hard to reverse or whose rationale may be questioned later
+- A3 Decision Log entries track governance state (who decided what, at what authority); an ADR documents the full decision context — they complement each other; link via ADR-NNN
 
-**ADR lifecycle:**
-Candidate → In Progress → Completed → Superseded (by ADR-NNN) | Deprecated
+**Quality indicators:**
+- The rejected options are documented as thoroughly as the chosen option — a reader should understand why alternatives were not selected, not just what was chosen
+- The rationale references Architecture Principles (TP/AP/DP/BP-NNN) and constraints (CST-NNN) — a decision that cannot be justified by any governing principle is a governance gap
+- Consequences include negative consequences and trade-offs explicitly — an ADR with only positive consequences is incomplete
 
-Use `/ea-adrs` to manage ADRs, track the register, and surface ADR summaries in
-other artifacts. Run `/ea-adrs status` for a quick portfolio view.
+**Common mistakes:**
+- Documenting only the chosen option — the value of an ADR is the options analysis, not just the outcome
+- ADRs written long after the decision was made, from memory — these tend to be post-hoc rationalisations; write them as decisions are being made
+- "We chose X because it's the best option" without stating what criteria defined "best" — always name the evaluation criteria
+
+**TOGAF reference:** TOGAF 10 §35 — Architecture Decisions. ADRs are not explicitly named in TOGAF but correspond to the Architecture Repository's Architecture Decisions category; they satisfy the T3-ADR compliance requirement across all domain architecture artifacts.
+
+**ADR lifecycle:** Candidate → In Progress → Completed → Superseded (by ADR-NNN) | Deprecated. Use `/ea-adrs` to manage. Run `/ea-adrs status` for a portfolio view.
 
 </details>
 
@@ -446,5 +441,39 @@ Record concerns and objections raised about this decision during review. Use `/e
 | *(no concerns recorded)* | — | — | — | — | — | — |
 
 ---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *Use `/ea-adrs` to manage this ADR, update its status, and generate the ADR Register. Use `/ea-concerns` to manage concerns.*

@@ -37,10 +37,21 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-The Communications Plan defines how architecture information will be communicated to stakeholders
-throughout the ADM cycle. It is produced in Phase A and updated as stakeholder engagement needs
-evolve. It complements the Stakeholder Map — where the Stakeholder Map identifies who has what
-interests, the Communications Plan defines how and when to engage them.
+**Purpose:** The Communications Plan defines how and when architecture information will be communicated to each stakeholder group throughout the ADM cycle. It is the operational companion to the Stakeholder Map — where the Stakeholder Map identifies who cares about what, the Communications Plan defines the cadence, format, and channel for engaging each audience.
+
+**What to include:** Communication objectives, stakeholder-to-audience mapping (who receives what), communication events (reviews, briefings, workshops, status reports) with frequency and format, the content tailoring strategy (executive summary vs technical detail vs operational impact), responsible owners for each communication, and the feedback mechanism.
+
+**Quality indicators:**
+- Communication events are tied to ADM phase gates — briefings are scheduled around Phase A sign-off, Phase B completion, etc., not just calendar weeks
+- Content is tailored by audience — executives receive outcome summaries, delivery teams receive constraints and decisions, operational teams receive impact assessments
+- The plan is updated when significant stakeholder changes occur — a new sponsor or programme director requires re-engagement strategy
+
+**Common mistakes:**
+- Communications plan that lists communication channels but not the content — a "monthly email" with no stated purpose is not a plan
+- One-size-fits-all communications — all stakeholders receiving the same architecture update regardless of their interests or level of technical literacy
+- Plan created in Phase A and never revisited — stakeholder communication needs change significantly as the engagement moves from analysis to delivery
+
+**TOGAF reference:** TOGAF 10 Part III, Phase A (§25.3) — Stakeholder Management and Communications. The Communications Plan operationalises the stakeholder engagement strategy identified in Phase A.
 
 </details>
 
@@ -191,5 +202,39 @@ Record all decisions made during the development of this artifact.
 | *(no related ADRs recorded)* | — | — | — |
 
 ---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
 
 *This document was created using the EA Assistant plugin.*

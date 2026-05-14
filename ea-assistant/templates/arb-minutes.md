@@ -25,13 +25,25 @@ diagrams: []
 links: []
 ---
 
-<!-- GUIDANCE:
-  ARB Minutes are the formal record of Architecture Review Board decisions.
-  They are stored in artifacts/cross-cutting/ and always cross-cutting in scope.
-  Decisions in the Decisions table link to ADR-NNN records and can be propagated 
-  via /ea-arb close.
-  If quorum was not met, all decisions are provisional — note this in the Quorum section.
--->
+<details>
+<summary>📋 Guidance</summary>
+
+**Purpose:** ARB Minutes are the formal governance record of Architecture Review Board decisions. They provide the audit trail for all architecture decisions ratified at ARB level, and decisions captured here can be propagated to linked ADR-NNN records via `/ea-arb close`.
+
+**What to include:** Attendees (with voting status), quorum confirmation, agenda items discussed, decisions made (with ADR links), actions raised, and the next meeting date. If quorum was not met, all decisions in the Decisions table are provisional — note this explicitly.
+
+**Quality indicators:**
+- Every decision has a named decision authority and links to its ADR-NNN where one exists
+- Decisions are clearly separated from discussion points — a reader should be able to identify all binding decisions without reading the full minutes
+- Actions have named owners and target dates — unowned actions are unmanaged actions
+
+**Common mistakes:**
+- Meeting minutes with no decisions — if the ARB met but made no formal decisions, note that explicitly; ambiguity about what was decided is a governance risk
+- Provisional decisions (quorum not met) not flagged — provisional decisions must be ratified at the next quorate meeting before they are binding
+
+**TOGAF reference:** TOGAF 10 §38 — Architecture Governance. ARB Minutes are the formal record of the Architecture Board's decision-making function, maintained in the Architecture Repository.
+
+</details>
 
 ## Meeting Details
 
@@ -127,3 +139,23 @@ links: []
 | ID | Concern | Raised By | Category | Status | Response | Action / Owner |
 |---|---|---|---|---|---|---|
 | *(no concerns recorded)* | — | — | — | — | — | — |
+
+---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Not included in published meeting outputs.
+
+### Comments
+
+*Ad-hoc notes from participants or reviewers.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Outstanding Tasks
+
+*Action items not yet captured in the Actions Register, or meta-tasks about this document.*
+
+- [ ] *(Add tasks)*
