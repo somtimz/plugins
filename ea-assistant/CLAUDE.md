@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.48 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.49 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -35,7 +35,7 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 
 ## Command Reference
 
-34 commands available — run `/ea-help` for the full table with agent assignments.
+39 commands available — run `/ea-help` for the full table with agent assignments.
 Key entry points: `/ea-new` · `/ea-open` · `/ea-interview` · `/ea-grill` · `/ea-generate` · `/ea-status` · `/ea-brief`
 
 ---
@@ -146,8 +146,12 @@ These are loaded automatically by `/ea-grill --skill practitioner|maturity|failu
 | CST-NNN | Constraint (restriction on implementation choices) | CST-001 |
 | POL-NNN | Policy (governance document or mandate) | POL-001 |
 | STY-NNN | User Story | STY-001 |
+| BP-NNN | Business Principle | BP-001 |
+| DP-NNN | Data Principle | DP-001 |
+| AP-NNN | Application Principle | AP-001 |
+| TP-NNN | Technology Principle | TP-001 |
 
-**Do not use domain-prefixed IDs** (BG-/DG-/AG-/TG- etc.) — the scheme is unified and domain-agnostic.
+**Do not use domain-prefixed IDs** (BG-/DG-/AG-/TG- etc.) — the scheme is unified and domain-agnostic. **Exception:** Architecture Principles use the TOGAF-standard four-domain prefixes (BP/DP/AP/TP) because the principle domain is itself a first-class classification, not a field-level qualifier.
 
 ---
 

@@ -84,6 +84,10 @@ You have existing engagements. Common next steps:
 | `/ea-requirements [action]` | Manage architecture requirements |
 | `/ea-constraints [action]` | Manage architecture constraints — capture, trace, and assess impact on solution space |
 | `/ea-policies [mode]` | Manage architecture policies — capture governance documents, trace to constraints, and assess policy impact |
+| `/ea-principles [mode]` | Architecture Principles Register — list, add, update, or trace BP/DP/AP/TP-NNN principle entries; `trace` detects ADR and constraint violations |
+| `/ea-abbs [mode]` | Architecture Building Block Register — generate, view, create, or update ABB-NNN entries |
+| `/ea-sbbs [mode]` | Solution Building Block Register — generate, view, create, or update SBB-NNN entries |
+| `/ea-stories [mode]` | User Story Register — generate, view, create, or update STY-NNN entries |
 | `/ea-trace [--gaps]` | Interactive traceability views — motivation chain from drivers to work packages; `--gaps` for consolidated gap report only |
 | `/ea-decisions [options]` | Generate Decision Register from all A3 decision logs |
 | `/ea-adrs [mode]` | Manage Architecture Decision Records (generate, new, update) |

@@ -14,7 +14,7 @@ EA Assistant is a Claude Code plugin. It has no runtime server — all behaviour
 ea-assistant/
 ├── .claude-plugin/plugin.json   # plugin identity and version
 ├── agents/                      # autonomous sub-agents (.md) — 12 agents
-├── commands/                    # user-invokable slash commands (.md) — 31 commands
+├── commands/                    # user-invokable slash commands (.md) — 39 commands
 ├── skills/                      # reusable instruction libraries (SKILL.md per skill) — 10 skills
 │   ├── ea-artifact-templates/   # templates + reference files
 │   ├── ea-engagement-lifecycle/ # ID scheme, facilitator styles, opt-out rules
@@ -72,7 +72,7 @@ When adding logic to an agent or command, check these files before writing anyth
 
 | File | What it owns |
 |---|---|
-| `skills/ea-artifact-templates/references/ea-concepts.md` | All 13 EA concept definitions — **never redefine inline** |
+| `skills/ea-artifact-templates/references/ea-concepts.md` | All 25 EA concept definitions — **never redefine inline** |
 | `skills/ea-artifact-templates/references/compliance-check.md` | All compliance rules (T1/T2/T3) — add new T3 rules here |
 | `skills/ea-artifact-templates/references/phase-interview-questions.md` | All phase question banks and output routing tables |
 | `skills/ea-artifact-templates/references/cross-topic-detection.md` | Signal map for routing answers to the right artifact |

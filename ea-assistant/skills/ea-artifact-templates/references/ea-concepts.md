@@ -299,6 +299,9 @@ Do not keep the two layers separate in your head — connect them structurally:
 | **Use Case** | *What does the actor need to accomplish?* | Discrete goal pursued by a specific actor — consumes processes, generates requirements | Business Architecture (Phase B); Use Case Catalog | — |
 | **Constraint** | *What boundaries must we respect?* | Non-negotiable restriction on implementation choices — certain, sourced, and owned | Constraints Register; Architecture Vision; Principles | Constraint (Motivation) |
 | **Metrics** | *How do we know we are succeeding?* | Specific, quantifiable measures — leading (predictive) or lagging (outcome); validate strategies or surface new Issues and Problems | Architecture Vision §7; domain artifacts | — |
+| **ABB** | *What logical component do we need?* | Reusable, vendor-neutral architecture component at solution-independent level — names the capability to be implemented, not the product | Technology Architecture §3a; Application Architecture; Phase D/E | — |
+| **SBB** | *What product or system implements it?* | Concrete realisation of an ABB — specific product, vendor, or build choice; registered in the SBB Register | Technology Architecture SBB Register; Phase D | — |
+| **User Story** | *What does the stakeholder want to be able to do?* | Stakeholder-perspective feature statement (As a… I want… so that…); links a business actor to a deliverable outcome; traced to REQ-NNN and ABB-NNN | Requirements Register; Phase C | — |
 
 ---
 

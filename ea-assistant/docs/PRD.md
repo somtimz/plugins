@@ -116,9 +116,9 @@ Requirements Register entries carry a Motivation field that links each requireme
 
 > 📎 Source framework: `skills/ea-artifact-templates/references/ea-concepts-source.pdf` — *Enterprise Architecture Strategic Context: Terms, Concepts, and Relationship Models*
 
-### EA Concepts (16 total)
+### EA Concepts (25 total)
 
-Vision, Mission, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Problem, Opportunity, Capability Model, Value Stream, Business Process, Use Case, Operating Model, Metrics — each with a formal definition, TOGAF phase placement, ArchiMate 3.x element, and a disambiguation checklist. Full definitions in `skills/ea-artifact-templates/references/ea-concepts.md`.
+Vision, Mission, Business Driver, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Problem, Opportunity, Capability Model, Capability Gap, Value Stream, Business Process, Use Case, Operating Model, Metrics, Constraint, Stakeholder Concern, ADR, ABB, SBB, User Story — each with a formal definition, TOGAF phase placement, ArchiMate 3.x element, and a disambiguation checklist. Full definitions in `skills/ea-artifact-templates/references/ea-concepts.md`.
 
 **Disambiguation summary:**
 
@@ -141,6 +141,14 @@ Vision, Mission, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Proble
 | Use Case         | Actor goal + scenario                  | No                      | No                 | Consumes Processes; generates Requirements; links to Capabilities                      |
 | Operating Model  | How the org functions                  | No                      | No                 | Shaped by Capability Model; measured by Metrics                                        |
 | Metrics          | Quantifiable measure (leading/lagging) | Yes (target + deadline) | No                 | Validates Objectives; surfaces new Issues and Problems                                 |
+| Constraint       | Non-negotiable restriction (certain)   | No                      | No                 | Sourced from Policy, Principle, or external mandate; registered with CST-NNN; `/ea-constraints` |
+| Business Principle | Non-negotiable rule (business domain)  | No                      | No                 | Governs Goals, Strategies, and Operating Model decisions; sourced from Policy or self-grounded; BP-NNN; `/ea-principles` |
+| Data Principle   | Non-negotiable rule (data domain)      | No                      | No                 | Governs Data Architecture; registered with DP-NNN; `/ea-principles` |
+| Application Principle | Non-negotiable rule (application domain) | No               | No                 | Governs Application Architecture and integration patterns; registered with AP-NNN; `/ea-principles` |
+| Technology Principle | Non-negotiable rule (technology domain) | No                | No                 | Governs platform and vendor selection; registered with TP-NNN; `/ea-principles` |
+| ABB              | Reusable component (solution-independent) | No                   | No                 | Realised by SBB-NNN; supports Phase D/E deliverables; registered with ABB-NNN; `/ea-abbs` |
+| SBB              | Concrete implementation                | No                      | No                 | Realises ABB-NNN; specific product or build choice; registered with SBB-NNN; `/ea-sbbs` |
+| User Story       | Qualitative (stakeholder goal)         | No                      | No                 | Linked to REQ-NNN and ABB-NNN; registered with STY-NNN; `/ea-stories`                 |
 
 ---
 
@@ -468,7 +476,7 @@ These will gain dedicated commands and workflow integration in a future version.
 - **Modes:** `generate` (default), `status` (inline summary), `update <ACR-ID> <field> <value>`
 - **Template:** `change-register.md` (aggregate view of all change request artifacts)
 
-### 5.17 Stakeholder Concerns & Objections
+### 5.17a Stakeholder Concerns & Objections
 
 `/ea-concerns` manages CON-NNN entries captured during stakeholder engagement. Concerns are stored in **Appendix A4** within each applicable artifact.
 
@@ -745,61 +753,21 @@ A validated Mermaid diagram inserted into the `## Two Layers of Intent` section 
 
 **Purpose:** Makes the artifact-type separation immediately visual for stakeholders and interviewers.
 
-### 5.37 Plugin Streamlining (v0.9.43)
+### 5.35 Two Layers Integration — Cross-Artifact, Interview, Grill, and Brainstorm (v0.9.41)
 
-Reduced slash command and skill count while preserving all existing behaviour.
+The Two Layers of Intent distinction (business change vs EA enablement) is now woven into every touchpoint where concepts are captured or reviewed.
 
-**Skills: 18 → 10** — The 9 individual `grill-me-*` skill directories are replaced by a single `skills/ea-grill-skills/SKILL.md` containing all 9 modes as named sections. `/ea-grill` loads the consolidated skill and jumps to the matching `## Mode:` section.
-
-**Commands: 35 → 31** — Four thin commands folded into existing hubs:
-- `ea-next` → `ea-status --next` (next-action algorithm now a flag on the dashboard command)
-- `ea-direction` → `ea-status --direction` (Direction Register now a flag on the dashboard command)
-- `ea-summary` → `ea-artifact summary` (executive summary management now a subcommand of the artifact hub)
-- `ea-reorganize` → `ea-migrate --reorganize` (file-move utility now a flag on the migration command)
-
-All cross-references in commands and skill reference files updated to use the new entry points.
-
----
-
-### 5.40 ABB, SBB, and User Story Concepts (v0.9.47)
-
-Introduced Architecture Building Blocks (ABB-NNN), Solution Building Blocks (SBB-NNN), and User Stories (STY-NNN) across the plugin to support the full TOGAF hierarchy: Capability → Requirement → ABB → SBB → Story → Task.
-
-- **New concepts in `ea-concepts.md`:** ABB-NNN, SBB-NNN, STY-NNN — each with full structured definition (What it IS, Structural parts, What it is NOT, Common confusions, Practitioner Notes, TOGAF placement, ArchiMate, ID scheme). Disambiguation checklist extended with Step 13 (ABB→SBB→Story→Task branch). Common Confusions table extended with 3 new rows. ASCII hierarchy diagram extended to show the full ABB→SBB→Story→Task tail.
-- **Requirements Register template:** NFR Sub-Type expanded from 9 to 19 values. Optional `### Sample Tests` and `### Stories` subsections added to both Enterprise and Program requirement blocks. `Sample Tests` column added to the Requirements Summary table.
-- **Business Architecture template:** Capability table expanded with `Capability Type` (Business / Technology) and `Domain` columns. Per-capability `#### ABBs for CAP-NNN` subsection template added with full ABB table.
-- **Application Architecture template:** Per-component `#### ABBs for {component}` section with `<!-- GUIDANCE -->` comment and ABB table added to each application component block.
-- **Technology Architecture template:** `## 3a. Architecture Building Blocks` global ABB register (columns: ABB-NNN, Name, Description, Satisfies REQ-NNN, Implemented by SBB-NNN). `## Solution Building Blocks Register` placed near end of template before Appendix A3, with SBB table (SBB-NNN, Name, Implements ABB-NNN, Vendor / Source, Version, Constraints / Lock-in Risk).
-- **Cross-topic detection:** 4 new signals added — User Story pattern in Requirement, vendor name in ABB, implementation detail in Capability, and "must/shall" language in Story. 3 new Signal Map rows.
-- **`/ea-grill`:** Layer 6 — Concept Type Validation added to Step 5, with four probe types: Capability vs Implementation, Requirement vs Story, ABB vs SBB, Story vs Task.
-- **ID Scheme:** ABB-NNN, SBB-NNN, STY-NNN registered in `CLAUDE.md`.
-
----
-
-### 5.39 Detail File Cross-Linking and Inline Notes (v0.9.46)
-
-Bidirectional cross-linking between detail files, inline note annotations with Open/Resolved lifecycle, and a generated index.
-
-- **Cross-linking:** `relatedItems: []` frontmatter array is the machine-readable source of truth. A `## Related Items` table in each detail file renders links as human-readable markdown using same-directory relative paths.
-- **`/ea-detail link {ID1} {ID2} [relationship]`** — creates a bidirectional link with automatic inverse label. Handles legacy files missing `## Related Items`. Updates `lastModified` in both files.
-- **`/ea-detail check [ID]`** — four integrity checks: link existence, back-link symmetry, table/frontmatter sync (full-token matching), and open notes. Interactive fix for single-file mode.
-- **`/ea-detail note resolve {ID}`** — lists open `📌` notes in a detail file; user selects one and enters resolution text; blockquote updated in-place.
-- **`/ea-detail index`** — generates `artifacts/details/_index.md` grouped by type with Related Items and Open Notes columns.
-- **Updated `list` mode** — type-grouped output with `### {Type}` headings, `--type {type}` filter, Open Notes column, cross-link footer.
-- **Updated `view` mode** — related-items nav line after content; 5-action menu with "Resolve a note" option; consistency check extended to all 4 check types.
-- **`/ea-note --detail {ID}`** — appends inline open `📌` blockquote to a detail file's `## Notes` section; handles legacy files missing that section.
-
----
-
-### 5.38 Ad-hoc Note Capture with Lifecycle (v0.9.45)
-
-**`/ea-note [text] [--artifact <id>] | resolve <path>`** — quick-capture notes from anywhere in the engagement lifecycle.
-
-- **Standalone capture:** Run `/ea-note` with or without inline text. The note is saved immediately to `artifacts/{phase}/notes/adhoc/` (or `cross-cutting/` if no phase active). A routing suggestion is offered after each save — classify as requirement, concern, ADR candidate, or cross-phase flag based on text content.
-- **Artifact annotation:** `--artifact <id>` to annotate a specific artifact. Choose inline (blockquote callout inserted into the artifact markdown) or linked (separate note file with frontmatter back-reference).
-- **Note lifecycle:** Every note includes `status: Open`, a `## Resolution` section, and lifecycle fields (`resolvedDate`, `resolvedBy`). Run `/ea-note resolve <path>` to walk through: resolved-by IDs, per-ID description, rationale, impact, and any residual unresolved impacts.
-- **Session interrupt:** Type `n: {text}` during any `/ea-interview` or `/ea-grill` session to capture a note without breaking flow — the session re-presents the current question or revision after confirming the save.
-- **Listing and management:** `/ea-notes list` now shows an Ad-hoc Notes section with Status column. `r) Resolve a note` action added to the notes menu.
+**Updated files:**
+- `agents/ea-interviewer.md` — Step 7c-1 adds an explicit **Two Layers check** before the generic concept check. Detects when an answer describes an EA-layer subject (governance, standard, review board, reference architecture) but is being captured in a business-layer artifact/field, or vice versa. Surfaces the "Would this still exist without the EA team?" quick test and offers reclassification.
+- `skills/ea-artifact-templates/references/cross-topic-detection.md` — New signal categories: **Two Layers (EA-layer)** detects governance/standard/review-board content in business-layer artifacts and routes to Governance Framework or Architecture Principles; **Two Layers (Business-layer)** detects customer journey/revenue stream content in EA-layer artifacts and routes to Business Architecture. Added to Signal Map and Signal Detection Cues.
+- `skills/ea-artifact-templates/references/phase-interview-questions.md` — Phase A Goals question and Phase B Use Cases question each include a **Layer test** that flags EA-layer subjects masquerading as business concepts.
+- `skills/ea-engagement-lifecycle/references/grill-direction-quality.md` — Direction quality scan now includes a **Two Layers** categorization warning and a **Two Layers test** probe question.
+- `skills/ea-interview-ui/references/brainstorm-app.jsx` — Brainstorm category hints updated: "Concerns" now flags layer-mixing concerns; "Goals & Vision" prompts the Two Layers test.
+- `commands/ea-grill.md` — New **Two Layers challenge** paragraph in Step 5: when grilling Business Architecture, Architecture Vision, Requirements Register, or Stakeholder Map, explicitly challenge mixed-layer content (e.g., "governance process" labeled as a Business Use Case).
+- `templates/business-architecture.md` — Practitioner Tip and Use Case Catalog guidance both include Two Layers checks.
+- `templates/architecture-vision.md` — Practitioner Tip and Goals guidance both include Two Layers checks.
+- `templates/requirements-register.md` — Guidance section includes Two Layers check for distinguishing Business Requirements from Architecture Requirements.
+- `templates/seeds/brainstorm-notes.md` — New **Two Layers of Intent — Brainstorm Prompt** section with the quick test and layer separation instructions.
 
 ---
 
@@ -823,21 +791,83 @@ The 9 core grill-me skills are now bundled directly inside ea-assistant, making 
 
 ---
 
-### 5.35 Two Layers Integration — Cross-Artifact, Interview, Grill, and Brainstorm (v0.9.41)
+### 5.37 Plugin Streamlining (v0.9.43)
 
-The Two Layers of Intent distinction (business change vs EA enablement) is now woven into every touchpoint where concepts are captured or reviewed.
+Reduced slash command and skill count while preserving all existing behaviour.
 
-**Updated files:**
-- `agents/ea-interviewer.md` — Step 7c-1 adds an explicit **Two Layers check** before the generic concept check. Detects when an answer describes an EA-layer subject (governance, standard, review board, reference architecture) but is being captured in a business-layer artifact/field, or vice versa. Surfaces the "Would this still exist without the EA team?" quick test and offers reclassification.
-- `skills/ea-artifact-templates/references/cross-topic-detection.md` — New signal categories: **Two Layers (EA-layer)** detects governance/standard/review-board content in business-layer artifacts and routes to Governance Framework or Architecture Principles; **Two Layers (Business-layer)** detects customer journey/revenue stream content in EA-layer artifacts and routes to Business Architecture. Added to Signal Map and Signal Detection Cues.
-- `skills/ea-artifact-templates/references/phase-interview-questions.md` — Phase A Goals question and Phase B Use Cases question each include a **Layer test** that flags EA-layer subjects masquerading as business concepts.
-- `skills/ea-engagement-lifecycle/references/grill-direction-quality.md` — Direction quality scan now includes a **Two Layers** categorization warning and a **Two Layers test** probe question.
-- `skills/ea-interview-ui/references/brainstorm-app.jsx` — Brainstorm category hints updated: "Concerns" now flags layer-mixing concerns; "Goals & Vision" prompts the Two Layers test.
-- `commands/ea-grill.md` — New **Two Layers challenge** paragraph in Step 5: when grilling Business Architecture, Architecture Vision, Requirements Register, or Stakeholder Map, explicitly challenge mixed-layer content (e.g., "governance process" labeled as a Business Use Case).
-- `templates/business-architecture.md` — Practitioner Tip and Use Case Catalog guidance both include Two Layers checks.
-- `templates/architecture-vision.md` — Practitioner Tip and Goals guidance both include Two Layers checks.
-- `templates/requirements-register.md` — Guidance section includes Two Layers check for distinguishing Business Requirements from Architecture Requirements.
-- `templates/seeds/brainstorm-notes.md` — New **Two Layers of Intent — Brainstorm Prompt** section with the quick test and layer separation instructions.
+**Skills: 18 → 10** — The 9 individual `grill-me-*` skill directories are replaced by a single `skills/ea-grill-skills/SKILL.md` containing all 9 modes as named sections. `/ea-grill` loads the consolidated skill and jumps to the matching `## Mode:` section.
+
+**Commands: 35 → 31** — Four thin commands folded into existing hubs:
+- `ea-next` → `ea-status --next` (next-action algorithm now a flag on the dashboard command)
+- `ea-direction` → `ea-status --direction` (Direction Register now a flag on the dashboard command)
+- `ea-summary` → `ea-artifact summary` (executive summary management now a subcommand of the artifact hub)
+- `ea-reorganize` → `ea-migrate --reorganize` (file-move utility now a flag on the migration command)
+
+All cross-references in commands and skill reference files updated to use the new entry points.
+
+---
+
+### 5.38 Ad-hoc Note Capture with Lifecycle (v0.9.45)
+
+**`/ea-note [text] [--artifact <id>] | resolve <path>`** — quick-capture notes from anywhere in the engagement lifecycle.
+
+- **Standalone capture:** Run `/ea-note` with or without inline text. The note is saved immediately to `artifacts/{phase}/notes/adhoc/` (or `cross-cutting/` if no phase active). A routing suggestion is offered after each save — classify as requirement, concern, ADR candidate, or cross-phase flag based on text content.
+- **Artifact annotation:** `--artifact <id>` to annotate a specific artifact. Choose inline (blockquote callout inserted into the artifact markdown) or linked (separate note file with frontmatter back-reference).
+- **Note lifecycle:** Every note includes `status: Open`, a `## Resolution` section, and lifecycle fields (`resolvedDate`, `resolvedBy`). Run `/ea-note resolve <path>` to walk through: resolved-by IDs, per-ID description, rationale, impact, and any residual unresolved impacts.
+- **Session interrupt:** Type `n: {text}` during any `/ea-interview` or `/ea-grill` session to capture a note without breaking flow — the session re-presents the current question or revision after confirming the save.
+- **Listing and management:** `/ea-notes list` now shows an Ad-hoc Notes section with Status column. `r) Resolve a note` action added to the notes menu.
+
+---
+
+### 5.39 Detail File Cross-Linking and Inline Notes (v0.9.46)
+
+Bidirectional cross-linking between detail files, inline note annotations with Open/Resolved lifecycle, and a generated index.
+
+- **Cross-linking:** `relatedItems: []` frontmatter array is the machine-readable source of truth. A `## Related Items` table in each detail file renders links as human-readable markdown using same-directory relative paths.
+- **`/ea-detail link {ID1} {ID2} [relationship]`** — creates a bidirectional link with automatic inverse label. Handles legacy files missing `## Related Items`. Updates `lastModified` in both files.
+- **`/ea-detail check [ID]`** — four integrity checks: link existence, back-link symmetry, table/frontmatter sync (full-token matching), and open notes. Interactive fix for single-file mode.
+- **`/ea-detail note resolve {ID}`** — lists open `📌` notes in a detail file; user selects one and enters resolution text; blockquote updated in-place.
+- **`/ea-detail index`** — generates `artifacts/details/_index.md` grouped by type with Related Items and Open Notes columns.
+- **Updated `list` mode** — type-grouped output with `### {Type}` headings, `--type {type}` filter, Open Notes column, cross-link footer.
+- **Updated `view` mode** — related-items nav line after content; 5-action menu with "Resolve a note" option; consistency check extended to all 4 check types.
+- **`/ea-note --detail {ID}`** — appends inline open `📌` blockquote to a detail file's `## Notes` section; handles legacy files missing that section.
+
+---
+
+### 5.40 ABB, SBB, and User Story Concepts (v0.9.47)
+
+Introduced Architecture Building Blocks (ABB-NNN), Solution Building Blocks (SBB-NNN), and User Stories (STY-NNN) across the plugin to support the full TOGAF hierarchy: Capability → Requirement → ABB → SBB → Story → Task.
+
+- **New concepts in `ea-concepts.md`:** ABB-NNN, SBB-NNN, STY-NNN — each with full structured definition (What it IS, Structural parts, What it is NOT, Common confusions, Practitioner Notes, TOGAF placement, ArchiMate, ID scheme). Disambiguation checklist extended with Step 13 (ABB→SBB→Story→Task branch). Common Confusions table extended with 3 new rows. ASCII hierarchy diagram extended to show the full ABB→SBB→Story→Task tail.
+- **Requirements Register template:** NFR Sub-Type expanded from 9 to 19 values. Optional `### Sample Tests` and `### Stories` subsections added to both Enterprise and Program requirement blocks. `Sample Tests` column added to the Requirements Summary table.
+- **Business Architecture template:** Capability table expanded with `Capability Type` (Business / Technology) and `Domain` columns. Per-capability `#### ABBs for CAP-NNN` subsection template added with full ABB table.
+- **Application Architecture template:** Per-component `#### ABBs for {component}` section with `<!-- GUIDANCE -->` comment and ABB table added to each application component block.
+- **Technology Architecture template:** `## 3a. Architecture Building Blocks` global ABB register (columns: ABB-NNN, Name, Description, Satisfies REQ-NNN, Implemented by SBB-NNN). `## Solution Building Blocks Register` placed near end of template before Appendix A3, with SBB table (SBB-NNN, Name, Implements ABB-NNN, Vendor / Source, Version, Constraints / Lock-in Risk).
+- **Cross-topic detection:** 4 new signals added — User Story pattern in Requirement, vendor name in ABB, implementation detail in Capability, and "must/shall" language in Story. 3 new Signal Map rows.
+- **`/ea-grill`:** Layer 6 — Concept Type Validation added to Step 5, with four probe types: Capability vs Implementation, Requirement vs Story, ABB vs SBB, Story vs Task.
+- **ID Scheme:** ABB-NNN, SBB-NNN, STY-NNN registered in `CLAUDE.md`.
+
+---
+
+### 5.41 ABB, SBB, and User Story Registers (v0.9.49)
+
+Dedicated register commands for managing ABB-NNN, SBB-NNN, and STY-NNN entries as first-class objects.
+
+- **`/ea-abbs [mode]`** — Architecture Building Block Register. Modes: `generate` (writes register from artifacts), `status` (inline summary), `new` (create entry from template), `update ABB-NNN <field> <value>` (single field update).
+- **`/ea-sbbs [mode]`** — Solution Building Block Register. Modes: `generate`, `status`, `new`, `update SBB-NNN <field> <value>`.
+- **`/ea-stories [mode]`** — User Story Register. Modes: `generate`, `status`, `new`, `update STY-NNN <field> <value>`.
+
+---
+
+### 5.42 Architecture Principles Register (`/ea-principles`) (v0.9.49)
+
+Dedicated management register for Architecture Principles (BP/DP/AP/TP-NNN). Principles are established in the Preliminary phase as the non-negotiable rules governing all downstream architecture decisions.
+
+- **Modes:** `list` (default — summary by type with orphan and violation flags), `add` (interactive 4-field capture: Name, Statement, Rationale, Implications), `update {ID} <field> <value>`, `trace [ID]` (shows ADRs, constraints, and artifacts governed by the principle; flags potential violations)
+- **ID scheme:** BP-NNN (Business), DP-NNN (Data), AP-NNN (Application), TP-NNN (Technology) — zero-padded 3-digit, TOGAF-standard
+- **Source Policy link:** each principle optionally references a POL-NNN that mandates it, completing the governance chain: Policy → Principle → Constraint → Solution
+- **Violation detection:** `trace` mode scans completed ADRs for decisions that may contradict the principle's Statement; flags candidates for human review
+- **Skill:** `ea-principles-management` — provides ID assignment rules, 4-field completeness checks, traceability hierarchy, and violation heuristics; loaded automatically by `/ea-grill` when reviewing the Architecture Principles artifact
 
 ---
 
@@ -922,31 +952,40 @@ EA-projects/
 |---|---|---|
 | `/ea-new` | — | Create engagement — collects name, type, domains, sponsor, scope, dates; scaffolds ResearchAndReferences/; generates CLAUDE.md |
 | `/ea-open` | `[slug]` | Open engagement, refresh CLAUDE.md, ensure ResearchAndReferences/ exists, next-action menu |
-| `/ea-status` | — | Portfolio dashboard — all engagements with progress, research count, opt-outs, non-standard flags |
+| `/ea-status` | `[--next] [--direction]` | Portfolio dashboard — all engagements with progress, research count, opt-outs, non-standard flags; `--next` for next-action recommendation; `--direction` for Direction Register |
 | `/ea-phase` | `[phase name]` | Start, navigate to, or resume an ADM phase |
 | `/ea-interview` | `[web|voice|text|display]` | Run stakeholder interview; ADR threshold scoring; defaults to Web mode |
-| `/ea-artifact` | `[create|view|list]` | Create, view, or list artifacts; compliance check on view |
+| `/ea-artifact` | `[create|view|list|summary]` | Create, view, or list artifacts; compliance check on view; `summary [refresh\|status]` for executive summary management |
 | `/ea-brainstorm` | `[phase]` | Capture freeform thoughts before or during interviews |
 | `/ea-generate` | `[artifact] [docx|pptx|mermaid|png|svg] [--theme] [--bg] [--all]` | Export artifact; embeds diagrams by default in docx/pptx; renders Mermaid to images via mmdc |
 | `/ea-review` | `[artifact]` | Open artifact for review; runs compliance check; update review status |
-| `/ea-grill` | `[artifact] [--skill name]` | Deep-review artifact using a grill-me skill; auto-selects skill by type; apply findings with y/n/edit |
+| `/ea-grill` | `[artifact\|all] [--skill name]` | Deep-review artifact using a grill-me skill; auto-selects skill by type; apply findings with y/n/edit; `all` runs non-interactive batch review across all artifacts |
 | `/ea-requirements` | `[list|add|edit|waive]` | Manage architecture requirements; corporate (read-only) and project scope |
 | `/ea-constraints` | `[list|add|update|trace|impact] [--type] [--status] [--priority] [--owner] [--phase]` | Manage architecture constraints (CST-NNN); trace to artifacts and SBBs; assess impact |
 | `/ea-policies` | `[list|add|update|trace|impact] [--type] [--scope] [--status]` | Manage architecture policies (POL-NNN); trace to constraints and principles; assess impact through linked constraints |
+| `/ea-principles` | `[list|add|update|trace] [--type Business|Data|Application|Technology] [--status Active|Draft|Deprecated]` | Architecture Principles Register — manage BP/DP/AP/TP-NNN entries; `trace` detects ADR and constraint violations |
+| `/ea-abbs` | `[generate|status|new|update ABB-NNN <field> <value>]` | Architecture Building Block Register — generate, view, create, or update ABB-NNN entries |
+| `/ea-sbbs` | `[generate|status|new|update SBB-NNN <field> <value>]` | Solution Building Block Register — generate, view, create, or update SBB-NNN entries |
+| `/ea-stories` | `[generate|status|new|update STY-NNN <field> <value>]` | User Story Register — generate, view, create, or update STY-NNN entries |
+| `/ea-trace` | `[--gaps]` | Interactive traceability views — motivation chain from drivers to work packages; `--gaps` for consolidated gap report only |
 | `/ea-decisions` | `[generate|status|rationale] [--audience] [--owner] [--domain] [--status] [--cost] [--impact] [--risk] [--artifact] [--authority]` | Generate Decision Register from all A3 logs; `rationale` mode backfills missing A3.N reasoning blocks |
 | `/ea-adrs` | `[generate|status|new|update ADR-NNN <field> <value>]` | Manage Architecture Decision Records; auto-suggested by interviewer at 2+ threshold indicators |
 | `/ea-risks` | `[generate|status|update RIS-NNN <field> <value>]` | Generate and maintain Risk Register by scanning all artifacts |
 | `/ea-changes` | `[generate|status|update <ACR-ID> <field> <value>]` | Generate Change Register aggregating all Phase H ACR artifacts |
 | `/ea-concerns` | — | Manage CON-NNN stakeholder concerns (Appendix A4) |
 | `/ea-roles` | `[ROLE-ID] [--domain] [--generate] [--update ROLE-ID]` | Canonical 15-role catalogue — list, filter by domain, generate Role Catalogue artifact, assign named individuals |
-| `/ea-direction` | `[goals\|objectives\|strategies] [--domain Business\|Data\|Application\|Technology]` | Display Direction Register — Goals, Objectives, Strategies aggregated from motivation artifacts; filters by item type or inferred domain |
 | `/ea-zachman` | `[generate|review|gap|interview|classify <artifact>]` | Manage Zachman 6×6 classification diagram |
 | `/ea-research` | `[add|note|link|list|view <item>|apply [artifact-id]]` | Manage research library; synthesise research against deliverables |
+| `/ea-notes` | `[list|view|edit|delete]` | List, view, edit, or delete interview notes, brainstorm notes, and review files |
+| `/ea-note` | `[text] [--artifact <id>] \| resolve <path>` | Quick-capture an ad-hoc note with Open/Resolved lifecycle; `resolve` records resolution with rationale and impact |
+| `/ea-detail` | `[new|view|list|sync|link|check|note resolve|index]` | Create, view, list, sync, cross-link, and integrity-check item detail files; generate index; add and resolve inline notes |
 | `/ea-consistency` | `[artifact <id>] [--ids] [--report]` | Focused consistency check — cross-artifact, within-artifact section contradictions, or ID reference scan only |
 | `/ea-engage-review` | — | Full-scope engagement consistency, alignment, governance, and quality review |
-| `/ea-reorganize` | `[--report] [--auto]` | Move flat-path artifacts into correct phase subfolders; update `engagement.json` file paths |
-| `/ea-migrate` | `[--report]` | Align legacy engagement to current plugin version conventions |
+| `/ea-migrate` | `[--report] [--reorganize]` | Align legacy engagement to current plugin version conventions; `--reorganize` moves flat-path artifacts into correct phase subfolders |
 | `/ea-publish` | `[markdown|word]` | Consolidated report via Pandoc; pre-publish compliance check |
+| `/ea-brief` | `[--focus decisions\|risks\|gaps\|strategy] [--save]` | Synthesised one-page engagement brief — ranked decisions, gaps, risks, open concerns |
+| `/ea-workshop` | `[start|resume|export|list]` | Facilitated multi-stakeholder workshops — WS-NNN minutes, agenda, decisions, actions |
+| `/ea-arb` | `[new|list|view|close]` | ARB meeting minutes — ARB-NNN, quorum, decisions, propagate to ADR register |
 | `/ea-config` | `[section]` | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md |
 | `/ea-security-review` | `[artifact-id] [--report]` | Security audit — SABSA ADM mapping, ISO 27001 Annex A, and NIST CSF 2.0 coverage; full engagement or single artifact |
 | `/ea-help` | — | Command reference, interview shortcuts, research agent guide |
@@ -962,7 +1001,8 @@ EA-projects/
 | `ea-roadmap` | Creates and manages the Architecture Roadmap in Review / Artifact-informed / Clean-slate mode | Ask Claude: "Let's build the roadmap" or "Review the roadmap" |
 | `ea-requirements-analyst` | Extracts structured requirements from uploaded documents | `/ea-requirements` |
 | `ea-consistency-checker` | Cross-artifact contradictions, naming consistency, traceability, phase alignment, ID reference validation | `/ea-consistency`, `/ea-engage-review` |
-| `ea-document-analyst` | EA mapping layer — extracts content from uploaded documents and maps to artifacts (no dedicated command) | Ask Claude: "Analyse the uploaded documents" |
+| `ea-document-analyst` | EA mapping layer — extracts content from uploaded documents and maps to artifacts; delegates format conversion to `ea-document-converter` (no dedicated command) | Ask Claude: "Analyse the uploaded documents" |
+| `ea-document-converter` | Format conversion — normalises uploaded files (.docx, .xlsx, .drawio, .pdf) to Markdown or Mermaid before EA mapping; invoked automatically by `ea-document-analyst` (no dedicated command) | Ask Claude: "Convert this uploaded document" |
 | `ea-advisor` | Answers EA methodology questions — TOGAF, Zachman, ArchiMate (no dedicated command) | Ask any methodology question in chat |
 | `ea-diagram` | Creates, edits, and interprets architecture diagrams (Mermaid, Graphviz, Draw.io, ArchiMate); standard diagram catalogue per artifact type; offers mmdc render after saving | `/ea-generate mermaid|png|svg`, ask Claude: "Create a diagram for..." |
 | `ea-research` | EA-aware research support — quick lookup (1-2 searches), deep 4-phase investigation (planning → execution → analysis → synthesis), phase research planning, multi-source synthesis, research quality audit, impact tracing | Ask: "Quick research: ...", "Deep research: ...", "What should I research for Phase X?", "Synthesise the vendor reports", "Quality check our research" |

@@ -23,7 +23,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Phase interviews** — curated question bank for each ADM phase (Text, Web, or Display mode) with output routing to artifacts; ID scheme reference and section markers for Phase A
 - **Interview shortcuts** — single-key shortcuts for defaults, skip, N/A, opt-out, brainstorm, research, A3 logging, and governance transitions; type `?` at any prompt for contextual help
 - **Contextual help** — type `?` during any interview to see the artifact's purpose, value, current progress, and a link to the EA concepts reference
-- **EA concepts reference** — canonical definitions of all 13 EA concepts (Vision, Mission, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Problem, Capability Model, Operating Model, Metrics) with full motivation chain model, TOGAF/ArchiMate alignment, and disambiguation checklist; grounded in *EA Strategic Context: Terms, Concepts, and Relationship Models*
+- **EA concepts reference** — canonical definitions of all 25 EA concepts (Vision, Mission, Business Driver, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Problem, Opportunity, Capability Model, Capability Gap, Operating Model, Value Stream, Business Process, Use Case, Constraint, Metrics, ADR, ABB, SBB, User Story, Stakeholder Concern) with full motivation chain model, TOGAF/ArchiMate alignment, and disambiguation checklist; grounded in *EA Strategic Context: Terms, Concepts, and Relationship Models*
 - **Cross-topic detection** — flags answers that belong in a different artifact and offers to route them correctly or save for later
 - **Session tracking** — records facilitator, participants, topics, and next recommended step for every interview session; prior session summary shown at session start
 - **Brainstorming** — capture freeform thoughts before or during interviews; surfaced automatically as context during Q&A
@@ -151,6 +151,11 @@ uiMode: html
 | `/ea-requirements [action]` | Manage architecture requirements |
 | `/ea-constraints [action]` | Manage architecture constraints — capture, view, trace to artifacts, and assess impact on solution space |
 | `/ea-policies [mode]` | Manage architecture policies — capture governance documents, trace to constraints, and assess policy impact |
+| `/ea-principles [mode]` | Manage architecture principles (BP/DP/AP/TP-NNN) — list, add, update, or trace; violation detection flags ADRs that contradict active principles |
+| `/ea-abbs [mode]` | Architecture Building Block Register — generate, view, create, or update ABB-NNN entries; modes: generate, status, new, update |
+| `/ea-sbbs [mode]` | Solution Building Block Register — generate, view, create, or update SBB-NNN entries; modes: generate, status, new, update |
+| `/ea-stories [mode]` | User Story Register — generate, view, create, or update STY-NNN entries; modes: generate, status, new, update |
+| `/ea-trace [--gaps]` | Interactive traceability views — motivation chain from drivers to work packages; `--gaps` for consolidated gap report only |
 | `/ea-decisions [options]` | Generate a Decision Register from all A3 decision logs; filter by audience, owner, domain, authority, cost, impact, risk, subject, or status |
 | `/ea-adrs [mode]` | Manage Architecture Decision Records — generate register, create new ADR, update status |
 | `/ea-risks [mode]` | Generate and maintain a cross-cutting Risk Register from all artifact risk sections |
@@ -163,7 +168,10 @@ uiMode: html
 | `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman |
 | `/ea-security-review [<artifact-id>] [--framework sabsa\|iso\|nist]` | Security audit — SABSA layer coverage, ISO 27001:2022 domain alignment, NIST CSF 2.0 function analysis; full engagement by default |
 | `/ea-migrate [--report\|--reorganize]` | Align a legacy engagement to the current plugin version conventions; `--reorganize` moves flat-path artifacts into correct phase subfolders |
-| `/ea-grill [artifact] [--skill]` | Deep-review an artifact using a grill-me skill; apply findings one revision at a time |
+| `/ea-grill [artifact] [--skill]` | Deep-review an artifact using a grill-me skill; apply findings one revision at a time; `all` mode batch-reviews all artifacts |
+| `/ea-brief [--focus decisions\|risks\|gaps\|strategy] [--save]` | Synthesised one-page engagement brief — ranked decisions, gaps, risks, open concerns |
+| `/ea-workshop [start\|resume\|export\|list]` | Facilitated multi-stakeholder workshops — WS-NNN minutes, agenda, decisions, actions |
+| `/ea-arb [new\|list\|view\|close]` | ARB meeting minutes — ARB-NNN, quorum, decisions, propagate to ADR register |
 | `/ea-publish` | Merge all artifacts into a consolidated document; compliance pre-check, opted-out and non-standard items flagged |
 | `/ea-config [section]` | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md |
 | `/ea-help` | Getting-started guide, full command reference, and interview shortcuts |
