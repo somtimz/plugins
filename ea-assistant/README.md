@@ -45,6 +45,10 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **ADM reference material** — detailed phase inputs/outputs, tailoring guidance for agile/programme/capability-based contexts
 - **Constraints Register** — `/ea-constraints` manages architecture constraints (CST-NNN) as first-class objects with Type, Source, Owner, and Impact Assessment; distinguishes constraints from requirements and risks; traces constraints to SBBs, artifacts, and work packages
 - **Policies Register** — `/ea-policies` manages architecture policies (POL-NNN) as first-class governance documents with Issuing Authority, Effective Date, Review Cycle, and Linked Constraints; distinguishes policies from principles and constraints; traces policies through linked CST-NNN constraints to capabilities, ABBs, and work packages
+- **Business Drivers Register** — `/ea-drivers` manages business drivers (DRV-NNN) as first-class objects with type (External/Internal), priority, evidence, and linked goals; `trace` walks the full DRV→G→OBJ→STR→WP motivation chain; `generate` produces a dated Drivers Register
+- **Architecture Gap Register** — `/ea-gaps` manages architecture gaps (GAP-NNN) as first-class objects with domain, severity, baseline/target state, phase, and status; `promote` formalises raw gap prose from `/ea-trace --gaps` into GAP-NNN entries; `trace` links upstream artifacts to downstream work packages; migration gaps use GAP-M-NNN
+- **Seasoned Architect Lens** — `/ea-lens` reviews the whole engagement through eight practitioner lenses (Real Problem, Decision Quality, Real Risk, Stakeholder Reality, Motivation Chain Integrity, Architecture vs Implementation Blur, What to Do Next, The One Thing); `--quick` produces lenses 1, 7, 8 only from engagement.json without a full artifact scan
+- **Phase-adaptive interviews and brainstorms** — `/ea-interview` and `/ea-brainstorm` now inject a phase intent preamble from `adm-phase-guide.md`, filter engagement direction items by phase relevance, and skip questions already answered in existing artifacts
 - **Risk Register** — `/ea-risks` generates a cross-cutting Risk Register (RIS-NNN) by scanning all artifacts for risk content; Likelihood × Impact severity matrix
 - **Architecture Decision Records** — `/ea-adrs` manages standalone ADRs (Candidate → Completed lifecycle); `ea-interviewer` auto-suggests ADRs at 2+ threshold indicators; Appendix A5 links artifacts to related ADRs
 - **Zachman Diagram** — `/ea-zachman` auto-populates and manages the 6×6 classification grid; generate, review, gap, interview, and classify modes
@@ -151,6 +155,8 @@ uiMode: html
 | `/ea-requirements [action]` | Manage architecture requirements |
 | `/ea-constraints [action]` | Manage architecture constraints — capture, view, trace to artifacts, and assess impact on solution space |
 | `/ea-policies [mode]` | Manage architecture policies — capture governance documents, trace to constraints, and assess policy impact |
+| `/ea-drivers [mode]` | Business Driver Register — list, add, update, trace DRV→G→OBJ→STR→WP chain, or generate register |
+| `/ea-gaps [mode]` | Architecture Gap Register — list, add, promote raw gaps to GAP-NNN, update, trace to work packages, or generate register |
 | `/ea-principles [mode]` | Manage architecture principles (BP/DP/AP/TP-NNN) — list, add, update, or trace; violation detection flags ADRs that contradict active principles |
 | `/ea-abbs [mode]` | Architecture Building Block Register — generate, view, create, or update ABB-NNN entries; modes: generate, status, new, update |
 | `/ea-sbbs [mode]` | Solution Building Block Register — generate, view, create, or update SBB-NNN entries; modes: generate, status, new, update |
@@ -165,6 +171,7 @@ uiMode: html
 | `/ea-zachman [mode]` | Manage the Zachman 6×6 classification diagram — generate, review, gap, interview, classify |
 | `/ea-research [mode]` | Research library — add documents, notes, links; apply findings to artifacts |
 | `/ea-consistency [options]` | Focused consistency check — cross-artifact contradictions, ID reference validation (`--ids`), or single-artifact within-section check (`artifact <id>`) |
+| `/ea-lens [--quick]` | Seasoned architect engagement review across eight practitioner lenses |
 | `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman |
 | `/ea-security-review [<artifact-id>] [--framework sabsa\|iso\|nist]` | Security audit — SABSA layer coverage, ISO 27001:2022 domain alignment, NIST CSF 2.0 function analysis; full engagement by default |
 | `/ea-migrate [--report\|--reorganize]` | Align a legacy engagement to the current plugin version conventions; `--reorganize` moves flat-path artifacts into correct phase subfolders |

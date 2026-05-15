@@ -78,13 +78,64 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
 
 2. Load the question bank from `skills/ea-artifact-templates/references/phase-interview-questions.md` for the selected phase.
 
+2b. **Inject Phase Intent Framing.**
+
+Read `skills/ea-engagement-lifecycle/references/adm-phase-guide.md`. Locate the section for the resolved phase (e.g. `## Phase B` or `## Preliminary Phase`). Extract:
+   - The first 3 bullet points from the **Objectives** section (what this phase must deliver)
+   - The first 4 bullet points from the **Key Questions** section (what must be answered)
+   - The "What to decide now" items from the **Decision Flow** section
+
+Present the following framing block to the user BEFORE the first interview question. Do NOT ask the user to respond to this block — it is context-setting only:
+
+---
+**Phase {name} — Interview Context**
+
+**What this phase must accomplish:**
+• {Objective 1}
+• {Objective 2}
+• {Objective 3}
+
+**Key questions this phase must answer:**
+• {Key Question 1}
+• {Key Question 2}
+• {Key Question 3}
+• {Key Question 4}
+
+**Decisions that must be made now (do not defer):**
+• {Decision Flow — "What to decide now" items}
+
+**Handoff from previous phase:**
+{If `direction.gaps[]` contains any entries with `phase` matching the immediately prior phase: list them — e.g. "GAP-001 (High): Missing CRM capability — identified in Phase B"}
+{If any open PAD-NNN entries found: "N pending architecture decisions remain open: [PAD-NNN list]"}
+{If neither: omit this section entirely}
+---
+
+Then proceed to step 3.
+
 3. Resolve the phase folder from the selected phase using the Phase Folder Mapping table in `skills/ea-engagement-lifecycle/SKILL.md`.
 
    Load any existing interview notes for this phase from `artifacts/{phase-folder}/notes/interviews/interview-phase-{phase}-*`. If notes exist, ask: "Previous phase interview notes found (v{N}, {date}). Resume from these, or start fresh?"
 
 3b. **Check for brainstorm notes:** Look for `EA-projects/{slug}/artifacts/{phase-folder}/notes/brainstorm/brainstorm-notes.md`. Note whether it exists.
 
-3c. **Select interview mode** — the `ea-interviewer` agent will present the mode selection menu. Pass the phase name and context; the agent handles mode selection.
+3c. **Load Phase-Relevant Direction Items.**
+
+Read `engagement.json → direction`. Filter to surface only the items most relevant to the current phase:
+
+| Phase | Relevant direction items |
+|---|---|
+| Prelim | All drivers, goals |
+| A | All drivers, goals, objectives, strategies |
+| B | Goals and objectives linked to capability or process concerns; all strategies |
+| C-Data / C-App | Objectives with measurable data or application targets; strategies supporting them |
+| D | Objectives with technology or platform targets; all strategies |
+| E / F | All objectives not yet covered by a work package; all strategies |
+| G / H | All objectives with governance or compliance targets; open issues and concerns |
+| Requirements | All objectives and goals; open problems and issues |
+
+Present the filtered list to the user as: "**Your engagement priorities for this phase:**" before the first question. If `direction` is empty or has no items for this phase, omit this step silently.
+
+3d. **Select interview mode** — the `ea-interviewer` agent will present the mode selection menu. Pass the phase name and context; the agent handles mode selection.
 
 4. Load phase-scoped context using **Scope B** from `skills/ea-engagement-lifecycle/references/context-loading.md`.
 
@@ -98,6 +149,7 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
    - Brainstorm notes path (if available): `artifacts/{phase-folder}/notes/brainstorm/brainstorm-notes.md`
    - Loaded research items relevant to this phase
    - Prior grill review files for any artifact in this phase
+   - **Skip already-answered questions:** Before presenting each question from the question bank, check whether the corresponding field in the target artifact(s) for this phase already has a non-placeholder, non-`⚠️ Not answered`, non-`⊘` value. If so, skip that question and note it as already captured. Present a count at the start: "Skipping {N} questions — already captured in existing artifacts. Starting with {M} remaining questions."
 
    The `ea-interviewer` agent must reference this context during Q&A: cite research or prior notes when they support or contradict a user's answer.
 

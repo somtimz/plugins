@@ -64,6 +64,14 @@ Capture freeform brainstorm notes for the active EA engagement.
        > 📋 **What good looks like in this section:** {first 2 sentences of guidance text}
      This anchors the brainstorm to the artifact's documented quality standard before the user captures thoughts.
    - **Phase-scoped** (phase argument provided): read `skills/ea-artifact-templates/references/phase-interview-questions.md` for the relevant phase. Extract up to 8 key questions in order.
+   - **Filter engagement direction by phase relevance.** After extracting questions, also read `engagement.json → direction` and filter items by phase:
+     - Phase A/Prelim: surface all goals and top-3 drivers by priority as context hints in the `goals` category
+     - Phase B: surface goals/objectives linked to business capabilities; strategies; issues and problems
+     - Phase C-Data/C-App: surface objectives with data or application targets; related strategies
+     - Phase D: surface objectives with technology targets; strategies
+     - Phase E/F: surface all objectives not yet linked to a work package (if `direction.gaps[]` exists, include top-3 unaddressed Critical/High gaps)
+     - Phase G/H: surface objectives with governance targets; open issues
+     Add these as additional entries in the `prefilled` list with `source: "direction"` so they appear in the pad as pre-loaded context tagged `[Direction]`.
    - **Engagement-scoped** (engagement mode): read Preliminary Parts 1–3 and Phase A §2–§6 from `phase-interview-questions.md`. Extract up to 10 key questions covering org context, drivers, goals, issues, and problems.
    - **Unscoped**: omit — leave `questions: null`.
 
@@ -110,6 +118,34 @@ Capture freeform brainstorm notes for the active EA engagement.
    Tag each response with `[ISS?]` or `[PRB?]` in the brainstorm pad's Issues & Problems category. These are not assigned ISS-NNN/PRB-NNN IDs here — IDs are assigned during `/ea-interview`. The tags flag them for formal assignment.
 
    If the user says "none" or "skip", proceed silently to step 4.
+
+3e. **Inject Phase Intent Framing** (chat message only — not pad content).
+
+   Read `skills/ea-engagement-lifecycle/references/adm-phase-guide.md`. Locate the section for the resolved phase. Extract:
+   - First 2–3 bullet points from **Objectives**
+   - First 3 bullet points from **Key Questions**
+   - "What to decide now" and "What to defer" items from **Decision Flow**
+
+   Present the following in the chat BEFORE launching the pad (this is a message to the user, not pad content):
+
+   ---
+   **{Phase Name} Brainstorm — What to focus on**
+
+   This phase must establish:
+   • {Objective 1}
+   • {Objective 2}
+   • {Objective 3}
+
+   Key questions to surface answers for:
+   • {Key Question 1}
+   • {Key Question 2}
+   • {Key Question 3}
+
+   Decide now: {Decision Flow — decide now items}
+   Defer: {Decision Flow — defer items}
+   ---
+
+   If `adm-phase-guide.md` is not found or the phase section is missing, skip this step silently. If engagement mode is active, skip this step silently.
 
 4. **Build `BRAINSTORM_DATA` and launch the brainstorm pad.**
 
@@ -270,6 +306,8 @@ Capture freeform brainstorm notes for the active EA engagement.
    | Other | Sunset criteria, ADM re-entry triggers, architecture debt backlog |
 
    Set `BRAINSTORM_DATA.phase` to the full phase label (e.g. `"Phase D — Technology Architecture"`). If the phase has no letter prefix (Preliminary, Requirements), use just the name (e.g. `"Preliminary"`).
+
+   Set `BRAINSTORM_DATA.subtitle` to the first Objectives bullet from the `adm-phase-guide.md` section for the resolved phase, prefixed with `"This phase must: "`. If `adm-phase-guide.md` was not readable or engagement mode is active, set `subtitle: null`.
 
    **Inject domain-specific categories when scoped to a domain phase.** In addition to the six default categories, append extra entries to `BRAINSTORM_DATA.categories` when the resolved phase matches:
    - **Phase B (Business Architecture):** `{ id: "value-streams", label: "Value Streams", emoji: "🌊", hint: "...", suggestions: [...] }`, `{ id: "use-cases", label: "Use Cases", emoji: "🎭", hint: "...", suggestions: [...] }`, `{ id: "processes", label: "Processes", emoji: "⚙️", hint: "...", suggestions: [...] }`

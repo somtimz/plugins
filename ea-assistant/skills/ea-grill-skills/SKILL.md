@@ -1,7 +1,7 @@
 ---
 name: ea-grill-skills
 description: Nine grill modes bundled for ea-assistant — stress-test, premortem, decision, design, software-design, infra-design, artifact, diagram, boardroom-strategy. Load this skill and follow the ## Mode section matching the requested short name.
-version: 0.1.0
+version: 0.2.0
 ---
 
 When this skill is loaded, locate the `## Mode: {short-name}` section that matches the mode requested by `/ea-grill` and follow it exclusively. Ignore all other mode sections.
@@ -323,6 +323,14 @@ After the section-by-section review, explicitly scan the artifact for these high
 - **Stale policy:** A policy with Review Cycle past due and Status = Enacted — may invalidate linked constraints. Flag: "Policy review overdue — may invalidate linked constraints."
 - **Orphan policy:** A policy with no linked CST-NNN constraints — the policy has not been operationalised into architecture rules. Flag: "Policy has no linked constraints — derive CST-NNN entries or document why none are needed."
 - **Principle without policy alignment:** A principle that is clearly derived from an enterprise policy but has no POL-NNN in its Source Policy field. Flag: "Principle aligned with enterprise policy — add POL-NNN for traceability."
+
+**Gap Analysis artifact — unpromoted gap check:**
+If the artifact being reviewed is a Gap Analysis document (artifact ID `gap-analysis` or `consolidated-gap-analysis`):
+- Scan the artifact for gap statements in tables or lists (rows that describe a difference between current and target state).
+- For each gap statement, check whether a corresponding `GAP-NNN` entry exists in `engagement.json → direction.gaps[]` by matching the statement text or a `linkedArtifact` reference to this file.
+- Count unmatched gap statements — statements in the artifact with no corresponding `GAP-NNN` entry.
+- If count ≥ 1, surface: "⚠️ {N} gap statement(s) in this artifact have not been promoted to formal GAP-NNN entries — run `/ea-gaps promote` to formalise them."
+- If all gaps are formalised, confirm: "✅ All gap statements have corresponding GAP-NNN entries."
 
 ---
 
