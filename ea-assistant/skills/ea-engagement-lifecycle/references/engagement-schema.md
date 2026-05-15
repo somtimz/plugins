@@ -44,6 +44,9 @@
     ],
     "opportunities": [
       { "id": "OPP-001", "statement": "", "drivers": ["DRV-001"], "type": "Exploit | Enhance | Emerge", "priority": "High | Medium | Low", "linkedGoals": ["G-001"], "rationale": "" }
+    ],
+    "gaps": [
+      { "id": "GAP-001", "statement": "", "domain": "Business | Data | Application | Technology | Capability | Process", "severity": "Critical | High | Medium | Low", "baseline": "", "target": "", "phase": "Prelim | A | B | C-Data | C-App | D | E | F | G | H | Requirements", "linkedWorkPackages": ["WP-001"], "linkedArtifact": "", "status": "Open | Mitigated | Closed | Accepted" }
     ]
   },
   "metrics": [
@@ -88,7 +91,7 @@
 - `targetEndDate` — optional target completion date; defaults to `null`
 
 **v0.4.0 fields** — `direction` (flat structure, current):
-- Flat object at engagement level (not domain-scoped): `{ vision, mission, drivers[], goals[], objectives[], strategies[], issues[], problems[], opportunities[] }`
+- Flat object at engagement level (not domain-scoped): `{ vision, mission, drivers[], goals[], objectives[], strategies[], issues[], problems[], opportunities[], gaps[] }`
 - **Driver** `{ id: DRV-NNN, statement, type, priority, evidence?, linkedGoals[] }` — WHY the engagement is needed
 - **Goal** `{ id: G-NNN, statement, priority, drivers[], rationale? }` — WHERE you want to be (qualitative)
 - **Objective** `{ id: OBJ-NNN, statement, measure, target, deadline, priority, linkedGoal }` — HOW FAR and BY WHEN (measurable)
@@ -96,6 +99,8 @@
 - **Issue** `{ id: ISS-NNN, statement, area, threatensGoals[], evidence?, raisedBy? }` — strategic threats to goals
 - **Problem** `{ id: PRB-NNN, statement, symptom, blocksObjectives[], evidence?, raisedBy? }` — tactical blockers of objectives
 - **Opportunity** `{ id: OPP-NNN, statement, drivers[], type, priority, linkedGoals[], rationale? }` — actionable possibilities
+- **Gap** `{ id: GAP-NNN (or GAP-M-NNN for migration gaps in Phase F/G), statement, domain, severity, baseline, target, phase, linkedWorkPackages[], linkedArtifact?, status }` — difference between as-is and to-be state in a given domain
+- Gap status: `Open | Mitigated | Closed | Accepted`
 - IDs are unique across the entire engagement; do not restart numbering per type
 - Fields marked `?` are optional — absent in legacy engagements; default to `""` or `[]` if missing
 - Items with empty `statement` are placeholders — MUST NOT be referenced in artifacts

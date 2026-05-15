@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.49
+**Version:** 0.9.50
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -868,6 +868,50 @@ Dedicated management register for Architecture Principles (BP/DP/AP/TP-NNN). Pri
 - **Source Policy link:** each principle optionally references a POL-NNN that mandates it, completing the governance chain: Policy → Principle → Constraint → Solution
 - **Violation detection:** `trace` mode scans completed ADRs for decisions that may contradict the principle's Statement; flags candidates for human review
 - **Skill:** `ea-principles-management` — provides ID assignment rules, 4-field completeness checks, traceability hierarchy, and violation heuristics; loaded automatically by `/ea-grill` when reviewing the Architecture Principles artifact
+
+---
+
+### 5.43 Business Drivers Register (`/ea-drivers`) (v0.9.50)
+
+First-class management of Business Drivers (DRV-NNN) as engagement-level motivation objects stored in `engagement.json → direction.drivers[]`.
+
+- **Modes:** `list` (grouped by type External/Internal, with orphan detection — drivers with no linked goal flagged), `add` (interactive capture: statement, type, priority, evidence, linkedGoals), `update DRV-NNN <field> <value>`, `trace DRV-NNN` (walks full DRV→G→OBJ→STR→WP motivation chain), `generate` (writes `artifacts/cross-cutting/drivers-register-{date}.md`)
+- **ID scheme:** DRV-NNN (sequential, global) — IDs are assigned by reading the current max from `direction.drivers[]` and incrementing
+- **Storage:** `engagement.json` is the source of truth; the generated register is a read-only output snapshot
+- **Skill:** `ea-drivers-management` — ID assignment algorithm, traceability walk, orphan/cycle validation, register format
+
+---
+
+### 5.44 Architecture Gap Register (`/ea-gaps`) (v0.9.50)
+
+First-class management of Architecture Gaps (GAP-NNN) stored in `engagement.json → direction.gaps[]`, covering both baseline-target gaps and motivation coverage gaps across all architecture domains.
+
+- **Modes:** `list` (grouped by severity Critical → High → Medium → Low), `add` (interactive capture: statement, domain, severity, baseline, target, phase, linkedWorkPackages, linkedArtifact, status), `promote` (formalises raw gap prose from `/ea-trace --gaps` output into a GAP-NNN entry), `update GAP-NNN <field> <value>`, `trace GAP-NNN` (upstream: linked artifact and phase; downstream: linked WP-NNN and roadmap wave), `generate` (writes `artifacts/cross-cutting/gap-register-{date}.md` in two sections: Architecture Gaps / Migration Gaps)
+- **ID scheme:** GAP-NNN for phases A–E/H; GAP-M-NNN for migration gaps (Phase F/G)
+- **Severity escalation:** Critical+Open+no linkedWorkPackages → warning surfaced in `/ea-engage-review` step 4i and `/ea-gaps list`
+- **Skill:** `ea-gaps-management` — schema definition, ID assignment, severity escalation rule, promote algorithm, two-section register format, relationship with `/ea-trace --gaps` (complementary, not superseded)
+
+---
+
+### 5.45 Seasoned Architect Lens (`/ea-lens`) (v0.9.50)
+
+Opinionated engagement review from the perspective of a practitioner focused on what actually matters, not completeness theatre.
+
+- **Eight lenses:** (1) Real Problem — signal vs noise; (2) Decision Quality — deferral pattern vs genuine optionality; (3) Real Risk — comfortable vs consequential risk tracking; (4) Stakeholder Reality — attention deficit for high-influence/low-support stakeholders; (5) Motivation Chain Integrity — DRV→G→OBJ→STR→WP breaks with practical implication; (6) Architecture vs Implementation Blur — premature vendor/tech specificity; (7) What a Seasoned Architect Would Do Next — 3–5 specific moves, not TOGAF steps; (8) The One Thing — single sentence, no hedging
+- **`--quick` flag:** skips full artifact scan; uses `engagement.json` state only; produces lenses 1, 7, and 8
+- **Output:** offered as save to `artifacts/cross-cutting/notes/lens-review-{date}.md`
+- **Skill:** `ea-architect-lens` — loads `practitioner-tips.md`, `failure-modes.md`, `adm-phase-guide.md`
+
+---
+
+### 5.46 Phase-Adaptive Interviews and Brainstorms (v0.9.50)
+
+`/ea-interview` and `/ea-brainstorm` now adapt to the active ADM phase using three mechanisms:
+
+- **Phase intent preamble:** reads `adm-phase-guide.md` for the active phase; presents the top 3 objectives, top 4 key questions, and "decide now" Decision Flow items before the first question/pad launch; also surfaces prior-phase handoff context (open GAP-NNN entries and open PAD-NNN entries from the previous phase)
+- **Engagement direction filter:** loads `engagement.json → direction` and surfaces only goals, objectives, drivers, and strategies relevant to the current phase per a TOGAF ADM intent mapping (Phase A: all goals and drivers; Phase B: capability-linked goals; Phase C: data/app-linked objectives; Phase D: technology-linked objectives; Phase E/F: strategy→WP coverage)
+- **Dynamic question skipping** (interview only): before presenting each question, checks whether the corresponding field already has a non-placeholder value in existing phase artifacts; skips populated fields and reports a count at the start of the session
+- **BRAINSTORM_DATA.subtitle:** set from the first objective in `adm-phase-guide.md` for the resolved phase, prefixed with `"This phase must: "`, rendered as a subtitle in the brainstorm pad header
 
 ---
 

@@ -84,6 +84,8 @@ You have existing engagements. Common next steps:
 | `/ea-requirements [action]` | Manage architecture requirements |
 | `/ea-constraints [action]` | Manage architecture constraints — capture, trace, and assess impact on solution space |
 | `/ea-policies [mode]` | Manage architecture policies — capture governance documents, trace to constraints, and assess policy impact |
+| `/ea-drivers [mode]` | Business Driver Register — list, add, update, trace DRV→G→OBJ→STR→WP chain, or generate register |
+| `/ea-gaps [mode]` | Architecture Gap Register — list, add, promote raw gaps to GAP-NNN, update, trace to work packages, or generate register |
 | `/ea-principles [mode]` | Architecture Principles Register — list, add, update, or trace BP/DP/AP/TP-NNN principle entries; `trace` detects ADR and constraint violations |
 | `/ea-abbs [mode]` | Architecture Building Block Register — generate, view, create, or update ABB-NNN entries |
 | `/ea-sbbs [mode]` | Solution Building Block Register — generate, view, create, or update SBB-NNN entries |
@@ -101,6 +103,7 @@ You have existing engagements. Common next steps:
 | `/ea-note [text] [--artifact <id>] \| resolve <path>` | Quick-capture an ad-hoc note with lifecycle (Open/Resolved) — inline annotation or linked note; `resolve` records resolution with rationale and impact |
 | `/ea-detail new\|view\|list\|sync\|link\|check\|note resolve\|index` | Create, view, list, sync, cross-link, or integrity-check item detail files; generate index; add and resolve inline notes |
 | `/ea-consistency [options]` | Focused consistency check — cross-artifact contradictions, within-artifact section inconsistencies, or ID reference scan only (`--ids`); `--details` validates detail file link integrity and A4 sync |
+| `/ea-lens [--quick]` | Seasoned architect engagement review — eight practitioner lenses focused on what matters vs. completeness theatre |
 | `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman |
 | `/ea-security-review` | Security audit — SABSA, ISO 27001, and NIST CSF 2.0 coverage across the engagement or a single artifact |
 | `/ea-migrate [--report\|--reorganize]` | Align legacy engagement to current plugin version conventions; `--reorganize` moves flat-path artifacts into correct phase subfolders |

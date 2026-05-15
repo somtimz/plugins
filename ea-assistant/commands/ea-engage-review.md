@@ -83,6 +83,9 @@ Scan `requirements/*.md` and `phase-e*/**/*.md` for `STY-\d{3}` tokens. For each
 - Check that it implements at least one `SBB-NNN` (scan `Implements` field)
 Flag orphan stories (no REQ, no SBB).
 
+**4i — Gap coverage:**
+Scan `engagement.json → direction.gaps[]`. Count entries where `severity` is `Critical` or `High`, `status` is `Open`, and `linkedWorkPackages` is empty or `[]`. If count ≥ 1, add to the Alignment summary: `⚠️ {N} Critical/High gap(s) open with no linked Work Packages — run /ea-gaps trace`. If no `direction.gaps[]` array exists, skip silently.
+
 Summarise as: Fully aligned / Partially aligned / Gaps detected.
 
 ---
@@ -172,6 +175,7 @@ Fix options:
   9. Generate Concerns Register                    — /ea-concerns generate
  11. Generate ADR Register                         — /ea-adrs generate
  12. Create a new ADR                              — /ea-adrs new
+ 13. Review unaddressed gaps                       — /ea-gaps trace
 
 Synchronize:
  10. Sync engagement                               — refresh CLAUDE.md, update lastModified, validate all frontmatter
