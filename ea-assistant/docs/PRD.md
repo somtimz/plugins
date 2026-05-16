@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.52
+**Version:** 0.9.53
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -972,7 +972,32 @@ Dedicated register management commands for three Phase A motivation concepts tha
 | `issues[]` | `domain`, `type`, `severity`, `status` |
 | `problems[]` | `domain`, `type`, `severity`, `status`, `symptom` (was previously free-text; now a required structured field) |
 
-**Phase 2** (separate PR, v0.9.53): `/ea-objectives`, `/ea-strategies`, `/ea-opportunities`
+**Phase 2** (separate PR, v0.9.54): `/ea-objectives`, `/ea-strategies`, `/ea-opportunities`
+
+---
+
+### 5.49 Business Scenarios — TOGAF Phase A Technique (v0.9.53)
+
+New command `/ea-scenarios` and template `templates/business-scenario.md` supporting the TOGAF 10 Business Scenario technique (§25.3.3).
+
+**Command:** `/ea-scenarios [list|new|view|interview|trace|generate] [BS-NNN]`
+
+**New ID prefix:** `BS-NNN` — Business Scenario (Phase A)
+
+**Storage:**
+- Index: `engagement.json → scenarios[]` (id, title, status, phase, path, linkedDrivers, linkedIssues, linkedProblems, linkedGoals, linkedObjectives, requirements, lastModified)
+- Artifact: `artifacts/phase-a/business-scenario-BS-NNN.md`
+- Summary register: `artifacts/cross-cutting/scenarios-register-{YYYY-MM-DD}.md`
+
+**Modes:**
+- `list` — table of all BS-NNN with status, linked drivers/goals, and requirement count
+- `new` — 9-step guided creation through all six TOGAF elements (Problem Statement, Objectives, Environment, Stakeholders, Actors, Requirements) plus Current/Target State narratives and Change Delta; writes artifact from template and indexes in engagement.json
+- `view BS-NNN` — display full scenario artifact with compliance checklist status
+- `interview BS-NNN` — scan for unfilled sections and guide completion question-by-question; updates artifact and index
+- `trace BS-NNN` — walk full upstream (DRV/ISS/PRB) → scenario → downstream (G/OBJ/REQ) motivation chain; orphan detection and broken-link flagging
+- `generate` — produce a Scenarios Summary Register cross-cutting artifact
+
+**Template sections:** (1) Problem Statement with ISS/PRB/DRV links, (2) Objectives table with SMART check, (3) Environment (Internal / External / Technology Context), (4) Stakeholders and Concerns, (5) Actors — §5.1 Human Actors + §5.2 Computing Actors with Existing/To Be Built/To Be Modified status, (6) Requirements (REQ-NNN by domain with source tracing), (7) Current State Narrative with friction points, (8) Target State Narrative with success signals, (9) Change Delta table (Process / Data / Application / Technology), (10) Scenario Diagram (optional Mermaid), Traceability Appendix.
 
 ---
 
