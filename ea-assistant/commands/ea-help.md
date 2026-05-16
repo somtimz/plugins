@@ -85,6 +85,9 @@ You have existing engagements. Common next steps:
 | `/ea-constraints [action]` | Manage architecture constraints — capture, trace, and assess impact on solution space |
 | `/ea-policies [mode]` | Manage architecture policies — capture governance documents, trace to constraints, and assess policy impact |
 | `/ea-drivers [mode]` | Business Driver Register — list, add, update, trace DRV→G→OBJ→STR→WP chain, or generate register |
+| `/ea-goals [mode]` | Goals Register — list, add, update, trace G→OBJ→STR→WP chain, or generate register; Domain + Type classification |
+| `/ea-issues [mode]` | Issues Register — list, add, update, trace ISS→G→GAP chain, or generate register; Domain (incl. Engagement) + Type classification |
+| `/ea-problems [mode]` | Problems Register — list, add, update, trace PRB→OBJ→REQ chain, or generate register; Domain (incl. Engagement) + Type classification |
 | `/ea-gaps [mode]` | Architecture Gap Register — list, add, promote raw gaps to GAP-NNN, update, trace to work packages, or generate register |
 | `/ea-principles [mode]` | Architecture Principles Register — list, add, update, or trace BP/DP/AP/TP-NNN principle entries; `trace` detects ADR and constraint violations |
 | `/ea-abbs [mode]` | Architecture Building Block Register — generate, view, create, or update ABB-NNN entries |

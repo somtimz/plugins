@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.51
+**Version:** 0.9.52
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -940,6 +940,39 @@ Opinionated engagement review from the perspective of a practitioner focused on 
 - **`/ea-open` integration** — if `EA-projects/.git` exists, `/ea-open` appends a Version Control table (branch, remote, last commit, uncommitted file count) to the engagement summary.
 
 **Sliced delivery:** Slice 1 (`/ea-git` command + `/ea-open` integration) is the foundation. Slices 2–4 (PR per artifact review, GitHub Issues sync, GitHub Project board) are separate PRs.
+
+### 5.48 Motivation Concept Registers — Phase 1: Goals, Issues, Problems (v0.9.52)
+
+Dedicated register management commands for three Phase A motivation concepts that previously had no standalone interface. All three follow the `/ea-drivers` pattern (list/add/update/trace/generate) and read/write from `engagement.json → direction.X[]`.
+
+**`/ea-goals` (G-NNN):**
+- List goals grouped by Domain (Business / Technology / Data / Application / Cross-cutting), with Type classification (Strategic / Operational / Capability / Compliance)
+- `add` includes Two-Layers disambiguation check (flags EA-layer goals that belong in Governance Framework, not Architecture Vision) and Objective check (warns if statement contains a measure or deadline, suggesting it should be an Objective instead)
+- `trace` walks: ← DRV-NNN → OBJ-NNN → STR-NNN → WP-NNN
+- `generate` produces `artifacts/cross-cutting/goals-register-{YYYY-MM-DD}.md`
+
+**`/ea-issues` (ISS-NNN):**
+- List issues grouped by Domain (Business / Technology / Data / Application / **Engagement**), with Type classification (Organisational / Process / Technology / Regulatory / Capability)
+- The **Engagement** domain covers issues about the EA engagement itself (methodology, governance, team, tooling) — not an architecture domain, but a first-class classification for engagement health
+- `add` begins with Issue vs Problem disambiguation: *"Is this concern systemic and broad, or specific and fixable?"*; includes specificity check if statement contains individual system names or numbers
+- `trace` walks: ← DRV-NNN (contextual) → threatens G-NNN → feeds GAP-NNN
+- `generate` produces `artifacts/cross-cutting/issues-register-{YYYY-MM-DD}.md`
+
+**`/ea-problems` (PRB-NNN):**
+- List problems grouped by Domain (Business / Technology / Data / Application / **Engagement**), with Type classification (Operational / Technical / Data / Engagement / Compliance)
+- `add` begins with Problem vs Issue disambiguation and systemic check (warns if statement sounds broad rather than specific); requires Observable Symptom field (ideally a number)
+- `trace` walks: ← ISS-NNN (related issues) → blocks OBJ-NNN → generates REQ-NNN
+- `generate` produces `artifacts/cross-cutting/problems-register-{YYYY-MM-DD}.md`
+
+**Engagement.json schema extensions** — new fields added to existing direction arrays:
+
+| Concept | New fields |
+|---|---|
+| `goals[]` | `domain`, `type`, `status` |
+| `issues[]` | `domain`, `type`, `severity`, `status` |
+| `problems[]` | `domain`, `type`, `severity`, `status`, `symptom` (was previously free-text; now a required structured field) |
+
+**Phase 2** (separate PR, v0.9.53): `/ea-objectives`, `/ea-strategies`, `/ea-opportunities`
 
 ---
 
