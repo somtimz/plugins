@@ -79,6 +79,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Tier 4 compliance** — advanced compliance rules for L3+ engagements: economic traceability, decision latency documentation, optionality preservation, fitness function coverage, premature decision detection, evidence quality assessment, political alignment, PAD hygiene, and work package evidence gating; maturity-based enforcement expectations
 - **Ad-hoc note capture** — `/ea-note [text] [--artifact <id>] | resolve <path>` quick-captures notes with Open/Resolved lifecycle from anywhere in the engagement; standalone notes routed to phase folder with classification suggestions; artifact annotations inserted inline or as linked files; `n:` interrupt prefix works during `/ea-interview` and `/ea-grill` without breaking session flow; `/ea-notes list` shows Ad-hoc Notes section with Status column
 - **Git and GitHub integration** — `/ea-git` manages `EA-projects/` as a git repository; `init` creates the repo, `.gitignore`, and optional private GitHub remote via `gh` CLI; `commit` auto-generates contextual messages from changed artifact names; `push`/`sync`/`log`/`remote` for full GitHub workflow; `/ea-open` shows version control status inline
+- **Motivation concept registers** — dedicated register commands for Goals (`/ea-goals`), Issues (`/ea-issues`), and Problems (`/ea-problems`); each with list/add/update/trace/generate modes; Domain + Type classification (Issues and Problems include an Engagement domain for methodology/governance concerns); Issue vs Problem disambiguation on `add`; trace walks the full upstream/downstream motivation chain
 
 ## Prerequisites
 
@@ -180,6 +181,9 @@ uiMode: html
 | `/ea-brief [--focus decisions\|risks\|gaps\|strategy] [--save]` | Synthesised one-page engagement brief — ranked decisions, gaps, risks, open concerns |
 | `/ea-workshop [start\|resume\|export\|list]` | Facilitated multi-stakeholder workshops — WS-NNN minutes, agenda, decisions, actions |
 | `/ea-arb [new\|list\|view\|close]` | ARB meeting minutes — ARB-NNN, quorum, decisions, propagate to ADR register |
+| `/ea-goals [mode]` | Goals Register — list, add, update, trace G→OBJ→STR→WP, or generate register; Domain + Type classification |
+| `/ea-issues [mode]` | Issues Register — list, add, update, trace ISS→G→GAP, or generate register; Domain (incl. Engagement) + Type classification |
+| `/ea-problems [mode]` | Problems Register — list, add, update, trace PRB→OBJ→REQ, or generate register; Domain (incl. Engagement) + Type classification |
 | `/ea-git [init\|status\|commit\|push\|sync\|log\|remote]` | Manage EA-projects/ as a git repository — init, commit, push to GitHub |
 | `/ea-publish` | Merge all artifacts into a consolidated document; compliance pre-check, opted-out and non-standard items flagged |
 | `/ea-config [section]` | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md |
