@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.50
+**Version:** 0.9.51
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -912,6 +912,34 @@ Opinionated engagement review from the perspective of a practitioner focused on 
 - **Engagement direction filter:** loads `engagement.json → direction` and surfaces only goals, objectives, drivers, and strategies relevant to the current phase per a TOGAF ADM intent mapping (Phase A: all goals and drivers; Phase B: capability-linked goals; Phase C: data/app-linked objectives; Phase D: technology-linked objectives; Phase E/F: strategy→WP coverage)
 - **Dynamic question skipping** (interview only): before presenting each question, checks whether the corresponding field already has a non-placeholder value in existing phase artifacts; skips populated fields and reports a count at the start of the session
 - **BRAINSTORM_DATA.subtitle:** set from the first objective in `adm-phase-guide.md` for the resolved phase, prefixed with `"This phase must: "`, rendered as a subtitle in the brainstorm pad header
+
+### 5.47 EA Projects Git and GitHub Integration (`/ea-git`) (v0.9.51)
+
+`/ea-git` manages `EA-projects/` as a git repository, enabling version control and optional GitHub collaboration for EA engagement content.
+
+**Subcommands:**
+
+| Subcommand | Purpose |
+|---|---|
+| `init` | Initialise `EA-projects/` as a git repo; create `.gitignore`; make initial commit; optionally create a private GitHub repo via `gh` CLI |
+| `status` | Show branch, remote, uncommitted changes (grouped by engagement), and last 5 commits |
+| `commit` | Stage all changes; auto-generate a contextual commit message from changed artifact names; confirm, edit, or cancel before committing |
+| `push` | Push committed changes to the GitHub remote |
+| `sync` | Pull with rebase then push — keeps local and remote in sync |
+| `log` | Show commit history (last 20, graph format) |
+| `remote` | View, set, or remove the GitHub remote URL |
+
+**Key design decisions:**
+
+- **Single repo for all engagements** — `EA-projects/` is the repo root; all engagements share one history. This keeps cross-engagement traceability simple and avoids per-engagement repo management overhead.
+- **`EA-projects/.ea-workspace.json`** — repo-level config (gitInitialized, githubRepo, gitRemoteUrl, defaultBranch, createdAt); distinct from per-engagement `engagement.json`.
+- **`git -C EA-projects/` pattern** — all git commands are scoped to the EA workspace; they do not affect any enclosing repo (e.g., the plugin development repo).
+- **Interviews and brainstorm notes are tracked** — all session content is committed by default; privacy managed via GitHub visibility (private repo).
+- **`.gitignore` template** — `templates/seeds/ea-gitignore.md` excludes `uploads/` (large client files), `tmp/`, and generated binary report files by default; `.ea-workspace.json` is tracked.
+- **`gh` CLI integration** — GitHub repo creation uses `gh repo create --source EA-projects/ --remote origin` (no `--push`); the initial commit is made before GitHub operations so the push always has content to send.
+- **`/ea-open` integration** — if `EA-projects/.git` exists, `/ea-open` appends a Version Control table (branch, remote, last commit, uncommitted file count) to the engagement summary.
+
+**Sliced delivery:** Slice 1 (`/ea-git` command + `/ea-open` integration) is the foundation. Slices 2–4 (PR per artifact review, GitHub Issues sync, GitHub Project board) are separate PRs.
 
 ---
 

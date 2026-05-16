@@ -138,6 +138,23 @@ artifacts/cross-cutting/
 ```
 Do not move existing artifact files — file migration is handled explicitly by `/ea-migrate`.
 
+7f. **Display git status** (read-only) — check whether `EA-projects/.git` exists:
+   - **If yes**: run `git -C EA-projects/ status --short` and `git -C EA-projects/ log --oneline -1`. Append to the engagement summary:
+     ```
+     ## Version Control
+
+     | Field | Value |
+     |-------|-------|
+     | Status | {✅ Working tree clean | ⚠️ N uncommitted changes} |
+     | Remote | {gitRemoteUrl from .ea-workspace.json, or "not set"} |
+     | Last commit | {date} — {message} |
+     | Branch | {current branch} |
+     ```
+   - **If no**: append a single notice (do not interrupt the next actions menu):
+     ```
+     ℹ️ Version control not enabled — run /ea-git init to track EA-projects/ in git.
+     ```
+
 7. **Offer next actions:**
 
    ```
