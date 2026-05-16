@@ -78,6 +78,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Political alignment documentation** — records stakeholder pressure and defensible evidence-based positions for high-impact decisions; surfaces in ADR and A3 assessments
 - **Tier 4 compliance** — advanced compliance rules for L3+ engagements: economic traceability, decision latency documentation, optionality preservation, fitness function coverage, premature decision detection, evidence quality assessment, political alignment, PAD hygiene, and work package evidence gating; maturity-based enforcement expectations
 - **Ad-hoc note capture** — `/ea-note [text] [--artifact <id>] | resolve <path>` quick-captures notes with Open/Resolved lifecycle from anywhere in the engagement; standalone notes routed to phase folder with classification suggestions; artifact annotations inserted inline or as linked files; `n:` interrupt prefix works during `/ea-interview` and `/ea-grill` without breaking session flow; `/ea-notes list` shows Ad-hoc Notes section with Status column
+- **Git and GitHub integration** — `/ea-git` manages `EA-projects/` as a git repository; `init` creates the repo, `.gitignore`, and optional private GitHub remote via `gh` CLI; `commit` auto-generates contextual messages from changed artifact names; `push`/`sync`/`log`/`remote` for full GitHub workflow; `/ea-open` shows version control status inline
 
 ## Prerequisites
 
@@ -179,6 +180,7 @@ uiMode: html
 | `/ea-brief [--focus decisions\|risks\|gaps\|strategy] [--save]` | Synthesised one-page engagement brief — ranked decisions, gaps, risks, open concerns |
 | `/ea-workshop [start\|resume\|export\|list]` | Facilitated multi-stakeholder workshops — WS-NNN minutes, agenda, decisions, actions |
 | `/ea-arb [new\|list\|view\|close]` | ARB meeting minutes — ARB-NNN, quorum, decisions, propagate to ADR register |
+| `/ea-git [init\|status\|commit\|push\|sync\|log\|remote]` | Manage EA-projects/ as a git repository — init, commit, push to GitHub |
 | `/ea-publish` | Merge all artifacts into a consolidated document; compliance pre-check, opted-out and non-standard items flagged |
 | `/ea-config [section]` | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md |
 | `/ea-help` | Getting-started guide, full command reference, and interview shortcuts |

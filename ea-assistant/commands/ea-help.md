@@ -108,6 +108,7 @@ You have existing engagements. Common next steps:
 | `/ea-security-review` | Security audit — SABSA, ISO 27001, and NIST CSF 2.0 coverage across the engagement or a single artifact |
 | `/ea-migrate [--report\|--reorganize]` | Align legacy engagement to current plugin version conventions; `--reorganize` moves flat-path artifacts into correct phase subfolders |
 | `/ea-publish` | Merge artifacts into a consolidated report |
+| `/ea-git [init\|status\|commit\|push\|sync\|log\|remote]` | Manage EA-projects/ as a git repository — init, commit, push to GitHub |
 | `/ea-brief [--focus decisions\|risks\|gaps\|strategy] [--save]` | Synthesized one-page engagement brief — ranked decisions, gaps, risks, open concerns |
 | `/ea-workshop [start\|resume\|export\|list]` | Facilitated multi-stakeholder workshops — WS-NNN minutes, agenda, decisions, actions |
 | `/ea-arb [new\|list\|view\|close]` | ARB meeting minutes — ARB-NNN, quorum, decisions, propagate to ADR register |
