@@ -80,6 +80,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Ad-hoc note capture** — `/ea-note [text] [--artifact <id>] | resolve <path>` quick-captures notes with Open/Resolved lifecycle from anywhere in the engagement; standalone notes routed to phase folder with classification suggestions; artifact annotations inserted inline or as linked files; `n:` interrupt prefix works during `/ea-interview` and `/ea-grill` without breaking session flow; `/ea-notes list` shows Ad-hoc Notes section with Status column
 - **Git and GitHub integration** — `/ea-git` manages `EA-projects/` as a git repository; `init` creates the repo, `.gitignore`, and optional private GitHub remote via `gh` CLI; `commit` auto-generates contextual messages from changed artifact names; `push`/`sync`/`log`/`remote` for full GitHub workflow; `/ea-open` shows version control status inline
 - **Motivation concept registers** — dedicated register commands for Goals (`/ea-goals`), Issues (`/ea-issues`), and Problems (`/ea-problems`); each with list/add/update/trace/generate modes; Domain + Type classification (Issues and Problems include an Engagement domain for methodology/governance concerns); Issue vs Problem disambiguation on `add`; trace walks the full upstream/downstream motivation chain
+- **Business Scenarios** — `/ea-scenarios` manages TOGAF Phase A Business Scenarios (BS-NNN) with guided `new` mode through all six TOGAF elements (Problem Statement, Objectives, Environment, Stakeholders, Actors, Requirements) plus Current/Target State narratives and Change Delta; `interview` mode completes existing scenarios; `trace` walks the full motivation chain from drivers/issues/problems through the scenario to goals, objectives, and generated requirements; generates a Scenarios Summary Register
 
 ## Prerequisites
 
@@ -158,6 +159,7 @@ uiMode: html
 | `/ea-constraints [action]` | Manage architecture constraints — capture, view, trace to artifacts, and assess impact on solution space |
 | `/ea-policies [mode]` | Manage architecture policies — capture governance documents, trace to constraints, and assess policy impact |
 | `/ea-drivers [mode]` | Business Driver Register — list, add, update, trace DRV→G→OBJ→STR→WP chain, or generate register |
+| `/ea-scenarios [mode]` | Business Scenario Register — list, create, interview, trace, and generate Phase A scenario artifacts (BS-NNN) |
 | `/ea-gaps [mode]` | Architecture Gap Register — list, add, promote raw gaps to GAP-NNN, update, trace to work packages, or generate register |
 | `/ea-principles [mode]` | Manage architecture principles (BP/DP/AP/TP-NNN) — list, add, update, or trace; violation detection flags ADRs that contradict active principles |
 | `/ea-abbs [mode]` | Architecture Building Block Register — generate, view, create, or update ABB-NNN entries; modes: generate, status, new, update |

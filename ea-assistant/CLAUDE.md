@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.52 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.53 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -35,8 +35,8 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 
 ## Command Reference
 
-46 commands available — run `/ea-help` for the full table with agent assignments.
-Key entry points: `/ea-new` · `/ea-open` · `/ea-interview` · `/ea-grill` · `/ea-generate` · `/ea-status` · `/ea-brief` · `/ea-lens` · `/ea-git` · `/ea-goals` · `/ea-issues` · `/ea-problems`
+47 commands available — run `/ea-help` for the full table with agent assignments.
+Key entry points: `/ea-new` · `/ea-open` · `/ea-interview` · `/ea-grill` · `/ea-generate` · `/ea-status` · `/ea-brief` · `/ea-lens` · `/ea-git` · `/ea-goals` · `/ea-issues` · `/ea-problems` · `/ea-scenarios`
 
 ---
 
@@ -137,6 +137,7 @@ These are loaded automatically by `/ea-grill --skill practitioner|maturity|failu
 | VS-NNN | Value Stream | VS-001 |
 | UC-NNN | Use Case | UC-001 |
 | PAD-NNN | Pending Architecture Decision | PAD-001 |
+| BS-NNN | Business Scenario (Phase A) | BS-001 |
 | WS-NNN | Workshop Minutes | WS-001 |
 | ARB-NNN | Architecture Review Board Meeting | ARB-001 |
 | ACR-NNN | Architecture Change Request | ACR-001 |
