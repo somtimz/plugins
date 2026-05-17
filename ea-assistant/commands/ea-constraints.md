@@ -39,7 +39,7 @@ This command aggregates all `CST-NNN` entries from across the engagement into a 
 
 ## Mode: `list` (default)
 
-1. Read `EA-projects/{slug}/constraints/constraints.md` (human-readable register) and `constraints-index.json`.
+1. Read `EA-projects/{slug}/artifacts/cross-cutting/governance/constraints-register.md` (human-readable register) and `constraints-index.json`.
 2. Render a summary table grouped by Type:
 
 ```
@@ -64,7 +64,7 @@ Detail Files:  {N} CST-NNN(s) with detail files  |  {N} open issues across all c
 
 Invoked as: `/ea-constraints add`
 
-1. Locate the existing register in `EA-projects/{slug}/constraints/constraints.md`. If none exists, create a minimal register from the template with this constraint as the first entry.
+1. Locate the existing register in `EA-projects/{slug}/artifacts/cross-cutting/governance/constraints-register.md`. If none exists, create a minimal register from the template with this constraint as the first entry.
 2. Assign the next available `CST-NNN` ID (increment from the highest existing ID).
 3. Prompt for each field in sequence (all required unless noted):
 
@@ -123,7 +123,7 @@ Invoked as: `/ea-constraints update CST-NNN <field> <value>`
    - Removing all `linkedArtifacts` → warn: "This constraint will have no artifact linkage. Continue? (y/n)"
 4. Show proposed change: `"CST-NNN: {field} — '{old}' → '{new}'"`
 5. Ask: `"Apply? (y/n)"`
-6. On confirm: update the register and `constraints-index.json`, set `lastModified: today`.
+6. On confirm: update `artifacts/cross-cutting/governance/constraints-register.md` and `constraints-index.json`, set `lastModified: today`.
 7. Confirm: `"Updated CST-NNN: {field} set to '{new_value}'."`
 
 ---
