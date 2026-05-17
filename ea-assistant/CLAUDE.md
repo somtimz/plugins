@@ -151,6 +151,9 @@ These are loaded automatically by `/ea-grill --skill practitioner|maturity|failu
 | DP-NNN | Data Principle | DP-001 |
 | AP-NNN | Application Principle | AP-001 |
 | TP-NNN | Technology Principle | TP-001 |
+| VDR-NNN | Vendor Landscape entry (Architecture Repository) | VDR-001 |
+| THR-NNN | Technology Horizon entry (Architecture Repository) | THR-001 |
+| STD-NNN | Standards Information Base entry (Architecture Repository) | STD-001 |
 
 **Do not use domain-prefixed IDs** (BG-/DG-/AG-/TG- etc.) — the scheme is unified and domain-agnostic. **Exception:** Architecture Principles use the TOGAF-standard four-domain prefixes (BP/DP/AP/TP) because the principle domain is itself a first-class classification, not a field-level qualifier.
 
