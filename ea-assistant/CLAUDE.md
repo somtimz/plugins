@@ -63,8 +63,12 @@ EA-projects/{slug}/
 │   │   └── notes/            # interviews/, brainstorm/, reviews/ for this phase
 │   ├── phase-h/              # Phase H: Change Request
 │   │   └── notes/
-│   ├── cross-cutting/        # Risk Register, Decision Register, ADR Register, Zachman, Constraints Register
-│   │   └── notes/            # unscoped notes (no active phase)
+│   ├── cross-cutting/        # Cross-cutting registers (organized by purpose)
+│   │   ├── governance/       # ADR Register, Decision Register, Constraints, Policies
+│   │   ├── operations/       # Risk Register, Change Register, Concerns
+│   │   ├── context/          # Zachman Diagram, Role Catalogue
+│   │   ├── notes/            # unscoped notes (no active phase)
+│   │   └── cross-cutting-index.md  # navigation hub
 │   └── details/              # per-item detail files (linked from artifact tables: ../details/{ID}.md)
 ├── diagrams/                 # .mmd, .dot, .drawio, .png, .svg
 ├── uploads/                  # source documents for ingestion

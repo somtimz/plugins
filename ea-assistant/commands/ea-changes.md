@@ -82,8 +82,8 @@ Invoked as: `/ea-changes update ACR-001 status "Approved"`
 ### Step 3 — Scan Change Request Artifacts
 
 Find all files matching:
-- `EA-projects/{slug}/artifacts/change-request-*.md`
-- `EA-projects/{slug}/artifacts/change-request.md`
+- `EA-projects/{slug}/artifacts/cross-cutting/operations/change-request-*.md`
+- `EA-projects/{slug}/artifacts/cross-cutting/operations/change-request.md`
 
 For each file, extract:
 - **ACR ID** — from `**Change Request ID:**` field
@@ -142,7 +142,7 @@ Organise the filtered ACRs into sections:
 
 Write the register to:
 ```
-EA-projects/{slug}/artifacts/change-register-{YYYY-MM-DD}.md
+EA-projects/{slug}/artifacts/cross-cutting/operations/change-register-{YYYY-MM-DD}.md
 ```
 
 Use the `change-register.md` template. Populate all sections from the collected data. Set:
@@ -154,7 +154,7 @@ Add an entry to `engagement.json → artifacts[]`:
 ```json
 {
   "name": "Change Register",
-  "file": "change-register-{YYYY-MM-DD}.md",
+  "file": "artifacts/cross-cutting/operations/change-register-{YYYY-MM-DD}.md",
   "phase": "H",
   "status": "Draft",
   "reviewStatus": "Not Reviewed"
@@ -166,7 +166,7 @@ If a change register already exists, overwrite it (registers are regenerated, no
 
 ### Step 7 — Report
 
-Confirm: "Change Register written to `artifacts/change-register-{YYYY-MM-DD}.md`. {N} change requests — {N} open, {N} approved, {N} rejected, {N} deferred."
+Confirm: "Change Register written to `artifacts/cross-cutting/operations/change-register-{YYYY-MM-DD}.md`. {N} change requests — {N} open, {N} approved, {N} rejected, {N} deferred."
 
 Offer:
 ```

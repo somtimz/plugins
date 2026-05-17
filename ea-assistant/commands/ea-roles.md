@@ -56,9 +56,9 @@ Generate a Role Catalogue artifact in the active engagement:
 1. Confirm the active engagement is loaded (if not, prompt `/ea-open` first)
 2. Read `templates/role-catalogue.md`
 3. Substitute `{{engagement_name}}`, `{{organisation}}`, and `{{YYYY-MM-DD}}`
-4. Write to `EA-projects/{slug}/artifacts/phase-a/role-catalogue.md`
+4. Write to `EA-projects/{slug}/artifacts/cross-cutting/context/role-catalogue.md`
 5. Register the artifact in `engagement.json` under `artifacts` with `status: Draft`
-6. Confirm: "Role Catalogue created at `artifacts/phase-a/role-catalogue.md`. Use `/ea-roles --update ROLE-NNN` to assign named individuals, or open the file directly."
+6. Confirm: "Role Catalogue created at `artifacts/cross-cutting/context/role-catalogue.md`. Use `/ea-roles --update ROLE-NNN` to assign named individuals, or open the file directly."
 
 If a role-catalogue artifact already exists for this engagement, ask before overwriting.
 
@@ -66,7 +66,7 @@ If a role-catalogue artifact already exists for this engagement, ask before over
 
 Interactively assign a named individual and organisation to a role in the active engagement's Role Catalogue:
 
-1. Read `EA-projects/{slug}/artifacts/phase-a/role-catalogue.md`
+1. Read `EA-projects/{slug}/artifacts/cross-cutting/context/role-catalogue.md`
 2. Find the row for `<ROLE-ID>`
 3. Prompt: "Who is assigned to [Role Name] (ROLE-NNN)? Enter name:"
 4. Prompt: "Organisation unit:"

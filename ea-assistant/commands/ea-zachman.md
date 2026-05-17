@@ -38,7 +38,7 @@ Scans all artifacts, extracts content per cell, writes a populated Zachman Diagr
    - Replace `{{placeholder}}` frontmatter tokens from `engagement.json`
    - Populate Coverage Summary table and cell sections with extracted content (bullet lists) and source references
    - Populate Gap Analysis table (see `gap` mode rules below)
-   - Write to: `EA-projects/{slug}/artifacts/zachman-diagram-{YYYY-MM-DD}.md`
+   - Write to: `EA-projects/{slug}/artifacts/cross-cutting/context/zachman-diagram-{YYYY-MM-DD}.md`
    - Register in `engagement.json → artifacts[]`
 4. Confirm: `"Zachman Diagram written: {N} cells populated (✅ {N} / ⚠️ {N} / ❌ {N})"` then offer: review, see gaps, fill empty cells, done
 5. Ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-status.md (the --next flag section)` and output the recommendation.

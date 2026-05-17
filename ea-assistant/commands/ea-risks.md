@@ -86,7 +86,7 @@ Sources:      {N} artifacts scanned, {N} contained risks
 
 Invoked as: `/ea-risks update RIS-NNN <field> <value>`
 
-1. Locate the existing risk register file in `EA-projects/{slug}/artifacts/risk-register-*.md`.
+1. Locate the existing risk register file in `EA-projects/{slug}/artifacts/cross-cutting/operations/risk-register-*.md`.
    - If multiple versions exist, use the most recent.
    - If none exists, prompt: "No risk register found. Run `/ea-risks` to generate one first."
 2. Find the `RIS-NNN` section in the file.
@@ -112,7 +112,7 @@ Invoked as: `/ea-risks add`
 
 Captures a new risk interactively and writes it to the existing risk register. Does not regenerate the full register.
 
-1. Locate the existing risk register in `EA-projects/{slug}/artifacts/risk-register-*.md` (most recent). If none exists, create a minimal register file using the template with this risk as the first entry.
+1. Locate the existing risk register in `EA-projects/{slug}/artifacts/cross-cutting/operations/risk-register-*.md` (most recent). If none exists, create a minimal register file using the template with this risk as the first entry.
 2. Assign the next available RIS-NNN ID (increment from the highest existing ID).
 3. Prompt for each field in sequence (all required unless noted):
    ```
@@ -253,7 +253,7 @@ Ask the user:
 >
 > Press Enter or type **1** for Markdown.
 
-- **Option 1** — Write to `EA-projects/{slug}/artifacts/risk-register-{YYYY-MM-DD}.md`. Register in `engagement.json` with `phase: "All"`, `status: "Draft"`. If a risk register for today already exists, append `-v2`, `-v3` etc. Display a brief confirmation with counts.
+- **Option 1** — Write to `EA-projects/{slug}/artifacts/cross-cutting/operations/risk-register-{YYYY-MM-DD}.md`. Register in `engagement.json` with `phase: "All"`, `status: "Draft"`. If a risk register for today already exists, append `-v2`, `-v3` etc. Display a brief confirmation with counts.
 - **Option 2** — Write the `.md` file first (same as Option 1), then load the `ea-generation` skill and export to `.docx`.
 - **Option 3** — Output the Summary and Critical + High risk tables inline only. Do not write any file.
 

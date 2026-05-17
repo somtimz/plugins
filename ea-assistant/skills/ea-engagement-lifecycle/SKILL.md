@@ -30,8 +30,12 @@ EA-projects/
 │   │   ├── phase-f/                 # Phase F: Migration Plan
 │   │   ├── phase-g/                 # Phase G: Architecture Contract, Compliance Assessment
 │   │   ├── phase-h/                 # Phase H: Change Request
-│   │   └── cross-cutting/           # Risk Register, Decision Register, ADR Register, Zachman
-│   │       └── notes/               # unscoped notes (no active phase)
+│   │   └── cross-cutting/           # Cross-cutting: registers and context artifacts
+│   │       ├── governance/          # ADR Register, Decision Register, Constraints, Policies, Principles
+│   │       ├── operations/          # Risk Register, Change Register, Stakeholder Concerns
+│   │       ├── context/             # Zachman Diagram, Role Catalogue
+│   │       ├── notes/               # unscoped notes (no active phase)
+│   │       └── cross-cutting-index.md  # navigation hub — links to all cross-cutting artifacts
 │   ├── diagrams/
 │   ├── uploads/
 │   └── ResearchAndReferences/
@@ -62,7 +66,9 @@ Use `/ea-notes` to list, view, edit, or delete notes across all phases.
 | `F` | `artifacts/phase-f/` | Migration Plan |
 | `G` | `artifacts/phase-g/` | Architecture Contract, Compliance Assessment, Implementation Governance Plan |
 | `H` | `artifacts/phase-h/` | Change Request |
-| `All` or `cross-cutting` | `artifacts/cross-cutting/` | Risk Register, Decision Register, ADR Register, Zachman Diagram |
+| `All` or `cross-cutting` — governance | `artifacts/cross-cutting/governance/` | ADR Register, Decision Register, Architecture Principles (cross-cutting), Constraints Register, Policies Register |
+| `All` or `cross-cutting` — operations | `artifacts/cross-cutting/operations/` | Risk Register, Change Register, Stakeholder Concerns |
+| `All` or `cross-cutting` — context | `artifacts/cross-cutting/context/` | Zachman Diagram, Role Catalogue |
 | `{{phase}}` | resolve from `engagement.json → currentPhase` at creation time | Gap Analysis, ADRs |
 
 ### Artifact Link Conventions

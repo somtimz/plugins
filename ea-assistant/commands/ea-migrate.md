@@ -63,6 +63,27 @@ GAP-M-{NNN}  [Info]  {ID} ({type}, {priority/rating}) — no detail file
 
 **Remediation for 3g:** Create stub detail files (frontmatter + empty section headers only, no content) for selected items. Stubs use `templates/item-detail.md` with placeholders replaced from source table data. The user can then populate them at any time with `/ea-detail view {ID}`.
 
+**3h — Cross-cutting sub-folder structure**
+
+Scan `EA-projects/{slug}/artifacts/cross-cutting/` (flat level only — not recursing into sub-folders) for `.md` files that should live in a sub-folder. Match by filename pattern:
+
+| Pattern | Target sub-folder |
+|---|---|
+| `adr-*.md`, `adr-register-*.md`, `decision-register-*.md`, `constraints-register-*.md`, `policies-register-*.md` | `governance/` |
+| `risk-register-*.md`, `concerns-register-*.md`, `change-register-*.md`, `change-request-*.md` | `operations/` |
+| `zachman-diagram-*.md`, `role-catalogue.md` | `context/` |
+
+For each misplaced file found, report:
+
+```
+GAP-M-{NNN}  [Medium]  {filename} is in cross-cutting/ root — should be in cross-cutting/{sub-folder}/
+             Suggested: run /ea-migrate --reorganize to move it
+```
+
+Also check `engagement.json → artifacts[]`: if any `file` path contains `artifacts/cross-cutting/{filename}` (flat, no sub-folder), flag as needing path update.
+
+**Remediation for 3h:** Move the files to their target sub-folders (creating the sub-folder if needed) and update `engagement.json → artifacts[]` file paths to match. Handled by `/ea-migrate --reorganize`.
+
 Track each gap found with: gap ID (GAP-M-NNN), type, affected file, severity, proposed remediation.
 
 ---
@@ -222,9 +243,16 @@ Additional flags:
    - Move the file: `mv EA-projects/{slug}/artifacts/{artifact-id}.md EA-projects/{slug}/artifacts/{phase-folder}/{artifact-id}.md`
    - Update the `file` field in `engagement.json → artifacts[]` for this artifact to the new path
 
-5. **Finalise.** Update `engagement.json` `lastModified` to now. Print a summary:
+5. **Move cross-cutting sub-folder artifacts.** After phase-folder moves, scan for GAP-M-3h items (flat cross-cutting files). For each:
+   - Present the move: `"Move artifacts/cross-cutting/{file} → artifacts/cross-cutting/{sub-folder}/{file}? (y/n/all/quit)"`
+   - On confirm: create sub-folder if needed, move the file, update `engagement.json → artifacts[]` path.
+
+6. **Seed cross-cutting-index.md** if it does not exist. If `artifacts/cross-cutting/cross-cutting-index.md` is missing, create it from `templates/cross-cutting-index.md` with `engagement_name` substituted. Register in `engagement.json → artifacts[]`.
+
+7. **Finalise.** Update `engagement.json` `lastModified` to now. Print a summary:
    ```
-   Moved:      {N} artifacts
-   Skipped:    {N} artifacts
-   Unmappable: {N} artifacts (set phase: frontmatter and re-run)
+   Moved to phase folders:        {N} artifacts
+   Moved to cross-cutting subs:   {N} artifacts
+   Skipped:                       {N} artifacts
+   Unmappable:                    {N} artifacts (set phase: frontmatter and re-run)
    ```

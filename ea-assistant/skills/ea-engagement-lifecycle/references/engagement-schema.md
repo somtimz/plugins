@@ -169,6 +169,18 @@ Review status: `Not Reviewed` | `In Review` | `Approved` | `Needs Revision`
 - Opt-outs accumulate across sessions; never auto-removed
 - Removal permitted only via `/ea-config optouts`
 
+## Cross-cutting Artifact Paths
+
+Cross-cutting artifacts are organized into three sub-folders under `artifacts/cross-cutting/`:
+
+| Sub-folder | Artifacts stored |
+|---|---|
+| `artifacts/cross-cutting/governance/` | ADR Register, Decision Register, Architecture Principles (cross-cutting), Constraints Register, Policies Register |
+| `artifacts/cross-cutting/operations/` | Risk Register, Change Register, Stakeholder Concerns |
+| `artifacts/cross-cutting/context/` | Zachman Diagram, Role Catalogue |
+
+The `cross-cutting-index.md` file at `artifacts/cross-cutting/cross-cutting-index.md` is a navigation hub linking to all cross-cutting artifacts. It is created on first use and updated whenever a new cross-cutting artifact is registered.
+
 ## Decision Register Entry Schema
 
 Multiple decision registers may exist (one per generation date):
@@ -178,8 +190,8 @@ Multiple decision registers may exist (one per generation date):
   "id": "decision-register-{YYYY-MM-DD}",
   "name": "Decision Register ({YYYY-MM-DD})",
   "phase": "All",
-  "file": "artifacts/decision-register-{YYYY-MM-DD}.md",
-  "reviewFile": "artifacts/decision-register-{YYYY-MM-DD}.review.md",
+  "file": "artifacts/cross-cutting/governance/decision-register-{YYYY-MM-DD}.md",
+  "reviewFile": "artifacts/cross-cutting/governance/decision-register-{YYYY-MM-DD}.review.md",
   "status": "Draft",
   "createdAt": "{ISO 8601}",
   "lastModified": "{ISO 8601}",
