@@ -16,6 +16,7 @@
   "requirementsRepoPath": "",
   "pluginVersion": "",
   "lastMigratedVersion": "",
+  "repoPath": null,
   "lastModified": "",
   "direction": {
     "vision": "",

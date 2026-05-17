@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.53 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.54 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -63,8 +63,12 @@ EA-projects/{slug}/
 │   │   └── notes/            # interviews/, brainstorm/, reviews/ for this phase
 │   ├── phase-h/              # Phase H: Change Request
 │   │   └── notes/
-│   ├── cross-cutting/        # Risk Register, Decision Register, ADR Register, Zachman, Constraints Register
-│   │   └── notes/            # unscoped notes (no active phase)
+│   ├── cross-cutting/        # Cross-cutting registers (organized by purpose)
+│   │   ├── governance/       # ADR Register, Decision Register, Constraints, Policies
+│   │   ├── operations/       # Risk Register, Change Register, Concerns
+│   │   ├── context/          # Zachman Diagram, Role Catalogue
+│   │   ├── notes/            # unscoped notes (no active phase)
+│   │   └── cross-cutting-index.md  # navigation hub
 │   └── details/              # per-item detail files (linked from artifact tables: ../details/{ID}.md)
 ├── diagrams/                 # .mmd, .dot, .drawio, .png, .svg
 ├── uploads/                  # source documents for ingestion
@@ -151,6 +155,9 @@ These are loaded automatically by `/ea-grill --skill practitioner|maturity|failu
 | DP-NNN | Data Principle | DP-001 |
 | AP-NNN | Application Principle | AP-001 |
 | TP-NNN | Technology Principle | TP-001 |
+| VDR-NNN | Vendor Landscape entry (Architecture Repository) | VDR-001 |
+| THR-NNN | Technology Horizon entry (Architecture Repository) | THR-001 |
+| STD-NNN | Standards Information Base entry (Architecture Repository) | STD-001 |
 
 **Do not use domain-prefixed IDs** (BG-/DG-/AG-/TG- etc.) — the scheme is unified and domain-agnostic. **Exception:** Architecture Principles use the TOGAF-standard four-domain prefixes (BP/DP/AP/TP) because the principle domain is itself a first-class classification, not a field-level qualifier.
 

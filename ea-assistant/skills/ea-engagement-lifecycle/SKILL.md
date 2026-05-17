@@ -1,7 +1,7 @@
 ---
 name: ea-engagement-lifecycle
 description: This skill should be used when the user asks to "start an EA engagement", "manage an EA project", "set up a new architecture engagement", "what phase are we in", "advance the ADM", "continue the engagement", "resume an EA project", or when working within any TOGAF ADM phase. Provides end-to-end lifecycle guidance for Enterprise Architecture engagements using TOGAF 10 as the backbone.
-version: 0.9.41
+version: 0.9.54
 ---
 
 # EA Engagement Lifecycle
@@ -30,8 +30,12 @@ EA-projects/
 │   │   ├── phase-f/                 # Phase F: Migration Plan
 │   │   ├── phase-g/                 # Phase G: Architecture Contract, Compliance Assessment
 │   │   ├── phase-h/                 # Phase H: Change Request
-│   │   └── cross-cutting/           # Risk Register, Decision Register, ADR Register, Zachman
-│   │       └── notes/               # unscoped notes (no active phase)
+│   │   └── cross-cutting/           # Cross-cutting: registers and context artifacts
+│   │       ├── governance/          # ADR Register, Decision Register, Constraints, Policies, Principles
+│   │       ├── operations/          # Risk Register, Change Register, Stakeholder Concerns
+│   │       ├── context/             # Zachman Diagram, Role Catalogue
+│   │       ├── notes/               # unscoped notes (no active phase)
+│   │       └── cross-cutting-index.md  # navigation hub — links to all cross-cutting artifacts
 │   ├── diagrams/
 │   ├── uploads/
 │   └── ResearchAndReferences/
@@ -62,7 +66,9 @@ Use `/ea-notes` to list, view, edit, or delete notes across all phases.
 | `F` | `artifacts/phase-f/` | Migration Plan |
 | `G` | `artifacts/phase-g/` | Architecture Contract, Compliance Assessment, Implementation Governance Plan |
 | `H` | `artifacts/phase-h/` | Change Request |
-| `All` or `cross-cutting` | `artifacts/cross-cutting/` | Risk Register, Decision Register, ADR Register, Zachman Diagram |
+| `All` or `cross-cutting` — governance | `artifacts/cross-cutting/governance/` | ADR Register, Decision Register, Architecture Principles (cross-cutting), Constraints Register, Policies Register |
+| `All` or `cross-cutting` — operations | `artifacts/cross-cutting/operations/` | Risk Register, Change Register, Stakeholder Concerns |
+| `All` or `cross-cutting` — context | `artifacts/cross-cutting/context/` | Zachman Diagram, Role Catalogue |
 | `{{phase}}` | resolve from `engagement.json → currentPhase` at creation time | Gap Analysis, ADRs |
 
 ### Artifact Link Conventions
@@ -182,6 +188,18 @@ Load `references/landscape-levels.md` when:
 - An artifact is being created or populated — check the Depth Expectation Matrix before starting
 
 **Fallback rule:** When `architectureLevel` is `null` or absent in an existing engagement, treat it as `Segment` for artifact depth purposes. This is non-blocking. At the next `/ea-config` interaction, prompt the user to set it via `Section 6 — Engagement Metadata`.
+
+## Architecture Repository
+
+Engagements can optionally link to a shared Architecture Repository at the workspace level. When linked, `engagement.json → repoPath` is set to `"../../Architecture-Repository"` (relative from `EA-Projects/<slug>/`).
+
+The linked repository provides:
+- Standards Information Base (STD-NNN) — mandatory/recommended standards surfaced during phase interviews
+- Vendor Landscape Register (VDR-NNN) — vendor context surfaced in `/ea-sbbs` and `/ea-adrs`
+- Technology Horizon Register (THR-NNN) — technology radar surfaced during Phase D
+
+Use `/ea-repo link <slug>` to link an engagement, or `/ea-new` inside an EA-Workspace to auto-link.
+See skill `ea-architecture-repository` for full details.
 
 ## Write Protocol
 

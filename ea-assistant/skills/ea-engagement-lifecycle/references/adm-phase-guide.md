@@ -24,7 +24,8 @@ This guide provides a concise but complete reference for each phase of the TOGAF
 4. Identify and establish Architecture Principles.
 5. Select and implement architecture tooling.
 6. Define the Architecture Repository structure.
-7. Finalise and publish the Architecture Governance framework.
+7. **Link to shared Architecture Repository (if applicable):** If an organisation-wide Architecture Repository exists at `EA-Workspace/Architecture-Repository/`, run `/ea-repo link <slug>` to connect this engagement. The linked repository provides STD, VDR, and THR context during Phases B–D. If running `/ea-new` inside an EA-Workspace, this link is set automatically.
+8. Finalise and publish the Architecture Governance framework.
 
 ### Key Questions
 - What is the enterprise scope for architecture work?
@@ -329,6 +330,10 @@ This guide provides a concise but complete reference for each phase of the TOGAF
 - Outputs of Phases B and C
 - Technology standards and constraints (e.g., approved platform list)
 - Infrastructure inventory
+- **Architecture Repository inputs (if `repoPath` set in `engagement.json`):**
+  - Technology Horizon Register (THR): surface entries with ring = Adopt or Trial as candidate SBBs
+  - Vendor Landscape Register (VDR): surface active vendors with linked ABBs as SBB mapping context
+  - Standards Information Base (STD): surface mandatory standards with `applicableDomains` including Technology as compliance constraints
 
 ### Major Steps
 1. Select reference models, viewpoints, and tools.

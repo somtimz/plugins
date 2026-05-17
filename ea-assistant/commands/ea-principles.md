@@ -65,7 +65,7 @@ Read `artifacts/preliminary/architecture-principles.md`. Render a summary view:
 ...
 ```
 
-After the table, scan `artifacts/cross-cutting/` for constraint and ADR register files. Check each constraint's `Source` field and each ADR's body for any principle ID reference. Flag any principle with zero references as "⚠️ Unreferenced — no constraints or ADRs cite this principle yet."
+After the table, scan `artifacts/cross-cutting/governance/` for constraint and ADR register files. Check each constraint's `Source` field and each ADR's body for any principle ID reference. Flag any principle with zero references as "⚠️ Unreferenced — no constraints or ADRs cite this principle yet."
 
 Load `skills/ea-principles-management/SKILL.md` for violation detection logic (Section 4).
 

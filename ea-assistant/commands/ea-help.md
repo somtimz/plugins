@@ -89,6 +89,10 @@ You have existing engagements. Common next steps:
 | `/ea-issues [mode]` | Issues Register — list, add, update, trace ISS→G→GAP chain, or generate register; Domain (incl. Engagement) + Type classification |
 | `/ea-problems [mode]` | Problems Register — list, add, update, trace PRB→OBJ→REQ chain, or generate register; Domain (incl. Engagement) + Type classification |
 | `/ea-scenarios [mode]` | Business Scenario Register — list, create, interview, trace, and generate Phase A scenario artifacts (BS-NNN) |
+| `/ea-repo [init\|link\|status\|open]` | Architecture Repository — initialize EA-Workspace, link engagements to the shared repo, view status |
+| `/ea-vendors [list\|add\|update\|link-sbb\|archive]` | Vendor Landscape Register — manage VDR-NNN org-wide vendor assessments with roadmap and lock-in tracking |
+| `/ea-horizon [list\|add\|update\|surface\|link-adr]` | Technology Horizon Register — manage THR-NNN technology radar with Adopt/Trial/Assess/Hold ring model |
+| `/ea-standards [list\|add\|link-constraint\|surface]` | Standards Information Base — manage STD-NNN industry/regulatory standards with adoption status |
 | `/ea-gaps [mode]` | Architecture Gap Register — list, add, promote raw gaps to GAP-NNN, update, trace to work packages, or generate register |
 | `/ea-principles [mode]` | Architecture Principles Register — list, add, update, or trace BP/DP/AP/TP-NNN principle entries; `trace` detects ADR and constraint violations |
 | `/ea-abbs [mode]` | Architecture Building Block Register — generate, view, create, or update ABB-NNN entries |

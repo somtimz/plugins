@@ -21,6 +21,7 @@
   "lastModified": "YYYY-MM-DDTHH:MM:SSZ",
   "pluginVersion": "0.9.5",
   "lastMigratedVersion": "0.9.5",
+  "repoPath": null,
   "direction": {
     "vision": "",
     "mission": "",
@@ -127,6 +128,9 @@
 - `lastMigratedVersion` — version at which `/ea-migrate` last ran successfully; absent until first migration → treat as `"0.0.0"`
 - `templateVersion` on artifacts — plugin version when the artifact was created or last migrated; absent in pre-v0.9.5 → treat as `"0.0.0"`
 
+**v0.9.54 fields**:
+- `repoPath` — relative path to the shared `Architecture-Repository/` directory. Always `"../../Architecture-Repository"` when set (from `EA-Projects/<slug>/`). `null` if no Architecture Repository is linked. Set via `/ea-repo link` or auto-set by `/ea-new` when an EA-Workspace is detected. Absent in legacy engagements → treat as `null`.
+
 **v0.9.31 fields** — absent in legacy engagements; treat as `null` / defaults if missing:
 - `architectureLevel` — Architecture landscape level classification; allowed values: `Strategic`, `Segment`, `Capability`, `Solution`; defaults to `null` in legacy engagements. When `null` or absent, treat as `Segment` for artifact depth and governance forum purposes — this is non-blocking and the plugin continues to operate normally. Prompt the user to set it at the next `/ea-config metadata` interaction.
 
@@ -165,6 +169,18 @@ Review status: `Not Reviewed` | `In Review` | `Approved` | `Needs Revision`
 - Opt-outs accumulate across sessions; never auto-removed
 - Removal permitted only via `/ea-config optouts`
 
+## Cross-cutting Artifact Paths
+
+Cross-cutting artifacts are organized into three sub-folders under `artifacts/cross-cutting/`:
+
+| Sub-folder | Artifacts stored |
+|---|---|
+| `artifacts/cross-cutting/governance/` | ADR Register, Decision Register, Architecture Principles (cross-cutting), Constraints Register, Policies Register |
+| `artifacts/cross-cutting/operations/` | Risk Register, Change Register, Stakeholder Concerns |
+| `artifacts/cross-cutting/context/` | Zachman Diagram, Role Catalogue |
+
+The `cross-cutting-index.md` file at `artifacts/cross-cutting/cross-cutting-index.md` is a navigation hub linking to all cross-cutting artifacts. It is created on first use and updated whenever a new cross-cutting artifact is registered.
+
 ## Decision Register Entry Schema
 
 Multiple decision registers may exist (one per generation date):
@@ -174,8 +190,8 @@ Multiple decision registers may exist (one per generation date):
   "id": "decision-register-{YYYY-MM-DD}",
   "name": "Decision Register ({YYYY-MM-DD})",
   "phase": "All",
-  "file": "artifacts/decision-register-{YYYY-MM-DD}.md",
-  "reviewFile": "artifacts/decision-register-{YYYY-MM-DD}.review.md",
+  "file": "artifacts/cross-cutting/governance/decision-register-{YYYY-MM-DD}.md",
+  "reviewFile": "artifacts/cross-cutting/governance/decision-register-{YYYY-MM-DD}.review.md",
   "status": "Draft",
   "createdAt": "{ISO 8601}",
   "lastModified": "{ISO 8601}",

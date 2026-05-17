@@ -1182,6 +1182,22 @@ SBBs are the output of technology/vendor selection decisions — they are what t
 
 ---
 
+### VDR (Vendor Landscape Register entry — VDR-NNN)
+
+Organisation-wide vendor assessment. Tracks a specific vendor product's roadmap status, contract status, lock-in risk, and links to SBBs that implement it. Stored in `Architecture-Repository/vendor-landscape/entries/VDR-NNN.md` — part of the shared Architecture Repository, not per-engagement.
+
+Distinct from SBB: SBB is the per-engagement deployment decision; VDR is the org-wide vendor assessment used to inform and validate SBB choices.
+
+### THR (Technology Horizon Register entry — THR-NNN)
+
+Technology radar entry tracking the organisation's position on an emerging technology, framework, or practice. Ring values: **Adopt** | **Trial** | **Assess** | **Hold**. Informs Phase D technology selection and ADR decision-making. Stored in `Architecture-Repository/technology-horizon/entries/THR-NNN.md`.
+
+### STD (Standards Information Base entry — STD-NNN)
+
+A formal industry, regulatory, or organisational standard tracked in the Architecture Repository. Adoption status: **Mandatory** | **Recommended** | **Informational** | **Deprecated**. Linked to per-engagement constraints (CST-NNN) and policies (POL-NNN) that enforce them. Stored in `Architecture-Repository/sib/standards/STD-NNN.md`.
+
+---
+
 ### User Story (STY-NNN)
 
 **What it IS:**

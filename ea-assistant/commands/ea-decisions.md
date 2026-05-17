@@ -202,7 +202,7 @@ Ask the user:
 >
 > Press Enter or type **1** for Markdown.
 
-- **Option 1** — Write to `EA-projects/{slug}/artifacts/decision-register-{YYYY-MM-DD}.md`. Register the artifact in `engagement.json` with `phase: "All"`, `status: "Draft"`. If a decision register for today already exists, append `-v2`, `-v3` etc. Display a brief confirmation with counts.
+- **Option 1** — Write to `EA-projects/{slug}/artifacts/cross-cutting/governance/decision-register-{YYYY-MM-DD}.md`. Register the artifact in `engagement.json` with `phase: "All"`, `status: "Draft"`. If a decision register for today already exists, append `-v2`, `-v3` etc. Display a brief confirmation with counts.
 - **Option 2** — Write the `.md` file first (same as Option 1), then load the `ea-generate` skill and export to `.docx`.
 - **Option 3** — Output the Summary section and Open Decisions table inline only. Do not write any file.
 

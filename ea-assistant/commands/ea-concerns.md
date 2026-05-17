@@ -85,7 +85,7 @@ If filtering results in zero rows, output: "No concerns match the applied filter
 ### Step 5 — Flag Risk-Eligible Concerns
 
 For each concern where `Category = Risk` or `Status = Requires Attention`:
-- Check whether a RIS-NNN entry already exists in `EA-projects/{slug}/artifacts/risk-register-*.md` that corresponds to this concern (match by keyword in description).
+- Check whether a RIS-NNN entry already exists in `EA-projects/{slug}/artifacts/cross-cutting/operations/risk-register-*.md` that corresponds to this concern (match by keyword in description).
 - If no matching risk found, flag the concern as **Risk-eligible** — note in the register output: "⚠️ No RIS-NNN — consider adding to Risk Register via `/ea-risks`"
 
 ### Step 6 — Render the Concerns Register
@@ -161,7 +161,7 @@ Ask the user:
 >
 > Press Enter or type **1** for Markdown.
 
-- **Option 1** — Write to `EA-projects/{slug}/artifacts/concerns-register-{YYYY-MM-DD}.md`. Register in `engagement.json` with `phase: "All"`, `status: "Draft"`. If a register for today already exists, append `-v2`, `-v3` etc.
+- **Option 1** — Write to `EA-projects/{slug}/artifacts/cross-cutting/operations/concerns-register-{YYYY-MM-DD}.md`. Register in `engagement.json` with `phase: "All"`, `status: "Draft"`. If a register for today already exists, append `-v2`, `-v3` etc.
 - **Option 2** — Output the Summary and Requires Attention table only, inline. Do not write any file.
 
 After generating, if any Risk-eligible concerns were flagged, offer:

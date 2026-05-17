@@ -9,6 +9,28 @@ Display a picklist of all EA engagements, open the selected one with full detail
 
 ## Instructions
 
+### Mode: `(no args)` — Project discovery
+
+When called without a slug or path argument:
+
+1. Walk up from the current directory (max 4 levels) looking for `workspace.json`
+2. **Workspace found:** Read `workspace.json → projects[]` and display a numbered pick-list:
+   ```
+   EA-Workspace: <workspace.name>
+
+   Active engagements:
+     1. <slug-a>   <name-a>   Phase <current-phase>
+     2. <slug-b>   <name-b>   Phase <current-phase>
+
+   Enter number or slug (or press Enter to cancel):
+   ```
+   - If exactly one active engagement: open it automatically without prompting
+   - If user enters a number: open that engagement
+   - If user enters a slug: open that engagement
+3. **Workspace not found:** Scan current directory and one level down for `engagement.json` files. Present any found as a pick-list using the same format. If none found: "No engagements found. Run /ea-new to create one or /ea-repo init to set up a workspace."
+
+---
+
 1. **Scan for engagements.** Find all `EA-projects/*/engagement.json` files. The glob pattern `EA-projects/*/` excludes dotdirs like `.archive/`, so archived engagements are not included. If no engagements exist, inform the user and offer to run `/ea-new`.
 
 2. **Build a picklist table** from all found engagements:
@@ -47,6 +69,7 @@ Display a picklist of all EA engagements, open the selected one with full detail
    | Start Date | {startDate} |
    | Target End Date | {targetEndDate or "—"} |
    | Status | {status} |
+   | Plugin Version | {pluginVersion or "—"} |
 
    ## ADM Phase Progress
 
@@ -76,6 +99,21 @@ Display a picklist of all EA engagements, open the selected one with full detail
    For each artifact, check if the artifact file exists on disk. If the file referenced in `engagement.json` is missing, show "File Missing" in the Status column as a warning.
 
    If no artifacts exist, display "No artifacts yet."
+
+### Architecture Repository context
+
+After loading `engagement.json`, if `repoPath` is set:
+1. Resolve `repoPath` relative to the engagement directory (i.e., from `EA-Projects/<slug>/`, go up two levels then into `Architecture-Repository/`)
+2. Read `Architecture-Repository/repo.json`
+3. Count entries in each register directory
+4. Include in the session summary:
+   ```
+   Architecture Repository: <repo.name>
+     Vendors (VDR):      <n>
+     Technologies (THR): <n>
+     Standards (STD):    <n>
+   ```
+5. If `repoPath` is set but `repo.json` is not found: warn "⚠ Architecture Repository not found at `<resolved-path>`. Run `/ea-repo init` or `/ea-repo link <slug>` to fix."
 
 6. **Store the active engagement** slug in the conversation context for subsequent commands.
 
