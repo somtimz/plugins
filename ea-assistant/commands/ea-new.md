@@ -9,6 +9,21 @@ Create a new EA engagement project under `EA-projects/`.
 
 ## Instructions
 
+### Workspace detection (pre-step)
+
+Before creating the engagement, walk up from the current directory looking for `workspace.json` (check current dir, then parent, then grandparent, then great-grandparent — max 4 levels):
+
+- **Workspace found:** Create the engagement at `<workspace-root>/EA-Projects/<slug>/`. Inform the user: "Creating engagement in EA-Workspace at `<workspace-root>`."
+- **Workspace not found:** Ask the user:
+  > "No EA-Workspace found. Options:
+  > 1. Create a new EA-Workspace here (recommended)
+  > 2. Continue without a workspace (engagement created at `./EA-Projects/<slug>/`)
+  > 3. Enter an existing workspace path"
+
+  If option 1: run `/ea-repo init` inline (prompt for org name, create workspace structure), then place engagement under it.
+  If option 2: proceed with current behaviour — create at `./EA-Projects/<slug>/`.
+  If option 3: validate the provided path contains `workspace.json`, then place engagement under it.
+
 1. If an engagement name was provided as an argument, use it as the display name. Otherwise, ask the user for:
    - **Name** (required) — display name of the engagement
    - **Description** (required) — brief description of the engagement
@@ -77,7 +92,18 @@ Create a new EA engagement project under `EA-projects/`.
    The EA interviewer surfaces relevant content from here during interviews.
    ```
 
-5. Write `EA-projects/{slug}/engagement.json` using the template in `templates/seeds/engagement-json.md`, populated with all collected fields including `architectureLevel`. Set all ADM phases to `Not Started`. See `skills/ea-engagement-lifecycle/references/engagement-schema.md` for the full annotated schema.
+5. Write `EA-projects/{slug}/engagement.json` using the template in `templates/seeds/engagement-json.md`, populated with all collected fields including `architectureLevel`. Set all ADM phases to `Not Started`. Read `.claude-plugin/plugin.json` and set `pluginVersion` and `lastMigratedVersion` to the `version` field value (new engagements start fully aligned). Set `lastModified` to now (ISO 8601 timestamp). See `skills/ea-engagement-lifecycle/references/engagement-schema.md` for the full annotated schema.
+
+### Auto-link to Architecture Repository
+
+After `engagement.json` is written, if a workspace was detected or created:
+1. Set `engagement.json → repoPath: "../../Architecture-Repository"`
+2. Append engagement to `workspace.json → projects[]`: `{ "slug": "<slug>", "name": "<name>", "path": "EA-Projects/<slug>", "status": "Active", "linkedDate": "<today>" }`
+3. Append engagement to `Architecture-Repository/repo.json → linkedEngagements[]`: `{ "slug": "<slug>", "name": "<name>", "path": "EA-Projects/<slug>", "linkedDate": "<today>" }`
+4. Update `lastModified` in both `workspace.json` and `repo.json`
+5. Report: "✓ Linked to Architecture Repository at `<workspace>/Architecture-Repository`"
+
+If no workspace: `repoPath` stays `null`. User can link later via `/ea-repo link <slug>`.
 
 6. Read `.claude/ea-assistant.local.md` if it exists and extract `requirementsRepoPath`. Store in `engagement.json`. If the file does not exist, set `requirementsRepoPath` to `""`.
 
@@ -88,5 +114,6 @@ Create a new EA engagement project under `EA-projects/`.
 8. Confirm success to the user and display:
    - Engagement name and slug
    - Architecture Level: `{architectureLevel}`
+   - Plugin Version: `{pluginVersion}` (ea-assistant version active at creation)
    - Folder location: `EA-projects/{slug}/`
    - Offer to begin the **Preliminary phase** immediately or return to the main menu
