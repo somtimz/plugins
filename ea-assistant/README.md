@@ -81,6 +81,11 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Git and GitHub integration** — `/ea-git` manages `EA-projects/` as a git repository; `init` creates the repo, `.gitignore`, and optional private GitHub remote via `gh` CLI; `commit` auto-generates contextual messages from changed artifact names; `push`/`sync`/`log`/`remote` for full GitHub workflow; `/ea-open` shows version control status inline
 - **Motivation concept registers** — dedicated register commands for Goals (`/ea-goals`), Issues (`/ea-issues`), and Problems (`/ea-problems`); each with list/add/update/trace/generate modes; Domain + Type classification (Issues and Problems include an Engagement domain for methodology/governance concerns); Issue vs Problem disambiguation on `add`; trace walks the full upstream/downstream motivation chain
 - **Business Scenarios** — `/ea-scenarios` manages TOGAF Phase A Business Scenarios (BS-NNN) with guided `new` mode through all six TOGAF elements (Problem Statement, Objectives, Environment, Stakeholders, Actors, Requirements) plus Current/Target State narratives and Change Delta; `interview` mode completes existing scenarios; `trace` walks the full motivation chain from drivers/issues/problems through the scenario to goals, objectives, and generated requirements; generates a Scenarios Summary Register
+- **Architecture Repository** — `/ea-repo` initializes a shared `EA-Workspace/` structure with `Architecture-Repository/` (VDR/THR/STD registers) and `EA-Projects/` as siblings; `link` connects an engagement to the repo; `/ea-open` (no args) discovers active projects via `workspace.json` walk-up
+- **Vendor Landscape Register** — `/ea-vendors` manages org-wide vendor assessments (VDR-NNN) with roadmap status (Active/Sunset/EoL), lock-in risk, and SBB cross-links; `/ea-sbbs new` auto-checks the vendor index and warns on Sunset/EoL vendors
+- **Technology Horizon Register** — `/ea-horizon` manages a technology radar (THR-NNN) with Adopt/Trial/Assess/Hold ring model, ring history, and PoC evidence; `/ea-adrs new` cross-references THR entries for technology/vendor selection decisions
+- **Standards Information Base** — `/ea-standards` manages industry/regulatory standards (STD-NNN) with adoption status (Mandatory/Recommended/Informational/Deprecated) and CST-NNN constraint linkage; `surface` command shows standards relevant to the active ADM phase
+- **Cross-cutting sub-folders** — `artifacts/cross-cutting/` reorganized into `governance/` (ADR Register, Decision Register, Constraints, Policies), `operations/` (Risk Register, Change Register, Concerns), and `context/` (Zachman, Roles); auto-maintained `cross-cutting-index.md` navigation hub; `/ea-migrate --reorganize` migrates legacy flat paths
 
 ## Prerequisites
 
@@ -160,6 +165,10 @@ uiMode: html
 | `/ea-policies [mode]` | Manage architecture policies — capture governance documents, trace to constraints, and assess policy impact |
 | `/ea-drivers [mode]` | Business Driver Register — list, add, update, trace DRV→G→OBJ→STR→WP chain, or generate register |
 | `/ea-scenarios [mode]` | Business Scenario Register — list, create, interview, trace, and generate Phase A scenario artifacts (BS-NNN) |
+| `/ea-repo [init\|link\|status\|open]` | Architecture Repository — initialize EA-Workspace, link engagements to the shared Architecture Repository |
+| `/ea-vendors [list\|add\|update\|link-sbb\|archive]` | Vendor Landscape Register — org-wide VDR-NNN entries with roadmap status and lock-in tracking |
+| `/ea-horizon [list\|add\|update\|surface\|link-adr]` | Technology Horizon Register — THR-NNN radar entries with Adopt/Trial/Assess/Hold rings |
+| `/ea-standards [list\|add\|link-constraint\|surface]` | Standards Information Base — STD-NNN entries with adoption status and constraint linkage |
 | `/ea-gaps [mode]` | Architecture Gap Register — list, add, promote raw gaps to GAP-NNN, update, trace to work packages, or generate register |
 | `/ea-principles [mode]` | Manage architecture principles (BP/DP/AP/TP-NNN) — list, add, update, or trace; violation detection flags ADRs that contradict active principles |
 | `/ea-abbs [mode]` | Architecture Building Block Register — generate, view, create, or update ABB-NNN entries; modes: generate, status, new, update |
