@@ -14,9 +14,14 @@
 | `projects` | array | List of EA engagements in this workspace |
 
 `projects` array entry:
-```json
-{ "slug": "", "name": "", "path": "EA-Projects/<slug>", "status": "Active", "linkedDate": "YYYY-MM-DD" }
-```
+
+| Field | Type | Values | Notes |
+|---|---|---|---|
+| `slug` | string | lowercase alphanumeric + hyphens | Unique engagement identifier |
+| `name` | string | any | Display name |
+| `path` | string | `EA-Projects/{slug}` | Relative path from workspace root |
+| `status` | enum | `Active`, `Archived` | Active = in-progress; Archived = completed/inactive |
+| `linkedDate` | ISO date | `YYYY-MM-DD` | Date engagement was linked to workspace |
 
 ## repo.json fields
 
@@ -35,6 +40,10 @@
 | `sib` | object | `{ enabled: bool, indexFile: "sib/sib-index.md", nextId: 1 }` |
 | `vendorLandscape` | object | `{ enabled: bool, indexFile: "vendor-landscape/vendor-index.md", nextId: 1 }` |
 | `technologyHorizon` | object | `{ enabled: bool, indexFile: "technology-horizon/horizon-index.md", nextId: 1 }` |
+
+### nextId counters
+
+`sib.nextId`, `vendorLandscape.nextId`, and `technologyHorizon.nextId` are integer counters seeded to `1` on init. Each time a new entry is created (STD-NNN, VDR-NNN, THR-NNN), the relevant counter is read, used as the ID, then incremented in `repo.json`. Commands must read then write `repo.json` atomically to avoid ID collisions.
 
 ## Directory Structure (produced by /ea-repo init)
 
