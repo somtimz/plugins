@@ -117,6 +117,38 @@ Creating new ADR — {next ADR ID}
 
 Wait for responses before proceeding.
 
+### Step 3b — Architecture Repository Context (if linked and ADR is technology/vendor-related)
+
+Check `engagement.json → repoPath`. If set, and if the ADR title or triggering artifact suggests a technology or vendor selection (keywords: vendor, platform, tool, framework, cloud, database, provider, product), run the following lookups before creating the file:
+
+**Technology Horizon check:**
+1. Read `{repoPath}/technology-horizon/horizon-index.md` and search for any entry whose `name` partially matches words in the ADR title.
+2. If matched, display:
+   ```
+   📡 Technology Horizon match: {THR-NNN} — {name}
+      Ring     : {ring}  (Adopt | Trial | Assess | Hold)
+      Rationale: {rationale (first line)}
+      PoC      : {pocEvidence or "none"}
+   ```
+3. If ring is `Hold`, warn: `"⚠️ {name} is on Hold in the Technology Horizon. Document the exception rationale carefully in ADR §3."`
+4. Ask: `"Pre-populate ADR §4 (Options) and §6 (Constraints) from this THR entry? (y/n)"`. If yes, carry the ring rationale and pocEvidence into those sections when writing the file.
+5. After saving the ADR, add `ADR-{NNN}` to `THR-{NNN}.md → linkedADRs[]`.
+
+**Vendor Landscape check:**
+1. Read `{repoPath}/vendor-landscape/vendor-index.md` and search for a partial match on any vendor name appearing in the ADR title.
+2. If matched, display:
+   ```
+   📋 Vendor Landscape match: {VDR-NNN} — {Vendor} / {Product}
+      Roadmap Status : {roadmapStatus}
+      Lock-in Risk   : {lockInRisk}
+      Contract Status: {contractStatus}
+   ```
+3. If `roadmapStatus` is `Sunset` or `EoL`, warn: `"⚠️ {Vendor} is marked {roadmapStatus}. Ensure ADR §3 documents this risk."`
+4. Ask: `"Pre-populate ADR §4 (Options) with this vendor entry? (y/n)"`. If yes, carry roadmap and lock-in detail into the options section.
+5. After saving the ADR, add `ADR-{NNN}` to `VDR-{NNN}.md → linkedADRs[]`.
+
+If neither lookup produces a match, note: `"No Architecture Repository entries matched. Use '/ea-vendors add' or '/ea-horizon add' to register this technology."`
+
 ### Step 4 — Create ADR File
 
 1. Read the ADR template from `templates/architecture-decision-record.md`

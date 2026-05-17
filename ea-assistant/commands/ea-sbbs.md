@@ -119,6 +119,26 @@ Creating new SBB — SBB-{NNN}
 6. Constraints / Lock-in Risk (vendor-specific detail: proprietary APIs, egress costs, licensing, data residency):
 ```
 
+**Vendor Landscape context (if Architecture Repository linked):**
+
+After the user provides the Vendor / Source value (field 3), check `engagement.json → repoPath`. If set:
+
+1. Read `{repoPath}/vendor-landscape/vendor-index.md` and search for a partial match on the vendor name entered.
+2. If a match is found, display:
+   ```
+   📋 Vendor Landscape match: {VDR-NNN} — {Vendor} / {Product}
+      Roadmap Status : {roadmapStatus}
+      Lock-in Risk   : {lockInRisk}
+      Notes          : {notes (first line)}
+   ```
+3. If `roadmapStatus` is `Sunset` or `EoL`, warn:
+   ```
+   ⚠️  This vendor/product is marked {roadmapStatus} in the Architecture Repository.
+       Consider selecting an alternative or documenting the exception in the Constraints Register.
+   ```
+4. Ask: `"Link this SBB to {VDR-NNN}? (y/n)"`. If yes, add `linkedVDR: VDR-NNN` to the SBB frontmatter when writing the file.
+5. If no match is found, note: `"No Vendor Landscape entry for '{vendor}'. Use '/ea-vendors add' to register this vendor."`
+
 ### Step 4 — Validate
 
 - `Implements` is required. If blank or ABB-NNN not found, warn: "⚠️ This SBB has no ABB. Create the ABB first with `/ea-abbs new`, or proceed as vendor-first? (y/n)"
@@ -154,6 +174,7 @@ Update a single field.
 - Setting `implements` to a non-existent ABB → warn, allow as planned
 - Setting `referencedConstraints` → verify each CST-NNN exists in the engagement Constraints Register; if not found, warn and offer to create via `/ea-constraints add`
 - Setting `constraints` → scan for lock-in keywords; if high-risk terms found, flag. If `referencedConstraints` is empty, warn: "⚠️ This SBB has vendor lock-in detail but no referenced CST-NNN constraint. Link a constraint for traceability? (y/n)"
+- Setting `vendor` → if Architecture Repository is linked, check `{repoPath}/vendor-landscape/vendor-index.md` for a match. If found, show roadmap/lock-in summary and offer to update `linkedVDR` on the SBB. If the matched entry is `Sunset` or `EoL`, warn before applying.
 
 **Procedure:**
 1. Find the SBB file matching `sbb-{NNN}*.md` or the SBB row in the register
