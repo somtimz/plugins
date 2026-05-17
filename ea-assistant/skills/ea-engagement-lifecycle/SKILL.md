@@ -183,6 +183,18 @@ Load `references/landscape-levels.md` when:
 
 **Fallback rule:** When `architectureLevel` is `null` or absent in an existing engagement, treat it as `Segment` for artifact depth purposes. This is non-blocking. At the next `/ea-config` interaction, prompt the user to set it via `Section 6 — Engagement Metadata`.
 
+## Architecture Repository
+
+Engagements can optionally link to a shared Architecture Repository at the workspace level. When linked, `engagement.json → repoPath` is set to `"../../Architecture-Repository"` (relative from `EA-Projects/<slug>/`).
+
+The linked repository provides:
+- Standards Information Base (STD-NNN) — mandatory/recommended standards surfaced during phase interviews
+- Vendor Landscape Register (VDR-NNN) — vendor context surfaced in `/ea-sbbs` and `/ea-adrs`
+- Technology Horizon Register (THR-NNN) — technology radar surfaced during Phase D
+
+Use `/ea-repo link <slug>` to link an engagement, or `/ea-new` inside an EA-Workspace to auto-link.
+See skill `ea-architecture-repository` for full details.
+
 ## Write Protocol
 
 See `references/write-protocol.md` for the full ownership table. Key rules:
