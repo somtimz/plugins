@@ -86,6 +86,8 @@ You have existing engagements. Common next steps:
 | `/ea-policies [mode]` | Manage architecture policies — capture governance documents, trace to constraints, and assess policy impact |
 | `/ea-drivers [mode]` | Business Driver Register — list, add, update, trace DRV→G→OBJ→STR→WP chain, or generate register |
 | `/ea-goals [mode]` | Goals Register — list, add, update, trace G→OBJ→STR→WP chain, or generate register; Domain + Type classification |
+| `/ea-target [new\|view\|update]` | Target State Declaration — capture per-domain target states, success criteria, and traceability to goals and objectives |
+| `/ea-actions [generate\|view\|update\|status]` | Stakeholder Action Plan — consolidated per-approver action view seeded from SAoW and Target State Declaration; suitable for governance forums and ARB |
 | `/ea-issues [mode]` | Issues Register — list, add, update, trace ISS→G→GAP chain, or generate register; Domain (incl. Engagement) + Type classification |
 | `/ea-problems [mode]` | Problems Register — list, add, update, trace PRB→OBJ→REQ chain, or generate register; Domain (incl. Engagement) + Type classification |
 | `/ea-scenarios [mode]` | Business Scenario Register — list, create, interview, trace, and generate Phase A scenario artifacts (BS-NNN) |
