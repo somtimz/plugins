@@ -35,8 +35,8 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 
 ## Command Reference
 
-47 commands available — run `/ea-help` for the full table with agent assignments.
-Key entry points: `/ea-new` · `/ea-open` · `/ea-interview` · `/ea-grill` · `/ea-generate` · `/ea-status` · `/ea-brief` · `/ea-lens` · `/ea-git` · `/ea-goals` · `/ea-issues` · `/ea-problems` · `/ea-scenarios`
+49 commands available — run `/ea-help` for the full table with agent assignments.
+Key entry points: `/ea-new` · `/ea-open` · `/ea-interview` · `/ea-grill` · `/ea-generate` · `/ea-status` · `/ea-brief` · `/ea-lens` · `/ea-git` · `/ea-goals` · `/ea-target` · `/ea-actions` · `/ea-issues` · `/ea-problems` · `/ea-scenarios`
 
 ---
 
