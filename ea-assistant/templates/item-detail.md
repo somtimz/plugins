@@ -1,12 +1,23 @@
 ---
-item: {{ID}}
-type: {{item_type}}
-title: {{item_title}}
-engagement: {{engagement_name}}
-parentArtifact: {{parent_artifact_path}}
-created: {{YYYY-MM-DD}}
-lastModified: {{YYYY-MM-DD}}
-relatedItems: {{related_items}}
+artifactId: item-detail
+artifact: Item Detail
+phase: All
+taxonomy: cross-cutting
+status: Draft
+reviewStatus: Not Reviewed
+version: 0.1
+templateVersion: 0.9.55
+engagement: "{{engagement_name}}"
+item: "{{ID}}"
+type: "{{item_type}}"
+title: "{{item_title}}"
+parentArtifact: "{{parent_artifact_path}}"
+created: "{{YYYY-MM-DD}}"
+lastModified: "{{YYYY-MM-DD}}"
+relatedItems: "{{related_items}}"
+relatedArtifacts: []
+diagrams: []
+links: []
 ---
 
 <!-- GUIDANCE:

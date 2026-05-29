@@ -1,11 +1,12 @@
 ---
 artifact: Architecture Roadmap
+artifactId: architecture-roadmap
 engagement: {{engagement_name}}
 phase: E/F
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-templateVersion: 0.9.5
+templateVersion: 0.9.55
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   domain: Cross-cutting

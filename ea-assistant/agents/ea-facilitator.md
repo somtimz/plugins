@@ -1,6 +1,6 @@
 ---
 name: ea-facilitator
-description: >
+description: >-
   Use this agent when the user wants to be guided through a TOGAF ADM phase, needs
   help advancing an EA engagement, asks what to do next in their architecture work,
   or needs facilitation of architecture activities. Examples:

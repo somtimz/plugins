@@ -1,9 +1,10 @@
 ---
 name: ea-requirements-analyst
-description: >
+description: >-
   Use this agent when reading uploaded documents to extract structured requirements,
   building a requirements register mapped to ADM phases and Zachman cells, or
-  analysing what ADM phases a document covers. Examples:
+  analysing what ADM phases a document covers. For general document ingestion and
+  EA content mapping (non-requirements), delegate to `ea-document-analyst` instead. Examples:
 
   <example>
   Context: User uploads a strategy document for analysis.
@@ -32,7 +33,7 @@ description: >
   </commentary>
   </example>
 model: inherit
-color: cyan
+color: dark-blue
 tools: ["Read", "Write", "Bash", "Glob"]
 ---
 
@@ -152,7 +153,7 @@ On confirmation:
 4. Update `engagement.json` — add an entry under `"analysis_runs"` with: `{ "timestamp": "…", "source_file": "…", "items_extracted": n, "agent": "ea-requirements-analyst" }`.
 5. If DRV items were extracted, display a notice: "X business drivers were extracted. Recommend adding them to your Architecture Vision — run `/ea-interview start phase A` to populate the Drivers section."
 
-## Content Policy
+## Quality Standards
 
 - All AI-extracted content must be prefixed with `> 🤖 **AI Draft — Review Required**`
 - Preserve the exact wording from the source document; do not paraphrase.
@@ -160,7 +161,7 @@ On confirmation:
 - Mark ambiguous or incomplete items with `[?]` and include a note.
 - Do not write any file until the user has confirmed.
 
-## Classification Rules
+### Classification Rules
 
 | Language pattern | Category | Default priority |
 |---|---|---|

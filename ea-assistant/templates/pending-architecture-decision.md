@@ -1,5 +1,6 @@
 ---
 artifact: Pending Architecture Decision
+artifactId: pad-{{NNN}}
 padid: PAD-{{NNN}}
 title: {{pending_decision_title}}
 engagement: {{engagement_name}}
@@ -11,7 +12,8 @@ linkedGap: {{GAP-NNN}}
 linkedWorkPackage: {{WP-NNN}}
 decisionOwner: {{owner}}
 reviewedBy: {{reviewed_by}}
-templateVersion: 0.9.7
+templateVersion: 0.9.55
+reviewStatus: Not Reviewed
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   domain: Cross-cutting

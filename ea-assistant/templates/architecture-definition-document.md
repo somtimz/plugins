@@ -1,11 +1,12 @@
 ---
 artifact: Architecture Definition Document
+artifactId: architecture-definition-document
 engagement: {{engagement_name}}
 phase: A
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-templateVersion: 0.9.13
+templateVersion: 0.9.55
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   domain: Cross-cutting
@@ -379,29 +380,32 @@ See [Architecture Principles](../preliminary/architecture-principles.md) for the
 
 ---
 
-## Appendix A3 — Decision Log
+<details>
+<summary>Appendix A3 — Decision Log</summary>
 
 | Item | Value | State | Captured By | Owner | Authority | Domain | Cost | Impact | Risk | Subject | Date |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | *(no decisions recorded)* | — | — | — | — | — | — | — | — | — | — | — |
 
----
+</details>
 
-## Appendix A4 — Stakeholder Concerns & Objections
+<details>
+<summary>Appendix A4 — Stakeholder Concerns & Objections</summary>
 
 | ID | Concern | Raised By | Category | Status | Response | Action / Owner |
 |---|---|---|---|---|---|---|
 | *(no concerns recorded)* | — | — | — | — | — | — |
 
----
+</details>
 
-## Appendix A5 — Related Architecture Decisions
+<details>
+<summary>Appendix A5 — Related Architecture Decisions</summary>
 
 | ADR ID | Title | Status | Summary |
 |---|---|---|---|
 | *(no related ADRs recorded)* | — | — | — |
 
----
+</details>
 
 ## Artifact Working Notes
 

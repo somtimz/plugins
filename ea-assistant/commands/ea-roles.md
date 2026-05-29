@@ -1,6 +1,8 @@
 ---
 name: ea-roles
 description: List, filter, and generate role catalogue entries for EA engagements
+argument-hint: "[ROLE-ID|--domain <domain>|--generate|--update ROLE-ID]"
+allowed-tools: [Read, Write]
 ---
 
 # /ea-roles

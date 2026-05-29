@@ -1,11 +1,12 @@
 ---
 artifact: Communications Plan
+artifactId: communications-plan
 engagement: {{engagement_name}}
 phase: A
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-templateVersion: 0.9.13
+templateVersion: 0.9.55
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   domain: Cross-cutting

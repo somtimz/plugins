@@ -68,13 +68,15 @@ The `--skill` argument accepts these short names:
 | `artifact` | `ea-assistant:ea-grill-skills` | Structured artifact review: section-by-section completeness, traceability chains, consistency |
 | `diagram` | `ea-assistant:ea-grill-skills` | Visual design review: topology, missing components, anti-patterns, readability |
 | `boardroom-strategy` | `ea-assistant:ea-grill-skills` | Hybrid: strategic depth + board pressure + pre-mortem (most thorough) |
-| `practitioner` | `grill-me-practitioner` | Practitioner-level review: economic framing, decision quality, optionality, complexity reduction |
-| `maturity` | `grill-me-maturity` | Maturity assessment: evaluates artifact against L1–L5 model and suggests advancement steps |
-| `failure-mode` | `grill-me-failure-mode` | Failure-mode pre-mortem: detects symptoms of the 6 failure modes and suggests fixes |
-| `requirements` | `grill-me-requirements` | Requirements quality: NFR coverage scorecard, measurability, traceability, consistency, feasibility — load from `skills/ea-engagement-lifecycle/references/grill-requirements-skill.md` |
-| `direction` | `grill-direction-quality` | Direction item quality: categorization correctness, phrasing quality, evidence rigour, isolation — load from `skills/ea-engagement-lifecycle/references/grill-direction-quality.md` |
+| `practitioner` | `ea-assistant:ea-grill-skills` | Practitioner-level review: economic framing, decision quality, optionality, complexity reduction — load from `skills/ea-engagement-lifecycle/references/practitioner-tips.md` |
+| `maturity` | `ea-assistant:ea-grill-skills` | Maturity assessment: evaluates artifact against L1–L5 model and suggests advancement steps — load from `skills/ea-engagement-lifecycle/references/adm-maturity-model.md` |
+| `failure-mode` | `ea-assistant:ea-grill-skills` | Failure-mode pre-mortem: detects symptoms of the 6 failure modes and suggests fixes — load from `skills/ea-engagement-lifecycle/references/failure-modes.md` |
+| `requirements` | `ea-assistant:ea-grill-skills` | Requirements quality: NFR coverage scorecard, measurability, traceability, consistency, feasibility — load from `skills/ea-engagement-lifecycle/references/grill-requirements-skill.md` |
+| `direction` | `ea-assistant:ea-grill-skills` | Direction item quality: categorization correctness, phrasing quality, evidence rigour, isolation — load from `skills/ea-engagement-lifecycle/references/grill-direction-quality.md` |
 
 For the 9 core skills (stress-test through boardroom-strategy): after loading `ea-assistant:ea-grill-skills`, locate and follow the `## Mode: {short-name}` section that matches the requested skill. Ignore all other mode sections.
+
+For the 5 advanced skills (practitioner, maturity, failure-mode, requirements, direction): after loading `ea-assistant:ea-grill-skills`, if a `## Mode: {short-name}` section exists for the requested skill, follow it. If not, load the referenced file from `skills/ea-engagement-lifecycle/references/` and follow its instructions as the review protocol.
 
 ---
 
@@ -456,7 +458,7 @@ Check whether the expected diagrams for this artifact type exist and are referen
 
 4. **For each ❌ Missing diagram:** state in one sentence what it would show and offer to create it:
    > "The Stakeholder Power/Interest Grid would show stakeholder positioning by influence and interest. Create it now? (y/n)"
-   - If yes: invoke `/ea-diagram` with the standard filename, the relevant artifact section as context, and the Mermaid starter from the diagram catalogue.
+   - If yes: delegate to the `ea-diagram` agent with the standard filename, the relevant artifact section as context, and the Mermaid starter from the diagram catalogue.
    - If no: continue.
 
 5. **For each ⚠️ Source only:** offer to render it:

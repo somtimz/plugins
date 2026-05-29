@@ -30,6 +30,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Requirements analysis** — extract structured requirements from uploaded documents, map to ADM phases and Zachman cells
 - **Stakeholder interviews** — chat-based or interactive web form; dated and versioned notes
 - **Diagram support** — Mermaid, Graphviz (.dot), Draw.io (.drawio), ArchiMate notation
+- **EA tool import** — ingest Sparx XMI, Archi tool `.archimate`, and LeanIX CSV/JSON exports; map elements to engagement artifacts
 - **Decision Register** — cross-artifact decision tracking with governance states (Provisional → Verified/Voted/Fiat), owner attribution, and on-demand registers tailored by audience, domain, authority, cost, impact, or risk
 - **Artifact grill** — deep-review any artifact using grill-me skills (stress-test, premortem, decision, design, software-design, infra-design, artifact, diagram, boardroom-strategy); auto-selects best skill by artifact type; apply findings back to the artifact one revision at a time with per-revision confirm/skip/edit
 - **Opt-out tracking** — explicitly opt out of any question or artifact; reasons and timestamps recorded; surfaced in status reports and consolidated documents
@@ -40,6 +41,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Consolidated reporting** — merge all artifacts into a single Markdown or Word document; readability pass flags oversized tables, broken image paths, placeholder text, and sections lacking narrative; AI-assisted rewrite pass adds transitions and narrative intros (with `<!-- ai-inserted -->` markers); opted-out and non-standard items flagged inline
 - **Research agent integration** — invoke `@research-agent` at any point during interviews for evidence-based validation of drivers, risks, technology choices, or assumptions; invoke `ea-research` agent for proactive phase research planning, multi-source synthesis, and research quality audits
 - **Document ingestion** — upload existing docs and diagrams to inform artifacts; format extraction (docx, pdf, xlsx, csv, drawio, mmd) handled by `ea-document-ingestion` skill; EA content mapping handled by `ea-document-analyst` agent
+- **External tool integration** — delegate to Claude Code MCP tools and agents (web search, browser automation, database queries, project management) from any interview, review, or research session
 - **Architecture Roadmap agent** — three-mode roadmap creation: Review (existing artifact), Artifact-informed (reads Vision Goals/Strategies/Objectives + Gap Analysis + Requirements to seed work packages with strategic alignment), Clean-slate (direct elicitation with no prior artifacts); Strategic Alignment table in roadmap template links every G-NNN/OBJ-NNN/STR-NNN to covering work packages
 - **Phase E strategic alignment** — roadmap work packages explicitly link to Goals and Strategies from Phase A; interview questions anchor prioritisation to G-NNN/STR-NNN before addressing gaps and constraints
 - **ADM reference material** — detailed phase inputs/outputs, tailoring guidance for agile/programme/capability-based contexts
@@ -172,8 +174,10 @@ uiMode: html
 | `/ea-gaps [mode]` | Architecture Gap Register — list, add, promote raw gaps to GAP-NNN, update, trace to work packages, or generate register |
 | `/ea-principles [mode]` | Manage architecture principles (BP/DP/AP/TP-NNN) — list, add, update, or trace; violation detection flags ADRs that contradict active principles |
 | `/ea-abbs [mode]` | Architecture Building Block Register — generate, view, create, or update ABB-NNN entries; modes: generate, status, new, update |
+| `/ea-actions [generate\|view\|update\|status]` | Stakeholder Action Plan — consolidated per-approver action view seeded from SAoW and Target State Declaration |
 | `/ea-sbbs [mode]` | Solution Building Block Register — generate, view, create, or update SBB-NNN entries; modes: generate, status, new, update |
 | `/ea-stories [mode]` | User Story Register — generate, view, create, or update STY-NNN entries; modes: generate, status, new, update |
+| `/ea-target [new\|view\|update]` | Target State Declaration — per-domain target states, success criteria, and traceability to goals and objectives |
 | `/ea-trace [--gaps]` | Interactive traceability views — motivation chain from drivers to work packages; `--gaps` for consolidated gap report only |
 | `/ea-decisions [options]` | Generate a Decision Register from all A3 decision logs; filter by audience, owner, domain, authority, cost, impact, risk, subject, or status |
 | `/ea-adrs [mode]` | Manage Architecture Decision Records — generate register, create new ADR, update status |

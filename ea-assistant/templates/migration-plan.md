@@ -1,11 +1,12 @@
 ---
 artifact: Migration Plan
+artifactId: migration-plan
 engagement: {{engagement_name}}
 phase: F
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-templateVersion: 0.9.5
+templateVersion: 0.9.55
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   domain: Cross-cutting

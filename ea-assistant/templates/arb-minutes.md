@@ -1,5 +1,7 @@
 ---
 artifact: ARB Minutes
+artifactId: arb-minutes-{{ARB-NNN}}
+phase: All
 arbId: ARB-{{NNN}}
 title: ARB Meeting {{NNN}} — {{YYYY-MM-DD}}
 engagement: {{engagement_name}}
@@ -11,7 +13,8 @@ quorumRequired: {{N}}
 quorumMet: true
 status: Draft
 nextMeeting: null
-templateVersion: 0.9.31
+templateVersion: 0.9.55
+reviewStatus: Not Reviewed
 lastModified: {{YYYY-MM-DDTHH:MM:SSZ}}
 taxonomy:
   domain: Cross-cutting

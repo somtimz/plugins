@@ -1,6 +1,8 @@
 ---
 name: ea-repo
 description: Initialise an EA-Workspace with a shared Architecture Repository, link engagements, and show repository status. The Architecture Repository holds Standards Information Base (SIB/STD-NNN), Vendor Landscape (VDR-NNN), and Technology Horizon (THR-NNN) registers shared across all EA engagements and IT projects.
+argument-hint: "[init|link|status|open] [engagement-slug] [--workspace-path <path>]"
+allowed-tools: [Read, Write, Bash]
 ---
 
 # /ea-repo — Architecture Repository Management

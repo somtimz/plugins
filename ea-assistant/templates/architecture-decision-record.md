@@ -1,5 +1,6 @@
 ---
 artifact: Architecture Decision Record
+artifactId: adr-{{NNN}}
 adrid: ADR-{{NNN}}
 title: {{decision_title}}
 engagement: {{engagement_name}}
@@ -9,7 +10,8 @@ decisionDate: {{YYYY-MM-DD}}
 decisionOwner: {{owner}}
 reviewedBy: {{reviewed_by}}
 supersededBy: null
-templateVersion: 0.9.7
+templateVersion: 0.9.55
+reviewStatus: Not Reviewed
 lastModified: {{YYYY-MM-DD}}
 evidenceSufficiency: {{sufficient / partial / insufficient}}
 decisionTiming: {{now / defer-to-phase / defer-to-wp}}

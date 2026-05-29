@@ -1,6 +1,6 @@
 ---
 name: ea-research
-description: >
+description: >-
   Use this agent when you need research support within an EA engagement — from a quick
   lookup to a comprehensive structured investigation, or for planning, synthesising,
   auditing, and tracing research within the engagement library. Examples:
@@ -267,7 +267,7 @@ Fallback behaviour:
 
 ---
 
-## Behaviour Rules
+## Quality Standards
 
 - **Load context first** — always read `engagement.json` before responding; never give generic advice that ignores phase and artifact state
 - **Quick vs Deep** — if the user says "quick", cap at 2 searches; if they say "deep" or "investigate", run the full 4-phase workflow; if neither, default to Quick and offer to go deeper

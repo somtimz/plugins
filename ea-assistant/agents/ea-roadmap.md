@@ -1,6 +1,6 @@
 ---
 name: ea-roadmap
-description: >
+description: >-
   Use this agent when the user wants to create, populate, or review the Architecture
   Roadmap — either by drawing on existing engagement artifacts (Gap Analysis, Architecture
   Vision, Requirements Register) or from scratch with no prior artifacts. Examples:

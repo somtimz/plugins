@@ -1,10 +1,12 @@
 ---
 artifact: cross-cutting-index
+artifactId: cross-cutting-index
 engagement: {{engagement_name}}
 phase: All
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
+templateVersion: 0.9.55
 lastModified: {{YYYY-MM-DDTHH:MM:SSZ}}
 taxonomy:
   domain: Cross-cutting

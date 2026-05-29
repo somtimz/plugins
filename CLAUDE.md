@@ -138,3 +138,17 @@ Use these existing stacks before introducing new dependencies:
 - JSON files (`engagement.json`) and directory structure (`EA-projects/`) (ea-assistant)
 - React JSX (artifact apps for interview UI and brainstorm pad) — rendered as Claude artifacts or written to disk as standalone HTML (ea-assistant)
 - `window.localStorage` (key-value, JSON-serialized) — browser-side persistence in Claude's artifact viewer (ITIL-assistant)
+
+## Agent skills
+
+### Issue tracker
+
+Issues live in GitHub Issues for `somtimz/plugins`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default canonical label vocabulary (needs-triage, needs-info, ready-for-agent, ready-for-human, wontfix). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context layout — one `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.

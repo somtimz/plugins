@@ -1,6 +1,6 @@
 ---
 name: ea-security-advisor
-description: >
+description: >-
   Use this agent when the user has a question about security architecture frameworks
   (SABSA, ISO 27001:2022, NIST CSF 2.0), needs guidance on mapping security controls
   to TOGAF artifacts, or needs advice on a security architecture decision. Examples:

@@ -1,12 +1,12 @@
 ---
-artifact: Architecture Principles
+artifact: Principles Register
 artifactId: architecture-principles
 engagement: "{{engagement_name}}"
 phase: Preliminary
 status: Draft
 reviewStatus: Not Reviewed
-version: 0.1.0
-templateVersion: 0.9.49
+version: 0.1
+templateVersion: 0.9.55
 lastModified: "{{date}}"
 taxonomy:
   domain: Cross-cutting

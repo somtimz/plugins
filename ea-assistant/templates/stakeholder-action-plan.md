@@ -1,5 +1,6 @@
 ---
 artifact: Stakeholder Action Plan
+artifactId: stakeholder-action-plan
 engagement: {{engagement_name}}
 phase: All
 status: Draft
