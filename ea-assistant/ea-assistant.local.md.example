@@ -24,3 +24,4 @@ Claude will load this context automatically when you use `/ea-open`.
 - **current_phase** — Active ADM phase (Prelim, Req, A, B, C, D, E, F, G, or H)
 - **completed_phases** — List of phases already completed, e.g. `["Prelim", "Req"]`
 - **requirements_repo_path** — Optional path to an external requirements file or repo to sync from
+- **uiMode** — UI delivery mode: `artifact` or `html` (default: `html`). Use `artifact` in Claude Code Desktop, Cowork Desktop, or claude.ai/code for inline React artifacts. Use `html` (or omit) in CLI for standalone browser HTML

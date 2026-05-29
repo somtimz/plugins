@@ -1,6 +1,8 @@
 ---
 name: ea-standards
 description: Manage the Standards Information Base (STD-NNN) in the shared Architecture Repository — track adopted industry and regulatory standards, link to constraints, and surface compliance obligations during EA phase interviews. Requires a linked Architecture Repository.
+argument-hint: "[list|add|link-constraint|surface] [STD-NNN] [--status Mandatory|Recommended|Informational|Deprecated] [--domain <domain>]"
+allowed-tools: [Read, Write, Bash]
 ---
 
 # /ea-standards — Standards Information Base

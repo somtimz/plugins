@@ -1,7 +1,7 @@
 ---
-artifact: technology-horizon-register
+artifact: Technology Horizon Register
 engagement: "{{engagement_name}}"
-phase: cross-cutting
+phase: All
 status: Active
 lastModified: "{{YYYY-MM-DDTHH:MM:SSZ}}"
 taxonomy:

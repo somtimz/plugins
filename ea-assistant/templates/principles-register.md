@@ -1,11 +1,11 @@
 ---
-artifact: Architecture Principles
+artifact: Principles Register
 artifactId: architecture-principles
 engagement: "{{engagement_name}}"
 phase: Preliminary
 status: Draft
 reviewStatus: Not Reviewed
-version: 0.1.0
+version: 0.1
 templateVersion: 0.9.49
 lastModified: "{{date}}"
 taxonomy:

@@ -4,7 +4,7 @@
       "Skill(claude-config-validator:reviewing-claude-config)",
       "Bash(claude plugins *)",
       "Bash(mkdir -p ~/.claude/hooks)",
-      "Bash(cp .claude/hooks/context-timeline.py ~/.claude/hooks/context-timeline.py)",
+      "Bash(cp scripts/context-timeline.py ~/.claude/hooks/context-timeline.py)",
       "Bash(npx skills *)"
     ]
   },

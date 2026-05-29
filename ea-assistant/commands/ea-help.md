@@ -168,7 +168,7 @@ Type these at any interview prompt:
   automatically — no manual format specification needed.
 • Type `?` at any interview prompt for contextual help including
   the artifact's purpose, value, and guidance on the current question.
-• Ask "let's build the roadmap" to start the ea-roadmap agent —
+• Ask "let's build the roadmap" — the ea-roadmap agent will be dispatched automatically;
   it reads your Vision goals and strategies to seed work packages
   automatically (or works from scratch if no artifacts exist yet).
 • After `/ea-grill`, choose "apply findings" to revise the artifact

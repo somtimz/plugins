@@ -1,6 +1,8 @@
 ---
 name: ea-horizon
 description: Manage the Technology Horizon Register (THR-NNN) in the shared Architecture Repository — add technologies to the radar, update ring placement, and track PoC evidence. Requires a linked Architecture Repository.
+argument-hint: "[list|add|update|surface|link-adr] [THR-NNN] [--ring Adopt|Trial|Assess|Hold]"
+allowed-tools: [Read, Write, Bash]
 ---
 
 # /ea-horizon — Technology Horizon Register

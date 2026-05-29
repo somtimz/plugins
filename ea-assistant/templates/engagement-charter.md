@@ -1,7 +1,7 @@
 ---
 artifact: Engagement Charter
 engagement: {{engagement_name}}
-phase: Prelim
+phase: Preliminary
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1

@@ -1,6 +1,8 @@
 ---
 name: ea-vendors
 description: Manage the Vendor Landscape Register (VDR-NNN) in the shared Architecture Repository — add, list, update, link, and archive vendor assessments. Requires a linked Architecture Repository (repoPath in engagement.json or /ea-repo open).
+argument-hint: "[list|add|update|link-sbb|archive] [VDR-NNN] [--filter <field>=<value>]"
+allowed-tools: [Read, Write, Bash]
 ---
 
 # /ea-vendors — Vendor Landscape Register

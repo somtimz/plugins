@@ -172,8 +172,10 @@ uiMode: html
 | `/ea-gaps [mode]` | Architecture Gap Register — list, add, promote raw gaps to GAP-NNN, update, trace to work packages, or generate register |
 | `/ea-principles [mode]` | Manage architecture principles (BP/DP/AP/TP-NNN) — list, add, update, or trace; violation detection flags ADRs that contradict active principles |
 | `/ea-abbs [mode]` | Architecture Building Block Register — generate, view, create, or update ABB-NNN entries; modes: generate, status, new, update |
+| `/ea-actions [generate\|view\|update\|status]` | Stakeholder Action Plan — consolidated per-approver action view seeded from SAoW and Target State Declaration |
 | `/ea-sbbs [mode]` | Solution Building Block Register — generate, view, create, or update SBB-NNN entries; modes: generate, status, new, update |
 | `/ea-stories [mode]` | User Story Register — generate, view, create, or update STY-NNN entries; modes: generate, status, new, update |
+| `/ea-target [new\|view\|update]` | Target State Declaration — per-domain target states, success criteria, and traceability to goals and objectives |
 | `/ea-trace [--gaps]` | Interactive traceability views — motivation chain from drivers to work packages; `--gaps` for consolidated gap report only |
 | `/ea-decisions [options]` | Generate a Decision Register from all A3 decision logs; filter by audience, owner, domain, authority, cost, impact, risk, subject, or status |
 | `/ea-adrs [mode]` | Manage Architecture Decision Records — generate register, create new ADR, update status |

@@ -431,9 +431,9 @@ Capture freeform brainstorm notes for the active EA engagement.
    > "Are there any diagrams or visual models that would help communicate these ideas? Standard diagrams for this phase:"
 
    List the 1–3 most relevant diagram names and filenames from the catalogue. Then offer:
-   > "Would you like to create one now? I can launch `/ea-diagram` with your brainstorm notes as context."
+   > "Would you like to create one now? I can delegate to the ea-diagram agent with your brainstorm notes as context."
 
-   If the user says yes: invoke `/ea-diagram` with a brief from the brainstorm notes and the appropriate Mermaid starter from the catalogue.
+   If the user says yes: delegate to the `ea-diagram` agent with a brief from the brainstorm notes and the appropriate Mermaid starter from the catalogue.
    If the user says no or there are no relevant diagrams: continue silently to step 8.
 
 7b. **Research during brainstorm.** At any point — before launching the pad, while waiting for the user to paste results, or after pasting — the user can type `r: {query}` or `research: {query}` in the chat to trigger an inline research pause:
