@@ -1,0 +1,57 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(claude-config-validator:reviewing-claude-config)",
+      "Bash(claude plugins *)",
+      "Bash(mkdir -p ~/.claude/hooks)",
+      "Bash(cp .claude/hooks/context-timeline.py ~/.claude/hooks/context-timeline.py)",
+      "Bash(npx skills *)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$HOME/.claude/hooks/context-timeline.py\" --server-start"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$HOME/.claude/hooks/context-timeline.py\" --event PreToolUse"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$HOME/.claude/hooks/context-timeline.py\" --event PostToolUse"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$HOME/.claude/hooks/context-timeline.py\" --event Stop"
+          }
+        ]
+      }
+    ]
+  }
+}
