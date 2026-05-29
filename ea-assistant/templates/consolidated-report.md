@@ -1,9 +1,12 @@
 ---
 artifact: Consolidated Architecture Document
+artifactId: consolidated-report
+phase: All
 engagement: {{engagement_name}}
 date: {{YYYY-MM-DD}}
 version: {{version}}
-templateVersion: 0.9.5
+templateVersion: 0.9.55
+reviewStatus: Not Reviewed
 status: {{document_status}}
 taxonomy:
   domain: Cross-cutting

@@ -1,11 +1,12 @@
 ---
+artifactId: architecture-contract
 artifact: Architecture Contract
 engagement: {{engagement_name}}
 phase: G
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-templateVersion: 0.9.5
+templateVersion: 0.9.55
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   domain: Cross-cutting

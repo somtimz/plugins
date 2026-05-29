@@ -1,4 +1,5 @@
 ---
+artifactId: target-state-declaration
 artifact: Target State Declaration
 engagement: {{engagement_name}}
 phase: A

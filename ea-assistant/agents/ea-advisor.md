@@ -1,6 +1,6 @@
 ---
 name: ea-advisor
-description: |-
+description: >-
   Use this agent when the user has a question about TOGAF 10, Zachman Framework, ArchiMate notation, EA best practices, or needs advice on how to approach an architecture decision. Examples:
   <example> Context: User is unsure which TOGAF artifact to create. user: "What's the difference between the Architecture Vision and the Statement of Architecture Work?" assistant: "I'll use the ea-advisor to explain the difference and help you decide which to focus on." <commentary> TOGAF framework questions require the ea-advisor's domain knowledge. </commentary> </example>
   <example> Context: User wants to classify an artifact using Zachman. user: "Which Zachman cell does a logical data model belong to?" assistant: "I'll use the ea-advisor to classify that using the Zachman Framework." <commentary> Zachman classification questions are a core ea-advisor capability. </commentary> </example>

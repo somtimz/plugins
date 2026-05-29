@@ -233,7 +233,7 @@ Before bumping `plugin.json` version, update all six files:
 | File | What to update |
 |---|---|
 | `.claude-plugin/plugin.json` | Version; description if changed |
-| `../.claude-plugin/marketplace.json` | Version + description — **must exactly match `plugin.json`** |
+| `../.claude-plugin/marketplace.json` (repo root) | Version + description — **must exactly match `plugin.json`** |
 | `docs/PRD.md` | Version; new feature sections; revised counts |
 | `commands/ea-help.md` | Commands table; tips |
 | `README.md` | Feature bullets; commands table |

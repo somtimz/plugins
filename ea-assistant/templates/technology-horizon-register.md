@@ -1,8 +1,11 @@
 ---
+artifactId: technology-horizon-register
 artifact: Technology Horizon Register
 engagement: "{{engagement_name}}"
 phase: All
 status: Active
+templateVersion: 0.9.55
+reviewStatus: Not Reviewed
 lastModified: "{{YYYY-MM-DDTHH:MM:SSZ}}"
 taxonomy:
   domain: Technology

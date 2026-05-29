@@ -1,5 +1,6 @@
 ---
 artifact: cross-cutting-index
+artifactId: cross-cutting-index
 engagement: {{engagement_name}}
 phase: All
 status: Draft
@@ -7,6 +8,7 @@ reviewStatus: Not Reviewed
 version: 0.1
 lastModified: {{YYYY-MM-DDTHH:MM:SSZ}}
 taxonomy:
+templateVersion: 0.9.55
   domain: Cross-cutting
   category: Governance
   audience: Architecture

@@ -1,8 +1,11 @@
 ---
+artifactId: standards-register
 artifact: Standards Register
 engagement: "{{engagement_name}}"
 phase: All
 status: Active
+templateVersion: 0.9.55
+reviewStatus: Not Reviewed
 lastModified: "{{YYYY-MM-DDTHH:MM:SSZ}}"
 taxonomy:
   domain: Cross-cutting

@@ -4,7 +4,7 @@ organization: "Acme Corporation"
 architect_name: "Jane Smith"
 architecture_scope: "Retail and Supply Chain domains"
 start_date: "2025-01"
-current_phase: "Phase A"
+current_phase: "A"
 completed_phases: []
 requirements_repo_path: ""
 ---
@@ -21,7 +21,7 @@ Claude will load this context automatically when you use `/ea-open`.
 - **architect_name** — Lead architect's name (appears in artifact footers)
 - **architecture_scope** — Brief description of what domains/systems are in scope
 - **start_date** — Engagement start date (YYYY-MM format)
-- **current_phase** — Active ADM phase (Prelim, Req, A, B, C, D, E, F, G, or H)
-- **completed_phases** — List of phases already completed, e.g. `["Prelim", "Req"]`
+- **current_phase** — Active ADM phase. Valid values: `Preliminary`, `Requirements`, `A`, `B`, `C (Data)`, `C (App)`, `D`, `E`, `F`, `G`, `H`
+- **completed_phases** — List of phases already completed, e.g. `["Preliminary", "Requirements"]`
 - **requirements_repo_path** — Optional path to an external requirements file or repo to sync from
 - **uiMode** — UI delivery mode: `artifact` or `html` (default: `html`). Use `artifact` in Claude Code Desktop, Cowork Desktop, or claude.ai/code for inline React artifacts. Use `html` (or omit) in CLI for standalone browser HTML

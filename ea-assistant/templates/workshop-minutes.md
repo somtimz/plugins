@@ -1,4 +1,5 @@
 ---
+artifactId: workshop-minutes
 artifact: Workshop Minutes
 workshopId: WS-{{NNN}}
 title: {{workshop_title}}
@@ -9,7 +10,8 @@ location: {{location}}
 status: In Progress
 phase: {{phase_or_cross-cutting}}
 relatedArtifact: {{artifact_or_phase_or_topic}}
-templateVersion: 0.9.31
+templateVersion: 0.9.55
+reviewStatus: Not Reviewed
 lastModified: {{YYYY-MM-DDTHH:MM:SSZ}}
 taxonomy:
   domain: Cross-cutting

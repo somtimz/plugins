@@ -1,11 +1,12 @@
 ---
+artifactId: business-model-canvas
 artifact: Business Model Canvas
 engagement: {{engagement_name}}
 phase: B
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-templateVersion: 0.9.5
+templateVersion: 0.9.55
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   domain: Business

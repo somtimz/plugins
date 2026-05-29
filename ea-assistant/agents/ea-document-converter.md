@@ -1,6 +1,6 @@
 ---
 name: ea-document-converter
-description: >
+description: >-
   Use this agent to convert an uploaded file into a clean Markdown or Mermaid
   intermediate before the ea-document-analyst processes it. Invoke whenever a
   document or diagram has been placed in uploads/ and needs to be normalised
@@ -212,7 +212,7 @@ Do not perform any EA mapping, artifact population, or interpretation yourself. 
 
 ---
 
-## Quality Rules
+## Quality Standards
 
 - **Faithful extraction only** — never paraphrase, summarise, or add content not present in the source
 - **Preserve structure** — heading hierarchy, table columns, and list nesting must be maintained
