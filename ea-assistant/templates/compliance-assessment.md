@@ -1,5 +1,4 @@
 ---
-artifactId: compliance-assessment
 artifact: Compliance Assessment
 artifactId: compliance-assessment
 engagement: {{engagement_name}}

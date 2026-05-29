@@ -1,5 +1,4 @@
 ---
-artifactId: governance-framework
 artifact: Architecture Governance Framework
 artifactId: governance-framework
 engagement: {{engagement_name}}

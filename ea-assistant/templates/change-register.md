@@ -1,5 +1,4 @@
 ---
-artifactId: change-register
 artifact: Change Register
 artifactId: change-register
 engagement: {{engagement_name}}

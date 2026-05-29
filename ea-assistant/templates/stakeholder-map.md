@@ -1,5 +1,4 @@
 ---
-artifactId: stakeholder-map
 artifact: Stakeholder Map
 artifactId: stakeholder-map
 engagement: {{engagement_name}}

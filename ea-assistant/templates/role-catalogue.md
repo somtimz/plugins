@@ -1,5 +1,4 @@
 ---
-artifactId: role-catalogue
 artifact: Role Catalogue
 artifactId: role-catalogue
 engagement: {{engagement_name}}

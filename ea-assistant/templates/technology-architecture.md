@@ -1,5 +1,4 @@
 ---
-artifactId: technology-architecture
 artifact: Technology Architecture
 artifactId: technology-architecture
 engagement: {{engagement_name}}

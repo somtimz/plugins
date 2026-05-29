@@ -1,5 +1,4 @@
 ---
-artifactId: architecture-definition-document
 artifact: Architecture Definition Document
 artifactId: architecture-definition-document
 engagement: {{engagement_name}}

@@ -1,5 +1,4 @@
 ---
-artifactId: business-model-canvas
 artifact: Business Model Canvas
 artifactId: business-model-canvas
 engagement: {{engagement_name}}

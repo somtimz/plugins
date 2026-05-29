@@ -1,5 +1,4 @@
 ---
-artifactId: implementation-governance-plan
 artifact: Implementation Governance Plan
 artifactId: implementation-governance-plan
 engagement: {{engagement_name}}

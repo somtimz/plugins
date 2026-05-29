@@ -1,5 +1,4 @@
 ---
-artifactId: vendor-landscape-register
 artifact: Vendor Landscape Register
 artifactId: vendor-landscape-register
 engagement: "{{engagement_name}}"

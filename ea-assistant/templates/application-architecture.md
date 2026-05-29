@@ -1,5 +1,4 @@
 ---
-artifactId: application-architecture
 artifact: Application Architecture
 artifactId: application-architecture
 engagement: {{engagement_name}}

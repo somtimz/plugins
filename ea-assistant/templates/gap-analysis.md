@@ -1,5 +1,4 @@
 ---
-artifactId: gap-analysis
 artifact: Gap Analysis
 artifactId: gap-analysis
 engagement: {{engagement_name}}

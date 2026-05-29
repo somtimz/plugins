@@ -1,5 +1,4 @@
 ---
-artifactId: stakeholder-action-plan
 artifact: Stakeholder Action Plan
 artifactId: stakeholder-action-plan
 engagement: {{engagement_name}}

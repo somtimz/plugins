@@ -1,5 +1,4 @@
 ---
-artifactId: data-architecture
 artifact: Data Architecture
 artifactId: data-architecture
 engagement: {{engagement_name}}

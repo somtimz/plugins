@@ -1,5 +1,4 @@
 ---
-artifactId: requirements-register
 artifact: Architecture Requirements Register
 artifactId: requirements-register
 engagement: {{engagement_name}}

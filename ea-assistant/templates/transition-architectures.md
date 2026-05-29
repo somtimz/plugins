@@ -1,5 +1,4 @@
 ---
-artifactId: transition-architectures
 artifact: Transition Architectures
 artifactId: transition-architectures
 engagement: {{engagement_name}}

@@ -1,5 +1,4 @@
 ---
-artifactId: pending-architecture-decision
 artifact: Pending Architecture Decision
 artifactId: pad-{{NNN}}
 padid: PAD-{{NNN}}

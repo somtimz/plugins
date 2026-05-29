@@ -1,5 +1,4 @@
 ---
-artifactId: architecture-roadmap
 artifact: Architecture Roadmap
 artifactId: architecture-roadmap
 engagement: {{engagement_name}}

@@ -1,5 +1,4 @@
 ---
-artifactId: workshop-minutes
 artifact: Workshop Minutes
 artifactId: ws-{{NNN}}
 workshopId: WS-{{NNN}}

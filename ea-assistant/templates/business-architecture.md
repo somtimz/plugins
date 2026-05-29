@@ -1,5 +1,4 @@
 ---
-artifactId: business-architecture
 artifact: Business Architecture
 artifactId: business-architecture
 engagement: {{engagement_name}}

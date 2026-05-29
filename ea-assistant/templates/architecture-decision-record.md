@@ -1,5 +1,4 @@
 ---
-artifactId: architecture-decision-record
 artifact: Architecture Decision Record
 artifactId: adr-{{NNN}}
 adrid: ADR-{{NNN}}
