@@ -4,7 +4,7 @@ organization: "Acme Corporation"
 architect_name: "Jane Smith"
 architecture_scope: "Retail and Supply Chain domains"
 start_date: "2025-01"
-current_phase: "A"
+current_phase: "Preliminary"  # Initial phase for new engagements; use /ea-open to update
 completed_phases: []
 requirements_repo_path: ""
 ---

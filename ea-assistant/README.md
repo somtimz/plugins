@@ -30,6 +30,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Requirements analysis** — extract structured requirements from uploaded documents, map to ADM phases and Zachman cells
 - **Stakeholder interviews** — chat-based or interactive web form; dated and versioned notes
 - **Diagram support** — Mermaid, Graphviz (.dot), Draw.io (.drawio), ArchiMate notation
+- **EA tool import** — ingest Sparx XMI, Archi tool `.archimate`, and LeanIX CSV/JSON exports; map elements to engagement artifacts
 - **Decision Register** — cross-artifact decision tracking with governance states (Provisional → Verified/Voted/Fiat), owner attribution, and on-demand registers tailored by audience, domain, authority, cost, impact, or risk
 - **Artifact grill** — deep-review any artifact using grill-me skills (stress-test, premortem, decision, design, software-design, infra-design, artifact, diagram, boardroom-strategy); auto-selects best skill by artifact type; apply findings back to the artifact one revision at a time with per-revision confirm/skip/edit
 - **Opt-out tracking** — explicitly opt out of any question or artifact; reasons and timestamps recorded; surfaced in status reports and consolidated documents

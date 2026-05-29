@@ -1,6 +1,7 @@
 ---
 artifactId: workshop-minutes
 artifact: Workshop Minutes
+artifactId: ws-{{NNN}}
 workshopId: WS-{{NNN}}
 title: {{workshop_title}}
 engagement: {{engagement_name}}

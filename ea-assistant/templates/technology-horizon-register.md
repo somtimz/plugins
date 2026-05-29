@@ -1,6 +1,7 @@
 ---
 artifactId: technology-horizon-register
 artifact: Technology Horizon Register
+artifactId: technology-horizon-register
 engagement: "{{engagement_name}}"
 phase: All
 status: Active

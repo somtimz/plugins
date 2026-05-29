@@ -1,6 +1,7 @@
 ---
 artifactId: standards-register
 artifact: Standards Register
+artifactId: standards-register
 engagement: "{{engagement_name}}"
 phase: All
 status: Active

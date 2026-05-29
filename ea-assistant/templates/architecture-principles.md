@@ -1,6 +1,7 @@
 ---
 artifactId: architecture-principles
 artifact: Architecture Principles
+artifactId: architecture-principles
 engagement: {{engagement_name}}
 phase: Preliminary
 status: Draft

@@ -1,6 +1,7 @@
 ---
 artifactId: migration-plan
 artifact: Migration Plan
+artifactId: migration-plan
 engagement: {{engagement_name}}
 phase: F
 status: Draft

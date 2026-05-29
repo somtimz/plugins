@@ -1,6 +1,7 @@
 ---
 artifactId: architecture-vision
 artifact: Architecture Vision
+artifactId: architecture-vision
 engagement: {{engagement_name}}
 phase: A
 status: Draft

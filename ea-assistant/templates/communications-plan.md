@@ -1,6 +1,7 @@
 ---
 artifactId: communications-plan
 artifact: Communications Plan
+artifactId: communications-plan
 engagement: {{engagement_name}}
 phase: A
 status: Draft

@@ -1,6 +1,7 @@
 ---
 artifactId: constraints-register
 artifact: Architecture Constraints Register
+artifactId: constraints-register
 engagement: {{engagement_name}}
 phase: All
 status: Draft

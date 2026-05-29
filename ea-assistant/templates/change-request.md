@@ -1,6 +1,7 @@
 ---
 artifactId: change-request
 artifact: Architecture Change Request
+artifactId: acr-{{NNN}}
 engagement: {{engagement_name}}
 phase: H
 status: Draft

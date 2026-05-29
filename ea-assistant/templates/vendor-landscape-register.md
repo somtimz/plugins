@@ -1,13 +1,14 @@
 ---
 artifactId: vendor-landscape-register
 artifact: Vendor Landscape Register
+artifactId: vendor-landscape-register
 engagement: "{{engagement_name}}"
 phase: All
 status: Active
-lastModified: "{{YYYY-MM-DDTHH:MM:SSZ}}"
-taxonomy:
 templateVersion: 0.9.55
 reviewStatus: Not Reviewed
+lastModified: "{{YYYY-MM-DDTHH:MM:SSZ}}"
+taxonomy:
   domain: Technology
   category: Register
   audience: Architecture

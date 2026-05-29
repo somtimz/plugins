@@ -1,6 +1,7 @@
 ---
 artifactId: architecture-contract
 artifact: Architecture Contract
+artifactId: architecture-contract
 engagement: {{engagement_name}}
 phase: G
 status: Draft

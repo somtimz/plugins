@@ -1,6 +1,7 @@
 ---
 artifactId: traceability-matrix
 artifact: Requirements Traceability Matrix
+artifactId: traceability-matrix
 engagement: {{engagement_name}}
 phase: Requirements
 status: Draft

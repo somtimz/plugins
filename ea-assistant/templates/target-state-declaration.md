@@ -1,6 +1,7 @@
 ---
 artifactId: target-state-declaration
 artifact: Target State Declaration
+artifactId: target-state-declaration
 engagement: {{engagement_name}}
 phase: A
 status: Draft

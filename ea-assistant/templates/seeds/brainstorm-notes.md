@@ -1,6 +1,6 @@
 ---
 engagement: "{{engagement_name}}"
-phase: "{{phase}}"
+phase: "{{phase}}"  # e.g. "Phase A — Architecture Vision"
 lastUpdated: "{{today_iso8601}}"
 sessions: 0
 ---

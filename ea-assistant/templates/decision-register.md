@@ -1,6 +1,7 @@
 ---
 artifactId: decision-register
 artifact: Decision Register
+artifactId: decision-register
 engagement: {{engagement_name}}
 phase: All
 status: Draft

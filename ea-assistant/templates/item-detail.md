@@ -1,4 +1,5 @@
 ---
+artifactId: item-detail
 artifact: Item Detail
 phase: All
 taxonomy: cross-cutting

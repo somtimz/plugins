@@ -1,6 +1,7 @@
 ---
 artifactId: engagement-charter
 artifact: Engagement Charter
+artifactId: engagement-charter
 engagement: {{engagement_name}}
 phase: Preliminary
 status: Draft

@@ -6,9 +6,9 @@ phase: All
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
+templateVersion: 0.9.55
 lastModified: {{YYYY-MM-DDTHH:MM:SSZ}}
 taxonomy:
-templateVersion: 0.9.55
   domain: Cross-cutting
   category: Governance
   audience: Architecture

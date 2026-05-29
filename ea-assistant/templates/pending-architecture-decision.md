@@ -1,6 +1,7 @@
 ---
 artifactId: pending-architecture-decision
 artifact: Pending Architecture Decision
+artifactId: pad-{{NNN}}
 padid: PAD-{{NNN}}
 title: {{pending_decision_title}}
 engagement: {{engagement_name}}

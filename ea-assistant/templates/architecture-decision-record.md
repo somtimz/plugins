@@ -1,6 +1,7 @@
 ---
 artifactId: architecture-decision-record
 artifact: Architecture Decision Record
+artifactId: adr-{{NNN}}
 adrid: ADR-{{NNN}}
 title: {{decision_title}}
 engagement: {{engagement_name}}

@@ -1,6 +1,7 @@
 ---
 artifactId: statement-of-architecture-work
 artifact: Statement of Architecture Work
+artifactId: statement-of-architecture-work
 engagement: {{engagement_name}}
 phase: A
 status: Draft
