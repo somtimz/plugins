@@ -84,6 +84,16 @@
 }
 ```
 
+**Phase status enum:** `Not Started | In Progress | Complete | On Hold | Not Applicable`. `Not Applicable` is set by ADM tailoring at `/ea-new` (recommended phase set derived from `architectureLevel`) and carries an `optOutReason` field on the phase entry. Not-Applicable phases keep their `phases{}` entry but are excluded from picklists and `/ea-status` progress counts (already implemented there); their `artifacts/{phase-folder}/` is not created at seeding. `/ea-phase` offers re-inclusion (restores `Not Started`, clears `optOutReason`, creates the folder). Phase-level tailoring uses this status — not the `optOuts[]` array, which remains for question- and artifact-level opt-outs.
+
+## Schema Versioning & Source of Truth
+
+**`schemaVersion`** (integer, current: **1**) tracks the structure of `engagement.json` itself, independent of the plugin version (`pluginVersion` tracks which plugin release last touched the engagement; `lastMigratedVersion` tracks the last `/ea-migrate` alignment). Increment the schema version only when the JSON structure changes incompatibly (renamed/moved keys, changed types) — additive fields do not bump it. Engagements without the field are pre-versioning; `/ea-migrate` adds it.
+
+**`migrations[]`** is the audit trail: `/ea-migrate` appends one entry per run — `{ date, fromPluginVersion, toPluginVersion, fromSchemaVersion, toSchemaVersion, gapsFound, gapsFixed, gapsSkipped }`. Never edit or prune entries manually.
+
+**Source of truth:** `engagement.json` is the single source of truth for all direction items (drivers, goals, objectives, strategies, issues, problems, metrics, policies, gaps), phase state, and the artifact registry. Generated register markdown files (`*-register.md`) are **rendered views** — regenerate them after any change; never edit them to change state (the exceptions are registers whose content lives only in markdown: Risk, Requirements, Constraints, Policies registers, which are file-mastered with `engagement.json` holding metadata). Snapshot files under `snapshots/` are point-in-time archives per the register snapshot convention.
+
 ## Field Version History
 
 **v0.2.0 fields** — absent in legacy engagements; treat as `null` / defaults if missing:

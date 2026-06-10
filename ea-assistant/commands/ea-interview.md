@@ -150,6 +150,7 @@ Present the filtered list to the user as: "**Your engagement priorities for this
    - Loaded research items relevant to this phase
    - Prior grill review files for any artifact in this phase
    - **Skip already-answered questions:** Before presenting each question from the question bank, check whether the corresponding field in the target artifact(s) for this phase already has a non-placeholder, non-`⚠️ Not answered`, non-`⊘` value. If so, skip that question and note it as already captured. Present a count at the start: "Skipping {N} questions — already captured in existing artifacts. Starting with {M} remaining questions."
+   - **Framework lens offer** (phases C-Data, C-App, D, E only): after the question bank's optional Security Questions section, offer framework lens questions per consumption point 2 in `skills/ea-framework-lenses/SKILL.md` — load the chosen lens reference and ask its Interview Questions for the current phase, routing answers per the lens's routing tables. Skip the offer silently when the engagement has no cloud or infrastructure scope signals.
 
    The `ea-interviewer` agent must reference this context during Q&A: cite research or prior notes when they support or contradict a user's answer.
 

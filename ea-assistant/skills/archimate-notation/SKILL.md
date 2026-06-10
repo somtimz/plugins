@@ -1,7 +1,7 @@
 ---
 name: archimate-notation
 description: This skill should be used when the user asks to "create an ArchiMate diagram", "model this in ArchiMate", "what ArchiMate element is this", "show the ArchiMate layers", "represent this architecture using ArchiMate", or when producing architecture diagrams using ArchiMate 3.x notation. Provides element types, layers, relationships, and diagram guidance including Mermaid, Graphviz, and Draw.io representations.
-version: 0.9.57
+version: 0.9.59
 ---
 
 # ArchiMate Notation

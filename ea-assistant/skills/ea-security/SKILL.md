@@ -1,7 +1,7 @@
 ---
 name: ea-security
 description: Security architecture knowledge store for ea-assistant — SABSA layer mapping, ISO 27001:2022 controls, NIST CSF 2.0 functions, artifact security checklists, and phase-specific interview questions
-version: 0.9.57
+version: 0.9.59
 ---
 
 # EA Security Skill

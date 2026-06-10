@@ -1054,6 +1054,11 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 If the user describes content, offer to launch `/ea-diagram` immediately. Output routing: diagram file → `diagrams/`, filename added to Migration Plan frontmatter `diagrams: []`.
 See `skills/ea-artifact-templates/references/diagram-catalogue.md` for a Mermaid starter.
 
+### Security Questions (optional)
+> Offer this section after completing the standard phase questions. Ask: "Would you like to address security concerns for Phase F? (y/n)"
+
+Load the **Phase F — Migration Planning** section of `skills/ea-security/references/security-interview-questions.md` and ask its questions, routing answers per its output routing table (migration data protection, coexistence/cutover risks, secrets rotation, secure decommissioning, third-party access, per-wave security go/no-go).
+
 ---
 
 ## Phase G — Implementation Governance Interview
@@ -1154,6 +1159,12 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for a Mermaid
 - The ADM trigger criteria question prevents scope creep being managed as minor changes — agree on clear thresholds upfront.
 - Ask for examples of how previous architecture changes were handled to calibrate the maturity of the change management process.
 - Lessons learned capture is frequently skipped under delivery pressure; recommend a brief retrospective as a scheduled deliverable rather than an ad hoc activity.
+- For ACR triage, classification thresholds, and re-entry mapping, use `skills/ea-engagement-lifecycle/references/phase-h-change-guide.md`.
+
+### Security Questions (optional)
+> Offer this section after completing the standard phase questions. Ask: "Would you like to address security concerns for Phase H? (y/n)"
+
+Load the **Phase H — Architecture Change Management** section of `skills/ea-security/references/security-interview-questions.md` and ask its questions, routing answers per its output routing table (ACR security impact assessment, re-assessment triggers, control drift, policy/constraint review cycles, incident-learning feedback).
 
 ---
 
@@ -1173,7 +1184,7 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for a Mermaid
 
 1. What must the architecture enable that is not possible today? List the top 3–5 new business capabilities required.
 2. Which existing capabilities must be preserved, enhanced, or replaced in the target state?
-3. Are there specific integration or interoperability requirements — systems that must exchange data or trigger each other?
+3. Are there specific integration or interoperability requirements — systems that must exchange data or trigger each other? For each boundary surfaced, apply `skills/ea-requirements-management/references/interoperability-requirements.md` — category (business/information/technical), degree (1–4), and capture conventions (REQ-NNN with measurable target; IFC-NNN for degree ≥ 3 boundaries).
 4. Are there reporting or data access requirements — what information must be available to whom and when?
 5. Are there workflow or process automation requirements that the architecture must support?
 

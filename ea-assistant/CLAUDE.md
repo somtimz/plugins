@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.57 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.59 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -116,8 +116,10 @@ The following advanced practitioner content is available for L3+ engagements:
 | `skills/ea-engagement-lifecycle/references/failure-modes.md` | 6 recurring failure modes with symptoms, fixes, and prevention |
 | `skills/ea-engagement-lifecycle/references/elite-architect-playbook.md` | Day-to-day behaviors and self-assessment for high-impact architects |
 | `docs/practitioner-white-paper.md` | Synthesized white paper for stakeholder communication |
+| `skills/ea-framework-lenses/references/aws-well-architected.md` | AWS Well-Architected lens — 6 pillars mapped to ADM phases, review checklist, interview questions (any maturity level, cloud-scope engagements) |
+| `skills/ea-engagement-lifecycle/references/phase-h-change-guide.md` | ACR triage, Simplification/Incremental/Re-architecting classification, escalation timeboxes, ADM re-entry mapping |
 
-These are loaded automatically by `/ea-grill --skill practitioner|maturity|failure-mode`, `/ea-brainstorm` advanced pauses, and `/ea-interview` phase mode.
+These are loaded automatically by `/ea-grill --skill practitioner|maturity|failure-mode|waf`, `/ea-brainstorm` advanced pauses, `/ea-interview` phase mode, and `/ea-changes`.
 
 ---
 
@@ -160,6 +162,8 @@ These are loaded automatically by `/ea-grill --skill practitioner|maturity|failu
 | VDR-NNN | Vendor Landscape entry (Architecture Repository) | VDR-001 |
 | THR-NNN | Technology Horizon entry (Architecture Repository) | THR-001 |
 | STD-NNN | Standards Information Base entry (Architecture Repository) | STD-001 |
+| SVC-NNN | Service (Business / Application / Technology service catalogue) | SVC-001 |
+| IFC-NNN | Interface (interface catalogue — contract/access point) | IFC-001 |
 
 **Do not use domain-prefixed IDs** (BG-/DG-/AG-/TG- etc.) — the scheme is unified and domain-agnostic. **Exception:** Architecture Principles use the TOGAF-standard four-domain prefixes (BP/DP/AP/TP) because the principle domain is itself a first-class classification, not a field-level qualifier.
 

@@ -14,6 +14,8 @@ Reference for `/ea-migrate`. Defines all gap checks, severity levels, and remedi
 | `architectureDomains` field present | Absent (pre-0.2.0) | Low |
 | `optOuts` field present | Absent (pre-0.8.0) | Low |
 | `architectureLevel` field present | Absent (pre-0.9.28) | Low |
+| `schemaVersion` field present | Absent (pre-0.9.59) | Low |
+| `migrations` field present | Absent (pre-0.9.59) | Low |
 | `requirements-index.json` scope values use Enterprise/Program | `scope: "Corporate"` or `"Project"` found (pre-0.9.35) | Low |
 
 **Remediations:**
@@ -25,6 +27,8 @@ Reference for `/ea-migrate`. Defines all gap checks, severity levels, and remedi
 - `architectureDomains` absent → add `"architectureDomains": ["Business","Data","Application","Technology"]`
 - `optOuts` absent → add `"optOuts": []`
 - `architectureLevel` absent → add `"architectureLevel": null`; inform: "Set this via `/ea-config metadata` — allowed values: Strategic, Segment, Capability, Solution. Defaults to Segment until set."
+- `schemaVersion` absent → add `"schemaVersion": 1` (current schema version per `engagement-schema.md`)
+- `migrations` absent → add `"migrations": []` (the current run appends its audit entry in Step 7)
 - Legacy scope values (`Corporate`/`Project`) → rename all `"Corporate"` → `"Enterprise"` and `"Project"` → `"Program"` in `requirements-index.json`. Non-destructive; no content change.
 
 ## 3b — Expected Artifacts Missing

@@ -45,7 +45,28 @@ Before creating the engagement, walk up from the current directory looking for `
 
 3. Check that `EA-projects/{slug}/` does not already exist. If it does, inform the user and ask for a different name or whether to use the existing one.
 
-4. Create the directory structure and seed files:
+3b. **ADM tailoring** — propose a phase set derived from the Architecture Level, then let the user adjust:
+
+   | Level | Recommended phase set |
+   |---|---|
+   | Strategic | All phases (full ADM cycle) |
+   | Segment | All phases |
+   | Capability | All phases; offer to opt out of **Preliminary** when an Architecture Repository is linked (inherit enterprise principles/governance instead of re-establishing them) |
+   | Solution | Offer to opt out of **Preliminary** (inherit from repository) and **Phase H** (change management handled at enterprise level); all other phases included but scoped to the solution |
+
+   Present:
+   ```
+   Recommended phases for a {level} engagement: {list}
+   Suggested opt-outs: {list with reasons, or "none"}
+   Accept the recommendation, or adjust? (accept / toggle <phase> / full)
+   ```
+   - `accept` — apply the recommendation
+   - `toggle <phase>` — flip a phase in/out (ask for a one-line reason when opting out)
+   - `full` — include all phases regardless of level
+
+   Requirements and the cross-cutting folder are always included — Requirements Management is the continuous center of the ADM and cannot be opted out.
+
+4. Create the directory structure and seed files — **create `artifacts/{phase-folder}/` only for included phases** (plus `requirements/` and `cross-cutting/`, always):
    ```
    EA-projects/{slug}/
    ├── .claude/
@@ -92,7 +113,7 @@ Before creating the engagement, walk up from the current directory looking for `
    The EA interviewer surfaces relevant content from here during interviews.
    ```
 
-5. Write `EA-projects/{slug}/engagement.json` using the template in `templates/seeds/engagement-json.md`, populated with all collected fields including `architectureLevel`. Set all ADM phases to `Not Started`. Read `.claude-plugin/plugin.json` and set `pluginVersion` and `lastMigratedVersion` to the `version` field value (new engagements start fully aligned). Set `lastModified` to now (ISO 8601 timestamp). See `skills/ea-engagement-lifecycle/references/engagement-schema.md` for the full annotated schema.
+5. Write `EA-projects/{slug}/engagement.json` using the template in `templates/seeds/engagement-json.md`, populated with all collected fields including `architectureLevel`. Set included ADM phases to `Not Started`; set opted-out phases to `Not Applicable` with an `optOutReason` field (from step 3b). Phases with `Not Applicable` status keep their entry in `phases[]` — they are excluded from picklists and progress counts (`/ea-status` already excludes them) but can be re-included later via `/ea-phase` (which restores `Not Started` and creates the folder). Read `.claude-plugin/plugin.json` and set `pluginVersion` and `lastMigratedVersion` to the `version` field value (new engagements start fully aligned); `schemaVersion` and `migrations` come from the seed (current schema, empty audit trail). Set `lastModified` to now (ISO 8601 timestamp). See `skills/ea-engagement-lifecycle/references/engagement-schema.md` for the full annotated schema.
 
 ### Auto-link to Architecture Repository
 
@@ -114,6 +135,7 @@ If no workspace: `repoPath` stays `null`. User can link later via `/ea-repo link
 8. Confirm success to the user and display:
    - Engagement name and slug
    - Architecture Level: `{architectureLevel}`
+   - Tailored phase set: `{included phases}`; opted out: `{phases with reasons, or "none"}`
    - Plugin Version: `{pluginVersion}` (ea-assistant version active at creation)
    - Folder location: `EA-projects/{slug}/`
    - Offer to begin the **Preliminary phase** immediately or return to the main menu

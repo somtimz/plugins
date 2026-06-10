@@ -10,6 +10,8 @@ You are executing the `/ea-changes` command. Load the `ea-engagement-lifecycle` 
 
 The Change Register aggregates all `change-request-*.md` (and `change-request.md`) artifacts in `EA-projects/{slug}/artifacts/` into a single cross-engagement view. It provides a consolidated picture of proposed, approved, rejected, and deferred architecture changes.
 
+For triaging an ACR — classification (Simplification / Incremental / Re-architecting), escalation rules, timeboxes, and ADM re-entry mapping — apply `skills/ea-engagement-lifecycle/references/phase-h-change-guide.md`. When the register shows open ACRs past their classification timebox, flag them: "⚠️ {N} open ACR(s) past their decision timebox — escalate per the Phase H change guide."
+
 ---
 
 ## Step 1 — Resolve Active Engagement

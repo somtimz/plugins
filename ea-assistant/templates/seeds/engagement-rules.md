@@ -114,7 +114,7 @@ Conformance > taste inside the engagement.
 
 ### IDs
 
-- Use the unified ID scheme: DRV-NNN, G-NNN, OBJ-NNN, STR-NNN, MET-NNN, ISS-NNN, PRB-NNN, RIS-NNN, ADR-NNN, REQ-NNN, WP-NNN, GAP-NNN, CON-NNN, CST-NNN, ABB-NNN, SBB-NNN, STY-NNN.
+- Use the unified ID scheme: DRV-NNN, G-NNN, OBJ-NNN, STR-NNN, MET-NNN, ISS-NNN, PRB-NNN, RIS-NNN, ADR-NNN, REQ-NNN, WP-NNN, GAP-NNN, CON-NNN, CST-NNN, ABB-NNN, SBB-NNN, STY-NNN, SVC-NNN, IFC-NNN.
 - Do not use domain-prefixed variants (BG-, DG-, AG-, TG-, BO-, etc.) — these are obsolete.
 
 ### Write Protocol

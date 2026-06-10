@@ -186,6 +186,27 @@ Artefacts are listed by ADM phase. Where an artefact spans multiple phases (e.g.
 
 ---
 
+### Business Transformation Readiness Assessment
+
+**Purpose:** Rates the organisation's readiness to absorb the transformation across twelve TOGAF readiness factors (vision clarity, desire, need, business case, funding, sponsorship, governance, accountability, workable approach, IT capacity, enterprise capacity, ability to implement and operate) — each with a readiness rating, urgency, and difficulty to fix. Low-readiness factors become risks (RIS-NNN) and readiness work packages, and cap how much concurrent change the roadmap may schedule.
+
+**Audience:** Sponsor, programme leadership, architecture team.
+
+**Contents:**
+- Readiness factor table (12 factors × readiness/urgency/difficulty/evidence)
+- Factor detail blocks for Low/None factors with readiness actions
+- Roadmap implications (change-capacity ceiling, readiness work packages)
+
+**When to Create:** Phase A (first assessment); reassessed at Phase E before wave sequencing — the roadmap must respect readiness, not assume it.
+
+**Who Reviews:** Sponsor, programme manager, architecture team lead.
+
+**Phase:** A (refined in E).
+
+**Template:** `business-transformation-readiness.md` — create with `/ea-artifact create business-transformation-readiness`.
+
+---
+
 ### Architecture Definition Document
 
 **Purpose:** The primary container for all architecture descriptions produced across the ADM cycle. Brings together the Business, Data, Application, and Technology architecture chapters into a single coherent document with cross-domain alignment and baseline/target narratives. Evolves from a skeleton in Phase A to a finalised, approved baseline in Phase F.

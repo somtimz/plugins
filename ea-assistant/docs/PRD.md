@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.57
+**Version:** 0.9.59
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -998,6 +998,31 @@ New command `/ea-scenarios` and template `templates/business-scenario.md` suppor
 - `generate` — produce a Scenarios Summary Register cross-cutting artifact
 
 **Template sections:** (1) Problem Statement with ISS/PRB/DRV links, (2) Objectives table with SMART check, (3) Environment (Internal / External / Technology Context), (4) Stakeholders and Concerns, (5) Actors — §5.1 Human Actors + §5.2 Computing Actors with Existing/To Be Built/To Be Modified status, (6) Requirements (REQ-NNN by domain with source tracing), (7) Current State Narrative with friction points, (8) Target State Narrative with success signals, (9) Change Delta table (Process / Data / Application / Technology), (10) Scenario Diagram (optional Mermaid), Traceability Appendix.
+
+### 5.54 Concept Completions, TOGAF Technique Stubs, Schema Versioning (v0.9.59)
+
+P4 (final band) of the 2026-06-10 improvement advisory:
+
+1. **Eight concepts added to `ea-concepts.md`** (definitions, TOGAF/ArchiMate placement, distinctions, quick-reference rows): Service (SVC-NNN), Interface (IFC-NNN), Application/Technology Component (no new IDs — captured as ABB/SBB), Capability Increment, Plateau/Transition Architecture, Deliverable (vs Artifact vs Building Block), Architecture Partitioning (operationalised by `architectureLevel` + ADM tailoring), Enterprise Continuum (realised by the Architecture Repository). New ID prefixes **SVC-NNN** and **IFC-NNN** added to the ID Scheme and engagement-rules seed.
+2. **TOGAF technique stubs:**
+   - **Business Transformation Readiness Assessment** — new `templates/business-transformation-readiness.md` (12 readiness factors × readiness/urgency/difficulty, factor detail blocks, roadmap implications); Phase A artifact, reassessed at Phase E; registered in `artifact-descriptions.md`.
+   - **Capability-Based Planning** — new `references/capability-based-planning.md` (capability as planning unit, increment quality tests, anti-patterns); wired into the `ea-roadmap` agent's work-candidate derivation.
+   - **Interoperability Requirements** — new `skills/ea-requirements-management/references/interoperability-requirements.md` (business/information/technical categories, degrees 1–4, discovery checklist, REQ/IFC/STD capture conventions); wired into the Requirements-phase functional questions.
+   - **Risk appetite & tolerance** — Risk Register template gains a `## Risk Appetite & Tolerance` section (appetite statement + per-rating tolerance/authority/escalation table); `/ea-risks accept` enforces the acceptance-authority column and warns when accepting outside appetite.
+3. **Schema versioning** — `engagement.json` gains `schemaVersion` (integer, current 1) and `migrations[]` (audit trail appended by every `/ea-migrate` run); seed updated; migration-gap-catalogue detects their absence; `engagement-schema.md` adds a Source of Truth declaration (engagement.json masters direction/phases/artifact registry; generated registers are rendered views; file-mastered exceptions named).
+
+---
+
+### 5.53 Framework Lenses, Security F/H Completion, ADM Tailoring, Phase H Change Guide (v0.9.58)
+
+P3 of the 2026-06-10 improvement advisory:
+
+1. **Framework lenses** — new `skills/ea-framework-lenses/` skill: a pluggable mechanism mapping external prescriptive frameworks onto the ADM via a fixed lens-file contract (Pillars → ADM Mapping → Review Checklist → Interview Questions → Tagging Conventions). First lens: **AWS Well-Architected** (`references/aws-well-architected.md`, all 6 pillars). Consumed via `/ea-grill --skill waf` (pillar-by-pillar artifact review) and offered in Phase C-Data/C-App/D/E interviews when the engagement has cloud scope. Azure CAF / GCP frameworks are drop-in reference files. Lens findings land in existing registers (REQ/RIS/GAP/PAD) — never framework-specific stores; lenses do not participate in T1–T4 compliance.
+2. **Security interview coverage completed** — Phase F (migration security: cutover protection, coexistence windows, secrets rotation, secure decommissioning, third-party access) and Phase H (ACR security impact, control drift, policy review cycles, incident-learning feedback) sections added to `security-interview-questions.md` and wired into the phase question bank. All 10 phases now have optional security sections.
+3. **ADM tailoring** — `/ea-new` proposes a phase set from `architectureLevel` (e.g. Solution-level suggests opting out of Preliminary and Phase H), user-adjustable; opted-out phases get status `Not Applicable` + `optOutReason` in `phases{}` (reusing the existing status that `/ea-status` already excludes from progress), and their folders are not seeded. `/ea-phase` offers re-inclusion. Requirements and cross-cutting can never be opted out.
+4. **Phase H change guide** — new `skills/ea-engagement-lifecycle/references/phase-h-change-guide.md`: change drivers, ACR triage flow, TOGAF three-way classification (Simplification / Incremental / Re-architecting) with tests, escalation rules with timeboxes, ADM re-entry mapping, and a per-ACR outputs checklist. Wired into `/ea-changes` (timebox flagging) and the Phase H interview facilitation notes.
+
+---
 
 ### 5.52 Surface-Area Consolidation — Register Protocol, Review Lanes, Continuous Requirements (v0.9.57)
 

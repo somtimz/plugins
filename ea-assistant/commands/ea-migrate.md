@@ -21,7 +21,7 @@ Flags:
 
 ## Step 1 — Resolve Active Engagement
 
-Check context for active slug; if none, scan `EA-projects/*/engagement.json`. Read `engagement.json`. Extract: `name`, `slug`, `pluginVersion`, `lastMigratedVersion`, `artifacts[]`, `direction`, `phases`, `engagementType`, `architectureDomains`.
+Check context for active slug; if none, scan `EA-projects/*/engagement.json`. Read `engagement.json`. Extract: `name`, `slug`, `pluginVersion`, `lastMigratedVersion`, `schemaVersion` (treat as absent for pre-versioning engagements), `artifacts[]`, `direction`, `phases`, `engagementType`, `architectureDomains`.
 
 ---
 
@@ -174,9 +174,13 @@ For `edit`: show the proposed YAML and allow modification before applying.
 
 After all remediations are applied or skipped:
 
-1. Update `engagement.json`: set `pluginVersion` and `lastMigratedVersion` to current version; update `lastModified`
-2. For each modified artifact: update `templateVersion` to current version and `lastModified` to now
-3. Report applied / skipped / remaining counts; suggest re-running if gaps remain
+1. Update `engagement.json`: set `pluginVersion` and `lastMigratedVersion` to current version; set `schemaVersion` to the current schema version (see `engagement-schema.md` — add the field if absent); update `lastModified`
+2. Append a migration audit entry to `engagement.json → migrations[]` (create the array if absent):
+   ```json
+   { "date": "{ISO 8601}", "fromPluginVersion": "{old}", "toPluginVersion": "{current}", "fromSchemaVersion": {old or null}, "toSchemaVersion": {current}, "gapsFound": N, "gapsFixed": N, "gapsSkipped": N }
+   ```
+3. For each modified artifact: update `templateVersion` to current version and `lastModified` to now
+4. Report applied / skipped / remaining counts; suggest re-running if gaps remain
 
 ---
 

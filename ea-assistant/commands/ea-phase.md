@@ -25,7 +25,7 @@ Navigate to a specific TOGAF ADM phase for the active engagement.
    - `G` → Implementation Governance
    - `H` → Architecture Change Management
 
-   If no argument provided, display the phase picklist:
+   If no argument provided, display the phase picklist (Not-Applicable phases shown last, marked `➖`):
    ```
    Select an ADM phase:
    1. Preliminary         [✅ Complete]
@@ -33,12 +33,14 @@ Navigate to a specific TOGAF ADM phase for the active engagement.
    3. Phase A — Vision    [🔄 In Progress]
    4. Phase B — Business  [⬜ Not Started]
    ...
+   9. Phase H — Change    [➖ Not Applicable — "handled at enterprise level"]
    ```
 
 3. Load the selected phase:
    - Update `currentPhase` in `engagement.json`
    - If phase status is `Not Started`, set to `In Progress` and record `startedAt`
    - If phase status is `Complete`, ask: "This phase is marked complete. Would you like to reopen it for editing?"
+   - If phase status is `Not Applicable`, ask: "This phase was opted out at engagement creation ({optOutReason}). Re-include it? (y/n)" — on yes: set status to `Not Started`, clear `optOutReason`, create `artifacts/{phase-folder}/` if missing, then proceed; on no: stop.
 
 4. Display a phase summary:
    ```
