@@ -1,7 +1,7 @@
 ---
 name: ea-policies-management
 description: This skill should be used when the user asks to "manage architecture policies", "add a policy", "view policies", "trace a policy to constraints", "update the policies register", or "assess policy impact". Handles the full policy lifecycle from capture through traceability and linkage to constraints.
-version: 0.9.55
+version: 0.9.56
 ---
 
 # EA Policies Management
@@ -10,18 +10,18 @@ Architecture Policies Management captures, classifies, traces, and manages forma
 
 ## Policies Storage
 
-Local policies are stored in `EA-projects/{slug}/artifacts/policies-register-{YYYY-MM-DD}.md`:
+Local policies are stored in `EA-projects/{slug}/artifacts/cross-cutting/governance/policies-register.md`:
 
 ```
-artifacts/
-├── policies-register-{YYYY-MM-DD}.md   # human-readable policies register
+artifacts/cross-cutting/governance/
+├── policies-register.md   # human-readable policies register (stable filename; superseded versions in snapshots/)
 ```
 
 The `policies` array in `engagement.json` stores metadata and links for fast lookup.
 
 ## Policies Register Format
 
-`policies-register-{YYYY-MM-DD}.md` uses a structured template:
+`policies-register.md` uses a structured template:
 
 ```markdown
 # Architecture Policies Register
@@ -89,7 +89,7 @@ Policies are tracked in `engagement.json` under the `direction` object:
         "supersededBy": "",
         "linkedConstraints": [],
         "linkedPrinciples": [],
-        "sourceFile": "policies-register-YYYY-MM-DD.md"
+        "sourceFile": "policies-register.md"
       }
     ]
   }

@@ -183,15 +183,15 @@ The `cross-cutting-index.md` file at `artifacts/cross-cutting/cross-cutting-inde
 
 ## Decision Register Entry Schema
 
-Multiple decision registers may exist (one per generation date):
+A single decision register entry exists at the stable path (superseded versions are archived to `snapshots/` per the register snapshot convention):
 
 ```json
 {
-  "id": "decision-register-{YYYY-MM-DD}",
-  "name": "Decision Register ({YYYY-MM-DD})",
+  "id": "decision-register",
+  "name": "Decision Register",
   "phase": "All",
-  "file": "artifacts/cross-cutting/governance/decision-register-{YYYY-MM-DD}.md",
-  "reviewFile": "artifacts/cross-cutting/governance/decision-register-{YYYY-MM-DD}.review.md",
+  "file": "artifacts/cross-cutting/governance/decision-register.md",
+  "reviewFile": "artifacts/cross-cutting/governance/decision-register.review.md",
   "status": "Draft",
   "createdAt": "{ISO 8601}",
   "lastModified": "{ISO 8601}",
@@ -199,4 +199,4 @@ Multiple decision registers may exist (one per generation date):
 }
 ```
 
-`/ea-decisions status` uses the most recently generated decision register for its summary.
+`/ea-decisions status` uses the current `decision-register.md` for its summary.

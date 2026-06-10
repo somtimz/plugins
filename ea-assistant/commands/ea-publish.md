@@ -1,11 +1,21 @@
 ---
 name: ea-publish
-description: Publish selected EA artifacts into a single consolidated architecture document, with per-artifact status and date reflected throughout
-argument-hint: "[markdown|word|both]"
+description: Publish selected EA artifacts as a layered, stakeholder-consumable report — executive brief, per-artifact summaries, and links to full artifacts — or a full consolidated document with --full
+argument-hint: "[markdown|word|both] [--full | --executive]"
 allowed-tools: [Read, Write, Bash]
 ---
 
-Publish selected artifacts for the active engagement into a single consolidated document.
+Publish selected artifacts for the active engagement as a stakeholder-consumable report.
+
+**Modes:**
+
+| Mode | Invocation | Output |
+|---|---|---|
+| **Layered** (default) | `/ea-publish` | Executive brief + per-artifact summaries + appendix of links to full artifacts. Readable in one sitting; full detail one click away. |
+| **Full** | `/ea-publish --full` | Single consolidated document embedding the full text of every selected artifact. Use for archival or contractual submission, not stakeholder reading. |
+| **Executive** | `/ea-publish --executive` | Executive Architecture Pack — executive summaries and first diagrams only. |
+
+Every mode also writes/refreshes a stakeholder reading guide at `artifacts/index.md` (Step 6b).
 
 ## Instructions
 
@@ -124,7 +134,61 @@ Compute the overall document status from the included artifacts:
 | Mix of Approved + anything else    | `Mixed — see artifact status table` |
 | Any Needs Revision                 | `Mixed — contains sections requiring revision` |
 
-### Step 5: Build Consolidated Document
+### Step 5L: Build Layered Report (default mode)
+
+Skip this step if `--full` or `--executive` was given.
+
+Assemble a three-layer document — summary first, detail by reference:
+
+```markdown
+# {Engagement Name} — Architecture Report
+
+{Cover page table — same format as Step 5}
+
+## Artifact Status Summary
+{Same table and warnings as Step 5}
+
+---
+
+## 1. Executive Brief
+
+{3–5 pages maximum. Synthesize — do not concatenate:}
+- Situation and strategic intent (from Architecture Vision §Strategic Intent or its Executive Summary)
+- Top drivers and goals (from direction register — top 5–7 by priority, one line each)
+- Key decisions made (Strategic-authority A3 rows + Completed ADRs — one line each with ID)
+- Top risks and open issues (Critical/High only — one line each with ID)
+- Roadmap headline (waves and timeline from Architecture Roadmap, if present)
+
+---
+
+## 2. Artifact Summaries
+
+{One subsection per selected artifact, in ADM order, 1–2 pages each:}
+
+### {Artifact Name}
+> **Phase {phase}  ·  {status badge}  ·  Last modified: {date}**
+
+{The artifact's `## Executive Summary` section. If absent, synthesize a 3–5 paragraph summary from the artifact's main sections — do not embed the full artifact. If `diagrams[]` is non-empty, include the first diagram.}
+
+**Full artifact:** [{relative path}]({relative path})
+
+---
+
+## 3. Appendix — Full Artifact Index
+
+| Artifact | Phase | Status | File |
+|---|---|---|---|
+{One row per selected artifact linking to its source file. Add rows for key registers (risk, decision, requirements, gap) whether or not selected, so readers can reach them.}
+```
+
+Rules:
+- **Never embed full artifact text in layered mode** — that is what `--full` is for.
+- Detail files (Step 2c) are always excluded in layered mode.
+- Apply the link-rewrite table from Step 5 to summary content (links to included artifacts point at their summary anchors; links to excluded artifacts keep display text with a relative file link).
+
+Then continue at Step 5b (Readability Pass).
+
+### Step 5: Build Consolidated Document (`--full` mode only)
 
 Assemble included artifacts in standard TOGAF ADM order (skip any not selected):
 
@@ -213,6 +277,8 @@ If any opt-outs exist (artifact or question level), add:
 
 #### Each Artifact Section
 
+**Strip plugin scaffolding before insertion (all modes):** remove all HTML comments (`<!-- GUIDANCE: ... -->` and any other `<!-- ... -->` blocks) from artifact content. Published output must contain no authoring guidance.
+
 Before inserting each artifact's content, rewrite its links for the consolidated document context:
 
 | Link type | Example | Action |
@@ -270,7 +336,7 @@ Sections missing narrative:    {N}  [list]
 Terminology inconsistencies:   {N}  [list]
 ```
 
-If any **Blocking** issues exist (placeholder text, `⚠️ Not answered` fields, broken image paths):
+If any **Blocking** issues exist (placeholder text, `TBD` / `TODO` markers, `⚠️ Not answered` fields, broken image paths):
 - List each occurrence explicitly (artifact section + text snippet).
 - Ask: "These issues should be resolved before publishing. Choose an option:"
   - **(f) Fix now** — walk through each issue interactively; patch the source artifact and re-assemble the affected section.
@@ -304,8 +370,8 @@ Run a readability rewrite? This will:
 
 ### Step 6: Write Output
 
-- Markdown: `artifacts/consolidated-report-{YYYY-MM-DD}.md`
-- Word: `artifacts/consolidated-report-{YYYY-MM-DD}.docx`
+- Layered mode (default) — Markdown: `artifacts/architecture-report-{YYYY-MM-DD}.md`, Word: `artifacts/architecture-report-{YYYY-MM-DD}.docx`
+- Full mode (`--full`) — Markdown: `artifacts/consolidated-report-{YYYY-MM-DD}.md`, Word: `artifacts/consolidated-report-{YYYY-MM-DD}.docx`
 
 ```bash
 # Bootstrap: install pandoc if not present
@@ -327,6 +393,38 @@ pandoc artifacts/consolidated-report-{date}.md \
 ```
 
 If a `.docx` reference template does not exist, run pandoc without `--reference-doc`.
+
+### Step 6b: Write the Stakeholder Reading Guide
+
+After writing the report (every mode), write/overwrite `EA-projects/{slug}/artifacts/index.md`:
+
+```markdown
+# {Engagement Name} — Start Here
+
+_Updated: {YYYY-MM-DD} by /ea-publish_
+
+**New to this engagement? Read in this order:**
+
+1. **[Latest published report]({report filename from Step 6})** — the layered architecture report ({date})
+2. **Executive summary** — [{path}] (if an executive-summary artifact exists)
+3. **Architecture Vision** — [{path}] (the why and the target)
+4. **Current phase artifacts** — {links to artifacts of engagement.json → currentPhase}
+
+**Registers (current state):**
+
+| Register | File |
+|---|---|
+| Risks | [risk-register.md](cross-cutting/operations/risk-register.md) |
+| Decisions | [decision-register.md](cross-cutting/governance/decision-register.md) |
+| Requirements | [{path}] |
+| Gaps | [gap-register.md](cross-cutting/gap-register.md) |
+
+{Only list registers whose files exist.}
+
+**Everything else:** [Cross-cutting index](cross-cutting/cross-cutting-index.md) · [Diagrams](../diagrams/) · full artifact list in the report appendix.
+```
+
+Keep the guide to one screen — it is a map, not a summary.
 
 ### Step 7: Confirm
 

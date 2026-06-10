@@ -191,11 +191,11 @@ Check the conversation context for an active engagement slug. If none found, sca
 
 **List files:** List all `*.md` files under `EA-projects/{slug}/artifacts/` recursively. Exclude:
 - `*.review.md`
-- `decision-register-*.md`
-- `risk-register-*.md`
-- `adr-register-*.md`
-- `direction-register-*.md`
-- `change-register-*.md`
+- `decision-register*.md`
+- `risk-register*.md`
+- `adr-register*.md`
+- `direction-register*.md`
+- `change-register*.md`
 
 **Detect direction-bearing sections** — for each file, scan for:
 

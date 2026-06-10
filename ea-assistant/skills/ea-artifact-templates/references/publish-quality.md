@@ -56,12 +56,15 @@ Defines all readability and content-quality checks with severity levels.
 | Check | Flag when… | Severity |
 |---|---|---|
 | Placeholder text | `{{...}}` patterns found in document body | Blocking |
+| Unresolved markers | `TBD`, `TODO`, or `(TBD)` appears in document body (whole-word match) | Blocking |
 | Not-answered fields | `⚠️ Not answered` appears in document body | Blocking |
+| Guidance comments | Any HTML comment (`<!-- ... -->`) survives in the assembled output | Blocking |
 | Empty appendix | A3, A4, or A5 appendix table contains only the row `*(no ... recorded)*` | Advisory |
 | Missing Executive Summary | Artifact section contains no `## Executive Summary` heading | Advisory |
 
 **Remediations:**
-- Placeholder / Not-answered → resolve by editing the source artifact before re-publishing, or mark inline with `<!-- ⚠️ PUBLISH QUALITY ISSUE: placeholder not filled — {field description} -->`
+- Placeholder / TBD-TODO / Not-answered → resolve by editing the source artifact before re-publishing, or mark inline with `<!-- ⚠️ PUBLISH QUALITY ISSUE: placeholder not filled — {field description} -->`
+- Guidance comments → stripped automatically during assembly (see `/ea-publish` "Strip plugin scaffolding"); flag only if any remain after stripping
 - Empty appendix → advisory only; acceptable to publish if intentionally empty
 - Missing Executive Summary → run `/ea-summary refresh {artifact-name}` to generate one
 

@@ -1,7 +1,7 @@
 ---
 name: ea-drivers-management
 description: This skill should be used when the user asks to "manage business drivers", "add a driver", "view drivers", "list drivers", "trace a driver to goals", "update the drivers register", or "generate the drivers register". Handles the full driver lifecycle from capture through traceability and linkage to goals and strategies.
-version: 0.9.55
+version: 0.9.56
 ---
 
 # EA Drivers Management
@@ -12,7 +12,7 @@ Business Drivers Management captures, classifies, traces, and manages the extern
 
 Business drivers are stored in `engagement.json → direction.drivers[]`. This is the single source of truth.
 
-The generated register file (`artifacts/cross-cutting/drivers-register-{YYYY-MM-DD}.md`) is output only — never edited directly. Re-generate it with `/ea-drivers generate` after any updates.
+The generated register file (`artifacts/cross-cutting/drivers-register.md`) is output only — never edited directly. Re-generate it with `/ea-drivers generate` after any updates; the previous version is archived to `snapshots/` per the register snapshot convention.
 
 ## Schema
 
@@ -60,7 +60,7 @@ Flag any referenced IDs not found in `engagement.json` as broken links.
 
 ## Register Format
 
-The generated `drivers-register-{YYYY-MM-DD}.md` follows this structure:
+The generated `drivers-register.md` follows this structure:
 
 ```markdown
 ---

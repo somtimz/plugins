@@ -65,7 +65,7 @@ Sources:      {N} artifacts scanned, {N} had A4 rows
 
 ### Step 3 — Scan Artifacts for A4 Tables
 
-1. List all files in `EA-projects/{slug}/artifacts/` matching `*.md` (exclude `*.review.md` and `concerns-register-*.md`).
+1. List all files in `EA-projects/{slug}/artifacts/` matching `*.md` (exclude `*.review.md` and `concerns-register*.md`).
 2. For each file, search for a section matching `## Appendix A4` or `### Appendix A4 — Stakeholder Concerns`.
 3. Parse each table row (skip header rows and placeholder rows containing `*(no concerns recorded)*`).
 4. Collect into a unified concern list with an added `sourceArtifact` field (the artifact file name, prettified).
@@ -85,7 +85,7 @@ If filtering results in zero rows, output: "No concerns match the applied filter
 ### Step 5 — Flag Risk-Eligible Concerns
 
 For each concern where `Category = Risk` or `Status = Requires Attention`:
-- Check whether a RIS-NNN entry already exists in `EA-projects/{slug}/artifacts/cross-cutting/operations/risk-register-*.md` that corresponds to this concern (match by keyword in description).
+- Check whether a RIS-NNN entry already exists in `EA-projects/{slug}/artifacts/cross-cutting/operations/risk-register*.md` that corresponds to this concern (match by keyword in description).
 - If no matching risk found, flag the concern as **Risk-eligible** — note in the register output: "⚠️ No RIS-NNN — consider adding to Risk Register via `/ea-risks`"
 
 ### Step 6 — Render the Concerns Register
@@ -161,7 +161,7 @@ Ask the user:
 >
 > Press Enter or type **1** for Markdown.
 
-- **Option 1** — Write to `EA-projects/{slug}/artifacts/cross-cutting/operations/concerns-register-{YYYY-MM-DD}.md`. Register in `engagement.json` with `phase: "All"`, `status: "Draft"`. If a register for today already exists, append `-v2`, `-v3` etc.
+- **Option 1** — Write to `EA-projects/{slug}/artifacts/cross-cutting/operations/concerns-register.md`. If the file already exists, archive it to `snapshots/` first per `skills/ea-artifact-templates/references/register-snapshot-convention.md`. Register in `engagement.json` with `phase: "All"`, `status: "Draft"` (single entry at the stable path).
 - **Option 2** — Output the Summary and Requires Attention table only, inline. Do not write any file.
 
 After generating, if any Risk-eligible concerns were flagged, offer:
@@ -188,7 +188,7 @@ Same as `generate` Step 1.
 
 ### Step B — Locate CON-NNN
 
-1. Scan all `*.md` files in `EA-projects/{slug}/artifacts/` (exclude `*.review.md` and `concerns-register-*.md`) for an A4 table row whose ID column matches `CON-NNN` (exact, case-insensitive).
+1. Scan all `*.md` files in `EA-projects/{slug}/artifacts/` (exclude `*.review.md` and `concerns-register*.md`) for an A4 table row whose ID column matches `CON-NNN` (exact, case-insensitive).
 2. Record the source artifact file path and the full row content.
 3. If not found: `"CON-NNN not found in any A4 appendix. Run /ea-concerns status to list all concern IDs."` — stop.
 4. If found in multiple artifacts: list all matches and ask the user to select which to update.
@@ -260,7 +260,7 @@ Closed CON-NNN in {Artifact Name} — Status: {Addressed | Partially Addressed}
 Response: "{response text}"
 ```
 
-If `Category = Risk` and no matching RIS-NNN was found in any `risk-register-*.md`:
+If `Category = Risk` and no matching RIS-NNN was found in any `risk-register*.md`:
 ```
 ⚠️ This concern is categorised as Risk. If a corresponding RIS-NNN exists in the
 Risk Register, run `/ea-risks update RIS-NNN status Closed` to mark it resolved.

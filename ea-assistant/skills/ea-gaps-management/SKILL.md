@@ -1,7 +1,7 @@
 ---
 name: ea-gaps-management
 description: This skill should be used when the user asks to "manage architecture gaps", "add a gap", "promote a gap", "view gaps", "trace a gap to work packages", "update the gap register", or "generate the gap register". Handles the full gap lifecycle from identification through formal promotion, status tracking, and linkage to work packages.
-version: 0.9.55
+version: 0.9.56
 ---
 
 # EA Gaps Management
@@ -29,7 +29,7 @@ engagement.json
     └── gaps[]          # formally promoted GAP-NNN entries (source of truth)
 ```
 
-The gap register file (`artifacts/cross-cutting/gap-register-{YYYY-MM-DD}.md`) is generated output only — never edited directly.
+The gap register file (`artifacts/cross-cutting/gap-register.md`) is generated output only — never edited directly. Superseded versions are archived to `snapshots/` per the register snapshot convention.
 
 ## Gap Schema
 
@@ -108,7 +108,7 @@ The warning is advisory — it does not block the save.
 
 ## Gap Register Format
 
-`artifacts/cross-cutting/gap-register-{YYYY-MM-DD}.md` uses this structure:
+`artifacts/cross-cutting/gap-register.md` uses this structure:
 
 ```markdown
 ---

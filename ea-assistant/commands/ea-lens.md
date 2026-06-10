@@ -26,11 +26,11 @@ This command provides an opinionated engagement-level review from the perspectiv
 If `--quick` flag is set: **skip this step** and proceed to Step 3 using engagement.json state only.
 
 Otherwise, read:
-- All artifact `.md` files in `EA-projects/{slug}/artifacts/` (exclude `*.review.md`, `decision-register-*.md`, `risk-register-*.md`, `concerns-register-*.md`, `adr-register-*.md`, `change-register-*.md`, `gap-register-*.md`, `drivers-register-*.md`)
+- All artifact `.md` files in `EA-projects/{slug}/artifacts/` (exclude `*.review.md`, `decision-register*.md`, `risk-register*.md`, `concerns-register*.md`, `adr-register*.md`, `change-register*.md`, `gap-register*.md`, `drivers-register*.md`)
 - All A3 appendices (scan each artifact for `## Appendix A3`)
 - All A4 appendices (scan each artifact for `## Appendix A4`)
-- `artifacts/cross-cutting/risk-register-*.md` if present, else scan A4 rows for Category = Risk items
-- `artifacts/cross-cutting/adr-register-*.md` or individual ADR files in `artifacts/`
+- `artifacts/cross-cutting/risk-register*.md` if present, else scan A4 rows for Category = Risk items
+- `artifacts/cross-cutting/adr-register*.md` or individual ADR files in `artifacts/`
 - Open PAD-NNN entries (scan artifacts for `PAD-\d{3}` tokens)
 - `engagement.json → direction.gaps[]` if present
 

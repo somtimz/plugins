@@ -31,7 +31,7 @@ Zachman Framework, and ArchiMate 3.x.
 3. `/ea-interview`     → Run a stakeholder interview
 4. `/ea-artifact`      → Generate an architecture artifact
 5. `/ea-review`        → Review and assess an artifact
-6. `/ea-publish`         → Produce a consolidated report
+6. `/ea-publish`         → Produce a layered stakeholder report
 
 ### Typical Workflow
 
@@ -117,13 +117,27 @@ You have existing engagements. Common next steps:
 | `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman |
 | `/ea-security-review` | Security audit — SABSA, ISO 27001, and NIST CSF 2.0 coverage across the engagement or a single artifact |
 | `/ea-migrate [--report\|--reorganize]` | Align legacy engagement to current plugin version conventions; `--reorganize` moves flat-path artifacts into correct phase subfolders |
-| `/ea-publish` | Merge artifacts into a consolidated report |
+| `/ea-publish [--full\|--executive]` | Layered stakeholder report (default), full consolidated document (`--full`), or executive pack; writes `artifacts/index.md` reading guide |
 | `/ea-git [init\|status\|commit\|push\|sync\|log\|remote]` | Manage EA-projects/ as a git repository — init, commit, push to GitHub |
 | `/ea-brief [--focus decisions\|risks\|gaps\|strategy] [--save]` | Synthesized one-page engagement brief — ranked decisions, gaps, risks, open concerns |
 | `/ea-workshop [start\|resume\|export\|list]` | Facilitated multi-stakeholder workshops — WS-NNN minutes, agenda, decisions, actions |
 | `/ea-arb [new\|list\|view\|close]` | ARB meeting minutes — ARB-NNN, quorum, decisions, propagate to ADR register |
 | `/ea-config [section]` | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md |
 | `/ea-help` | This guide |
+
+### Which Review Command?
+
+Five commands review work at different scopes — pick by what you want answered:
+
+| You want to know… | Scope | Run |
+|---|---|---|
+| "Is this one artifact sound? Challenge its content." | Single artifact, deep critique | `/ea-grill [artifact]` |
+| "Formally review and sign off this artifact, with tracked comments." | Single artifact, formal assessment | `/ea-review [artifact]` |
+| "Do my artifacts contradict each other? Any broken IDs?" | Cross-artifact, mechanical checks | `/ea-consistency` |
+| "Is the whole engagement healthy — coverage, traceability, governance?" | Full engagement, structured | `/ea-engage-review` |
+| "What would a seasoned architect say actually matters here?" | Full engagement, opinionated | `/ea-lens` |
+
+Security has its own lane: `/ea-security-review` (SABSA / ISO 27001 / NIST CSF coverage).
 
 ### Interview Shortcuts
 
@@ -160,7 +174,8 @@ Type these at any interview prompt:
   with output routing to the right artifacts.
 • Use `/ea-generate [artifact] [docx|pptx|mermaid|png|svg]` to export
   individual artifacts — diagrams are embedded automatically in docx/pptx.
-  Use `/ea-publish` for a full consolidated document.
+  Use `/ea-publish` for a layered stakeholder report, or
+  `/ea-publish --full` for a full consolidated document.
 • Upload documents to `EA-projects/{name}/uploads/` and the
   ea-document-analyst agent will extract architecture-relevant content
   and map it to the appropriate artifact sections. EA tool exports

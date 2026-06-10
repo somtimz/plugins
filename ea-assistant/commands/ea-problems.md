@@ -230,7 +230,8 @@ Chain status: {✅ Addressed | ⚠️ Partial | 🔴 Orphan}
 Invoked as: `/ea-problems generate`
 
 1. Read `engagement.json → direction.problems[]`.
-2. Produce `EA-projects/{slug}/artifacts/cross-cutting/problems-register-{YYYY-MM-DD}.md`:
+2. If `problems-register.md` already exists in the target folder, archive it to `snapshots/` per `skills/ea-artifact-templates/references/register-snapshot-convention.md`.
+3. Produce `EA-projects/{slug}/artifacts/cross-cutting/problems-register.md`:
 
 ```markdown
 ---
@@ -292,8 +293,8 @@ links: []
 {Repeat for all problems, grouped by Domain}
 ```
 
-3. Register artifact in `engagement.json → artifacts[]`.
-4. Confirm: `"Problems Register written to artifacts/cross-cutting/problems-register-{YYYY-MM-DD}.md — {N} problems."`
+4. Register artifact in `engagement.json → artifacts[]` (single entry at the stable path).
+5. Confirm: `"Problems Register written to artifacts/cross-cutting/problems-register.md — {N} problems."`
 
 ---
 

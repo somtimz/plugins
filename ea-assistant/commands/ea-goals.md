@@ -218,7 +218,8 @@ Chain status: {✅ Complete | ⚠️ Partial | 🔴 Orphan}
 Invoked as: `/ea-goals generate`
 
 1. Read `engagement.json → direction.goals[]`.
-2. Produce `EA-projects/{slug}/artifacts/cross-cutting/goals-register-{YYYY-MM-DD}.md`:
+2. If `goals-register.md` already exists in the target folder, archive it to `snapshots/` per `skills/ea-artifact-templates/references/register-snapshot-convention.md`.
+3. Produce `EA-projects/{slug}/artifacts/cross-cutting/goals-register.md`:
 
 ```markdown
 ---
@@ -276,8 +277,8 @@ links: []
 {Repeat for all goals, grouped by Domain}
 ```
 
-3. Register artifact in `engagement.json → artifacts[]`.
-4. Confirm: `"Goals Register written to artifacts/cross-cutting/goals-register-{YYYY-MM-DD}.md — {N} goals."`
+4. Register artifact in `engagement.json → artifacts[]` (single entry at the stable path).
+5. Confirm: `"Goals Register written to artifacts/cross-cutting/goals-register.md — {N} goals."`
 
 ---
 

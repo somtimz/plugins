@@ -12,7 +12,7 @@ You are executing the `/ea-abbs` command.
 Architecture Building Blocks (ABBs) are logical, vendor-neutral components defined in Phase C (Application/Data) and Phase D (Technology) architecture. This command aggregates all ABB-NNN entries from across the engagement into a single register, surfaces orphans (ABBs with no linked requirement or SBB), and supports creating or updating individual ABB records.
 
 **Modes:**
-- `generate` (default) — scan all artifacts for ABB tables and write `abb-register-{YYYY-MM-DD}.md`
+- `generate` (default) — scan all artifacts for ABB tables and write `abb-register.md`
 - `status` — inline summary of ABBs without writing a file
 - `new` — create a new ABB record interactively
 - `update ABB-NNN <field> <value>` — update a single field on an existing ABB
@@ -74,9 +74,9 @@ Using the ABB register template (`templates/abb-register.md`):
 
 ### Step 5 — Write the Register File
 
-Write to: `EA-projects/{slug}/artifacts/abb-register-{YYYY-MM-DD}.md`
+Write to: `EA-projects/{slug}/artifacts/abb-register.md`. If the file already exists, archive it to `snapshots/` first per `skills/ea-artifact-templates/references/register-snapshot-convention.md`.
 
-Register in `engagement.json → artifacts[]` if not already present.
+Register in `engagement.json → artifacts[]` if not already present (single entry at the stable path).
 
 Confirm: `"ABB Register written: {N} ABBs ({N} orphans flagged)"`
 

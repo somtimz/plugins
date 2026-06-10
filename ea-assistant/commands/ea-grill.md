@@ -7,6 +7,8 @@ allowed-tools: [Read, Glob, Bash]
 
 Deeply review an EA artifact using a grill-me skill.
 
+**Lane:** deep single-artifact critique. For formal sign-off with tracked comments use `/ea-review`; for cross-artifact contradictions and ID checks use `/ea-consistency`; for engagement-level reviews use `/ea-engage-review` (structured) or `/ea-lens` (opinionated). See the "Which Review Command?" table in `/ea-help`.
+
 ## Instructions
 
 If no engagement is active in context, prompt the user to run `/ea-open` first.

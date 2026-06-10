@@ -397,7 +397,8 @@ Invoked as: `/ea-scenarios generate`
 Produces a **Scenarios Summary Register** — a cross-cutting artifact that lists all scenarios, their completeness, and the aggregate requirements they generate.
 
 1. Read all scenario files from `engagement.json → scenarios[]`.
-2. Write `EA-projects/{slug}/artifacts/cross-cutting/scenarios-register-{YYYY-MM-DD}.md`:
+2. If `scenarios-register.md` already exists in the target folder, archive it to `snapshots/` per `skills/ea-artifact-templates/references/register-snapshot-convention.md`.
+3. Write `EA-projects/{slug}/artifacts/cross-cutting/scenarios-register.md`:
 
 ```markdown
 ---
@@ -461,8 +462,8 @@ links: []
 {Repeat for each scenario}
 ```
 
-3. Register in `engagement.json → artifacts[]`.
-4. Confirm: `"Scenarios Register written to artifacts/cross-cutting/scenarios-register-{YYYY-MM-DD}.md — {N} scenarios."`
+4. Register in `engagement.json → artifacts[]` (single entry at the stable path).
+5. Confirm: `"Scenarios Register written to artifacts/cross-cutting/scenarios-register.md — {N} scenarios."`
 
 ---
 

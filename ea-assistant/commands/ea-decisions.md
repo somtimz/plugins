@@ -127,7 +127,7 @@ Source files:   {N} artifacts scanned, {N} had A3 rows
 
 ### Step 3 — Scan Artifacts for A3 Tables
 
-1. List all files in `EA-projects/{slug}/artifacts/` matching `*.md` (exclude `*.review.md` and `decision-register-*.md`).
+1. List all files in `EA-projects/{slug}/artifacts/` matching `*.md` (exclude `*.review.md` and `decision-register*.md`).
 2. For each file, read its content and search for a section matching `## Appendix A3` or `### Appendix A3 — Decision Log`.
 3. Parse each table row (skip header rows and placeholder rows containing `*(no decisions recorded)*`).
 4. Collect into a unified decision list with an added `sourceArtifact` field (the artifact file name, prettified).
@@ -202,7 +202,7 @@ Ask the user:
 >
 > Press Enter or type **1** for Markdown.
 
-- **Option 1** — Write to `EA-projects/{slug}/artifacts/cross-cutting/governance/decision-register-{YYYY-MM-DD}.md`. Register the artifact in `engagement.json` with `phase: "All"`, `status: "Draft"`. If a decision register for today already exists, append `-v2`, `-v3` etc. Display a brief confirmation with counts.
+- **Option 1** — Write to `EA-projects/{slug}/artifacts/cross-cutting/governance/decision-register.md`. If the file already exists, archive it to `snapshots/` first per `skills/ea-artifact-templates/references/register-snapshot-convention.md`. Register the artifact in `engagement.json` with `phase: "All"`, `status: "Draft"` (single entry at the stable path). Display a brief confirmation with counts.
 - **Option 2** — Write the `.md` file first (same as Option 1), then load the `ea-generate` skill and export to `.docx`.
 - **Option 3** — Output the Summary section and Open Decisions table inline only. Do not write any file.
 
@@ -214,7 +214,7 @@ Ask the user:
 |---|---|
 | Artifact has no A3 section | Skip silently; include in "scanned" count but not "with A3 rows" count |
 | A3 row missing classification fields (legacy) | Include in register with missing fields shown as `—`; flag in Summary: "N rows with missing classification fields" |
-| Multiple decision registers already exist | Each is dated/versioned; all listed in `engagement.json`; `/ea-decisions status` uses latest |
+| Legacy dated decision registers exist | Archive them to `snapshots/` per the register snapshot convention; `/ea-decisions status` uses the current `decision-register.md` |
 | Filter returns zero results | Show "No decisions match the applied filters." with filter summary; do not write a file |
 | Owner partial match returns multiple owners | Show all matching owners; include in results |
 | `--audience` combined with conflicting flags | Apply intersection; note in filter summary: "executive preset + domain=Data applied" |

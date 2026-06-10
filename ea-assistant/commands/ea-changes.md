@@ -142,8 +142,10 @@ Organise the filtered ACRs into sections:
 
 Write the register to:
 ```
-EA-projects/{slug}/artifacts/cross-cutting/operations/change-register-{YYYY-MM-DD}.md
+EA-projects/{slug}/artifacts/cross-cutting/operations/change-register.md
 ```
+
+If the file already exists, archive it to `snapshots/` first per `skills/ea-artifact-templates/references/register-snapshot-convention.md`.
 
 Use the `change-register.md` template. Populate all sections from the collected data. Set:
 - `generated: {today}`
@@ -154,19 +156,19 @@ Add an entry to `engagement.json → artifacts[]`:
 ```json
 {
   "name": "Change Register",
-  "file": "artifacts/cross-cutting/operations/change-register-{YYYY-MM-DD}.md",
+  "file": "artifacts/cross-cutting/operations/change-register.md",
   "phase": "H",
   "status": "Draft",
   "reviewStatus": "Not Reviewed"
 }
 ```
-If a change register already exists, overwrite it (registers are regenerated, not versioned) and update the existing `artifacts[]` entry.
+Keep a single `artifacts[]` entry at the stable path; if a legacy dated entry exists, update its `file` path instead of adding a new one.
 
 ---
 
 ### Step 7 — Report
 
-Confirm: "Change Register written to `artifacts/cross-cutting/operations/change-register-{YYYY-MM-DD}.md`. {N} change requests — {N} open, {N} approved, {N} rejected, {N} deferred."
+Confirm: "Change Register written to `artifacts/cross-cutting/operations/change-register.md`. {N} change requests — {N} open, {N} approved, {N} rejected, {N} deferred."
 
 Offer:
 ```

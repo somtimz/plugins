@@ -12,7 +12,7 @@ You are executing the `/ea-stories` command.
 User Stories (STY-NNN) are lightweight, actor-centred delivery items that translate SBBs into executable work. This command aggregates all STY-NNN entries from across the engagement into a single register, surfaces orphan stories (no REQ or SBB link), and tracks enabler stories.
 
 **Modes:**
-- `generate` (default) — scan all artifacts for STY tables and write `story-register-{YYYY-MM-DD}.md`
+- `generate` (default) — scan all artifacts for STY tables and write `story-register.md`
 - `status` — inline summary of stories without writing a file
 - `new` — create a new story record interactively
 - `update STY-NNN <field> <value>` — update a single field on an existing story
@@ -72,9 +72,9 @@ Using the Story register template (`templates/story-register.md`):
 
 ### Step 5 — Write the Register File
 
-Write to: `EA-projects/{slug}/artifacts/story-register-{YYYY-MM-DD}.md`
+Write to: `EA-projects/{slug}/artifacts/story-register.md`. If the file already exists, archive it to `snapshots/` first per `skills/ea-artifact-templates/references/register-snapshot-convention.md`.
 
-Register in `engagement.json → artifacts[]` if not already present.
+Register in `engagement.json → artifacts[]` if not already present (single entry at the stable path).
 
 Confirm: `"Story Register written: {N} stories ({N} orphans flagged, {N} enablers)"`
 
