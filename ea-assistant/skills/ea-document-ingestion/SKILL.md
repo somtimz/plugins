@@ -1,7 +1,7 @@
 ---
 name: ea-document-ingestion
 description: This skill should be used when the user asks to "upload a document", "import a diagram", "read this Word file", "use this PDF as input", "parse the completed interview", "import my answers from Word", "ingest an existing architecture document", or when processing uploaded files to extract EA-relevant content for use in artifacts or interviews.
-version: 0.9.57
+version: 0.9.58
 ---
 
 # EA Document Ingestion

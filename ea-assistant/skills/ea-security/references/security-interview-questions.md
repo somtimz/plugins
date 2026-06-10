@@ -167,6 +167,31 @@ Phase-by-phase optional security question bank for ea-interviewer. Load this fil
 
 ---
 
+## Phase F — Migration Planning
+
+**SABSA focus:** Physical/Operational — securing the transition itself, not just the end state
+
+**Questions:**
+
+1. How is data protected during migration — encryption in transit, integrity verification, and handling of copies created for cutover?
+2. What is the security posture during coexistence windows when old and new systems run in parallel? (duplicated attack surface, synchronised access revocation)
+3. How are credentials, keys, and secrets rotated or re-issued as workloads move?
+4. What is the secure decommissioning plan for legacy systems — data sanitisation, licence/account termination, certificate revocation?
+5. Do migration vendors or partners get temporary privileged access, and how is it time-boxed and audited?
+6. Is there a security go/no-go checkpoint per migration wave, and who owns it?
+
+**Output routing:**
+
+| Output | Artifact |
+|---|---|
+| Migration data protection | Migration Plan (security section), REQ-NNN (type:security) |
+| Coexistence/cutover risks | Migration Plan risk table, RIS-NNN |
+| Secrets rotation | Migration Plan (cutover runbook), REQ-NNN (type:security, source:ISO27001, control:A.8.24) |
+| Decommissioning | Migration Plan (decommissioning section), GAP-M-NNN if unplanned |
+| Third-party access | Migration Plan, CON-NNN if contested |
+
+---
+
 ## Phase G — Implementation Governance
 
 **SABSA focus:** Operational — security operations model, compliance, and incident management
@@ -188,3 +213,28 @@ Phase-by-phase optional security question bank for ea-interviewer. Load this fil
 | Security operations model | Implementation Governance Plan (security operations section) |
 | Incident response | Governance Framework (incident management), Implementation Governance Plan |
 | Statement of Applicability | Compliance Assessment (SoA reference or draft) |
+
+---
+
+## Phase H — Architecture Change Management
+
+**SABSA focus:** Operational — keeping the security posture current as the architecture changes
+
+**Questions:**
+
+1. Does every Architecture Change Request (ACR) receive a security impact assessment, and who performs it?
+2. What triggers a security re-assessment outside the change process — new threats, vendor advisories, regulatory change, incident learnings?
+3. How is control drift detected — are deployed controls periodically verified against the documented architecture?
+4. Are security policies (POL-NNN) and constraints (CST-NNN) on a review cycle, and what happens when one expires?
+5. How do post-incident learnings feed back into Architecture Principles, standards, and the threat model?
+6. When a change is classified as re-architecting, is the security architecture explicitly re-entered (Phase A security context refresh), or only the affected domain?
+
+**Output routing:**
+
+| Output | Artifact |
+|---|---|
+| ACR security assessment step | Change Request (security impact field), Governance Framework |
+| Re-assessment triggers | Governance Framework (security review triggers) |
+| Control drift checks | Compliance Assessment (recurring), RIS-NNN if drift found |
+| Policy/constraint review cycle | Policies Register (reviewCycle), Constraints Register |
+| Incident-learning feedback | Architecture Principles (revision), ADR-NNN if a decision is reversed |

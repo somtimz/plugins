@@ -1,7 +1,7 @@
 ---
 name: ea-drivers-management
 description: This skill should be used when the user asks to "manage business drivers", "add a driver", "view drivers", "list drivers", "trace a driver to goals", "update the drivers register", or "generate the drivers register". Handles the full driver lifecycle from capture through traceability and linkage to goals and strategies.
-version: 0.9.57
+version: 0.9.58
 ---
 
 # EA Drivers Management

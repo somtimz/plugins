@@ -84,6 +84,8 @@
 }
 ```
 
+**Phase status enum:** `Not Started | In Progress | Complete | On Hold | Not Applicable`. `Not Applicable` is set by ADM tailoring at `/ea-new` (recommended phase set derived from `architectureLevel`) and carries an `optOutReason` field on the phase entry. Not-Applicable phases keep their `phases{}` entry but are excluded from picklists and `/ea-status` progress counts (already implemented there); their `artifacts/{phase-folder}/` is not created at seeding. `/ea-phase` offers re-inclusion (restores `Not Started`, clears `optOutReason`, creates the folder). Phase-level tailoring uses this status — not the `optOuts[]` array, which remains for question- and artifact-level opt-outs.
+
 ## Field Version History
 
 **v0.2.0 fields** — absent in legacy engagements; treat as `null` / defaults if missing:
