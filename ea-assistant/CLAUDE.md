@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.56 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.57 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -14,7 +14,7 @@ These rules prevent the most common errors. Check them before writing any agent 
 - **No invented ID prefixes** — use only the prefixes in the ID Scheme table; never create domain-prefixed IDs (BG-/DG-/AG-/TG- etc.)
 - **Relative paths only** — all artifact paths are relative to `EA-projects/{slug}/`; never assume an absolute path
 - **State changes require engagement.json** — every phase transition, artifact registration, and opt-out must update `engagement.json`
-- **No duplicated logic** — cross-topic detection lives in `cross-topic-detection.md`; A3 governance rules live in `ea-artifact-templates/SKILL.md`; concept definitions live in `ea-concepts.md`; do not restate these inline
+- **No duplicated logic** — cross-topic detection lives in `cross-topic-detection.md`; A3 governance rules live in `ea-artifact-templates/SKILL.md`; concept definitions live in `ea-concepts.md`; direction-register mode mechanics live in `register-protocol.md` (register commands declare only a Register Spec + unique checks); do not restate these inline
 - **Engagement discipline rules** — every project follows the 12 rules in `.claude/rules/ea-engagement.md` (seeded from `templates/seeds/engagement-rules.md`). For the canonical reference with citation guidance, see `skills/ea-engagement-lifecycle/references/engagement-rules-reference.md`
 - **Register snapshot convention** — generated registers use stable, undated filenames (e.g. `risk-register.md`); regeneration archives the prior version to a `snapshots/` subfolder. Rules in `skills/ea-artifact-templates/references/register-snapshot-convention.md`; do not restate inline
 - **No bulk empty stubs** — detail files (`artifacts/details/{ID}.md`) are created on demand only, when the user supplies content; never bulk-create empty stub files

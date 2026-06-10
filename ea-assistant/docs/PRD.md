@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.56
+**Version:** 0.9.57
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -998,6 +998,16 @@ New command `/ea-scenarios` and template `templates/business-scenario.md` suppor
 - `generate` — produce a Scenarios Summary Register cross-cutting artifact
 
 **Template sections:** (1) Problem Statement with ISS/PRB/DRV links, (2) Objectives table with SMART check, (3) Environment (Internal / External / Technology Context), (4) Stakeholders and Concerns, (5) Actors — §5.1 Human Actors + §5.2 Computing Actors with Existing/To Be Built/To Be Modified status, (6) Requirements (REQ-NNN by domain with source tracing), (7) Current State Narrative with friction points, (8) Target State Narrative with success signals, (9) Change Delta table (Process / Data / Application / Technology), (10) Scenario Diagram (optional Mermaid), Traceability Appendix.
+
+### 5.52 Surface-Area Consolidation — Register Protocol, Review Lanes, Continuous Requirements (v0.9.57)
+
+P2 of the 2026-06-10 improvement advisory:
+
+1. **Register protocol** — the shared list/add/update/trace/generate mechanics of the five direction-register commands (`/ea-drivers`, `/ea-goals`, `/ea-issues`, `/ea-problems`, `/ea-gaps`) now live once in `skills/ea-engagement-lifecycle/references/register-protocol.md`. Each command shrank to a declarative Register Spec (prefix, storage, fields, link fields, trace chain, groupings, status transitions) plus its register-specific checks (Two-Layers, Issue↔Problem disambiguation, systemic/specificity warnings, gap severity escalation, `/ea-gaps promote`). Net ~915 lines removed; behavior unchanged. Concept definitions now point at `ea-concepts.md` instead of being restated inline.
+2. **Review lane boundary** — `/ea-engage-review` explicitly composes `/ea-consistency` for its Consistency dimension (logic never restated); `--quick` now reports Consistency as `⏭ Skipped` instead of omitting it silently. (`/ea-consistency` is retained as the focused mechanical lane rather than folded — it owns `--ids`/`--details`/`--quality`/artifact modes and is referenced by seeded engagement rules in live engagements.)
+3. **Continuous requirements** — `/ea-phase` runs a requirements check-in on every phase entry (open REQ-NNN items whose `phase` field matches, with an unaddressed-High warning), and completing the Requirements phase bridges directly into Phase A with the register carried as interview context.
+
+---
 
 ### 5.51 Consumable Deliverables — Layered Publish, Reading Guide, Register Snapshots, On-demand Details (v0.9.56)
 

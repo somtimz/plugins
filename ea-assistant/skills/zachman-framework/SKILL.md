@@ -1,7 +1,7 @@
 ---
 name: zachman-framework
 description: This skill should be used when the user asks to "classify an artifact using Zachman", "which Zachman cell does this belong to", "apply the Zachman framework", "map requirements to Zachman", "what row and column is this", or when classifying EA artifacts, viewpoints, or concerns against the Zachman Framework. Provides full 6×6 Zachman classification guidance.
-version: 0.9.56
+version: 0.9.57
 ---
 
 # Zachman Framework

@@ -59,7 +59,21 @@ Navigate to a specific TOGAF ADM phase for the active engagement.
    ✅ Requirements Register (from Requirements phase)
    ```
 
-5. Offer next actions:
+5. **Requirements check-in** (every phase entry except the Requirements phase itself — Requirements Management is continuous in the ADM, not a one-time gate):
+   - Read `requirements/requirements-index.json` (schema in the `ea-requirements-management` skill); fall back to the Requirements Register markdown under `artifacts/requirements/` if the index is absent; if neither exists, skip silently.
+   - Filter to requirements whose `phase` field matches the entered phase (or `All`) and whose status is not Implemented/Superseded.
+   - If any match, show a compact block between the phase summary and next actions:
+     ```
+     Requirements relevant to this phase: {N} open ({N} High priority)
+       REQ-003  High   {title truncated}
+       REQ-017  High   {title truncated}
+       {…top 5 by priority}
+     Review or update them with /ea-requirements — new requirements emerging
+     from this phase's work should be captured as they surface, not batched.
+     ```
+   - If High-priority requirements for this phase have no linked artifact yet, add: "⚠️ {N} High-priority requirement(s) for this phase are not yet addressed by any artifact — run `/ea-requirements trace`."
+
+6. Offer next actions:
    - Create a missing artifact → `/ea-artifact create [artifact-name]`
    - Continue an in-progress artifact interview → `/ea-interview resume`
    - View phase guidance → loads the `ea-engagement-lifecycle` skill and use the `ea-facilitator` agent
@@ -71,9 +85,10 @@ Navigate to a specific TOGAF ADM phase for the active engagement.
    - Invoke `/ea-brainstorm phase [phase]` (e.g. `/ea-brainstorm phase B` for Business Architecture).
    - The phase argument is already known from step 2 — pass it directly so the brainstorm command opens with the correct phase scope and session header.
 
-6. When marking a phase complete:
+7. When marking a phase complete:
    - Check all required artifacts for the phase exist in `artifacts/`
    - Warn if any artifacts are still in `Draft` status
    - Set phase `status` to `Complete` and `completedAt` timestamp
    - Update `lastModified` in `engagement.json`
    - Suggest the next recommended phase
+   - **Requirements → Phase A bridge:** when the completed phase is Requirements, suggest Phase A directly and carry the register forward: "Requirements phase complete — {N} requirements captured ({N} High priority). Start Phase A now? The Architecture Vision interview will reference these requirements, and Requirements Management continues throughout the engagement (capture new REQ-NNN items as they emerge in any phase)."

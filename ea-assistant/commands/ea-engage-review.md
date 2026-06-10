@@ -18,7 +18,7 @@ This command performs a full-scope review of the active engagement across four d
 | **Governance** | Open decisions, unresolved concerns, open/critical risks | Inline scan of A3/A4/risk tables |
 | **Quality** | Artifact completeness %, review status, compliance state | Inline scan |
 
-Flags from `--quick` skip the detailed consistency check and show only the governance and quality summaries.
+The Consistency dimension is owned by `/ea-consistency` — this command composes it; consistency logic is never restated here. `--quick` skips the consistency dimension and shows only the governance and quality summaries; the report must then mark Consistency as `⏭ Skipped (--quick) — run /ea-consistency for the focused check` rather than omitting it silently.
 
 ---
 
@@ -43,7 +43,7 @@ Build an inventory table for the report.
 
 ## Step 3 — Consistency Check (skip with `--quick`)
 
-Invoke the `ea-consistency-checker` agent to cross-check all artifacts. Capture the output. Summarise: Critical Issues (count), Warnings (count), Traceability gaps (count).
+Run the `/ea-consistency` full-mode flow (which loads Scope C context and invokes the `ea-consistency-checker` agent — see `commands/ea-consistency.md`; do not restate its logic). Capture the output. Summarise: Critical Issues (count), Warnings (count), Traceability gaps (count).
 
 ---
 
@@ -125,7 +125,7 @@ ENGAGEMENT REVIEW — {engagement name}
 Generated: {YYYY-MM-DD}  |  Phase: {currentPhase}  |  Artifacts: {N}
 ════════════════════════════════════════════════════════════════
 
-## Consistency          {✅ No issues | ⚠️ N warnings | 🔴 N critical}
+## Consistency          {✅ No issues | ⚠️ N warnings | 🔴 N critical | ⏭ Skipped (--quick) — run /ea-consistency}
   {top 2 critical issues, if any — one line each}
 
 ## Alignment            {✅ Fully aligned | ⚠️ Partial | 🔴 Gaps detected}
