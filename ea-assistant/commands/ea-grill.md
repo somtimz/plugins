@@ -54,7 +54,7 @@ If `--skill` was provided, use that skill. Otherwise, recommend a skill based on
 | Decision Register | `grill-me-decision` | Reviews whether decisions are defensible, owned, and governed |
 | Business Model Canvas | `grill-me-boardroom-strategy` | Needs full strategic + commercial + execution review |
 
-**Advanced mode overrides:** If the engagement is at L3+ maturity, the user may request an advanced review. When `--skill practitioner`, `--skill maturity`, `--skill failure-mode`, `--skill requirements`, `--skill direction`, or `--skill waf` is specified, bypass the default recommendation and use the requested skill. (`waf` is available at any maturity level when the engagement has cloud scope.)
+**Advanced mode overrides:** If the engagement is at L3+ maturity, the user may request an advanced review. When `--skill practitioner`, `--skill maturity`, `--skill failure-mode`, `--skill requirements`, `--skill direction`, `--skill waf`, `--skill caf`, or `--skill gcaf` is specified, bypass the default recommendation and use the requested skill. (The cloud lenses — `waf`, `caf`, `gcaf` — are available at any maturity level when the engagement has cloud scope.)
 
 Confirm the skill with the user before proceeding, and offer the full list as alternatives.
 The `--skill` argument accepts these short names:
@@ -76,10 +76,12 @@ The `--skill` argument accepts these short names:
 | `requirements` | `ea-assistant:ea-grill-skills` | Requirements quality: NFR coverage scorecard, measurability, traceability, consistency, feasibility — load from `skills/ea-engagement-lifecycle/references/grill-requirements-skill.md` |
 | `direction` | `ea-assistant:ea-grill-skills` | Direction item quality: categorization correctness, phrasing quality, evidence rigour, isolation — load from `skills/ea-engagement-lifecycle/references/grill-direction-quality.md` |
 | `waf` | `ea-assistant:ea-framework-lenses` | AWS Well-Architected lens: pillar-by-pillar review (Operational Excellence, Security, Reliability, Performance, Cost, Sustainability) against the artifact's phase — load from `skills/ea-framework-lenses/references/aws-well-architected.md` and follow its Review Checklist per the lens consumption rules in that skill |
+| `caf` | `ea-assistant:ea-framework-lenses` | Azure Cloud Adoption Framework lens: adoption-lifecycle review (Strategy, Plan, Ready, Adopt, Govern, Manage) — strongest on Phase A/B/E/F artifacts (vision, portfolio dispositions, roadmap, migration plan) — load from `skills/ea-framework-lenses/references/azure-caf.md` |
+| `gcaf` | `ea-assistant:ea-framework-lenses` | Google Cloud Architecture Framework lens: pillar review (System Design, Operational Excellence, Security, Reliability, Cost, Performance) against the artifact's phase — load from `skills/ea-framework-lenses/references/google-caf.md` |
 
 For the 9 core skills (stress-test through boardroom-strategy): after loading `ea-assistant:ea-grill-skills`, locate and follow the `## Mode: {short-name}` section that matches the requested skill. Ignore all other mode sections.
 
-For the 6 advanced skills (practitioner, maturity, failure-mode, requirements, direction, waf): after loading the skill named in the table, if a `## Mode: {short-name}` section exists for the requested skill, follow it. If not, load the referenced file from the path in the table and follow its instructions as the review protocol.
+For the 8 advanced skills (practitioner, maturity, failure-mode, requirements, direction, waf, caf, gcaf): after loading the skill named in the table, if a `## Mode: {short-name}` section exists for the requested skill, follow it. If not, load the referenced file from the path in the table and follow its instructions as the review protocol.
 
 ---
 
