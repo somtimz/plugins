@@ -6,7 +6,7 @@ phase: All
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-templateVersion: 0.9.55
+templateVersion: 0.9.59
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   domain: Cross-cutting
@@ -110,6 +110,26 @@ Run `/ea-summary refresh` to regenerate this section from current artifact conte
 | Total | Critical | High | Medium | Low | Open | Monitoring | Accepted | Closed |
 |---|---|---|---|---|---|---|---|---|
 | {{total}} | {{critical}} | {{high}} | {{medium}} | {{low}} | {{open}} | {{monitoring}} | {{accepted}} | {{closed}} |
+
+---
+
+## Risk Appetite & Tolerance
+
+<details>
+<summary>📋 Guidance</summary>
+
+The appetite statement records how much risk the organisation is willing to carry in pursuit of the engagement's goals — agreed with the sponsor, not assumed. Tolerance thresholds make the appetite operational: they determine who may accept a risk at each rating and when escalation is mandatory. `/ea-risks accept` enforces the acceptance-authority column.
+
+</details>
+
+**Appetite statement:** {{risk_appetite_statement}}
+
+| Rating | Tolerance | Acceptance authority | Escalation trigger |
+|---|---|---|---|
+| Critical | {{tolerance_critical — e.g. "Outside appetite — must be mitigated or escalated"}} | Sponsor | Immediately on identification |
+| High | {{tolerance_high}} | Sponsor or ARB | Open > 30 days without mitigation plan |
+| Medium | {{tolerance_medium}} | Lead architect | Open > 90 days |
+| Low | {{tolerance_low — e.g. "Within appetite — monitor"}} | Lead architect | — |
 
 ---
 

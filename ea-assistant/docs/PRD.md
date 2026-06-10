@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.58
+**Version:** 0.9.59
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -998,6 +998,20 @@ New command `/ea-scenarios` and template `templates/business-scenario.md` suppor
 - `generate` — produce a Scenarios Summary Register cross-cutting artifact
 
 **Template sections:** (1) Problem Statement with ISS/PRB/DRV links, (2) Objectives table with SMART check, (3) Environment (Internal / External / Technology Context), (4) Stakeholders and Concerns, (5) Actors — §5.1 Human Actors + §5.2 Computing Actors with Existing/To Be Built/To Be Modified status, (6) Requirements (REQ-NNN by domain with source tracing), (7) Current State Narrative with friction points, (8) Target State Narrative with success signals, (9) Change Delta table (Process / Data / Application / Technology), (10) Scenario Diagram (optional Mermaid), Traceability Appendix.
+
+### 5.54 Concept Completions, TOGAF Technique Stubs, Schema Versioning (v0.9.59)
+
+P4 (final band) of the 2026-06-10 improvement advisory:
+
+1. **Eight concepts added to `ea-concepts.md`** (definitions, TOGAF/ArchiMate placement, distinctions, quick-reference rows): Service (SVC-NNN), Interface (IFC-NNN), Application/Technology Component (no new IDs — captured as ABB/SBB), Capability Increment, Plateau/Transition Architecture, Deliverable (vs Artifact vs Building Block), Architecture Partitioning (operationalised by `architectureLevel` + ADM tailoring), Enterprise Continuum (realised by the Architecture Repository). New ID prefixes **SVC-NNN** and **IFC-NNN** added to the ID Scheme and engagement-rules seed.
+2. **TOGAF technique stubs:**
+   - **Business Transformation Readiness Assessment** — new `templates/business-transformation-readiness.md` (12 readiness factors × readiness/urgency/difficulty, factor detail blocks, roadmap implications); Phase A artifact, reassessed at Phase E; registered in `artifact-descriptions.md`.
+   - **Capability-Based Planning** — new `references/capability-based-planning.md` (capability as planning unit, increment quality tests, anti-patterns); wired into the `ea-roadmap` agent's work-candidate derivation.
+   - **Interoperability Requirements** — new `skills/ea-requirements-management/references/interoperability-requirements.md` (business/information/technical categories, degrees 1–4, discovery checklist, REQ/IFC/STD capture conventions); wired into the Requirements-phase functional questions.
+   - **Risk appetite & tolerance** — Risk Register template gains a `## Risk Appetite & Tolerance` section (appetite statement + per-rating tolerance/authority/escalation table); `/ea-risks accept` enforces the acceptance-authority column and warns when accepting outside appetite.
+3. **Schema versioning** — `engagement.json` gains `schemaVersion` (integer, current 1) and `migrations[]` (audit trail appended by every `/ea-migrate` run); seed updated; migration-gap-catalogue detects their absence; `engagement-schema.md` adds a Source of Truth declaration (engagement.json masters direction/phases/artifact registry; generated registers are rendered views; file-mastered exceptions named).
+
+---
 
 ### 5.53 Framework Lenses, Security F/H Completion, ADM Tailoring, Phase H Change Guide (v0.9.58)
 

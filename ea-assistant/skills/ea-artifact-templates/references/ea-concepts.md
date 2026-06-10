@@ -302,6 +302,14 @@ Do not keep the two layers separate in your head — connect them structurally:
 | **ABB** | *What logical component do we need?* | Reusable, vendor-neutral architecture component at solution-independent level — names the capability to be implemented, not the product | Technology Architecture §3a; Application Architecture; Phase D/E | — |
 | **SBB** | *What product or system implements it?* | Concrete realisation of an ABB — specific product, vendor, or build choice; registered in the SBB Register | Technology Architecture SBB Register; Phase D | — |
 | **User Story** | *What does the stakeholder want to be able to do?* | Stakeholder-perspective feature statement (As a… I want… so that…); links a business actor to a deliverable outcome; traced to REQ-NNN and ABB-NNN | Requirements Register; Phase C | — |
+| **Service** | *What behaviour is offered to consumers?* | Externally visible unit of behaviour with a defined contract — what is offered, not how it is built | Business/Application/Technology Architecture service catalogues | Business / Application / Technology Service |
+| **Interface** | *Where and how do two things connect?* | Defined access point and contract between components or services (API, event, file exchange) | Application Architecture (integration); Technology Architecture | Interface elements (all layers) |
+| **Application / Technology Component** | *What structural element does the work?* | Modular structural unit (deployed application, node, device) — the thing that realises services via interfaces | Application/Technology Architecture diagrams and ABB/SBB tables | Application Component; Node / Device |
+| **Capability Increment** | *How much of the capability does this step deliver?* | Discrete, valuable step in a capability's maturity, delivered by work packages and visible at a Plateau | Architecture Roadmap (Phase E); Capability Model | — |
+| **Plateau / Transition Architecture** | *What stable state exists between baseline and target?* | A relatively stable, operable architecture state at a point in time | Transition Architectures (Phase E); Migration Plan (Phase F) | Plateau (Impl. & Migration) |
+| **Deliverable** | *What work product is contractually handed over?* | Formally specified, reviewed, signed-off output of the engagement — contains artifacts | Statement of Architecture Work; Engagement Charter | Deliverable (Impl. & Migration) |
+| **Architecture Partitioning** | *How is the architecture landscape divided?* | Deliberate division of architectures by level, domain, and time so teams can work without collision | Engagement setup (`architectureLevel`, ADM tailoring); Architecture Repository | — |
+| **Enterprise Continuum** | *How generic or specific is this asset?* | Classification of assets from generic (Foundation) to Organisation-Specific — governs reuse from the Architecture Repository | Architecture Repository (reference library, STD/VDR/THR) | — |
 
 ---
 
@@ -1229,6 +1237,154 @@ In a TOGAF engagement, user stories sit *below* Requirements: Requirements defin
 **Practitioner Notes:**
 - Stories are the bridge between TOGAF architecture and Agile delivery. They should trace to at least one REQ-NNN — a story with no requirement link is delivering something the architecture did not ask for.
 - **Enabler Stories:** A sub-type with no direct user-facing outcome — they support architectural runway (infrastructure setup, security hardening, compliance scaffolding). Tag as `[Enabler]` in the story text.
+
+---
+
+### Service (SVC-NNN)
+
+**What it IS:**
+A Service is an externally visible unit of behaviour offered to consumers through a defined contract — *what* is offered, deliberately hiding *how* it is delivered. Services exist at three levels: **Business Service** (offered to customers or other business units, e.g. "Claims Settlement"), **Application Service** (offered by an application, e.g. "Payment Authorisation"), and **Technology Service** (offered by infrastructure, e.g. "Managed Database Hosting"). Each level's services are realised by the structures of that layer and consumed by the layer above.
+
+**TOGAF placement:** Business Architecture (Phase B — business service catalogue), Application Architecture (Phase C-App — application service catalogue), Technology Architecture (Phase D — platform service catalogue).
+
+**ArchiMate:** Business Service / Application Service / Technology Service.
+
+**ID scheme:** SVC-NNN (e.g. SVC-001) when tracked formally in a service catalogue. Record the level in a `Level` column (Business / Application / Technology).
+
+**Structural parts (catalogue row):**
+- Name — noun phrase for the offered behaviour (e.g. "Payment Authorisation")
+- Level — Business / Application / Technology
+- Consumers — actors, processes, or higher-layer services that use it
+- Realised by — the component(s) or capability that deliver it (ABB/SBB or component name)
+- Contract — SLA/NFR references (REQ-NNN) and the Interface(s) through which it is accessed (IFC-NNN)
+
+**What it is NOT:**
+- Not a **Capability** — a capability is the organisation's *potential* to do something (people + process + information + tools); a service is behaviour *actually offered* through a contract. "Fraud Detection" the capability vs "Transaction Fraud Scoring" the application service.
+- Not an **ABB** — an ABB is the logical *component*; the service is the *behaviour* the component exposes. One ABB may expose several services.
+- Not a **Business Process** — a process is the internal step-by-step *how*; the service is the external *what*, abstracting the process away from the consumer.
+
+---
+
+### Interface (IFC-NNN)
+
+**What it IS:**
+An Interface is the defined access point and contract through which a service is consumed or two structural elements exchange information — an API, an event/message channel, a file exchange, or a human channel (portal, counter). The interface carries the integration obligations: protocol, format, versioning, ownership, and change policy.
+
+**TOGAF placement:** Application Architecture (Phase C-App — integration views, interface catalogue), Technology Architecture (Phase D — network/platform interfaces). Interoperability requirements (REQ-NNN) attach to interfaces.
+
+**ArchiMate:** Business / Application / Technology Interface elements.
+
+**ID scheme:** IFC-NNN (e.g. IFC-001) when tracked formally in an interface catalogue — recommended whenever an interface crosses a team, vendor, or trust boundary.
+
+**Structural parts (catalogue row):**
+- Name — what crosses it (e.g. "Order Events Feed")
+- Type — API (sync) / Event (async) / File / Human
+- Provider and Consumer — the components/parties on each side
+- Contract — format/protocol, version, SLA references (REQ-NNN), data classification
+- Owner — who controls change to the contract
+- Change policy — versioning and backward-compatibility window
+
+**What it is NOT:**
+- Not a **Service** — the service is the behaviour; the interface is the access point through which the behaviour is reached. One service may be exposed through several interfaces.
+- Not an **Integration product** — an ESB or API gateway is an SBB; the interface is the contract that the product carries.
+
+---
+
+### Application Component & Technology Component
+
+**What it IS:**
+A **Component** is a modular structural unit that does the work: an Application Component is a deployable/deployed unit of application functionality (a system, module, or microservice); a Technology Component is an infrastructure element (node, device, system software). Components *realise* Services and connect through Interfaces. In this plugin, components in the target architecture are normally captured as **ABB rows** (logical, vendor-neutral) realised by **SBB rows** (concrete products) — the component concept explains what those rows *are* in ArchiMate terms; it does not introduce a separate register.
+
+**TOGAF placement:** Application Architecture (Phase C-App — application portfolio/component diagrams), Technology Architecture (Phase D — technology component diagrams).
+
+**ArchiMate:** Application Component (Application layer); Node, Device, System Software (Technology layer).
+
+**ID scheme:** none — components appear as ABB-NNN (logical) and SBB-NNN (concrete) rows, or as named diagram elements.
+
+**What it is NOT:**
+- Not a **Service** — the component is the structure; the service is the behaviour it exposes.
+- Not a separate register — do not invent component IDs; use ABB/SBB.
+
+---
+
+### Capability Increment
+
+**What it IS:**
+A Capability Increment is a discrete, independently valuable step in a capability's maturity — the unit in which capability change is actually delivered. Capability-Based Planning decomposes each target capability into increments; each increment is delivered by one or more Work Packages and becomes visible at a Plateau (Transition Architecture). Example: "Fraud Detection capability — Increment 1: rules-based screening; Increment 2: ML scoring; Increment 3: real-time adaptive models."
+
+**TOGAF placement:** Architecture Roadmap (Phase E) — increments link Capability Model entries (CAP-NNN) to Work Packages (WP-NNN); Transition Architectures show which increments exist at each plateau. See `skills/ea-engagement-lifecycle/references/capability-based-planning.md`.
+
+**ArchiMate:** modelled as intermediate Capability states associated with Plateaus, or as Work Package outcomes.
+
+**ID scheme:** none — increments are numbered within their capability (CAP-007 Increment 2) in the Roadmap, not independently registered.
+
+**What it is NOT:**
+- Not a **Work Package** — a WP is the *work*; the increment is the *capability state* the work produces. Several WPs may deliver one increment.
+- Not a **Plateau** — a plateau is the whole-architecture stable state; an increment is one capability's step that contributes to it.
+
+---
+
+### Plateau / Transition Architecture
+
+**What it IS:**
+A Plateau is a relatively stable, operable state of the architecture at a point in time. The Baseline and Target are plateaus; **Transition Architectures** are the intermediate plateaus between them — each one a coherent state the organisation can actually run on (not a construction site). Wave planning in the Migration Plan moves the enterprise from plateau to plateau.
+
+**TOGAF placement:** Transition Architectures (Phase E artifact); Architecture Roadmap waves; Migration Plan (Phase F) wave entry/exit criteria define when a plateau is reached.
+
+**ArchiMate:** Plateau element (Implementation & Migration layer); Gap element models the delta between two plateaus.
+
+**ID scheme:** none — plateaus are named (e.g. "Transition State 1 — Q3 2027") in the Transition Architectures artifact.
+
+**What it is NOT:**
+- Not a **Wave** — a wave is the *delivery activity* between plateaus; the plateau is the *state* reached when the wave completes.
+- Not a **Milestone** — a milestone is a date/event; a plateau is a described, operable architecture state with content.
+
+---
+
+### Deliverable
+
+**What it IS:**
+A Deliverable is a formally specified work product that is contractually agreed, reviewed, and signed off — the unit of obligation between the architecture engagement and its sponsor. TOGAF's three-way distinction: a **Deliverable** is the signed-off work product; an **Artifact** is a finer-grained piece of architectural content (catalogue, matrix, diagram) that deliverables contain; a **Building Block** (ABB/SBB) is a component of the architecture itself, described *by* artifacts.
+
+**TOGAF placement:** Statement of Architecture Work (Phase A — the deliverables list IS the contract), Engagement Charter, Architecture Contract (Phase G). In this plugin, the published outputs of `/ea-publish` and `/ea-generate` are the deliverable renderings of artifact content.
+
+**ArchiMate:** Deliverable element (Implementation & Migration layer), produced by Work Packages.
+
+**ID scheme:** none — deliverables are enumerated in the Statement of Architecture Work.
+
+**What it is NOT:**
+- Not an **Artifact** — artifacts are working content; a deliverable is the reviewed, signed-off package. An artifact becomes part of a deliverable when published.
+- Not a **Work Package outcome** generally — implementation WPs produce systems; engagement deliverables are the architecture work products themselves.
+
+---
+
+### Architecture Partitioning
+
+**What it IS:**
+Architecture Partitioning is the deliberate division of the architecture landscape so multiple architectures can coexist and teams can work without collision. Architectures are partitioned by **breadth/level** (Strategic → Segment → Capability → Solution), by **domain** (Business / Data / Application / Technology), and by **time** (baseline, transition plateaus, target). Each partition has its own scope, granularity, and governance; deeper partitions must conform to the partitions above them.
+
+**TOGAF placement:** operationalised in this plugin by `architectureLevel` at `/ea-new` (with ADM tailoring deriving the phase set), `architectureDomains` selection, and the Architecture Repository's separation of enterprise assets (STD/VDR/THR, enterprise principles/policies) from engagement-local content. See `landscape-levels.md` for level guidance.
+
+**ID scheme:** none — partitioning is a structural decision recorded in `engagement.json` (`architectureLevel`, `architectureDomains`) and the workspace layout.
+
+**What it is NOT:**
+- Not **scope creep control** alone — partitioning is a positive design of the landscape, not just a fence; it defines which engagement owns which decisions.
+- Not **ADM tailoring** itself — tailoring (which phases to run) is a *consequence* of where the engagement sits in the partitioned landscape.
+
+---
+
+### Enterprise Continuum
+
+**What it IS:**
+The Enterprise Continuum is TOGAF's classification of architecture and solution assets by generality: **Foundation** (generic, industry-neutral — e.g. TOGAF TRM-style platform taxonomies) → **Common Systems** (reusable across industries — e.g. security or integration architectures) → **Industry** (sector-specific reference models) → **Organisation-Specific** (this enterprise's architectures). It answers "how generic is this asset, and what more-generic asset should we derive from?" — the discipline of *reusing leftward before inventing rightward*.
+
+**TOGAF placement:** realised in this plugin by the **Architecture Repository**: the reference library, Standards Information Base (STD-NNN), Vendor Landscape (VDR-NNN), and Technology Horizon (THR-NNN) hold the more-generic assets; engagement artifacts are the organisation-specific end. When authoring a target architecture, check the repository for an applicable reference model before designing from scratch; record the derivation in the artifact's sources.
+
+**ID scheme:** none — the continuum is a classification axis, not a register. Repository assets carry their own IDs (STD/VDR/THR).
+
+**What it is NOT:**
+- Not the **Architecture Repository** itself — the repository is the *store*; the continuum is the *classification axis* its contents sit on.
+- Not a maturity model — position on the continuum measures generality, not quality or maturity.
 
 ---
 

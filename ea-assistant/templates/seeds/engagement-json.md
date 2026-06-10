@@ -16,6 +16,8 @@
   "requirementsRepoPath": "",
   "pluginVersion": "",
   "lastMigratedVersion": "",
+  "schemaVersion": 1,
+  "migrations": [],
   "repoPath": null,
   "lastModified": "",
   "direction": {
