@@ -1,7 +1,7 @@
 ---
 name: ea-framework-lenses
-description: This skill should be used when the user asks to "apply a framework lens", "review against AWS Well-Architected", "well-architected review", "apply cloud framework", "check pillar coverage", or when /ea-grill --skill waf is invoked or a phase interview offers framework lens questions. Provides a pluggable mechanism for reviewing EA artifacts and phases against external prescriptive frameworks.
-version: 0.9.59
+description: This skill should be used when the user asks to "apply a framework lens", "review against AWS Well-Architected", "well-architected review", "review against Azure CAF", "cloud adoption framework review", "review against the Google Cloud Architecture Framework", "apply cloud framework", "check pillar coverage", or when /ea-grill --skill waf|caf|gcaf is invoked or a phase interview offers framework lens questions. Provides a pluggable mechanism for reviewing EA artifacts and phases against external prescriptive frameworks.
+version: 0.9.60
 ---
 
 # EA Framework Lenses
@@ -13,8 +13,8 @@ A **framework lens** maps an external prescriptive framework (pillars, design pr
 | Lens | Short name | Reference file | Status |
 |---|---|---|---|
 | AWS Well-Architected Framework | `waf` | `references/aws-well-architected.md` | Available |
-| Azure Cloud Adoption Framework | `caf` | `references/azure-caf.md` | Not yet authored — drop-in |
-| Google Cloud Architecture Framework | `gcaf` | `references/google-caf.md` | Not yet authored — drop-in |
+| Azure Cloud Adoption Framework | `caf` | `references/azure-caf.md` | Available — adoption-lifecycle shape: strongest in Phases A/B/E/F |
+| Google Cloud Architecture Framework | `gcaf` | `references/google-caf.md` | Available |
 
 The security frameworks (SABSA, ISO 27001, NIST CSF) are **not** lenses — they have their own deeper integration via the `ea-security` skill and `/ea-security-review`.
 
@@ -32,7 +32,7 @@ Every lens reference file must contain these sections, in order:
 
 **1. `/ea-grill --skill {short-name}` (artifact review):** load the lens reference; for each pillar whose ADM Mapping includes the artifact's phase, walk the Review Checklist against the artifact. Report per pillar: `✅ Addressed / ⚠️ Partial / 🔴 Not addressed / ➖ Not applicable`, with findings and suggested REQ/RIS/GAP captures per the Tagging Conventions. Same session flow as other grill skills (one area at a time; offer to apply findings).
 
-**2. Phase interview injection (`/ea-interview start phase` — phases C-Data, C-App, D, E):** after the question bank's optional Security Questions, offer: *"Apply a framework lens to this phase? Available: {registry list}. (lens name / n)"* If accepted, load the lens reference and ask its Interview Questions for the current phase, routing answers per the lens's routing tables. Skip the offer silently if the engagement has no cloud or infrastructure scope signals (no cloud-related drivers, constraints, SBBs, or technology choices).
+**2. Phase interview injection (`/ea-interview start phase`):** after the question bank's optional Security Questions, offer: *"Apply a framework lens to this phase? Available: {lenses from the registry whose Interview Questions cover the current phase}. (lens name / n)"* If accepted, load the lens reference and ask its Interview Questions for the current phase, routing answers per the lens's routing tables. Offer in phases C-Data, C-App, D, E for workload-pillar lenses (`waf`, `gcaf`) and additionally A, B, F for adoption-lifecycle lenses (`caf`). Skip the offer silently if the engagement has no cloud or infrastructure scope signals (no cloud-related drivers, constraints, SBBs, or technology choices).
 
 **3. Direct consultation:** when the user asks "what does {framework} say about X", load the lens reference and answer from it, citing the pillar.
 

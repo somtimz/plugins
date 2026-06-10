@@ -207,9 +207,11 @@ Type these at any interview prompt:
   within-section label contradictions and broken ID refs.
 • Use `/ea-engage-review` for a full engagement health check — coverage,
   traceability, governance, ADR status, and Zachman completeness.
-• Use `/ea-grill --skill waf` to review an artifact against the AWS
-  Well-Architected pillars — phase C/D/E interviews also offer lens questions
-  on cloud-scope engagements (see the ea-framework-lenses skill).
+• Use `/ea-grill --skill waf|caf|gcaf` to review an artifact against a cloud
+  framework lens — AWS Well-Architected, Azure CAF (adoption lifecycle:
+  strategy, five-Rs dispositions, landing zones), or the Google Cloud
+  Architecture Framework. Phase interviews also offer lens questions on
+  cloud-scope engagements (see the ea-framework-lenses skill).
 • Use `/ea-grill --skill practitioner` for an economic framing and decision
   quality review; `--skill maturity` to assess against the L1–L5 maturity model;
   `--skill failure-mode` to run a pre-mortem against the 6 failure modes.

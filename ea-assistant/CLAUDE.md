@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.59 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.60 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -116,10 +116,10 @@ The following advanced practitioner content is available for L3+ engagements:
 | `skills/ea-engagement-lifecycle/references/failure-modes.md` | 6 recurring failure modes with symptoms, fixes, and prevention |
 | `skills/ea-engagement-lifecycle/references/elite-architect-playbook.md` | Day-to-day behaviors and self-assessment for high-impact architects |
 | `docs/practitioner-white-paper.md` | Synthesized white paper for stakeholder communication |
-| `skills/ea-framework-lenses/references/aws-well-architected.md` | AWS Well-Architected lens — 6 pillars mapped to ADM phases, review checklist, interview questions (any maturity level, cloud-scope engagements) |
+| `skills/ea-framework-lenses/references/` | Cloud framework lenses — AWS Well-Architected (`waf`), Azure CAF (`caf`, adoption lifecycle: Phase A/B/E/F), Google Cloud Architecture Framework (`gcaf`); pillars mapped to ADM phases with review checklists and interview questions (any maturity level, cloud-scope engagements) |
 | `skills/ea-engagement-lifecycle/references/phase-h-change-guide.md` | ACR triage, Simplification/Incremental/Re-architecting classification, escalation timeboxes, ADM re-entry mapping |
 
-These are loaded automatically by `/ea-grill --skill practitioner|maturity|failure-mode|waf`, `/ea-brainstorm` advanced pauses, `/ea-interview` phase mode, and `/ea-changes`.
+These are loaded automatically by `/ea-grill --skill practitioner|maturity|failure-mode|waf|caf|gcaf`, `/ea-brainstorm` advanced pauses, `/ea-interview` phase mode, and `/ea-changes`.
 
 ---
 

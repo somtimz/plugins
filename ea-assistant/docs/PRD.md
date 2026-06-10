@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.59
+**Version:** 0.9.60
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -998,6 +998,17 @@ New command `/ea-scenarios` and template `templates/business-scenario.md` suppor
 - `generate` — produce a Scenarios Summary Register cross-cutting artifact
 
 **Template sections:** (1) Problem Statement with ISS/PRB/DRV links, (2) Objectives table with SMART check, (3) Environment (Internal / External / Technology Context), (4) Stakeholders and Concerns, (5) Actors — §5.1 Human Actors + §5.2 Computing Actors with Existing/To Be Built/To Be Modified status, (6) Requirements (REQ-NNN by domain with source tracing), (7) Current State Narrative with friction points, (8) Target State Narrative with success signals, (9) Change Delta table (Process / Data / Application / Technology), (10) Scenario Diagram (optional Mermaid), Traceability Appendix.
+
+### 5.55 Azure CAF and Google Cloud Architecture Framework Lenses (v0.9.60)
+
+Completes the cloud-lens registry begun in v0.9.58 — both remaining lenses authored per the lens-file contract and marked Available:
+
+1. **Azure Cloud Adoption Framework** (`/ea-grill --skill caf`, `references/azure-caf.md`) — adoption-lifecycle shape (Strategy, Plan, Ready, Adopt, Govern, Manage, Secure as pillars), strongest on Phase A/B/E/F artifacts: motivation/business-case review, five-Rs workload dispositions (contested → PAD-NNN; hard-to-reverse → A3/ADR), landing-zone readiness work packages, governance disciplines mapped to the POL→CST chain. Secure pillar defers to `ea-security`.
+2. **Google Cloud Architecture Framework** (`/ea-grill --skill gcaf`, `references/google-caf.md`) — workload-pillar shape (System Design foundation + Operational Excellence, Security, Reliability, Cost, Performance), SLO/error-budget framing, resource-hierarchy-mirrors-governance checks, Phase C/D/E interview questions.
+
+Interview injection now offers lenses per phase coverage: workload lenses (waf/gcaf) in C-Data/C-App/D/E; the adoption lens (caf) additionally in A/B/F. `/ea-grill` advanced skills: 6 → 8.
+
+---
 
 ### 5.54 Concept Completions, TOGAF Technique Stubs, Schema Versioning (v0.9.59)
 
