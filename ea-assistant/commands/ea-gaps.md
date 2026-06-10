@@ -197,7 +197,8 @@ Downstream:
 Invoked as: `/ea-gaps generate`
 
 1. Read all `direction.gaps[]` entries. Separate into: GAP-NNN (architecture gaps) and GAP-M-NNN (migration gaps).
-2. Write `EA-projects/{slug}/artifacts/cross-cutting/gap-register-{YYYY-MM-DD}.md`:
+2. If `gap-register.md` already exists in the target folder, archive it to `snapshots/` per `skills/ea-artifact-templates/references/register-snapshot-convention.md`.
+3. Write `EA-projects/{slug}/artifacts/cross-cutting/gap-register.md`:
 
 ```markdown
 ---
@@ -250,7 +251,7 @@ generated: {YYYY-MM-DD}
 > Raw gap statements in artifact prose can be promoted to formal GAP-NNN entries using `/ea-gaps promote`.
 ```
 
-3. Confirm: "Gap Register written to `artifacts/cross-cutting/gap-register-{date}.md`. {N} architecture gaps, {N} migration gaps."
+4. Confirm: "Gap Register written to `artifacts/cross-cutting/gap-register.md`. {N} architecture gaps, {N} migration gaps."
 
 ---
 

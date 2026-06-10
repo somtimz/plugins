@@ -7,6 +7,8 @@ allowed-tools: [Read, Write, Glob, Bash]
 
 Open an EA artifact for formal review and assessment.
 
+**Lane:** formal single-artifact assessment with tracked review state and comments. For a deep content critique use `/ea-grill`; for cross-artifact checks use `/ea-consistency`; for engagement-level reviews use `/ea-engage-review` or `/ea-lens`. See the "Which Review Command?" table in `/ea-help`.
+
 ## Instructions
 
 If no engagement is active in context, prompt the user to run `/ea-open` first.

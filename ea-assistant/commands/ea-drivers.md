@@ -184,7 +184,8 @@ Chain status: {✅ Complete | ⚠️ Partial | 🔴 No goals linked}
 Invoked as: `/ea-drivers generate`
 
 1. Read `engagement.json → direction.drivers[]`.
-2. Produce `EA-projects/{slug}/artifacts/cross-cutting/drivers-register-{YYYY-MM-DD}.md`:
+2. If `drivers-register.md` already exists in the target folder, archive it to `snapshots/` per `skills/ea-artifact-templates/references/register-snapshot-convention.md`.
+3. Produce `EA-projects/{slug}/artifacts/cross-cutting/drivers-register.md`:
 
 ```markdown
 ---
@@ -219,7 +220,7 @@ generated: {YYYY-MM-DD}
 {Walk the chain for this driver — list linked G-NNN, OBJ-NNN, STR-NNN, WP-NNN}
 ```
 
-3. Confirm: `"Drivers Register written to artifacts/cross-cutting/drivers-register-{YYYY-MM-DD}.md — {N} drivers."`
+4. Confirm: `"Drivers Register written to artifacts/cross-cutting/drivers-register.md — {N} drivers."`
 
 ---
 

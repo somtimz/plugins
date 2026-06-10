@@ -1,6 +1,6 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.55
+**Version:** 0.9.56
 **Status:** Current
 **Author:** Costa Pissaris
 
@@ -436,7 +436,7 @@ These will gain dedicated commands and workflow integration in a future version.
 
 `/ea-risks` generates and maintains a cross-cutting Risk Register by scanning existing artifacts for risk content:
 
-- **Sources scanned:** Architecture Vision §14, Statement of Architecture Work, Migration Plan risk section, Compliance Assessment, and any existing `risk-register-*.md` files
+- **Sources scanned:** Architecture Vision §14, Statement of Architecture Work, Migration Plan risk section, Compliance Assessment, and any existing `risk-register*.md` files
 - **RIS-NNN ID scheme** — unified, domain-agnostic
 - **Risk rating:** Likelihood × Impact matrix → Critical / High / Medium / Low
 - **Modes:** `generate` (default, writes file), `status` (inline summary), `update RIS-NNN <field> <value>`
@@ -670,7 +670,7 @@ A **NFR Coverage Checklist** in the requirements register template tracks which 
 Shared quality rules defined in `skills/ea-artifact-templates/references/publish-quality.md` and applied at three touchpoints:
 
 **`/ea-publish` Steps 5b + 5c:**
-- **Readability Pass (5b):** Scans the assembled consolidated document for blocking issues (placeholder text, `⚠️ Not answered` fields, broken image paths) and non-blocking issues (oversized tables, sections lacking narrative, terminology inconsistencies). Blocking issues trigger a fix/mark/abort choice. Non-blocking issues appear in a `## Publication Quality Notes` section.
+- **Readability Pass (5b):** Scans the assembled document for blocking issues (placeholder text, `TBD`/`TODO` markers, `⚠️ Not answered` fields, broken image paths, surviving guidance comments) and non-blocking issues (oversized tables, sections lacking narrative, terminology inconsistencies). Blocking issues trigger a fix/mark/abort choice. Non-blocking issues appear in a `## Publication Quality Notes` section.
 - **Rewrite Pass (5c):** AI-assisted pass adds brief narrative introductions to sections that open with a table, transition sentences between back-to-back sections, and standardises inconsistent terminology. Each insertion is tagged `<!-- ai-inserted -->`. Executive Mode (`--executive`) runs blocking checks only; skips the rewrite pass.
 
 **`/ea-review` action (f) — per-artifact quality check:** Scans the open artifact against publish-quality.md rules and reports table sizes, placeholder text, broken images, and narrative gaps scoped to that artifact. Each finding can be added as a review comment with one keystroke.
@@ -875,7 +875,7 @@ Dedicated management register for Architecture Principles (BP/DP/AP/TP-NNN). Pri
 
 First-class management of Business Drivers (DRV-NNN) as engagement-level motivation objects stored in `engagement.json → direction.drivers[]`.
 
-- **Modes:** `list` (grouped by type External/Internal, with orphan detection — drivers with no linked goal flagged), `add` (interactive capture: statement, type, priority, evidence, linkedGoals), `update DRV-NNN <field> <value>`, `trace DRV-NNN` (walks full DRV→G→OBJ→STR→WP motivation chain), `generate` (writes `artifacts/cross-cutting/drivers-register-{date}.md`)
+- **Modes:** `list` (grouped by type External/Internal, with orphan detection — drivers with no linked goal flagged), `add` (interactive capture: statement, type, priority, evidence, linkedGoals), `update DRV-NNN <field> <value>`, `trace DRV-NNN` (walks full DRV→G→OBJ→STR→WP motivation chain), `generate` (writes `artifacts/cross-cutting/drivers-register.md`)
 - **ID scheme:** DRV-NNN (sequential, global) — IDs are assigned by reading the current max from `direction.drivers[]` and incrementing
 - **Storage:** `engagement.json` is the source of truth; the generated register is a read-only output snapshot
 - **Skill:** `ea-drivers-management` — ID assignment algorithm, traceability walk, orphan/cycle validation, register format
@@ -886,7 +886,7 @@ First-class management of Business Drivers (DRV-NNN) as engagement-level motivat
 
 First-class management of Architecture Gaps (GAP-NNN) stored in `engagement.json → direction.gaps[]`, covering both baseline-target gaps and motivation coverage gaps across all architecture domains.
 
-- **Modes:** `list` (grouped by severity Critical → High → Medium → Low), `add` (interactive capture: statement, domain, severity, baseline, target, phase, linkedWorkPackages, linkedArtifact, status), `promote` (formalises raw gap prose from `/ea-trace --gaps` output into a GAP-NNN entry), `update GAP-NNN <field> <value>`, `trace GAP-NNN` (upstream: linked artifact and phase; downstream: linked WP-NNN and roadmap wave), `generate` (writes `artifacts/cross-cutting/gap-register-{date}.md` in two sections: Architecture Gaps / Migration Gaps)
+- **Modes:** `list` (grouped by severity Critical → High → Medium → Low), `add` (interactive capture: statement, domain, severity, baseline, target, phase, linkedWorkPackages, linkedArtifact, status), `promote` (formalises raw gap prose from `/ea-trace --gaps` output into a GAP-NNN entry), `update GAP-NNN <field> <value>`, `trace GAP-NNN` (upstream: linked artifact and phase; downstream: linked WP-NNN and roadmap wave), `generate` (writes `artifacts/cross-cutting/gap-register.md` in two sections: Architecture Gaps / Migration Gaps)
 - **ID scheme:** GAP-NNN for phases A–E/H; GAP-M-NNN for migration gaps (Phase F/G)
 - **Severity escalation:** Critical+Open+no linkedWorkPackages → warning surfaced in `/ea-engage-review` step 4i and `/ea-gaps list`
 - **Skill:** `ea-gaps-management` — schema definition, ID assignment, severity escalation rule, promote algorithm, two-section register format, relationship with `/ea-trace --gaps` (complementary, not superseded)
@@ -949,20 +949,20 @@ Dedicated register management commands for three Phase A motivation concepts tha
 - List goals grouped by Domain (Business / Technology / Data / Application / Cross-cutting), with Type classification (Strategic / Operational / Capability / Compliance)
 - `add` includes Two-Layers disambiguation check (flags EA-layer goals that belong in Governance Framework, not Architecture Vision) and Objective check (warns if statement contains a measure or deadline, suggesting it should be an Objective instead)
 - `trace` walks: ← DRV-NNN → OBJ-NNN → STR-NNN → WP-NNN
-- `generate` produces `artifacts/cross-cutting/goals-register-{YYYY-MM-DD}.md`
+- `generate` produces `artifacts/cross-cutting/goals-register.md`
 
 **`/ea-issues` (ISS-NNN):**
 - List issues grouped by Domain (Business / Technology / Data / Application / **Engagement**), with Type classification (Organisational / Process / Technology / Regulatory / Capability)
 - The **Engagement** domain covers issues about the EA engagement itself (methodology, governance, team, tooling) — not an architecture domain, but a first-class classification for engagement health
 - `add` begins with Issue vs Problem disambiguation: *"Is this concern systemic and broad, or specific and fixable?"*; includes specificity check if statement contains individual system names or numbers
 - `trace` walks: ← DRV-NNN (contextual) → threatens G-NNN → feeds GAP-NNN
-- `generate` produces `artifacts/cross-cutting/issues-register-{YYYY-MM-DD}.md`
+- `generate` produces `artifacts/cross-cutting/issues-register.md`
 
 **`/ea-problems` (PRB-NNN):**
 - List problems grouped by Domain (Business / Technology / Data / Application / **Engagement**), with Type classification (Operational / Technical / Data / Engagement / Compliance)
 - `add` begins with Problem vs Issue disambiguation and systemic check (warns if statement sounds broad rather than specific); requires Observable Symptom field (ideally a number)
 - `trace` walks: ← ISS-NNN (related issues) → blocks OBJ-NNN → generates REQ-NNN
-- `generate` produces `artifacts/cross-cutting/problems-register-{YYYY-MM-DD}.md`
+- `generate` produces `artifacts/cross-cutting/problems-register.md`
 
 **Engagement.json schema extensions** — new fields added to existing direction arrays:
 
@@ -987,7 +987,7 @@ New command `/ea-scenarios` and template `templates/business-scenario.md` suppor
 **Storage:**
 - Index: `engagement.json → scenarios[]` (id, title, status, phase, path, linkedDrivers, linkedIssues, linkedProblems, linkedGoals, linkedObjectives, requirements, lastModified)
 - Artifact: `artifacts/phase-a/business-scenario-BS-NNN.md`
-- Summary register: `artifacts/cross-cutting/scenarios-register-{YYYY-MM-DD}.md`
+- Summary register: `artifacts/cross-cutting/scenarios-register.md`
 
 **Modes:**
 - `list` — table of all BS-NNN with status, linked drivers/goals, and requirement count
@@ -998,6 +998,19 @@ New command `/ea-scenarios` and template `templates/business-scenario.md` suppor
 - `generate` — produce a Scenarios Summary Register cross-cutting artifact
 
 **Template sections:** (1) Problem Statement with ISS/PRB/DRV links, (2) Objectives table with SMART check, (3) Environment (Internal / External / Technology Context), (4) Stakeholders and Concerns, (5) Actors — §5.1 Human Actors + §5.2 Computing Actors with Existing/To Be Built/To Be Modified status, (6) Requirements (REQ-NNN by domain with source tracing), (7) Current State Narrative with friction points, (8) Target State Narrative with success signals, (9) Change Delta table (Process / Data / Application / Technology), (10) Scenario Diagram (optional Mermaid), Traceability Appendix.
+
+### 5.51 Consumable Deliverables — Layered Publish, Reading Guide, Register Snapshots, On-demand Details (v0.9.56)
+
+Four changes from the 2026-06-10 improvement advisory (`docs/reviews/improvement-advisory-2026-06-10.md`) targeting deliverable consumability and ceremony reduction:
+
+1. **Layered publish (default)** — `/ea-publish` now defaults to a layered report: 3–5 page executive brief → per-artifact summaries (1–2 pages each, with links to full artifacts) → appendix index. Full-text embedding moved behind `--full`. Output: `artifacts/architecture-report-{date}.md`. All modes strip HTML guidance comments and treat `TBD`/`TODO` markers as blocking quality issues.
+2. **Stakeholder reading guide** — every `/ea-publish` run writes `artifacts/index.md`: a one-screen "start here" map pointing to the latest report, executive summary, Architecture Vision, current-phase artifacts, and live registers.
+3. **Register snapshot convention** — generated registers use stable, undated filenames (e.g. `risk-register.md`); regeneration archives the prior version to a `snapshots/` subfolder. Single `artifacts[]` entry per register. Convention: `skills/ea-artifact-templates/references/register-snapshot-convention.md`. Applies to all 14 register-generating commands.
+4. **On-demand detail files** — `/ea-migrate` gap 3g is report-only and never bulk-creates empty detail stubs; detail files are created only when content is supplied (per-item selection + at least a Summary). Always excluded from `--auto`.
+
+Review-command discoverability: `/ea-help` gains a "Which Review Command?" decision table; `/ea-grill` and `/ea-review` preambles state their lane and cross-reference the others.
+
+---
 
 ### 5.50 Architecture Repository, Vendor/Horizon/Standards Registers, and Cross-cutting Sub-folders (v0.9.54)
 
@@ -1149,7 +1162,7 @@ EA-projects/
 | `/ea-consistency` | `[artifact <id>] [--ids] [--report]` | Focused consistency check — cross-artifact, within-artifact section contradictions, or ID reference scan only |
 | `/ea-engage-review` | — | Full-scope engagement consistency, alignment, governance, and quality review |
 | `/ea-migrate` | `[--report] [--reorganize]` | Align legacy engagement to current plugin version conventions; `--reorganize` moves flat-path artifacts into correct phase subfolders |
-| `/ea-publish` | `[markdown|word]` | Consolidated report via Pandoc; pre-publish compliance check |
+| `/ea-publish` | `[markdown|word|both] [--full|--executive]` | Layered stakeholder report (default) or full consolidated document (`--full`) via Pandoc; pre-publish compliance check; writes `artifacts/index.md` reading guide |
 | `/ea-brief` | `[--focus decisions\|risks\|gaps\|strategy] [--save]` | Synthesised one-page engagement brief — ranked decisions, gaps, risks, open concerns |
 | `/ea-workshop` | `[start|resume|export|list]` | Facilitated multi-stakeholder workshops — WS-NNN minutes, agenda, decisions, actions |
 | `/ea-arb` | `[new|list|view|close]` | ARB meeting minutes — ARB-NNN, quorum, decisions, propagate to ADR register |

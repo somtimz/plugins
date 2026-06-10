@@ -12,7 +12,7 @@ You are executing the `/ea-adrs` command. Load the `ea-engagement-lifecycle` ski
 `/ea-adrs` manages Architecture Decision Records for the active engagement. ADRs document significant architecture decisions — technology or vendor selection, architecture pattern choices, make-vs-buy decisions, data governance approaches, security architecture choices, and any decision that is hard to reverse or whose rationale may be questioned later.
 
 **Modes:**
-- `generate` (default) — scan all ADR files and write a consolidated `adr-register-{YYYY-MM-DD}.md`
+- `generate` (default) — scan all ADR files and write a consolidated `adr-register.md`
 - `status` — show an inline ADR summary without writing a file
 - `new` — create a new ADR document from the template
 - `update ADR-NNN <field> <value>` — update a single field on a specific ADR
@@ -60,9 +60,9 @@ Using the ADR register template (`templates/adr-register.md`):
 
 ### Step 4 — Write the Register File
 
-Write the completed register to: `EA-projects/{slug}/artifacts/cross-cutting/governance/adr-register-{YYYY-MM-DD}.md`
+Write the completed register to: `EA-projects/{slug}/artifacts/cross-cutting/governance/adr-register.md`. If the file already exists, archive it to `snapshots/` first per `skills/ea-artifact-templates/references/register-snapshot-convention.md`.
 
-Register all register artifacts in `engagement.json → artifacts[]` if not already present.
+Register in `engagement.json → artifacts[]` if not already present (single entry at the stable path).
 
 Confirm: `"ADR Register written: {N} ADRs ({N} Candidate, {N} In Progress, {N} Completed, {N} Superseded)"`
 

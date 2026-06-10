@@ -12,7 +12,7 @@ You are executing the `/ea-sbbs` command.
 Solution Building Blocks (SBBs) are concrete, vendor-specific implementations of Architecture Building Blocks. This command aggregates all SBB-NNN entries from across the engagement into a single register, surfaces vendor-first selections (SBBs without an ABB), and tracks lock-in constraints.
 
 **Modes:**
-- `generate` (default) — scan all artifacts for SBB tables and write `sbb-register-{YYYY-MM-DD}.md`
+- `generate` (default) — scan all artifacts for SBB tables and write `sbb-register.md`
 - `status` — inline summary of SBBs without writing a file
 - `new` — create a new SBB record interactively
 - `update SBB-NNN <field> <value>` — update a single field on an existing SBB
@@ -69,9 +69,9 @@ Using the SBB register template (`templates/sbb-register.md`):
 
 ### Step 5 — Write the Register File
 
-Write to: `EA-projects/{slug}/artifacts/sbb-register-{YYYY-MM-DD}.md`
+Write to: `EA-projects/{slug}/artifacts/sbb-register.md`. If the file already exists, archive it to `snapshots/` first per `skills/ea-artifact-templates/references/register-snapshot-convention.md`.
 
-Register in `engagement.json → artifacts[]` if not already present.
+Register in `engagement.json → artifacts[]` if not already present (single entry at the stable path).
 
 Confirm: `"SBB Register written: {N} SBBs ({N} orphans flagged, {N} lock-in risks)"`
 

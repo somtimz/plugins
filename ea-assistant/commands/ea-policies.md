@@ -42,7 +42,7 @@ This command aggregates all `POL-NNN` entries into a single Policies Register, s
 
 ## Mode: `list` (default)
 
-1. Read `EA-projects/{slug}/artifacts/cross-cutting/governance/policies-register-{YYYY-MM-DD}.md` (human-readable register).
+1. Read `EA-projects/{slug}/artifacts/cross-cutting/governance/policies-register.md` (human-readable register).
 2. Render a summary table grouped by Type:
 
 ```
@@ -66,7 +66,7 @@ Detail Files:  {N} POL-NNN(s) with detail files  |  {N} open issues across all p
 
 Invoked as: `/ea-policies add`
 
-1. Locate the existing register in `EA-projects/{slug}/artifacts/cross-cutting/governance/policies-register-*.md`. If none exists, create a minimal register from the template with this policy as the first entry.
+1. Locate the existing register in `EA-projects/{slug}/artifacts/cross-cutting/governance/policies-register.md`. If none exists, create a minimal register from the template with this policy as the first entry.
 2. Assign the next available `POL-NNN` ID (increment from the highest existing ID).
 3. Prompt for each field in sequence (all required unless noted):
 

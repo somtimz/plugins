@@ -32,7 +32,7 @@ Flags from `--quick` skip the detailed consistency check and show only the gover
 
 ## Step 2 — Artifact Inventory
 
-Read all `.md` files in `EA-projects/{slug}/artifacts/` (exclude `*.review.md`, `decision-register-*.md`, `risk-register-*.md`, `concerns-register-*.md`, `adr-register-*.md`, `change-register-*.md`). For each:
+Read all `.md` files in `EA-projects/{slug}/artifacts/` (exclude `*.review.md`, `decision-register*.md`, `risk-register*.md`, `concerns-register*.md`, `adr-register*.md`, `change-register*.md`). For each:
 - Extract frontmatter: artifact name, phase, status, reviewStatus, version
 - Count `{{placeholder}}` tokens (unanswered fields)
 - Check for T3 appendix sections: Appendix A3 (Decision Log), Appendix A4 (Concerns)
@@ -96,7 +96,7 @@ Summarise as: Fully aligned / Partially aligned / Gaps detected.
 
 **5b — Unresolved Concerns:** Scan all A4 appendices. Count rows where Status = `Requires Attention`. List top 3 by artifact. Flag any Category = Risk items with no matching RIS-NNN.
 
-**5c — Open Risks:** Scan `risk-register-*.md` if present, else scan all A3/A4 rows for risk references. Count Critical + High risks with Status = Open.
+**5c — Open Risks:** Scan `risk-register*.md` if present, else scan all A3/A4 rows for risk references. Count Critical + High risks with Status = Open.
 
 **5d — ADR Status:** Scan all `adr-*.md` files in `EA-projects/{slug}/artifacts/`. Count by status. Flag any Candidate ADRs older than 14 days (stale — no options analysis started). Flag any In Progress ADRs older than 30 days (overdue for decision).
 

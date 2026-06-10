@@ -15,7 +15,7 @@ Scans the active engagement for alignment gaps between its artifacts and the cur
 
 Flags:
 - `--report` — scan and report only; do not offer remediation
-- `--auto` — apply all non-destructive remediations without confirmation
+- `--auto` — apply all non-destructive remediations without confirmation (excludes 3g detail-file creation, which always requires per-item selection and content)
 
 ---
 
@@ -61,7 +61,7 @@ GAP-M-{NNN}  [Info]  {ID} ({type}, {priority/rating}) — no detail file
              Suggested: run /ea-detail new {ID} to capture narrative, rationale, and risks
 ```
 
-**Remediation for 3g:** Create stub detail files (frontmatter + empty section headers only, no content) for selected items. Stubs use `templates/item-detail.md` with placeholders replaced from source table data. The user can then populate them at any time with `/ea-detail view {ID}`.
+**Remediation for 3g:** Report-only — never bulk-create detail files. Empty stubs add navigation noise without content (detail files are opt-in per `detail-file-convention.md`). For each item the user explicitly selects, run the `/ea-detail new {ID}` flow (which extracts the table row, title, and related IDs) and immediately prompt for at least a Summary. If the user declines to provide any content, do not create the file. 3g is always excluded from `--auto`.
 
 **3h — Cross-cutting sub-folder structure**
 
@@ -69,8 +69,8 @@ Scan `EA-projects/{slug}/artifacts/cross-cutting/` (flat level only — not recu
 
 | Pattern | Target sub-folder |
 |---|---|
-| `adr-*.md`, `adr-register-*.md`, `decision-register-*.md`, `constraints-register-*.md`, `policies-register-*.md` | `governance/` |
-| `risk-register-*.md`, `concerns-register-*.md`, `change-register-*.md`, `change-request-*.md` | `operations/` |
+| `adr-*.md`, `adr-register*.md`, `decision-register*.md`, `constraints-register*.md`, `policies-register*.md` | `governance/` |
+| `risk-register*.md`, `concerns-register*.md`, `change-register*.md`, `change-request-*.md` | `operations/` |
 | `zachman-diagram-*.md`, `role-catalogue.md` | `context/` |
 
 For each misplaced file found, report:

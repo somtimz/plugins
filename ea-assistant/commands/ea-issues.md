@@ -218,7 +218,8 @@ Chain status: {✅ Complete | ⚠️ Partial | 🔴 Orphan}
 Invoked as: `/ea-issues generate`
 
 1. Read `engagement.json → direction.issues[]`.
-2. Produce `EA-projects/{slug}/artifacts/cross-cutting/issues-register-{YYYY-MM-DD}.md`:
+2. If `issues-register.md` already exists in the target folder, archive it to `snapshots/` per `skills/ea-artifact-templates/references/register-snapshot-convention.md`.
+3. Produce `EA-projects/{slug}/artifacts/cross-cutting/issues-register.md`:
 
 ```markdown
 ---
@@ -280,8 +281,8 @@ links: []
 {Repeat for all issues, grouped by Domain}
 ```
 
-3. Register artifact in `engagement.json → artifacts[]`.
-4. Confirm: `"Issues Register written to artifacts/cross-cutting/issues-register-{YYYY-MM-DD}.md — {N} issues."`
+4. Register artifact in `engagement.json → artifacts[]` (single entry at the stable path).
+5. Confirm: `"Issues Register written to artifacts/cross-cutting/issues-register.md — {N} issues."`
 
 ---
 
