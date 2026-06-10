@@ -1,7 +1,7 @@
 ---
 name: ea-grill-skills
 description: Nine grill modes bundled for ea-assistant — stress-test, premortem, decision, design, software-design, infra-design, artifact, diagram, boardroom-strategy. Load this skill and follow the ## Mode section matching the requested short name.
-version: 0.9.56
+version: 0.9.57
 ---
 
 When this skill is loaded, locate the `## Mode: {short-name}` section that matches the mode requested by `/ea-grill` and follow it exclusively. Ignore all other mode sections.

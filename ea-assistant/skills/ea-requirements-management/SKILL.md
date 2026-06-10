@@ -1,7 +1,7 @@
 ---
 name: ea-requirements-management
 description: This skill should be used when the user asks to "manage architecture requirements", "add a requirement", "sync requirements from the repo", "view requirements", "trace a requirement to an artifact", "update the requirements register", or "start the architecture requirements phase". Handles the full requirements lifecycle from capture through traceability and sync with a shared requirements repository.
-version: 0.9.56
+version: 0.9.57
 ---
 
 # EA Requirements Management
@@ -201,6 +201,8 @@ The Architecture Requirements phase runs in two modes:
 2. Update status of existing requirements
 3. Re-sync from repo if updated externally
 4. Trigger consistency check when requirements change
+
+`/ea-phase` reinforces the continuous discipline: on every phase entry it surfaces open requirements whose `phase` field matches the entered phase (the requirements check-in), and on Requirements-phase completion it bridges directly into Phase A with the register carried as interview context.
 
 ## Content Policy
 

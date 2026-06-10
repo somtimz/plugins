@@ -1,7 +1,7 @@
 ---
 name: ea-architecture-repository
 description: Manages the shared TOGAF Architecture Repository — Standards Information Base (SIB/STD-NNN), Vendor Landscape Register (VDR-NNN), Technology Horizon Register (THR-NNN), and enterprise-level governance artefacts. Supports multi-engagement, multi-project sharing via the EA-Workspace/ sibling-folder layout.
-version: 0.9.56
+version: 0.9.57
 ---
 
 # Architecture Repository Skill
