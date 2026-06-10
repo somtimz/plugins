@@ -119,7 +119,7 @@ For each source read, note: file path, extraction date, items found.
 
 Group extracted items into logical work packages:
 - One WP per major gap cluster (related gaps that require coordinated delivery)
-- One WP per major capability uplift
+- One WP per major capability uplift — decompose multi-wave capability uplifts into Capability Increments per `skills/ea-engagement-lifecycle/references/capability-based-planning.md` (each increment independently valuable and observable; sequence by increment dependency and readiness, respecting any Business Transformation Readiness Assessment ceiling)
 - One WP per infrastructure or platform migration
 - Assign a provisional WP-NNN ID starting at WP-001
 

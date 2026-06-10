@@ -148,6 +148,7 @@ Invoked as: `/ea-risks accept RIS-NNN [--reason "text"]`
 Records a formal acceptance decision for a risk — sets `Status: Accepted` and captures the mandatory reason in the risk entry. An accepted risk must have a documented rationale for governance purposes.
 
 1. Locate the risk register and find the `RIS-NNN` entry.
+1b. **Tolerance check:** if the register has a `## Risk Appetite & Tolerance` section, look up the acceptance authority for this risk's rating. If the authority is above lead-architect level (Sponsor / ARB), require it: prompt "This is a {rating} risk — acceptance authority is {authority}. Who is accepting it on their behalf? (name and role)" and record it as `Accepted By`. If the section marks the rating outside appetite (e.g. Critical: "must be mitigated or escalated"), warn before proceeding: "⚠️ {rating} risks are outside the stated risk appetite. Acceptance requires {authority} sign-off and should be exceptional. Continue? (y/n)"
 2. If `--reason` flag is not provided, prompt:
    ```
    Acceptance reason (why is this risk being accepted without mitigation?):

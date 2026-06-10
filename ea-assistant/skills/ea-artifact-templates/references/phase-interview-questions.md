@@ -1184,7 +1184,7 @@ Load the **Phase H — Architecture Change Management** section of `skills/ea-se
 
 1. What must the architecture enable that is not possible today? List the top 3–5 new business capabilities required.
 2. Which existing capabilities must be preserved, enhanced, or replaced in the target state?
-3. Are there specific integration or interoperability requirements — systems that must exchange data or trigger each other?
+3. Are there specific integration or interoperability requirements — systems that must exchange data or trigger each other? For each boundary surfaced, apply `skills/ea-requirements-management/references/interoperability-requirements.md` — category (business/information/technical), degree (1–4), and capture conventions (REQ-NNN with measurable target; IFC-NNN for degree ≥ 3 boundaries).
 4. Are there reporting or data access requirements — what information must be available to whom and when?
 5. Are there workflow or process automation requirements that the architecture must support?
 
