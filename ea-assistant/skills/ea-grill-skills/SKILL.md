@@ -332,6 +332,23 @@ If the artifact being reviewed is a Gap Analysis document (artifact ID `gap-anal
 - If count ≥ 1, surface: "⚠️ {N} gap statement(s) in this artifact have not been promoted to formal GAP-NNN entries — run `/ea-gaps promote` to formalise them."
 - If all gaps are formalised, confirm: "✅ All gap statements have corresponding GAP-NNN entries."
 
+**Adopted Reference Architecture compliance:**
+If `engagement.json → adoptedRAs[]` is non-empty:
+- For each RA-NNN in `adoptedRAs[]`:
+  1. Resolve `RA-NNN.md` (repo first, then `artifacts/cross-cutting/reference-architectures/`). If not found: warn "⚠ Adopted RA-NNN not found — cannot run its grill checklist."
+  2. Read `## Grill Checklist` — extract each numbered item as a testable statement.
+  3. For each checklist item: scan the artifact under review (and the engagement's ABB/SBB register if available) for evidence that the statement is satisfied or contradicted.
+     - **Satisfied:** evidence found consistent with the statement → pass silently (or list in the final scorecard as ✅).
+     - **Contradicted:** evidence found that directly contradicts the statement → flag: "⚠ RA-NNN Grill Check failed: {statement} — found: {contradicting evidence}"
+     - **Cannot verify:** insufficient information in the artifact to confirm or deny → flag: "❓ RA-NNN Grill Check unverifiable: {statement} — no evidence found in this artifact"
+  4. Summarise at the end of the artifact review:
+     ```
+     Adopted RA checks (RA-NNN: {name}):
+       Passed:      {n}
+       Failed:      {n} ⚠
+       Unverifiable: {n} ❓
+     ```
+
 ---
 
 At the end, provide:
