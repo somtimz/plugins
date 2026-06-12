@@ -349,6 +349,17 @@ If `engagement.json → adoptedRAs[]` is non-empty:
        Unverifiable: {n} ❓
      ```
 
+**Recommended matrices (advisory):**
+When reviewing a phase artifact (any artifact whose phase maps to Prelim, B, C-Data, C-App, D, E, or F):
+- Read `skills/ea-artifact-templates/references/matrix-catalogue.md` and filter to entries whose Phase matches the artifact's phase (excluding managed-elsewhere entries).
+- For each: if the matrix file does not exist, note "⬜ Recommended matrix not created: {name} — `/ea-matrix new {key}`"; if it exists but has no filled cells, note "⚠ Matrix {name} exists but is empty."
+- Advisory only — never fails the review and never affects the verdict. Present as a short block after the scorecard. Omit the block entirely if all recommended matrices exist with content.
+
+**Matrix artifact grilling:**
+If the artifact under review is itself a matrix (frontmatter contains a `matrixKey` field):
+- Look up the key in `skills/ea-artifact-templates/references/matrix-catalogue.md` and run the full check set defined by `/ea-matrix check` mode in `commands/ea-matrix.md` (axes check, marker check, orphan check, catalogue grill checks, approval check) — the check definitions live in the catalogue; do not restate them.
+- Report each as ✅ / ⚠ / ❓ in the scorecard, and treat ⚠ marker or axes failures as Inconsistent sections in the verdict.
+
 ---
 
 At the end, provide:
