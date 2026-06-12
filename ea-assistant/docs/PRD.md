@@ -1,8 +1,27 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.60
+**Version:** 0.9.61
 **Status:** Current
 **Author:** Costa Pissaris
+
+---
+
+## v0.9.61 — Reference Architecture Register
+
+### Summary
+Added RA-NNN Reference Architecture support to the Architecture Repository. Architects can define reusable architectural patterns (with ABB/SBB layer catalogues, key decisions, constraints, and grill checklists) at the org level or per-engagement, then adopt them into engagements to surface building blocks, seed decisions, and drive grill compliance checks.
+
+### New
+- `/ea-refarch` command (7 modes: new, list, show, edit, adopt, unadopt, status)
+- `RA-NNN` ID prefix added to unified ID scheme
+- `referenceArchitecture` register block in `repo.json`
+- `adoptedRAs[]` and `localRA.nextId` fields in `engagement.json`
+- RA grill checklist integration in `/ea-grill` artifact mode
+- RA layer hints surfaced in `/ea-abbs new` and `/ea-sbbs new`
+
+### Modified
+- `/ea-repo init` and `status` updated for RA register
+- `/ea-new` seeds new engagement fields
 
 ---
 
