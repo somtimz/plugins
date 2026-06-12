@@ -106,6 +106,20 @@ Coverage:       {N} REQ(s) satisfied by {N} ABB(s)
 
 Create a new ABB record.
 
+**RA reference (if adopted RAs exist):**
+Before starting the interview, check `engagement.json → adoptedRAs[]`. If non-empty:
+- Load each adopted RA's `## Architecture Layers` table.
+- If any RA has a row whose `Layer` matches the domain the user is creating an ABB in, display:
+  ```
+  Reference Architecture hint — {RA-NNN}: {RA name}
+  The following ABBs are defined in this RA for the {domain} layer:
+  | ABB-NNN | ABB Name | Role in Pattern |
+  ...
+  ```
+  Then ask: "Are you implementing one of these, or defining a new ABB?"
+  - If implementing an existing one: pre-fill the Name and Description from the RA row; let user confirm or override.
+  - If new: continue with the standard interview.
+
 ### Step 2 — Determine Next ABB Number
 
 Find highest existing ABB-NNN. Assign next: `ABB-{NNN+1}` (zero-padded).

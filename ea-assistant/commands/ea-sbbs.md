@@ -102,6 +102,17 @@ Coverage:       {N} ABB(s) implemented by {N} SBB(s)
 
 Create a new SBB record.
 
+**RA reference (if adopted RAs exist):**
+Before starting the interview, check `engagement.json → adoptedRAs[]`. If non-empty:
+- Load each adopted RA's `## Architecture Layers` table.
+- If the ABB the user is implementing (or the domain they specified) matches a row in the RA, display:
+  ```
+  Reference Architecture hint — {RA-NNN}: {RA name}
+  The parent ABB ({ABB-NNN}: {ABB Name}) is defined in this RA.
+  Adoption Notes from the RA: {RA → ## Adoption Notes, first paragraph}
+  ```
+  This is informational — the user proceeds with the normal SBB interview.
+
 ### Step 2 — Determine Next SBB Number
 
 Find highest existing SBB-NNN. Assign next: `SBB-{NNN+1}` (zero-padded).
