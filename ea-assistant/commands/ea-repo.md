@@ -28,11 +28,20 @@ Initialise a new EA-Workspace at `[workspace-path]` (default: `./EA-Workspace` r
    - `<path>/Architecture-Repository/vendor-landscape/entries/`
    - `<path>/Architecture-Repository/technology-horizon/entries/`
    - `<path>/Architecture-Repository/reference-library/`
+   - `<path>/Architecture-Repository/reference-library/entries/`
 4. Write `workspace.json` from seed `workspace-json.md` — substitute:
    - `{{organisation}}` → user-provided organisation name
    - `{{YYYY-MM-DD}}` → today's date
    - `{{YYYY-MM-DDTHH:MM:SSZ}}` → current UTC datetime
-5. Write `repo.json` from seed `architecture-repo-json.md` with same substitutions
+5. Write `repo.json` from seed `architecture-repo-json.md` with same substitutions. After the `technologyHorizon` block in `repo.json`, the seed must include:
+   ```json
+   "referenceArchitecture": {
+     "enabled": true,
+     "indexFile": "reference-library/reference-architecture-index.md",
+     "entriesPath": "reference-library/entries/",
+     "nextId": 1
+   }
+   ```
 6. Write stub files:
    - `Architecture-Repository/governance/enterprise-principles.md` — heading: "# Enterprise Architecture Principles"
    - `Architecture-Repository/governance/enterprise-policies.md` — heading: "# Enterprise Architecture Policies"
@@ -40,15 +49,22 @@ Initialise a new EA-Workspace at `[workspace-path]` (default: `./EA-Workspace` r
    - `Architecture-Repository/sib/sib-index.md` — heading: "# Standards Information Base Index"
    - `Architecture-Repository/vendor-landscape/vendor-index.md` — heading: "# Vendor Landscape Register Index"
    - `Architecture-Repository/technology-horizon/horizon-index.md` — heading: "# Technology Horizon Register Index"
+   - `Architecture-Repository/reference-library/reference-architecture-index.md` — seed from `templates/seeds/ra-index.md`
 7. Report:
    ```
    ✓ EA-Workspace initialised at <path>
-   ✓ Architecture-Repository/ created (SIB, Vendor Landscape, Technology Horizon)
+   ✓ Architecture-Repository/ created (SIB, Vendor Landscape, Technology Horizon, Reference Architectures)
    ✓ EA-Projects/ ready for engagements
 
    Next steps:
      /ea-new              — create a new engagement (auto-links to this workspace)
      /ea-repo link <slug> — link an existing engagement
+
+   Now available:
+     /ea-standards  — manage Standards Information Base (STD-NNN)
+     /ea-vendors    — manage Vendor Landscape Register (VDR-NNN)
+     /ea-horizon    — manage Technology Horizon Register (THR-NNN)
+     /ea-refarch    — manage Reference Architecture Register (RA-NNN)
    ```
 
 ---
@@ -102,6 +118,7 @@ Show Architecture Repository health dashboard.
    - VDR entries: count files in `Architecture-Repository/vendor-landscape/entries/`
    - THR entries: count files in `Architecture-Repository/technology-horizon/entries/`
    - STD entries: count files in `Architecture-Repository/sib/standards/`
+   - RA entries: count files in `Architecture-Repository/reference-library/entries/`
 4. Display:
    ```
    Architecture Repository: <repo.name>
@@ -113,6 +130,7 @@ Show Architecture Repository health dashboard.
      Vendor Landscape:      <n> vendors (VDR-NNN)
      Technology Horizon:    <n> technologies (THR-NNN)
      Standards (SIB):       <n> standards (STD-NNN)
+     Reference Architectures: <n> patterns (RA-NNN)
 
    Linked engagements (<count>):
      <slug>   <name>   <linkedDate>
