@@ -51,7 +51,7 @@ Mode defaults to `list` when no arguments are given.
    If a seed source file does not exist, say so and ask the user to provide that axis manually. Harvest any `[Matrix]`-relevant thoughts from `artifacts/{folder}/notes/brainstorm/brainstorm-notes.md` (category `relationships`) and offer them as additional candidates.
 3. **Elicit cells (optional).** Ask: "Fill cells now, row by row? (y = guided / n = leave empty)". If yes: for each row, ask the catalogue's elicitation questions adapted to that row entity, and record markers using only the catalogue's Markers vocabulary for this key.
 4. Create the phase folder if it does not exist. Write the matrix file from `templates/seeds/matrix-template.md`, substituting per the template's substitution notes. Set `lastModified` to today.
-5. Register the artifact in `engagement.json → artifacts` (same shape as other artifacts: id `{key}-matrix`, phase, path, status Draft, version 0.1.0) and update the engagement's `lastModified`.
+5. Register the artifact in `engagement.json → artifacts` (same shape as other artifacts: `id` `{key}-matrix`, `name`, `phase`, `file` `artifacts/{folder}/{key}-matrix.md`, `status` Draft, `version` 0.1.0) and update the engagement's `lastModified`.
 6. Report: file path, axis sizes, fill %, and a reminder: "Run `/ea-matrix check {key}` after filling cells."
 
 ---

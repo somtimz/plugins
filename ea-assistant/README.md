@@ -97,7 +97,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Technology Horizon Register** — `/ea-horizon` manages a technology radar (THR-NNN) with Adopt/Trial/Assess/Hold ring model, ring history, and PoC evidence; `/ea-adrs new` cross-references THR entries for technology/vendor selection decisions
 - **Standards Information Base** — `/ea-standards` manages industry/regulatory standards (STD-NNN) with adoption status (Mandatory/Recommended/Informational/Deprecated) and CST-NNN constraint linkage; `surface` command shows standards relevant to the active ADM phase
 - **Reference Architecture Register** — define reusable RA-NNN patterns with ABB/SBB layer catalogues, key decisions, and grill checklist integration; adopt patterns into engagements
-- **TOGAF relationship matrices** — 18-matrix catalogue (Actor/Role, Application/Data CRUD, Capability/Application, System/Technology, Work Package/Dependency…) with /ea-matrix management, axis seeding from existing artifacts, and grill compliance checks.
+- **TOGAF relationship matrices** — 18-matrix catalogue (Actor/Role, Application/Data CRUD, Capability/Application, System/Technology, Work Package/Dependency…) with /ea-matrix management, axis seeding from existing artifacts, and grill compliance checks
 - **Cross-cutting sub-folders** — `artifacts/cross-cutting/` reorganized into `governance/` (ADR Register, Decision Register, Constraints, Policies), `operations/` (Risk Register, Change Register, Concerns), and `context/` (Zachman, Roles); auto-maintained `cross-cutting-index.md` navigation hub; `/ea-migrate --reorganize` migrates legacy flat paths
 
 ## Prerequisites
