@@ -360,6 +360,12 @@ If the artifact under review is itself a matrix (frontmatter contains a `matrixK
 - Look up the key in `skills/ea-artifact-templates/references/matrix-catalogue.md` and run the full check set defined by `/ea-matrix check` mode in `commands/ea-matrix.md` (axes check, marker check, orphan check, catalogue grill checks, approval check) — the check definitions live in the catalogue; do not restate them.
 - Report each as ✅ / ⚠ / ❓ in the scorecard, and treat ⚠ marker or axes failures as Inconsistent sections in the verdict.
 
+**Zachman Diagram grilling:**
+If the artifact under review is a Zachman Diagram (artifact id or filename matches `zachman-diagram*`):
+- Run the audit checklist from `skills/zachman-framework/references/zachman-audit-checklist.md` — all six categories with cross-artifact verification (contributing artifacts per the cell-extraction-map; cited IDs against registers; modification dates; cell content against each cell's `Expected Model:` line in `zachman-cell-descriptions.md`). The check definitions live in the checklist; do not restate them.
+- Feed findings into the standard grill output: High findings map to Inconsistent sections in the verdict; the checklist's Stale verdict maps to "Needs revision" with re-generation (`/ea-zachman generate`) as the top prioritised revision.
+- Grill's standard apply flow holds — applying fixes bumps the diagram artifact version and saves the review file per grill's convention.
+
 ---
 
 At the end, provide:
