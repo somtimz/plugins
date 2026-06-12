@@ -19,6 +19,8 @@
   "schemaVersion": 1,
   "migrations": [],
   "repoPath": null,
+  "adoptedRAs": [],
+  "localRA": { "nextId": 1 },
   "lastModified": "",
   "direction": {
     "vision": "",
