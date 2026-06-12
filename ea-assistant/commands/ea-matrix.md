@@ -83,7 +83,7 @@ Mode defaults to `list` when no arguments are given.
 
 ## Mode: `check [<key>]`
 
-1. If a key is given, check that one matrix; otherwise check every existing matrix file for the engagement (glob `EA-projects/{slug}/artifacts/*/[a-z]*-matrix.md` and match frontmatter `matrixKey` against the catalogue).
+1. If a key is given, check that one matrix; otherwise check every existing matrix file for the engagement (glob `EA-projects/{slug}/artifacts/*/[a-z]*-matrix.md`). Skip any file whose frontmatter has no `matrixKey` field or whose key is not a managed catalogue entry (e.g. `traceability-matrix.md`), printing `➡️ {filename} — managed elsewhere, skipped`.
 2. For each matrix, run:
    - **Axes check:** row/column entity types match the catalogue entry's Axes.
    - **Marker check:** every non-empty cell uses only the catalogue's Markers vocabulary for this key.
