@@ -39,7 +39,7 @@ This reference describes all 36 cells, with purpose, example content, and exampl
 | **Row 1 — Contextual** | Business objects in scope | Business processes in scope | Business locations | Business stakeholders | Business events and cycles | Business goals and drivers |
 | **Row 2 — Conceptual** | Semantic model / Entity types | Business process model | Business logistics | Organisational model | Business event cycle | Business strategy model |
 | **Row 3 — Logical** | Logical data model | Application function model | Distributed systems model | Human interface model | Processing cycle | Business rule model |
-| **Row 4 — Physical** | Physical data model | System design | Technology architecture | Presentation architecture | Control structure | Rule design |
+| **Row 4 — Physical** | Physical data model | System design | Technology architecture | Workforce/ops design | Control structure | Rule design |
 | **Row 5 — Detailed** | Data definition (DDL) | Program code | Network configuration | Security configuration | Timing definitions | Rule specifications |
 | **Row 6 — Functioning** | Instantiated data | Running functions | Network as deployed | Users in roles | Events occurring | Goals enacted |
 
@@ -187,11 +187,11 @@ This reference describes all 36 cells, with purpose, example content, and exampl
 **Example Content:** AWS VPC topology, on-premises rack layout, network segment definitions
 **Example Artefacts:** Network topology diagram, infrastructure architecture diagram, cloud landing zone design
 
-#### Cell 4,4 — Technology / Who (Presentation Architecture)
-**Purpose:** Specifies how users interact with the system: UI frameworks, authentication mechanisms, and device/channel support.
+#### Cell 4,4 — Technology / Who (Workforce & Operations Design)
+**Purpose:** Specifies how people are organised to build, run, and support the system: job designs, runbook ownership, support and escalation model, and operational access.
 **Expected Model:** Workforce/ops design — job designs, runbook ownership, support model
-**Example Content:** React SPA architecture, OAuth 2.0 / OIDC authentication flow, mobile-responsive design specification
-**Example Artefacts:** UI architecture specification, authentication design, channel architecture document
+**Example Content:** L1/L2/L3 support model, on-call rota and runbook ownership, operations role definitions, admin access model
+**Example Artefacts:** Support model design, runbook catalogue, job/role descriptions, operational RACI
 
 #### Cell 4,5 — Technology / When (Control Structure)
 **Purpose:** Specifies timing controls, scheduling mechanisms, and transaction management at a technology level.
