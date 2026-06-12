@@ -63,7 +63,9 @@ EA Traceability Views — {engagement name}
   6. Requirement → ABB             ({N} gaps)
   7. ABB → SBB                     ({N} gaps)
   8. SBB → Story                   ({N} gaps)
-  9. Full gap report               (all views, gaps + contradictions only)
+  9. Gap → Work Package            ({N} gaps)
+ 10. Requirement → Work Package    ({N} gaps)
+ 11. Full gap report               (all views, gaps + contradictions only)
   Q. Quit
 
 Enter a number:
@@ -407,6 +409,53 @@ Two stories linked (`deliveredAs`) to the same SBB-NNN but with conflicting acce
 
 ---
 
+### View 9: Gap → Work Package (read-only)
+
+**Entity sources:**
+- GAP-NNN: read `engagement.json → direction.gaps[]` — each entry's `id` and `linkedWorkPackages` field
+- WP-NNN: scan `EA-projects/{slug}/artifacts/phase-e*/**/*.md` for tokens matching `WP-\d{3}`
+
+**Render matrix:** rows = GAP-NNN, columns = WP-NNN. A cell is marked `R` (resolves) when the WP appears in the gap's `linkedWorkPackages`. This view renders from the gaps register only — it does NOT read or write `traceability-index.json`, and no bootstrap mechanism applies. Edit links via `/ea-gaps update GAP-NNN linkedWorkPackages WP-NNN`.
+
+**Gaps section:**
+
+For each GAP-NNN with an empty `linkedWorkPackages`:
+```
+⚠️ GAP-001 ({severity}) has no work package resolving it
+   → Link one via /ea-gaps update GAP-001 linkedWorkPackages WP-NNN
+   → Or accept the gap deliberately and record the acceptance in the Gap Analysis
+```
+
+For each WP-NNN appearing in no gap's `linkedWorkPackages`:
+```
+⚠️ WP-002 resolves no recorded gap — orphaned work package
+   → Verify the WP traces to a goal/objective instead (see T3-ROAD-WP), or link a gap
+```
+
+**After view:** Return to the persistent menu (Step 3).
+
+---
+
+### View 10: Requirement → Work Package (derived, read-only)
+
+**Entity sources:**
+- REQ-NNN: scan `EA-projects/{slug}/artifacts/requirements/*.md` for tokens matching `REQ-\d{3}`
+- WP-NNN: scan `EA-projects/{slug}/artifacts/phase-e*/**/*.md` for tokens matching `WP-\d{3}`
+
+**Render matrix:** rows = REQ-NNN, columns = WP-NNN. A cell is marked `~` (derived) when a transitive path exists in `traceability-index.json`: REQ —`satisfiedBy`→ CAP —`deliveredBy`→ WP. This view is a composition of Views 4 and 5 — it writes nothing and has no bootstrap mechanism. To change it, edit the underlying links via View 4 or View 5.
+
+**Gaps section:**
+
+For each REQ-NNN with no derived path to any WP:
+```
+⚠️ REQ-003 has no delivery path (no Requirement → Capability → Work Package chain)
+   → Add the missing link via View 4 (Requirement → Capability) or View 5 (Capability → Work Package)
+```
+
+**After view:** Return to the persistent menu (Step 3).
+
+---
+
 ## Step 5 — Write Links
 
 When a user confirms a bootstrap suggestion or manually adds a link (by typing the JSON):
@@ -424,9 +473,9 @@ When a user confirms a bootstrap suggestion or manually adds a link (by typing t
 
 ## Step 6 — Full Gap Report
 
-Triggered by menu option 9 or the `--gaps` argument.
+Triggered by menu option 11 or the `--gaps` argument.
 
-Run all eight views silently (generate findings but do not render matrices). Collect all gap and contradiction findings. Print:
+Run all ten views silently (generate findings but do not render matrices). Collect all gap and contradiction findings. Print:
 
 ```
 Full Gap Report — {engagement name}
@@ -443,6 +492,8 @@ Capability → Work Package {N} gaps, {N} contradictions
 Requirement → ABB         {N} gaps, {N} contradictions
 ABB → SBB                 {N} gaps, {N} contradictions
 SBB → Story               {N} gaps, {N} contradictions
+Gap → Work Package        {N} gaps
+Requirement → Work Package {N} gaps
 
 Total: {N} gaps, {N} contradictions
 
@@ -457,7 +508,7 @@ Total: {N} gaps, {N} contradictions
 
 After the report, offer:
 ```
-  1. Open a specific view  →  enter 1–8
+  1. Open a specific view  →  enter 1–10
   2. Run /ea-consistency for artifact-level checks
   Q. Quit
 ```
