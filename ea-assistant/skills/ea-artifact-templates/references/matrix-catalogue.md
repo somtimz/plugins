@@ -35,6 +35,8 @@ Entries marked **Managed by:** are not handled by `/ea-matrix` — follow the po
 | E / F | `wp-dependency`, Work Package / Gap (managed elsewhere) |
 | Requirements / Cross-cutting | Requirements Traceability Matrix, Requirement / Work Package (both managed elsewhere) |
 
+> `capability-application` spans Phases B and C-App (single file in `artifacts/phase-b/`); it appears in both rows above by design.
+
 ---
 
 ## Managed by `/ea-matrix` (14)
@@ -50,7 +52,7 @@ Entries marked **Managed by:** are not handled by `/ea-matrix` — follow the po
 - **Grill checks:**
   1. Every `C` (conflict) cell has a corresponding entry in `## Observations` naming the resolution or escalation path.
   2. Every `E` (exception) cell names the granting authority in `## Observations`.
-  3. No ADR with status Completed is absent from the columns — an unassessed completed decision is a governance gap.
+  3. No ADR with status Completed (per the Status column in `artifacts/cross-cutting/governance/adr-register.md`) is absent from the columns — an unassessed completed decision is a governance gap.
 - **Elicitation questions:**
   1. "Does {decision} support or strain any of your architecture principles?"
   2. "Have any exceptions to principles been granted for this decision — and who approved them?"
@@ -134,7 +136,7 @@ Entries marked **Managed by:** are not handled by `/ea-matrix` — follow the po
   2. "For each supporting application: tolerate, invest, migrate, or retire?"
 
 ### data-function — Data Entity / Business Function Matrix
-- **Phase:** C · **Folder:** `artifacts/phase-c-data/` · **File:** `data-function-matrix.md`
+- **Phase:** C-Data · **Folder:** `artifacts/phase-c-data/` · **File:** `data-function-matrix.md`
 - **Axes:** rows = data entities, columns = business functions
 - **Seed sources:** rows — `artifacts/phase-c-data/data-architecture.md` entity/subject-area tables; columns — `artifacts/phase-b/business-architecture.md` function catalogue
 - **Markers:** `C` create · `R` read · `U` update · `D` delete (combinable) · `O` owner · `S` steward
@@ -149,7 +151,7 @@ Entries marked **Managed by:** are not handled by `/ea-matrix` — follow the po
   2. "Which functions create or update {entity} — and which only read it?"
 
 ### app-data — Application / Data Matrix
-- **Phase:** C · **Folder:** `artifacts/phase-c-data/` · **File:** `app-data-matrix.md`
+- **Phase:** C-Data · **Folder:** `artifacts/phase-c-data/` · **File:** `app-data-matrix.md`
 - **Axes:** rows = applications, columns = data entities
 - **Seed sources:** rows — `artifacts/phase-c-app/application-architecture.md` application catalogue; columns — `artifacts/phase-c-data/data-architecture.md` entity tables
 - **Markers:** `C` create · `R` read · `U` update · `D` delete (combinable) · `★` system of record · `!` sensitive data (PII/regulated)
@@ -166,7 +168,7 @@ Entries marked **Managed by:** are not handled by `/ea-matrix` — follow the po
   3. "Which of these entities carry sensitive or regulated data?"
 
 ### app-organization — Application / Organization Matrix
-- **Phase:** C · **Folder:** `artifacts/phase-c-app/` · **File:** `app-organization-matrix.md`
+- **Phase:** C-App · **Folder:** `artifacts/phase-c-app/` · **File:** `app-organization-matrix.md`
 - **Axes:** rows = applications, columns = organization units
 - **Seed sources:** rows — `artifacts/phase-c-app/application-architecture.md` application catalogue; columns — `artifacts/phase-b/business-architecture.md` organization sections
 - **Markers:** `O` owns · `H` heavy use · `L` light use · `S` support responsibility · `F` funding responsibility
@@ -181,7 +183,7 @@ Entries marked **Managed by:** are not handled by `/ea-matrix` — follow the po
   2. "Which units use {application} heavily versus occasionally?"
 
 ### role-application — Role / Application Matrix
-- **Phase:** C · **Folder:** `artifacts/phase-c-app/` · **File:** `role-application-matrix.md`
+- **Phase:** C-App · **Folder:** `artifacts/phase-c-app/` · **File:** `role-application-matrix.md`
 - **Axes:** rows = roles (ROLE-NNN), columns = applications
 - **Seed sources:** rows — `artifacts/cross-cutting/context/role-catalogue.md`; columns — `artifacts/phase-c-app/application-architecture.md` application catalogue
 - **Markers:** `M` mandatory for the role · `O` optional · access level suffix: `r` read-only · `w` read-write · `a` admin (e.g. `Mw`)
@@ -196,7 +198,7 @@ Entries marked **Managed by:** are not handled by `/ea-matrix` — follow the po
   2. "Are there applications where admin access is broader than it should be?"
 
 ### app-function — Application / Function Matrix
-- **Phase:** C · **Folder:** `artifacts/phase-c-app/` · **File:** `app-function-matrix.md`
+- **Phase:** C-App · **Folder:** `artifacts/phase-c-app/` · **File:** `app-function-matrix.md`
 - **Axes:** rows = applications, columns = business functions
 - **Seed sources:** rows — `artifacts/phase-c-app/application-architecture.md` application catalogue; columns — `artifacts/phase-b/business-architecture.md` function catalogue
 - **Markers:** `P` primary support · `S` secondary support · `D` duplicate support · `R` planned replacement · `T` target-state support
@@ -211,7 +213,7 @@ Entries marked **Managed by:** are not handled by `/ea-matrix` — follow the po
   2. "Which functions feel under-supported by the current application estate?"
 
 ### app-interaction — Application Interaction Matrix
-- **Phase:** C · **Folder:** `artifacts/phase-c-app/` · **File:** `app-interaction-matrix.md`
+- **Phase:** C-App · **Folder:** `artifacts/phase-c-app/` · **File:** `app-interaction-matrix.md`
 - **Axes:** rows = applications, columns = applications (square matrix)
 - **Seed sources:** both axes — `artifacts/phase-c-app/application-architecture.md` application catalogue; existing IFC-NNN entries in interface catalogues enrich cells
 - **Markers:** `→` sends to · `←` receives from · `↔` bidirectional · `!` critical interface; cell may name the interface (e.g. `→ IFC-003`)
@@ -249,7 +251,7 @@ Entries marked **Managed by:** are not handled by `/ea-matrix` — follow the po
 - **Markers:** `P` predecessor (row must precede column) · `T` technical dependency · `B` business dependency · `F` funding dependency · `G` governance dependency
 - **Shows:** dependencies between work packages, projects, or transition states
 - **Why:** supports migration sequencing and delivery governance
-- **How:** WP-NNN on both axes; read row → column (row WP-001, column WP-003, cell `P` = WP-001 must precede WP-003); circular `P` chains are sequencing errors
+- **How:** WP-NNN on both axes; read row → column (row WP-001, column WP-003, cell `P` = WP-001 must precede WP-003); circular `P` chains are sequencing errors. The file lives in `phase-f/` because sequencing is finalised during Migration Planning; row/column candidates come from the Phase E roadmap.
 - **Grill checks:**
   1. No circular `P` chains (A precedes B, B precedes A — directly or transitively).
   2. Every WP scheduled in Wave 1 of the Roadmap has no `P` dependency on a WP in a later wave.
