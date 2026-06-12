@@ -16,6 +16,7 @@ Goals sit in the middle of the motivation chain (DRV → **G** → OBJ → WP). 
 | Prefix / concept | `G-NNN` — Goal |
 | Storage | `engagement.json → direction.goals[]` |
 | Register file | `artifacts/cross-cutting/goals-register.md` (artifactId `goals-register`; relatedArtifacts `["architecture-vision"]`) |
+| Display view | Architecture Vision `§3 Goals` — columns `ID \| Goal \| Business Driver(s) \| Linked Strategies \| Rationale \| Details` ← `id, statement, drivers, —, rationale` |
 | Groupings | `list` and `generate` group by Domain; summary counts by Type, Priority, Status, plus "Orphans (no driver)" and "Not operationalised (no objective)" |
 | Orphan rule | No linked drivers AND no linked objectives → `⚠️ Orphan` |
 

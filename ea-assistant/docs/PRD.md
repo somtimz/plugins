@@ -1,10 +1,24 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.63
+**Version:** 0.9.64
 **Status:** Current
 **Author:** Costa Pissaris
 
 ---
+
+## v0.9.64 — Objectives Register & Direction Single Source of Truth
+
+### Summary
+Added the missing `/ea-objectives` register command (OBJ-NNN was the only motivation-chain concept without one, despite four references to it) and closed the direction-data drift gap: `engagement.json → direction` is now enforced as the single source of truth, with register `add`/`update` mirroring changes into the artifact display tables and `/ea-status --direction` reading the SST with drift detection.
+
+### New
+- **`/ea-objectives` command** (`commands/ea-objectives.md`) — Objectives Register on the shared register protocol: list/add/update/trace/generate; fields per the engagement schema (statement, measure, target, deadline, priority, linkedGoal); goal-disambiguation and measurability checks on `add`; trace walks OBJ → Goal/Drivers upstream, blocking Problems lateral, Metrics (`metrics[].linkedTo`) and Work Packages downstream. Resolves the dangling `/ea-objectives add` references in `ea-goals.md` and `ea-problems.md`
+- **Display View Sync** (`register-protocol.md`) — optional `Display view` Register Spec element (artifact section + column → field mapping); after a confirmed `add`/`update`, the change is mirrored into the display table (append on add, in-place cell rewrite on update; artifact never created, missing section skipped with a note). Declared for `/ea-drivers` (AV §2), `/ea-goals` (AV §3), `/ea-objectives` (AV §4), `/ea-issues` (AV §5), `/ea-problems` (AV §6)
+
+### Changed
+- **`/ea-status --direction`** — now reads `engagement.json → direction` (previously parsed artifact tables, diverging from `/ea-brief` which reads the SST). The artifact scan is repurposed as drift detection: IDs found in artifact tables but absent from `engagement.json` are reported with import guidance; the `Source` column became `Displayed In` (the artifact rendering each item); domain resolution uses item fields with linked-goal inheritance
+- `commands/ea-help.md`, `README.md`, `CLAUDE.md` — `/ea-objectives` row, register list, and command count (56) updated
+- `skills/ea-engagement-lifecycle/SKILL.md` — version bumped to 0.9.64
 
 ## v0.9.63 — Zachman Diagram Audit
 

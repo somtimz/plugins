@@ -1,6 +1,6 @@
 # Register Protocol — Shared Mode Mechanics for Direction Registers
 
-Single source of truth for the mechanics of the direction-register commands: `/ea-drivers`, `/ea-goals`, `/ea-issues`, `/ea-problems`, `/ea-gaps`. Each command file declares a **Register Spec** (identity, fields, links, trace chain, groupings) plus any register-specific checks; everything else — the mode flows below — comes from this protocol and is **never restated in the command file**.
+Single source of truth for the mechanics of the direction-register commands: `/ea-drivers`, `/ea-goals`, `/ea-objectives`, `/ea-issues`, `/ea-problems`, `/ea-gaps`. Each command file declares a **Register Spec** (identity, fields, links, trace chain, groupings) plus any register-specific checks; everything else — the mode flows below — comes from this protocol and is **never restated in the command file**.
 
 ## Register Spec (declared per command)
 
@@ -11,6 +11,7 @@ Each command declares:
 | **Prefix / concept** | ID prefix (e.g. `G`) and concept name; concept definition lives in `ea-concepts.md` — never inline |
 | **Storage** | The `engagement.json → direction.{array}` that is the single source of truth |
 | **Register file** | Stable output path for `generate` (e.g. `artifacts/cross-cutting/goals-register.md`) |
+| **Display view** *(optional)* | The artifact section that renders this register for stakeholders (e.g. Architecture Vision `§3 Goals`), with a column → field mapping. `add`/`update` mirror changes into it (see Display View Sync below) |
 | **Fields** | Table of: field, add-prompt text, valid values, required/optional |
 | **Link fields** | Fields holding cross-references (target prefix + orphan semantics) |
 | **Trace chain** | Upstream and downstream walks for `trace` |
@@ -47,7 +48,8 @@ Each command declares:
 4. Run the spec's **post-prompt checks** (e.g. Two-Layers test, specificity/systemic warnings) — each asks "Proceed? (y/n)".
 5. Show a confirmation preview (all captured fields; recommended-but-empty fields shown as `⚠️ None — recommended`). Ask "Add to engagement? (y/n)".
 6. On confirm: append to the storage array, set `engagement.json → lastModified: today`.
-7. Confirm with the spec's success message; if a link field is empty, emit the spec's orphan nudge (suggested `update` command).
+7. Run **Display View Sync** (below) if the spec declares a display view.
+8. Confirm with the spec's success message; if a link field is empty, emit the spec's orphan nudge (suggested `update` command).
 
 ## Mode: `update {ID} <field> <value>`
 
@@ -58,7 +60,19 @@ Each command declares:
    - Link values must match existing IDs in their target array/artifact; flag unknown IDs as broken references
 4. Apply the spec's **status transitions** (extra prompts) and any field-specific rules.
 5. Show the proposed change — `"{ID}: {field} — '{old}' → '{new}'"` — and ask "Apply? (y/n)".
-6. On confirm: update `engagement.json`, set `lastModified: today`, confirm.
+6. On confirm: update `engagement.json`, set `lastModified: today`, run **Display View Sync** (below) if the spec declares one, confirm.
+
+## Display View Sync (`add` and `update`)
+
+`engagement.json` is the single source of truth; the display view is a rendered projection of it. After a confirmed `add` or `update`, mirror the change into the spec's display view so the stakeholder-facing artifact never drifts from the data:
+
+1. Resolve the display artifact file (e.g. `artifacts/phase-a/architecture-vision.md`). If the file does not exist, skip silently — the section is rendered when the artifact is created.
+2. Find the spec's section heading and its table. If the heading or table is missing, skip and note: "ℹ️ {artifact} has no {section} table — display view not updated."
+3. **Add:** append a row using the spec's column → field mapping, following the table's existing row conventions (ID link style, `../details/{ID}.md` Details link, `—` for unmapped columns). Remove any remaining `{{placeholder}}` template rows when adding the first real row.
+4. **Update:** find the row whose first cell contains the item's ID and rewrite only the mapped cells; preserve unmapped cells. If no row matches, append as in step 3.
+5. Update the artifact's `lastModified` frontmatter field. Do not change `status`, `reviewStatus`, or `version`.
+
+Never edit the display view in the other direction — content found in artifact tables but absent from `engagement.json` is drift, surfaced by `/ea-status --direction` and `/ea-consistency`, and resolved by importing into the register (`add`) or correcting the artifact.
 
 ## Mode: `trace [{ID}]`
 
@@ -99,3 +113,5 @@ Always flag referenced IDs that do not exist in `engagement.json` (or the named 
 | Link references unknown ID | Flag as broken link; suggest the target register's `list` command |
 | Orphan item | Flag in `list` and `trace` per the spec's orphan rule; suggest the linking `update` command |
 | Unknown field in `update` | Reject; show the spec's valid field list |
+| Display artifact missing or section absent | Skip Display View Sync silently (file) or with an ℹ️ note (section); never create the artifact |
+| ID found in display table but not in storage array | Drift — do not delete from the table; suggest `add` to import it into the register |

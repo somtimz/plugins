@@ -16,6 +16,7 @@ Problems are specific, observable, fixable symptoms actively blocking objectives
 | Prefix / concept | `PRB-NNN` — Problem |
 | Storage | `engagement.json → direction.problems[]` |
 | Register file | `artifacts/cross-cutting/problems-register.md` (artifactId `problems-register`; relatedArtifacts `["architecture-vision"]`) |
+| Display view | Architecture Vision `§6 Problems` — columns `ID \| Problem \| Observable Symptom \| Blocks Objective(s) \| Evidence \| Raised By \| Details` ← `id, statement, symptom, blocksObjectives, evidence, raisedBy` |
 | Groupings | `list` and `generate` group by Domain (Engagement first, then Business, Technology, Data, Application); summary counts by Severity, Status, plus "No evidence" and "No objectives" |
 | Orphan rule | No linked objectives → `⚠️ Orphan` |
 

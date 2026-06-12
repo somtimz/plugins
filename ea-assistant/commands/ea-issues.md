@@ -16,6 +16,7 @@ Issues are systemic concerns threatening goals — present and ongoing, broad, w
 | Prefix / concept | `ISS-NNN` — Issue |
 | Storage | `engagement.json → direction.issues[]` |
 | Register file | `artifacts/cross-cutting/issues-register.md` (artifactId `issues-register`; relatedArtifacts `["architecture-vision"]`) |
+| Display view | Architecture Vision `§5 Issues` — columns `ID \| Issue \| Area \| Threatens Goal(s) \| Evidence \| Raised By \| Details` ← `id, statement, domain, threatensGoals, evidence, raisedBy` |
 | Groupings | `list` and `generate` group by Domain (Engagement first, then Business, Technology, Data, Application); summary counts by Severity, Status, plus "No evidence" and "No goals" |
 | Orphan rule | No linked goals → `⚠️ Orphan` |
 

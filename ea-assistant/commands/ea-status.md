@@ -167,7 +167,7 @@ Want to go deeper? Run `/ea-engage-review` for a full health check or `/ea-zachm
 
 ## Flag: --direction
 
-Display the Direction Register — Goals, Objectives, Strategies, Opportunities, Issues, and Problems — aggregated from artifacts in the active engagement. This flag can be combined with additional filters:
+Display the Direction Register — Goals, Objectives, Strategies, Opportunities, Issues, and Problems — read from `engagement.json → direction` (the single source of truth), with drift detection against the artifact display tables. This flag can be combined with additional filters:
 
 | Additional argument | Effect |
 |---|---|
@@ -187,46 +187,29 @@ Arguments are combinable: `/ea-status --direction goals --domain Business`
 
 Check the conversation context for an active engagement slug. If none found, scan `EA-projects/*/engagement.json` (excluding `.archive/`) and ask the user to select one. Load `engagement.json` to confirm the slug and engagement name.
 
-### Step 2 — Scan Artifacts
+### Step 2 — Read Direction Data
 
-**List files:** List all `*.md` files under `EA-projects/{slug}/artifacts/` recursively. Exclude:
-- `*.review.md`
-- `decision-register*.md`
-- `risk-register*.md`
-- `adr-register*.md`
-- `direction-register*.md`
-- `change-register*.md`
+Read `engagement.json → direction` — the single source of truth for direction items:
 
-**Detect direction-bearing sections** — for each file, scan for:
+| Section type | Source array | Fields |
+|---|---|---|
+| **Goals** | `direction.goals[]` | id, statement, domain, type, priority, status, drivers, rationale |
+| **Objectives** | `direction.objectives[]` | id, statement, measure, target, deadline, priority, linkedGoal |
+| **Strategies** | `direction.strategies[]` | id, statement, supports, priority |
+| **Opportunities** | `direction.opportunities[]` | id, statement, drivers, type, priority, linkedGoals, rationale |
+| **Issues** | `direction.issues[]` | id, statement, domain/area, threatensGoals, evidence, raisedBy |
+| **Problems** | `direction.problems[]` | id, statement, symptom, blocksObjectives, evidence, raisedBy |
 
-| Section type | Detection rule |
-|---|---|
-| **Goals** | Heading containing "Goals", next table has rows matching `G-\d+` in first cell |
-| **Objectives** | Heading containing "Objectives", next table has rows matching `OBJ-\d+` |
-| **Strategies** | Heading containing "Strategies", next table has rows matching `STR-\d+` |
-| **Opportunities** | Heading containing "Opportunities", next table has rows matching `OPP-\d+` |
-| **Issues** | Heading containing "Issues", next table has rows matching `ISS-\d+` |
-| **Problems** | Heading containing "Problems", next table has rows matching `PRB-\d+` |
+**Domain resolution:** use the item's own `domain` field where present (goals, issues, problems). Items without one (objectives, strategies, opportunities) inherit the domain of their linked goal (`linkedGoal` / first of `supports` / first of `linkedGoals`); if no linked goal, show `—`.
 
-**Parse table rows:** Skip header rows, separator rows, `{{...}}` placeholders, and empty/`—` rows.
+### Step 2b — Drift Detection
 
-**Column layouts:**
-- Goals: `| ID | Goal | Business Driver(s) | Linked Strategies |` → id, statement, drivers, linkedStrategies
-- Objectives: `| ID | Objective | Measure | Target | Deadline | Linked Goal |` → id, statement, measure, target, deadline, linkedGoal
-- Strategies: `| ID | Strategy | Supports Goal(s) |` → id, statement, supports
-- Opportunities: `| ID | Opportunity | Driver(s) | Type | Priority | Linked Goal(s) | Rationale |` → id, statement, drivers, type, priority, linkedGoals, rationale
-- Issues: `| ID | Issue | Area | Threatens Goal(s) | Evidence | Raised By |` → id, statement, area, threatensGoals, evidence, raisedBy
-- Problems: `| ID | Problem | Observable Symptom | Blocks Objective(s) | Evidence | Raised By |` → id, statement, symptom, blocksObjectives, evidence, raisedBy
+The artifact display tables (Architecture Vision §2–§8 and sibling artifacts) are rendered projections of `engagement.json`. Check they have not drifted:
 
-**Domain mapping** — infer from artifact filename:
-- `architecture-vision*` → All
-- `business-architecture*`, `business-model-canvas*` → Business
-- `data-architecture*` → Data
-- `application-architecture*` → Application
-- `technology-architecture*` → Technology
-- anything else → —
-
-**De-duplicate:** If the same ID appears in multiple artifacts, keep the first occurrence. Sort files so `architecture-vision*` is processed first.
+1. List all `*.md` files under `EA-projects/{slug}/artifacts/` recursively, excluding `*.review.md` and `*-register*.md` files.
+2. Grep each file for ID tokens per type: `G-\d{3}`, `OBJ-\d{3}`, `STR-\d{3}`, `OPP-\d{3}`, `ISS-\d{3}`, `PRB-\d{3}` (skip `{{...}}` placeholder rows and `G-00N`-style template examples).
+3. **Artifact-only IDs** — found in an artifact table but absent from the corresponding `direction` array: collect as drift, noting the artifact file.
+4. Record, per item in the register, the first artifact file that displays its ID — this populates the `Displayed In` column (items not yet rendered in any artifact show `—`).
 
 ### Step 3 — Apply Filters
 
@@ -239,34 +222,45 @@ Apply `--domain X` and item-type arguments. If filtering yields zero rows, omit 
 Engagement: {name}  ·  Date: {YYYY-MM-DD}
 
 ### Goals
-| ID | Statement | Domain | Drivers | Linked Strategies | Source |
+| ID | Statement | Domain | Drivers | Linked Strategies | Displayed In |
 |---|---|---|---|---|---|
 
 ### Objectives
-| ID | Statement | Domain | Measure | Target | Deadline | Linked Goal | Source |
+| ID | Statement | Domain | Measure | Target | Deadline | Linked Goal | Displayed In |
 |---|---|---|---|---|---|---|---|
 
 ### Strategies
-| ID | Statement | Domain | Supports | Source |
+| ID | Statement | Domain | Supports | Displayed In |
 |---|---|---|---|---|
 
 ### Opportunities
-| ID | Statement | Domain | Type | Priority | Driver(s) | Linked Goals | Source |
+| ID | Statement | Domain | Type | Priority | Driver(s) | Linked Goals | Displayed In |
 |---|---|---|---|---|---|---|---|
 
 ### Issues (ISS-NNN) — Strategic Threats
-| ID | Statement | Area | Threatens Goal(s) | Evidence | Raised By | Source |
+| ID | Statement | Area | Threatens Goal(s) | Evidence | Raised By | Displayed In |
 |---|---|---|---|---|---|---|
 
 ### Problems (PRB-NNN) — Tactical Blockers
-| ID | Statement | Symptom | Blocks Objective(s) | Evidence | Raised By | Source |
+| ID | Statement | Symptom | Blocks Objective(s) | Evidence | Raised By | Displayed In |
 |---|---|---|---|---|---|---|
 
 ---
-{N} goals · {N} objectives · {N} strategies · {N} opportunities · {N} issues · {N} problems from {N} artifact(s)
+{N} goals · {N} objectives · {N} strategies · {N} opportunities · {N} issues · {N} problems (source: engagement.json)
 ```
 
-Sort rows within each section by ID number. Null/absent fields: show `—`. Do not write any file.
+A goal's `Linked Strategies` is derived from `direction.strategies[]` where `supports` contains the goal's ID. `Displayed In` is the artifact file recorded in Step 2b, or `—` if the item is not yet rendered in any artifact. Sort rows within each section by ID number. Null/absent fields: show `—`. Do not write any file.
+
+**Drift report** — if Step 2b found artifact-only IDs, append after the footer:
+
+```
+⚠️ Drift detected — {N} item(s) appear in artifact tables but not in engagement.json:
+  {ID} — {artifact file}
+    → import with `/ea-{register} add` (re-enter the item; the register assigns engagement.json mastery)
+    → or remove the row from the artifact if it is obsolete
+```
+
+If no drift: omit the block entirely.
 
 ### Step 5 — Quality Scan (`--quality` only)
 
@@ -281,8 +275,7 @@ Load `skills/ea-engagement-lifecycle/references/grill-direction-quality.md`. App
 
 | Scenario | Handling |
 |---|---|
-| No artifacts directory or no `.md` files found | "No artifacts found in `EA-projects/{slug}/artifacts/`. Run `/ea-phase` to start a phase." |
-| Artifacts exist but none contain direction sections | "No direction items found. Run `/ea-interview` on Phase A to capture Goals, Objectives, Strategies." |
-| Architecture Vision not yet created | Show items from any other artifact; note at footer: "Architecture Vision not found — items sourced from: {list}" |
-| All items are template placeholders | Treat as empty |
-| Same ID in multiple artifacts | Keep first occurrence (Architecture Vision takes priority) |
+| All `direction` arrays empty or missing | "No direction items in engagement.json. Capture them via `/ea-interview start phase A` or the register commands (`/ea-goals add`, `/ea-objectives add`, ...)." Still run Step 2b — artifact-only IDs found with an empty register are all drift |
+| No artifacts directory or no `.md` files found | Skip Step 2b; `Displayed In` shows `—` for all items |
+| Artifact tables contain only `{{...}}` placeholders | Treat as empty for drift detection |
+| Same ID displayed in multiple artifacts | `Displayed In` shows the first occurrence (Architecture Vision takes priority) |

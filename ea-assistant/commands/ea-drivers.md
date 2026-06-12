@@ -16,6 +16,7 @@ Drivers sit at the top of the motivation chain (DRV → G → OBJ → STR → WP
 | Prefix / concept | `DRV-NNN` — Business Driver |
 | Storage | `engagement.json → direction.drivers[]` |
 | Register file | `artifacts/cross-cutting/drivers-register.md` (artifactId `drivers-register`) |
+| Display view | Architecture Vision `§2 Business Drivers` — columns `ID \| Driver \| Type \| Force \| Impact on Strategy \| Linked Goals \| Evidence / Source \| Details` ← `id, statement, type, —, —, linkedGoals, evidence` |
 | Groupings | `list` and `generate` group by Type (External first); summary counts by Priority, plus "Orphans (no linked goal)" and "No evidence" |
 | Orphan rule | No linked goals → `⚠️ Orphan` |
 
