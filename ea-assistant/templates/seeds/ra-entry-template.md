@@ -5,7 +5,7 @@ domain: {{domain}}
 status: Draft
 version: 1.0.0
 source: {{source}}
-industryBody: ""
+industryBody: "{{industryBody}}"
 linkedSTDs: []
 linkedADRs: []
 createdDate: {{date}}
