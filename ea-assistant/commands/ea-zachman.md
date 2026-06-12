@@ -1,7 +1,7 @@
 ---
 name: ea-zachman
-description: Create, populate, and review the Zachman Diagram for an EA engagement — generate from existing artifacts, interview to fill gaps, produce coverage analysis, and classify any artifact against the 6×6 grid
-argument-hint: "[generate | review | gap | interview | classify <artifact-name>]"
+description: Create, populate, review, and audit the Zachman Diagram for an EA engagement — generate from existing artifacts, interview to fill gaps, produce coverage analysis, audit completeness and consistency, and classify any artifact against the 6×6 grid
+argument-hint: "[generate | review | gap | interview | audit | classify <artifact-name>]"
 allowed-tools: [Read, Write, Glob, Bash]
 ---
 
@@ -11,12 +11,13 @@ You are executing the `/ea-zachman` command. Load the `zachman-framework` skill 
 
 Manages the Zachman Diagram artifact for the active engagement. The Zachman Framework classifies architecture content by **audience row** (Contextual through Functioning) and **interrogative column** (What / How / Where / Who / When / Why).
 
-**Modes:** `generate` (default), `review`, `gap`, `interview`, `classify <artifact-name>`
+**Modes:** `generate` (default), `review`, `gap`, `interview`, `audit`, `classify <artifact-name>`
 
 **Reference files:**
 - `skills/zachman-framework/references/cell-extraction-map.md` — which artifacts feed which cells, coverage symbols, and artifact→cell relationship table
 - `skills/zachman-framework/references/interview-questions.md` — question bank for all rows
 - `skills/zachman-framework/references/zachman-cell-descriptions.md` — one-sentence purpose per cell
+- `skills/zachman-framework/references/zachman-audit-checklist.md` — six audit check categories, severity model, report format (used by `audit` mode and `/ea-grill`)
 - `skills/zachman-framework/references/togaf-zachman-mapping.md` — TOGAF artifact classification
 
 ---
@@ -146,3 +147,17 @@ TOGAF mapping: {TOGAF phase and artifact name, if applicable}
 ```
 
 Offer: "Update the Zachman Diagram to mark this cell as populated? (y/n)"
+---
+
+## Mode: `audit`
+
+Quality audit of the Zachman Diagram — completeness honesty, consistency, currency, scope, and perspective purity. Complements `review`/`gap` (presence) with quality checks.
+
+1. **Locate the diagram.** Find the most recent `EA-projects/{slug}/artifacts/cross-cutting/context/zachman-diagram-*.md`. If none exists, error: "No Zachman Diagram found — run `/ea-zachman generate` first."
+2. **Run the checklist.** Load `skills/zachman-framework/references/zachman-audit-checklist.md` and execute all six categories with cross-artifact verification: open contributing artifacts per `cell-extraction-map.md`, verify cited IDs against their registers, compare modification dates, and compare cell content against each cell's `Expected Model:` line in `zachman-cell-descriptions.md`. The check definitions live in the checklist — do not restate them here.
+3. **Render the report inline** using the checklist's Report Format: category scorecard, findings grouped High / Medium / Low (each with cell reference, evidence, and concrete action), and the verdict (Ready / Needs revision / Stale, per the checklist's verdict rules).
+4. **Save the report** to `EA-projects/{slug}/artifacts/cross-cutting/notes/reviews/zachman-audit-{YYYY-MM-DD}.md` (create the folder if needed).
+5. **Offer next actions:**
+   - Verdict Stale → "Re-run `/ea-zachman generate` to refresh from current artifacts? (y/n)"
+   - Otherwise → "Run `/ea-zachman interview` jumping to the failing cells? (y/n)"
+   - Then ask: "Want a next step suggestion? (y/n)" — if yes, apply the Next Step Algorithm from `commands/ea-status.md (the --next flag section)` and output the recommendation.
