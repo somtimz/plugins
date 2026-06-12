@@ -164,6 +164,7 @@ These are loaded automatically by `/ea-grill --skill practitioner|maturity|failu
 | STD-NNN | Standards Information Base entry (Architecture Repository) | STD-001 |
 | SVC-NNN | Service (Business / Application / Technology service catalogue) | SVC-001 |
 | IFC-NNN | Interface (interface catalogue — contract/access point) | IFC-001 |
+| RA-NNN | Reference Architecture (Architecture Repository) | RA-001 |
 
 **Do not use domain-prefixed IDs** (BG-/DG-/AG-/TG- etc.) — the scheme is unified and domain-agnostic. **Exception:** Architecture Principles use the TOGAF-standard four-domain prefixes (BP/DP/AP/TP) because the principle domain is itself a first-class classification, not a field-level qualifier.
 

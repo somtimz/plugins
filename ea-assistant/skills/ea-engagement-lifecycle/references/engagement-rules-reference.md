@@ -122,7 +122,7 @@ Summarize what was done, what's verified (against `engagement.json`, compliance 
 ## Rule 11 — Match engagement conventions, even if you disagree
 
 Conformance > taste inside the engagement.
-- Use the unified ID scheme (DRV-NNN, G-NNN, OBJ-NNN, etc.) — never invent domain-prefixed variants.
+- Use the unified ID scheme (DRV-NNN, G-NNN, OBJ-NNN, RA-NNN, etc.) — never invent domain-prefixed variants.
 - Follow the artifact frontmatter format: `relatedArtifacts`, `diagrams`, `links`.
 - Use relative paths per the Artifact Link Conventions table.
 - If you genuinely think a convention is harmful, surface it via `/ea-grill` or `/ea-engage-review`. Don't fork silently.
