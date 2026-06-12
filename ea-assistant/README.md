@@ -53,7 +53,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Phase-adaptive interviews and brainstorms** — `/ea-interview` and `/ea-brainstorm` now inject a phase intent preamble from `adm-phase-guide.md`, filter engagement direction items by phase relevance, and skip questions already answered in existing artifacts
 - **Risk Register** — `/ea-risks` generates a cross-cutting Risk Register (RIS-NNN) by scanning all artifacts for risk content; Likelihood × Impact severity matrix
 - **Architecture Decision Records** — `/ea-adrs` manages standalone ADRs (Candidate → Completed lifecycle); `ea-interviewer` auto-suggests ADRs at 2+ threshold indicators; Appendix A5 links artifacts to related ADRs
-- **Zachman Diagram** — `/ea-zachman` auto-populates and manages the 6×6 classification grid; generate, review, gap, interview, and classify modes
+- **Zachman Diagram** — `/ea-zachman` auto-populates and manages the 6×6 classification grid; generate, review, gap, interview, audit, and classify modes — audit checks completeness honesty, row/column consistency, staleness, scope, and perspective purity
 - **Governance artifacts** — Engagement Charter (Prelim), Governance Framework (Prelim), Implementation Governance Plan (G), Change Register (H)
 - **Architecture Change Management** — `/ea-changes` generates Change Register from Phase H ACR artifacts; `/ea-concerns` manages CON-NNN stakeholder concerns (Appendix A4)
 - **Engagement review** — `/ea-engage-review` produces a full health report covering coverage, traceability, governance, ADR status, and Zachman completeness
@@ -198,7 +198,7 @@ uiMode: html
 | `/ea-changes [mode]` | Generate Change Register aggregating Phase H ACR artifacts |
 | `/ea-concerns` | Manage CON-NNN stakeholder concerns and objections (Appendix A4) |
 | `/ea-roles [ROLE-ID\|--domain\|--generate\|--update]` | Role Catalogue — list, filter, and generate role assignments with RACI, triggers, and calendar |
-| `/ea-zachman [mode]` | Manage the Zachman 6×6 classification diagram — generate, review, gap, interview, classify |
+| `/ea-zachman [mode]` | Manage the Zachman 6×6 classification diagram — generate, review, gap, interview, audit, classify |
 | `/ea-research [mode]` | Research library — add documents, notes, links; apply findings to artifacts |
 | `/ea-consistency [options]` | Focused consistency check — cross-artifact contradictions, ID reference validation (`--ids`), or single-artifact within-section check (`artifact <id>`) |
 | `/ea-lens [--quick]` | Seasoned architect engagement review across eight practitioner lenses |

@@ -109,7 +109,7 @@ You have existing engagements. Common next steps:
 | `/ea-changes [mode]` | Generate Change Register for Phase H ACR artifacts |
 | `/ea-concerns` | Manage CON-NNN stakeholder concerns (Appendix A4) |
 | `/ea-roles [ROLE-ID\|--domain\|--generate\|--update]` | Role Catalogue — list, filter, and generate role assignments with RACI, triggers, and calendar |
-| `/ea-zachman [mode]` | Manage the Zachman 6×6 classification diagram (generate, review, gap, interview, classify) |
+| `/ea-zachman [mode]` | Manage the Zachman 6×6 classification diagram (generate, review, gap, interview, audit, classify) |
 | `/ea-research [mode]` | Research library — add, note, link, list, view, apply findings to artifacts |
 | `/ea-notes [mode]` | List, view, edit, or delete interview notes, brainstorm notes, and review files |
 | `/ea-note [text] [--artifact <id>] \| resolve <path>` | Quick-capture an ad-hoc note with lifecycle (Open/Resolved) — inline annotation or linked note; `resolve` records resolution with rationale and impact |

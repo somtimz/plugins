@@ -1,10 +1,25 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.62
+**Version:** 0.9.63
 **Status:** Current
 **Author:** Costa Pissaris
 
 ---
+
+## v0.9.63 — Zachman Diagram Audit
+
+### Summary
+Added quality auditing for the Zachman Diagram — six check categories (cell honesty, row refinement, column consistency, staleness, scope honesty, perspective purity) defined once and invoked from both a new `/ea-zachman audit` mode and a `/ea-grill` routing block.
+
+### New
+- **Audit checklist** (`skills/zachman-framework/references/zachman-audit-checklist.md`) — single source of truth for the six check categories, the High/Medium/Low severity model (R5/R6 findings default to Low; Row 4 retains category severity), and the report format with Ready / Needs revision / Stale verdicts (Stale when stale cells exceed one third of populated cells)
+- **`Expected Model:` line on all 36 cell descriptions** (`skills/zachman-framework/references/zachman-cell-descriptions.md`) — the primitive model that belongs in each cell (one cell = one primitive model); Row 6 converted from a summary table to full cell blocks; cell 4,4 harmonized to workforce/ops design framing
+- **`/ea-zachman audit` mode** — runs the checklist with cross-artifact verification (source artifacts per the cell-extraction-map, cited IDs against registers, `lastModified` dates, content vs Expected Model), renders the report inline, and saves it to `artifacts/cross-cutting/notes/reviews/zachman-audit-{date}.md`
+- **Grill routing** — `/ea-grill` runs the same checklist when the target is a Zachman Diagram; High findings map to Inconsistent sections; the Stale verdict makes re-generation the top prioritised revision
+
+### Changed
+- `commands/ea-zachman.md` — audit mode added (now 6 modes); `commands/ea-help.md` and `README.md` updated
+- `skills/zachman-framework/SKILL.md`, `skills/ea-grill-skills/SKILL.md` — version bumped to 0.9.63
 
 ## v0.9.62 — TOGAF Relationship Matrices
 
