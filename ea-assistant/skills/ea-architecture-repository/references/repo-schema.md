@@ -40,10 +40,11 @@
 | `sib` | object | `{ enabled: bool, indexFile: "sib/sib-index.md", nextId: 1 }` |
 | `vendorLandscape` | object | `{ enabled: bool, indexFile: "vendor-landscape/vendor-index.md", nextId: 1 }` |
 | `technologyHorizon` | object | `{ enabled: bool, indexFile: "technology-horizon/horizon-index.md", nextId: 1 }` |
+| `referenceArchitecture` | object | `{ enabled: bool, indexFile: "reference-library/reference-architecture-index.md", entriesPath: "reference-library/entries/", nextId: 1 }` |
 
 ### nextId counters
 
-`sib.nextId`, `vendorLandscape.nextId`, and `technologyHorizon.nextId` are integer counters seeded to `1` on init. Each time a new entry is created (STD-NNN, VDR-NNN, THR-NNN), the relevant counter is read, used as the ID, then incremented in `repo.json`. Commands must read then write `repo.json` atomically to avoid ID collisions.
+`sib.nextId`, `vendorLandscape.nextId`, `technologyHorizon.nextId`, and `referenceArchitecture.nextId` are integer counters seeded to `1` on init. Each time a new entry is created (STD-NNN, VDR-NNN, THR-NNN, RA-NNN), the relevant counter is read, used as the ID, then incremented in `repo.json`. Commands must read then write `repo.json` atomically to avoid ID collisions.
 
 ## Directory Structure (produced by /ea-repo init)
 
@@ -66,6 +67,8 @@ EA-Workspace/
 │   │   ├── horizon-index.md
 │   │   └── entries/
 │   └── reference-library/
+│       ├── reference-architecture-index.md
+│       ├── entries/
 │       └── abb-catalogue.md
 └── EA-Projects/                      # engagement projects go here
 ```

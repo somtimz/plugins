@@ -36,6 +36,15 @@ Technology radar tracking the organisation's position on emerging technologies:
 - Stored in: `Architecture-Repository/technology-horizon/entries/THR-NNN.md`
 - See `references/technology-horizon-schema.md` (created in Task 6)
 
+### Reference Architecture Register (RA-NNN)
+Stores reusable architectural patterns shared across engagements:
+- Named patterns with ABB/SBB layer catalogues, key decisions, constraints, and implied principles
+- Each RA entry: id, name, domain, status (Draft | Approved | Deprecated), source (internal | industry), linkedSTDs, linkedADRs
+- `## Grill Checklist` section drives `/ea-grill` RA compliance checks when an engagement adopts the RA
+- Stored in: `Architecture-Repository/reference-library/entries/RA-NNN.md`
+- Per-engagement local RAs (not shared): `artifacts/cross-cutting/reference-architectures/RA-NNN.md`
+- See `references/reference-architecture-schema.md`
+
 ### Enterprise Governance
 Principles, policies, and constraints that apply across ALL engagements (not per-engagement BP/DP/AP/TP):
 - `Architecture-Repository/governance/enterprise-principles.md`
@@ -63,6 +72,8 @@ EA-Workspace/
 │   │   ├── horizon-index.md
 │   │   └── entries/                 # THR-NNN.md files
 │   └── reference-library/
+│       ├── reference-architecture-index.md
+│       ├── entries/                 # RA-NNN.md files
 │       └── abb-catalogue.md
 └── EA-Projects/
     └── <slug>/
@@ -90,6 +101,7 @@ When an engagement has `repoPath` set in `engagement.json`:
 | `/ea-vendors` | Manage Vendor Landscape Register (VDR-NNN) |
 | `/ea-horizon` | Manage Technology Horizon Register (THR-NNN) |
 | `/ea-standards` | Manage Standards Information Base (STD-NNN) |
+| `/ea-refarch [new|list|show|edit|adopt|unadopt|status]` | Manage Reference Architecture Register (RA-NNN) |
 
 ## Initialization Workflow
 
