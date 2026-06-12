@@ -72,7 +72,7 @@ Each command declares:
 4. **Update:** find the row whose first cell contains the item's ID and rewrite only the mapped cells; preserve unmapped cells. If no row matches, append as in step 3.
 5. Update the artifact's `lastModified` frontmatter field. Do not change `status`, `reviewStatus`, or `version`.
 
-Never edit the display view in the other direction — content found in artifact tables but absent from `engagement.json` is drift, surfaced by `/ea-status --direction` and `/ea-consistency`, and resolved by importing into the register (`add`) or correcting the artifact.
+Never edit the display view in the other direction — content found in artifact tables but absent from `engagement.json` is drift, surfaced by `/ea-status --direction`, and resolved by importing into the register (`add`) or correcting the artifact.
 
 ## Mode: `trace [{ID}]`
 
