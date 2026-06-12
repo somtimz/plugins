@@ -27,7 +27,7 @@ For every non-❌ cell: no placeholder text — `TBD`, `TODO`, `⚠️ Not answe
 
 ### 2. Row refinement
 
-For each column with two or more vertically adjacent populated cells, R(N) content must be a traceable refinement of R(N−1). Verify by opening the contributing source artifacts (per `references/cell-extraction-map.md`), not just the grid text:
+For each column with two or more vertically adjacent populated cells, R(N) content must be a traceable refinement of R(N−1). Verify by opening the contributing source artifacts (per `cell-extraction-map.md`), not just the grid text:
 - R3,C1 logical entities trace to R2,C1 conceptual entities (compare against Data Architecture conceptual vs logical model sections).
 - R3,C2 application components/services trace to R2,C2 capabilities or processes (compare against Application Architecture and Business Architecture).
 - R4,Cx technology content traces to R3,Cx logical content (compare against Technology Architecture vs Application/Data Architecture).
@@ -42,7 +42,7 @@ For each column with two or more vertically adjacent populated cells, R(N) conte
 ### 4. Staleness
 
 - Read the diagram's generation date (filename `zachman-diagram-{YYYY-MM-DD}.md` or frontmatter).
-- For each contributing artifact in `references/cell-extraction-map.md`, compare its `lastModified` (frontmatter; file mtime as fallback) against the diagram date.
+- For each contributing artifact in `cell-extraction-map.md`, compare its `lastModified` frontmatter field (the plugin-standard artifact field) against the diagram date. If an artifact has no `lastModified`, mark its cells ❓ for this check — file mtime is unreliable after git checkout; do not guess.
 - Flag each cell whose sources changed after generation: "Stale: R{N},C{N} — {artifact} modified {date}, after diagram generation."
 - If stale cells exceed one third of populated cells, the overall verdict becomes **Stale** and the primary recommendation is `/ea-zachman generate` before any cell-level fixes.
 
@@ -53,7 +53,7 @@ For each column with two or more vertically adjacent populated cells, R(N) conte
 
 ### 6. Perspective purity (primitive model fit)
 
-One cell = one primitive model. For each populated cell, compare its content against the `Expected Model:` line for that cell in `references/zachman-cell-descriptions.md`:
+One cell = one primitive model. For each populated cell, compare its content against the `Expected Model:` line for that cell in `zachman-cell-descriptions.md`:
 - Content belonging to a lower row's perspective in an upper row is flagged (e.g. physical schema details in R2,C1; vendor product names in R2,C2).
 - Content belonging to an upper row in a lower row is flagged (e.g. business goal prose in R4,C6).
 - A bundle artifact (e.g. Architecture Definition Document) cited as a source is acceptable only if the cell's extracted content is the separable primitive model — citing the bundle with no extracted model content is flagged.
@@ -69,7 +69,7 @@ One cell = one primitive model. For each populated cell, compare its content aga
 | Medium | Missing source references; refinement breaks; stale cells; perspective mixing; bundle cited without separable model |
 | Low | Naming drift without contradiction; thin ⚠️ annotations |
 
-All findings in R5/R6 default to Low regardless of category — those rows describe implementation and operational reality usually outside documentation scope (consistent with `/ea-zachman gap` severity rules).
+All findings in R5/R6 default to Low regardless of category — those rows describe implementation and operational reality usually outside documentation scope (consistent with `/ea-zachman gap` severity rules). Row 4 findings retain their category-assigned severity — only R5/R6 are demoted.
 
 ---
 
