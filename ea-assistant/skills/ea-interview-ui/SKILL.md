@@ -143,7 +143,7 @@ const BRAINSTORM_DATA = {
     {
       id: "q1",
       text: "<question that will be asked in the upcoming interview>",
-      category: "concerns | goals | constraints | opportunities | assumptions | other | value-streams | use-cases | processes | conceptual-model | logical-model | platforms | languages | infrastructure | network",
+      category: "concerns | goals | constraints | opportunities | assumptions | other | value-streams | use-cases | processes | conceptual-model | logical-model | platforms | languages | infrastructure | network | relationships",
     },
     // ... up to 8 questions
   ],
@@ -153,7 +153,7 @@ const BRAINSTORM_DATA = {
       questionText: "<full question text>",
       answer: "<pre-existing answer from document or artifact>",
       source: "<'artifact' or upload filename>",
-      category: "concerns | goals | constraints | opportunities | assumptions | other | value-streams | use-cases | processes | conceptual-model | logical-model | platforms | languages | infrastructure | network",
+      category: "concerns | goals | constraints | opportunities | assumptions | other | value-streams | use-cases | processes | conceptual-model | logical-model | platforms | languages | infrastructure | network | relationships",
     },
     // ...
   ],
