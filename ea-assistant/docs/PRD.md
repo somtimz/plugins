@@ -1,8 +1,32 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.61
+**Version:** 0.9.62
 **Status:** Current
 **Author:** Costa Pissaris
+
+---
+
+## v0.9.62 — TOGAF Relationship Matrices
+
+### Summary
+Added first-class TOGAF 10 relationship-matrix support: an 18-matrix catalogue, a `/ea-matrix` command managing 14 matrices, and integrations into `/ea-interview`, `/ea-brainstorm`, `/ea-grill`, and `/ea-trace`.
+
+### New
+- **18-matrix catalogue** (`skills/ea-artifact-templates/references/matrix-catalogue.md`) — single source of truth for axes, seed sources, marker vocabularies, grill checks, and elicitation questions
+- **14 matrices managed by `/ea-matrix`**: principle-decision (Preliminary), business-interaction / actor-role / capability-organization / capability-value-stream / capability-application (Phase B), data-function / app-data (Phase C-Data), app-organization / role-application / app-function / app-interaction / capability-application (Phase C-App), system-technology (Phase D), wp-dependency (Phase E/F)
+- **4 matrices managed elsewhere** (documented with pointers, not duplicated): Stakeholder Map Matrix (Phase A, existing artifact), Requirements Traceability Matrix (cross-cutting, existing artifact), Work Package / Gap (Phase E/F, `/ea-trace` View 9), Requirement / Work Package (cross-cutting, `/ea-trace` View 10)
+- `/ea-matrix` command (5 modes: list, new, show, edit, check) with axis seeding from existing artifacts and stale-axis detection
+- **Interview matrix offer** — `/ea-interview` phase mode surfaces recommended matrices for the current phase with elicitation questions from the catalogue
+- **Brainstorm `[Matrix]` hints** — `/ea-brainstorm` injects matrix context hints and adds a `relationships` category; type `[Matrix]` to trigger
+- **Grill advisory block** — `/ea-grill` includes a recommended-matrices advisory block and runs catalogue-driven checks when a matrix artifact is grilled
+- `/ea-trace` Views 9–10 — Work Package / Gap cross-view (View 9) and Requirement / Work Package traceability (View 10)
+
+### Modified
+- `/ea-interview` — matrix offer injected at start of relevant phase interviews
+- `/ea-brainstorm` — `[Matrix]` interrupt and relationships category added
+- `/ea-grill` — matrix advisory block and matrix-artifact grilling wired to catalogue
+- `/ea-trace` — two new cross-cutting views (9 and 10)
+- `skills/ea-artifact-templates/SKILL.md`, `skills/ea-grill-skills/SKILL.md`, `skills/ea-interview-ui/SKILL.md` — version bumped to 0.9.62
 
 ---
 

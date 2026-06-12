@@ -97,6 +97,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Technology Horizon Register** — `/ea-horizon` manages a technology radar (THR-NNN) with Adopt/Trial/Assess/Hold ring model, ring history, and PoC evidence; `/ea-adrs new` cross-references THR entries for technology/vendor selection decisions
 - **Standards Information Base** — `/ea-standards` manages industry/regulatory standards (STD-NNN) with adoption status (Mandatory/Recommended/Informational/Deprecated) and CST-NNN constraint linkage; `surface` command shows standards relevant to the active ADM phase
 - **Reference Architecture Register** — define reusable RA-NNN patterns with ABB/SBB layer catalogues, key decisions, and grill checklist integration; adopt patterns into engagements
+- **TOGAF relationship matrices** — 18-matrix catalogue (Actor/Role, Application/Data CRUD, Capability/Application, System/Technology, Work Package/Dependency…) with /ea-matrix management, axis seeding from existing artifacts, and grill compliance checks.
 - **Cross-cutting sub-folders** — `artifacts/cross-cutting/` reorganized into `governance/` (ADR Register, Decision Register, Constraints, Policies), `operations/` (Risk Register, Change Register, Concerns), and `context/` (Zachman, Roles); auto-maintained `cross-cutting-index.md` navigation hub; `/ea-migrate --reorganize` migrates legacy flat paths
 
 ## Prerequisites
@@ -182,6 +183,7 @@ uiMode: html
 | `/ea-horizon [list\|add\|update\|surface\|link-adr]` | Technology Horizon Register — THR-NNN radar entries with Adopt/Trial/Assess/Hold rings |
 | `/ea-standards [list\|add\|link-constraint\|surface]` | Standards Information Base — STD-NNN entries with adoption status and constraint linkage |
 | `/ea-refarch [new\|list\|show\|edit\|adopt\|unadopt\|status]` | Reference Architecture Register — manage RA-NNN patterns with ABB/SBB layer catalogues, key decisions, and grill checklist integration |
+| `/ea-matrix [list\|new\|show\|edit\|check] [key]` | TOGAF relationship matrices — 14 grid artifacts (Actor/Role, App/Data CRUD, Capability/Application, System/Technology…) with axis seeding and catalogue-driven checks |
 | `/ea-gaps [mode]` | Architecture Gap Register — list, add, promote raw gaps to GAP-NNN, update, trace to work packages, or generate register |
 | `/ea-principles [mode]` | Manage architecture principles (BP/DP/AP/TP-NNN) — list, add, update, or trace; violation detection flags ADRs that contradict active principles |
 | `/ea-abbs [mode]` | Architecture Building Block Register — generate, view, create, or update ABB-NNN entries; modes: generate, status, new, update |
