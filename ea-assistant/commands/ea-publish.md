@@ -289,6 +289,9 @@ Before inserting each artifact's content, rewrite its links for the consolidated
 | Relative link to an **included** artifact + section | `[Goals](../phase-a/architecture-vision.md#3-goals)` | Rewrite to section anchor: `[Goals](#3-goals)` |
 | Relative link to an artifact **not included** | `[Tech Architecture](../phase-d/technology-architecture.md)` | Strip link, keep display text: `Technology Architecture` |
 | Relative image | `![diagram](../../diagrams/context.png)` | Resolve to absolute path |
+| Wikilink to an **included** artifact | `[[architecture-vision\|Arch Vision]]` | Rewrite to internal anchor: `[Arch Vision](#architecture-vision)` |
+| Wikilink to anything else | `[[G-001]]`, `[[tech-radar\|Radar]]` | Strip — keep alias text, or the target if no alias: `G-001`, `Radar` |
+| Wikilink embed | `![[context.png]]` | Treat as the image at `diagrams/context.png` — resolve to absolute path |
 
 Anchor derivation: the consolidated document uses `## {Artifact Name}` as each artifact's heading. The corresponding anchor is the heading text lowercased with spaces replaced by hyphens (e.g., `## Architecture Vision` → `#architecture-vision`).
 

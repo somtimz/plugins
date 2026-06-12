@@ -108,10 +108,10 @@ Map this roadmap to the Goals, Objectives, and Strategies defined in Phase A. Ev
 
 | ID | Goal / Objective / Strategy | Type | Addressed by Work Packages | Details |
 |---|---|---|---|---|
-| [{{G-001}}](../details/{{G-001}}.md) | {{goal_description}} | Goal | {{WP-NNN}} | [→](../details/{{G-001}}.md) |
-| [{{OBJ-001}}](../details/{{OBJ-001}}.md) | {{objective_description}} | Objective | {{WP-NNN}} | [→](../details/{{OBJ-001}}.md) |
-| [{{STR-001}}](../details/{{STR-001}}.md) | {{strategy_description}} | Strategy | {{WP-NNN}} | [→](../details/{{STR-001}}.md) |
-| [{{OPP-001}}](../details/{{OPP-001}}.md) | {{opportunity_description}} | Opportunity | {{WP-NNN}} | [→](../details/{{OPP-001}}.md) |
+| [[{{G-001}}]] | {{goal_description}} | Goal | {{WP-NNN}} | [[{{G-001}}\|→]] |
+| [[{{OBJ-001}}]] | {{objective_description}} | Objective | {{WP-NNN}} | [[{{OBJ-001}}\|→]] |
+| [[{{STR-001}}]] | {{strategy_description}} | Strategy | {{WP-NNN}} | [[{{STR-001}}\|→]] |
+| [[{{OPP-001}}]] | {{opportunity_description}} | Opportunity | {{WP-NNN}} | [[{{OPP-001}}\|→]] |
 
 **Unaddressed items:** {{list_any_goals_objectives_strategies_not_covered_or_None}}
 
@@ -144,7 +144,7 @@ Work packages close gaps identified in the Gap Analysis.
 
 | Field | Value |
 |---|---|
-| **ID** | [WP-001](../details/WP-001.md) |
+| **ID** | [[WP-001]] |
 | **Description** | {{description}} |
 | **Advances Goals / Objectives** | {{g_obj_ids}} |
 | **Executes Strategies** | {{str_ids}} |
@@ -162,7 +162,7 @@ Work packages close gaps identified in the Gap Analysis.
 | **Evidence Status** | Sufficient / Partial / Insufficient |
 | **Decision Reversibility** | High / Medium / Low |
 | **Value Delivery** | Standalone / Cumulative / Enabling |
-| **Details** | [→](../details/WP-001.md) |
+| **Details** | [[WP-001\|→]] |
 
 ---
 
@@ -210,7 +210,7 @@ after their target work package completes.
 
 | PAD-NNN | Description | Target WP | Resolution Status | Expiry Date | Risk if Expired |
 |---|---|---|---|---|---|
-| [PAD-001](../details/PAD-001.md) | {{description}} | WP-003 | Resolved / Open / Expired | {{date}} | {{risk}} |
+| [[PAD-001]] | {{description}} | WP-003 | Resolved / Open / Expired | {{date}} | {{risk}} |
 
 **Open PADs with expired target dates:** {{list_or_None}}
 
@@ -230,9 +230,9 @@ decisions are still speculative.
 
 | WP-NNN | Impact | Feasibility | Evidence Status | Prioritisation Verdict | Action |
 |---|---|---|---|---|---|
-| [WP-001](../details/WP-001.md) | High | High | Sufficient | ✅ Proceed | [→](../details/WP-001.md) |
-| [WP-002](../details/WP-002.md) | High | Medium | Insufficient | ⚠️ Defer — gather evidence | {{action}} |
-| [WP-003](../details/WP-003.md) | Medium | High | Partial | ⚠️ Proceed with guardrails | {{guardrails}} |
+| [[WP-001]] | High | High | Sufficient | ✅ Proceed | [[WP-001\|→]] |
+| [[WP-002]] | High | Medium | Insufficient | ⚠️ Defer — gather evidence | {{action}} |
+| [[WP-003]] | Medium | High | Partial | ⚠️ Proceed with guardrails | {{guardrails}} |
 
 **Work packages blocked by insufficient evidence:** {{list_or_None}}
 

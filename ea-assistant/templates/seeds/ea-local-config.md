@@ -26,6 +26,14 @@
 - ARB meets fortnightly on Wednesdays — decisions require a quorum of 4
 -->
 
+## Link Style
+
+linkStyle: wikilink
+
+<!-- How internal links are written in artifacts: wikilink (Obsidian [[..]] syntax, default)
+     or markdown (relative paths — use for GitHub/VS Code rendering or multi-engagement vaults).
+     See skills/ea-artifact-templates/references/link-conventions.md for the full convention. -->
+
 ## Interview Preferences
 
 <!-- Overrides for how this engagement's interviews should be run. -->

@@ -68,7 +68,7 @@ Each command declares:
 
 1. Resolve the display artifact file (e.g. `artifacts/phase-a/architecture-vision.md`). If the file does not exist, skip silently — the section is rendered when the artifact is created.
 2. Find the spec's section heading and its table. If the heading or table is missing, skip and note: "ℹ️ {artifact} has no {section} table — display view not updated."
-3. **Add:** append a row using the spec's column → field mapping, following the table's existing row conventions (ID link style, `../details/{ID}.md` Details link, `—` for unmapped columns). Remove any remaining `{{placeholder}}` template rows when adding the first real row.
+3. **Add:** append a row using the spec's column → field mapping, following the table's existing row conventions (`—` for unmapped columns; ID and Details links per the engagement's `linkStyle` — see `skills/ea-artifact-templates/references/link-conventions.md`). Remove any remaining `{{placeholder}}` template rows when adding the first real row.
 4. **Update:** find the row whose first cell contains the item's ID and rewrite only the mapped cells; preserve unmapped cells. If no row matches, append as in step 3.
 5. Update the artifact's `lastModified` frontmatter field. Do not change `status`, `reviewStatus`, or `version`.
 

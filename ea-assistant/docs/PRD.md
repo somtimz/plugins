@@ -1,10 +1,27 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.64
+**Version:** 0.9.65
 **Status:** Current
 **Author:** Costa Pissaris
 
 ---
+
+## v0.9.65 — Obsidian Wikilink Support
+
+### Summary
+Internal links in engagement artifacts can now use Obsidian `[[..]]` wikilink syntax, governed by a per-engagement `linkStyle` setting (`wikilink` | `markdown`). New engagements default to `wikilink`; legacy engagements without the setting keep `markdown` behavior unchanged.
+
+### New
+- **Link conventions reference** (`skills/ea-artifact-templates/references/link-conventions.md`) — single source of truth: the `linkStyle` setting (location, values, defaults), both-style link table per target (detail files, artifacts, diagrams, uploads, research), wikilink rules (bare name + `|alias`, `![[..]]` embeds, multi-engagement vault collision caveat, frontmatter always plain paths), the parsing rule (all commands recognise both forms), and export resolution
+- **`linkStyle` setting** in `templates/seeds/ea-local-config.md` — seeded as `wikilink` for new engagements; user-editable, never overwritten
+
+### Changed
+- **All 15 link-bearing templates** — 127 internal links converted to wikilink form (`[[G-001]]`, `[[G-001|→]]`, `[[business-architecture|Business Architecture]]`); `item-detail.md` parent link uses new `{{parent_artifact_file}}` placeholder
+- **`/ea-generate`** — link-rewrite table gains wikilink rows (alias → text, bare → target, `![[..]]` → diagram embed); detail-link scan recognises wikilink forms
+- **`/ea-publish`** — consolidated-document rewrite table handles wikilinks (included artifacts → internal anchors; everything else → text); `publish-quality.md` image checks recognise `![[..]]` embeds
+- **`/ea-detail`, `/ea-consistency`, `/ea-brainstorm`** — detail-link writing/parsing follows `linkStyle` and recognises both forms
+- **Register protocol Display View Sync** — mirrored rows use the engagement's `linkStyle`
+- `CLAUDE.md` Artifact Link Conventions table shows both styles; `skills/ea-artifact-templates/SKILL.md` (Internal Links subsection) and `ea-engagement-lifecycle` skill versions bumped to 0.9.65
 
 ## v0.9.64 — Objectives Register & Direction Single Source of Truth
 

@@ -1,7 +1,7 @@
 ---
 name: ea-artifact-templates
 description: This skill should be used when the user asks to "create an artifact", "generate the architecture vision", "start a new artifact from a template", "what template should I use", "populate this artifact", or when any TOGAF artifact needs to be created or populated. Provides template selection, placeholder conventions, and guidance text marking standards for all EA artifacts.
-version: 0.9.62
+version: 0.9.65
 ---
 
 # EA Artifact Templates
@@ -38,6 +38,10 @@ All unfilled fields use double-brace tokens:
 {{YYYY-MM-DDTHH:MM:SSZ}} — timestamp field (lastModified, createdAt, lastUpdated)
 {{artifact_ref}}        — reference to another artifact
 ```
+
+### Internal Links
+
+Internal links (detail files, cross-artifact, diagrams, uploads, research) follow the engagement's `linkStyle` — `wikilink` (Obsidian `[[..]]`, default for new engagements) or `markdown` (relative paths). Templates ship with wikilink-form example rows. Full rules, both-style table, parsing and export handling: `references/link-conventions.md`; do not restate inline.
 
 ### Guidance Text
 
@@ -301,3 +305,4 @@ Table rows in EA artifacts may optionally link to a companion detail file contai
 - **`references/ea-concepts.md`** — Canonical definitions and TOGAF/ArchiMate alignment for Principle, Goal, Objective, Strategy, Plan, and Risk. Load this when concept confusion is detected during interviews or artifact population.
 - **`references/compliance-check.md`** — Compliance rules (Tier 1/2/3), check procedure, remediation actions for Option 1 (achieve compliance) and Option 2 (accept as-is with defaults). Load this whenever an artifact is opened for interview, review, or viewing.
 - **`references/detail-file-convention.md`** — Detail file pattern: location, frontmatter, sections, linking rules, and how skills load and cite detail files.
+- **`references/link-conventions.md`** — Internal link styles: the `linkStyle` setting (wikilink | markdown), link forms per target, wikilink rules, parsing rule (recognise both forms), and export resolution for `/ea-generate` and `/ea-publish`.

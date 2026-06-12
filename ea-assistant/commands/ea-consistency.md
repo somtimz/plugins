@@ -126,7 +126,7 @@ Unless `--report`, offer:
 
 **Check D — Detail file link integrity**
 
-Scan all artifact files in `EA-projects/{slug}/artifacts/**/*.md` (excluding `/notes/`) for detail file links matching the pattern `../details/{ID}.md` (in both `[→](../details/{ID}.md)` and `[{ID}](../details/{ID}.md)` forms).
+Scan all artifact files in `EA-projects/{slug}/artifacts/**/*.md` (excluding `/notes/`) for detail file links in all forms per `skills/ea-artifact-templates/references/link-conventions.md`: `[→](../details/{ID}.md)`, `[{ID}](../details/{ID}.md)`, `[[{ID}]]`, and `[[{ID}|...]]`.
 
 For each link found:
 

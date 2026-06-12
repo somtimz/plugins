@@ -180,7 +180,7 @@ See `skills/ea-artifact-templates/references/abb-catalogue.md` for a standard se
 
 | ABB-NNN | Name | Description | Satisfies (REQ-NNN) | Implemented by (SBB-NNN) |
 |---|---|---|---|---|
-| [ABB-001](../details/ABB-001.md) | {{abb_name}} | {{description}} | {{req_id}} | {{sbb_id}} |
+| [[ABB-001]] | {{abb_name}} | {{description}} | {{req_id}} | {{sbb_id}} |
 
 ---
 
@@ -258,7 +258,7 @@ Reference the full Gap Analysis artifact for detail.
 
 | Gap ID | Description | Priority | Impact |
 |---|---|---|---|
-| [GAP-001](../details/GAP-001.md) | {{description}} | High / Med / Low | {{impact}} |
+| [[GAP-001]] | {{description}} | High / Med / Low | {{impact}} |
 
 ---
 
@@ -307,7 +307,7 @@ Standard diagrams for the Technology Architecture. Diagrams are stored in `diagr
 
 | SBB-NNN | Name | Implements (ABB-NNN) | Vendor / Source | Version | Constraints / Lock-in Risk |
 |---|---|---|---|---|---|
-| [SBB-001](../details/SBB-001.md) | {{sbb_name}} | ABB-001 | {{vendor}} | {{version}} | {{constraints}} |
+| [[SBB-001]] | {{sbb_name}} | ABB-001 | {{vendor}} | {{version}} | {{constraints}} |
 
 ---
 

@@ -42,6 +42,9 @@ Recommend the primary format for the artifact type (see `skills/ea-generation/re
    | Relative artifact link | `[Arch Vision](../phase-a/architecture-vision.md)` | Strip link, keep display text only: `Architecture Vision` |
    | Relative artifact + section | `[Goals](../phase-a/architecture-vision.md#3-goals)` | Strip link, keep display text only: `Goals` |
    | Relative path, no display text | `[../phase-a/architecture-vision.md](../phase-a/architecture-vision.md)` | Replace with the prettified artifact name: `Architecture Vision` |
+   | Wikilink with alias | `[[architecture-vision\|Arch Vision]]` | Strip link, keep alias text only: `Arch Vision` |
+   | Wikilink, bare | `[[G-001]]` | Strip brackets, keep target text: `G-001` |
+   | Wikilink embed | `![[context-diagram.png]]` | Treat as the image at `diagrams/context-diagram.png` — embed per the diagram rules |
 
    **Rule:** any link whose target starts with `./`, `../`, or a relative filename (no `http`) and is not an image is a relative file link — strip the link target and keep only the display text.
 
@@ -51,7 +54,7 @@ Recommend the primary format for the artifact type (see `skills/ea-generation/re
 **If `--with-details` flag is set:**
 
 After writing `/tmp/ea-gen-{artifact-id}.json`, load all detail files linked from this artifact:
-- Scan all tables in the artifact for `[→](../details/{ID}.md)` links.
+- Scan all tables in the artifact for detail links (`[→](../details/{ID}.md)` or `[[{ID}|→]]` / `[[{ID}]]` wikilink forms).
 - For each linked file that exists at `EA-projects/{slug}/artifacts/details/{ID}.md`, read it and extract:
   - Frontmatter: `item`, `type`, `title`
   - All populated sections (Summary, Narrative, Rationale, Risks, Costs, Issues, Concerns, Impact, Alternatives)

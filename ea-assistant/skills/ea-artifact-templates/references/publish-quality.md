@@ -25,8 +25,8 @@ Defines all readability and content-quality checks with severity levels.
 
 | Check | Flag when… | Severity |
 |---|---|---|
-| Broken image path | `![...](path)` where resolved path does not exist | Blocking |
-| Missing diagram | Artifact type is Architecture Vision, Business Architecture, Data Architecture, Application Architecture, or Technology Architecture and contains no `![...]` reference | Advisory |
+| Broken image path | `![...](path)` or `![[file]]` where the resolved path / vault file does not exist | Blocking |
+| Missing diagram | Artifact type is Architecture Vision, Business Architecture, Data Architecture, Application Architecture, or Technology Architecture and contains no `![...]` or `![[...]]` reference | Advisory |
 
 **Remediations:**
 - Broken path → fix the relative path or provide the diagram file
@@ -74,7 +74,7 @@ Defines all readability and content-quality checks with severity levels.
 
 | Check | Flag when… | Severity |
 |---|---|---|
-| Broken image path | Relative image path resolves to a non-existent file | Blocking |
+| Broken image path | Relative image path or `![[file]]` embed resolves to a non-existent file | Blocking |
 | Broken internal anchor | After link rewriting, an `[text](#anchor)` target does not correspond to any heading in the consolidated document | Warning |
 | External URLs | Any `[text](https://...)` | Not validated — skip |
 

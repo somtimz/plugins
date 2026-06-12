@@ -94,10 +94,10 @@ Link to the domain-level gap analysis artifacts for full detail.
 
 | Domain | Source Artifact | Total Gaps | High | Medium | Low | Key Findings |
 |---|---|---|---|---|---|---|
-| Business | [Gap Analysis — Business Architecture](../phase-b/gap-analysis-business.md) | {{count}} | {{h}} | {{m}} | {{l}} | {{findings}} |
-| Data | [Gap Analysis — Data Architecture](../phase-c-data/gap-analysis-data.md) | {{count}} | {{h}} | {{m}} | {{l}} | {{findings}} |
-| Application | [Gap Analysis — Application Architecture](../phase-c-app/gap-analysis-application.md) | {{count}} | {{h}} | {{m}} | {{l}} | {{findings}} |
-| Technology | [Gap Analysis — Technology Architecture](../phase-d/gap-analysis-technology.md) | {{count}} | {{h}} | {{m}} | {{l}} | {{findings}} |
+| Business | [[gap-analysis-business\|Gap Analysis — Business Architecture]] | {{count}} | {{h}} | {{m}} | {{l}} | {{findings}} |
+| Data | [[gap-analysis-data\|Gap Analysis — Data Architecture]] | {{count}} | {{h}} | {{m}} | {{l}} | {{findings}} |
+| Application | [[gap-analysis-application\|Gap Analysis — Application Architecture]] | {{count}} | {{h}} | {{m}} | {{l}} | {{findings}} |
+| Technology | [[gap-analysis-technology\|Gap Analysis — Technology Architecture]] | {{count}} | {{h}} | {{m}} | {{l}} | {{findings}} |
 
 ---
 
@@ -114,8 +114,8 @@ The "Domain" column indicates which domain-level analysis originated the gap.
 
 | Gap ID | Domain | Description | Category | Priority | Baseline State | Target State | Effort | Evidence | Related Gaps |
 |---|---|---|---|---|---|---|---|---|---|
-| [GAP-001](../details/GAP-001.md) | Business | {{description}} | Missing capability | High | {{baseline}} | {{target}} | High | {{evidence}} | [→](../details/GAP-001.md) |
-| [GAP-002](../details/GAP-002.md) | Data | {{description}} | {{category}} | {{priority}} | {{baseline}} | {{target}} | {{effort}} | {{evidence}} | GAP-001 |
+| [[GAP-001]] | Business | {{description}} | Missing capability | High | {{baseline}} | {{target}} | High | {{evidence}} | [[GAP-001\|→]] |
+| [[GAP-002]] | Data | {{description}} | {{category}} | {{priority}} | {{baseline}} | {{target}} | {{effort}} | {{evidence}} | GAP-001 |
 
 ---
 
@@ -132,7 +132,7 @@ work packages in the Architecture Roadmap.
 
 | Primary Gap | Dependent Gap | Dependency Type | Sequencing Implication |
 |---|---|---|---|
-| [GAP-001](../details/GAP-001.md) | GAP-004 | Prerequisite | GAP-001 must be closed before GAP-004 begins |
+| [[GAP-001]] | GAP-004 | Prerequisite | GAP-001 must be closed before GAP-004 begins |
 
 ---
 

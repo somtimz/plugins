@@ -193,8 +193,8 @@ Gap Analysis — a flow listed as Current must not also appear as a gap to be bu
 
 | Flow ID | Description | Source | Destination | Frequency | State | Classification |
 |---|---|---|---|---|---|---|
-| [DF-001](../details/DF-001.md) | {{description}} | {{source}} | {{destination}} | Real-time / Batch / On-demand | Current / Planned (Target) / Deprecated | {{classification}} |
-| [DF-002](../details/DF-002.md) | {{description}} | {{source}} | {{destination}} | Real-time / Batch / On-demand | Current / Planned (Target) / Deprecated | {{classification}} |
+| [[DF-001]] | {{description}} | {{source}} | {{destination}} | Real-time / Batch / On-demand | Current / Planned (Target) / Deprecated | {{classification}} |
+| [[DF-002]] | {{description}} | {{source}} | {{destination}} | Real-time / Batch / On-demand | Current / Planned (Target) / Deprecated | {{classification}} |
 
 ---
 
@@ -242,7 +242,7 @@ to data: missing authoritative sources, duplicated master data, ungoverned flows
 
 | Gap ID | Description | Priority | Impact |
 |---|---|---|---|
-| [GAP-001](../details/GAP-001.md) | {{description}} | High / Med / Low | {{impact}} |
+| [[GAP-001]] | {{description}} | High / Med / Low | {{impact}} |
 
 ---
 

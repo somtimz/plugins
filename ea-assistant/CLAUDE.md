@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.64 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.65 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -82,16 +82,16 @@ EA-projects/{slug}/
 
 ### Artifact Link Conventions
 
-All links in artifact markdown use paths relative to the artifact file at `artifacts/{phase}/`:
+Internal links follow the engagement's `linkStyle` (`.claude/rules/ea-local-config.md`): `wikilink` — Obsidian `[[..]]` syntax, default for new engagements — or `markdown` (relative paths; the default for legacy engagements without the setting). Full rules, parsing, and export handling: `skills/ea-artifact-templates/references/link-conventions.md` — do not restate inline. Frontmatter fields (`relatedArtifacts`, `diagrams`, `links[].path`) always use plain relative paths.
 
-| Target | Relative path |
-|---|---|
-| Diagram | `../../diagrams/{name}.{ext}` |
-| Same-phase artifact | `./{artifact-id}.md` |
-| Different-phase artifact | `../{phase-folder}/{artifact-id}.md` |
-| Upload | `../../uploads/{filename}` |
-| Research document | `../../ResearchAndReferences/{filename}.md` |
-| Detail file | `../details/{ID}.md` |
+| Target | `wikilink` (default) | `markdown` (relative to `artifacts/{phase}/`) |
+|---|---|---|
+| Diagram | `[[{name}.{ext}\|{label}]]` / embed `![[{name}.{ext}]]` | `../../diagrams/{name}.{ext}` |
+| Same-phase artifact | `[[{artifact-id}\|{label}]]` | `./{artifact-id}.md` |
+| Different-phase artifact | `[[{artifact-id}\|{label}]]` | `../{phase-folder}/{artifact-id}.md` |
+| Upload | `[[{filename}\|{label}]]` | `../../uploads/{filename}` |
+| Research document | `[[{filename}\|{label}]]` | `../../ResearchAndReferences/{filename}.md` |
+| Detail file | `[[{ID}]]` / Details column `[[{ID}\|→]]` | `../details/{ID}.md` |
 
 ### Artifact Metadata Fields
 

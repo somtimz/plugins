@@ -11,6 +11,8 @@ Create, view, or list detail files for individual engagement items.
 
 Detail files are optional companion documents for table rows in EA artifacts. They live at `artifacts/details/{ID}.md` and are linked from the `Details` column in artifact tables. See `skills/ea-artifact-templates/references/detail-file-convention.md` for the full convention.
 
+**Link style:** all detail-link forms written or parsed by this command follow the engagement's `linkStyle` per `skills/ea-artifact-templates/references/link-conventions.md`. With `linkStyle: wikilink` (default for new engagements), write `[[{ID}\|→]]` (table cells — alias pipe escaped) instead of `[→](../details/{ID}.md)` and `[[{ID}]]` instead of `[{ID}](../details/{ID}.md)`; when parsing, recognise all forms regardless of setting.
+
 ## Instructions
 
 If no engagement is active in context, prompt the user to run `/ea-open` first.
@@ -114,6 +116,7 @@ Copy the detail file template from `templates/item-detail.md`. Replace all place
 - `{{item_title}}` → the extracted title from Step 4 (or `⚠️ Not answered` if not found)
 - `{{engagement_name}}` → from `engagement.json`
 - `{{parent_artifact_path}}` → relative path to parent artifact (e.g. `phase-a/architecture-vision.md`)
+- `{{parent_artifact_file}}` → parent artifact file name without extension (e.g. `architecture-vision`); if `linkStyle: markdown`, rewrite the Parent Artifact line as `[{{parent_artifact_name}}](../{{parent_artifact_path}})` instead
 - `{{parent_artifact_name}}` → display name derived from artifact frontmatter `artifact:` field
 - `{{YYYY-MM-DD}}` → today's date
 - `{{related_items}}` → YAML list from Step 4 cross-link extraction; if empty, keep `[]`

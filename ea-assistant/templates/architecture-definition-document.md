@@ -98,11 +98,11 @@ Update `relatedArtifacts` in this document's frontmatter as domain artifacts are
 | Chapter | Status | Source Artifact | Last Updated |
 |---|---|---|---|
 | 1. Scope and Context | ⚠️ Not answered | — | — |
-| 2. Architecture Principles | ⚠️ Not answered | [Architecture Principles](../preliminary/architecture-principles.md) | — |
-| 3. Business Architecture | ⚠️ Not answered | [Business Architecture](../phase-b/business-architecture.md) | — |
-| 4. Data Architecture | ⚠️ Not answered | [Data Architecture](../phase-c-data/data-architecture.md) | — |
-| 5. Application Architecture | ⚠️ Not answered | [Application Architecture](../phase-c-app/application-architecture.md) | — |
-| 6. Technology Architecture | ⚠️ Not answered | [Technology Architecture](../phase-d/technology-architecture.md) | — |
+| 2. Architecture Principles | ⚠️ Not answered | [[architecture-principles\|Architecture Principles]] | — |
+| 3. Business Architecture | ⚠️ Not answered | [[business-architecture\|Business Architecture]] | — |
+| 4. Data Architecture | ⚠️ Not answered | [[data-architecture\|Data Architecture]] | — |
+| 5. Application Architecture | ⚠️ Not answered | [[application-architecture\|Application Architecture]] | — |
+| 6. Technology Architecture | ⚠️ Not answered | [[technology-architecture\|Technology Architecture]] | — |
 | 7. Cross-Domain Alignment | ⚠️ Not answered | — | — |
 | 8. Baseline Architecture Summary | ⚠️ Not answered | — | — |
 | 9. Target Architecture Summary | ⚠️ Not answered | — | — |
@@ -137,8 +137,8 @@ Update `relatedArtifacts` in this document's frontmatter as domain artifacts are
 **Domains in scope:** {{architecture_domains}}
 
 **Reference documents:**
-- [Statement of Architecture Work](./statement-of-architecture-work.md)
-- [Architecture Vision](./architecture-vision.md)
+- [[statement-of-architecture-work|Statement of Architecture Work]]
+- [[architecture-vision|Architecture Vision]]
 
 ---
 
@@ -165,7 +165,7 @@ Update `relatedArtifacts` in this document's frontmatter as domain artifacts are
 
 </details>
 
-See [Architecture Principles](../preliminary/architecture-principles.md) for the full catalogue.
+See [[architecture-principles|Architecture Principles]] for the full catalogue.
 
 **Key principles applicable to this engagement:**
 
@@ -200,7 +200,7 @@ See [Architecture Principles](../preliminary/architecture-principles.md) for the
 
 **Target:** {{business_target_summary}}
 
-**Full detail:** [Business Architecture](../phase-b/business-architecture.md)
+**Full detail:** [[business-architecture|Business Architecture]]
 
 ---
 
@@ -231,7 +231,7 @@ See [Architecture Principles](../preliminary/architecture-principles.md) for the
 
 **Target:** {{data_target_summary}}
 
-**Full detail:** [Data Architecture](../phase-c-data/data-architecture.md)
+**Full detail:** [[data-architecture|Data Architecture]]
 
 ---
 
@@ -262,7 +262,7 @@ See [Architecture Principles](../preliminary/architecture-principles.md) for the
 
 **Target:** {{application_target_summary}}
 
-**Full detail:** [Application Architecture](../phase-c-app/application-architecture.md)
+**Full detail:** [[application-architecture|Application Architecture]]
 
 ---
 
@@ -293,7 +293,7 @@ See [Architecture Principles](../preliminary/architecture-principles.md) for the
 
 **Target:** {{technology_target_summary}}
 
-**Full detail:** [Technology Architecture](../phase-d/technology-architecture.md)
+**Full detail:** [[technology-architecture|Technology Architecture]]
 
 ---
 

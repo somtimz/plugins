@@ -133,7 +133,7 @@ Categories: Missing capability, Retiring component, Consolidation, New requireme
 
 | Gap ID | Description | Category | Priority | Baseline State | Target State | Effort | Evidence | Linked Decision | Resolution Path | Details |
 |---|---|---|---|---|---|---|---|---|---|---|
-| [GAP-001](../details/GAP-001.md) | {{description}} | Missing capability | High/Med/Low | {{baseline}} | {{target}} | High/Med/Low | {{evidence}} | {{ADR-NNN / PAD-NNN / —}} | {{WP-NNN / Phase E / —}} | [→](../details/GAP-001.md) |
+| [[GAP-001]] | {{description}} | Missing capability | High/Med/Low | {{baseline}} | {{target}} | High/Med/Low | {{evidence}} | {{ADR-NNN / PAD-NNN / —}} | {{WP-NNN / Phase E / —}} | [[GAP-001\|→]] |
 
 ---
 
@@ -153,7 +153,7 @@ Maturity. Link each gap to the G-NNN or OBJ-NNN it prevents.
 
 | CAP-NNN | Capability | L1 Domain | Current Maturity | Target Maturity | Prevents (G-NNN / OBJ-NNN) | Priority | Evidence | PAD-NNN | WP-NNN | Details |
 |---|---|---|---|---|---|---|---|---|---|---|
-| [CAP-001](../details/CAP-001.md) | {{capability_name}} | {{domain}} | Absent / Immature / Developing | {{target}} | {{G-NNN}} | High / Med / Low | {{evidence}} | {{PAD-NNN / —}} | {{WP-NNN / —}} | [→](../details/CAP-001.md) |
+| [[CAP-001]] | {{capability_name}} | {{domain}} | Absent / Immature / Developing | {{target}} | {{G-NNN}} | High / Med / Low | {{evidence}} | {{PAD-NNN / —}} | {{WP-NNN / —}} | [[CAP-001\|→]] |
 
 ---
 
@@ -181,7 +181,7 @@ Legend: ✅ Covered | ⚠️ Partial | ⬜ Gap
 
 | Gap ID | Recommended Action | Phase | Owner |
 |---|---|---|---|
-| [GAP-001](../details/GAP-001.md) | {{action}} | E / F | {{owner}} |
+| [[GAP-001]] | {{action}} | E / F | {{owner}} |
 
 ---
 
@@ -202,9 +202,9 @@ delivery risk. Flag orphan gaps explicitly.
 
 | Gap ID | Decision Type | Decision ID | Status | Phase to Resolve | Owner |
 |---|---|---|---|---|---|
-| [GAP-001](../details/GAP-001.md) | Committed ADR | ADR-003 | Completed | Phase C | {{owner}} |
-| [GAP-002](../details/GAP-002.md) | Pending | PAD-001 | Open | Phase E | {{owner}} |
-| [GAP-003](../details/GAP-003.md) | Trivial / Reversible | — | N/A | Phase B | {{owner}} |
+| [[GAP-001]] | Committed ADR | ADR-003 | Completed | Phase C | {{owner}} |
+| [[GAP-002]] | Pending | PAD-001 | Open | Phase E | {{owner}} |
+| [[GAP-003]] | Trivial / Reversible | — | N/A | Phase B | {{owner}} |
 
 **Orphan gaps (no linked decision or WP):** {{list_or_None}}
 
@@ -223,8 +223,8 @@ evidence-based. Evidence requirements should be specific and testable.
 
 | Gap ID | Evidence Required | Current Status | Gathering Method | Target Date | Owner |
 |---|---|---|---|---|---|
-| [GAP-001](../details/GAP-001.md) | Benchmark confirming target performance | Missing | Vendor benchmark | {{date}} | {{owner}} |
-| [GAP-002](../details/GAP-002.md) | POC proving integration pattern | In Progress | 2-week spike | {{date}} | {{owner}} |
+| [[GAP-001]] | Benchmark confirming target performance | Missing | Vendor benchmark | {{date}} | {{owner}} |
+| [[GAP-002]] | POC proving integration pattern | In Progress | 2-week spike | {{date}} | {{owner}} |
 
 ---
 
