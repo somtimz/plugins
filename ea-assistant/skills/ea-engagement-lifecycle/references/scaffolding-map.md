@@ -92,6 +92,7 @@ All available templates and the phase they belong to. These are not all scaffold
 | `statement-of-architecture-work.md` | Statement of Architecture Work | A | All | All |
 | `architecture-vision.md` | Architecture Vision | A | All | All |
 | `communications-plan.md` | Communications Plan | A | All | All |
+| `business-case.md` | Business Case | A (draft) → F (refined) | All | All |
 | `architecture-definition-document.md` | Architecture Definition Document | A (skeleton) → F (final) | All | All |
 | `requirements-register.md` | Architecture Requirements Register | Requirements | All | All |
 | `traceability-matrix.md` | Requirements Traceability Matrix | Requirements | All | All |

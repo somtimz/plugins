@@ -236,7 +236,7 @@ Cross-cutting artifacts are organized into three sub-folders under `artifacts/cr
 | Sub-folder | Artifacts stored |
 |---|---|
 | `artifacts/cross-cutting/governance/` | ADR Register, Decision Register, Architecture Principles (cross-cutting), Constraints Register, Policies Register |
-| `artifacts/cross-cutting/operations/` | Risk Register, Change Register, Stakeholder Concerns |
+| `artifacts/cross-cutting/operations/` | Risk Register, Change Register, Stakeholder Concerns, Cost Model Register |
 | `artifacts/cross-cutting/context/` | Zachman Diagram, Role Catalogue |
 
 The `cross-cutting-index.md` file at `artifacts/cross-cutting/cross-cutting-index.md` is a navigation hub linking to all cross-cutting artifacts. It is created on first use and updated whenever a new cross-cutting artifact is registered.

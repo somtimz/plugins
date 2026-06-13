@@ -67,7 +67,7 @@ EA-projects/{slug}/
 │   │   └── notes/
 │   ├── cross-cutting/        # Cross-cutting registers (organized by purpose)
 │   │   ├── governance/       # ADR Register, Decision Register, Constraints, Policies
-│   │   ├── operations/       # Risk Register, Change Register, Concerns
+│   │   ├── operations/       # Risk Register, Change Register, Concerns, Cost Model Register
 │   │   ├── context/          # Zachman Diagram, Role Catalogue
 │   │   ├── notes/            # unscoped notes (no active phase)
 │   │   └── cross-cutting-index.md  # navigation hub
