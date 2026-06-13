@@ -34,6 +34,7 @@
     "metrics": [],
     "policies": []
   },
+  "finance": [],
   "optOuts": [],
   "phases": {
     "Prelim":        { "status": "Not Started", "startedAt": null, "completedAt": null },

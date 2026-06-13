@@ -1,10 +1,29 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.65
+**Version:** 0.9.66
 **Status:** Current
 **Author:** Costa Pissaris
 
 ---
+
+## v0.9.66 — Financial Modeling & Cost Model Register
+
+### Summary
+Adds an architecture-grade financial layer so budgets, options, and roadmaps carry real numbers instead of prose. A new Cost Model Register (`/ea-finance`, FIN-NNN) captures the full cost picture of each work package, option, or capability — capex, opex, derived 3-year TCO, payback, and an explicit confidence rating. Work packages gain cost fields and a wave-level budget roll-up; a new Business Case artifact compares costed options; benefit realisation is tracked with a new metric type; and a T4-TCO compliance rule asks for quantified economics on strategic and Wave-1 work.
+
+### New
+- **`/ea-finance` command** — Cost Model Register following the register protocol. Modes: list, add, update, trace, generate. Each FIN-NNN Cost Entry stores capex, opexAnnual, horizonYears, **derived** tco and paybackMonths, annualBenefit/benefitNarrative, confidence + basis, status (Estimate/Budgeted/Committed/Actual), and links to WP/ADR/Goal. `generate` writes `cost-model-register.md` and syncs the Architecture Roadmap budget roll-up + per-WP cost fields. Stored at `engagement.json → finance[]` (sibling to `metrics[]`).
+- **Cost Entry concept** (`ea-concepts.md`) — architecture-grade vs finance-grade framing; distinctions from Metric / Business Case / Work Package field.
+- **Business Case artifact** (`templates/business-case.md`, Phase A drafted / F refined) — problem, options-considered table (sourced from FIN entries), recommended option with cost·risk·value rationale, cost-benefit summary, assumptions, risks, funding & timing, benefits realisation. Create with `/ea-artifact create business-case`.
+- **`benefit` metric type** — fourth metric type tracking realisation of a Cost Entry's projected value (`linkedTo` may reference FIN-NNN); answers the Phase G implementation-governance question "did we deliver the expected benefit?".
+- **T4-TCO compliance rule** — strategic options and Wave-1 work packages carry a numeric cost estimate with stated confidence. Applies to Business Case, Architecture Roadmap, Migration Plan, and ADRs with Cost = High. Aspirational at L3, expected at L4+.
+
+### Changed
+- **Architecture Roadmap template** — work-package field table gains Capex / Opex (annual) / 3-Year TCO / Cost Confidence / Linked Cost Entry; new `## Roadmap Budget Summary` section with per-wave and total roll-up; T4-TCO added to the compliance checklist.
+- **Compliance reference** — T4-TCO row added; Business Case added to the T3-A3, T3-A4, and T3-A5/ADR artifact lists; maturity expectations updated (L3/L4 include T4-TCO).
+- **Governance framework reference** — Benefit row added to the metrics table with the cost-projection-vs-realisation explanation.
+- **Engagement schema** — `finance[]` array and `benefit` metric type documented (v0.9.66 fields); TCO and payback noted as always-derived.
+- **CLAUDE.md** — FIN-NNN ID, T4-TCO rule, command count (57), `/ea-finance` key entry point.
 
 ## v0.9.65 — Obsidian Wikilink Support
 
@@ -205,9 +224,9 @@ Requirements Register entries carry a Motivation field that links each requireme
 
 > 📎 Source framework: `skills/ea-artifact-templates/references/ea-concepts-source.pdf` — *Enterprise Architecture Strategic Context: Terms, Concepts, and Relationship Models*
 
-### EA Concepts (25 total)
+### EA Concepts (26 total)
 
-Vision, Mission, Business Driver, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Problem, Opportunity, Capability Model, Capability Gap, Value Stream, Business Process, Use Case, Operating Model, Metrics, Constraint, Stakeholder Concern, ADR, ABB, SBB, User Story — each with a formal definition, TOGAF phase placement, ArchiMate 3.x element, and a disambiguation checklist. Full definitions in `skills/ea-artifact-templates/references/ea-concepts.md`.
+Vision, Mission, Business Driver, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Problem, Opportunity, Capability Model, Capability Gap, Value Stream, Business Process, Use Case, Operating Model, Metrics, Cost Entry, Constraint, Stakeholder Concern, ADR, ABB, SBB, User Story — each with a formal definition, TOGAF phase placement, ArchiMate 3.x element, and a disambiguation checklist. Full definitions in `skills/ea-artifact-templates/references/ea-concepts.md`.
 
 **Disambiguation summary:**
 
@@ -230,6 +249,7 @@ Vision, Mission, Business Driver, Principle, Goal, Objective, Strategy, Plan, Ri
 | Use Case         | Actor goal + scenario                  | No                      | No                 | Consumes Processes; generates Requirements; links to Capabilities                      |
 | Operating Model  | How the org functions                  | No                      | No                 | Shaped by Capability Model; measured by Metrics                                        |
 | Metrics          | Quantifiable measure (leading/lagging) | Yes (target + deadline) | No                 | Validates Objectives; surfaces new Issues and Problems                                 |
+| Cost Entry       | Costed estimate (capex/opex/TCO/payback) | Yes (TCO horizon)     | No                 | Costs Work Packages, ADRs, options; feeds Business Case and Roadmap budget; FIN-NNN; `/ea-finance` |
 | Constraint       | Non-negotiable restriction (certain)   | No                      | No                 | Sourced from Policy, Principle, or external mandate; registered with CST-NNN; `/ea-constraints` |
 | Business Principle | Non-negotiable rule (business domain)  | No                      | No                 | Governs Goals, Strategies, and Operating Model decisions; sourced from Policy or self-grounded; BP-NNN; `/ea-principles` |
 | Data Principle   | Non-negotiable rule (data domain)      | No                      | No                 | Governs Data Architecture; registered with DP-NNN; `/ea-principles` |

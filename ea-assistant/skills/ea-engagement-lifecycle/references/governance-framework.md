@@ -154,6 +154,9 @@ Each metric tracks a specific element of direction:
 | **Outcome** | A goal | Is the desired state being approached? | Goal IDs (`G-NNN`) |
 | **Performance** | An objective | Is the measurable target on track? | Objective IDs (`OBJ-NNN`) |
 | **Activity** | A strategy | Is the chosen approach being executed? | Strategy IDs (`STR-NNN`) |
+| **Benefit** | A projected financial value | Did we realise the value the investment promised? | Cost Entry IDs (`FIN-NNN`) |
+
+A **Benefit** metric closes the implementation-governance loop: a Cost Entry (`FIN-NNN`, managed via `/ea-finance`) *projects* an annual benefit; the Benefit metric *measures the actual* against it. This is what Phase G interrogates when it asks "did those performing the change deliver the expected benefit?" — without it, claimed value is a promise no one tracks.
 
 Every metric has:
 - **Measure** — the specific unit or calculation (e.g., "average days from application to account activation")
@@ -167,7 +170,7 @@ Every metric has:
 **Metrics vs. Objectives:**
 - An **objective** defines the *commitment* — what will be achieved and by when.
 - A **metric** defines the *instrument* — how progress will be measured, how often, and from what source.
-- Every objective should have at least one corresponding performance metric. A metric without a linked direction item is an orphan and should be linked or removed.
+- Every objective should have at least one corresponding performance metric. A metric without a linked direction item is an orphan and should be linked or removed — except `benefit`-type metrics, which legitimately link to a `FIN-NNN` Cost Entry rather than a direction item.
 
 ---
 

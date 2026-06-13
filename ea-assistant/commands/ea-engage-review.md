@@ -64,7 +64,7 @@ For each `G-NNN` / `OBJ-NNN`, check that at least one `STR-NNN` supports it. Fla
 If the Architecture Roadmap exists, check each `STR-NNN` and `G-NNN` is referenced in at least one `WP-NNN` entry. Flag goals/strategies not covered by any work package.
 
 **4e — Metric → Objective linkage:**
-For each `MET-NNN` in `engagement.json → metrics`, verify it links to a `G-NNN` or `OBJ-NNN`. Flag metrics with no linked direction item.
+For each `MET-NNN` in `engagement.json → metrics`, verify it links to a `G-NNN` or `OBJ-NNN` — except `benefit`-type metrics, which link to a `FIN-NNN` Cost Entry. Flag metrics with no linked direction or cost item.
 
 **4f — ABB coverage (Phase C/D):**
 Scan `phase-c*/**/*.md` and `phase-d*/**/*.md` for `ABB-\d{3}` tokens. For each ABB-NNN:

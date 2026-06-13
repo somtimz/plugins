@@ -52,6 +52,7 @@ EA Assistant works on both **Windows** and **Ubuntu Linux** (including WSL). All
 - **Seasoned Architect Lens** — `/ea-lens` reviews the whole engagement through eight practitioner lenses (Real Problem, Decision Quality, Real Risk, Stakeholder Reality, Motivation Chain Integrity, Architecture vs Implementation Blur, What to Do Next, The One Thing); `--quick` produces lenses 1, 7, 8 only from engagement.json without a full artifact scan
 - **Phase-adaptive interviews and brainstorms** — `/ea-interview` and `/ea-brainstorm` now inject a phase intent preamble from `adm-phase-guide.md`, filter engagement direction items by phase relevance, and skip questions already answered in existing artifacts
 - **Risk Register** — `/ea-risks` generates a cross-cutting Risk Register (RIS-NNN) by scanning all artifacts for risk content; Likelihood × Impact severity matrix
+- **Financial modeling** — `/ea-finance` manages a Cost Model Register of FIN-NNN Cost Entries, each capturing the full architecture-grade cost picture of one work package, option, or capability (capex, opex, derived 3-year TCO, payback, confidence); `generate` writes the register and rolls up the Architecture Roadmap budget. A Business Case artifact (`/ea-artifact create business-case`) compares costed options and recommends one (T4-ECON/T4-TCO); `benefit`-type metrics track value realisation in Phase G
 - **Architecture Decision Records** — `/ea-adrs` manages standalone ADRs (Candidate → Completed lifecycle); `ea-interviewer` auto-suggests ADRs at 2+ threshold indicators; Appendix A5 links artifacts to related ADRs
 - **Zachman Diagram** — `/ea-zachman` auto-populates and manages the 6×6 classification grid; generate, review, gap, interview, audit, and classify modes — audit checks completeness honesty, row/column consistency, staleness, scope, and perspective purity
 - **Governance artifacts** — Engagement Charter (Prelim), Governance Framework (Prelim), Implementation Governance Plan (G), Change Register (H)
@@ -196,6 +197,7 @@ uiMode: html
 | `/ea-decisions [options]` | Generate a Decision Register from all A3 decision logs; filter by audience, owner, domain, authority, cost, impact, risk, subject, or status |
 | `/ea-adrs [mode]` | Manage Architecture Decision Records — generate register, create new ADR, update status |
 | `/ea-risks [mode]` | Generate and maintain a cross-cutting Risk Register from all artifact risk sections |
+| `/ea-finance [list\|add\|update\|trace\|generate]` | Cost Model Register — manage FIN-NNN Cost Entries (capex/opex/TCO/payback with confidence), trace to work packages/ADRs/goals, generate register and roll up the roadmap budget |
 | `/ea-changes [mode]` | Generate Change Register aggregating Phase H ACR artifacts |
 | `/ea-concerns` | Manage CON-NNN stakeholder concerns and objections (Appendix A4) |
 | `/ea-roles [ROLE-ID\|--domain\|--generate\|--update]` | Role Catalogue — list, filter, and generate role assignments with RACI, triggers, and calendar |

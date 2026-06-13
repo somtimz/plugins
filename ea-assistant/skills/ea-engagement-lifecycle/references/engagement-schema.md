@@ -54,7 +54,7 @@
     {
       "id": "MET-001",
       "name": "",
-      "type": "outcome | performance | activity",
+      "type": "outcome | performance | activity | benefit",
       "description": "",
       "measure": "",
       "baseline": "",
@@ -64,6 +64,28 @@
       "frequency": "Daily | Weekly | Monthly | Quarterly",
       "linkedTo": ["OBJ-001"],
       "status": "Not Established | On Track | At Risk | Behind | Achieved"
+    }
+  ],
+  "finance": [
+    {
+      "id": "FIN-001",
+      "label": "",
+      "subject": "WorkPackage | ADR | Option | Capability | Engagement",
+      "currency": "EUR",
+      "capex": 0,
+      "opexAnnual": 0,
+      "horizonYears": 3,
+      "tco": 0,
+      "annualBenefit": 0,
+      "benefitNarrative": "",
+      "paybackMonths": null,
+      "confidence": "High | Medium | Low",
+      "confidenceBasis": "",
+      "status": "Estimate | Budgeted | Committed | Actual",
+      "linkedWorkPackages": ["WP-001"],
+      "linkedADRs": [],
+      "linkedGoals": [],
+      "source": ""
     }
   ],
   "phases": {
@@ -132,6 +154,34 @@
 - `linkedTo` — array of G-NNN or OBJ-NNN IDs this metric tracks
 - Metrics with empty `name` or `measure` are placeholders — MUST NOT be displayed in artifacts
 - Every objective should have at least one metric; a metric without a `linkedTo` entry is an orphan
+
+**v0.9.66 fields** — `finance` (flat array) and `benefit` metric type:
+
+- `finance[]` — flat array at engagement level (sibling to `metrics[]`), absent in legacy engagements → treat as `[]`. Each entry is a **Cost Entry** (`FIN-NNN`) capturing the full architecture-grade cost picture of one subject (a work package, an ADR option, a capability, or the whole engagement). Managed via `/ea-finance`.
+
+| Field | Meaning |
+|---|---|
+| `label` | Short name of what is being costed |
+| `subject` | `WorkPackage` / `ADR` / `Option` / `Capability` / `Engagement` |
+| `currency` | ISO code; defaults to the engagement's `financeCurrency` local-config value (fallback `EUR`) |
+| `capex` | One-time build/transition cost (numeric, currency units) |
+| `opexAnnual` | Recurring annual run cost once live |
+| `horizonYears` | TCO horizon (default 3) |
+| `tco` | **Derived** = `capex + opexAnnual × horizonYears` — never hand-entered |
+| `annualBenefit` | Quantified annual value (0 if value is qualitative only) |
+| `benefitNarrative` | Qualitative value statement when not fully quantified |
+| `paybackMonths` | **Derived** = `capex / ((annualBenefit − opexAnnual) / 12)` when `annualBenefit > opexAnnual`, else `null` (no payback within horizon) |
+| `confidence` | `High` / `Medium` / `Low` |
+| `confidenceBasis` | Why that confidence (vendor quote, analogous project, rough order of magnitude) |
+| `status` | `Estimate` / `Budgeted` / `Committed` / `Actual` |
+| `linkedWorkPackages` / `linkedADRs` / `linkedGoals` | Cross-references; an entry with no links is an orphan |
+| `source` | Where the numbers came from |
+
+- Entries with an empty `label` are placeholders — MUST NOT be displayed in artifacts.
+- `tco` and `paybackMonths` are always recomputed on `add`/`update`; never trust hand-edited values.
+- A `benefit`-type metric (below) tracks realisation of a Cost Entry's projected `annualBenefit`.
+
+- `metrics[].type` gains a fourth value `benefit` — tracks realisation of projected financial value (revenue, cost saving, or avoided cost) against a Cost Entry. `linkedTo` for a `benefit` metric may reference a `FIN-NNN` Cost Entry (in addition to `G-NNN`/`OBJ-NNN`). Used in Phase G to answer the implementation-governance question *"did we deliver the expected benefit?"*. Absent in legacy engagements — the three original types remain valid.
 
 **v0.9.5 fields**:
 - `pluginVersion` — ea-assistant version that last opened this engagement (set by `/ea-open`); absent in legacy → treat as `"0.0.0"`

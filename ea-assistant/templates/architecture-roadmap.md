@@ -32,6 +32,7 @@ links: []
 | T3-RATIONALE | ⚠️ Pending | |
 | T3-ROAD-SA | ⚠️ Pending | |
 | T3-ROAD-WP | ⚠️ Pending | |
+| T4-TCO | ⚠️ Pending | Wave-1 WPs carry a numeric cost estimate with confidence |
 | Linked to Architecture Vision | ⚠️ Pending | |
 
 *This section is for author guidance only. Run `/ea-grill` to validate compliance.*
@@ -152,6 +153,11 @@ Work packages close gaps identified in the Gap Analysis.
 | **Addresses Requirements** | {{req_ids}} |
 | **Phase / Wave** | Wave 1 / Wave 2 / Wave 3 |
 | **Estimated Effort** | {{effort}} |
+| **Capex (one-time)** | {{capex}} |
+| **Opex (annual)** | {{opex_annual}} |
+| **3-Year TCO** | {{tco}} |
+| **Cost Confidence** | High / Medium / Low |
+| **Linked Cost Entry** | {{fin_ids}} |
 | **Dependencies** | {{dependencies}} |
 | **Owner** | {{owner}} |
 | **Status** | Proposed / Approved / In Progress / Complete |
@@ -163,6 +169,32 @@ Work packages close gaps identified in the Gap Analysis.
 | **Decision Reversibility** | High / Medium / Low |
 | **Value Delivery** | Standalone / Cumulative / Enabling |
 | **Details** | [[WP-001\|→]] |
+
+---
+
+## Roadmap Budget Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Roll up the per-work-package costs into a wave-level budget view. Capex is one-time;
+Opex is the annual run-rate added once the work package is live. 3-Year TCO = Capex +
+(Opex × 3). Figures are architecture-grade estimates, not finance-grade budgets — every
+row should carry a confidence rating. Keep this section in sync with the per-WP cost fields
+and the Cost Model Register (`/ea-finance`); regenerate via `/ea-finance generate` rather
+than editing totals by hand.
+
+</details>
+
+| Wave | Work Packages | Capex | Opex (annual) | 3-Year TCO | Confidence |
+|---|---|---|---|---|---|
+| Wave 1 | {{wp_ids}} | {{capex}} | {{opex_annual}} | {{tco}} | High / Medium / Low |
+| Wave 2 | {{wp_ids}} | {{capex}} | {{opex_annual}} | {{tco}} | High / Medium / Low |
+| Wave 3 | {{wp_ids}} | {{capex}} | {{opex_annual}} | {{tco}} | High / Medium / Low |
+| **Total** | All | {{total_capex}} | {{total_opex_annual}} | {{total_tco}} | — |
+
+**Funding window alignment:** {{note_whether_wave_costs_fit_annual_funding_cycles_or_None}}
+**Unestimated work packages:** {{list_WPs_with_no_cost_estimate_or_None}}
 
 ---
 

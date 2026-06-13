@@ -163,6 +163,31 @@ Artefacts are listed by ADM phase. Where an artefact spans multiple phases (e.g.
 
 ---
 
+### Business Case
+
+**Purpose:** The economic and political instrument that secures the mandate and funding for the architecture engagement. States the problem, compares the realistic options on cost, value, and risk, and recommends one — backed by architecture-grade Cost Entries (FIN-NNN) from the Cost Model Register, not hand-waving. It is the artifact a sponsor reads before committing money.
+
+**Audience:** Sponsor, executive leadership, investment/steering committee, programme management.
+
+**Contents:**
+- Problem / opportunity tied to drivers (DRV-NNN), goals (G-NNN), and objectives (OBJ-NNN), with the cost of inaction
+- Options Considered table — genuinely distinct options including "do nothing", each referencing its FIN-NNN entries (Capex, Opex, 3-Year TCO, annual benefit, payback, confidence, trade-off)
+- Recommended option with rationale framed in cost, risk, AND value terms (T4-ECON)
+- Cost-Benefit Summary drawn from the recommended option's Cost Entries
+- Assumptions with confidence; key risks (linked to RIS-NNN)
+- Funding & timing aligned to Architecture Roadmap waves and annual funding cycles
+- Benefits Realisation — each benefit assigned a `benefit`-type metric and an owner, reviewed in Phase G
+
+**When to Create:** Phase A with directional estimates (the funding/mandate instrument supporting the Request for Architecture Work and Architecture Vision). Refined in Phase F once the Architecture Roadmap and Cost Entries are firm.
+
+**Who Reviews:** Sponsor, investment/steering committee, architecture review board.
+
+**Phase:** A (draft), F (refined).
+
+**Template:** `business-case.md` — create with `/ea-artifact create business-case`. Populate costs via `/ea-finance`.
+
+---
+
 ### Communications Plan
 
 **Purpose:** Defines how architecture information will be communicated to each stakeholder group throughout the ADM cycle — what they need to know, how often, through what channel, and who is responsible. Complements the Stakeholder Map by converting stakeholder engagement strategies into a concrete communication schedule.
