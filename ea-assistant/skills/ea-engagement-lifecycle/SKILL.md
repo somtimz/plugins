@@ -1,7 +1,7 @@
 ---
 name: ea-engagement-lifecycle
 description: This skill should be used when the user asks to "start an EA engagement", "manage an EA project", "set up a new architecture engagement", "what phase are we in", "advance the ADM", "continue the engagement", "resume an EA project", or when working within any TOGAF ADM phase. Provides end-to-end lifecycle guidance for Enterprise Architecture engagements using TOGAF 10 as the backbone.
-version: 0.9.67
+version: 0.9.68
 ---
 
 # EA Engagement Lifecycle
@@ -102,6 +102,7 @@ All static data is in `references/`. Read these rather than relying on memory:
 - **`references/adm-tailoring.md`** — tailoring ADM for agile, programme, capability, and security contexts
 - **`references/ai-security-guidance.md`** — AI/GenAI security guidance for TOGAF ADM: ISO/IEC 42001 (AIMS), NIST AI RMF, and OWASP Top 10 for LLMs mapped per phase; load when the engagement involves AI or agentic systems, or when the user asks about AI security architecture
 - **`references/role-catalogue.md`** — canonical role catalogue (ROLE-001 to ROLE-015): definitions, responsibilities, RACI defaults, triggering events, cadence, and escalation paths; read when populating the Stakeholder Map, SAoW §5, or the Role Catalogue artifact
+- **`references/persona-registry.md`** — stakeholder personas (EA, CIO, CISO, Chief Product/Privacy Officer, Business/Data Architect): interests, command subset, report bundle, audience tags, entry workflow; read by `/ea-help --persona` and `/ea-publish --persona`. Distinct from the role catalogue: roles are engagement participants with RACI; personas are reporting/menu lenses mapped to the `audience` taxonomy
 
 ## Lifecycle Workflow
 

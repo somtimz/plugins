@@ -1,12 +1,38 @@
 ---
 name: ea-help
-description: Show how to get started with EA Assistant and list all available commands
+description: Show how to get started with EA Assistant and list all available commands; --persona <role> renders a role-tailored menu and workflow
+argument-hint: "[--persona enterprise-architect|cio|ciso|chief-product-officer|chief-privacy-officer|business-architect|data-architect]"
 allowed-tools: [Read, Bash]
 ---
 
 Display a getting-started guide and command reference for EA Assistant.
 
 ## Instructions
+
+### Step 0 — Persona mode (`--persona <role>`)
+
+If a `--persona <role>` argument is present (or `defaultPersona:` is set in `.claude/rules/ea-local-config.md` and no other mode is requested):
+
+1. Read `skills/ea-engagement-lifecycle/references/persona-registry.md` and resolve `<role>` against each persona's Key or Aliases (case-insensitive). An explicit `--persona` overrides any `defaultPersona`.
+2. If no match, list the available personas (Key — one-line Interests) and stop.
+3. Render the persona view — do **not** print the full command table:
+   ```
+   ## EA Assistant — {Persona} view
+
+   **Your interests:** {Interests}
+
+   ### Suggested workflow
+   {Entry workflow}
+
+   ### Your commands
+   {render the All Commands table below, filtered to the persona's Commands list — same row text}
+
+   ### Your report bundle
+   {Report bundle items, each as a runnable command or artifact name}
+   ```
+4. End with: "Run `/ea-help` for the full command list, or `/ea-publish --persona {key}` for your report pack."
+
+Otherwise (no persona), continue with the standard guide below.
 
 1. **Read the plugin version.** Read `.claude-plugin/plugin.json` from the ea-assistant plugin directory and extract the `version` field.
 
@@ -196,6 +222,12 @@ Type these at any interview prompt:
   Consolidate/Modernise/Defend), Horizon, and rationale; `add`/`update` sync
   into Architecture Vision §8. Run `/ea-strategies trace` for the Strategy Map
   (which goals each strategy serves and which work packages execute it).
+• Run `/ea-help --persona <role>` for a role-tailored menu and workflow, and
+  `/ea-publish --persona <role>` for a role-scoped report pack — roles:
+  enterprise-architect, cio, ciso, chief-product-officer, chief-privacy-officer,
+  business-architect, data-architect. Set `defaultPersona:` in
+  `.claude/rules/ea-local-config.md` to make it stick. Personas are defined in
+  `persona-registry.md` — add your own as a data row.
 • After `/ea-grill`, choose "apply findings" to revise the artifact
   one recommendation at a time, with confirm/skip/edit per change.
 • Use `/ea-research` to add whitepapers, notes, or URL references to

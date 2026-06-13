@@ -1,10 +1,25 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.67
+**Version:** 0.9.68
 **Status:** Current
 **Author:** Costa Pissaris
 
 ---
+
+## v0.9.68 — Persona-Tailored Menus & Reports
+
+### Summary
+Tailors the workflow and reporting to stakeholder personas — EA, CIO, CISO, Chief Product Officer, Chief Privacy Officer, Business Architect, Data Architect. Implemented as a data registry plus a `--persona` filter, so adding a persona is a data edit, not code. Personas build on the existing `audience` taxonomy rather than a parallel scheme.
+
+### New
+- **Persona registry** (`skills/ea-engagement-lifecycle/references/persona-registry.md`) — single source of truth mapping each persona → interests, audience tags, command subset, report bundle, and entry workflow. Includes a resolution/alias guide and an "extending" section. CPO is deliberately two personas (Chief Product Officer + Chief Privacy Officer); bare `cpo` resolves to Product.
+- **`/ea-help --persona <role>`** — renders the persona's interests, suggested workflow, a command table filtered to the persona's subset, and its report bundle (instead of the full 58-command table).
+- **`/ea-publish --persona <role>`** — pre-filters the artifact selection by the persona's `audience` set and pre-ticks its report bundle; output titled "{Persona} Pack". Combines with `--full`/`--executive`.
+- **`defaultPersona:` local-config setting** — sets the engagement default persona (seed `ea-local-config.md`); an explicit `--persona` flag overrides it.
+
+### Changed
+- **`ea-engagement-lifecycle` SKILL.md** — Reference Files list gains `persona-registry.md`; version bumped to 0.9.68.
+- **CLAUDE.md / README / ea-help** — persona tailoring documented; no new command (persona is a flag on existing commands, so the count stays 58).
 
 ## v0.9.67 — Strategy Register & Strategy Visibility
 
