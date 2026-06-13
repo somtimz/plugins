@@ -128,6 +128,67 @@ placeholders) — populated content is never changed and reviewStatus stays Appr
 sections may warrant re-review. Proceed with this insertion? (y/n)
 ```
 
+## Snapshot Before Restructure (applies to 3j and 3k)
+
+Unlike 3a–3i, the **3j and 3k** remediations relocate **populated** content — they can lose or misfile authored work if they go wrong. Before applying **any** 3j reorder or 3k move, snapshot every artifact that will be modified:
+
+1. Copy the artifact to a `snapshots/` subfolder in its own directory, named `{artifact-id}-{YYYY-MM-DD}-pre-restructure.md` (append `-v2`, `-v3` if the name exists), per `skills/ea-artifact-templates/references/register-snapshot-convention.md`. Create `snapshots/` if needed.
+2. Announce it: `"Snapshot saved: {path} — revert with a copy-back if needed."`
+3. Only then apply the change.
+
+**Content-preservation verification (mandatory):** after a 3j reorder, the multiset of section blocks (heading + body, verbatim) must be identical before and after — only their order changes. After a 3k move, the moved block must appear in exactly one place across the source and destination (never zero, never duplicated). If verification fails, restore from the snapshot and report the failure — never leave a half-applied move.
+
+## 3j — Section Ordering Gaps
+
+Reorders **existing** sections of an artifact to match the order its current template defines. Runs only on sections present in both the artifact and the template (3i handles missing ones — run 3i first). **Whole-section atomic moves only:** a section is its `## {heading}` line plus everything until the next `## ` heading; the block moves verbatim. Severity **Low**. **Excluded from `--auto`.** Same authored-artifact scope and command-generated exclusions as 3i.
+
+### Detection
+
+Build the template's canonical `## ` section order (body sections only — exclude the author-only `## Compliance Checklist`, the `# Title`, and the trailing Appendices A3/A4/A5 + `## Artifact Working Notes`, which are always last). Build the artifact's order of the same sections. If the artifact's relative order differs from the template's, flag `[Low]` with the specific out-of-order sections.
+
+Appendices and Working Notes keep their fixed trailing order (A3 → A4 → A5 → Working Notes) and are never reordered into the body.
+
+### Remediation (per-artifact confirmation)
+
+1. Show the before/after **heading order** (headings only — not the full bodies):
+   ```
+   Reorder business-architecture.md sections to template order?
+     current: Executive Summary · Organisation Model · Business Context · …
+     template: Executive Summary · Business Context · Organisation Model · …
+   Only the order of existing sections changes; all content is preserved. (y / n / skip)
+   ```
+2. Warn that the author may have reordered intentionally: "If this ordering was deliberate, skip."
+3. On confirm: snapshot (above), move whole-section blocks to template order, run the preservation check.
+
+**Approved artifacts:** 3j is permitted on an `Approved` artifact with explicit confirmation — it changes only section *order*, not content (the preservation check guarantees this), so `reviewStatus` stays `Approved`; offer re-review as optional. This is an explicit exception to the general "only metadata/appendix changes on Approved artifacts" rule, justified by the content-preservation guarantee.
+
+## 3k — Misplaced Content (heuristic, user-confirmed moves)
+
+Surfaces content that likely belongs in a **different section** (within the document) or a **different artifact**, and proposes a move. **Heuristic and advisory** — every move is user-confirmed; nothing is inferred-and-applied. Severity **Info**. **Excluded from `--auto`.** Conservative, high-precision patterns only — when unsure, do not suggest.
+
+### Detection patterns
+
+| Pattern | Suggested destination | Move type |
+|---|---|---|
+| A `Risk`-titled section/table, or A4 rows with `Category = Risk`, in a non-Risk artifact | Risk Register (`/ea-risks`) | register registration (not raw paste) |
+| Requirement-shaped statements ("the system must/shall …") in narrative body | Requirements Register (`/ea-requirements`) | register registration |
+| A populated section that belongs to a different artifact type per the templates (e.g. a `Work Packages` section authored inside Architecture Vision) | the owning artifact (e.g. Architecture Roadmap) | cross-document block move |
+| A block clearly under the wrong heading within the same doc (e.g. constraints listed under `Assumptions`) | the correct section in the same doc | within-document block move |
+
+### Remediation (per-move, user-confirmed)
+
+For each suggestion, show: the source block (or its first lines), the proposed destination, the confidence, and the rationale. Then:
+
+- **Register registration** (Risk/Requirements/Decision targets): do **not** paste raw markdown into a register — registers are command-owned. Instead offer to run the register's `add` flow seeded from the block (e.g. `/ea-risks add` pre-filled), and once registered, replace the source block with a one-line pointer (`*Registered as RIS-NNN — see [[risk-register]]*`) only on confirm.
+- **Cross-document block move** (narrative → narrative): snapshot **both** artifacts; insert the block into the destination's correct section (use 3i positioning rules); remove it from the source; replace the source location with an optional pointer line if the user wants one; run the preservation check across both files; flag any `[[links]]`/IDs that referenced the moved block as needing update.
+- **Within-document block move:** snapshot the artifact; move the block under the correct heading; preservation check.
+
+Confirm options per move: `y / n / skip / edit-destination`. If the user declines, leave everything untouched.
+
+### Approved artifacts
+
+3k moves change populated content, so on an `Approved` artifact warn and require explicit confirmation; moving content out of an Approved artifact should set its `reviewStatus` back to `Needs Revision` (a moved block is a material change) — confirm this with the user before applying.
+
 ## Handling Special Cases
 
 **Non-standard artifacts:** If `artifact:` field does not match a known template type, flag `[Info]` — not a migration error. Do not attempt canonical taxonomy. Suggest manual review or `/ea-grill artifact`.
@@ -137,4 +198,4 @@ sections may warrant re-review. Proceed with this insertion? (y/n)
 ⚠️ {artifact name} is Approved. This remediation only adds metadata (taxonomy/templateVersion) or appends
 empty appendix tables — content sections are not changed. The reviewStatus will remain Approved. Proceed? (y/n)
 ```
-Only structural metadata additions are permitted on Approved artifacts.
+Only structural metadata additions are permitted on Approved artifacts **by 3a–3i**. The body-restructure checks **3j and 3k define their own Approved handling** (see their sections): 3j reorders with content preserved (reviewStatus stays Approved); 3k moves populated content and sets reviewStatus to `Needs Revision`. Both require explicit confirmation and a snapshot.
