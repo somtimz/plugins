@@ -1334,6 +1334,22 @@ EA-Workspace/
 
 ---
 
+### 5.56 Capabilities Added v0.9.61–v0.9.75
+
+Major capabilities since v0.9.60 (see the per-release changelog at the top of this document for full detail):
+
+- **Reference Architecture Register & concept** (v0.9.61, v0.9.73) — `/ea-refarch` manages governed reusable blueprints (RA-NNN) in the Architecture Repository or per-engagement; the **Reference Architecture concept** and a full governed-blueprint template (boundary conditions, failure modes, three-teams stress test) make RAs interview-able/scorable/grillable.
+- **TOGAF relationship matrices** (v0.9.62, v0.9.69, v0.9.75) — `/ea-matrix` manages a 20-matrix catalogue (16 managed) of grid artifacts with axis seeding and grill checks; domain templates carry a Related Matrices pointer; `/ea-generate --matrices` and `/ea-publish --matrices` inline the grids into exports.
+- **Motivation & direction registers** (v0.9.64, v0.9.67) — `/ea-objectives` (OBJ-NNN) and `/ea-strategies` (STR-NNN, with the Goals→Strategies→Work Packages Strategy Map) complete the DRV→G→OBJ→STR→WP register set under the shared register protocol.
+- **Financial modeling** (v0.9.66) — `/ea-finance` Cost Model Register (FIN-NNN; capex/opex/derived TCO/payback with confidence); **Business Case** artifact; **T4-TCO** compliance rule; `benefit` metric type.
+- **Persona-tailored menus & reports** (v0.9.68) — `/ea-help --persona` and `/ea-publish --persona` (EA, CIO, CISO, Chief Product/Privacy Officer, Business/Data Architect) driven by a data registry mapped to the `audience` taxonomy.
+- **`/ea-migrate` body alignment** (v0.9.70–71) — backfill missing template sections/guidance (3i), reorder sections (3j), and heuristically relocate misplaced content within/across documents (3k), all snapshotted and confirmed per item.
+- **Two-score artifact scoring** (v0.9.72) — `/ea-score` rates Completeness and Quality (0–100 + band) per section and overall, carried out by the grill skills against a rubric grounded in the EA definitions, each section's guidance, and the compliance tiers (Quality includes readability); scores render into an author-only in-artifact Scorecard block, stripped on export.
+- **Capability management** (v0.9.74) — `/ea-capabilities` creates/edits/maps/scores business capabilities (CAP-NNN, mastered in the Business Architecture capability model, each with a value/outcome); a canonical capability map (CAP-C-NNN) in the Architecture Repository is adoptable into engagements.
+- Plus Zachman Diagram audit (v0.9.63) and Obsidian wikilink support (v0.9.65).
+
+---
+
 ## 6. Data Model
 
 ### Folder Structure
@@ -1415,12 +1431,12 @@ EA-projects/
 |---|---|---|
 | `/ea-new` | — | Create engagement — collects name, type, domains, sponsor, scope, dates; scaffolds ResearchAndReferences/; generates CLAUDE.md |
 | `/ea-open` | `[slug]` | Open engagement, refresh CLAUDE.md, ensure ResearchAndReferences/ exists, next-action menu |
-| `/ea-status` | `[--next] [--direction]` | Portfolio dashboard — all engagements with progress, research count, opt-outs, non-standard flags; `--next` for next-action recommendation; `--direction` for Direction Register |
+| `/ea-status` | `[--next] [--direction] [--quality]` | Portfolio dashboard — progress, research count, opt-outs, non-standard flags; `--next` for next-action; `--direction` for Direction Register; `--quality` for direction-item quality scan |
 | `/ea-phase` | `[phase name]` | Start, navigate to, or resume an ADM phase |
 | `/ea-interview` | `[web|voice|text|display]` | Run stakeholder interview; ADR threshold scoring; defaults to Web mode |
 | `/ea-artifact` | `[create|view|list|summary]` | Create, view, or list artifacts; compliance check on view; `summary [refresh\|status]` for executive summary management |
 | `/ea-brainstorm` | `[phase]` | Capture freeform thoughts before or during interviews |
-| `/ea-generate` | `[artifact] [docx|pptx|mermaid|png|svg] [--theme] [--bg] [--all]` | Export artifact; embeds diagrams by default in docx/pptx; renders Mermaid to images via mmdc |
+| `/ea-generate` | `[artifact] [docx|pptx|mermaid|png|svg] [--theme] [--bg] [--all] [--matrices]` | Export artifact; embeds diagrams by default in docx/pptx; `--matrices` embeds linked relationship matrices; renders Mermaid to images via mmdc |
 | `/ea-review` | `[artifact]` | Open artifact for review; runs compliance check; update review status |
 | `/ea-grill` | `[artifact\|all] [--skill name]` | Deep-review artifact using a grill-me skill; auto-selects skill by type; apply findings with y/n/edit; `all` runs non-interactive batch review across all artifacts |
 | `/ea-requirements` | `[list|add|edit|waive]` | Manage architecture requirements; corporate (read-only) and project scope |
@@ -1444,14 +1460,35 @@ EA-projects/
 | `/ea-detail` | `[new|view|list|sync|link|check|note resolve|index]` | Create, view, list, sync, cross-link, and integrity-check item detail files; generate index; add and resolve inline notes |
 | `/ea-consistency` | `[artifact <id>] [--ids] [--report]` | Focused consistency check — cross-artifact, within-artifact section contradictions, or ID reference scan only |
 | `/ea-engage-review` | — | Full-scope engagement consistency, alignment, governance, and quality review |
-| `/ea-migrate` | `[--report] [--reorganize]` | Align legacy engagement to current plugin version conventions; `--reorganize` moves flat-path artifacts into correct phase subfolders |
-| `/ea-publish` | `[markdown|word|both] [--full|--executive]` | Layered stakeholder report (default) or full consolidated document (`--full`) via Pandoc; pre-publish compliance check; writes `artifacts/index.md` reading guide |
+| `/ea-migrate` | `[--report] [--reorganize]` | Align legacy engagement to current conventions: backfill missing template sections/guidance (3i), reorder sections (3j), relocate misplaced content (3k); `--reorganize` moves flat-path artifacts into phase subfolders |
+| `/ea-publish` | `[markdown|word|both] [--full|--executive] [--persona <role>] [--matrices]` | Layered stakeholder report (default) or full consolidated document (`--full`) via Pandoc; `--persona` scopes to a stakeholder role; `--matrices` inlines linked relationship matrices; pre-publish compliance check; reading guide |
 | `/ea-brief` | `[--focus decisions\|risks\|gaps\|strategy] [--save]` | Synthesised one-page engagement brief — ranked decisions, gaps, risks, open concerns |
 | `/ea-workshop` | `[start|resume|export|list]` | Facilitated multi-stakeholder workshops — WS-NNN minutes, agenda, decisions, actions |
 | `/ea-arb` | `[new|list|view|close]` | ARB meeting minutes — ARB-NNN, quorum, decisions, propagate to ADR register |
 | `/ea-config` | `[section]` | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md |
 | `/ea-security-review` | `[artifact-id] [--report]` | Security audit — SABSA ADM mapping, ISO 27001 Annex A, and NIST CSF 2.0 coverage; full engagement or single artifact |
 | `/ea-help` | — | Command reference, interview shortcuts, research agent guide |
+| `/ea-drivers` | [list\|add\|update\|trace\|generate] [DRV-NNN] [--type External\|Internal] [--priority High\|Medium\|Low] | Manage business drivers — list, add, update, trace to goals and work packages, and generate a drivers register |
+| `/ea-goals` | [list\|add\|update\|trace\|generate] [G-NNN] [--domain Business\|Technology\|Data\|Application\|Cross-cutting] [--type Strategic\|Operational\|Capability\|Compliance] [--priority High\|Medium\|Low] | Manage goals — list, add, update, trace to drivers and objectives, and generate a Goals Register |
+| `/ea-objectives` | [list\|add\|update\|trace\|generate] [OBJ-NNN] [--priority High\|Medium\|Low] | Manage objectives — list, add, update, trace to goals, problems, and metrics, and generate an Objectives Register |
+| `/ea-strategies` | [list\|add\|update\|trace\|generate] [STR-NNN] [--type Build\|Buy\|Partner\|Consolidate\|Modernise\|Defend\|Other] [--horizon Near\|Mid\|Long] [--priority High\|Medium\|Low] [--status Active\|Completed\|Superseded] | Manage strategies — list, add, update, trace the Goals→Strategies→Work Packages map, and generate a Strategy Register |
+| `/ea-target` | [new\|view\|update <section> <value>] | Create and manage the Target State Declaration — captures per-domain target states, success criteria, and traceability to goals and objectives |
+| `/ea-actions` | [generate\|view\|update <approver> <row#> <field> <value>\|status] | Generate and manage the Stakeholder Action Plan — a consolidated per-approver action view seeded from the SAoW and Target State Declaration, suitable for gov… |
+| `/ea-issues` | [list\|add\|update\|trace\|generate] [ISS-NNN] [--domain Business\|Technology\|Data\|Application\|Engagement] [--type Organisational\|Process\|Technology\|Regulatory\|Capability] [--severity Critical\|High\|Medium\|Low] [--status Open\|Under Mitigation\|Resolved\|Accepted] | Manage architecture issues — list, add, update, trace to goals and gaps, and generate an Issues Register |
+| `/ea-problems` | [list\|add\|update\|trace\|generate] [PRB-NNN] [--domain Business\|Technology\|Data\|Application\|Engagement] [--type Operational\|Technical\|Data\|Engagement\|Compliance] [--severity Critical\|High\|Medium\|Low] [--status Open\|In Progress\|Resolved] | Manage architecture problems — list, add, update, trace to objectives and requirements, and generate a Problems Register |
+| `/ea-scenarios` | [list\|new\|view\|interview\|trace\|generate] [BS-NNN] | Manage TOGAF Business Scenarios — list, create, interview, trace, and generate Phase A scenario artifacts (BS-NNN) |
+| `/ea-gaps` | [list\|add\|promote\|update\|trace\|generate] [GAP-NNN] [--domain Business\|Data\|Application\|Technology\|Capability\|Process] [--severity Critical\|High\|Medium\|Low] [--status Open\|Mitigated\|Closed\|Accepted] [--phase A\|B\|C\|D\|E\|F\|G\|H] | Manage architecture gaps — list, add, promote from raw gap text, update, trace to work packages, and generate a gap register |
+| `/ea-capabilities` | [list\|add\|update\|map\|score\|adopt] [CAP-NNN] [field value] [--level L1\|L2\|L3] [--type Business\|Technology] [--domain name] | Create, edit, map, and score business capabilities (CAP-NNN) in the Business Architecture capability model |
+| `/ea-matrix` | [list\|new\|show\|edit\|check] [key] | Manage TOGAF relationship matrices — create, list, show, edit, and check grid artifacts (Actor/Role, Application/Data CRUD, Capability/Application, System/Te… |
+| `/ea-finance` | [list\|add\|update\|trace\|generate] [FIN-NNN] [--subject WorkPackage\|ADR\|Option\|Capability\|Engagement] [--status Estimate\|Budgeted\|Committed\|Actual] [--confidence High\|Medium\|Low] | Manage Cost Entries (FIN-NNN) — architecture-grade capex/opex/TCO/payback estimates |
+| `/ea-score` | [artifact-id \| --all \| --status] [--no-write] | Score artifacts on Completeness and Quality (0–100 with bands), per section and overall, using the grill scoring rubric |
+| `/ea-lens` | [architect] [--quick] | Apply an opinionated practitioner lens to the full engagement — cuts through completeness theatre to identify what actually matters, where real risk lies, an… |
+| `/ea-refarch` | [new\|list\|show\|edit\|adopt\|unadopt\|status] [RA-NNN] [--local] | Manage Reference Architectures (RA-NNN) in the Architecture Repository or per-engagement |
+| `/ea-repo` | [init\|link\|status\|open] [engagement-slug] [--workspace-path <path>] | Initialise an EA-Workspace with a shared Architecture Repository, link engagements, and show repository status |
+| `/ea-vendors` | [list\|add\|update\|link-sbb\|archive] [VDR-NNN] [--filter <field>=<value>] | Manage the Vendor Landscape Register (VDR-NNN) in the shared Architecture Repository — add, list, update, link, and archive vendor assessments |
+| `/ea-horizon` | [list\|add\|update\|surface\|link-adr] [THR-NNN] [--ring Adopt\|Trial\|Assess\|Hold] | Manage the Technology Horizon Register (THR-NNN) in the shared Architecture Repository — add technologies to the radar, update ring placement, and track PoC… |
+| `/ea-standards` | [list\|add\|link-constraint\|surface] [STD-NNN] [--status Mandatory\|Recommended\|Informational\|Deprecated] [--domain <domain>] | Manage the Standards Information Base (STD-NNN) in the shared Architecture Repository — track adopted industry and regulatory standards, link to constraints,… |
+| `/ea-git` | [init\|status\|commit\|push\|sync\|log\|remote] [args] | Manage EA projects via git and GitHub — init, commit, push, sync, log, remote |
 
 ---
 
