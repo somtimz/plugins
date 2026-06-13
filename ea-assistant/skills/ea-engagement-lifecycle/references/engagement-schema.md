@@ -35,7 +35,7 @@
       { "id": "OBJ-001", "statement": "", "measure": "", "target": "", "deadline": "", "priority": "High | Medium | Low", "linkedGoal": "G-001" }
     ],
     "strategies": [
-      { "id": "STR-001", "statement": "", "supports": ["G-001"], "priority": "High | Medium | Low" }
+      { "id": "STR-001", "statement": "", "type": "Build | Buy | Partner | Consolidate | Modernise | Defend | Other", "supports": ["G-001"], "horizon": "Near | Mid | Long", "priority": "High | Medium | Low", "status": "Active | Completed | Superseded", "rationale": "" }
     ],
     "issues": [
       { "id": "ISS-001", "statement": "", "area": "", "threatensGoals": ["G-001"], "evidence": "", "raisedBy": "" }
@@ -128,7 +128,7 @@
 - **Driver** `{ id: DRV-NNN, statement, type, priority, evidence?, linkedGoals[] }` — WHY the engagement is needed
 - **Goal** `{ id: G-NNN, statement, priority, drivers[], rationale? }` — WHERE you want to be (qualitative)
 - **Objective** `{ id: OBJ-NNN, statement, measure, target, deadline, priority, linkedGoal }` — HOW FAR and BY WHEN (measurable)
-- **Strategy** `{ id: STR-NNN, statement, supports: [id,...], priority }` — HOW you'll get there
+- **Strategy** `{ id: STR-NNN, statement, type, supports: [id,...], horizon, priority, status, rationale? }` — HOW you'll get there. `type` ∈ Build/Buy/Partner/Consolidate/Modernise/Defend/Other; `horizon` ∈ Near/Mid/Long; `status` ∈ Active/Completed/Superseded. Managed via `/ea-strategies`. `type`/`horizon`/`status`/`rationale` are v0.9.67 fields — absent in legacy engagements; default `type: Other`, `horizon: Mid`, `status: Active`, `rationale: ""`. Executing work packages are **derived** from the Architecture Roadmap WP `Executes Strategies` field (not stored on the strategy), mirroring how goals/objectives derive their WPs.
 - **Issue** `{ id: ISS-NNN, statement, area, threatensGoals[], evidence?, raisedBy? }` — strategic threats to goals
 - **Problem** `{ id: PRB-NNN, statement, symptom, blocksObjectives[], evidence?, raisedBy? }` — tactical blockers of objectives
 - **Opportunity** `{ id: OPP-NNN, statement, drivers[], type, priority, linkedGoals[], rationale? }` — actionable possibilities

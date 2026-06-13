@@ -1,10 +1,26 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.66
+**Version:** 0.9.67
 **Status:** Current
 **Author:** Costa Pissaris
 
 ---
+
+## v0.9.67 — Strategy Register & Strategy Visibility
+
+### Summary
+Strategy was the only motivation-chain concept (DRV→G→OBJ→**STR**→WP) without a dedicated register command — it was buried in the direction data with a thin three-field schema and surfaced only as a sub-table in Architecture Vision §8. This release makes strategy first-class: a new `/ea-strategies` command at parity with drivers/goals/objectives, an enriched schema, and `trace` doubling as the Strategy Map.
+
+### New
+- **`/ea-strategies` command** — Strategy Register (STR-NNN) following the register protocol (list / add / update / trace / generate). `trace` (no ID) renders the **Strategy Map**: one row per strategy showing the goals it serves and the work packages that execute it. Architecture Vision §8 is the synced display view (`add`/`update` mirror in).
+- **Enriched strategy schema** — `type` (Build / Buy / Partner / Consolidate / Modernise / Defend / Other), `horizon` (Near / Mid / Long), `status` (Active / Completed / Superseded), and `rationale` added to `direction.strategies[]`. Executing work packages are **derived** from the roadmap's `Executes Strategies` field (no duplicate storage), mirroring goals/objectives.
+- **Disambiguation checks on `add`** — Goal (destination vs path), Objective (measurable target), and Plan (sequenced steps) warnings keep strategies clean.
+
+### Changed
+- **Architecture Vision §8 Strategies table** — gains a Type column (display-view sync target).
+- **Register protocol** — `/ea-strategies` added to the direction-register command list.
+- **Strategy concept** (`ea-concepts.md`) — structural parts updated with type/horizon/status/rationale and the derived executing-WP relationship.
+- **CLAUDE.md** — command count (58), `/ea-strategies` key entry point. Schema field-history documents the v0.9.67 strategy fields.
 
 ## v0.9.66 — Financial Modeling & Cost Model Register
 

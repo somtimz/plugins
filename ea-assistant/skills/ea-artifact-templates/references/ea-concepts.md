@@ -598,10 +598,15 @@ A problem is a specific, observable, and fixable symptom that is actively blocki
 **What it IS:**
 A strategy is a chosen course of action or approach that the organisation will take to pursue its goals and objectives. It answers *how* — selecting one path from among alternatives. A strategy does not describe steps or sequences; it names the approach.
 
-**Structural parts** (engagement.json `direction.strategies[]`):
+**Structural parts** (engagement.json `direction.strategies[]`; managed via `/ea-strategies`):
 - **Statement** — one declarative sentence naming the approach
+- **Type** — the kind of approach: Build / Buy / Partner / Consolidate / Modernise / Defend / Other
 - **Supports** — IDs of the goals or objectives this strategy serves
+- **Horizon** — when the approach plays out: Near (0–12mo) / Mid (1–2yr) / Long (2yr+)
 - **Priority** — High / Medium / Low
+- **Status** — Active / Completed / Superseded
+- **Rationale** — why this approach over the alternatives ("where to play / how to win")
+- **Executing work packages** — *derived*, not stored: Architecture Roadmap WP rows whose `Executes Strategies` references this STR-NNN
 
 **What it is NOT:**
 - Not a **Plan** — a strategy says "we will take the API-first approach"; a plan says "in Q1 we will build the API gateway, in Q2 we will migrate service X, in Q3 we will retire the legacy integration layer"

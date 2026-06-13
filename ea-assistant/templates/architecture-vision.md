@@ -224,9 +224,9 @@ stakeholders who need the full motivation chain without reading individual secti
 
 ### Strategies
 
-| ID | Strategy | Supports Goal(s) | Details |
-|---|---|---|---|
-| [[STR-001]] | {{strategy_1}} | G-00N | [[STR-001\|→]] |
+| ID | Strategy | Type | Supports Goal(s) | Details |
+|---|---|---|---|---|
+| [[STR-001]] | {{strategy_1}} | {{strategy_type}} | G-00N | [[STR-001\|→]] |
 
 ### Key Metrics
 
