@@ -1,6 +1,6 @@
 ---
 name: ea-migrate
-description: Detect and resolve alignment gaps between an EA engagement and the current ea-assistant version — missing taxonomy, appendices, new artifacts, and engagement.json schema fields. Always asks permission before making any change.
+description: Detect and resolve alignment gaps between an EA engagement and the current ea-assistant version — missing taxonomy, appendices, new artifacts, engagement.json schema fields, and template body sections/guidance the artifact predates (insertion-only, per-section confirmation). Always asks permission before making any change.
 argument-hint: "[--report] [--auto]"
 allowed-tools: [Read, Write, Glob, Bash]
 ---
@@ -43,6 +43,7 @@ Read `skills/ea-engagement-lifecycle/references/migration-gap-catalogue.md` for 
 - 3d — phase-organized artifact structure (**detection only** — file moves are handled by `/ea-migrate --reorganize`)
 - 3e — rules file and CLAUDE.md format gaps
 - 3f — artifact content gaps (Appendix A3/A4/A5)
+- 3i — template body section & guidance gaps (sections/guidance the current template defines but the artifact is missing) — **insertion-only, per-section confirmation, excluded from `--auto`**; skips command-generated artifacts (registers/matrices/derived)
 
 Additionally, run this engagement-specific scan:
 
@@ -119,6 +120,11 @@ Artifact content gaps            {N gaps | ✅ None}
   GAP-M-030  [Medium] architecture-vision.md — Appendix A4 missing
   GAP-M-040  [Low]    architecture-vision.md — Appendix A5 missing
 
+Template body gaps               {N gaps | ✅ None}
+  GAP-M-045  [Low]    business-architecture.md — section "Related Matrices" missing (template adds it)
+  GAP-M-046  [Info]   business-scenario-BS-001.md — §3 Environment has no guidance block
+  (insertion-only · per-section confirm · excluded from --auto)
+
 Missing detail files             {N gaps | ✅ None}
   GAP-M-050  [Info]   RIS-001 (Risk, Critical) — no detail file
   GAP-M-051  [Info]   G-002 (Goal, Strategic decision) — no detail file
@@ -143,7 +149,7 @@ How would you like to proceed?
   4. Skip — close without changes
 ```
 
-**Never apply any change without the user selecting an option.** If `--auto` was specified, proceed as option 1 — but still announce each change before writing.
+**Never apply any change without the user selecting an option.** If `--auto` was specified, proceed as option 1 — but still announce each change before writing. **3g (detail files) and 3i (template body sections/guidance) are always excluded from `--auto`** — they require interactive per-item confirmation even under `--auto`, because they touch artifact bodies rather than metadata/structure.
 
 ---
 

@@ -92,6 +92,42 @@ For each artifact `.md` in `EA-projects/{slug}/artifacts/` and phase subdirector
 
 **Appendix remediation:** See `skills/ea-artifact-templates/references/appendix-templates.md` for the markdown blocks to inject. Ordering: A3 → A4 → A5. Place each missing appendix after any existing lower-numbered appendix, or before any existing higher-numbered one. If none exist, append at the document end.
 
+## 3i — Template Body Section & Guidance Gaps
+
+Backfills body **sections** and `<details>📋 Guidance</details>` **blocks** that the artifact's current template defines but the existing artifact is missing — without ever modifying populated content. This is how artifacts created under an older template pick up sections and guidance added by later releases (e.g. a Related Matrices pointer, a new roll-up section, or guidance blocks the interview/grill/brainstorm skills consume).
+
+**Strictly insertion-only.** 3i never edits, reorders, or deletes existing content. It only adds missing scaffolding (heading + guidance + empty placeholders) or a missing guidance block above an already-present heading. **Always excluded from `--auto`** — every insertion requires interactive per-section confirmation.
+
+### Scope and exclusions
+
+- **Applies to:** authored artifacts only. Resolve the template via the artifact's frontmatter `artifactId` → `templates/{artifactId}.md`. If no matching template exists, skip with `[Info]` (per the Non-standard artifacts rule below).
+- **Skip entirely (command-generated bodies — refresh by re-running the generating command, not by backfilling):** any artifact with a `generated:` frontmatter field, or whose `artifactId` matches `*-register`, `*-matrix`, `decision-register`, `cost-model-register`, `traceability-matrix`, `zachman-diagram`, `role-catalogue`, `consolidated-report`, or `cross-cutting-index`. For these, structure is owned by the generating command (`/ea-risks`, `/ea-matrix`, `/ea-strategies generate`, etc.).
+- **Out of scope (handled elsewhere):** the author-only `## Compliance Checklist` block, the `# Title` H1, and Appendices A3/A4/A5 (covered by 3f).
+
+### Detection
+
+| Check | Gap if… | Severity |
+|---|---|---|
+| Template body section present in artifact | A `## {Section}` heading in the template body is absent from the artifact | Low |
+| Section guidance present | A section exists in both, but the template's copy has a `<details>📋 Guidance</details>` block and the artifact's does not | Info |
+
+Heading match is case-insensitive on the heading text after the `## ` marker, ignoring trailing punctuation. A section the user renamed counts as present (do not flag a rename as missing — when unsure, flag `[Info]`, never auto-insert a duplicate).
+
+### Remediation (per-section confirmation, insertion-only)
+
+- **Missing section:** copy the template's full section verbatim (heading + guidance block + placeholders/tables). Insert it at the position that preserves template order — immediately **before** the first later template-section that *does* exist in the artifact; if none exist, immediately before the first Appendix (`## Appendix A3`) or `## Artifact Working Notes`; otherwise append at the document end. Preview the heading + first ~5 lines; confirm `y / n / skip / view` (view shows the full block).
+- **Missing guidance block:** insert the template's `<details>📋 Guidance</details>` block immediately after the artifact's existing heading line, before any existing content. Confirm per block.
+- **Never** touch populated content. If a heading exists with content beneath it, only the missing-guidance insertion (above the content) is permitted — the content itself is never read for replacement or edited.
+
+### Approved artifacts
+
+Warn before any 3i insertion on an `Approved` artifact:
+```
+⚠️ {artifact name} is Approved. 3i adds empty template scaffolding (headings, guidance, blank
+placeholders) — populated content is never changed and reviewStatus stays Approved. New empty
+sections may warrant re-review. Proceed with this insertion? (y/n)
+```
+
 ## Handling Special Cases
 
 **Non-standard artifacts:** If `artifact:` field does not match a known template type, flag `[Info]` — not a migration error. Do not attempt canonical taxonomy. Suggest manual review or `/ea-grill artifact`.

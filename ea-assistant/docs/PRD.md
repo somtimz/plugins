@@ -1,10 +1,25 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.69
+**Version:** 0.9.70
 **Status:** Current
 **Author:** Costa Pissaris
 
 ---
+
+## v0.9.70 — Template Body Backfill in `/ea-migrate`
+
+### Summary
+`/ea-migrate` previously aligned schema, frontmatter, standard appendices, and file organisation, but did **not** bring existing artifact bodies up to newer template structures — so sections and guidance added by later releases (e.g. the v0.9.69 guidance blocks, Related Matrices pointers, Strategy §8 Type column) never reached artifacts created under an older template. This release adds a body-backfill gap category.
+
+### New
+- **Migration scan 3i — Template Body Section & Guidance Gaps** (`migration-gap-catalogue.md`): detects `## {Section}` headings and `<details>📋 Guidance</details>` blocks that the artifact's current template defines but the artifact is missing, and offers to insert them.
+- **Strictly insertion-only** — never edits, reorders, or deletes populated content; only adds missing scaffolding (heading + guidance + empty placeholders) or a guidance block above an existing heading.
+- **Per-section confirmation** (`y / n / skip / view`) and **always excluded from `--auto`** — body changes never apply unattended.
+- **Skips command-generated artifacts** (registers, matrices, decision/cost-model registers, traceability matrix, Zachman, role catalogue, consolidated report, cross-cutting index) — those bodies are owned by their generating command; re-run it to refresh.
+- **Approved-artifact guard** — warns that 3i adds only empty scaffolding, reviewStatus stays Approved, and re-review may be warranted.
+
+### Changed
+- `/ea-migrate` report gains a **Template body gaps** section; Step 5 documents the 3g + 3i `--auto` exclusion; command and help/README descriptions updated.
 
 ## v0.9.69 — Template Guidance Coverage & Matrix Catalogue Expansion
 
