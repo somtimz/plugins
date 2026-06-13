@@ -68,15 +68,15 @@ lastModified: YYYY-MM-DD
 
 ### Markdown sections
 
-| Section | Content |
-|---|---|
-| `## Overview` | Description and when to use the pattern |
-| `## Architecture Layers` | Table: layer → ABB-NNN references |
-| `## Key Decisions` | Table: decision title, rationale summary, candidate ADR title |
-| `## Constraints` | Table: description + candidate CST title |
-| `## Implied Principles` | BP/DP/AP/TP IDs or descriptions this RA assumes |
-| `## Adoption Notes` | What is mandatory vs. flexible when adopting |
-| `## Grill Checklist` | Explicit checks run by `/ea-grill` when RA is adopted |
+| Section                  | Content                                                       |
+| ------------------------ | ------------------------------------------------------------- |
+| `## Overview`            | Description and when to use the pattern                       |
+| `## Architecture Layers` | Table: layer → ABB-NNN references                             |
+| `## Key Decisions`       | Table: decision title, rationale summary, candidate ADR title |
+| `## Constraints`         | Table: description + candidate CST title                      |
+| `## Implied Principles`  | BP/DP/AP/TP IDs or descriptions this RA assumes               |
+| `## Adoption Notes`      | What is mandatory vs. flexible when adopting                  |
+| `## Grill Checklist`     | Explicit checks run by `/ea-grill` when RA is adopted         |
 
 The `## Grill Checklist` section drives the grill integration — each item is a testable statement against the engagement's artifacts.
 
