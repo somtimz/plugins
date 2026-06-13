@@ -1,7 +1,7 @@
 ---
 name: ea-grill-skills
 description: Nine grill modes bundled for ea-assistant — stress-test, premortem, decision, design, software-design, infra-design, artifact, diagram, boardroom-strategy. Load this skill and follow the ## Mode section matching the requested short name.
-version: 0.9.63
+version: 0.9.72
 ---
 
 When this skill is loaded, locate the `## Mode: {short-name}` section that matches the mode requested by `/ea-grill` and follow it exclusively. Ignore all other mode sections.
@@ -263,6 +263,12 @@ Then interrogate the content one section at a time using **guidance-driven scori
 3. Score the section against that specific criterion. Do not apply a generic "is this complete?" check — test against the purpose the guidance defines.
 4. If no guidance entry exists for a section: fall back to TOGAF best practice for the artifact type and announce: `*(No guidance block for this section — scoring against TOGAF best practice.)*`
 
+**Assign the two numeric scores per section** (read `skills/ea-engagement-lifecycle/references/grill-scoring-rubric.md` for the full rubric):
+- **Completeness 0–100** — is everything the guidance calls for present and populated (not placeholder/TBD/empty)? Map the section's Complete/Partial/Empty state to the rubric band.
+- **Quality 0–100** — is what's there good, across four sub-dimensions: definition-correctness (30%, per `ea-concepts.md` — a Goal isn't an Objective, a Strategy isn't a Plan, a Risk needs a real mitigation), guidance adherence (30%), evidence & rigour (20%), and **readability** (20% — clarity, structure, concision, jargon control). Empty sections score Quality `—` and are excluded from the roll-up.
+
+Both scores are `0–100` with bands (Comprehensive / Substantial / Partial / Skeletal / Stub).
+
 **Challenge each section:**
 - challenge whether the content actually achieves the stated purpose
 - identify vague, circular, or unsupported claims
@@ -369,13 +375,16 @@ If the artifact under review is a Zachman Diagram (artifact id or filename match
 ---
 
 At the end, provide:
-1. a section-by-section scorecard (Complete / Partial / Empty / Inconsistent)
-2. traceability gaps (dangling or missing ID references)
-3. governance anti-patterns found — list each with the specific text and recommended fix
-4. the three weakest sections and why
-5. the three strongest sections and why
-6. recommended revisions (prioritised)
-7. overall verdict: Ready for review / Needs revision / Incomplete
+1. a section-by-section scorecard with **Completeness and Quality (0–100 + band) per section**, plus the legacy state column (Complete / Partial / Empty / Inconsistent)
+2. **overall Completeness and Quality** for the artifact (rubric roll-up: Completeness = required-section-weighted mean; Quality = mean over non-empty sections), each as `{N}/100 ({band})`
+3. traceability gaps (dangling or missing ID references)
+4. governance anti-patterns found — list each with the specific text and recommended fix
+5. the three weakest sections and why
+6. the three strongest sections and why
+7. recommended revisions (prioritised)
+8. overall verdict: Ready for review / Needs revision / Incomplete
+
+Then **write/refresh the artifact's Scorecard block** (author-only `<details>📊 Scorecard</details>`, per the rubric's Scorecard format — replace any existing one in place, stripped on export) and set `engagement.json → artifacts[]` `scores: { completeness, quality, scoredAt }` for this artifact. On an `Approved` artifact, prompt before writing (reviewStatus stays Approved). For a one-or-all scoring pass without the full adversarial review, use `/ea-score`.
 
 ---
 

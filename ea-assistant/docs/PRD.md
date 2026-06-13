@@ -1,10 +1,26 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.71
+**Version:** 0.9.72
 **Status:** Current
 **Author:** Costa Pissaris
 
 ---
+
+## v0.9.72 — Two-Score Artifact Scoring (Completeness + Quality)
+
+### Summary
+Puts numbers on every deliverable. Each authored artifact — and **each of its sections** — gets two scores: **Completeness** and **Quality**, on a 0–100 scale with bands (Comprehensive / Substantial / Partial / Skeletal / Stub). Scoring is carried out by the grill skills against a rubric grounded in the EA concept definitions, each section's guidance block, and the compliance tiers; Quality explicitly includes **readability**. Scores are written **into the artifact** as an author-only Scorecard block.
+
+### New
+- **Scoring rubric** (`skills/ea-engagement-lifecycle/references/grill-scoring-rubric.md`) — the two scores, the 0–100 bands, the section→band mappings for Completeness, the four Quality sub-dimensions (definition-correctness 30% · guidance adherence 30% · evidence & rigour 20% · **readability 20%**), the required-section-weighted roll-up, and the Scorecard block format.
+- **`/ea-score` command** — `[artifact]` scores one, `--all` scores the whole engagement and prints a roll-up, `--status` shows the last scores without rescoring, `--no-write` previews. Writes/refreshes the per-section Scorecard and caches the overall pair in `engagement.json`.
+- **In-artifact Scorecard block** — an author-only `<details>📊 Scorecard</details>` block (per-section table + overall) placed after the Compliance Status block. Being a `<details>` block, it is **stripped on export** by `/ea-generate` and `/ea-publish` — scores never reach a stakeholder deliverable.
+- **`engagement.json` artifact `scores`** field (optional) — `{ completeness, quality, scoredAt }`, the roll-up cache.
+
+### Changed
+- **`ea-grill-skills`** — guidance-driven scoring now also emits the two numeric scores per section and the overall roll-up, and writes the Scorecard block; readability added as a Quality dimension. `/ea-grill` output and `/ea-score` share the rubric.
+- **`/ea-publish`** strip rule tightened to remove **all author-only `<details>` blocks** (Compliance, Guidance, Practitioner Tip, Scorecard) — also fixes a latent leak of those blocks into `--full` exports.
+- Command-generated artifacts (registers/matrices/derived) are out of scope for scoring.
 
 ## v0.9.71 — `/ea-migrate` Section Reorder & Content Relocation
 

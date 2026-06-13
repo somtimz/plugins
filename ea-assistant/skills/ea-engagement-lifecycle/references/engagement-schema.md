@@ -206,11 +206,14 @@
   "status": "Draft",
   "createdAt": "YYYY-MM-DDTHH:MM:SSZ",
   "lastModified": "YYYY-MM-DDTHH:MM:SSZ",
-  "reviewStatus": "Not Reviewed"
+  "reviewStatus": "Not Reviewed",
+  "scores": { "completeness": 78, "quality": 66, "scoredAt": "YYYY-MM-DD" }
 }
 ```
 
 Artifact status: `Draft` | `In Review` | `Approved` | `Needs Revision`
+
+**`scores`** (v0.9.72; optional, absent until first scored): the latest overall artifact scores from `/ea-score` or `/ea-grill` — `completeness` and `quality` are `0–100` integers, `scoredAt` is the date last scored. The per-section breakdown lives in the artifact's `📊 Scorecard` block (the source of truth); this is the roll-up cache for `/ea-score --status` and `/ea-status`. Command-generated artifacts (registers/matrices/derived) are not scored and have no `scores` field.
 Review status: `Not Reviewed` | `In Review` | `Approved` | `Needs Revision`
 
 ## optOuts[] Entry Schema
