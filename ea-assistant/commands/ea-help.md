@@ -107,6 +107,7 @@ You have existing engagements. Common next steps:
 | `/ea-generate [artifact] [format]` | Export artifact as Word, PPTX, Mermaid, PNG, or SVG; embeds diagrams in docx/pptx by default |
 | `/ea-review [artifact]` | Review and assess an artifact |
 | `/ea-grill [artifact] [--skill]` | Deep-review an artifact using a grill-me skill; then optionally apply findings back to the artifact one revision at a time |
+| `/ea-score [artifact\|--all\|--status]` | Score artifacts on Completeness + Quality (0–100 + band), per section and overall; writes an author-only 📊 Scorecard block into each artifact; `--all` scores the whole engagement, `--status` shows last scores |
 | `/ea-requirements [action]` | Manage architecture requirements |
 | `/ea-constraints [action]` | Manage architecture constraints — capture, trace, and assess impact on solution space |
 | `/ea-policies [mode]` | Manage architecture policies — capture governance documents, trace to constraints, and assess policy impact |
@@ -167,6 +168,7 @@ Five commands review work at different scopes — pick by what you want answered
 | "Do my artifacts contradict each other? Any broken IDs?" | Cross-artifact, mechanical checks | `/ea-consistency` |
 | "Is the whole engagement healthy — coverage, traceability, governance?" | Full engagement, structured | `/ea-engage-review` |
 | "What would a seasoned architect say actually matters here?" | Full engagement, opinionated | `/ea-lens` |
+| "How complete and how good is each artifact — with numbers?" | Per section + overall, two scores | `/ea-score [artifact\|--all]` |
 
 Security has its own lane: `/ea-security-review` (SABSA / ISO 27001 / NIST CSF coverage).
 
@@ -222,6 +224,12 @@ Type these at any interview prompt:
   Consolidate/Modernise/Defend), Horizon, and rationale; `add`/`update` sync
   into Architecture Vision §8. Run `/ea-strategies trace` for the Strategy Map
   (which goals each strategy serves and which work packages execute it).
+• Use `/ea-score` to put numbers on every deliverable — Completeness and Quality
+  (0–100 + band), scored per section and overall against the EA definitions, each
+  section's guidance, and the compliance tiers (Quality includes readability). The
+  scores write into an author-only 📊 Scorecard block in the artifact (stripped on
+  export). `/ea-score --all` scores the whole engagement; re-score after revising to
+  track improvement. `/ea-grill` emits the same two scores during a deep review.
 • Run `/ea-help --persona <role>` for a role-tailored menu and workflow, and
   `/ea-publish --persona <role>` for a role-scoped report pack — roles:
   enterprise-architect, cio, ciso, chief-product-officer, chief-privacy-officer,

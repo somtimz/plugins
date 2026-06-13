@@ -281,7 +281,7 @@ If any opt-outs exist (artifact or question level), add:
 
 #### Each Artifact Section
 
-**Strip plugin scaffolding before insertion (all modes):** remove all HTML comments (`<!-- GUIDANCE: ... -->` and any other `<!-- ... -->` blocks) from artifact content. Published output must contain no authoring guidance.
+**Strip plugin scaffolding before insertion (all modes):** remove all HTML comments (`<!-- GUIDANCE: ... -->` and any other `<!-- ... -->` blocks) **and all author-only `<details>...</details>` blocks** (Compliance Status, 📋 Guidance, 💡 Practitioner Tip, 📊 Scorecard, and any other collapsible) from artifact content, plus the `## Artifact Working Notes` section. Published output must contain no authoring guidance, compliance scaffolding, or scores.
 
 Before inserting each artifact's content, rewrite its links for the consolidated document context:
 

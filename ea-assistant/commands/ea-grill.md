@@ -508,7 +508,7 @@ For each artifact in turn:
 1. **Read** the artifact file in full.
 2. **Load** the artifact's frontmatter: `title`, `phase`, `status`, `version`.
 3. **Apply the `artifact` skill** (or the overriding `--skill`) directly to the artifact content — do not ask questions. Instead, produce the full structured output for that skill as if the review session were complete. For the `artifact` skill this means:
-   - Section-by-section scorecard (Complete / Partial / Empty / Inconsistent) for every populated section
+   - Section-by-section scorecard with **Completeness and Quality (0–100 + band) per section** (rubric: `skills/ea-engagement-lifecycle/references/grill-scoring-rubric.md`), plus the legacy state (Complete / Partial / Empty / Inconsistent); then the **overall Completeness and Quality** roll-up, and write/refresh the artifact's author-only `📊 Scorecard` block
    - Traceability gaps (dangling or missing ID references)
    - Governance anti-patterns found (each with specific text and recommended fix)
    - Three weakest sections and why
