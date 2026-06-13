@@ -135,7 +135,7 @@ Include a diagram reference if available.
 <details>
 <summary>📋 Guidance</summary>
 
-Define capabilities using a three-level hierarchy. Each capability gets a CAP-NNN ID.
+Define capabilities using a three-level hierarchy. Each capability gets a CAP-NNN ID. Manage this table with **`/ea-capabilities`** (list / add / update / map / score / adopt) — capabilities are mastered here, in this artifact. A capability is an *ability to achieve an outcome*, independent of who/how/what — a noun ("Order Management"), never a process ("Process Orders"). See the **Capability Model** concept in `ea-concepts.md`.
 
 - **L1** — capability domain (broadest grouping, e.g. Customer Management, Operations, Finance)
 - **L2** — capability within a domain (the primary unit of analysis)
@@ -153,6 +153,8 @@ Define capabilities using a three-level hierarchy. Each capability gets a CAP-NN
 
 **Domain column:** grouping label for the capability (e.g. "Business Continuity", "Data Governance", "Customer Management", "Security Architecture"). Free text, used for grouping and reporting.
 
+**Value / Outcome column:** state the business outcome each capability enables — the value of being able to do it. A capability with no articulated value and no strategic anchor is "capability inflation" — flag it for removal. This is what scoring, brainstorming, and interviewing test for.
+
 **Supports column:** link each capability to the STR-NNN strategy or G-NNN goal it enables.
 A capability with no strategic anchor should be flagged for removal or reclassification.
 
@@ -162,11 +164,11 @@ A capability with no strategic anchor should be flagged for removal or reclassif
 
 </details>
 
-| CAP-NNN | Level | Capability Type | Domain | Capability | Description | Current Maturity | Target Maturity | Supports (STR-NNN / G-NNN) | Details |
-|---|---|---|---|---|---|---|---|---|---|
-| [[CAP-001]] | L1 | Business Capability | Customer Management | {{domain_name}} | {{domain_description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | [[CAP-001\|→]] |
-| [[CAP-002]] | L2 | Business Capability | Customer Management | {{capability_name}} | {{description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | [[CAP-002\|→]] |
-| [[CAP-003]] | L3 | Technology Capability | Business Continuity | {{sub_capability_name}} | {{description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | [[CAP-003\|→]] |
+| CAP-NNN | Level | Capability Type | Domain | Capability | Value / Outcome | Description | Current Maturity | Target Maturity | Supports (STR-NNN / G-NNN) | Details |
+|---|---|---|---|---|---|---|---|---|---|---|
+| [[CAP-001]] | L1 | Business Capability | Customer Management | {{domain_name}} | {{value_outcome}} | {{domain_description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | [[CAP-001\|→]] |
+| [[CAP-002]] | L2 | Business Capability | Customer Management | {{capability_name}} | {{value_outcome}} | {{description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | [[CAP-002\|→]] |
+| [[CAP-003]] | L3 | Technology Capability | Business Continuity | {{sub_capability_name}} | {{value_outcome}} | {{description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | [[CAP-003\|→]] |
 
 <!-- GUIDANCE: For each capability, add an optional #### ABBs subsection below listing the logical
      architecture components needed to realise it. ABBs are vendor-neutral logical components —

@@ -1,7 +1,7 @@
 ---
 name: ea-architecture-repository
 description: Manages the shared TOGAF Architecture Repository — Standards Information Base (SIB/STD-NNN), Vendor Landscape Register (VDR-NNN), Technology Horizon Register (THR-NNN), and enterprise-level governance artefacts. Supports multi-engagement, multi-project sharing via the EA-Workspace/ sibling-folder layout.
-version: 0.9.73
+version: 0.9.74
 ---
 
 # Architecture Repository Skill
@@ -46,6 +46,14 @@ Stores reusable architectural patterns shared across engagements. A reference ar
 - Per-engagement local RAs (not shared): `artifacts/cross-cutting/reference-architectures/RA-NNN.md`
 - See `references/reference-architecture-schema.md`
 
+### Capability Library — Canonical Capability Map
+The organisation's **canonical, reference business capability map** — the authoritative enterprise capability hierarchy that engagements seed and adopt from, so every engagement speaks the same capability language. For the Capability / Capability Model concept (what a capability is, components, attributes, value, map vs knowledge graph), read the **Capability Model** definition in `skills/ea-artifact-templates/references/ea-concepts.md`.
+
+- A single hierarchical map (L1 domain → L2 capability → L3 sub-capability), box-in-box, non-flow; each canonical capability carries a stable `CAP-C-NNN` id, name, value/outcome, and description (no engagement-specific maturity or Supports — those are assessed per engagement)
+- Stored in: `Architecture-Repository/capability-library/canonical-capability-map.md` (from seed `templates/seeds/canonical-capability-map.md`)
+- **Adopt into an engagement:** `/ea-capabilities adopt` copies selected canonical domains/branches into the engagement's Business Architecture capability table, allocating fresh engagement `CAP-NNN` ids and recording `Source: canonical CAP-C-NNN`; the engagement then assesses Current/Target maturity and `Supports` locally
+- The canonical map is technology- and organisation-neutral and stable; version it as the enterprise's capability taxonomy evolves
+
 ### Enterprise Governance
 Principles, policies, and constraints that apply across ALL engagements (not per-engagement BP/DP/AP/TP):
 - `Architecture-Repository/governance/enterprise-principles.md`
@@ -72,10 +80,12 @@ EA-Workspace/
 │   ├── technology-horizon/
 │   │   ├── horizon-index.md
 │   │   └── entries/                 # THR-NNN.md files
-│   └── reference-library/
-│       ├── reference-architecture-index.md
-│       ├── entries/                 # RA-NNN.md files
-│       └── abb-catalogue.md
+│   ├── reference-library/
+│   │   ├── reference-architecture-index.md
+│   │   ├── entries/                 # RA-NNN.md files
+│   │   └── abb-catalogue.md
+│   └── capability-library/
+│       └── canonical-capability-map.md   # canonical CAP-C-NNN hierarchy
 └── EA-Projects/
     └── <slug>/
         ├── engagement.json           # repoPath: "../../Architecture-Repository"
@@ -103,6 +113,7 @@ When an engagement has `repoPath` set in `engagement.json`:
 | `/ea-horizon` | Manage Technology Horizon Register (THR-NNN) |
 | `/ea-standards` | Manage Standards Information Base (STD-NNN) |
 | `/ea-refarch [new|list|show|edit|adopt|unadopt|status]` | Manage Reference Architecture Register (RA-NNN) |
+| `/ea-capabilities [list|add|update|map|score|adopt]` | Manage engagement capabilities (CAP-NNN) in Business Architecture; `adopt` seeds from the canonical capability map (`CAP-C-NNN`) |
 
 ## Initialization Workflow
 

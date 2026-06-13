@@ -32,7 +32,7 @@ Map the existing section verdict (Complete / Partial / Empty / Inconsistent) to 
 
 Per section with content, score `0–100` across four sub-dimensions, then take the weighted mean:
 
-1. **Definition-correctness (30%)** — content matches the EA definitions in `ea-concepts.md`: a Goal is qualitative (not a measure), an Objective is SMART, a Strategy names an approach (not a plan or an outcome), a Constraint is not a Principle, a Risk carries a *real* mitigation (funded, owned, scheduled, measurable). A clear misclassification caps this sub-dimension at 40.
+1. **Definition-correctness (30%)** — content matches the EA definitions in `ea-concepts.md`: a Goal is qualitative (not a measure), an Objective is SMART, a Strategy names an approach (not a plan or an outcome), a Constraint is not a Principle, a Risk carries a *real* mitigation (funded, owned, scheduled, measurable), a **Capability** is an outcome-based noun with a stated value/outcome and strategic anchor (not a process or org structure; an anchorless or valueless capability is "inflation"). A clear misclassification caps this sub-dimension at 40.
 2. **Guidance adherence (30%)** — meets the section's **Quality indicators** and avoids its **Common mistakes** from the guidance block.
 3. **Evidence & rigour (20%)** — claims are evidenced; decisions carry rationale; numbers state a basis; assumptions are explicit.
 4. **Readability (20%)** — clarity, structure, concision, controlled jargon, scannability. Content a stakeholder cannot follow in a single read loses readability points regardless of correctness.

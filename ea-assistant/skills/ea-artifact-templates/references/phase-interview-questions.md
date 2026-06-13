@@ -359,7 +359,7 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
    - Are there steps in the value stream where no existing capability covers the need?
    - Flag any uncovered steps as capability gaps — these will become GAP-NNN entries.
 
-4. Let's build the capability model systematically — this is the core Phase B deliverable.
+4. Let's build the capability model systematically — this is the core Phase B deliverable. Capabilities are mastered in the Business Architecture capability table and managed with **`/ea-capabilities`** (which can also seed from the Architecture Repository's canonical capability map via `adopt`). A capability is an *ability to achieve an outcome* — a noun ("Order Management"), not a process ("Process Orders").
 
    a. **Level 1 — Domains:** What are the major capability domains relevant to this engagement?
       (e.g. Customer Management, Operations, Finance, Technology, Compliance — agree 4–8 domains)
@@ -370,6 +370,8 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 
    c. **Level 3 — Sub-capabilities:** For any L2 capability where detail matters for gap analysis, what sub-capabilities exist beneath it?
       Only elicit L3 where there is a known gap or a Phase B deliverable that requires it.
+
+   c2. **Value / Outcome:** For each capability, what business outcome does it enable — the value of being able to do it? ("What do we gain by being able to do this?") A capability with no articulated value and no strategic anchor is **capability inflation** — flag it for removal or as commodity overhead. Distinguish **differentiating** capabilities (where you compete — invest) from **commodity** ones (table stakes — make efficient). Recorded in the Value / Outcome column.
 
    d. **Maturity Assessment:** For each L2 and L3 capability, rate the current maturity:
       - **Absent** — this capability does not exist today
