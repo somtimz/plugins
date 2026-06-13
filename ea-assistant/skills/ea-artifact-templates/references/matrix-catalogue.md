@@ -28,8 +28,8 @@ Entries marked **Managed by:** are not handled by `/ea-matrix` — follow the po
 |---|---|
 | Preliminary | `principle-decision` |
 | A | Stakeholder Map Matrix (managed elsewhere) |
-| B | `business-interaction`, `actor-role`, `capability-organization`, `capability-value-stream`, `capability-application` |
-| C-Data | `data-function`, `app-data` |
+| B | `business-interaction`, `actor-role`, `capability-organization`, `capability-value-stream`, `capability-application`, `goal-service` |
+| C-Data | `data-function`, `app-data`, `data-entity-component` |
 | C-App | `app-organization`, `role-application`, `app-function`, `app-interaction`, `capability-application` |
 | D | `system-technology` |
 | E / F | `wp-dependency`, Work Package / Gap (managed elsewhere) |
@@ -39,7 +39,7 @@ Entries marked **Managed by:** are not handled by `/ea-matrix` — follow the po
 
 ---
 
-## Managed by `/ea-matrix` (14)
+## Managed by `/ea-matrix` (16)
 
 ### principle-decision — Principle / Decision Matrix
 - **Phase:** Preliminary / Cross-cutting · **Folder:** `artifacts/preliminary/` · **File:** `principle-decision-matrix.md`
@@ -259,6 +259,38 @@ Entries marked **Managed by:** are not handled by `/ea-matrix` — follow the po
 - **Elicitation questions:**
   1. "Which work packages must complete before {WP} can start?"
   2. "Are any dependencies non-technical — funding, business readiness, or governance approvals?"
+
+### goal-service — Goal / Service Matrix
+- **Phase:** B · **Folder:** `artifacts/phase-b/` · **File:** `goal-service-matrix.md`
+- **Axes:** rows = goals and objectives (G-NNN, OBJ-NNN), columns = services (SVC-NNN — business, application, or technology services)
+- **Seed sources:** rows — `engagement.json → direction.goals[]` and `direction.objectives[]` (also surfaced in Architecture Vision §3/§4); columns — `artifacts/phase-b/business-architecture.md` §5 Business Services (SVC-NNN tokens), plus any application/technology service sections in the Phase C-App / D architectures
+- **Markers:** `D` directly delivers · `S` supports · `E` enables (indirect) · `M` missing service needed to meet the goal
+- **Shows:** which services contribute to which goals and objectives (the TOGAF Goal/Objective/Service matrix)
+- **Why:** confirms every goal is served by at least one service and exposes services that serve no goal — the classic "capability/service with no business justification" check
+- **How:** goals/objectives on rows, services on columns; mark each contribution; `M` cells are direct gap-analysis inputs; a goal row with no `D`/`S` is unserved and a service column with no marks is unjustified
+- **Grill checks:**
+  1. Every goal/objective row has at least one `D` or `S` — an unserved goal is either unachievable or missing a service.
+  2. Every service column has at least one mark — a service that serves no goal needs a justification in `## Observations` or is a retirement candidate.
+  3. Every `M` (missing) cell has a corresponding GAP-NNN entry or is listed in `## Open Questions`.
+- **Elicitation questions:**
+  1. "Which services deliver or support {goal} — and is any goal left unserved?"
+  2. "Are there services that don't trace to any goal or objective?"
+
+### data-entity-component — Data Entity / Data Component Matrix
+- **Phase:** C-Data · **Folder:** `artifacts/phase-c-data/` · **File:** `data-entity-component-matrix.md`
+- **Axes:** rows = data entities (logical), columns = data components (logical and physical — data stores, services, master-data hubs)
+- **Seed sources:** both axes — `artifacts/phase-c-data/data-architecture.md` conceptual/logical data model (entities) and data component / data store sections
+- **Markers:** `M` master (authoritative source) · `R` replica / cached copy · `U` uses (read) · `W` writes · `–` not held
+- **Shows:** which data components hold, master, or use which data entities (the TOGAF Data Entity/Data Component matrix)
+- **Why:** locates the system of record for each entity, exposes mastership ambiguity and uncontrolled replication, and underpins data governance and migration planning
+- **How:** entities on rows, components on columns; exactly one `M` per entity keeps mastership single-threaded; multiple `M`s are a data-governance defect; entities with no `M` have no system of record
+- **Grill checks:**
+  1. Every data entity row has exactly one `M` — zero means no system of record, two or more means contested mastership (flag in `## Observations`).
+  2. Every entity in the logical data model appears as a row (no orphan entities).
+  3. Every `R` (replica) traces to the entity's `M` source — uncontrolled replication is a governance risk.
+- **Elicitation questions:**
+  1. "Which component is the authoritative master for {entity} — and where is it replicated?"
+  2. "Are there entities with no clear system of record, or with two systems both claiming to master them?"
 
 ---
 

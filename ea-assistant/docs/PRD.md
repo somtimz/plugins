@@ -1,10 +1,25 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.68
+**Version:** 0.9.69
 **Status:** Current
 **Author:** Costa Pissaris
 
 ---
+
+## v0.9.69 — Template Guidance Coverage & Matrix Catalogue Expansion
+
+### Summary
+A coverage audit found two authored templates whose guidance was written in forms the interview/grill/brainstorm skills cannot parse (HTML comments, italic intros), and two TOGAF matrices with no catalogue home. This release closes those gaps so the existing guidance-driven dialogue mechanism (each skill extracts `<details>📋 Guidance</details>` blocks) has content to work with everywhere, and the matrix catalogue covers the canonical TOGAF set.
+
+### Changed
+- **`business-transformation-readiness.md`** — guidance converted from `<!-- HTML comments -->` to parseable `<details>📋 Guidance</details>` blocks and extended to every section (0 → 5 blocks). The interview/grill/brainstorm skills can now see it.
+- **`business-scenario.md`** — per-section guidance converted from italic intros to parseable `<details>📋 Guidance</details>` blocks (1 → 11 blocks).
+- **`matrix-catalogue.md`** — two TOGAF matrices added (now 16 managed + 4 managed-elsewhere = 20): **`goal-service`** (Goal/Objective × Service — confirms every goal is served and exposes unjustified services) and **`data-entity-component`** (Data Entity × Data Component — locates the system of record and exposes mastership ambiguity). Pure data additions; `/ea-matrix` picks them up with no code change.
+- **Domain architecture templates** (business / data / application / technology) — each gains a **Related Matrices** pointer so the relevant matrices are discoverable from the narrative.
+- **Register templates** (constraints, policies) — a guidance block added to the Summary section explaining how to read register health (untraced/orphan/stale/proposed), not just counts.
+
+### Why
+The guidance-extraction mechanism is only as good as the parseable guidance present. Templates with guidance in non-`<details>` forms silently starved the interview/grill/brainstorm dialogue; this aligns guidance form with what the skills consume.
 
 ## v0.9.68 — Persona-Tailored Menus & Reports
 
