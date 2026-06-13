@@ -1,7 +1,7 @@
 ---
 name: ea-generate
-description: Generate a formatted file (Word, PowerPoint, Mermaid diagram, or rendered image) from an EA artifact or .mmd file
-argument-hint: "[artifact-name] [docx|pptx|mermaid|png|svg] [--theme <theme>] [--bg <color>] [--with-details]"
+description: Generate a formatted file (Word, PowerPoint, Mermaid diagram, or rendered image) from an EA artifact or .mmd file. --matrices embeds the artifact's linked relationship matrices into the export.
+argument-hint: "[artifact-name] [docx|pptx|mermaid|png|svg] [--theme <theme>] [--bg <color>] [--with-details] [--matrices]"
 allowed-tools: [Read, Write, Bash]
 ---
 
@@ -29,8 +29,15 @@ Recommend the primary format for the artifact type (see `skills/ea-generation/re
    - `## Artifact Working Notes` (and all sub-sections: Comments, Critiques, Exceptions, Outstanding Tasks)
    - Any `<details>...</details>` block (collapses guidance, compliance checklist, practitioner tips — all author-only)
    - Any `<!-- GUIDANCE: ... -->` comment block
+   - `## Related Matrices` — the author-facing pointer blockquote (it references `/ea-matrix` and lists matrix keys). It is **replaced** by the embedded grids when `--matrices` is passed (step 1c), and stripped otherwise.
 
    Perform this removal on the in-memory copy only — do not modify the source artifact file.
+
+1c. **Embed linked matrices (`--matrices` only).** If `--matrices` was passed, resolve the artifact's relationship matrices and append them so they are exported as part of the document:
+   - Read `skills/ea-artifact-templates/references/matrix-catalogue.md`. Identify the matrix keys whose **Folder** is the artifact's phase folder (e.g. a Phase B artifact → matrices in `artifacts/phase-b/`), plus any keys named in the artifact's `## Related Matrices` pointer.
+   - For each key, check whether `{folder}/{key}-matrix.md` exists and has a populated grid (a table with at least one non-placeholder data row). Skip empty or uncreated matrices.
+   - For each included matrix: strip its own author-only blocks (frontmatter, `<details>`, comments, `## Observations`/`## Open Questions` working notes per the matrix template), then append a `### {Matrix Name}` subsection (the grid + any populated Observations) under a new `## Related Matrices` section at the end of the artifact body (before any appendices).
+   - If `--matrices` is passed but no populated matrices exist for the artifact, note inline: "ℹ️ No populated matrices found for {artifact} — nothing embedded." and continue.
 
 2. **Resolve relative image links** — for each `![alt](relative-path)` in the body, resolve to an absolute path before extraction
 3. **Rewrite cross-artifact and relative text links** — apply the following rules to every `[display](target)` link in the body before extraction:

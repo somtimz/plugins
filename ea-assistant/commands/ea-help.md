@@ -104,7 +104,7 @@ You have existing engagements. Common next steps:
 | `/ea-artifact [action]` | Create, list, or view artifacts; `summary [refresh\|status]` for executive summary management |
 | `/ea-interview [mode]` | Stakeholder interviews (artifact or phase mode) |
 | `/ea-brainstorm [phase]` | Capture freeform thoughts and context for use during interviews |
-| `/ea-generate [artifact] [format]` | Export artifact as Word, PPTX, Mermaid, PNG, or SVG; embeds diagrams in docx/pptx by default |
+| `/ea-generate [artifact] [format]` | Export artifact as Word, PPTX, Mermaid, PNG, or SVG; embeds diagrams in docx/pptx by default; `--matrices` embeds the artifact's linked relationship matrices |
 | `/ea-review [artifact]` | Review and assess an artifact |
 | `/ea-grill [artifact] [--skill]` | Deep-review an artifact using a grill-me skill; then optionally apply findings back to the artifact one revision at a time |
 | `/ea-score [artifact\|--all\|--status]` | Score artifacts on Completeness + Quality (0–100 + band), per section and overall; writes an author-only 📊 Scorecard block into each artifact; `--all` scores the whole engagement, `--status` shows last scores |
@@ -150,7 +150,7 @@ You have existing engagements. Common next steps:
 | `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman |
 | `/ea-security-review` | Security audit — SABSA, ISO 27001, and NIST CSF 2.0 coverage across the engagement or a single artifact |
 | `/ea-migrate [--report\|--reorganize]` | Align legacy engagement to current plugin version conventions; backfills template body sections/guidance (3i), reorders sections to template order (3j), and proposes user-confirmed moves of misplaced content within/across documents (3k) — body changes are snapshotted, confirmed per item, excluded from `--auto`; `--reorganize` moves flat-path artifacts into correct phase subfolders |
-| `/ea-publish [--full\|--executive]` | Layered stakeholder report (default), full consolidated document (`--full`), or executive pack; writes `artifacts/index.md` reading guide |
+| `/ea-publish [--full\|--executive]` | Layered stakeholder report (default), full consolidated document (`--full`), or executive pack; `--matrices` inlines linked relationship matrices; writes `artifacts/index.md` reading guide |
 | `/ea-git [init\|status\|commit\|push\|sync\|log\|remote]` | Manage EA-projects/ as a git repository — init, commit, push to GitHub |
 | `/ea-brief [--focus decisions\|risks\|gaps\|strategy] [--save]` | Synthesized one-page engagement brief — ranked decisions, gaps, risks, open concerns |
 | `/ea-workshop [start\|resume\|export\|list]` | Facilitated multi-stakeholder workshops — WS-NNN minutes, agenda, decisions, actions |

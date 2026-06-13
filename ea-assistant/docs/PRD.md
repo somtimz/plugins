@@ -1,10 +1,19 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.74
+**Version:** 0.9.75
 **Status:** Current
 **Author:** Costa Pissaris
 
 ---
+
+## v0.9.75 — Embed Matrices in Exports (`/ea-generate` & `/ea-publish`)
+
+### Summary
+Relationship matrices are standalone artifacts (`{key}-matrix.md`), and the domain document templates only carry an author-facing `## Related Matrices` pointer. This release lets the export commands optionally **inline the actual matrix grids** into the generated/published document, and ensures the author-facing pointer never leaks into output.
+
+### Changed
+- **`/ea-generate --matrices`** — embeds the artifact's linked relationship matrices into the docx/pptx export. Resolution: matrices in the artifact's phase folder (per `matrix-catalogue.md`) plus any keys named in its `## Related Matrices` pointer, kept only where `{key}-matrix.md` exists with a populated grid. Each is appended as a `### {Matrix Name}` subsection (grid + populated Observations), with the matrix's own author-only blocks stripped first. The `## Related Matrices` pointer is now always stripped from exports (replaced by the grids when `--matrices` is given).
+- **`/ea-publish --matrices`** (or interactive prompt) — new **Step 2d: Matrix Inclusion**, mirroring detail-file inclusion: Inline (after each parent artifact) / Appendix-only (`## Relationship Matrices`) / Exclude (default). The strip rule now also removes the author-facing `## Related Matrices` pointer (it references `/ea-matrix`) so it never reaches a stakeholder deliverable.
 
 ## v0.9.74 — Capability Management (`/ea-capabilities`) & Canonical Capability Map
 
