@@ -1,10 +1,19 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.77
+**Version:** 0.9.78
 **Status:** Current
 **Author:** Costa Pissaris
 
 ---
+
+## v0.9.78 — Architecture Review Board Defined in the Governance Framework
+
+### Summary
+The ARB's full role definition (duties, membership, RACI, authority, escalation) already lived in `role-catalogue.md`, but the **governance framework** — where one would look for "what is the ARB" — only described the *minutes record*, not the *body*. Adds a dedicated definition of the ARB as a governance body and cross-links it from `/ea-arb`.
+
+### New / Changed
+- **`governance-framework.md`** — new **"The Architecture Review Board (ARB)"** section defining the body in terms of its **role** (approves the target architecture; authority of last resort below the executive layer; the Phase G conformance gate), **function** (ratifies decisions, governs principles/dispensations, controls ACRs, checks conformance, resolves cross-domain conflict), **authority & standing** (Approve/Reject/Defer/Escalate per its Terms of Reference; quorum-based; chaired by the EA), and **what it is not** (vs the EA Working Group, vs a program/steering board, vs the minutes). Cross-links to the full role-catalogue entry.
+- **`/ea-arb`** — header note distinguishing the ARB (the body) from the minutes (`ARB-NNN`, the record this command manages), pointing to both the governance-framework definition and the role catalogue.
 
 ## v0.9.77 — Requirement, Work Package & Opportunity Concepts
 

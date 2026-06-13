@@ -267,6 +267,34 @@ The cleanest formulation: **architecture governance governs the architecture; pr
 
 ---
 
+## The Architecture Review Board (ARB)
+
+The **Architecture Review Board** is the engagement's **strategic architecture governance body** — the standing forum that holds collective authority over architecture decisions and holds architects accountable for them. It is the human institution that operates **Layer 1 (Architecture Governance)**: where the *Decision* element of governance is formally exercised and the *Control* element verifies conformance. (Full role definition — duties, membership, RACI, escalation — in `references/role-catalogue.md` → **Architecture Review Board (ARB)**; this section states its role and function within the governance model.)
+
+### Role
+- The body that **approves the target architecture** — the "Process to Approve Target Architecture" (above) culminates at the ARB. It decides whether a proposed target addresses the direction within the stated constraints and risk appetite.
+- The **authority of last resort** below the executive layer for architecture matters: it ratifies hard-to-reverse or strategic choices that exceed an individual architect's mandate, and escalates anything beyond its own authority to the Stakeholder's governance layer (Board / C-suite).
+- The **conformance gate** in Phase G — it reviews compliance assessments at delivery gates and approves or rejects deviations.
+
+### Function (what it actually does)
+- **Ratifies decisions** — approves, rejects, defers, or escalates Strategic and Tactical architecture decisions; an ADR is *proposed* by an architect and *ratified* by the ARB (recorded via `/ea-arb close`, which sets the ADR's Governance Reference to the meeting).
+- **Governs the rules** — approves changes to Architecture Principles; grants or refuses dispensations and waivers raised under the Implementation Governance Plan.
+- **Controls change** — reviews and endorses Architecture Change Requests (ACRs) with engagement-wide impact (Phase H).
+- **Checks conformance** — assesses architecture compliance at phase-gate reviews and approves or withholds phase progression.
+- **Resolves conflict** — adjudicates cross-domain conflicts escalated by the Enterprise Architect.
+
+### Authority & standing
+- **Decision rights:** Approve / Reject / Defer / Escalate, within the scope defined by the Governance Framework's **ARB Terms of Reference** (established in the Preliminary Phase).
+- **Quorum-based:** decisions require quorum; without it they are recorded as `Provisional — pending quorum confirmation` (enforced by `/ea-arb close`).
+- **Chaired** by the Enterprise Architect (or a designated ARB Chair); **cadence** monthly plus ad-hoc for emergency ACRs and phase gates.
+
+### What the ARB is *not*
+- Not the **EA Working Group (AWG)** — the AWG is the *operational* coordination body that handles day-to-day progress and peer review *below* the ARB's authority threshold; the ARB is the *strategic* decision authority.
+- Not a **program board / steering committee** — those govern delivery (Layer 2: scope, schedule, budget, benefits). The ARB governs the architecture (Layer 1). Phase G is where they interface.
+- Not the **minutes** — `ARB-NNN` and `/ea-arb` are the *record* of a meeting; the ARB is the *body* that meets. The board defined here; the minutes in the next section.
+
+---
+
 ## ARB Meeting Minutes
 
 Architecture Review Board (ARB) meetings are the primary governance touchpoint for formal architecture decisions. Meeting minutes capture attendance, quorum, agenda, decisions, actions, and deferred items.
