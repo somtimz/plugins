@@ -1,7 +1,7 @@
 {
   "name": "ea-assistant",
-  "version": "0.9.67",
-  "description": "End-to-end Enterprise Architecture engagement management — TOGAF 10 ADM lifecycle, Zachman classification, ArchiMate notation. Architecture landscape levels (Strategic/Segment/Capability/Solution), structured phase interviews, artifact generation, motivation framework with dedicated driver/goal/objective/strategy registers, Decision Register, ADR management, ARB meeting minutes, workshop facilitation, Risk Register, Cost Model Register and Business Case (architecture-grade TCO/payback costing), EA tool import (Sparx XMI, Archi, LeanIX), engagement brief, and consolidated reporting.",
+  "version": "0.9.68",
+  "description": "End-to-end Enterprise Architecture engagement management — TOGAF 10 ADM lifecycle, Zachman classification, ArchiMate notation. Architecture landscape levels (Strategic/Segment/Capability/Solution), structured phase interviews, artifact generation, motivation framework with dedicated driver/goal/objective/strategy registers, Decision Register, ADR management, ARB meeting minutes, workshop facilitation, Risk Register, Cost Model Register and Business Case (architecture-grade TCO/payback costing), persona-tailored menus and reports (CIO, CISO, CPO, Business/Data Architect), EA tool import (Sparx XMI, Archi, LeanIX), engagement brief, and consolidated reporting.",
   "author": {
     "name": "Costa Pissaris",
     "email": "cpissaris@gmail.com"

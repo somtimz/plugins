@@ -34,6 +34,19 @@ linkStyle: wikilink
      or markdown (relative paths — use for GitHub/VS Code rendering or multi-engagement vaults).
      See skills/ea-artifact-templates/references/link-conventions.md for the full convention. -->
 
+## Default Persona
+
+<!-- Optional. Sets the default stakeholder role for /ea-help and /ea-publish so menus and
+     report packs are tailored without re-typing --persona. An explicit --persona flag overrides this.
+     Leave unset for the full menu and unscoped reports.
+     Valid keys: enterprise-architect | cio | ciso | chief-product-officer |
+     chief-privacy-officer | business-architect | data-architect
+     See skills/ea-engagement-lifecycle/references/persona-registry.md. -->
+
+<!-- Example:
+defaultPersona: cio
+-->
+
 ## Interview Preferences
 
 <!-- Overrides for how this engagement's interviews should be run. -->

@@ -1,7 +1,7 @@
 ---
 name: ea-publish
-description: Publish selected EA artifacts as a layered, stakeholder-consumable report — executive brief, per-artifact summaries, and links to full artifacts — or a full consolidated document with --full
-argument-hint: "[markdown|word|both] [--full | --executive]"
+description: Publish selected EA artifacts as a layered, stakeholder-consumable report — executive brief, per-artifact summaries, and links to full artifacts — or a full consolidated document with --full; --persona <role> scopes the pack to a stakeholder role
+argument-hint: "[markdown|word|both] [--full | --executive] [--persona <role>]"
 allowed-tools: [Read, Write, Bash]
 ---
 
@@ -15,6 +15,8 @@ Publish selected artifacts for the active engagement as a stakeholder-consumable
 | **Full** | `/ea-publish --full` | Single consolidated document embedding the full text of every selected artifact. Use for archival or contractual submission, not stakeholder reading. |
 | **Executive** | `/ea-publish --executive` | Executive Architecture Pack — executive summaries and first diagrams only. |
 
+**`--persona <role>` modifier** (combines with any mode above): scopes the pack to a stakeholder role from `skills/ea-engagement-lifecycle/references/persona-registry.md`. Resolve `<role>` against each persona's Key/Aliases (case-insensitive); if no match, list available personas and stop. The persona's **Audience** set pre-filters the artifact selection (Step 1) and its **Report bundle** is pre-ticked; the output is titled "{Persona} Pack". The user can still adjust the selection. Default layered mode applies unless `--full`/`--executive` is also given.
+
 Every mode also writes/refreshes a stakeholder reading guide at `artifacts/index.md` (Step 6b).
 
 ## Instructions
@@ -22,6 +24,8 @@ Every mode also writes/refreshes a stakeholder reading guide at `artifacts/index
 If no engagement is active in context, prompt the user to run `/ea-open` first.
 
 ### Step 1: List Available Artifacts
+
+**If `--persona <role>` was passed** (or `defaultPersona:` is set in `.claude/rules/ea-local-config.md`): read the persona registry, resolve the role, and read each artifact's `taxonomy.audience` frontmatter. Pre-select artifacts whose `audience` is in the persona's **Audience** set or `All`; show the others in the list but un-ticked. Note at the top: "Scoped to {Persona} — audience: {tags}. Pre-selected {N} artifacts; adjust as needed." Then pre-tick the persona's **Report bundle** items where they correspond to generatable artifacts.
 
 Read `engagement.json` and present all artifacts as a numbered selection list. Show status, phase, and last modified date for each:
 
