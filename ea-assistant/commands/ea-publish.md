@@ -1,7 +1,7 @@
 ---
 name: ea-publish
-description: Publish selected EA artifacts as a layered, stakeholder-consumable report — executive brief, per-artifact summaries, and links to full artifacts — or a full consolidated document with --full; --persona <role> scopes the pack to a stakeholder role
-argument-hint: "[markdown|word|both] [--full | --executive] [--persona <role>]"
+description: Publish selected EA artifacts as a layered, stakeholder-consumable report — executive brief, per-artifact summaries, and links to full artifacts — or a full consolidated document with --full; --persona <role> scopes the pack to a stakeholder role; --matrices inlines each artifact's linked relationship matrices
+argument-hint: "[markdown|word|both] [--full | --executive] [--persona <role>] [--matrices]"
 allowed-tools: [Read, Write, Bash]
 ---
 
@@ -95,6 +95,34 @@ Options:
 - **Exclude:** Skip detail files entirely (backward-compatible default).
 
 If no detail files exist for the selected artifacts, skip this step silently.
+
+### Step 2d: Matrix Inclusion
+
+Relationship matrices are standalone artifacts (`{key}-matrix.md`), not embedded in the domain documents. By default they are **not** inlined and the author-facing `## Related Matrices` pointer is stripped (see Step "Each Artifact Section"). Offer to inline them:
+
+For each selected artifact, resolve its linked matrices: read `skills/ea-artifact-templates/references/matrix-catalogue.md`, take the matrix keys whose **Folder** is the artifact's phase folder plus any keys named in the artifact's `## Related Matrices` pointer, and keep those where `{folder}/{key}-matrix.md` exists with a **populated** grid (≥1 non-placeholder data row).
+
+If `--matrices` was passed, include all of them without prompting. Otherwise, if any populated matrices were found, ask:
+
+```
+Include linked relationship matrices in the published document?
+
+  {N} populated matrix/matrices found across the selected artifacts:
+    Actor / Role Matrix            (Business Architecture · phase-b)
+    Application / Data Matrix       (Data Architecture · phase-c-data)
+    ...
+
+Options:
+  (y) Inline — embed each matrix grid after its parent artifact, under a "Related Matrices" heading
+  (a) Appendix only — add a "Relationship Matrices" appendix at the end of the document
+  (n) Exclude — do not include matrices (default)
+```
+
+- **Inline:** after each artifact's content, add `### Related Matrices` with each matrix as a `#### {Matrix Name}` subsection (grid + any populated Observations). Strip each matrix file's own frontmatter, `<details>` blocks, and comments first.
+- **Appendix only:** append a top-level `## Relationship Matrices` section ordered by phase then matrix name.
+- **Exclude:** default; matrices are not inlined.
+
+If no populated matrices exist for the selected artifacts, skip this step silently.
 
 ### Step 2b: Pre-Publish Compliance Check
 
@@ -281,7 +309,7 @@ If any opt-outs exist (artifact or question level), add:
 
 #### Each Artifact Section
 
-**Strip plugin scaffolding before insertion (all modes):** remove all HTML comments (`<!-- GUIDANCE: ... -->` and any other `<!-- ... -->` blocks) **and all author-only `<details>...</details>` blocks** (Compliance Status, 📋 Guidance, 💡 Practitioner Tip, 📊 Scorecard, and any other collapsible) from artifact content, plus the `## Artifact Working Notes` section. Published output must contain no authoring guidance, compliance scaffolding, or scores.
+**Strip plugin scaffolding before insertion (all modes):** remove all HTML comments (`<!-- GUIDANCE: ... -->` and any other `<!-- ... -->` blocks) **and all author-only `<details>...</details>` blocks** (Compliance Status, 📋 Guidance, 💡 Practitioner Tip, 📊 Scorecard, and any other collapsible) from artifact content, plus the `## Artifact Working Notes` section, and the author-facing **`## Related Matrices`** pointer blockquote (it references `/ea-matrix` — when matrices are inlined per Step 2d, the real grids replace it; otherwise it is dropped). Published output must contain no authoring guidance, compliance scaffolding, scores, or tool-command pointers.
 
 Before inserting each artifact's content, rewrite its links for the consolidated document context:
 

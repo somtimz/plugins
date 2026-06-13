@@ -173,7 +173,7 @@ uiMode: html
 | `/ea-artifact [action]` | Create, view, or list artifacts; runs compliance check on view; `summary [refresh\|status]` for executive summary management |
 | `/ea-brainstorm [phase]` | Capture freeform thoughts and context before or during interviews |
 | `/ea-interview [mode]` | Start or resume a stakeholder interview (artifact or phase mode; Text/Web/Display) |
-| `/ea-generate [artifact] [format]` | Export as docx, pptx, mermaid, png, or svg; diagrams embedded in docx/pptx by default |
+| `/ea-generate [artifact] [format]` | Export as docx, pptx, mermaid, png, or svg; diagrams embedded in docx/pptx by default; `--matrices` embeds linked relationship matrices |
 | `/ea-notes [mode]` | List, view, edit, or delete interview notes, brainstorm notes, and review files |
 | `/ea-note [text] [--artifact <id>] \| resolve <path>` | Quick-capture an ad-hoc note with Open/Resolved lifecycle; `resolve` records resolution with rationale and impact; `n:` prefix works mid-interview or mid-grill |
 | `/ea-detail new\|view\|list\|sync\|link\|check\|note resolve\|index` | Create, view, list, sync, cross-link, and integrity-check item detail files; generate type-grouped index; add and resolve inline notes |
@@ -223,7 +223,7 @@ uiMode: html
 | `/ea-issues [mode]` | Issues Register — list, add, update, trace ISS→G→GAP, or generate register; Domain (incl. Engagement) + Type classification |
 | `/ea-problems [mode]` | Problems Register — list, add, update, trace PRB→OBJ→REQ, or generate register; Domain (incl. Engagement) + Type classification |
 | `/ea-git [init\|status\|commit\|push\|sync\|log\|remote]` | Manage EA-projects/ as a git repository — init, commit, push to GitHub |
-| `/ea-publish [--full\|--executive]` | Layered stakeholder report (default), full consolidated document (`--full`), or executive pack; writes `artifacts/index.md` reading guide; compliance pre-check |
+| `/ea-publish [--full\|--executive]` | Layered stakeholder report (default), full consolidated document (`--full`), or executive pack; `--matrices` inlines linked relationship matrices; writes `artifacts/index.md` reading guide; compliance pre-check |
 | `/ea-config [section]` | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md |
 | `/ea-help` | Getting-started guide, full command reference, and interview shortcuts |
 
