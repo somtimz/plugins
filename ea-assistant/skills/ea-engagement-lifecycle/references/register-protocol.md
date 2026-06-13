@@ -1,6 +1,6 @@
 # Register Protocol — Shared Mode Mechanics for Direction Registers
 
-Single source of truth for the mechanics of the direction-register commands: `/ea-drivers`, `/ea-goals`, `/ea-objectives`, `/ea-issues`, `/ea-problems`, `/ea-gaps`. Each command file declares a **Register Spec** (identity, fields, links, trace chain, groupings) plus any register-specific checks; everything else — the mode flows below — comes from this protocol and is **never restated in the command file**.
+Single source of truth for the mechanics of the direction-register commands: `/ea-drivers`, `/ea-goals`, `/ea-objectives`, `/ea-strategies`, `/ea-issues`, `/ea-problems`, `/ea-gaps`. Each command file declares a **Register Spec** (identity, fields, links, trace chain, groupings) plus any register-specific checks; everything else — the mode flows below — comes from this protocol and is **never restated in the command file**.
 
 ## Register Spec (declared per command)
 

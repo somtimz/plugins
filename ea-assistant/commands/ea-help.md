@@ -87,6 +87,7 @@ You have existing engagements. Common next steps:
 | `/ea-drivers [mode]` | Business Driver Register — list, add, update, trace DRV→G→OBJ→STR→WP chain, or generate register |
 | `/ea-goals [mode]` | Goals Register — list, add, update, trace G→OBJ→STR→WP chain, or generate register; Domain + Type classification |
 | `/ea-objectives [mode]` | Objectives Register — list, add, update, trace OBJ→G/PRB/MET/WP chain, or generate register; measurability checks (measure, target, deadline) |
+| `/ea-strategies [mode]` | Strategy Register — list, add, update, trace the Goals→Strategies→Work Packages map, or generate register; Type (Build/Buy/Partner/Consolidate/Modernise/Defend) + Horizon classification; `trace` renders the Strategy Map |
 | `/ea-target [new\|view\|update]` | Target State Declaration — capture per-domain target states, success criteria, and traceability to goals and objectives |
 | `/ea-actions [generate\|view\|update\|status]` | Stakeholder Action Plan — consolidated per-approver action view seeded from SAoW and Target State Declaration; suitable for governance forums and ARB |
 | `/ea-finance [list\|add\|update\|trace\|generate]` | Cost Model Register — manage FIN-NNN Cost Entries (capex/opex/TCO/payback with confidence), trace to work packages/ADRs/goals, generate register and roll up the roadmap budget |
@@ -190,6 +191,11 @@ Type these at any interview prompt:
 • Ask "let's build the roadmap" — the ea-roadmap agent will be dispatched automatically;
   it reads your Vision goals and strategies to seed work packages
   automatically (or works from scratch if no artifacts exist yet).
+• Use `/ea-strategies` to make strategy first-class — the "how" in the
+  DRV→G→OBJ→STR→WP chain. Each STR-NNN carries Type (Build/Buy/Partner/
+  Consolidate/Modernise/Defend), Horizon, and rationale; `add`/`update` sync
+  into Architecture Vision §8. Run `/ea-strategies trace` for the Strategy Map
+  (which goals each strategy serves and which work packages execute it).
 • After `/ea-grill`, choose "apply findings" to revise the artifact
   one recommendation at a time, with confirm/skip/edit per change.
 • Use `/ea-research` to add whitepapers, notes, or URL references to
