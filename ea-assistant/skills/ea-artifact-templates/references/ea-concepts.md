@@ -593,6 +593,35 @@ A problem is a specific, observable, and fixable symptom that is actively blocki
 
 ---
 
+### Opportunity (OPP-NNN)
+
+**What it IS:**
+An Opportunity is an actionable possibility — a favourable opening the organisation could pursue to create or capture value, beyond simply fixing what is broken. Where Drivers, Issues, and Problems describe pressure and dysfunction, an Opportunity describes upside: a market gap, an emerging technology, a capability the org could newly exploit. It answers *"What could we gain if we acted?"* Captured in `engagement.json → direction.opportunities[]` and surfaced during brainstorming and Phase A.
+
+**Types:**
+- **Exploit** — capitalise on an existing advantage the org already holds
+- **Enhance** — amplify a current capability to widen the lead
+- **Emerge** — pursue something not previously in scope (new market, new technology, new model)
+
+**Key relationships:**
+- **Arises from** Drivers (a force can be a threat *and* an opening) and links to the Goals (G-NNN) it would advance
+- **Distinct from a Problem** — a problem is a symptom to remove; an opportunity is value to capture. Resolving a problem may *reveal* an opportunity worth tracking separately.
+- May justify new **Strategies**, **Capabilities**, or **Work Packages** when pursued
+
+**What it is NOT:**
+- Not a **Goal** — a goal is the desired future state; an opportunity is a possibility that, if taken, helps reach it
+- Not a **Driver** — a driver is the underlying force; an opportunity is a specific actionable opening that force creates
+- Not a **Requirement** — an opportunity is directional; it generates requirements only once a decision to pursue it is made
+
+**TOGAF placement:** Architecture Vision (Phase A) — captured alongside Drivers/Issues/Problems as part of structuring corporate intent; an opportunity taken becomes input to Strategy and the Roadmap.
+
+**Practitioner Notes:**
+- Keep opportunities **honest** — an opportunity with no plausible value or no owner is wishful thinking; flag it.
+- The best opportunities are often the **inverse of a problem** — when capturing problems, ask "if we fixed this, what would it open up?"
+- **Maturity marker (L1→L5):** L1 = opportunities are a wish list; L3 = opportunities are typed, linked to drivers/goals, and triaged; L5 = opportunity pursuit is governed against strategy and revisited as the market shifts.
+
+---
+
 ### Strategy
 
 **What it IS:**
@@ -1055,6 +1084,39 @@ A Capability Gap is a delta between the capabilities the organisation currently 
 
 ---
 
+### Work Package (WP-NNN)
+
+**What it IS:**
+A Work Package is a discrete, plannable unit of change that the organisation will resource and deliver to move from the baseline toward the target architecture. It is the **delivery vehicle**: capabilities and gaps define *what* must change; the work package is *how the change gets done and funded*. Every work package must deliver measurable business value — closing a technical gap is not a work package unless it enables a specific business outcome. Defined and sequenced in the Architecture Roadmap (Phase E) and finalised in the Migration Plan (Phase F).
+
+**Structural parts** (Architecture Roadmap):
+- **Description** and **Phase / Wave** — what it delivers and when, grouped into delivery increments
+- **Advances Goals/Objectives** and **Executes Strategies** — the strategic alignment (a WP with neither is unjustified)
+- **Closes Gaps** (GAP-NNN) and **Addresses Requirements** (REQ-NNN) — what it resolves
+- **Effort**, **Capex / Opex / TCO** (via FIN-NNN), **Dependencies**, **Owner**, **Status**
+- **Evidence Status**, **Decision Reversibility**, **Value Delivery** (Standalone / Cumulative / Enabling) — used for evidence-gated and risk-aware sequencing
+
+**Key relationships:**
+- **Closes** Capability Gaps and **delivers** Capabilities to their target maturity
+- **Realises** the Transition Architectures (Plateaus) — work packages are the steps between plateaus
+- **Costed by** Cost Entries (FIN-NNN); **depends on** other WPs (sequencing, captured in the WP/Dependency matrix)
+
+**What it is NOT:**
+- Not a **Gap** — a gap is the difference between current and target; the work package is the change that closes it
+- Not a **Project** — a work package is an architecture-defined unit of change; a project is the delivery construct that may bundle several (program governance, not architecture governance)
+- Not a **Plan** — a plan is the ordered set of actions; the roadmap *sequences* work packages into the plan
+- Not a **Capability Increment** — an increment is a measurable step-up in a capability's maturity; a work package is the work that produces it
+
+**TOGAF placement:** Architecture Roadmap (Phase E) — the primary home; refined and costed in the Migration Plan (Phase F); re-assessed in Phase H when change requests alter the migration sequence.
+
+**Practitioner Notes:**
+- **Package work as value increments** — every WP delivers measurable business value, not just a technical milestone.
+- **Sequence by impact × feasibility** — quick wins early build delivery credibility; gate low-evidence packages out of Wave 1 (T4-WPEVID).
+- **Align to funding cycles** — a roadmap that ignores budget reality is fantasy; carry capex/opex so waves roll up to a fundable budget (T4-TCO).
+- **Maturity marker (L1→L5):** L1 = work packages are a project list with no traceability; L3 = each WP traces to gaps/goals and carries effort and evidence; L5 = the roadmap is an investment portfolio with economic tracking and continuous re-sequencing.
+
+---
+
 ### Value Stream (VS-NNN)
 
 **What it IS:**
@@ -1199,6 +1261,41 @@ Plus **Current-State** and **Target-State** narratives and a **Change Delta** �
 - **Use scenarios when tables fail.** When stakeholders can't engage with abstract driver/goal/objective tables, or when requirements are contested, a shared narrative everyone can verify breaks the deadlock.
 - Every scenario should **generate at least one REQ-NNN** and **trace to at least one goal** — an ungrounded scenario is a story with no architectural consequence; flag it.
 - **Maturity marker (L1→L5):** L1 = scenarios are anecdotes with no requirements; L3 = scenarios capture the six elements and generate traced requirements; L5 = scenarios drive the Vision and are revisited as the target state evolves.
+
+---
+
+### Requirement (REQ-NNN)
+
+**What it IS:**
+A Requirement is a formalised, testable statement of something the architecture must do, provide, or satisfy. It is the **contract** between intent and solution: it converts the *why* (drivers, goals, objectives) and the *what-the-actor-needs* (use cases, scenarios) into a precise, verifiable obligation that designs and implementations are checked against. It answers *"What must be true of the solution?"* Managed via `/ea-requirements`; the central node of the traceability chain.
+
+**Structural parts** (Requirements Register):
+- **Statement** — "The system/organisation must/shall …" — singular, testable, unambiguous
+- **Type** — **Functional** (a capability the solution provides) or **Non-Functional** (a quality it must exhibit — e.g. Availability, Performance, Security, Compliance; NFRs carry a measurable target)
+- **Scope** — **Enterprise** (organisation-wide, read-only/waiveable) or **Program** (engagement-specific, editable)
+- **Priority** — MoSCoW (Must / Should / Could / Won't)
+- **Motivation** — the DRV/ISS/PRB/G/OBJ it derives from; **Source** — the UC-NNN or BS-NNN that generated it
+- Optional **Sample Tests** (verification) and **Stories** (STY-NNN delivery items)
+
+**Key relationships:**
+- **Generated by** Use Cases (UC-NNN) and Business Scenarios (BS-NNN); **derives from** Objectives, Problems, and Drivers (the Motivation field)
+- **Realised by** Architecture Building Blocks (ABB-NNN) → Solution Building Blocks (SBB-NNN) → User Stories (STY-NNN)
+- **Addressed by** Work Packages (WP-NNN); **bounded by** Constraints (CST-NNN)
+- Tracked in the Requirements Traceability Matrix and verified through Phase G compliance
+
+**What it is NOT:**
+- Not an **Objective** — an objective is a measurable business target ("onboarding in 1 day"); a requirement is what the solution must do to meet it ("the system must support self-service onboarding")
+- Not a **Use Case** — a use case is the actor-goal narrative that *generates* requirements; the requirement is the formalised need
+- Not a **Constraint** — a constraint restricts the *solution space* ("must run on-premises"); a requirement states a *needed capability or quality*
+- Not a **Specification** — a requirement says *what* must be true; the design says *how* it is achieved
+
+**TOGAF placement:** Requirements Management is the **continuous central process** of the ADM — requirements are elicited in Phase A/B, refined through C/D, delivered via E/F, and verified in G. The Requirements Register and Traceability Matrix are the home artifacts.
+
+**Practitioner Notes:**
+- **Make every requirement testable** — if you cannot write a pass/fail check for it, it is a wish, not a requirement.
+- **Trace both ways** — every requirement should derive from a motivation item and be realised by an ABB/WP; an orphan in either direction is a gap (`/ea-trace`).
+- **Separate Enterprise from Program scope** — enterprise requirements are inherited and waived, not edited locally.
+- **Maturity marker (L1→L5):** L1 = requirements are a flat wish list; L3 = requirements are typed, prioritised, traced to motivation and solution, with NFR targets; L5 = requirements carry automated conformance tests verified continuously.
 
 ---
 
