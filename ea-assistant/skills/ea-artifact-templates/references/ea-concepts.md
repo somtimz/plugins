@@ -1162,6 +1162,46 @@ A Use Case is a discrete goal pursued by a specific actor (user, system, or exte
 
 ---
 
+### Business Scenario (BS-NNN)
+
+**What it IS:**
+A Business Scenario is a **TOGAF Phase A technique** — a narrative that frames an architecture need in business terms a stakeholder recognises, then derives the requirements needed to meet it. It bridges business stakeholders and architects by describing the problem in lived, concrete terms and working systematically to the technical and business requirements that resolve it. Its purpose is to **validate and justify the Architecture Vision** by grounding it in a real story rather than abstract driver/goal tables, and to **generate traceable requirements**. Managed via `/ea-scenarios`; stored as a full artifact in `artifacts/phase-a/` (one per scenario, `BS-NNN`) and indexed in `engagement.json → scenarios[]`.
+
+**The six TOGAF elements** (every scenario captures these):
+- **Problem Statement** — what is broken and why it matters, in the stakeholder's language
+- **Objectives** — SMART goals the architecture must meet to resolve it
+- **Environment** — the internal and external context (and current technology touchpoints)
+- **Stakeholders & Concerns** — who is affected and what they care about
+- **Actors** — the human and computing actors who act or are acted upon in the flow (distinct from stakeholders)
+- **Requirements** — the specific capabilities the architecture must deliver (each registered as a REQ-NNN with `sourceScenario: BS-NNN`)
+
+Plus **Current-State** and **Target-State** narratives and a **Change Delta** — because the value of a scenario is in *the change*: what happens today vs. what will happen in the target. Model the delta the architecture must enable, not the current state in exhaustive detail.
+
+**Key relationships:**
+- **Triggered by** Issues (ISS-NNN) and **addresses** Problems (PRB-NNN) — a scenario makes those concrete
+- **Generates** Requirements (REQ-NNN) — the scenario is the narrative context that justifies each requirement
+- **Justifies / tests** the Architecture Vision — one story that validates the agreed target state
+- **Contains** Use Cases (UC-NNN) — a scenario is the broader business narrative; a use case is a discrete actor goal within it
+
+**What it is NOT:**
+- Not an **Issue** — an issue is a broad systemic concern; a scenario is a concrete narrative that an issue may trigger
+- Not a **Problem** — a problem is a specific fixable symptom; a scenario may address several
+- Not a **Requirement** — a scenario *generates* requirements; it is the context, not the formalised need
+- Not the **Architecture Vision** — the Vision is the agreed target; a scenario is one story that justifies or tests it
+- Not a **Use Case** — a use case is one actor's functional goal; a scenario is a business narrative that may contain several
+
+**TOGAF placement:** Phase A (Architecture Vision) — optional but strongly recommended when stakeholder alignment is needed before Phase B, or when multiple distinct problem domains are in scope (each gets its own scenario). Source: TOGAF 10 Part III, §25.3.3.
+
+**ArchiMate:** expressed through Motivation-aspect elements — `Driver`, `Assessment`, `Goal`, `Requirement` — linked to the `Stakeholders` and `Business Actors`/`Roles` that participate; the change delta maps to baseline vs target `Business Process`/`Application` elements.
+
+**Practitioner Notes:**
+- **Focus on the change.** A scenario that exhaustively models the current state but not the delta has missed its purpose — capture only what constrains or enables the target.
+- **Use scenarios when tables fail.** When stakeholders can't engage with abstract driver/goal/objective tables, or when requirements are contested, a shared narrative everyone can verify breaks the deadlock.
+- Every scenario should **generate at least one REQ-NNN** and **trace to at least one goal** — an ungrounded scenario is a story with no architectural consequence; flag it.
+- **Maturity marker (L1→L5):** L1 = scenarios are anecdotes with no requirements; L3 = scenarios capture the six elements and generate traced requirements; L5 = scenarios drive the Vision and are revisited as the target state evolves.
+
+---
+
 ### Architecture Building Block (ABB-NNN)
 
 **What it IS:**

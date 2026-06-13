@@ -1,10 +1,18 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.75
+**Version:** 0.9.76
 **Status:** Current
 **Author:** Costa Pissaris
 
 ---
+
+## v0.9.76 — Business Scenario Concept
+
+### Summary
+Business Scenarios already had a command (`/ea-scenarios`), a BS-NNN id, a guidance-driven template, and an `engagement.json → scenarios[]` index — but no formal entry in the concepts reference. Adds the canonical **Business Scenario (BS-NNN)** definition so scoring, grilling, and interviewing have the same grounding the other concepts have.
+
+### New
+- **Business Scenario (BS-NNN) concept** in `ea-concepts.md` — a TOGAF Phase A narrative technique: the six TOGAF elements (Problem Statement, Objectives, Environment, Stakeholders, Actors, Requirements) plus Current/Target state and Change Delta; its relationships (triggered by Issues, addresses Problems, generates Requirements, justifies the Vision, contains Use Cases); what it is *not*; TOGAF/ArchiMate placement; and practitioner notes (focus on the change; use when tables fail; generate ≥1 REQ + trace to a goal). EA concepts: 27 → 28.
 
 ## v0.9.75 — Embed Matrices in Exports (`/ea-generate` & `/ea-publish`)
 
@@ -351,9 +359,9 @@ Requirements Register entries carry a Motivation field that links each requireme
 
 > 📎 Source framework: `skills/ea-artifact-templates/references/ea-concepts-source.pdf` — *Enterprise Architecture Strategic Context: Terms, Concepts, and Relationship Models*
 
-### EA Concepts (27 total)
+### EA Concepts (28 total)
 
-Vision, Mission, Business Driver, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Problem, Opportunity, Capability Model, Capability Gap, Value Stream, Business Process, Use Case, Operating Model, Metrics, Cost Entry, Constraint, Stakeholder Concern, ADR, ABB, SBB, Reference Architecture, User Story — each with a formal definition, TOGAF phase placement, ArchiMate 3.x element, and a disambiguation checklist. Full definitions in `skills/ea-artifact-templates/references/ea-concepts.md`.
+Vision, Mission, Business Driver, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Problem, Opportunity, Capability Model, Capability Gap, Value Stream, Business Process, Use Case, Business Scenario, Operating Model, Metrics, Cost Entry, Constraint, Stakeholder Concern, ADR, ABB, SBB, Reference Architecture, User Story — each with a formal definition, TOGAF phase placement, ArchiMate 3.x element, and a disambiguation checklist. Full definitions in `skills/ea-artifact-templates/references/ea-concepts.md`.
 
 **Disambiguation summary:**
 
@@ -374,6 +382,7 @@ Vision, Mission, Business Driver, Principle, Goal, Objective, Strategy, Plan, Ri
 | Value Stream     | End-to-end value delivery              | No                      | No                 | Composed of Business Processes; exercises Capabilities; links to Goals                 |
 | Business Process | Structured activity flow               | No                      | No                 | Component of Value Streams; exercises Capabilities; generates Requirements             |
 | Use Case         | Actor goal + scenario                  | No                      | No                 | Consumes Processes; generates Requirements; links to Capabilities                      |
+| Business Scenario | Phase A narrative (six TOGAF elements) | No                     | No                 | Triggered by Issues; addresses Problems; generates Requirements; justifies the Vision; contains Use Cases; BS-NNN; `/ea-scenarios` |
 | Operating Model  | How the org functions                  | No                      | No                 | Shaped by Capability Model; measured by Metrics                                        |
 | Metrics          | Quantifiable measure (leading/lagging) | Yes (target + deadline) | No                 | Validates Objectives; surfaces new Issues and Problems                                 |
 | Cost Entry       | Costed estimate (capex/opex/TCO/payback) | Yes (TCO horizon)     | No                 | Costs Work Packages, ADRs, options; feeds Business Case and Roadmap budget; FIN-NNN; `/ea-finance` |
