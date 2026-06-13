@@ -89,6 +89,7 @@ You have existing engagements. Common next steps:
 | `/ea-objectives [mode]` | Objectives Register — list, add, update, trace OBJ→G/PRB/MET/WP chain, or generate register; measurability checks (measure, target, deadline) |
 | `/ea-target [new\|view\|update]` | Target State Declaration — capture per-domain target states, success criteria, and traceability to goals and objectives |
 | `/ea-actions [generate\|view\|update\|status]` | Stakeholder Action Plan — consolidated per-approver action view seeded from SAoW and Target State Declaration; suitable for governance forums and ARB |
+| `/ea-finance [list\|add\|update\|trace\|generate]` | Cost Model Register — manage FIN-NNN Cost Entries (capex/opex/TCO/payback with confidence), trace to work packages/ADRs/goals, generate register and roll up the roadmap budget |
 | `/ea-issues [mode]` | Issues Register — list, add, update, trace ISS→G→GAP chain, or generate register; Domain (incl. Engagement) + Type classification |
 | `/ea-problems [mode]` | Problems Register — list, add, update, trace PRB→OBJ→REQ chain, or generate register; Domain (incl. Engagement) + Type classification |
 | `/ea-scenarios [mode]` | Business Scenario Register — list, create, interview, trace, and generate Phase A scenario artifacts (BS-NNN) |
@@ -204,6 +205,13 @@ Type these at any interview prompt:
   Zachman 6×6 grid — generate, review, gap, interview, or classify modes.
 • Use `/ea-risks` to generate a cross-cutting Risk Register from all
   artifact risk sections; `/ea-changes` for Phase H change management.
+• Use `/ea-finance` to make the budget rigorous — each FIN-NNN Cost Entry
+  models the full cost picture (capex, opex, 3-year TCO, payback, confidence)
+  of one work package, option, or capability. Link entries to work packages,
+  then `/ea-finance generate` writes the Cost Model Register and rolls up the
+  Architecture Roadmap budget. Pair a Cost Entry's projected value with a
+  `benefit`-type metric to track realisation in Phase G. Use `/ea-artifact
+  create business-case` for the funding instrument that compares costed options.
 • Use `/ea-consistency --ids` for a fast ID reference scan before publishing —
   finds broken references and orphaned IDs without the full consistency sweep.
   Use `/ea-consistency artifact [name]` to check a single artifact for

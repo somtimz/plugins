@@ -929,6 +929,42 @@ Metrics close the loop between intention and evidence:
 
 ---
 
+### Cost Entry (FIN-NNN)
+
+**What it IS:**
+A Cost Entry captures the **architecture-grade economic picture** of a single subject — a work package, an ADR option, a capability, or the whole engagement. It is the unit that makes architecture legible in financial terms: capital outlay, ongoing run cost, total cost of ownership, and projected value. Cost Entries answer *"What does this cost, over what horizon, and what is it worth?"*
+
+**Architecture-grade, not finance-grade:** A Cost Entry exists to make trade-offs comparable and roadmaps fundable — not to replace the finance function's budgeting. Estimates are rough order-of-magnitude with an explicit confidence rating; they sharpen as evidence accrues (PADs resolve, vendors quote, POCs complete). Do not present them as committed budgets unless `status = Committed` or `Actual`.
+
+**Structural parts** (Cost Model Register / `/ea-finance`):
+- **ID** — `FIN-NNN`
+- **Label** — what is being costed
+- **Subject** — WorkPackage / ADR / Option / Capability / Engagement
+- **Capex** — one-time build/transition cost
+- **Opex (annual)** — recurring run cost once live
+- **Horizon** — TCO horizon in years (default 3)
+- **TCO** — *derived* = Capex + (Opex × Horizon)
+- **Annual Benefit** — quantified annual value, if any
+- **Benefit Narrative** — qualitative value when not fully quantified
+- **Payback** — *derived* = Capex ÷ ((Annual Benefit − Opex) ÷ 12), in months; `—` if no payback within horizon
+- **Confidence** + **Basis** — High / Medium / Low and why
+- **Status** — Estimate / Budgeted / Committed / Actual
+- **Links** — WP-NNN, ADR-NNN, G-NNN
+
+**What it is NOT:**
+- Not a Metric — a Cost Entry is a *projection* of cost and value; a `benefit`-type Metric *measures whether the projected value was realised*. Pair them: `FIN-003` projects €400k annual saving; `MET-012` (benefit) tracks the actual saving in production.
+- Not a Business Case — a Business Case *argues* for an option using one or more Cost Entries as evidence; the Cost Entry is the costed building block, not the argument.
+- Not a Work Package field — the roadmap WP cost fields are a *display projection* of the linked Cost Entry; `engagement.json → finance[]` is the source of truth.
+
+**TOGAF placement:** Feeds the Business Case (Phase A funding instrument), the Architecture Roadmap budget roll-up (Phase E), and the Implementation & Migration Plan costing (Phase F); benefit realisation is checked in Phase G.
+
+**Practitioner Notes:**
+- **Speak the language of finance** — Phase F is an economic negotiation; cost, run-rate, TCO, and payback are the vocabulary that gets architecture funded.
+- **Confidence beats false precision** — a Low-confidence ROM estimate that is honest about its basis is more useful than a spuriously exact figure.
+- **Maturity marker (L1→L5):** L1 = no costing; L3 = strategic decisions and Wave-1 work carry TCO with confidence (T4-TCO); L5 = Cost Entries are tracked against actuals and trigger roadmap re-sequencing.
+
+---
+
 ### Architecture Decision Record
 
 **What it IS:**

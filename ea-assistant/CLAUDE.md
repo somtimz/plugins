@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.65 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.66 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -37,8 +37,8 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 
 ## Command Reference
 
-56 commands available — run `/ea-help` for the full table with agent assignments.
-Key entry points: `/ea-new` · `/ea-open` · `/ea-interview` · `/ea-grill` · `/ea-generate` · `/ea-status` · `/ea-brief` · `/ea-lens` · `/ea-git` · `/ea-goals` · `/ea-target` · `/ea-actions` · `/ea-issues` · `/ea-problems` · `/ea-scenarios` · `/ea-refarch` · `/ea-matrix`
+57 commands available — run `/ea-help` for the full table with agent assignments.
+Key entry points: `/ea-new` · `/ea-open` · `/ea-interview` · `/ea-grill` · `/ea-generate` · `/ea-status` · `/ea-brief` · `/ea-lens` · `/ea-git` · `/ea-goals` · `/ea-target` · `/ea-actions` · `/ea-issues` · `/ea-problems` · `/ea-scenarios` · `/ea-refarch` · `/ea-matrix` · `/ea-finance`
 
 ---
 
@@ -165,6 +165,7 @@ These are loaded automatically by `/ea-grill --skill practitioner|maturity|failu
 | SVC-NNN | Service (Business / Application / Technology service catalogue) | SVC-001 |
 | IFC-NNN | Interface (interface catalogue — contract/access point) | IFC-001 |
 | RA-NNN | Reference Architecture (Architecture Repository) | RA-001 |
+| FIN-NNN | Cost Entry (Cost Model Register — capex/opex/TCO/payback) | FIN-001 |
 
 **Do not use domain-prefixed IDs** (BG-/DG-/AG-/TG- etc.) — the scheme is unified and domain-agnostic. **Exception:** Architecture Principles use the TOGAF-standard four-domain prefixes (BP/DP/AP/TP) because the principle domain is itself a first-class classification, not a field-level qualifier.
 
@@ -228,8 +229,9 @@ When an ADR is ratified at an ARB meeting, set `arbReference: ARB-NNN` via `/ea-
 | T4-POLIT | ADRs, A3 rows with Cost = High or Impact = High | Political Alignment note recording stakeholder pressure and defensible position |
 | T4-PAD | All PAD-NNN artifacts | Open PADs have expiry date within 90 days and defined resolution path |
 | T4-WPEVID | Architecture Roadmap | Work packages with Evidence Status = Insufficient are not scheduled in Wave 1 |
+| T4-TCO | Business Case, Architecture Roadmap, Migration Plan, ADRs (Cost = High) | Strategic options and Wave-1 work packages carry a numeric cost estimate (Capex/Opex or 3-Year TCO) with stated confidence, costed via FIN-NNN Cost Entries |
 
-**Maturity expectations:** L3 aspirational (T4-ECON, T4-EVID, T4-PREMAT encouraged); L4 expected (T4-ECON, T4-EVID, T4-PREMAT, T4-POLIT required); L5 enforced (all T4 rules including T4-PAD and T4-WPEVID).
+**Maturity expectations:** L3 aspirational (T4-ECON, T4-EVID, T4-PREMAT, T4-TCO encouraged); L4 expected (T4-ECON, T4-EVID, T4-PREMAT, T4-POLIT, T4-TCO required); L5 enforced (all T4 rules including T4-PAD and T4-WPEVID).
 
 ---
 
