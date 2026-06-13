@@ -1,5 +1,7 @@
 # Reference Architecture Schema
 
+A reference architecture is a **governed, reusable blueprint** for a class of solutions — see the **Reference Architecture (RA-NNN)** concept in `skills/ea-artifact-templates/references/ea-concepts.md` for the definition, boundary conditions, failure modes, and stress test. This file defines the entry's structure; the authored template is `templates/seeds/ra-entry-template.md` (guidance-driven, so RAs are interview-able / scorable / grillable).
+
 ## RA-NNN Entry Frontmatter
 
 | Field | Type | Values | Notes |
@@ -11,22 +13,39 @@
 | `version` | string | semver `MAJOR.MINOR.PATCH` | Start at `1.0.0` |
 | `source` | enum | `internal \| industry` | `industry` = derived from a named standard or body (e.g. BIAN, AWS WAF, Azure CAF) |
 | `industryBody` | string | any | If `source: industry`, name the issuing body (e.g. "BIAN", "AWS") |
+| `linkedCAPs` | array | `CAP-NNN` strings | Business capabilities this RA serves (capability→technology traceability) |
 | `linkedSTDs` | array | `STD-NNN` strings | Standards this RA is derived from or aligns to |
 | `linkedADRs` | array | `ADR-NNN` strings | ADRs ratified against this RA (populated during engagement adoption) |
+| `linkedSBBs` | array | `SBB-NNN` strings | Approved solution building blocks referenced by this RA (technology-neutral RA still references approved products) |
+| `reviewCadence` | string | any | How often the RA is reviewed/versioned (RAs age quickly and need active lifecycle management) |
 | `createdDate` | ISO date | `YYYY-MM-DD` | |
 | `lastModified` | ISO date | `YYYY-MM-DD` | Updated on every edit |
 
 ## Markdown Sections
 
+Each section carries a `<details>📋 Guidance</details>` block. Required sections must be populated for an RA to have governance value; the boundary sections (Mandatory vs Optional Components, Integration, Security Trust Boundaries, Data Ownership & Sovereignty, Governance Checkpoints) are what separate a governed RA from "architecture by PowerPoint".
+
 | Section | Required | Content |
 |---|---|---|
-| `## Overview` | yes | 1–3 paragraphs: what the pattern is and when to use it |
-| `## Architecture Layers` | yes | Table: Layer \| ABB-NNN \| ABB Name \| Role in Pattern |
+| `## Overview` | yes | 1–3 paragraphs: the solution class it governs and the consistency goal |
+| `## Scope & Domain` | yes | In-scope / out-of-scope boundary of the solution class |
+| `## Capability Alignment` | yes | Table: CAP-NNN \| Capability \| How this RA enables it |
+| `## Architecture Layers` | yes | Logical service decomposition. Table: Layer \| ABB-NNN \| ABB Name \| Role in Pattern |
+| `## Mandatory vs Optional Components` | yes | Table: Component (ABB-NNN) \| Mandatory/Optional \| Conformance note |
+| `## Integration Patterns & Mechanisms` | yes | Table: Interaction \| Approved pattern/mechanism \| Mandatory? |
+| `## Information Flows` | no | Table: Flow \| From \| To \| Mechanism \| Notes |
+| `## Security Architecture & Trust Boundaries` | yes | Table: Trust boundary \| Crossing \| Required control/pattern |
+| `## Data Ownership & Sovereignty` | yes | Table: Data domain \| Authoritative source \| Ownership boundary \| Residency requirement |
+| `## Technology Standards` | yes | Table: STD-NNN \| Standard \| Mandatory? (technology-neutral) |
+| `## Non-Functional Requirements` | no | Table: NFR category \| Target/envelope \| Conformance check |
 | `## Key Decisions` | yes | Table: Decision \| Rationale Summary \| Candidate ADR Title |
 | `## Constraints` | yes | Table: Description \| Candidate CST Title \| Flexibility (Mandatory \| Recommended) |
-| `## Implied Principles` | yes | Bullet list of BP/DP/AP/TP IDs (if linked to a repo) or free-text principle statements |
-| `## Adoption Notes` | yes | What is mandatory vs. flexible; known adaptations for common contexts |
-| `## Grill Checklist` | yes | Numbered list of testable statements used by `/ea-grill` when this RA is adopted |
+| `## Implied Principles` | yes | Bullet list of BP/DP/AP/TP IDs or free-text principle statements |
+| `## Governance Checkpoints & Conformance` | yes | Table: Checkpoint \| Measurable conformance criterion \| Checked at (phase) + adoption metric |
+| `## Operational Responsibilities` | no | Table: Component/service \| Operated by \| Consumed as shared service? |
+| `## Adoption Notes` | yes | What is mandatory vs. flexible; known adaptations |
+| `## Stress Test` | no | The three-teams consistency-vs-freedom verdict |
+| `## Grill Checklist` | yes | Numbered testable statements used by `/ea-grill` when this RA is adopted |
 
 ### Grill Checklist format
 

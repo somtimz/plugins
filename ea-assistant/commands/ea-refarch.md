@@ -25,7 +25,7 @@ Before executing any mode:
 
 ## Mode: `new [--local]`
 
-Create a new Reference Architecture entry.
+Create a new Reference Architecture entry. For the concept — what an RA is and is not, its boundary conditions, failure modes, and the consistency-vs-freedom stress test — read the **Reference Architecture (RA-NNN)** definition in `skills/ea-artifact-templates/references/ea-concepts.md`; do not restate it. The enriched `ra-entry-template.md` carries `<details>📋 Guidance</details>` per section, so a new RA is interview-able (`/ea-interview`), scorable (`/ea-score`), and grillable (`/ea-grill`) like any authored artifact.
 
 ### Steps
 
@@ -53,8 +53,12 @@ Create a new Reference Architecture entry.
    ✓ RA-NNN created: {name}
    File: {path}/RA-NNN.md
    
-   Next: fill in the sections (Architecture Layers, Key Decisions, Constraints, Grill Checklist)
-   then run /ea-refarch adopt RA-NNN to use it in this engagement.
+   Next: populate the boundary sections that give an RA governance value —
+   Mandatory vs Optional Components, Integration Mechanisms, Security Trust
+   Boundaries, Data Ownership & Sovereignty, Governance Checkpoints — plus
+   Architecture Layers, Key Decisions, Constraints, and the Grill Checklist.
+   Use `/ea-interview {raRoot}/RA-NNN.md` to fill it guidance-by-guidance, or
+   `/ea-score RA-NNN` to check completeness/quality. Then `/ea-refarch adopt RA-NNN`.
    ```
 
 ---

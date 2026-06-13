@@ -1231,6 +1231,63 @@ SBBs are the output of technology/vendor selection decisions — they are what t
 
 ---
 
+### Reference Architecture (RA-NNN)
+
+**What it IS:**
+A reference architecture is a **governed, reusable blueprint** that defines the required structural patterns, constraints, and interactions for a *class* of solutions — so that independent teams can build different systems that remain strategically aligned, interoperable, secure, and maintainable across the enterprise. It is *prescriptive*: it codifies approved patterns, principles, standards, capability mappings, interaction models, and governance constraints for a specific domain (e.g. Customer Engagement, Integration, Data & Analytics, Cloud, Identity & Access Management).
+
+It sits **between business strategy and a specific solution implementation** — and is neither of its neighbours:
+- Not a **conceptual architecture** — too abstract to govern against.
+- Not a **solution architecture** — too specific; it does not name the exact product, cloud region, or CPU allocation. Those belong to solution design.
+
+It answers: *what capabilities should exist · what kinds of components are needed · how should they interact · what standards and patterns must be followed* — while deliberately leaving *which exact product / region / sizing* to implementation.
+
+**The core purpose is consistency:** it lets many teams build different solutions that still fit the same enterprise ecosystem, maximising consistency while preserving design freedom.
+
+**Structural parts** (RA-NNN entry — `/ea-refarch`; full structure in `templates/seeds/ra-entry-template.md`):
+- **Capability model alignment** — which CAP-NNN this RA serves (business-capability → technology traceability)
+- **Logical service decomposition** — the layers/services (e.g. presentation, API, IAM, business services, data services, observability, security controls) as ABB-NNN
+- **Mandatory vs optional components** — what every conforming solution must include vs may include
+- **Approved integration patterns & mechanisms** — e.g. "all external access via an API gateway", "apps publish events to an event bus", "auth via the central identity provider"
+- **Information flows** — how data moves between components
+- **Security architecture patterns & trust boundaries** — where trust crosses a boundary; controls at each
+- **Data ownership / sovereignty** — master-data services, residency requirements, ownership boundaries
+- **Technology standards** — STD-NNN the RA mandates (technology-neutral, not vendor-specific)
+- **Non-functional requirements** — the NFR envelope conforming solutions inherit
+- **Governance checkpoints** — measurable conformance criteria used at architecture review
+- **Operational responsibilities** — who runs and supports what
+- **Grill checklist** — testable conformance statements
+
+**Key architectural functions:** Standardization (reduces architectural entropy by constraining choices) · Reuse (common patterns and shared services) · Governance (measurable conformance criteria) · Risk reduction (institutionalises proven patterns) · Strategic alignment (capability-to-implementation traceability).
+
+**What it is NOT:**
+- Not an **ABB/SBB** — a reference architecture *composes* ABBs (and references approved SBBs); it is the governed pattern, not a single building block.
+- Not a **Principle** — a principle is a universal rule; an RA is a domain-scoped, versioned blueprint that *applies* principles.
+- Not a **Solution Architecture** — see boundary above. Over-specify and it *becomes* a solution architecture (an anti-pattern).
+
+**Boundary conditions (must be explicit, or the RA has no governance value):** mandatory vs optional components · approved integration mechanisms · security trust boundaries · data sovereignty requirements · operational responsibilities. Without these it devolves into "a generic diagram".
+
+**Failure modes:**
+- **Architecture by PowerPoint** — a static diagram with no adoption metrics, no conformance process, no linkage to standards.
+- **Over-specification** — collapses into a solution architecture; reduces innovation, over-couples, can't adapt.
+- **Under-specification** — aspirational not actionable; multiple interpretations, inconsistent implementations, governance ambiguity.
+- **Vendor capture** — a disguised product recommendation; loses technology neutrality, invites lock-in.
+
+**Known limitations:** an RA raises the *probability* of good outcomes — it cannot guarantee successful implementation, operational excellence, or business value. It ages quickly when operating models, platforms, regulation, or capabilities change, so it requires active lifecycle management, versioning, and governance.
+
+**Stress test (a useful RA survives this question):** *"If three independent teams build three different systems from this RA, will their solutions exhibit consistent security, integration, data-management, operational, and governance characteristics without extensive coordination?"* If **no** → it lacks guidance (under-specified). If **yes, but the three are nearly identical** → it is over-constrained. The optimum maximises consistency while preserving design freedom.
+
+**TOGAF placement:** Architecture Repository (Reference Library) and Architecture Capability; informs Phases B–D (domain architectures) and Phase E (solution shaping); conformance checked in Phase G (Implementation Governance). Managed via `/ea-refarch` (shared repo or per-engagement); adopted RAs contribute a grill checklist.
+
+**ArchiMate:** typically expressed as a layered set of Application/Technology **Services** and **Components** with Motivation-layer **Principles**, **Requirements**, and **Constraints** governing them — a viewpoint, not a single element.
+
+**Practitioner Notes:**
+- **Define the boundaries first.** The mandatory/optional split and the trust/data boundaries are what give an RA governance teeth; everything else is commentary.
+- **Stay technology-neutral.** Name ABBs and standards, reference approved SBBs — but resist baking in a single vendor, or you invite vendor capture.
+- **Maturity marker (L1→L5):** L1 = RA is a slide deck with no conformance; L3 = RA has mandatory components, a grill checklist, and is checked at review; L5 = adoption and conformance are measured, and the RA is versioned and pruned as platforms evolve.
+
+---
+
 ### VDR (Vendor Landscape Register entry — VDR-NNN)
 
 Organisation-wide vendor assessment. Tracks a specific vendor product's roadmap status, contract status, lock-in risk, and links to SBBs that implement it. Stored in `Architecture-Repository/vendor-landscape/entries/VDR-NNN.md` — part of the shared Architecture Repository, not per-engagement.

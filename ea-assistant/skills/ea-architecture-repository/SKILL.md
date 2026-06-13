@@ -1,7 +1,7 @@
 ---
 name: ea-architecture-repository
 description: Manages the shared TOGAF Architecture Repository — Standards Information Base (SIB/STD-NNN), Vendor Landscape Register (VDR-NNN), Technology Horizon Register (THR-NNN), and enterprise-level governance artefacts. Supports multi-engagement, multi-project sharing via the EA-Workspace/ sibling-folder layout.
-version: 0.9.60
+version: 0.9.73
 ---
 
 # Architecture Repository Skill
@@ -37,10 +37,11 @@ Technology radar tracking the organisation's position on emerging technologies:
 - See `references/technology-horizon-schema.md` (created in Task 6)
 
 ### Reference Architecture Register (RA-NNN)
-Stores reusable architectural patterns shared across engagements:
-- Named patterns with ABB/SBB layer catalogues, key decisions, constraints, and implied principles
-- Each RA entry: id, name, domain, status (Draft | Approved | Deprecated), source (internal | industry), linkedSTDs, linkedADRs
-- `## Grill Checklist` section drives `/ea-grill` RA compliance checks when an engagement adopts the RA
+Stores reusable architectural patterns shared across engagements. A reference architecture is a **governed, reusable blueprint** for a *class* of solutions — prescriptive on patterns/constraints/interactions but not a solution architecture. For the full concept (what it is/isn't, boundary conditions, failure modes, the consistency-vs-freedom stress test), read the **Reference Architecture (RA-NNN)** definition in `skills/ea-artifact-templates/references/ea-concepts.md` — the single source of truth; do not restate it here.
+
+- Governed blueprint per domain: capability alignment, logical service decomposition (ABB/SBB layer catalogues), **mandatory vs optional components**, approved integration patterns/mechanisms, information flows, **security trust boundaries**, data ownership & sovereignty, technology standards, NFR envelope, **governance checkpoints**, operational responsibilities, key decisions, constraints, and implied principles — per `templates/seeds/ra-entry-template.md` (guidance-driven, so RAs are interview-able, scorable, and grillable)
+- Each RA entry: id, name, domain, status (Draft | Approved | Deprecated), source (internal | industry), linkedCAPs, linkedSTDs, linkedADRs, linkedSBBs
+- `## Grill Checklist` and `## Governance Checkpoints & Conformance` drive `/ea-grill` RA compliance checks when an engagement adopts the RA
 - Stored in: `Architecture-Repository/reference-library/entries/RA-NNN.md`
 - Per-engagement local RAs (not shared): `artifacts/cross-cutting/reference-architectures/RA-NNN.md`
 - See `references/reference-architecture-schema.md`

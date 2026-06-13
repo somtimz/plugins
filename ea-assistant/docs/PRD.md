@@ -1,10 +1,22 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.72
+**Version:** 0.9.73
 **Status:** Current
 **Author:** Costa Pissaris
 
 ---
+
+## v0.9.73 — Reference Architecture Concept & Enriched Template
+
+### Summary
+Reference architecture already had a register (`/ea-refarch`, RA-NNN) and a repository skill, but no formal **concept definition** and only a thin entry template. This release adds the concept and enriches the template to a full governed-blueprint structure — **without** duplicating the existing command/skill.
+
+### New
+- **Reference Architecture (RA-NNN) concept** in `ea-concepts.md` — a governed, reusable blueprint for a *class* of solutions, sitting between business strategy and solution implementation. Covers what it is/isn't (not a conceptual or solution architecture), structural parts, the four key functions (standardization / reuse / governance / risk reduction / strategic alignment), boundary conditions, the four failure modes (architecture-by-PowerPoint, over-/under-specification, vendor capture), known limitations, and the three-teams **stress test**. (EA concepts: 26 → 27.)
+- **Enriched `ra-entry-template.md`** — from 7 thin sections to a full structure with `<details>📋 Guidance</details>` per section (so RAs are interview-able, scorable, and grillable): Scope & Domain, Capability Alignment, Architecture Layers, **Mandatory vs Optional Components**, Integration Patterns & Mechanisms, Information Flows, **Security Architecture & Trust Boundaries**, **Data Ownership & Sovereignty**, Technology Standards, NFRs, Key Decisions, Constraints, Implied Principles, **Governance Checkpoints & Conformance**, Operational Responsibilities, Adoption Notes, **Stress Test**, Grill Checklist. New frontmatter: `linkedCAPs`, `linkedSBBs`, `reviewCadence`.
+
+### Changed
+- **`/ea-refarch new`** and the **`ea-architecture-repository`** skill point to the concept (single source of truth) and the enriched template; `reference-architecture-schema.md` updated to match. No new command — the existing register handles creation (`/ea-refarch new`), and the guidance-driven template means `/ea-interview`, `/ea-score`, and `/ea-grill` all work on RAs.
 
 ## v0.9.72 — Two-Score Artifact Scoring (Completeness + Quality)
 
@@ -316,9 +328,9 @@ Requirements Register entries carry a Motivation field that links each requireme
 
 > 📎 Source framework: `skills/ea-artifact-templates/references/ea-concepts-source.pdf` — *Enterprise Architecture Strategic Context: Terms, Concepts, and Relationship Models*
 
-### EA Concepts (26 total)
+### EA Concepts (27 total)
 
-Vision, Mission, Business Driver, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Problem, Opportunity, Capability Model, Capability Gap, Value Stream, Business Process, Use Case, Operating Model, Metrics, Cost Entry, Constraint, Stakeholder Concern, ADR, ABB, SBB, User Story — each with a formal definition, TOGAF phase placement, ArchiMate 3.x element, and a disambiguation checklist. Full definitions in `skills/ea-artifact-templates/references/ea-concepts.md`.
+Vision, Mission, Business Driver, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Problem, Opportunity, Capability Model, Capability Gap, Value Stream, Business Process, Use Case, Operating Model, Metrics, Cost Entry, Constraint, Stakeholder Concern, ADR, ABB, SBB, Reference Architecture, User Story — each with a formal definition, TOGAF phase placement, ArchiMate 3.x element, and a disambiguation checklist. Full definitions in `skills/ea-artifact-templates/references/ea-concepts.md`.
 
 **Disambiguation summary:**
 
@@ -349,6 +361,7 @@ Vision, Mission, Business Driver, Principle, Goal, Objective, Strategy, Plan, Ri
 | Technology Principle | Non-negotiable rule (technology domain) | No                | No                 | Governs platform and vendor selection; registered with TP-NNN; `/ea-principles` |
 | ABB              | Reusable component (solution-independent) | No                   | No                 | Realised by SBB-NNN; supports Phase D/E deliverables; registered with ABB-NNN; `/ea-abbs` |
 | SBB              | Concrete implementation                | No                      | No                 | Realises ABB-NNN; specific product or build choice; registered with SBB-NNN; `/ea-sbbs` |
+| Reference Architecture | Governed reusable blueprint (class of solutions) | Versioned | No        | Composes ABBs; governs solutions between strategy and implementation; RA-NNN; `/ea-refarch` |
 | User Story       | Qualitative (stakeholder goal)         | No                      | No                 | Linked to REQ-NNN and ABB-NNN; registered with STY-NNN; `/ea-stories`                 |
 
 ---
