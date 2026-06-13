@@ -170,7 +170,7 @@ Every metric has:
 **Metrics vs. Objectives:**
 - An **objective** defines the *commitment* — what will be achieved and by when.
 - A **metric** defines the *instrument* — how progress will be measured, how often, and from what source.
-- Every objective should have at least one corresponding performance metric. A metric without a linked direction item is an orphan and should be linked or removed.
+- Every objective should have at least one corresponding performance metric. A metric without a linked direction item is an orphan and should be linked or removed — except `benefit`-type metrics, which legitimately link to a `FIN-NNN` Cost Entry rather than a direction item.
 
 ---
 

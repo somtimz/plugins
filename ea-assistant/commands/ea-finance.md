@@ -16,7 +16,7 @@ A Cost Entry makes one subject legible in financial terms (capex, opex, TCO, pay
 | Prefix / concept | `FIN-NNN` — Cost Entry |
 | Storage | `engagement.json → finance[]` |
 | Register file | `artifacts/cross-cutting/operations/cost-model-register.md` (artifactId `cost-model-register`; relatedArtifacts `["architecture-roadmap", "business-case"]`) |
-| Display view | Architecture Roadmap `## Roadmap Budget Summary` + per-WP cost fields — synced at `generate` time from linked work packages (see Roadmap Sync below); not a simple row mirror |
+| Display view | **none** — do not run the protocol's add/update Display View Sync (the roadmap relationship is a many-FIN→budget roll-up, not a one-row-per-item mirror). The Architecture Roadmap is refreshed at `generate` time only — see Roadmap Sync below |
 | Groupings | `list` and `generate` group by Subject; summary header shows total Capex, total Opex (annual), total 3-Year TCO (per the engagement currency), plus counts by Status and Confidence, "Orphans (no linked WP/ADR/Goal)", and "Unquantified value (no annualBenefit and no benefitNarrative)" |
 | Orphan rule | No `linkedWorkPackages` AND no `linkedADRs` AND no `linkedGoals` → `⚠️ Orphan` |
 
@@ -42,7 +42,7 @@ A Cost Entry makes one subject legible in financial terms (capex, opex, TCO, pay
 
 **Derived fields (never prompted — always recomputed on `add` and `update`):**
 - `tco` = `capex + opexAnnual × horizonYears`
-- `paybackMonths` = `capex ÷ ((annualBenefit − opexAnnual) ÷ 12)`, rounded to a whole month, **only when `annualBenefit > opexAnnual`**; otherwise `null` (display as `—`, "no payback within horizon")
+- `paybackMonths` = `capex ÷ ((annualBenefit − opexAnnual) ÷ 12)`, rounded to a whole month, **only when `annualBenefit > opexAnnual`**; otherwise `null` (no payback — annual value does not exceed annual run cost). Display: `null` → `—`; a value `> horizonYears × 12` → `{n} months (beyond {horizonYears}-yr horizon)`; otherwise `{n} months`.
 
 ### Link fields
 
@@ -70,7 +70,7 @@ A Cost Entry makes one subject legible in financial terms (capex, opex, TCO, pay
 
 ## Register-Specific Checks
 
-**Recompute derived fields (add and update, before the confirmation preview):** Always recompute `tco` and `paybackMonths` from the current `capex`, `opexAnnual`, `horizonYears`, and `annualBenefit`. Show both in the preview: `3-Year TCO: {currency} {tco}  ·  Payback: {paybackMonths} months | —`. Never accept a hand-entered `tco` or `paybackMonths`.
+**Recompute derived fields (add and update, before the confirmation preview):** Always recompute `tco` and `paybackMonths` from the current `capex`, `opexAnnual`, `horizonYears`, and `annualBenefit`. Show both in the preview: `3-Year TCO: {currency} {tco}  ·  Payback: {payback display per the rule above}`. Never accept a hand-entered `tco` or `paybackMonths`.
 
 **Value-quantification check (post-prompt, add; also flag in `list` with `⚠️ value?`):** If both `annualBenefit` is 0 and `benefitNarrative` is empty, warn:
 ```

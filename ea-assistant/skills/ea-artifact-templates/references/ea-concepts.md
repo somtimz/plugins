@@ -946,7 +946,7 @@ A Cost Entry captures the **architecture-grade economic picture** of a single su
 - **TCO** — *derived* = Capex + (Opex × Horizon)
 - **Annual Benefit** — quantified annual value, if any
 - **Benefit Narrative** — qualitative value when not fully quantified
-- **Payback** — *derived* = Capex ÷ ((Annual Benefit − Opex) ÷ 12), in months; `—` if no payback within horizon
+- **Payback** — *derived* = Capex ÷ ((Annual Benefit − Opex) ÷ 12), in months; `—` if Annual Benefit does not exceed Opex (no payback); flagged as "beyond horizon" if it exceeds the TCO horizon
 - **Confidence** + **Basis** — High / Medium / Low and why
 - **Status** — Estimate / Budgeted / Committed / Actual
 - **Links** — WP-NNN, ADR-NNN, G-NNN
