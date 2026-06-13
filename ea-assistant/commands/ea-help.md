@@ -147,7 +147,7 @@ You have existing engagements. Common next steps:
 | `/ea-lens [--quick]` | Seasoned architect engagement review — eight practitioner lenses focused on what matters vs. completeness theatre |
 | `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman |
 | `/ea-security-review` | Security audit — SABSA, ISO 27001, and NIST CSF 2.0 coverage across the engagement or a single artifact |
-| `/ea-migrate [--report\|--reorganize]` | Align legacy engagement to current plugin version conventions; `--reorganize` moves flat-path artifacts into correct phase subfolders |
+| `/ea-migrate [--report\|--reorganize]` | Align legacy engagement to current plugin version conventions; backfills template body sections/guidance the artifact predates (insertion-only, per-section confirm); `--reorganize` moves flat-path artifacts into correct phase subfolders |
 | `/ea-publish [--full\|--executive]` | Layered stakeholder report (default), full consolidated document (`--full`), or executive pack; writes `artifacts/index.md` reading guide |
 | `/ea-git [init\|status\|commit\|push\|sync\|log\|remote]` | Manage EA-projects/ as a git repository — init, commit, push to GitHub |
 | `/ea-brief [--focus decisions\|risks\|gaps\|strategy] [--save]` | Synthesized one-page engagement brief — ranked decisions, gaps, risks, open concerns |
