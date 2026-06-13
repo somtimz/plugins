@@ -1,10 +1,24 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.73
+**Version:** 0.9.74
 **Status:** Current
 **Author:** Costa Pissaris
 
 ---
+
+## v0.9.74 — Capability Management (`/ea-capabilities`) & Canonical Capability Map
+
+### Summary
+Capabilities had a concept (Capability Model), a CAP-NNN id, matrices, and a table inside Business Architecture — but no command to create/edit/score/manage them, and the concept lacked the components/attributes/**value** framing. This release makes capabilities first-class and ensures brainstorming, interviewing, and scoring all understand what a capability is and the value it brings. Per the design decisions: capabilities are **mastered in `business-architecture.md`** (no engagement.json array); the map + register ship now (knowledge graph deferred); the canonical map is an **adoptable repository register**.
+
+### New
+- **`/ea-capabilities` command** — `list / add / update / map / score / adopt`. Masters CAP-NNN in the Business Architecture `## 3. Capability Model` table. `add`/`update` enforce capability-as-noun (process-name warning) and require a **value/outcome**; `map` renders the box-in-box hierarchical capability map (indented + Mermaid); `score` rates the model on Completeness + Quality (value stated, strategically anchored, not a process, not inflated, value-stream traced) via the grill scoring rubric; `adopt` seeds from the canonical map.
+- **Canonical Capability Map in the Architecture Repository** — a new `capability-library/` with `canonical-capability-map.md` (seed template, `CAP-C-NNN` ids). The authoritative enterprise capability hierarchy engagements seed/adopt from so everyone speaks the same capability language. Added to the repository skill, workspace structure, and command table.
+- **Value / Outcome column** added to the Business Architecture capability table; CAP-C-NNN id added to the ID scheme.
+
+### Changed
+- **Capability Model concept** enriched: single-capability definition, the **value it brings**, components (people/process/information/technology/resources), attributes (strategic importance/maturity/cost/risk/performance), the realization chain, Capability Map vs Knowledge Graph, and the critical challenges (capability inflation, false completeness, stability caveat).
+- **Phase B interview** gains a Value/Outcome question and differentiating-vs-commodity framing; **brainstorm** Phase B probes capabilities by value; **scoring rubric** definition-correctness now covers capabilities. No KG built (deferred — ROI unproven, per the source material).
 
 ## v0.9.73 — Reference Architecture Concept & Enriched Template
 

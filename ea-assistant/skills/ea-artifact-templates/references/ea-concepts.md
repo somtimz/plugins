@@ -830,23 +830,44 @@ A stakeholder concern or objection is a named challenge, question, or objection 
 **What it IS:**
 A Capability Model is a stable, hierarchical map of what the organisation must be able to do to achieve its business outcomes — independent of current organisational structure, people, or systems. Capabilities represent bundles of people, processes, information, and tools working together to produce a defined outcome. The Capability Model answers *"What must the organisation be able to do?"*
 
+**A single capability** is an *ability of the organisation to achieve an outcome*, independent of **who** performs it, **how** it is done, or **what** technology is used. It is a noun ("Customer Onboarding"), never a verb-noun process ("Process Order"). Manage individual capabilities with `/ea-capabilities`.
+
+**The value a capability brings** — every capability should state the **business outcome it enables** and the goal/strategy it serves. A capability with no articulated value and no strategic anchor is a candidate for removal: it is either commodity overhead or "capability inflation". Make differentiating capabilities (where the org competes) strong; make commodity capabilities (table stakes) efficient, not gold-plated. Scoring, brainstorming, and interviewing all test for this value statement.
+
+**Components — a capability is realised by** (the *what*, decomposed into the *how/who/with-what*):
+- **People / Roles** — who executes
+- **Processes** — how the work flows
+- **Information / Data** — what is used and produced
+- **Applications / Technology** — the enablers
+- **Resources / Facilities** — assets it draws on
+
+**Attributes (decision layer)** — meta-properties used to prioritise investment: **strategic importance** (differentiating vs commodity), **maturity**, **cost / investment**, **risk**, **performance**.
+
+**Realization chain:** `Strategy → Capability → Process → Application → Technology`. The capability is the anchor that translates strategy into execution; processes operationalise it; applications and infrastructure enable the processes.
+
 **Structural characteristics:**
-- Organised as a hierarchy: Level 1 (domain) → Level 2 (capability) → Level 3 (sub-capability)
+- Organised as a hierarchy: Level 1 (domain) → Level 2 (capability) → Level 3 (sub-capability); the map is **box-in-box, not flow-based** (no arrows — that is a value stream)
 - Each capability is assigned a **CAP-NNN** ID on creation during Phase B — IDs are sequential across the engagement
-- Each capability has a name, brief description, and maturity level (Absent / Immature / Developing / Mature)
-- Each capability includes a **Supports** field referencing the STR-NNN strategies or G-NNN goals it enables — this is the explicit traceability link from strategy to capability; a capability with no strategic anchor should be flagged for removal or reclassification
+- Each capability has a name, brief description, **value / outcome**, and maturity level (Absent / Immature / Developing / Mature)
+- Each capability includes a **Supports** field referencing the STR-NNN strategies or G-NNN goals it enables — the explicit strategy→capability traceability link; a capability with no strategic anchor should be flagged for removal or reclassification
 - Independent of how the capability is currently delivered — what, not how or who
-- Stable across reorganisations; changes only when business outcomes change
+- Stable across reorganisations; changes only when business outcomes change. **Caveat:** "stable over time" holds at higher abstraction levels — digital-native and AI-driven organisations see faster capability evolution at lower levels.
 
 **Key relationships:**
 - **Objectives and Strategies inform** the Capability Model — the capabilities the org must develop are determined by where it is going and how it plans to get there
 - **Capability Model shapes** the Operating Model — once you know what you must be able to do, you design how it will be done
 - **Capability Gap** = a capability that is absent or immature relative to what the Strategies and Objectives require; capability gaps prevent Goals from being achieved
+- Capabilities also relate to **value streams** (which stages they enable), **applications** (which IT supports them), and **data domains** (information ownership) — captured via `/ea-matrix` (capability×value-stream, capability×application, capability×organization)
+
+**Capability Map vs Capability Knowledge Graph:** the **map** is a static, hierarchical *representation* (human-readable, hierarchy only). A **capability knowledge graph** is an *operational model* — capabilities as nodes with explicit typed relationships to processes, applications, data, goals, and value streams, enabling impact and path analysis. EA Assistant manages the **map** (and typed relationships via matrices); a full RDF/ontology knowledge graph is a future option, not built in — its ROI is still unproven in practice.
 
 **What it is NOT:**
 - Not an org chart — capabilities are outcome-based, not structure-based
 - Not a process model — a capability is what can be done; a process is how it is done
 - Not a system inventory — capabilities are business concepts; applications implement them
+- Not a **value stream** — a capability is a stable "what"; a value stream is the end-to-end flow that delivers value by exercising capabilities
+
+**Critical challenges (avoid):** *capability inflation / duplication* (no universal boundary for "a capability" — keep the model lean); *false completeness* (a map claims "full enterprise view" but omits informal work, shadow IT, and emergent capabilities — note known gaps); *maps hide dynamics* (no sequencing or causality — pair with value streams for transformation planning).
 
 **TOGAF placement:** Business Architecture (Phase B) — the primary home. Referenced in Gap Analysis and Architecture Vision when summarising what the organisation must be able to do to achieve its Goals.
 

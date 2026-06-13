@@ -115,6 +115,7 @@ You have existing engagements. Common next steps:
 | `/ea-goals [mode]` | Goals Register — list, add, update, trace G→OBJ→STR→WP chain, or generate register; Domain + Type classification |
 | `/ea-objectives [mode]` | Objectives Register — list, add, update, trace OBJ→G/PRB/MET/WP chain, or generate register; measurability checks (measure, target, deadline) |
 | `/ea-strategies [mode]` | Strategy Register — list, add, update, trace the Goals→Strategies→Work Packages map, or generate register; Type (Build/Buy/Partner/Consolidate/Modernise/Defend) + Horizon classification; `trace` renders the Strategy Map |
+| `/ea-capabilities [list\|add\|update\|map\|score\|adopt]` | Manage business capabilities (CAP-NNN) in the Business Architecture capability model — create/edit the hierarchy, render the capability map, score Completeness + Quality, or adopt from the Architecture Repository's canonical capability map; each capability states the value/outcome it brings |
 | `/ea-target [new\|view\|update]` | Target State Declaration — capture per-domain target states, success criteria, and traceability to goals and objectives |
 | `/ea-actions [generate\|view\|update\|status]` | Stakeholder Action Plan — consolidated per-approver action view seeded from SAoW and Target State Declaration; suitable for governance forums and ARB |
 | `/ea-finance [list\|add\|update\|trace\|generate]` | Cost Model Register — manage FIN-NNN Cost Entries (capex/opex/TCO/payback with confidence), trace to work packages/ADRs/goals, generate register and roll up the roadmap budget |
@@ -219,6 +220,12 @@ Type these at any interview prompt:
 • Ask "let's build the roadmap" — the ea-roadmap agent will be dispatched automatically;
   it reads your Vision goals and strategies to seed work packages
   automatically (or works from scratch if no artifacts exist yet).
+• Use `/ea-capabilities` to create and manage business capabilities (CAP-NNN) —
+  what the org must be *able to do*, as outcome-based nouns, each with the value
+  it brings. `map` renders the box-in-box capability map; `score` rates the model
+  on Completeness + Quality (value stated? strategically anchored? not a process?
+  not inflated?); `adopt` seeds from the Architecture Repository's canonical
+  capability map. Brainstorm and Phase B interviews now probe capabilities by value.
 • Use `/ea-strategies` to make strategy first-class — the "how" in the
   DRV→G→OBJ→STR→WP chain. Each STR-NNN carries Type (Build/Buy/Partner/
   Consolidate/Modernise/Defend), Horizon, and rationale; `add`/`update` sync
