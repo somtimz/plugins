@@ -1,7 +1,7 @@
 ---
 name: ea-engagement-lifecycle
 description: This skill should be used when the user asks to "start an EA engagement", "manage an EA project", "set up a new architecture engagement", "what phase are we in", "advance the ADM", "continue the engagement", "resume an EA project", or when working within any TOGAF ADM phase. Provides end-to-end lifecycle guidance for Enterprise Architecture engagements using TOGAF 10 as the backbone.
-version: 0.9.70
+version: 0.9.71
 ---
 
 # EA Engagement Lifecycle

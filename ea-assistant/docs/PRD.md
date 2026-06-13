@@ -1,10 +1,25 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.70
+**Version:** 0.9.71
 **Status:** Current
 **Author:** Costa Pissaris
 
 ---
+
+## v0.9.71 — `/ea-migrate` Section Reorder & Content Relocation
+
+### Summary
+Extends `/ea-migrate`'s body-alignment beyond insertion (v0.9.70's 3i) to **rearranging** existing sections and **moving** misplaced content — within a document or to another document. Because these operations relocate *populated* content, they ship with a strict safety contract.
+
+### New
+- **Scan 3j — Section Ordering Gaps:** reorders existing sections to match the current template's order. Whole-section atomic moves (heading + body until the next heading), per-artifact confirmation, snapshot first, excluded from `--auto`. Appendices/Working Notes keep their fixed trailing order.
+- **Scan 3k — Misplaced Content (heuristic):** surfaces content that likely belongs in another section or another artifact (Risk-shaped content → Risk Register; requirement statements → Requirements Register; a `Work Packages` section in the Vision → Roadmap; a block under the wrong heading), and proposes a **user-confirmed** move. Register-bound content is offered as formal registration (e.g. `/ea-risks add` seeded from the block), not raw paste. Conservative, high-precision patterns only.
+- **Snapshot Before Restructure:** every 3j/3k change snapshots the affected artifact(s) to `snapshots/{artifact-id}-{date}-pre-restructure.md` first, and runs a **content-preservation check** afterwards (reorder = same section multiset, different order; move = block present in exactly one place) — restoring from the snapshot if anything would be lost or duplicated.
+
+### Safety
+- 3j/3k are **excluded from `--auto`** and require per-item confirmation
+- Approved artifacts: 3k moves set `reviewStatus` back to `Needs Revision` (material change), confirmed first
+- Same authored-artifact scope as 3i — command-generated artifacts (registers/matrices/derived) are skipped
 
 ## v0.9.70 — Template Body Backfill in `/ea-migrate`
 
