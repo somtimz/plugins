@@ -67,6 +67,12 @@ links: []
 
 ---
 
+## Related Matrices
+
+> **TOGAF relationship matrices for this domain** (manage with `/ea-matrix`; definitions in `matrix-catalogue.md`): Data Entity/Business Function (`data-function`), Application/Data (`app-data`), Data Entity/Data Component (`data-entity-component`). Run `/ea-matrix list` for status.
+
+---
+
 ## Executive Summary
 
 <details>

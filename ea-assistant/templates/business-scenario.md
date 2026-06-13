@@ -71,7 +71,12 @@ links: []
 
 ## 1. Problem Statement
 
-*A clear description of the business problem or pain point this scenario addresses. Answer: "What is broken, and why does it matter?"*
+<details>
+<summary>📋 Guidance</summary>
+
+A clear description of the business problem or pain point this scenario addresses. Answer: "What is broken, and why does it matter?" Write it in the stakeholder's language, not the architect's. Link it to the Issues, Problems, and Drivers it stems from so the scenario is anchored in the motivation chain.
+
+</details>
 
 {{problem_statement}}
 
@@ -84,7 +89,12 @@ links: []
 
 ## 2. Objectives
 
-*SMART goals the architecture must meet to resolve this scenario. Each objective must have a measure, target, and deadline.*
+<details>
+<summary>📋 Guidance</summary>
+
+SMART goals the architecture must meet to resolve this scenario — each with a measure, target, and deadline. An objective that fails the SMART check (no unit, no target, no date) is probably a Goal; move it or sharpen it. Every objective should trace back to the problem in §1.
+
+</details>
 
 | OBJ-NNN | Objective | Measure | Target | Deadline | Priority |
 |---|---|---|---|---|---|
@@ -96,7 +106,12 @@ links: []
 
 ## 3. Environment and Context
 
-*The business and technology context within which this scenario occurs.*
+<details>
+<summary>📋 Guidance</summary>
+
+The business and technology context within which this scenario occurs — internal (structure, capabilities, platforms, budget, mandate), external (market, regulation, partner/customer expectations, competition), and the current technology touchpoints. Capture only what constrains or enables the target state; this is context, not a full baseline architecture.
+
+</details>
 
 ### 3.1 Internal Environment
 
@@ -120,7 +135,12 @@ links: []
 
 ## 4. Stakeholders and Concerns
 
-*Who is involved in or affected by this scenario, and what they care about most.*
+<details>
+<summary>📋 Guidance</summary>
+
+Who is involved in or affected by this scenario, and what they care about most. Capture only the stakeholders directly in this scenario — the full engagement register lives in the Stakeholder Map. Each named concern is a candidate CON-NNN and a test the target state must satisfy.
+
+</details>
 
 | Stakeholder | Role | Primary Concern | Engagement Level |
 |---|---|---|---|
@@ -133,7 +153,12 @@ links: []
 
 ## 5. Actors
 
-*The specific people and systems that participate in this scenario. Actors are not the same as stakeholders — actors are the ones who take actions or receive actions in the scenario flow.*
+<details>
+<summary>📋 Guidance</summary>
+
+The specific people and systems that participate in this scenario. Actors are not stakeholders — actors take or receive actions in the scenario flow. A **human actor** is a person or role who initiates, approves, or receives outcomes; a **computing actor** is a system, application, service, or device that processes, stores, or transmits information. Mark each computing actor's current state (Existing / To Be Built / To Be Modified) — that feeds the change delta in §9.
+
+</details>
 
 ### 5.1 Human Actors
 
@@ -153,7 +178,12 @@ links: []
 
 ## 6. Requirements
 
-*The specific capabilities the architecture must deliver to resolve this scenario. Grouped by domain. Each requirement should trace to this scenario.*
+<details>
+<summary>📋 Guidance</summary>
+
+The specific capabilities the architecture must deliver to resolve this scenario, grouped by domain (Business / Data / Application / Technology) with a MoSCoW priority. Each requirement should trace to an actor, problem, or issue in this scenario. Register each formally with `/ea-requirements add` and set `sourceScenario` so traceability from scenario to requirement is maintained.
+
+</details>
 
 | REQ-NNN | Domain | Statement | Priority | Source (Actor / Problem) |
 |---|---|---|---|---|
@@ -165,7 +195,12 @@ links: []
 
 ## 7. Current State Narrative
 
-*A plain-language description of what happens today — the "before" picture. Written as a stakeholder would describe it, not as an architect would model it.*
+<details>
+<summary>📋 Guidance</summary>
+
+A plain-language description of what happens today — the "before" picture, written as a stakeholder would describe it, not as an architect would model it. Name the friction points explicitly; they are what the target state must remove and what makes the case for change concrete.
+
+</details>
 
 {{current_state_narrative}}
 
@@ -177,7 +212,12 @@ links: []
 
 ## 8. Target State Narrative
 
-*What will happen after the architecture is delivered — the "after" picture. Written to be verifiable: stakeholders should be able to confirm whether the target has been reached.*
+<details>
+<summary>📋 Guidance</summary>
+
+What will happen after the architecture is delivered — the "after" picture. Write it to be verifiable: stakeholders should be able to confirm whether the target has been reached. The success signals here should map back to the objectives in §2 and the friction points in §7.
+
+</details>
 
 {{target_state_narrative}}
 
@@ -189,7 +229,12 @@ links: []
 
 ## 9. Change Delta
 
-*What specifically changes between current and target state. This is the minimum the architecture must enable.*
+<details>
+<summary>📋 Guidance</summary>
+
+What specifically changes between current and target state across process, data, application, and technology — and the architecture action each change requires. This is the minimum the architecture must enable; it is the bridge from narrative to work packages, so keep each row concrete and actionable.
+
+</details>
 
 | Dimension | Current State | Target State | Architecture Action Required |
 |---|---|---|---|
@@ -202,7 +247,12 @@ links: []
 
 ## 10. Scenario Diagram (optional)
 
-*A simple flow or sequence diagram showing the scenario in the target state. Actor → Action → System notation is sufficient.*
+<details>
+<summary>📋 Guidance</summary>
+
+A simple flow or sequence diagram showing the scenario in the target state — Actor → Action → System notation is sufficient. The diagram should match the actors in §5 and the target flow in §8; generate it with `/ea-generate business-scenario-{{BS-NNN}} mermaid`.
+
+</details>
 
 ```
 {{actor_1}} ──[action]──► {{system_1}} ──[result]──► {{actor_2}}

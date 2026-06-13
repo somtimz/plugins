@@ -125,7 +125,7 @@ You have existing engagements. Common next steps:
 | `/ea-horizon [list\|add\|update\|surface\|link-adr]` | Technology Horizon Register — manage THR-NNN technology radar with Adopt/Trial/Assess/Hold ring model |
 | `/ea-standards [list\|add\|link-constraint\|surface]` | Standards Information Base — manage STD-NNN industry/regulatory standards with adoption status |
 | `/ea-refarch [new\|list\|show\|edit\|adopt\|unadopt\|status]` | Reference Architecture Register — manage RA-NNN patterns with ABB/SBB layer catalogues, key decisions, and grill checklist integration |
-| `/ea-matrix [list\|new\|show\|edit\|check] [key]` | TOGAF relationship matrices — 14 grid artifacts (Actor/Role, App/Data CRUD, Capability/Application, System/Technology…) with axis seeding and catalogue-driven checks |
+| `/ea-matrix [list\|new\|show\|edit\|check] [key]` | TOGAF relationship matrices — 16 grid artifacts (Actor/Role, App/Data CRUD, Capability/Application, Goal/Service, Data Entity/Component, System/Technology…) with axis seeding and catalogue-driven checks |
 | `/ea-gaps [mode]` | Architecture Gap Register — list, add, promote raw gaps to GAP-NNN, update, trace to work packages, or generate register |
 | `/ea-principles [mode]` | Architecture Principles Register — list, add, update, or trace BP/DP/AP/TP-NNN principle entries; `trace` detects ADR and constraint violations |
 | `/ea-abbs [mode]` | Architecture Building Block Register — generate, view, create, or update ABB-NNN entries |

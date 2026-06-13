@@ -79,6 +79,12 @@ links: []
 
 ---
 
+## Related Matrices
+
+> **TOGAF relationship matrices for this domain** (manage with `/ea-matrix`; definitions in `matrix-catalogue.md`): Business Interaction (`business-interaction`), Actor/Role (`actor-role`), Capability/Organization (`capability-organization`), Capability/Value Stream (`capability-value-stream`), Capability/Application (`capability-application`), Goal/Service (`goal-service`). Run `/ea-matrix list` for status.
+
+---
+
 ## Executive Summary
 
 <details>

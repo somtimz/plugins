@@ -26,21 +26,43 @@ links: []
 **Assessed:** {{YYYY-MM-DD}}
 **Assessors:** {{assessor_names_and_roles}}
 
-<!-- GUIDANCE: TOGAF Phase A technique (refined in Phase E). Rate the organisation's readiness
-     to absorb the transformation BEFORE committing the roadmap. Each factor gets a readiness
-     rating, an urgency, and a degree of difficulty to fix. Low-readiness/high-urgency factors
-     become risks (RIS-NNN) and often readiness work packages (WP-NNN) sequenced in Wave 1.
-     Reassess at Phase E — wave sequencing must respect readiness, not assume it. -->
+<details>
+<summary>📋 Guidance</summary>
+
+**Purpose:** A TOGAF Phase A technique (refined in Phase E) that rates the organisation's readiness to absorb the transformation **before** the roadmap is committed. Each factor gets a readiness rating, an urgency, and a degree of difficulty to fix. Low-readiness / high-urgency factors become risks (RIS-NNN) and often readiness work packages (WP-NNN) sequenced in Wave 1.
+
+**Quality indicators:** every factor is rated with evidence (not opinion); low-readiness factors carry a named action and an owner; readiness findings are traced to RIS/WP/ISS IDs; the assessment is revisited at Phase E so wave sequencing respects readiness rather than assuming it.
+
+**Common mistakes:** rating readiness without evidence; assessing only IT readiness and ignoring business absorption capacity; treating the assessment as a one-off Phase A checkbox instead of a Phase E sequencing input.
+
+**TOGAF reference:** TOGAF 10 Part III — Business Transformation Readiness Assessment; complements the Architecture Vision and feeds the Architecture Roadmap.
+
+</details>
 
 ---
 
 ## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+A short verdict a sponsor can act on: overall readiness (e.g. "Conditionally ready — 3 of 12 factors Low"), the factors that most threaten delivery, and the readiness work required before Wave 1 can safely start.
+Run `/ea-summary refresh` to regenerate this section from current content.
+
+</details>
 
 {{executive_summary}}
 
 ---
 
 ## Readiness Factor Assessment
+
+<details>
+<summary>📋 Guidance</summary>
+
+Rate all 12 factors. **Readiness** = how ready the organisation is on that dimension today; **Urgency** = how soon it must be addressed for the transformation to proceed; **Difficulty** = how hard it is to raise. Each rating needs evidence — an incident, a quote, a missing budget line — not a gut feel. The dangerous quadrant is **Low readiness + High urgency**: those factors gate the roadmap and almost always need a readiness work package before Wave 1. Don't average the scores into a single number; the distribution is what matters.
+
+</details>
 
 Rating scale — **Readiness:** High / Acceptable / Low / None · **Urgency:** High / Medium / Low · **Difficulty to fix:** High / Medium / Low
 
@@ -63,7 +85,12 @@ Rating scale — **Readiness:** High / Acceptable / Low / None · **Urgency:** H
 
 ## Factor Detail — Low / None Readiness Only
 
-<!-- GUIDANCE: One block per factor rated Low or None. Delete this section if all factors are High/Acceptable. -->
+<details>
+<summary>📋 Guidance</summary>
+
+One block per factor rated Low or None — these are the factors that can sink the transformation. State what was observed, the consequence if it is not addressed, the actions to raise readiness, and the ID each finding was captured as (RIS-NNN risk, WP-NNN readiness work package, or ISS-NNN issue). Delete this section if all factors are High / Acceptable.
+
+</details>
 
 ### Factor {{N}} — {{factor_name}}
 
@@ -76,7 +103,12 @@ Rating scale — **Readiness:** High / Acceptable / Low / None · **Urgency:** H
 
 ## Roadmap Implications
 
-<!-- GUIDANCE: Completed/refined at Phase E. How readiness shapes wave sequencing. -->
+<details>
+<summary>📋 Guidance</summary>
+
+Completed / refined at Phase E. Translate readiness findings into concrete constraints on the roadmap: change-capacity ceilings (how many business-facing work packages can run at once), readiness work packages that must precede Wave 1, and any sequencing forced by low-readiness factors. A roadmap that ignores these implications is fiction — this is where readiness becomes a planning input, not a report.
+
+</details>
 
 | Implication | Affected waves / work packages |
 |---|---|

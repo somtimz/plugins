@@ -66,6 +66,12 @@ links: []
 
 ---
 
+## Related Matrices
+
+> **TOGAF relationship matrices for this domain** (manage with `/ea-matrix`; definitions in `matrix-catalogue.md`): Application/Organization (`app-organization`), Role/Application (`role-application`), Application/Function (`app-function`), Application Interaction (`app-interaction`), Capability/Application (`capability-application`). Run `/ea-matrix list` for status.
+
+---
+
 ## Executive Summary
 
 <details>

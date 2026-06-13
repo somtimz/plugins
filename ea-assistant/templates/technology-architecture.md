@@ -67,6 +67,12 @@ links: []
 
 ---
 
+## Related Matrices
+
+> **TOGAF relationship matrices for this domain** (manage with `/ea-matrix`; definitions in `matrix-catalogue.md`): System/Technology (`system-technology`). Run `/ea-matrix list` for status.
+
+---
+
 ## Executive Summary
 
 <details>
