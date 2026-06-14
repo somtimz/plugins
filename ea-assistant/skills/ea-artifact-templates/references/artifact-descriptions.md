@@ -536,6 +536,22 @@ Artefacts are listed by ADM phase. Where an artefact spans multiple phases (e.g.
 
 ---
 
+### Motivation Registers (Drivers / Goals / Objectives / Strategy / Issues / Problems)
+
+**Purpose:** Six dedicated Phase-A registers — Drivers (DRV-NNN), Goals (G-NNN), Objectives (OBJ-NNN), Strategy (STR-NNN), Issues (ISS-NNN), Problems (PRB-NNN) — that hold the full motivation chain. They are the management interface for `engagement.json → direction` (the single source of truth). The **Architecture Vision is the strategic index** that summarises and links to these registers rather than embedding their tables; it should be reviewed together with them at the Phase A gate. Each register is a first-class, **scored** artifact (guidance per section + a `## Summary` count table), unlike other command-generated registers.
+
+**Audience:** Programme sponsor, enterprise architect, business owners, architecture review board.
+
+**Contents:** Per register — a `## Summary` count table (totals, status/priority counts, orphan/quality flags) and items grouped per that concept's grouping (drivers by type; goals/issues/problems by domain; objectives by linked goal; strategies by type), each item as an ID-keyed field block matching the `/ea-{concept}` Register Spec fields.
+
+**Templates:** `templates/phase-a/{drivers,goals,objectives,strategy,issues,problems}-register.md`.
+
+**When to Create:** Populated from interview/brainstorm capture via the register commands. Regenerate with `/ea-{concept} generate` (writes to `artifacts/cross-cutting/{concept}-register.md`); `add`/`update` change `engagement.json` and nudge a regenerate. Do not hand-edit the generated register — it is overwritten from the source of truth.
+
+**Phase:** Authored in Phase A (motivation); maintained throughout the engagement.
+
+---
+
 ### Risk Register
 
 **Purpose:** A cross-cutting artifact that aggregates and tracks all architecture risks across the engagement — from initial identification in the Architecture Vision through to delivery in the Migration Plan. Provides a single authoritative view of risk status, ownership, and mitigation across all phases.
