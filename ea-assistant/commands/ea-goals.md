@@ -7,7 +7,7 @@ allowed-tools: [Read, Write, Bash]
 
 You are executing the `/ea-goals` command. All mode mechanics (engagement resolution, ID assignment, list/add/update/trace/generate flows, common edge cases) follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the Goal concept and its distinctions from Driver/Objective/Strategy, read `ea-concepts.md`; do not restate definitions here.
 
-Goals sit in the middle of the motivation chain (DRV → **G** → OBJ → WP). Every goal must trace to at least one Business Driver; every goal should be operationalised by at least one Objective. Goals appear in Architecture Vision §3 — the register is the management interface; Architecture Vision is the primary display view.
+Goals sit in the middle of the motivation chain (DRV → **G** → OBJ → WP). Every goal must trace to at least one Business Driver; every goal should be operationalised by at least one Objective. Goals appear in Architecture Vision §5 — the register is the management interface; Architecture Vision is the primary display view.
 
 ## Register Spec
 
@@ -16,7 +16,7 @@ Goals sit in the middle of the motivation chain (DRV → **G** → OBJ → WP). 
 | Prefix / concept | `G-NNN` — Goal |
 | Storage | `engagement.json → direction.goals[]` |
 | Register file | `artifacts/cross-cutting/goals-register.md` (artifactId `goals-register`; relatedArtifacts `["architecture-vision"]`) |
-| Display view | Architecture Vision `§3 Goals` — columns `ID \| Goal \| Business Driver(s) \| Linked Strategies \| Rationale \| Details` ← `id, statement, drivers, —, rationale` |
+| Display view | Architecture Vision `§5 Goals` — columns `ID \| Goal \| Business Driver(s) \| Linked Strategies \| Rationale \| Details` ← `id, statement, drivers, —, rationale` |
 | Groupings | `list` and `generate` group by Domain; summary counts by Type, Priority, Status, plus "Orphans (no driver)" and "Not operationalised (no objective)" |
 | Orphan rule | No linked drivers AND no linked objectives → `⚠️ Orphan` |
 

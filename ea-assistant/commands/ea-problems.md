@@ -7,7 +7,7 @@ allowed-tools: [Read, Write, Bash]
 
 You are executing the `/ea-problems` command. All mode mechanics follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the Problem concept and its distinctions from Issue/Risk/Gap/Constraint, read `ea-concepts.md`; do not restate definitions here.
 
-Problems are specific, observable, fixable symptoms actively blocking objectives — certain and present, with a measurable symptom. They appear in Architecture Vision §6 — the register is the management interface; Architecture Vision is the primary display view. The **Engagement** domain covers problems with the EA engagement itself (methodology, governance, team, tooling).
+Problems are specific, observable, fixable symptoms actively blocking objectives — certain and present, with a measurable symptom. They appear in Architecture Vision §9 — the register is the management interface; Architecture Vision is the primary display view. The **Engagement** domain covers problems with the EA engagement itself (methodology, governance, team, tooling).
 
 ## Register Spec
 
@@ -16,7 +16,7 @@ Problems are specific, observable, fixable symptoms actively blocking objectives
 | Prefix / concept | `PRB-NNN` — Problem |
 | Storage | `engagement.json → direction.problems[]` |
 | Register file | `artifacts/cross-cutting/problems-register.md` (artifactId `problems-register`; relatedArtifacts `["architecture-vision"]`) |
-| Display view | Architecture Vision `§6 Problems` — columns `ID \| Problem \| Observable Symptom \| Blocks Objective(s) \| Evidence \| Raised By \| Details` ← `id, statement, symptom, blocksObjectives, evidence, raisedBy` |
+| Display view | Architecture Vision `§9 Problems` — columns `ID \| Problem \| Observable Symptom \| Blocks Objective(s) \| Evidence \| Raised By \| Details` ← `id, statement, symptom, blocksObjectives, evidence, raisedBy` |
 | Groupings | `list` and `generate` group by Domain (Engagement first, then Business, Technology, Data, Application); summary counts by Severity, Status, plus "No evidence" and "No objectives" |
 | Orphan rule | No linked objectives → `⚠️ Orphan` |
 

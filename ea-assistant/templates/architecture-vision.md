@@ -6,7 +6,7 @@ phase: A
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-templateVersion: 0.9.55
+templateVersion: 0.9.79
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   domain: Cross-cutting
@@ -94,7 +94,46 @@ Written for an executive audience. Avoid technical jargon.
 
 ---
 
-## 2. Business Drivers
+## 2. Scope
+
+<details>
+<summary>📋 Guidance</summary>
+
+Define what is IN and OUT of scope for this engagement.
+Be specific about organisational units, systems, geographies, and time horizons.
+
+</details>
+
+### In Scope
+{{scope_in}}
+
+### Out of Scope
+{{scope_out}}
+
+### Time Horizon
+{{time_horizon}}
+
+---
+
+## 3. Stakeholders
+
+<details>
+<summary>📋 Guidance</summary>
+
+List all key stakeholders, their roles, concerns, and level of engagement.
+This feeds directly into the Stakeholder Map artifact.
+
+</details>
+
+| Stakeholder | Role | Concerns | Engagement Level |
+|---|---|---|---|
+| {{stakeholder_1}} | {{role_1}} | {{concerns_1}} | Informed / Consulted / Responsible |
+| {{stakeholder_2}} | {{role_2}} | {{concerns_2}} | Informed / Consulted / Responsible |
+
+---
+
+
+## 4. Business Drivers
 
 <details>
 <summary>📋 Guidance</summary>
@@ -116,7 +155,7 @@ Force: Opportunity / Threat / Mandate.
 
 ---
 
-## 3. Goals
+## 5. Goals
 
 <details>
 <summary>📋 Guidance</summary>
@@ -136,7 +175,7 @@ this goal necessary. Goals are the primary anchor for Issues (the barriers that 
 
 ---
 
-## 4. Objectives
+## 6. Objectives
 
 <details>
 <summary>📋 Guidance</summary>
@@ -153,8 +192,22 @@ a deadline. Objectives are the primary anchor for Problems (the specific symptom
 | [[OBJ-002]] | {{objective_2}} | {{measure_2}} | {{target_2}} | {{deadline_2}} | G-00N | [[OBJ-002\|→]] |
 
 ---
+## 7. Strategic Direction Summary
 
-## 5. Issues
+<details>
+<summary>📋 Guidance</summary>
+
+The chosen **Strategies** (STR-NNN) — the approaches for achieving the goals/objectives above. Strategy is the *"how"* in the motivation chain (DRV → G → OBJ → **STR** → WP). Strategies are mastered in `engagement.json → direction.strategies[]` and managed with `/ea-strategies`; this table is the display view (`/ea-strategies add`/`update` mirror into it). Each strategy carries a Type (Build / Buy / Partner / Consolidate / Modernise / Defend) and should support at least one goal. Key Metrics that track progress are in §11, not here.
+
+</details>
+
+| ID | Strategy | Type | Supports Goal(s) | Details |
+|---|---|---|---|---|
+| [[STR-001]] | {{strategy_1}} | {{strategy_type}} | G-00N | [[STR-001\|→]] |
+
+---
+
+## 8. Issues
 
 <details>
 <summary>📋 Guidance</summary>
@@ -173,7 +226,7 @@ They are parallel to Problems, not parents of them.
 
 ---
 
-## 6. Problems
+## 9. Problems
 
 <details>
 <summary>📋 Guidance</summary>
@@ -192,12 +245,14 @@ Issues, not derived from them.
 
 ---
 
-## 7. Opportunities
+## 10. Opportunities
 
 <details>
 <summary>📋 Guidance</summary>
 
-An Opportunity is a specific, actionable possibility to exploit a favourable condition or close a capability gap in a value-generating way — something the organisation could do that it currently cannot. Opportunities are distinct from Goals (which state desired outcomes) and Drivers (which describe why the engagement is needed). Each OPP-NNN should advance at least one Goal and, in Phase E, be elaborated into one or more Work Packages (WP-NNN).
+An Opportunity is a specific, actionable possibility to exploit a favourable condition or close a capability gap in a value-generating way — something the organisation could do that it currently cannot. 
+Opportunities are distinct from Goals (which state desired outcomes) and Drivers (which describe why the engagement is needed). 
+Each OPP-NNN should advance at least one Goal and, in Phase E, be elaborated into one or more Work Packages (WP-NNN).
 
 Types: **Exploit** (capitalise on existing advantage) / **Enhance** (amplify current capability) / **Emerge** (pursue something not previously in scope).
 
@@ -209,26 +264,15 @@ Types: **Exploit** (capitalise on existing advantage) / **Enhance** (amplify cur
 
 ---
 
-## 8. Strategic Direction Summary
+
+## 11. Key Metrics
 
 <details>
 <summary>📋 Guidance</summary>
 
-This section rolls up the strategic direction elements captured during the engagement. Strategies are
-the chosen approaches for achieving goals — they are recorded in `engagement.json → direction.strategies[]`
-and summarised here. Metrics are the measures used to track progress against objectives — they are
-recorded in `engagement.json → metrics[]`. This section provides a single-page view for executive
-stakeholders who need the full motivation chain without reading individual sections.
+The measures that track progress against the direction. **Metrics are the instruments that give the Control element of governance its teeth** — without them governance is opinion-based, with them it is evidence-based. Each metric type tracks a specific direction item: **Outcome** → a Goal (G-NNN), **Performance** → an Objective (OBJ-NNN), **Activity** → a Strategy (STR-NNN). A metric with no linked direction item is an orphan — link it or remove it. Mastered in `engagement.json → metrics[]`; every objective should have at least one performance metric.
 
 </details>
-
-### Strategies
-
-| ID | Strategy | Type | Supports Goal(s) | Details |
-|---|---|---|---|---|
-| [[STR-001]] | {{strategy_1}} | {{strategy_type}} | G-00N | [[STR-001\|→]] |
-
-### Key Metrics
 
 | ID | Metric | Type | Linked Objective | Baseline | Target | Baseline Source |
 |---|---|---|---|---|---|---|
@@ -238,45 +282,7 @@ stakeholders who need the full motivation chain without reading individual secti
 
 ---
 
-## 9. Scope
-
-<details>
-<summary>📋 Guidance</summary>
-
-Define what is IN and OUT of scope for this engagement.
-Be specific about organisational units, systems, geographies, and time horizons.
-
-</details>
-
-### In Scope
-{{scope_in}}
-
-### Out of Scope
-{{scope_out}}
-
-### Time Horizon
-{{time_horizon}}
-
----
-
-## 10. Stakeholders
-
-<details>
-<summary>📋 Guidance</summary>
-
-List all key stakeholders, their roles, concerns, and level of engagement.
-This feeds directly into the Stakeholder Map artifact.
-
-</details>
-
-| Stakeholder | Role | Concerns | Engagement Level |
-|---|---|---|---|
-| {{stakeholder_1}} | {{role_1}} | {{concerns_1}} | Informed / Consulted / Responsible |
-| {{stakeholder_2}} | {{role_2}} | {{concerns_2}} | Informed / Consulted / Responsible |
-
----
-
-## 11. Architecture Principles
+## 12. Architecture Principles
 
 <details>
 <summary>📋 Guidance</summary>
@@ -294,7 +300,7 @@ Summary:
 
 ---
 
-## 12. Constraints
+## 13. Constraints
 
 <details>
 <summary>📋 Guidance</summary>
@@ -310,7 +316,7 @@ Distinguish between hard constraints (non-negotiable) and soft constraints (pref
 
 ---
 
-## 13. Assumptions
+## 14. Assumptions
 
 <details>
 <summary>📋 Guidance</summary>
@@ -323,7 +329,7 @@ List the assumptions being made. These should be validated and updated throughou
 
 ---
 
-## 14. High-Level Target Architecture
+## 15. High-Level Target Architecture
 
 <details>
 <summary>📋 Guidance</summary>
@@ -339,7 +345,7 @@ Reference diagrams stored in the diagrams/ folder. Avoid detailed design at this
 
 ---
 
-## 15. Key Risks
+## 16. Key Risks
 
 <details>
 <summary>📋 Guidance</summary>
@@ -354,7 +360,7 @@ Identify the top 3-5 risks to the architecture or engagement. Include mitigation
 
 ---
 
-## 16. Next Steps
+## 17. Next Steps
 
 <details>
 <summary>📋 Guidance</summary>
@@ -368,7 +374,7 @@ Typically: approve Statement of Architecture Work, proceed to Phase B/C/D.
 
 ---
 
-## 17. Diagrams
+## 18. Diagrams
 
 <details>
 <summary>📋 Guidance</summary>
@@ -383,8 +389,6 @@ Standard diagrams for the Architecture Vision. Diagrams are stored in `diagrams/
 | Stakeholder Power/Interest Grid | `../../diagrams/architecture-vision-stakeholder-grid.mmd` | ❌ Missing |
 
 *Use `/ea-diagram` to create. Run `/ea-generate png` to render for export.*
-
----
 
 ---
 

@@ -201,7 +201,7 @@ For each flagged alignment gap:
 ```
 Gap: {DRV-002 has no linked Goal}
 Options:
-  a) Add a Goal linked to DRV-002 — open Architecture Vision §3 for editing
+  a) Add a Goal linked to DRV-002 — open Architecture Vision §5 for editing
   b) Mark as intentional — note in A4: "DRV-002 excluded from scope"
   c) Skip this gap
 ```

@@ -204,7 +204,7 @@ Read `engagement.json → direction` — the single source of truth for directio
 
 ### Step 2b — Drift Detection
 
-The artifact display tables (Architecture Vision §2–§8 and sibling artifacts) are rendered projections of `engagement.json`. Check they have not drifted:
+The artifact display tables (Architecture Vision §2–§11 and sibling artifacts) are rendered projections of `engagement.json`. Check they have not drifted:
 
 1. List all `*.md` files under `EA-projects/{slug}/artifacts/` recursively, excluding `*.review.md` and `*-register*.md` files.
 2. In each file, locate **direction-bearing section tables**: a heading containing "Goals", "Objectives", "Strategies", "Opportunities", "Issues", or "Problems" whose next table has first-cell rows matching the corresponding ID pattern (`G-\d{3}`, `OBJ-\d{3}`, `STR-\d{3}`, `OPP-\d{3}`, `ISS-\d{3}`, `PRB-\d{3}`). Skip `{{...}}` placeholder rows and `G-00N`-style template examples. ID tokens appearing elsewhere (e.g. a Roadmap's "Advances Goals/Objectives" column, A3 notes) are cross-references, not display rows — out of scope here; broken references are surfaced by `/ea-trace`.

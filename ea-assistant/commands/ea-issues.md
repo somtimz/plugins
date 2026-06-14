@@ -7,7 +7,7 @@ allowed-tools: [Read, Write, Bash]
 
 You are executing the `/ea-issues` command. All mode mechanics follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the Issue concept and its distinctions from Problem/Risk/Driver/Gap, read `ea-concepts.md`; do not restate definitions here.
 
-Issues are systemic concerns threatening goals — present and ongoing, broad, with multiple contributing causes. They appear in Architecture Vision §5 — the register is the management interface; Architecture Vision is the primary display view. The **Engagement** domain covers issues about the EA engagement itself (methodology, governance, team, tooling).
+Issues are systemic concerns threatening goals — present and ongoing, broad, with multiple contributing causes. They appear in Architecture Vision §8 — the register is the management interface; Architecture Vision is the primary display view. The **Engagement** domain covers issues about the EA engagement itself (methodology, governance, team, tooling).
 
 ## Register Spec
 
@@ -16,7 +16,7 @@ Issues are systemic concerns threatening goals — present and ongoing, broad, w
 | Prefix / concept | `ISS-NNN` — Issue |
 | Storage | `engagement.json → direction.issues[]` |
 | Register file | `artifacts/cross-cutting/issues-register.md` (artifactId `issues-register`; relatedArtifacts `["architecture-vision"]`) |
-| Display view | Architecture Vision `§5 Issues` — columns `ID \| Issue \| Area \| Threatens Goal(s) \| Evidence \| Raised By \| Details` ← `id, statement, domain, threatensGoals, evidence, raisedBy` |
+| Display view | Architecture Vision `§8 Issues` — columns `ID \| Issue \| Area \| Threatens Goal(s) \| Evidence \| Raised By \| Details` ← `id, statement, domain, threatensGoals, evidence, raisedBy` |
 | Groupings | `list` and `generate` group by Domain (Engagement first, then Business, Technology, Data, Application); summary counts by Severity, Status, plus "No evidence" and "No goals" |
 | Orphan rule | No linked goals → `⚠️ Orphan` |
 

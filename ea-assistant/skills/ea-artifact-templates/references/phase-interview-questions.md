@@ -53,7 +53,7 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 
 ### Preliminary — Part 3: Motivation Framework
 
-*Routes to: Engagement Charter §6, engagement.json → direction, Architecture Vision §2–§7*
+*Routes to: Engagement Charter §6, engagement.json → direction, Architecture Vision §4–§11*
 
 12. What external forces (market shifts, regulatory changes, competitive pressure, technology change) are creating pressure to act now? Assign each a DRV-NNN ID.
 13. What internal forces (cost pressure, strategic mandate, leadership change, capability gap) are pushing this engagement forward? Assign each a DRV-NNN ID.
@@ -877,7 +877,7 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 3. Which capability gaps identified in earlier phases are the highest priority to close?
 4. For each high-priority gap — does it represent an Opportunity (OPP-NNN) to capture, not just a problem to fix? Assign an OPP-NNN if so, and link it to the work package it will be addressed by.
    - If an OPP-NNN was already recorded in Phase A, link the WP to it now.
-   - If no OPP-NNN exists yet, create one and add it to Architecture Vision §7.
+   - If no OPP-NNN exists yet, create one and add it to Architecture Vision §10.
 5. What projects are already in flight that this roadmap must align with or avoid conflicting with?
 
 *Resources and capacity*

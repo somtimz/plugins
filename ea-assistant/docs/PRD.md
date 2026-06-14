@@ -1,10 +1,24 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.78
+**Version:** 0.9.79
 **Status:** Current
 **Author:** Costa Pissaris
 
 ---
+
+## v0.9.79 — Architecture Vision Template Fix & Section-Number Reconciliation
+
+### Summary
+Fixes a manually-reordered Architecture Vision template (Scope/Stakeholders moved up, motivation sections renumbered) and reconciles every cross-reference that pointed at the old section numbers.
+
+### Fixed (template)
+- **Section numbering** — was §8 → §10 (skipped 9), duplicate §12 (Key Metrics + Architecture Principles, the latter a `##  12.` double-space typo), duplicate §16 (Key Risks + Next Steps); now clean **1–18, sequential and unique**.
+- **§11 Key Metrics had no `📋 Guidance` block** — added one (the "metrics give the Control element its teeth" framing + Outcome/Performance/Activity → G/OBJ/STR mapping), restoring the every-section-has-guidance design principle.
+- **§7 Strategic Direction Summary guidance** was stale (claimed it summarised Metrics, which moved to §11) — rewritten; now references `/ea-strategies` and the display-view sync.
+- `templateVersion` 0.9.55 → 0.9.79; two manually-padded tables normalised to the compact house style; stray double `---` removed.
+
+### Reconciled (the reorder's ripple)
+The register commands sync into AV sections **by number**, so the reorder desynced them. Updated the Display-View specs and prose: **Drivers §2→§4, Goals §3→§5, Objectives §4→§6, Strategies §8→§7, Issues §5→§8, Problems §6→§9, Metrics →§11, Opportunities →§10** across `/ea-drivers`, `/ea-goals`, `/ea-objectives`, `/ea-strategies`, `/ea-issues`, `/ea-problems`, `/ea-status`, `/ea-engage-review`, and the `ea-concepts.md` placement table, `matrix-catalogue.md`, `phase-interview-questions.md`, and `compliance-check.md` references — with per-file context (the same §7 meant Metrics in one file and Opportunities in another).
 
 ## v0.9.78 — Governance Framework v3: ARB Body, Direction Concept & Control-Metrics
 

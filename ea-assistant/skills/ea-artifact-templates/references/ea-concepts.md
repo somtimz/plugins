@@ -282,15 +282,15 @@ Do not keep the two layers separate in your head — connect them structurally:
 |---|---|---|---|---|
 | **Vision** | *What do we aspire to become?* | Long-term aspirational destination — the North Star; all Drivers and Strategies must align | Architecture Vision §1; Stakeholder Map | — |
 | **Mission** | *Why do we exist today?* | Fundamental purpose and scope of activity — bounds which Drivers are relevant | Architecture Vision §1; Stakeholder Map | — |
-| **Business Driver** | *Why do we need to change now?* | External or internal force making the engagement necessary — must be evidenced and traceable to at least one Goal | Architecture Vision §2; Engagement Charter §6.2 | — |
+| **Business Driver** | *Why do we need to change now?* | External or internal force making the engagement necessary — must be evidenced and traceable to at least one Goal | Architecture Vision §4; Engagement Charter §6.2 | — |
 | **Principle** | *What must always be true?* | Normative rule — applies to every future decision in its domain | Architecture Principles Catalogue (Prelim) | Principle (Motivation) |
-| **Goal** | *Where do we want to be?* | Desired future state — qualitative, no deadline required | Architecture Vision §3; domain artifacts | Goal (Motivation) |
-| **Objective** | *How far, and by when?* | Measurable, time-bound result — must have a measure, target, and deadline | Architecture Vision §4; domain artifacts | Outcome (Motivation) |
+| **Goal** | *Where do we want to be?* | Desired future state — qualitative, no deadline required | Architecture Vision §5; domain artifacts | Goal (Motivation) |
+| **Objective** | *How far, and by when?* | Measurable, time-bound result — must have a measure, target, and deadline | Architecture Vision §6; domain artifacts | Outcome (Motivation) |
 | **Strategy** | *How will we get there?* | Chosen course of action — not an outcome, not a sequence | Architecture Vision; domain artifacts | Course of Action (Motivation) |
 | **Plan** | *What will we do, in what order, by when?* | Sequenced execution — who, what, when | Architecture Roadmap (Phase E); Migration Plan (Phase F) | Implementation Event sequences (Impl. & Migration) |
 | **Risk** | *What could go wrong?* | Uncertain future event with potential negative effect on objectives | Architecture Vision; Statement of Architecture Work; Migration Plan | Risk (Motivation, Strategy layer) |
-| **Issue** | *What systemic concern is threatening a goal?* | Broad barrier or pattern of dysfunction — no single fix; threatens a Goal | Architecture Vision §5 (Phase A) | — |
-| **Problem** | *What specific symptom is blocking an objective?* | Observable, measurable, and fixable — blocks an Objective | Architecture Vision §6 (Phase A) | — |
+| **Issue** | *What systemic concern is threatening a goal?* | Broad barrier or pattern of dysfunction — no single fix; threatens a Goal | Architecture Vision §8 (Phase A) | — |
+| **Problem** | *What specific symptom is blocking an objective?* | Observable, measurable, and fixable — blocks an Objective | Architecture Vision §9 (Phase A) | — |
 | **Capability Model** | *What must the organisation be able to do?* | Stable, hierarchical map of capabilities (people + process + info + tools) — independent of org structure or current systems | Business Architecture (Phase B); Capability Map | Resource (Active Structure) |
 | **Capability Gap** | *Which capabilities are missing or immature?* | Delta between required and current capability — prevents goals; feeds Gap Analysis | Gap Analysis (Phase B/C/D) | — |
 | **Operating Model** | *How does the organisation function to deliver value?* | Describes how process, information, technology, and governance are organized and coordinated | Business Architecture (Phase B); Technology Architecture (Phase D) | — |
@@ -298,7 +298,7 @@ Do not keep the two layers separate in your head — connect them structurally:
 | **Business Process** | *How is value delivered step by step?* | Structured set of activities with defined actors, inputs, outputs, and decision points — component of a value stream | Business Architecture (Phase B); Process Flow | Business Process (Business) |
 | **Use Case** | *What does the actor need to accomplish?* | Discrete goal pursued by a specific actor — consumes processes, generates requirements | Business Architecture (Phase B); Use Case Catalog | — |
 | **Constraint** | *What boundaries must we respect?* | Non-negotiable restriction on implementation choices — certain, sourced, and owned | Constraints Register; Architecture Vision; Principles | Constraint (Motivation) |
-| **Metrics** | *How do we know we are succeeding?* | Specific, quantifiable measures — leading (predictive) or lagging (outcome); validate strategies or surface new Issues and Problems | Architecture Vision §7; domain artifacts | — |
+| **Metrics** | *How do we know we are succeeding?* | Specific, quantifiable measures — leading (predictive) or lagging (outcome); validate strategies or surface new Issues and Problems | Architecture Vision §11; domain artifacts | — |
 | **ABB** | *What logical component do we need?* | Reusable, vendor-neutral architecture component at solution-independent level — names the capability to be implemented, not the product | Technology Architecture §3a; Application Architecture; Phase D/E | — |
 | **SBB** | *What product or system implements it?* | Concrete realisation of an ABB — specific product, vendor, or build choice; registered in the SBB Register | Technology Architecture SBB Register; Phase D | — |
 | **User Story** | *What does the stakeholder want to be able to do?* | Stakeholder-perspective feature statement (As a… I want… so that…); links a business actor to a deliverable outcome; traced to REQ-NNN and ABB-NNN | Requirements Register; Phase C | — |
@@ -404,7 +404,7 @@ A Business Driver is an external or internal force that makes the engagement nec
 - "We need to reduce costs" — this could be a Driver (internal cost pressure) OR a Goal depending on framing. If it is the *force* creating pressure on the engagement, it's a Driver; if it is what the engagement aims to achieve, it's a Goal
 - "Our legacy platform is at end-of-life" — this is a Driver (internal technical force), not an Issue. The Issue is the *organisational consequence*: "Unplanned outages are increasing, threatening customer commitments"
 
-**TOGAF placement:** Architecture Vision §2 (Preliminary/Phase A); Engagement Charter §6.2. Drivers are captured in the Preliminary phase and refined in Phase A. All Drivers should be linked to at least one Goal — an unlinked Driver is out of scope or requires a new Goal.
+**TOGAF placement:** Architecture Vision §4 (Preliminary/Phase A); Engagement Charter §6.2. Drivers are captured in the Preliminary phase and refined in Phase A. All Drivers should be linked to at least one Goal — an unlinked Driver is out of scope or requires a new Goal.
 
 **ArchiMate:** `Driver` element in the Motivation aspect. Motivates `Assessment`, which in turn motivates `Goal`.
 
@@ -508,7 +508,7 @@ A goal is a qualitative statement of a desired future state. It describes *where
 - "Adopt API-first integration" — this is a **Strategy** (a chosen approach), not a goal
 - "Comply with GDPR" — this is a **Requirement** (a compliance obligation), not a goal. The related goal might be "Become a trusted custodian of customer data"
 
-**TOGAF placement:** `direction.goals[]` in `engagement.json`; Architecture Vision §3; referenced in domain architecture documents.
+**TOGAF placement:** `direction.goals[]` in `engagement.json`; Architecture Vision §5; referenced in domain architecture documents.
 
 **ArchiMate:** `Goal` element in the Motivation aspect. Realised by `Outcomes`, associated with `Requirements`.
 
@@ -527,7 +527,7 @@ A goal is a qualitative statement of a desired future state. It describes *where
 **What it IS:**
 An objective is the measurable, time-bound operationalisation of a goal. It answers *how far, and by when?* Every objective must have three parts: a **unit of measure** (what you will count or track), a **target value** (how much), and a **deadline** (by when). Objectives are the direct anchor for Problems — if a problem cannot be linked to an objective, it may be out of scope.
 
-**Structural parts** (Architecture Vision §4 / `direction.objectives[]`):
+**Structural parts** (Architecture Vision §6 / `direction.objectives[]`):
 - **Statement** — one declarative sentence specifying the outcome
 - **Measure** — unit of measure (e.g. "unplanned downtime hours per quarter")
 - **Target** — target value (e.g. "< 4 hours")
@@ -545,7 +545,7 @@ An objective is the measurable, time-bound operationalisation of a goal. It answ
 - "Reduce costs" — this is a **Goal**. "Reduce operational cost by 15% by end of FY27" is the **Objective**
 - "We want 99.9% uptime" — has a measure and implicit target; add a deadline to make it a complete Objective
 
-**TOGAF placement:** Architecture Vision §4; domain artifacts; `direction.objectives[]` in `engagement.json`.
+**TOGAF placement:** Architecture Vision §6; domain artifacts; `direction.objectives[]` in `engagement.json`.
 
 **ArchiMate:** `Outcome` element in the Motivation aspect. Associated with `Goal` (realisation relationship).
 
@@ -563,7 +563,7 @@ An objective is the measurable, time-bound operationalisation of a goal. It answ
 **What it IS:**
 An issue is a broader, systemic concern that threatens the organisation's ability to achieve one or more goals. Issues are management-level problems — patterns of dysfunction, capability gaps, unresolved conflicts, or sustained exposure to a driver that has no single fix. An issue has multiple contributing causes, affects a domain or process broadly, and requires sustained organisational response rather than a technical patch.
 
-**Structural parts** (Architecture Vision §5):
+**Structural parts** (Architecture Vision §8):
 - **Statement** — one sentence naming the systemic concern
 - **Area** — organisational, process, or technology domain most affected
 - **Threatens Goal(s)** — G-NNN IDs of the goals this issue puts at risk
@@ -581,7 +581,7 @@ An issue is a broader, systemic concern that threatens the organisation's abilit
 - "Increasing regulatory pressure" — this is a **Driver** (external force)
 - "The integration broke" — this is a **Problem** (specific, fixable). The related issue might be "Our integration architecture lacks resilience and monitoring"
 
-**TOGAF placement:** Architecture Vision §5 (Phase A). Issues captured here feed into Gap Analysis, Risk assessments, and Requirements.
+**TOGAF placement:** Architecture Vision §8 (Phase A). Issues captured here feed into Gap Analysis, Risk assessments, and Requirements.
 
 **Practitioner Notes:**
 - Treat gaps as **opportunities to simplify**, not just deficits to fill. The best architecture often removes rather than adds.
@@ -596,7 +596,7 @@ An issue is a broader, systemic concern that threatens the organisation's abilit
 **What it IS:**
 A problem is a specific, observable, and fixable symptom that is actively blocking the achievement of one or more objectives. Problems have a clear cause-and-effect relationship: a root cause produces a visible symptom that degrades performance against a known objective. Because they are specific and measurable, problems can be prioritised, assigned, and resolved directly.
 
-**Structural parts** (Architecture Vision §6):
+**Structural parts** (Architecture Vision §9):
 - **Statement** — one sentence naming the specific problem
 - **Observable Symptom** — what can be seen or measured today (ideally a number)
 - **Blocks Objective(s)** — OBJ-NNN IDs of the objectives this problem is preventing
@@ -613,7 +613,7 @@ A problem is a specific, observable, and fixable symptom that is actively blocki
 - "Our systems are slow" — this is an **Issue**. The problem is: "Mobile checkout page load time averages 8.2 seconds, causing 68% cart abandonment"
 - "The vendor may not deliver" — this is a **Risk** (uncertain, future)
 
-**TOGAF placement:** Architecture Vision §6 (Phase A). Problems feed directly into Requirements — each problem should produce one or more architecture requirements.
+**TOGAF placement:** Architecture Vision §9 (Phase A). Problems feed directly into Requirements — each problem should produce one or more architecture requirements.
 
 **Practitioner Notes:**
 - Problems are **specific, observable, and fixable** — if it is not fixable, it is an Issue, not a Problem.
@@ -997,7 +997,7 @@ Metrics close the loop between intention and evidence:
 - If performance is below threshold → metrics **surface new Problems** (observable symptoms) or **reveal deeper Issues** (systemic conditions)
 - Metrics also **evaluate Capability Maturity** — when a capability is not performing, metrics identify which ones need investment
 
-**Structural parts** (Architecture Vision §7 / Metrics Register):
+**Structural parts** (Architecture Vision §11 / Metrics Register):
 - **ID** — MET-NNN
 - **Description** — what is being measured
 - **Type** — Leading / Lagging
@@ -1013,7 +1013,7 @@ Metrics close the loop between intention and evidence:
 - Not a KPI (necessarily) — all KPIs are metrics, but not all metrics are KPIs; KPIs are the most strategically significant metrics
 - Not a requirement — a requirement specifies what must be done; a metric measures whether it has been done successfully
 
-**TOGAF placement:** Architecture Vision §7 Strategic Direction Summary; referenced in Phase G (Implementation Governance) for compliance tracking; Phase H (Architecture Change Management) for performance feedback.
+**TOGAF placement:** Architecture Vision §11 Key Metrics; referenced in Phase G (Implementation Governance) for compliance tracking; Phase H (Architecture Change Management) for performance feedback.
 
 **Practitioner Notes:**
 - **Measure success through delivery outcomes** (cycle time, quality, value), not artifact completeness.
@@ -1740,19 +1740,19 @@ If you have identified something that is *not* a goal, objective, strategy, issu
 | Vision | Architecture Vision §1; Stakeholder Map | A | Motivation | — |
 | Mission | Architecture Vision §1; Stakeholder Map | A | Motivation | — |
 | Principle | Architecture Principles Catalogue | Preliminary | Motivation | Principle |
-| Goal | Architecture Vision §3; Domain Artifacts | A | Motivation | Goal |
-| Objective | Architecture Vision §4; Domain Artifacts | A | Motivation | Outcome |
+| Goal | Architecture Vision §5; Domain Artifacts | A | Motivation | Goal |
+| Objective | Architecture Vision §6; Domain Artifacts | A | Motivation | Outcome |
 | Strategy | Architecture Vision; Domain Artifacts | A | Motivation | Course of Action |
 | Plan | Architecture Roadmap; Migration Plan | E / F | Implementation & Migration | Work Package, Implementation Event |
 | Risk | Architecture Vision; Statement of Architecture Work; Migration Plan | A | Motivation (Strategy layer) | Risk |
 | Constraint | Architecture Vision; Principles; Requirements Register | Preliminary / A | Motivation | Constraint |
 | Requirement | Requirements Register; Traceability Matrix | Requirements | Motivation | Requirement |
-| Issue | Architecture Vision §5; Gap Analysis | A | — | — |
-| Problem | Architecture Vision §6; Requirements Register (Motivation field) | A | — | — |
+| Issue | Architecture Vision §8; Gap Analysis | A | — | — |
+| Problem | Architecture Vision §9; Requirements Register (Motivation field) | A | — | — |
 | Capability Model | Business Architecture; Capability Map | B | Business | Resource (Active Structure) |
 | Capability Gap | Gap Analysis (B/C/D); Architecture Roadmap (E) | B | Business | — |
 | Operating Model | Business Architecture; Technology Architecture | B / D | Business | — |
-| Metrics | Architecture Vision §7; Phase G/H governance | A / G / H | Motivation | — |
+| Metrics | Architecture Vision §11; Phase G/H governance | A / G / H | Motivation | — |
 | Architecture Decision Record | ADR Register; individual ADR-NNN files; cross-referenced in artifact `## Appendix A5 — Related Architecture Decisions` sections | Any | — | — |
 | Architecture Building Block (ABB) | Architecture Definition Document; Gap Analysis; Business/App/Tech Architecture ABB sections | B–E | Application / Technology | Application Component; Technology Node |
 | Solution Building Block (SBB) | Technology Architecture (SBB Register); Gap Analysis; Migration Plan | D–F | Technology | System Software; Device; Technology Service |
