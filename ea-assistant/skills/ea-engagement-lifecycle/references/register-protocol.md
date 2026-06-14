@@ -11,7 +11,8 @@ Each command declares:
 | **Prefix / concept** | ID prefix (e.g. `G`) and concept name; concept definition lives in `ea-concepts.md` — never inline |
 | **Storage** | The `engagement.json → direction.{array}` that is the single source of truth |
 | **Register file** | Stable output path for `generate` (e.g. `artifacts/cross-cutting/goals-register.md`) |
-| **Display view** *(optional)* | The artifact section that renders this register for stakeholders (e.g. Architecture Vision `§3 Goals`), with a column → field mapping. `add`/`update` mirror changes into it (see Display View Sync below) |
+| **Seed template** *(optional)* | A plugin template (e.g. `templates/phase-a/goals-register.md`) whose static scaffolding — frontmatter, guidance/compliance blocks, `## Summary` table, grouped section headings — `generate` fills from the storage array. When declared, `generate` builds from this seed instead of from scratch (see Mode: `generate`) |
+| **Display view** *(optional)* | The artifact section that renders this register for stakeholders, with a column → field mapping. `add`/`update` mirror changes into it (see Display View Sync below). Registers that declare **no** display view (e.g. the motivation registers, whose Vision sections are now a summary + link, not a live table) skip Display View Sync entirely — `add`/`update` touch only `engagement.json`, and the register is refreshed via `generate` |
 | **Fields** | Table of: field, add-prompt text, valid values, required/optional |
 | **Link fields** | Fields holding cross-references (target prefix + orphan semantics) |
 | **Trace chain** | Upstream and downstream walks for `trace` |
@@ -64,6 +65,8 @@ Each command declares:
 
 ## Display View Sync (`add` and `update`)
 
+**Only runs when the spec declares a Display view.** Registers without one (the motivation registers — drivers, goals, objectives, strategy, issues, problems) skip this step: `add`/`update` update `engagement.json` only, and the register is refreshed on demand via `generate`. The Architecture Vision summarises and links to those registers rather than rendering a live table.
+
 `engagement.json` is the single source of truth; the display view is a rendered projection of it. After a confirmed `add` or `update`, mirror the change into the spec's display view so the stakeholder-facing artifact never drifts from the data:
 
 1. Resolve the display artifact file (e.g. `artifacts/phase-a/architecture-vision.md`). If the file does not exist, skip silently — the section is rendered when the artifact is created.
@@ -86,22 +89,24 @@ Always flag referenced IDs that do not exist in `engagement.json` (or the named 
 
 1. Read the storage array.
 2. If the spec's register file already exists, archive it to `snapshots/` per `skills/ea-artifact-templates/references/register-snapshot-convention.md`.
-3. Write the register to the spec's stable path with frontmatter:
-   ```yaml
-   ---
-   artifact: {Concept} Register
-   artifactId: {register-id}
-   engagement: {name}
-   phase: cross-cutting
-   status: Draft
-   generated: {YYYY-MM-DD}
-   relatedArtifacts: {per spec}
-   diagrams: []
-   links: []
-   ---
-   ```
-   Body: title, engagement/date/total header, `## Summary` count table (totals, statuses, orphan/missing-data counts), then one `###`-grouped section per the spec's grouping with a `#### {ID}: {statement truncated}` field table per item (all spec fields plus link fields).
-4. Register the artifact in `engagement.json → artifacts[]` (single entry at the stable path; update a legacy dated entry rather than adding).
+3. **Build the register body:**
+   - **If the spec declares a Seed template:** read it, substitute `{{engagement_name}}`, `{{organisation}}`, `{{version}}`, and `{{YYYY-MM-DD}}` (today), fill the `## Summary` count table from the array per the spec's groupings, and replace the seed's placeholder `#### {ID}` example blocks with one real `#### {ID}: {statement truncated}` field block per item, grouped under the seed's section headings (drop a grouping's example block if it has no items; add headings for groupings the seed did not pre-list). Preserve the seed's frontmatter (it already carries `taxonomy`, guidance, compliance, and Working Notes), updating only `engagement`, `lastModified`/`generated` (today), and `status`.
+   - **If the spec declares no Seed template:** write the register from scratch with frontmatter:
+     ```yaml
+     ---
+     artifact: {Concept} Register
+     artifactId: {register-id}
+     engagement: {name}
+     phase: cross-cutting
+     status: Draft
+     generated: {YYYY-MM-DD}
+     relatedArtifacts: {per spec}
+     diagrams: []
+     links: []
+     ---
+     ```
+     Body: title, engagement/date/total header, `## Summary` count table (totals, statuses, orphan/missing-data counts), then one `###`-grouped section per the spec's grouping with a `#### {ID}: {statement truncated}` field table per item (all spec fields plus link fields).
+4. Write the register to the spec's stable path. Register the artifact in `engagement.json → artifacts[]` (single entry at the stable path; update a legacy dated entry rather than adding).
 5. Confirm: `"{Concept} Register written to {path} — {N} items."`
 
 ## Common Edge Cases (all registers)

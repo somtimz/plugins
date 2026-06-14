@@ -7,7 +7,7 @@ allowed-tools: [Read, Write, Bash]
 
 You are executing the `/ea-issues` command. All mode mechanics follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the Issue concept and its distinctions from Problem/Risk/Driver/Gap, read `ea-concepts.md`; do not restate definitions here.
 
-Issues are systemic concerns threatening goals — present and ongoing, broad, with multiple contributing causes. They appear in Architecture Vision §5 — the register is the management interface; Architecture Vision is the primary display view. The **Engagement** domain covers issues about the EA engagement itself (methodology, governance, team, tooling).
+Issues are systemic concerns threatening goals — present and ongoing, broad, with multiple contributing causes. The **Issues Register** is the management interface; the Architecture Vision (§5) summarises and links to it rather than rendering a live table. The **Engagement** domain covers issues about the EA engagement itself (methodology, governance, team, tooling).
 
 ## Register Spec
 
@@ -16,7 +16,7 @@ Issues are systemic concerns threatening goals — present and ongoing, broad, w
 | Prefix / concept | `ISS-NNN` — Issue |
 | Storage | `engagement.json → direction.issues[]` |
 | Register file | `artifacts/cross-cutting/issues-register.md` (artifactId `issues-register`; relatedArtifacts `["architecture-vision"]`) |
-| Display view | Architecture Vision `§5 Issues` — columns `ID \| Issue \| Area \| Threatens Goal(s) \| Evidence \| Raised By \| Details` ← `id, statement, domain, threatensGoals, evidence, raisedBy` |
+| Seed template | `templates/phase-a/issues-register.md` (scored artifact; `generate` fills its Summary + per-domain item blocks) |
 | Groupings | `list` and `generate` group by Domain (Engagement first, then Business, Technology, Data, Application); summary counts by Severity, Status, plus "No evidence" and "No goals" |
 | Orphan rule | No linked goals → `⚠️ Orphan` |
 
@@ -84,6 +84,6 @@ Proceed as an Issue? (y/n)
 ## Messages
 
 - **Empty state:** "No issues found. Capture issues during interviews or `/ea-brainstorm`, then add them with `/ea-issues add`."
-- **Add success:** "ISS-NNN added. Run '/ea-issues trace ISS-NNN' to verify goal linkage and check for related gaps."
+- **Add success:** "ISS-NNN added to engagement.json. Run `/ea-issues generate` to refresh the Issues Register, then '/ea-issues trace ISS-NNN' to verify goal linkage and check for related gaps."
 - **Orphan nudge:** "⚠️ No goals linked. Use `/ea-goals list` to review goals, then `/ea-issues update ISS-NNN threatensGoals G-NNN`."
 - **No-evidence flag:** "⚠️ {N} issue(s) have no evidence — unverified issues are assumptions, not confirmed concerns."

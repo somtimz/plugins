@@ -111,10 +111,12 @@ Force: Opportunity / Threat / Mandate.
 
 </details>
 
-| ID | Driver | Type | Force | Impact on Strategy | Linked Goals | Evidence / Source | Details |
-|---|---|---|---|---|---|---|---|
-| [[DRV-001]] | {{driver_1}} | Internal / External | Opportunity / Threat / Mandate | {{impact_1}} | G-00N | {{evidence_1}} | [[DRV-001\|→]] |
-| [[DRV-002]] | {{driver_2}} | Internal / External | Opportunity / Threat / Mandate | {{impact_2}} | G-00N | {{evidence_2}} | [[DRV-002\|→]] |
+Business drivers are maintained in the **Drivers Register** — full detail (type, force, evidence, goal linkage) lives there. This section carries the executive summary only.
+
+Summary:
+{{drivers_summary}}
+
+**Full register:** [[drivers-register]] · manage with `/ea-drivers`
 
 ---
 
@@ -131,10 +133,12 @@ this goal necessary. Goals are the primary anchor for Issues (the barriers that 
 
 </details>
 
-| ID | Goal | Business Driver(s) | Linked Strategies | Rationale | Details |
-|---|---|---|---|---|---|
-| [[G-001]] | {{goal_1}} | DRV-00N | STR-00N | {{goal_rationale_1}} | [[G-001\|→]] |
-| [[G-002]] | {{goal_2}} | DRV-00N | STR-00N | {{goal_rationale_2}} | [[G-002\|→]] |
+Goals are maintained in the **Goals Register** — driver/strategy linkage and rationale live there. This section carries the executive summary only.
+
+Summary:
+{{goals_summary}}
+
+**Full register:** [[goals-register]] · manage with `/ea-goals`
 
 ---
 
@@ -149,10 +153,12 @@ a deadline. Objectives are the primary anchor for Problems (the specific symptom
 
 </details>
 
-| ID | Objective | Measure | Target | Deadline | Linked Goal | Details |
-|---|---|---|---|---|---|---|
-| [[OBJ-001]] | {{objective_1}} | {{measure_1}} | {{target_1}} | {{deadline_1}} | G-00N | [[OBJ-001\|→]] |
-| [[OBJ-002]] | {{objective_2}} | {{measure_2}} | {{target_2}} | {{deadline_2}} | G-00N | [[OBJ-002\|→]] |
+Objectives are maintained in the **Objectives Register** — measure, target, deadline, and goal linkage live there. This section carries the executive summary only.
+
+Summary:
+{{objectives_summary}}
+
+**Full register:** [[objectives-register]] · manage with `/ea-objectives`
 
 ---
 
@@ -168,10 +174,12 @@ They are parallel to Problems, not parents of them.
 
 </details>
 
-| ID | Issue | Area | Threatens Goal(s) | Evidence | Raised By | Details |
-|---|---|---|---|---|---|---|
-| [[ISS-001]] | {{issue_1}} | {{area_1}} | G-00N | {{issue_evidence_1}} | {{issue_raised_by_1}} | [[ISS-001\|→]] |
-| [[ISS-002]] | {{issue_2}} | {{area_2}} | G-00N | {{issue_evidence_2}} | {{issue_raised_by_2}} | [[ISS-002\|→]] |
+Issues are maintained in the **Issues Register** — severity, threatened goals, and evidence live there. This section carries the executive summary only.
+
+Summary:
+{{issues_summary}}
+
+**Full register:** [[issues-register]] · manage with `/ea-issues`
 
 ---
 
@@ -187,10 +195,12 @@ Issues, not derived from them.
 
 </details>
 
-| ID | Problem | Observable Symptom | Blocks Objective(s) | Evidence | Raised By | Details |
-|---|---|---|---|---|---|---|
-| [[PRB-001]] | {{problem_1}} | {{symptom_1}} | OBJ-00N | {{problem_evidence_1}} | {{problem_raised_by_1}} | [[PRB-001\|→]] |
-| [[PRB-002]] | {{problem_2}} | {{symptom_2}} | OBJ-00N | {{problem_evidence_2}} | {{problem_raised_by_2}} | [[PRB-002\|→]] |
+Problems are maintained in the **Problems Register** — observable symptom, blocked objectives, and evidence live there. This section carries the executive summary only.
+
+Summary:
+{{problems_summary}}
+
+**Full register:** [[problems-register]] · manage with `/ea-problems`
 
 ---
 
@@ -204,6 +214,10 @@ An Opportunity is a specific, actionable possibility to exploit a favourable con
 Types: **Exploit** (capitalise on existing advantage) / **Enhance** (amplify current capability) / **Emerge** (pursue something not previously in scope).
 
 </details>
+
+<!-- follow-up: no dedicated Opportunities register/command yet — keep this lean Vision summary; promote to a register if OPP volume grows -->
+
+Opportunities are summarised here in the Vision (there is no dedicated register yet). Each OPP-NNN should advance at least one Goal and, in Phase E, be elaborated into Work Packages (WP-NNN).
 
 | ID | Opportunity | Driver(s) | Type | Priority | Linked Goal(s) | Rationale | Details |
 |---|---|---|---|---|---|---|---|
@@ -226,11 +240,16 @@ stakeholders who need the full motivation chain without reading individual secti
 
 ### Strategies
 
-| ID | Strategy | Type | Supports Goal(s) | Details |
-|---|---|---|---|---|
-| [[STR-001]] | {{strategy_1}} | {{strategy_type}} | G-00N | [[STR-001\|→]] |
+Strategies are maintained in the **Strategy Register** — type, horizon, supported goals/objectives, and rationale live there. This section carries the executive summary only.
+
+Summary:
+{{strategies_summary}}
+
+**Full register:** [[strategy-register]] · manage with `/ea-strategies`
 
 ### Key Metrics
+
+<!-- follow-up: no dedicated Metrics register/command yet — keep this lean Vision summary, sourced from engagement.json → metrics[] -->
 
 | ID | Metric | Type | Linked Objective | Baseline | Target | Baseline Source |
 |---|---|---|---|---|---|---|

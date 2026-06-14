@@ -7,7 +7,7 @@ allowed-tools: [Read, Write, Bash]
 
 You are executing the `/ea-strategies` command. All mode mechanics (engagement resolution, ID assignment, list/add/update/trace/generate flows, common edge cases) follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the Strategy concept and its distinctions from Goal / Objective / Plan / Principle, read `ea-concepts.md`; do not restate definitions here.
 
-Strategy is the **"how"** in the motivation chain (DRV → G → OBJ → **STR** → WP) — the chosen approach for pursuing goals and objectives. Until now it was the only motivation concept without a register command, so strategies were buried in the direction data. This command surfaces them: every strategy should support at least one goal or objective, and be executed by at least one work package. Strategies appear in Architecture Vision §8 — the register is the management interface; Architecture Vision is the primary display view. **`trace` (no ID) renders the Strategy Map** — one row per strategy showing the goals it serves and the work packages that execute it.
+Strategy is the **"how"** in the motivation chain (DRV → G → OBJ → **STR** → WP) — the chosen approach for pursuing goals and objectives. Until now it was the only motivation concept without a register command, so strategies were buried in the direction data. This command surfaces them: every strategy should support at least one goal or objective, and be executed by at least one work package. The **Strategy Register** is the management interface; the Architecture Vision (§8) summarises and links to it rather than rendering a live table. **`trace` (no ID) renders the Strategy Map** — one row per strategy showing the goals it serves and the work packages that execute it.
 
 ## Register Spec
 
@@ -16,7 +16,7 @@ Strategy is the **"how"** in the motivation chain (DRV → G → OBJ → **STR**
 | Prefix / concept | `STR-NNN` — Strategy |
 | Storage | `engagement.json → direction.strategies[]` |
 | Register file | `artifacts/cross-cutting/strategy-register.md` (artifactId `strategy-register`; relatedArtifacts `["architecture-vision"]`) |
-| Display view | Architecture Vision `§8 Strategic Direction Summary → Strategies` — columns `ID \| Strategy \| Type \| Supports Goal(s) \| Details` ← `id, statement, type, supports` |
+| Seed template | `templates/phase-a/strategy-register.md` (scored artifact; `generate` fills its Summary + per-type item blocks) |
 | Groupings | `list` and `generate` group by Type; summary counts by Horizon, Priority, Status, plus "Orphans (no supported goal/objective)" and "Not executed (no work package)" |
 | Orphan rule | No `supports` AND no executing work package → `⚠️ Orphan` |
 
@@ -79,5 +79,5 @@ Capture the approach here and let the Architecture Roadmap sequence the work. Pr
 ## Messages
 
 - **Empty state:** "No strategies found. Capture strategies during Phase A interviews (`/ea-interview start phase A`) or `/ea-brainstorm`, then add them with `/ea-strategies add`. A strategy is the chosen *approach* for achieving a goal — the 'how'."
-- **Add success:** "STR-NNN added. Link it to the work packages that execute it via the roadmap's `Executes Strategies` field (`/ea-matrix` or edit the Architecture Roadmap), and confirm it supports a goal with `/ea-strategies trace STR-NNN`."
+- **Add success:** "STR-NNN added to engagement.json. Run `/ea-strategies generate` to refresh the Strategy Register, link it to the work packages that execute it via the roadmap's `Executes Strategies` field (`/ea-matrix` or edit the Architecture Roadmap), and confirm it supports a goal with `/ea-strategies trace STR-NNN`."
 - **Orphan nudge:** "⚠️ No supported goal/objective. Run `/ea-goals list` (or `/ea-objectives list`) to see what's available, then `/ea-strategies update STR-NNN supports G-NNN`."

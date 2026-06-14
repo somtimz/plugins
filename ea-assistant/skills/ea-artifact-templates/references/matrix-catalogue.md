@@ -263,7 +263,7 @@ Entries marked **Managed by:** are not handled by `/ea-matrix` — follow the po
 ### goal-service — Goal / Service Matrix
 - **Phase:** B · **Folder:** `artifacts/phase-b/` · **File:** `goal-service-matrix.md`
 - **Axes:** rows = goals and objectives (G-NNN, OBJ-NNN), columns = services (SVC-NNN — business, application, or technology services)
-- **Seed sources:** rows — `engagement.json → direction.goals[]` and `direction.objectives[]` (also surfaced in Architecture Vision §3/§4); columns — `artifacts/phase-b/business-architecture.md` §5 Business Services (SVC-NNN tokens), plus any application/technology service sections in the Phase C-App / D architectures
+- **Seed sources:** rows — `engagement.json → direction.goals[]` and `direction.objectives[]` (rendered in the Goals/Objectives registers; surfaced in Architecture Vision §3/§4 summaries); columns — `artifacts/phase-b/business-architecture.md` §5 Business Services (SVC-NNN tokens), plus any application/technology service sections in the Phase C-App / D architectures
 - **Markers:** `D` directly delivers · `S` supports · `E` enables (indirect) · `M` missing service needed to meet the goal
 - **Shows:** which services contribute to which goals and objectives (the TOGAF Goal/Objective/Service matrix)
 - **Why:** confirms every goal is served by at least one service and exposes services that serve no goal — the classic "capability/service with no business justification" check

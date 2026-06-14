@@ -53,7 +53,7 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 
 ### Preliminary — Part 3: Motivation Framework
 
-*Routes to: Engagement Charter §6, engagement.json → direction, Architecture Vision §2–§7*
+*Routes to: Engagement Charter §6, engagement.json → direction (rendered in the motivation registers), Architecture Vision §2–§7 summaries*
 
 12. What external forces (market shifts, regulatory changes, competitive pressure, technology change) are creating pressure to act now? Assign each a DRV-NNN ID.
 13. What internal forces (cost pressure, strategic mandate, leadership change, capability gap) are pushing this engagement forward? Assign each a DRV-NNN ID.
@@ -268,18 +268,18 @@ Assign IDs sequentially within each prefix as responses are confirmed. Record ID
 
 | Response Topic | Target Artifact | Target Field |
 |---|---|---|
-| External business drivers | Architecture Vision | `§2 Business Drivers` (DRV-NNN rows) |
-| Internal business drivers | Architecture Vision | `§2 Business Drivers` (DRV-NNN rows) |
-| Goals | Architecture Vision + engagement.json | `§3 Goals` (G-NNN rows) + `direction.goals[]` |
-| Objectives | Architecture Vision + engagement.json | `§4 Objectives` (OBJ-NNN rows) + `direction.objectives[]` |
-| Systemic issues | Architecture Vision | `§5 Issues` (ISS-NNN rows) |
-| Specific problems | Architecture Vision | `§6 Problems` (PRB-NNN rows) |
+| External business drivers | Drivers Register (+ engagement.json) | `direction.drivers[]`; Vision §2 summary |
+| Internal business drivers | Drivers Register (+ engagement.json) | `direction.drivers[]`; Vision §2 summary |
+| Goals | Goals Register + engagement.json | `direction.goals[]`; Vision §3 summary |
+| Objectives | Objectives Register + engagement.json | `direction.objectives[]`; Vision §4 summary |
+| Systemic issues | Issues Register (+ engagement.json) | `direction.issues[]`; Vision §5 summary |
+| Specific problems | Problems Register (+ engagement.json) | `direction.problems[]`; Vision §6 summary |
 | Opportunities | Architecture Vision | `§7 Opportunities` (OPP-NNN rows) |
 | Performance metrics | engagement.json | `metrics[]` linked to OBJ-NNN |
 | Success criteria | Architecture Vision | `§1 Executive Summary` + `§3 Goals` |
 | Key stakeholders | Stakeholder Map | `{{stakeholder_list}}` |
 | Stakeholder concerns | Stakeholder Map | `{{stakeholder_concerns}}` |
-| Strategies | Architecture Vision + engagement.json | `§8 Strategic Direction Summary` (STR-NNN rows) + `direction.strategies[]` |
+| Strategies | Strategy Register + engagement.json | `direction.strategies[]`; Vision §8 summary |
 | Metrics | engagement.json | `§8 Strategic Direction Summary` (MET-NNN rows) + `metrics[]` |
 | In-scope items | Architecture Vision | `§9 Scope — {{scope_in}}` |
 | Out-of-scope items | Architecture Vision | `§9 Scope — {{scope_out}}` |

@@ -7,7 +7,7 @@ allowed-tools: [Read, Write, Bash]
 
 You are executing the `/ea-problems` command. All mode mechanics follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the Problem concept and its distinctions from Issue/Risk/Gap/Constraint, read `ea-concepts.md`; do not restate definitions here.
 
-Problems are specific, observable, fixable symptoms actively blocking objectives — certain and present, with a measurable symptom. They appear in Architecture Vision §6 — the register is the management interface; Architecture Vision is the primary display view. The **Engagement** domain covers problems with the EA engagement itself (methodology, governance, team, tooling).
+Problems are specific, observable, fixable symptoms actively blocking objectives — certain and present, with a measurable symptom. The **Problems Register** is the management interface; the Architecture Vision (§6) summarises and links to it rather than rendering a live table. The **Engagement** domain covers problems with the EA engagement itself (methodology, governance, team, tooling).
 
 ## Register Spec
 
@@ -16,7 +16,7 @@ Problems are specific, observable, fixable symptoms actively blocking objectives
 | Prefix / concept | `PRB-NNN` — Problem |
 | Storage | `engagement.json → direction.problems[]` |
 | Register file | `artifacts/cross-cutting/problems-register.md` (artifactId `problems-register`; relatedArtifacts `["architecture-vision"]`) |
-| Display view | Architecture Vision `§6 Problems` — columns `ID \| Problem \| Observable Symptom \| Blocks Objective(s) \| Evidence \| Raised By \| Details` ← `id, statement, symptom, blocksObjectives, evidence, raisedBy` |
+| Seed template | `templates/phase-a/problems-register.md` (scored artifact; `generate` fills its Summary + per-domain item blocks) |
 | Groupings | `list` and `generate` group by Domain (Engagement first, then Business, Technology, Data, Application); summary counts by Severity, Status, plus "No evidence" and "No objectives" |
 | Orphan rule | No linked objectives → `⚠️ Orphan` |
 
@@ -86,6 +86,6 @@ Proceed as a Problem? (y/n)
 ## Messages
 
 - **Empty state:** "No problems found. Capture problems during interviews or `/ea-brainstorm`, then add them with `/ea-problems add`."
-- **Add success:** "PRB-NNN added. Consider creating a REQ-NNN requirement to address this problem: '/ea-requirements add'."
+- **Add success:** "PRB-NNN added to engagement.json. Run `/ea-problems generate` to refresh the Problems Register, and consider creating a REQ-NNN requirement to address this problem: '/ea-requirements add'."
 - **Orphan nudge (no objectives exist yet):** "⚠️ No objectives captured yet. Problems should block specific objectives. After capturing objectives with '/ea-objectives add', link this problem: /ea-problems update PRB-NNN blocksObjectives OBJ-NNN"
 - **No-evidence flag:** "⚠️ {N} problem(s) have no evidence — problems without a measurable symptom cannot be prioritised."

@@ -202,14 +202,16 @@ Read `engagement.json → direction` — the single source of truth for directio
 
 **Domain resolution:** use the item's own `domain` field where present (goals, issues, problems). Items without one (objectives, strategies, opportunities) inherit the domain of their linked goal (`linkedGoal` / first of `supports` / first of `linkedGoals`); if no linked goal, show `—`.
 
-### Step 2b — Drift Detection
+### Step 2b — Displayed-In & Residual Drift
 
-The artifact display tables (Architecture Vision §2–§8 and sibling artifacts) are rendered projections of `engagement.json`. Check they have not drifted:
+Drivers, goals, objectives, strategies, issues, and problems are rendered by their **dedicated registers** (`artifacts/cross-cutting/{concept}-register.md`), regenerated from `engagement.json → direction` via `/ea-{concept} generate`. The Architecture Vision summarises and links to those registers rather than embedding live tables, so for these six concepts there is **no projection that can drift** — the register is overwritten from the source of truth. Set their `Displayed In` to the dedicated register path (or `—` if it has not been generated yet).
 
-1. List all `*.md` files under `EA-projects/{slug}/artifacts/` recursively, excluding `*.review.md` and `*-register*.md` files.
-2. In each file, locate **direction-bearing section tables**: a heading containing "Goals", "Objectives", "Strategies", "Opportunities", "Issues", or "Problems" whose next table has first-cell rows matching the corresponding ID pattern (`G-\d{3}`, `OBJ-\d{3}`, `STR-\d{3}`, `OPP-\d{3}`, `ISS-\d{3}`, `PRB-\d{3}`). Skip `{{...}}` placeholder rows and `G-00N`-style template examples. ID tokens appearing elsewhere (e.g. a Roadmap's "Advances Goals/Objectives" column, A3 notes) are cross-references, not display rows — out of scope here; broken references are surfaced by `/ea-trace`.
-3. **Artifact-only IDs** — a row ID present in a display table but absent from the corresponding `direction` array: collect as drift, noting the artifact file.
-4. Record, per item in the register, the first artifact whose display table contains its ID — this populates the `Displayed In` column (items not yet rendered in any display table show `—`).
+Opportunities (Vision §7) and Key Metrics have no dedicated register and remain rendered as Vision tables; any sibling artifact may also embed a direction-ID display table. Detect residual drift in those:
+
+1. List all `*.md` files under `EA-projects/{slug}/artifacts/` recursively, excluding `*.review.md` and `*-register*.md` files (the dedicated registers are generated outputs, never drift sources).
+2. In each file, locate **direction-bearing section tables**: a heading containing "Opportunities" (or, in sibling artifacts, "Goals"/"Objectives"/"Strategies"/"Issues"/"Problems") whose next table has first-cell rows matching the corresponding ID pattern (`OPP-\d{3}`, `G-\d{3}`, `OBJ-\d{3}`, `STR-\d{3}`, `ISS-\d{3}`, `PRB-\d{3}`). Skip `{{...}}` placeholder rows and `G-00N`-style template examples. ID tokens appearing elsewhere (e.g. a Roadmap's "Advances Goals/Objectives" column, A3 notes) are cross-references, not display rows — out of scope; broken references are surfaced by `/ea-trace`.
+3. **Artifact-only IDs** — a row ID present in such a display table but absent from the corresponding `direction` array: collect as drift, noting the artifact file.
+4. For an item that *is* rendered in a scanned artifact table, record the first such artifact as its `Displayed In` (this is the path for opportunities); the six register-backed concepts use their dedicated register path per the note above.
 
 ### Step 3 — Apply Filters
 
@@ -249,7 +251,7 @@ Engagement: {name}  ·  Date: {YYYY-MM-DD}
 {N} goals · {N} objectives · {N} strategies · {N} opportunities · {N} issues · {N} problems (source: engagement.json)
 ```
 
-A goal's `Linked Strategies` is derived from `direction.strategies[]` where `supports` contains the goal's ID. `Displayed In` is the artifact file recorded in Step 2b, or `—` if the item is not yet rendered in any artifact. Sort rows within each section by ID number. Null/absent fields: show `—`. Do not write any file.
+A goal's `Linked Strategies` is derived from `direction.strategies[]` where `supports` contains the goal's ID. `Displayed In` is the dedicated register path for the six register-backed concepts (or `—` if not yet generated), and the first scanned artifact table for opportunities (per Step 2b). Sort rows within each section by ID number. Null/absent fields: show `—`. Do not write any file.
 
 **Drift report** — if Step 2b found artifact-only IDs, append after the footer:
 
@@ -278,4 +280,5 @@ Load `skills/ea-engagement-lifecycle/references/grill-direction-quality.md`. App
 | All `direction` arrays empty or missing | "No direction items in engagement.json. Capture them via `/ea-interview start phase A` or the register commands (`/ea-goals add`, `/ea-objectives add`, ...)." Still run Step 2b — artifact-only IDs found with an empty register are all drift |
 | No artifacts directory or no `.md` files found | Skip Step 2b; `Displayed In` shows `—` for all items |
 | Artifact tables contain only `{{...}}` placeholders | Treat as empty for drift detection |
-| Same ID displayed in multiple artifacts | `Displayed In` shows the first occurrence (Architecture Vision takes priority) |
+| Same opportunity ID displayed in multiple artifacts | `Displayed In` shows the first occurrence (Architecture Vision §7 takes priority) |
+| Dedicated register not yet generated | The six register-backed concepts show `Displayed In: —` until `/ea-{concept} generate` is run; this is not drift |
