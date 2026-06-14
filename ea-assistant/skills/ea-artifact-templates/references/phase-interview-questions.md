@@ -53,7 +53,7 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 
 ### Preliminary — Part 3: Motivation Framework
 
-*Routes to: Engagement Charter §6, engagement.json → direction (rendered in the motivation registers), Architecture Vision §2–§7 summaries*
+*Routes to: Engagement Charter §6, engagement.json → direction (rendered in the motivation registers), Architecture Vision §2–§6 summaries*
 
 12. What external forces (market shifts, regulatory changes, competitive pressure, technology change) are creating pressure to act now? Assign each a DRV-NNN ID.
 13. What internal forces (cost pressure, strategic mandate, leadership change, capability gap) are pushing this engagement forward? Assign each a DRV-NNN ID.

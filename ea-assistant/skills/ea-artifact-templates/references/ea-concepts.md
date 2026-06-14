@@ -997,7 +997,7 @@ Metrics close the loop between intention and evidence:
 - If performance is below threshold → metrics **surface new Problems** (observable symptoms) or **reveal deeper Issues** (systemic conditions)
 - Metrics also **evaluate Capability Maturity** — when a capability is not performing, metrics identify which ones need investment
 
-**Structural parts** (Architecture Vision §7 / Metrics Register):
+**Structural parts** (Architecture Vision §8 / Metrics Register):
 - **ID** — MET-NNN
 - **Description** — what is being measured
 - **Type** — Leading / Lagging
@@ -1013,7 +1013,7 @@ Metrics close the loop between intention and evidence:
 - Not a KPI (necessarily) — all KPIs are metrics, but not all metrics are KPIs; KPIs are the most strategically significant metrics
 - Not a requirement — a requirement specifies what must be done; a metric measures whether it has been done successfully
 
-**TOGAF placement:** Architecture Vision §7 Strategic Direction Summary; referenced in Phase G (Implementation Governance) for compliance tracking; Phase H (Architecture Change Management) for performance feedback.
+**TOGAF placement:** Architecture Vision §8 Strategic Direction Summary; referenced in Phase G (Implementation Governance) for compliance tracking; Phase H (Architecture Change Management) for performance feedback.
 
 **Practitioner Notes:**
 - **Measure success through delivery outcomes** (cycle time, quality, value), not artifact completeness.
@@ -1752,7 +1752,7 @@ If you have identified something that is *not* a goal, objective, strategy, issu
 | Capability Model | Business Architecture; Capability Map | B | Business | Resource (Active Structure) |
 | Capability Gap | Gap Analysis (B/C/D); Architecture Roadmap (E) | B | Business | — |
 | Operating Model | Business Architecture; Technology Architecture | B / D | Business | — |
-| Metrics | Architecture Vision §7; Phase G/H governance | A / G / H | Motivation | — |
+| Metrics | Architecture Vision §8; Phase G/H governance | A / G / H | Motivation | — |
 | Architecture Decision Record | ADR Register; individual ADR-NNN files; cross-referenced in artifact `## Appendix A5 — Related Architecture Decisions` sections | Any | — | — |
 | Architecture Building Block (ABB) | Architecture Definition Document; Gap Analysis; Business/App/Tech Architecture ABB sections | B–E | Application / Technology | Application Component; Technology Node |
 | Solution Building Block (SBB) | Technology Architecture (SBB Register); Gap Analysis; Migration Plan | D–F | Technology | System Software; Device; Technology Service |

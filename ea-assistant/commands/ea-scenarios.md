@@ -381,7 +381,7 @@ Status: {status}  |  Phase: A  |  Last Modified: {date}
    → REQ-002 — {statement} [Domain: {domain} / Priority: {priority}]
 
  Architecture Vision section:
-   → Architecture Vision §1 (Problem Summary) / §14 (Scenario Reference)
+   → Architecture Vision §1 (Problem Summary) / §14 (Target Architecture)
 
 Chain status: {✅ Complete | ⚠️ Partial (list missing links) | 🔴 Orphan (no goals linked)}
 ```

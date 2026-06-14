@@ -112,7 +112,7 @@ Creating new ADR — {next ADR ID}
 3. Decision Owner (name or role):
 4. Reviewed By (names/roles, or press Enter to leave blank):
 5. Related business drivers or goals (e.g. "DRV-001, G-002", or press Enter to skip):
-6. Triggering artifact and section (e.g. "Architecture Vision §7 STR-002", or press Enter to skip):
+6. Triggering artifact and section (e.g. "Architecture Vision §8 STR-002", or press Enter to skip):
 ```
 
 Wait for responses before proceeding.
