@@ -6,14 +6,16 @@
 
 ---
 
-## v0.9.78 — Architecture Review Board Defined in the Governance Framework
+## v0.9.78 — Governance Framework v3: ARB Body, Direction Concept & Control-Metrics
 
 ### Summary
-The ARB's full role definition (duties, membership, RACI, authority, escalation) already lived in `role-catalogue.md`, but the **governance framework** — where one would look for "what is the ARB" — only described the *minutes record*, not the *body*. Adds a dedicated definition of the ARB as a governance body and cross-links it from `/ea-arb`.
+Incorporates the Architecture Governance Framework v3 review. Most of it already existed in `governance-framework.md` (Four Elements, Cascade, Two Processes, Two Layers, Phase G boundary, Metrics, ADM mapping, ARB minutes) and the Goal/Objective/Strategy definitions were already verbatim-consistent — so this adds the genuinely missing pieces and reconciles the concept layer.
 
 ### New / Changed
-- **`governance-framework.md`** — new **"The Architecture Review Board (ARB)"** section defining the body in terms of its **role** (approves the target architecture; authority of last resort below the executive layer; the Phase G conformance gate), **function** (ratifies decisions, governs principles/dispensations, controls ACRs, checks conformance, resolves cross-domain conflict), **authority & standing** (Approve/Reject/Defer/Escalate per its Terms of Reference; quorum-based; chaired by the EA), and **what it is not** (vs the EA Working Group, vs a program/steering board, vs the minutes). Cross-links to the full role-catalogue entry.
-- **`/ea-arb`** — header note distinguishing the ARB (the body) from the minutes (`ARB-NNN`, the record this command manages), pointing to both the governance-framework definition and the role catalogue.
+- **Architecture Review Board (the body)** — new section in `governance-framework.md` defining the ARB's **role** (approves the target architecture; authority of last resort below the executive; Phase G conformance gate), **function** (ratifies decisions, governs principles/dispensations, controls ACRs, checks conformance, resolves conflict), authority & standing, and what it is *not* (vs EA Working Group, vs program board, vs the minutes). Cross-linked to `role-catalogue.md`; `/ea-arb` header note distinguishes the body from the `ARB-NNN` minutes record.
+- **`### Direction` concept** in `ea-concepts.md` — the reconciliation point: Direction is the **superset** (performance expectation + constraint + risk appetite) delivered through Goals/Objectives/Strategies, sourced from above via the cascade. Goal/Objective/Strategy definitions were already consistent and unchanged. EA concepts: 31 → 32.
+- **Metrics → Control** — the Metrics concept now states explicitly that **metrics are the instruments that give the Control element its teeth** (governance is opinion-based without them, evidence-based with them), with the Outcome/Performance/Activity/Benefit → G/OBJ/STR/FIN mapping.
+- **Governance framework additions** — an **Executive Summary** table (scannable anchor) and two **Mermaid diagrams**: the two core processes + Architecture Contract handoff (Figure 4) and the TOGAF governance layers + Phase G boundary (Figure 3).
 
 ## v0.9.77 — Requirement, Work Package & Opportunity Concepts
 
@@ -381,9 +383,9 @@ Requirements Register entries carry a Motivation field that links each requireme
 
 > 📎 Source framework: `skills/ea-artifact-templates/references/ea-concepts-source.pdf` — *Enterprise Architecture Strategic Context: Terms, Concepts, and Relationship Models*
 
-### EA Concepts (31 total)
+### EA Concepts (32 total)
 
-Vision, Mission, Business Driver, Principle, Goal, Objective, Strategy, Plan, Risk, Issue, Problem, Opportunity, Capability Model, Capability Gap, Value Stream, Business Process, Use Case, Business Scenario, Requirement, Work Package, Opportunity, Operating Model, Metrics, Cost Entry, Constraint, Stakeholder Concern, ADR, ABB, SBB, Reference Architecture, User Story — each with a formal definition, TOGAF phase placement, ArchiMate 3.x element, and a disambiguation checklist. Full definitions in `skills/ea-artifact-templates/references/ea-concepts.md`.
+Vision, Mission, Business Driver, Principle, Direction, Goal, Objective, Strategy, Plan, Risk, Issue, Problem, Opportunity, Capability Model, Capability Gap, Value Stream, Business Process, Use Case, Business Scenario, Requirement, Work Package, Opportunity, Operating Model, Metrics, Cost Entry, Constraint, Stakeholder Concern, ADR, ABB, SBB, Reference Architecture, User Story — each with a formal definition, TOGAF phase placement, ArchiMate 3.x element, and a disambiguation checklist. Full definitions in `skills/ea-artifact-templates/references/ea-concepts.md`.
 
 **Disambiguation summary:**
 
@@ -392,6 +394,7 @@ Vision, Mission, Business Driver, Principle, Goal, Objective, Strategy, Plan, Ri
 | Vision           | Aspirational (future state)            | No                      | No                 | Inspires Mission and Drivers                                                           |
 | Mission          | Declarative (present purpose)          | No                      | No                 | Bounds Drivers and Goals                                                               |
 | Principle        | Rule (non-negotiable)                  | No                      | No                 | Architecture decisions                                                                 |
+| Direction        | Superset of intent (perf. expectation + constraint + risk appetite) | No | No  | Delivered through Goals/Objectives/Strategies; sourced via the cascade; engagement.json → direction |
 | Goal             | Qualitative                            | No                      | No                 | Drivers                                                                                |
 | Objective        | Measurable                             | Yes                     | No                 | Goals                                                                                  |
 | Strategy         | Directional                            | No                      | No                 | Goals (STR-NNN)                                                                        |

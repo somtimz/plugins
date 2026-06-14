@@ -6,6 +6,22 @@ This reference explains the governance model used throughout EA engagements. It 
 
 ---
 
+## Executive Summary
+
+A scannable anchor for the detailed sections below.
+
+| Area | Core idea | Governance implication |
+|---|---|---|
+| **Definition** | Architecture governance directs enterprise architects and controls how the architecture guides implementation | Governance must cover both architecture *development* and implementation *conformance* |
+| **Direction** | Direction combines performance expectation, constraint, and risk appetite | Every architecture decision should trace back to a clear source of direction |
+| **Governance elements** | Direction, Decision, Execution, and Control form the recurring pattern | Control needs observable evidence through reviews, assessments, and **metrics** |
+| **Cascade** | Execution at one level becomes direction for the level below | Deviations must be **escalated up** the cascade, not silently resolved |
+| **Core processes** | Target-architecture approval and implementation governance are the two core processes | Governance shifts from target approval to conformance monitoring during implementation |
+| **TOGAF boundary** | Architecture governance governs the architecture; program governance governs delivery; Phase G is the interface | Phase G focuses on architecture conformance, not general project management |
+| **Metrics** | Outcome, performance, and activity metrics make control evidence-based | Metrics trace to goals, objectives, or strategies — unlinked metrics are orphans |
+
+---
+
 ## What Is Architecture Governance?
 
 Governance is how an organisation delivers **direction** and exercises **control**.
@@ -119,6 +135,20 @@ Specifically:
 - Did they follow the constraints (architecture specifications that limited their choices)?
 
 The TOGAF ADM transitions between these two processes between **Phase E** (output: Architecture Roadmap) and **Phase F** (output: Implementation Plan + Architecture Contract).
+
+**Figure 4 — the two core processes and the Architecture Contract handoff:**
+
+```mermaid
+flowchart LR
+    A["Direction + Problem"] --> B["Develop Target<br/>Architecture"]
+    B --> C{"ARB — does the target<br/>address the direction within<br/>constraints + risk appetite?"}
+    C -->|Approve| D["Approved Target<br/>Architecture Roadmap · Phase E"]
+    D -->|"Architecture Contract<br/>(Phase F handoff)"| E["Implementers follow the<br/>embedded direction"]
+    E --> F{"Conformance — gap filled?<br/>strategy followed? benefit<br/>delivered? constraints kept?"}
+    F -->|"Compliance Assessment · Phase G"| G["Approve / Reject<br/>deviation"]
+```
+
+*Left of the handoff: Process 1 (approve the target). Right of it: Process 2 (govern implementation).*
 
 ---
 
@@ -237,6 +267,19 @@ Phase G adds exactly one question to the broader program governance picture:
 Phase G does **not** replace: program boards, steering committees, investment committees, PMO oversight, benefits tracking, delivery schedule management, or funding governance.
 
 The cleanest formulation: **architecture governance governs the architecture; program governance governs the delivery; Phase G is where they interface.**
+
+**Figure 3 — TOGAF governance layers and the Phase G boundary:**
+
+```mermaid
+flowchart TB
+    subgraph L1["Layer 1 — Architecture Governance · ARB / EA function"]
+        A1["Are we doing architecture properly?<br/>principles · phase reviews · approval gates · waivers"]
+    end
+    subgraph L2["Layer 2 — Program Governance · Sponsor / PMO / Steering Committee"]
+        A2["Are we delivering the change effectively?<br/>stage gates · funding · benefits · risk &amp; issue"]
+    end
+    A1 -.->|"Phase G interface — 'Is the implementation<br/>conforming to the approved architecture?'"| A2
+```
 
 ---
 
