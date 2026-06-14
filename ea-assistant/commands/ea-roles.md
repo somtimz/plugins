@@ -56,7 +56,7 @@ Display a filtered summary table. If the domain value is not recognised, list va
 Generate a Role Catalogue artifact in the active engagement:
 
 1. Confirm the active engagement is loaded (if not, prompt `/ea-open` first)
-2. Read `templates/role-catalogue.md`
+2. Read `templates/phase-a/role-catalogue.md`
 3. Substitute `{{engagement_name}}`, `{{organisation}}`, and `{{YYYY-MM-DD}}`
 4. Write to `EA-projects/{slug}/artifacts/cross-cutting/context/role-catalogue.md`
 5. Register the artifact in `engagement.json` under `artifacts` with `status: Draft`

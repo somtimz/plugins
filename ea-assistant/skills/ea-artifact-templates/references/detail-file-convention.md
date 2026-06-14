@@ -134,7 +134,7 @@ Use `/ea-detail new {ID} [{artifact-id}]` to create a detail file. The command:
 1. Detects the ID type from the prefix
 2. Locates the parent artifact (from the optional argument or by scanning all artifacts)
 3. Extracts the matching table row to pre-fill `title`, `type`, and `parentArtifact`
-4. Creates `artifacts/details/{ID}.md` from `templates/item-detail.md`
+4. Creates `artifacts/details/{ID}.md` from `templates/cross-cutting/item-detail.md`
 5. Opens the file for editing
 
 ---
@@ -193,7 +193,7 @@ When interview, review, brainstorm, or grill sessions surface concerns or issues
 
 **Rules:**
 - Session recording is always **offer-based** — the user confirms before any write.
-- If a detail file does not exist when recording is accepted, create a stub from `templates/item-detail.md` first.
+- If a detail file does not exist when recording is accepted, create a stub from `templates/cross-cutting/item-detail.md` first.
 - Do not overwrite existing entries — always append.
 - Update `lastModified` in the detail file frontmatter after every write.
 

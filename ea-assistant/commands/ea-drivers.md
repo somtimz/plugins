@@ -15,8 +15,8 @@ Drivers sit at the top of the motivation chain (DRV → G → OBJ → STR → WP
 |---|---|
 | Prefix / concept | `DRV-NNN` — Business Driver |
 | Storage | `engagement.json → direction.drivers[]` |
-| Register file | `artifacts/cross-cutting/drivers-register.md` (artifactId `drivers-register`) |
-| Display view | Architecture Vision `§2 Business Drivers` — columns `ID \| Driver \| Type \| Force \| Impact on Strategy \| Linked Goals \| Evidence / Source \| Details` ← `id, statement, type, —, —, linkedGoals, evidence` |
+| Register file | `artifacts/cross-cutting/drivers-register.md` (artifactId `drivers-register`; relatedArtifacts `["architecture-vision"]`) |
+| Seed template | `templates/phase-a/drivers-register.md` (scored artifact; `generate` fills its Summary + per-type item blocks) |
 | Groupings | `list` and `generate` group by Type (External first); summary counts by Priority, plus "Orphans (no linked goal)" and "No evidence" |
 | Orphan rule | No linked goals → `⚠️ Orphan` |
 
@@ -50,5 +50,5 @@ Drivers have no status field — they are present (active) or removed. Before re
 ## Messages
 
 - **Empty state:** "No drivers found. Capture drivers during engagement-level interviews (`/ea-interview start engagement`) or `/ea-brainstorm`, then add them with `/ea-drivers add`."
-- **Add success:** "DRV-NNN added. Use '/ea-drivers trace DRV-NNN' to verify goal linkage."
+- **Add success:** "DRV-NNN added to engagement.json. Run `/ea-drivers generate` to refresh the Drivers Register, then '/ea-drivers trace DRV-NNN' to verify goal linkage."
 - **Orphan nudge:** "⚠️ No goals linked. Consider running `/ea-drivers update DRV-NNN linkedGoals G-NNN` after capturing goals."

@@ -353,7 +353,7 @@ Options:
 
 If `a` or `s` selected:
 - For each chosen CON-NNN: check whether `artifacts/details/{ID}.md` exists.
-  - If not: create a stub using `templates/item-detail.md`.
+  - If not: create a stub using `templates/cross-cutting/item-detail.md`.
   - Append to the **Concerns** section: `- CON-NNN: {concern text} — {grill skill}, {YYYY-MM-DD}`
   - Update `lastModified` in the detail file frontmatter.
 - If the concern text does not clearly map to an ID, ask: "Which item ID does CON-NNN relate to? (enter ID or skip)"

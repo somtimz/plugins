@@ -35,7 +35,7 @@ Scans all artifacts, extracts content per cell, writes a populated Zachman Diagr
 1. **Build cell extraction map** — read `skills/zachman-framework/references/cell-extraction-map.md`
 2. **Scan artifacts** — for each artifact in `engagement.json → artifacts[]`, read the file, identify contributing cells, extract key statements and IDs with source traceability; classify each cell as ✅/⚠️/❌/🚫 per the coverage rules in `cell-extraction-map.md`
 3. **Write the diagram:**
-   - Read template from `templates/zachman-diagram.md`
+   - Read template from `templates/cross-cutting/zachman-diagram.md`
    - Replace `{{placeholder}}` frontmatter tokens from `engagement.json`
    - Populate Coverage Summary table and cell sections with extracted content (bullet lists) and source references
    - Populate Gap Analysis table (see `gap` mode rules below)

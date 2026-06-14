@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.78 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.80 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -18,6 +18,7 @@ These rules prevent the most common errors. Check them before writing any agent 
 - **Engagement discipline rules** — every project follows the 12 rules in `.claude/rules/ea-engagement.md` (seeded from `templates/seeds/engagement-rules.md`). For the canonical reference with citation guidance, see `skills/ea-engagement-lifecycle/references/engagement-rules-reference.md`
 - **Register snapshot convention** — generated registers use stable, undated filenames (e.g. `risk-register.md`); regeneration archives the prior version to a `snapshots/` subfolder. Rules in `skills/ea-artifact-templates/references/register-snapshot-convention.md`; do not restate inline
 - **No bulk empty stubs** — detail files (`artifacts/details/{ID}.md`) are created on demand only, when the user supplies content; never bulk-create empty stub files
+- **Vision is a strategic index** — the Architecture Vision summarises and links to the dedicated motivation registers (drivers/goals/objectives/strategy/issues/problems) rather than embedding their tables; do not re-add live motivation tables to §2–§6/§8. Those registers are regenerated from `engagement.json → direction` via `/ea-{concept} generate`; `add`/`update` touch only `engagement.json`. Review the Vision together with its linked registers at the Phase A gate
 
 ---
 
@@ -42,7 +43,7 @@ Key entry points: `/ea-new` · `/ea-open` · `/ea-interview` · `/ea-grill` · `
 
 **Persona tailoring:** `/ea-help --persona <role>` and `/ea-publish --persona <role>` tailor the menu and report pack to a stakeholder role (enterprise-architect, cio, ciso, chief-product-officer, chief-privacy-officer, business-architect, data-architect). Persona definitions — interests, command subset, report bundle, audience tags, entry workflow — live in `skills/ea-engagement-lifecycle/references/persona-registry.md` (single source of truth; adding a persona is a data edit). `defaultPersona:` in `.claude/rules/ea-local-config.md` sets the engagement default. Personas map to the `audience` taxonomy (Executive/Business/Architecture/Delivery/Governance) — do not invent a parallel scheme.
 
-**Artifact scoring:** `/ea-score [artifact|--all|--status]` assigns two scores — **Completeness** and **Quality** (0–100 + band) — **per section and overall**, using `skills/ea-engagement-lifecycle/references/grill-scoring-rubric.md` (grounded in `ea-concepts.md` + each section's guidance block + compliance tiers; Quality includes readability). Scoring is carried out by `ea-grill-skills`; `/ea-grill` also emits the two scores and refreshes the Scorecard. Scores render into an author-only `<details>📊 Scorecard</details>` block in the artifact (per-section table + overall) — stripped on export like the Compliance/Guidance blocks. The overall pair is cached on the `engagement.json` artifact entry (`scores`). Command-generated artifacts (registers/matrices/derived) are not scored.
+**Artifact scoring:** `/ea-score [artifact|--all|--status]` assigns two scores — **Completeness** and **Quality** (0–100 + band) — **per section and overall**, using `skills/ea-engagement-lifecycle/references/grill-scoring-rubric.md` (grounded in `ea-concepts.md` + each section's guidance block + compliance tiers; Quality includes readability). Scoring is carried out by `ea-grill-skills`; `/ea-grill` also emits the two scores and refreshes the Scorecard. Scores render into an author-only `<details>📊 Scorecard</details>` block in the artifact (per-section table + overall) — stripped on export like the Compliance/Guidance blocks. The overall pair is cached on the `engagement.json` artifact entry (`scores`). Command-generated artifacts (registers/matrices/derived) are not scored — **exception:** the six Phase-A motivation registers (`drivers/goals/objectives/strategy/issues/problems-register`) **are** scored, because they are seeded from guidance-rich templates (`templates/phase-a/*-register.md`) and serve as the authoritative motivation artifacts that the Architecture Vision indexes.
 
 ---
 
@@ -105,6 +106,10 @@ relatedArtifacts: []   # artifact IDs referenced (e.g. ["architecture-vision"])
 diagrams: []           # diagram paths from engagement root (e.g. ["diagrams/context.png"])
 links: []              # named refs: [{label: "Context Diagram", path: "../../diagrams/context.png"}]
 ```
+
+### Template Library Organisation
+
+Plugin templates are organised by ADM phase: `templates/{preliminary,phase-a,…,phase-h,requirements}/` mirror the engagement `artifacts/` layout, multi-phase and `phase: All` templates live in `templates/cross-cutting/` (governed by their `admPhases` tag), and `templates/seeds/` holds engagement scaffolding. Look templates up by globbing recursively (`templates/**/*.md`); the source subfolder is organisational only — an artifact's storage folder is derived from the template's `phase:` value. Every template's `taxonomy:` block carries `admPhases` and an optional best-effort `zachmanCell` (cell vocabulary: `skills/zachman-framework/references/zachman-cell-descriptions.md`).
 
 ---
 

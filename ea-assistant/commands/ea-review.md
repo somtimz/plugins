@@ -65,7 +65,7 @@ Present the following options:
 - **Cross-reference in detail file:** After writing the comment, check whether the section name or comment text contains a recognised engagement ID (e.g. `G-001`, `WP-003`, `CAP-007`). If an ID is found, offer:
   > "Add this comment to the detail file for {ID}? (y/n)"
   - If accepted: check whether `artifacts/details/{ID}.md` exists.
-    - If not: create a stub using `templates/item-detail.md`.
+    - If not: create a stub using `templates/cross-cutting/item-detail.md`.
     - Append to the **Concerns** section: `- [review: {YYYY-MM-DD}] {comment text} — {reviewer}`
     - Update `lastModified` in the detail file frontmatter.
 

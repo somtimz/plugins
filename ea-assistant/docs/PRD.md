@@ -1,8 +1,29 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.78
+**Version:** 0.9.80
 **Status:** Current
 **Author:** Costa Pissaris
+
+---
+
+## v0.9.80 — Phase-aligned template library, dedicated motivation registers & Architecture Vision index model
+
+### Summary
+Three related changes. (1) **Template library reorganised by ADM phase.** All 48 artifact templates moved from a flat `templates/` directory into phase subfolders (`preliminary/`, `phase-a/` … `phase-h/`, `requirements/`), with multi-phase and `phase: All` templates relocated to `templates/cross-cutting/`. Every template now carries two classification tags in its `taxonomy` block — `admPhases` (the ADM phase(s) it applies to) and an optional best-effort `zachmanCell` (primary Zachman cell). `/ea-artifact create` now globs templates recursively; the artifact storage folder is still derived from each template's `phase:` value.
+
+(2) **Six dedicated Phase-A motivation registers.** New seed templates `templates/phase-a/{drivers,goals,objectives,strategy,issues,problems}-register.md` (modelled on the Risk/Constraints registers) give the motivation chain guidance-rich, **scored** registers — a documented exception to the "command-generated registers are not scored" rule. `register-protocol.md` `generate` now seeds from these templates when a spec declares one.
+
+(3) **Architecture Vision becomes a strategic index.** Vision §2–§8 motivation tables are replaced by concise summaries that link to the dedicated registers (mirroring the §11 Architecture Principles pattern); Opportunities (§7) and Key Metrics (§8) keep a lean Vision table as they have no dedicated register. The six register commands drop their live Display View Sync into the Vision — `add`/`update` now touch `engagement.json` only (the single source of truth) and nudge `/ea-{concept} generate` to refresh the register. `engagement.json → direction` remains authoritative; `/ea-status --direction` Step 2b is reworked for the index model. Cross-references across `ea-concepts.md`, `phase-interview-questions.md`, `matrix-catalogue.md`, `phase-constraints.md`, and `artifact-descriptions.md` retargeted onto the registers.
+
+### Files
+- `templates/**` — 48 templates git-moved into ADM-phase folders; `admPhases` + `zachmanCell` added to every taxonomy block.
+- `templates/phase-a/{drivers,goals,objectives,strategy,issues,problems}-register.md` — new scored seed templates.
+- `templates/phase-a/architecture-vision.md` — §2–§8 converted to summary + register links.
+- `commands/ea-artifact.md` — recursive template glob.
+- `commands/ea-{drivers,goals,objectives,strategies,issues,problems}.md` — Seed-template spec, no Display view, generate-nudge messages.
+- `commands/ea-status.md` — `--direction` Step 2b reworked.
+- `skills/ea-engagement-lifecycle/references/register-protocol.md` — seed-aware `generate`; Display-View-Sync skip note.
+- `CLAUDE.md`, `skills/ea-artifact-templates/SKILL.md`, `skills/ea-engagement-lifecycle/SKILL.md`, scaffolding-map, artifact-descriptions, ea-concepts, phase-interview-questions, matrix-catalogue, phase-constraints — documentation + cross-reference updates.
 
 ---
 

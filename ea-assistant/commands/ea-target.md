@@ -45,7 +45,7 @@ Check whether `artifacts/phase-a/target-state-declaration.md` already exists in 
 
 ### Interview
 
-Conduct the following questions in sequence. Apply standard interview shortcuts (s = skip, n/a = not applicable, opt-out, a: = decision log). Use the template at `templates/target-state-declaration.md` for placeholder keys.
+Conduct the following questions in sequence. Apply standard interview shortcuts (s = skip, n/a = not applicable, opt-out, a: = decision log). Use the template at `templates/phase-a/target-state-declaration.md` for placeholder keys.
 
 **Q1 — Overall target state:**
 ```
@@ -99,7 +99,7 @@ If no goals exist: "No goals found — you can add goals later via `/ea-goals ad
 
 ### Writing the artifact
 
-1. Substitute all collected answers into `templates/target-state-declaration.md`.
+1. Substitute all collected answers into `templates/phase-a/target-state-declaration.md`.
 2. Pre-populate `engagement_name`, `organisation`, `sponsor` from `engagement.json`.
 3. Set `lastModified` to today's date.
 4. Write to `EA-projects/{slug}/artifacts/phase-a/target-state-declaration.md`.

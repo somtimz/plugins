@@ -93,13 +93,13 @@ Artefacts are listed by ADM phase. Where an artefact spans multiple phases (e.g.
 
 ### Architecture Vision
 
-**Purpose:** Provides a high-level, stakeholder-oriented description of the target architecture and the value it will deliver. It is the primary communication document for executive and business stakeholders.
+**Purpose:** Provides a high-level, stakeholder-oriented description of the target architecture and the value it will deliver. It is the primary communication document for executive and business stakeholders, and the **strategic index** for the engagement: §2–§8 summarise the motivation chain and link to the dedicated registers (Drivers/Goals/Objectives/Strategy/Issues/Problems) rather than embedding their full tables. Sign-off reviews the Vision together with its linked registers.
 
 **Audience:** Executive sponsors, programme sponsors, senior business and IT stakeholders.
 
 **Contents:**
 - Executive summary of the problem being solved
-- **Direction Summary** — cross-domain table drawn from `engagement.json direction`, listing all goals, objectives, and strategies across all selected domains with their priority and (for strategies) which goals/objectives they support; items with no `statement` are excluded. Present in three grouped sections: Goals / Objectives / Strategies. Include a brief definition of each term at the top of the section to orient readers who may be unfamiliar with the distinction.
+- **Direction summaries (§2–§8)** — concise prose/summary per motivation concept drawn from `engagement.json direction`, each with a **"Full register" link** to its dedicated register ([[drivers-register]], [[goals-register]], [[objectives-register]], [[issues-register]], [[problems-register]], [[strategy-register]]). The Vision does not embed the full item tables — those live in the registers. Opportunities (§7) and Key Metrics (§8) have no dedicated register and keep a lean Vision table.
 - **Metrics Summary** — cross-domain table drawn from `engagement.json metrics`, listing all metrics grouped by type (Outcome / Performance / Activity), showing name, measure, baseline → target, deadline, frequency, source, linked direction ID, and current status. Metrics with no `name` or `measure` are excluded.
 - Business goals and strategic drivers
 - Scope of the architecture engagement
@@ -533,6 +533,22 @@ Artefacts are listed by ADM phase. Where an artefact spans multiple phases (e.g.
 **Who Reviews:** Programme sponsor, project management office, architecture review board, business stakeholders.
 
 **Phase:** E (draft), F (finalised).
+
+---
+
+### Motivation Registers (Drivers / Goals / Objectives / Strategy / Issues / Problems)
+
+**Purpose:** Six dedicated Phase-A registers — Drivers (DRV-NNN), Goals (G-NNN), Objectives (OBJ-NNN), Strategy (STR-NNN), Issues (ISS-NNN), Problems (PRB-NNN) — that hold the full motivation chain. They are the management interface for `engagement.json → direction` (the single source of truth). The **Architecture Vision is the strategic index** that summarises and links to these registers rather than embedding their tables; it should be reviewed together with them at the Phase A gate. Each register is a first-class, **scored** artifact (guidance per section + a `## Summary` count table), unlike other command-generated registers.
+
+**Audience:** Programme sponsor, enterprise architect, business owners, architecture review board.
+
+**Contents:** Per register — a `## Summary` count table (totals, status/priority counts, orphan/quality flags) and items grouped per that concept's grouping (drivers by type; goals/issues/problems by domain; objectives by linked goal; strategies by type), each item as an ID-keyed field block matching the `/ea-{concept}` Register Spec fields.
+
+**Templates:** `templates/phase-a/{drivers,goals,objectives,strategy,issues,problems}-register.md`.
+
+**When to Create:** Populated from interview/brainstorm capture via the register commands. Regenerate with `/ea-{concept} generate` (writes to `artifacts/cross-cutting/{concept}-register.md`); `add`/`update` change `engagement.json` and nudge a regenerate. Do not hand-edit the generated register — it is overwritten from the source of truth.
+
+**Phase:** Authored in Phase A (motivation); maintained throughout the engagement.
 
 ---
 

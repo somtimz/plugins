@@ -265,7 +265,7 @@ This will write artifacts/phase-a/business-scenario-BS-NNN.md and index it in en
 ```
 
 On confirm:
-1. Read `ea-assistant/templates/business-scenario.md` (the template).
+1. Read `ea-assistant/templates/phase-a/business-scenario.md` (the template).
 2. Substitute all `{{placeholder}}` tokens with captured answers.
 3. Write to `EA-projects/{slug}/artifacts/phase-a/business-scenario-BS-NNN.md`.
 4. Append to `engagement.json → scenarios[]`:
@@ -381,7 +381,7 @@ Status: {status}  |  Phase: A  |  Last Modified: {date}
    → REQ-002 — {statement} [Domain: {domain} / Priority: {priority}]
 
  Architecture Vision section:
-   → Architecture Vision §1 (Problem Summary) / §14 (Scenario Reference)
+   → Architecture Vision §1 (Problem Summary) / §14 (Target Architecture)
 
 Chain status: {✅ Complete | ⚠️ Partial (list missing links) | 🔴 Orphan (no goals linked)}
 ```

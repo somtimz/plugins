@@ -91,7 +91,7 @@ Create the folder if it does not exist.
 
 ### Step 6 — Create Workshop Minutes File
 
-1. Read `templates/workshop-minutes.md` as the template.
+1. Read `templates/cross-cutting/workshop-minutes.md` as the template.
 2. Replace all `{{placeholder}}` tokens with collected values.
 3. Write to: `EA-projects/{slug}/{storage-path}/workshop-minutes-{NNN}-{YYYY-MM-DD}.md`
 4. Register in `engagement.json → artifacts[]`:

@@ -48,7 +48,7 @@ Build an in-memory ADR index with all extracted data.
 
 ### Step 3 — Compile ADR Register
 
-Using the ADR register template (`templates/adr-register.md`):
+Using the ADR register template (`templates/cross-cutting/adr-register.md`):
 
 1. Populate the Summary table with counts by status
 2. Populate the phase tables — place each ADR in the correct phase section
@@ -112,7 +112,7 @@ Creating new ADR — {next ADR ID}
 3. Decision Owner (name or role):
 4. Reviewed By (names/roles, or press Enter to leave blank):
 5. Related business drivers or goals (e.g. "DRV-001, G-002", or press Enter to skip):
-6. Triggering artifact and section (e.g. "Architecture Vision §7 STR-002", or press Enter to skip):
+6. Triggering artifact and section (e.g. "Architecture Vision §8 STR-002", or press Enter to skip):
 ```
 
 Wait for responses before proceeding.
@@ -151,7 +151,7 @@ If neither lookup produces a match, note: `"No Architecture Repository entries m
 
 ### Step 4 — Create ADR File
 
-1. Read the ADR template from `templates/architecture-decision-record.md`
+1. Read the ADR template from `templates/cross-cutting/architecture-decision-record.md`
 2. Replace all `{{placeholder}}` tokens with the collected metadata:
    - `ADR-{{NNN}}` → assigned ADR ID
    - `{{decision_title}}` → title entered by user

@@ -27,7 +27,7 @@ TOGAF technique for planning change in terms of **business capabilities** rather
 | Capability Model / CAP-NNN | Business Architecture (Phase B); `ea-concepts.md` Capability Model entry |
 | Capability gaps | `/ea-gaps` (domain: Capability) |
 | Increments | Architecture Roadmap — per-capability increment list under each WP cluster ("CAP-007 Increment 2") |
-| Readiness ceiling | `templates/business-transformation-readiness.md` → Roadmap Implications |
+| Readiness ceiling | `templates/phase-a/business-transformation-readiness.md` → Roadmap Implications |
 | Measures | MET-NNN in `engagement.json → metrics`, linked to the capability's goals/objectives |
 
 ## Anti-patterns

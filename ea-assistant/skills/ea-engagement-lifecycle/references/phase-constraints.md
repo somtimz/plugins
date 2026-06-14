@@ -87,15 +87,15 @@ None required at this phase — this phase establishes the foundation for tracea
 | At least one G-NNN (Goal) defined | Blocking |
 | At least one OBJ-NNN (Objective) defined | Warning |
 | At least one STR-NNN (Strategy) defined | Warning |
-| Every G-NNN must appear in §3 Goals | Blocking |
-| Every OBJ-NNN must appear in §4 Objectives | Warning |
-| Every STR-NNN must appear in §7 Strategic Direction Summary | Warning |
+| Every G-NNN in `direction.goals[]` must appear in the Goals Register (refresh with `/ea-goals generate`) | Blocking |
+| Every OBJ-NNN in `direction.objectives[]` must appear in the Objectives Register (`/ea-objectives generate`) | Warning |
+| Every STR-NNN in `direction.strategies[]` must appear in the Strategy Register (`/ea-strategies generate`) | Warning |
 
 ### Content Constraints
 | Constraint | Severity |
 |---|---|
 | §1 Executive Summary must be populated (not `⚠️ Not answered`) | Blocking |
-| §2 Business Drivers must contain at least one DRV-NNN entry | Blocking |
+| `direction.drivers[]` must contain at least one DRV-NNN (rendered in the Drivers Register; Vision §2 carries the summary + link) | Blocking |
 | §8 Scope must be populated | Blocking |
 | §9 Stakeholders must list at least one stakeholder | Warning |
 | §10 Architecture Principles must reference Preliminary phase principles | Warning |
@@ -114,8 +114,8 @@ None required at this phase — this phase establishes the foundation for tracea
 | Every PRB-NNN must reference at least one OBJ-NNN it blocks | Info |
 
 ### Blocking Gates
-- [ ] Architecture Vision exists with `status` of Draft or higher
-- [ ] At least one DRV-NNN and one G-NNN defined
+- [ ] Architecture Vision exists with `status` of Draft or higher (reviewed together with its linked motivation registers — the Vision indexes them rather than embedding their tables)
+- [ ] At least one DRV-NNN and one G-NNN defined in `engagement.json → direction` (the single source of truth; the motivation registers are its rendered projection)
 - [ ] §1 Executive Summary and §2 Business Drivers are populated
 - [ ] Statement of Architecture Work exists (at minimum as a Draft)
 

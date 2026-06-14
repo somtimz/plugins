@@ -212,7 +212,7 @@ Guide the user through roadmap creation via direct elicitation. Ask one question
 
 ## Writing the Artifact
 
-Use the template at `templates/architecture-roadmap.md`. Populate:
+Use the template at `templates/phase-e/architecture-roadmap.md`. Populate:
 - Frontmatter: `engagement`, `lastModified` (today's date), `status: Draft`
 - Roadmap Overview: reference horizon and wave structure
 - One `### WP-NNN` section per work package

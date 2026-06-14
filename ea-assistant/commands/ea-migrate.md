@@ -268,7 +268,7 @@ Additional flags:
    - Present the move: `"Move artifacts/cross-cutting/{file} → artifacts/cross-cutting/{sub-folder}/{file}? (y/n/all/quit)"`
    - On confirm: create sub-folder if needed, move the file, update `engagement.json → artifacts[]` path.
 
-6. **Seed cross-cutting-index.md** if it does not exist. If `artifacts/cross-cutting/cross-cutting-index.md` is missing, create it from `templates/cross-cutting-index.md` with `engagement_name` substituted. Register in `engagement.json → artifacts[]`.
+6. **Seed cross-cutting-index.md** if it does not exist. If `artifacts/cross-cutting/cross-cutting-index.md` is missing, create it from `templates/cross-cutting/cross-cutting-index.md` with `engagement_name` substituted. Register in `engagement.json → artifacts[]`.
 
 7. **Finalise.** Update `engagement.json` `lastModified` to now. Print a summary:
    ```

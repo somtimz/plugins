@@ -422,7 +422,7 @@ Capture freeform brainstorm notes for the active EA engagement.
    >   - [PRB?] G-001: measurable decline in goal attainment rate
    > Record these in their item detail files? (y / n / select)"
 
-   - **y** — process all: for each ID-bearing entry, create the detail file if it does not exist (using `templates/item-detail.md`), then append to its Issues section: `- [brainstorm: {YYYY-MM-DD}] {entry text}` (retaining `[ISS?]`/`[PRB?]` marker). Update `lastModified` in each detail file.
+   - **y** — process all: for each ID-bearing entry, create the detail file if it does not exist (using `templates/cross-cutting/item-detail.md`), then append to its Issues section: `- [brainstorm: {YYYY-MM-DD}] {entry text}` (retaining `[ISS?]`/`[PRB?]` marker). Update `lastModified` in each detail file.
    - **select** — list entries and let the user choose which to record.
    - **n** — skip silently; brainstorm entries remain in session notes only.
 
