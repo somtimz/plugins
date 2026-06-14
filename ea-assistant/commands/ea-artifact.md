@@ -54,9 +54,9 @@ Derive the artifact's storage folder from the `phase` field in the template fron
 
 ### Mode: `create [artifact-name]`
 
-1. Match the artifact name to a template in the plugin's `templates/` directory
+1. Match the artifact name to a template by globbing the plugin's templates **recursively** (`templates/**/*.md`, excluding `templates/seeds/`), matching on `artifactId`/name. Templates are organised into ADM-phase subfolders (`templates/phase-a/`, `templates/cross-cutting/`, …) — the subfolder a template lives in does **not** determine the artifact's storage folder.
 2. If ambiguous, show a numbered list of matching templates
-3. Determine the phase folder using the **Phase Folder Mapping** table above
+3. Determine the phase folder using the **Phase Folder Mapping** table above (driven by the template's `phase:` frontmatter, **not** its source subfolder)
 4. Copy the template to `EA-projects/{slug}/artifacts/{phase-folder}/{artifact-id}.md`
 5. Pre-populate known fields from `engagement.json` (name, sponsor, organisation, date)
 6. Pre-populate any requirements linked to this phase from `requirements/requirements-index.json`

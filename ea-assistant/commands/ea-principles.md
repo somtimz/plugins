@@ -33,7 +33,7 @@ Look for `artifacts/preliminary/architecture-principles.md` in the active engage
 
 - If the file exists: proceed with the requested mode.
 - If the file does not exist and mode is `list`: display "No Architecture Principles artifact found. Run `/ea-artifact create architecture-principles` to create it, or use `/ea-principles add` to start capturing principles now."
-- If the file does not exist and mode is `add`: offer to create the artifact scaffold before adding the first principle. Use `templates/principles-register.md` as the scaffold.
+- If the file does not exist and mode is `add`: offer to create the artifact scaffold before adding the first principle. Use `templates/cross-cutting/principles-register.md` as the scaffold.
 
 ## Mode: `list` (default)
 
@@ -112,6 +112,6 @@ For each principle being traced:
 |---|---|
 | Duplicate principle name | Warn: "A principle named '{name}' may already exist ({ID}). Add anyway? (y/n)" |
 | Deprecated principle cited in active ADR | Flag in `trace` output as stale reference |
-| Principles artifact missing | Offer to scaffold from `templates/principles-register.md`; do not fail silently |
+| Principles artifact missing | Offer to scaffold from `templates/cross-cutting/principles-register.md`; do not fail silently |
 | No engagement open | Display: "No active engagement. Run `/ea-open` to open one." |
 | --type filter with no matching principles | Display: "No {type} principles found. Use `/ea-principles add --type {type}` to create the first one." |

@@ -106,7 +106,7 @@ If user selects `edit`: prompt for which approver or section to modify before wr
 
 ### Writing the Artifact
 
-1. Substitute all collected data into `templates/stakeholder-action-plan.md`.
+1. Substitute all collected data into `templates/cross-cutting/stakeholder-action-plan.md`.
 2. Populate `engagement_name`, `organisation` from `engagement.json`.
 3. Compute action summary counts (all Pending at generation time).
 4. Set `lastModified` to today.

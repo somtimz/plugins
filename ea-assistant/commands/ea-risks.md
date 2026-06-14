@@ -232,7 +232,7 @@ For each Open or Monitoring risk, check whether its description references any G
 
 ### Step 6 — Render the Risk Register
 
-Populate `templates/risk-register.md` with the collected data:
+Populate `templates/cross-cutting/risk-register.md` with the collected data:
 
 - Group risks by rating: Critical → High → Medium → Low
 - Within each group, sort by likelihood descending (High first)

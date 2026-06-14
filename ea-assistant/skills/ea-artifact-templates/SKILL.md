@@ -8,12 +8,20 @@ version: 0.9.78
 
 All EA artifacts are created from templates stored in the plugin's `templates/` directory. Templates use a consistent structure with clearly marked guidance, placeholder tokens, and answer state markers.
 
+## Template Organisation
+
+Templates are filed into ADM-phase subfolders that mirror the engagement `artifacts/` layout: `templates/{preliminary,phase-a,phase-b,phase-c-data,phase-c-app,phase-d,phase-e,phase-f,phase-g,phase-h,requirements}/`. Multi-phase and `phase: All` templates live in `templates/cross-cutting/` and are governed by their `admPhases` tag; `templates/seeds/` holds engagement scaffolding (not artifacts). Look up templates by globbing recursively (`templates/**/*.md`). The source subfolder is organisational only — an artifact's **storage** folder is always derived from the template's `phase:` value (see the Phase Folder Mapping in `commands/ea-artifact.md`).
+
+Every template also carries two classification tags in its `taxonomy:` block: `admPhases` (the ADM phase(s) it applies to) and `zachmanCell` (optional best-effort primary Zachman cell, e.g. `Scope/Why`; blank where ambiguous — cell vocabulary in `skills/zachman-framework/references/zachman-cell-descriptions.md`).
+
 ## Artifact Taxonomy
 
 Every artifact template includes a `taxonomy:` block in its YAML frontmatter. Use `references/taxonomy.md` as the canonical reference for all valid values and assignment rules.
 
 ```yaml
 taxonomy:
+  admPhases: [A]               # one or more of Preliminary|Requirements|A|B|C-Data|C-App|D|E|F|G|H
+  zachmanCell: "Scope/Why"     # optional best-effort primary Zachman cell; "" where ambiguous
   domain: Cross-cutting        # Business | Data | Application | Technology | Cross-cutting
   category: Strategy           # Strategy | Analysis | Design | Planning | Governance | Register
   audience: Executive          # Executive | Business | Architecture | Delivery | Governance | All

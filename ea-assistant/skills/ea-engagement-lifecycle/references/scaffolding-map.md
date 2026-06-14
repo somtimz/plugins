@@ -37,10 +37,12 @@ Each engagement type determines which ADM phases are applicable. Phases not cove
 
 These artifacts are automatically scaffolded when `/ea-new` completes. All are Preliminary phase artifacts.
 
+> **Template organisation:** Templates are filed into ADM-phase subfolders (`templates/preliminary/`, `templates/phase-a/`, … `templates/requirements/`). Multi-phase and `phase: All` templates live in `templates/cross-cutting/` and are governed by their `admPhases` frontmatter tag. The source subfolder is for organisation only — an artifact's storage folder is always derived from the template's `phase:` value (see the Phase Folder Mapping in `commands/ea-artifact.md`).
+
 | Artifact ID | Display Name | Template | Applicable Types | Applicable Domains |
 |---|---|---|---|---|
-| `architecture-principles` | Architecture Principles | `templates/architecture-principles.md` | All | All |
-| `stakeholder-map` | Stakeholder Map | `templates/stakeholder-map.md` | All | All |
+| `architecture-principles` | Architecture Principles | `templates/preliminary/architecture-principles.md` | All | All |
+| `stakeholder-map` | Stakeholder Map | `templates/phase-a/stakeholder-map.md` | All | All |
 
 ### Scaffolding Rules
 

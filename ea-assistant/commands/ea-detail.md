@@ -110,7 +110,7 @@ Read the located parent artifact. Find the table row whose first cell contains `
 
 Ensure the directory exists: `EA-projects/{slug}/artifacts/details/`
 
-Copy the detail file template from `templates/item-detail.md`. Replace all placeholders:
+Copy the detail file template from `templates/cross-cutting/item-detail.md`. Replace all placeholders:
 - `{{ID}}` → the ID argument (e.g. `G-001`)
 - `{{item_type}}` → the type label from Step 1
 - `{{item_title}}` → the extracted title from Step 4 (or `⚠️ Not answered` if not found)

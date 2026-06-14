@@ -1,0 +1,483 @@
+---
+artifact: Architecture Decision Record
+artifactId: adr-{{NNN}}
+adrid: ADR-{{NNN}}
+title: {{decision_title}}
+engagement: {{engagement_name}}
+phase: {{phase}}
+status: Candidate
+decisionDate: {{YYYY-MM-DD}}
+decisionOwner: {{owner}}
+reviewedBy: {{reviewed_by}}
+supersededBy: null
+templateVersion: 0.9.55
+reviewStatus: Not Reviewed
+lastModified: {{YYYY-MM-DD}}
+evidenceSufficiency: {{sufficient / partial / insufficient}}
+decisionTiming: {{now / defer-to-phase / defer-to-wp}}
+politicalAlignment: {{aligned / contested / fiat / deferred-governance}}
+linkedPad: {{PAD-NNN or null}}
+transitionArchitectureLink: {{T-NNN or null}}
+taxonomy:
+  admPhases: [Preliminary, Requirements, A, B, C-Data, C-App, D, E, F, G, H]
+  zachmanCell: ""
+  domain: Cross-cutting
+  category: Governance
+  audience: Architecture
+  layer: Governance
+  sensitivity: Internal
+  tags: [adr, decision, rationale, options]
+relatedArtifacts: []
+diagrams: []
+links: []
+---
+<details>
+<summary>🔒 TOGAF/ADM Compliance Status (author only — collapses on export)</summary>
+
+## Compliance Checklist
+
+| Requirement | Status | Notes |
+|---|---|---|
+| Standalone ADR format followed | ⚠️ Pending | |
+
+*This section is for author guidance only. Run `/ea-grill` to validate compliance.*
+
+</details>
+
+<details>
+<summary>📋 Guidance</summary>
+
+**Purpose:** An Architecture Decision Record (ADR) is a standalone document capturing a significant architecture decision — one that has lasting consequences, involves meaningful trade-offs, or requires full options analysis and documented rationale. Its primary purpose is to prevent the same decision from being re-litigated and to let future architects understand why the system is the way it is.
+
+**What to include:** Decision context (what triggered it), the options considered (at least three for significant decisions), the chosen option and rationale, trade-offs accepted, consequences (positive and negative), and the evidence used to make the decision. The ADR must reference the Architecture Principles (BP/DP/AP/TP-NNN) that constrained the decision and any A3 Decision Log entries that correspond to it.
+
+**When to create an ADR (vs. an A3 Decision Log entry):**
+- Technology or vendor selection; architecture pattern or style choice; make-vs-buy; data governance approach; security or compliance architecture; any decision that is hard to reverse or whose rationale may be questioned later
+- A3 Decision Log entries track governance state (who decided what, at what authority); an ADR documents the full decision context — they complement each other; link via ADR-NNN
+
+**Quality indicators:**
+- The rejected options are documented as thoroughly as the chosen option — a reader should understand why alternatives were not selected, not just what was chosen
+- The rationale references Architecture Principles (TP/AP/DP/BP-NNN) and constraints (CST-NNN) — a decision that cannot be justified by any governing principle is a governance gap
+- Consequences include negative consequences and trade-offs explicitly — an ADR with only positive consequences is incomplete
+
+**Common mistakes:**
+- Documenting only the chosen option — the value of an ADR is the options analysis, not just the outcome
+- ADRs written long after the decision was made, from memory — these tend to be post-hoc rationalisations; write them as decisions are being made
+- "We chose X because it's the best option" without stating what criteria defined "best" — always name the evaluation criteria
+
+**TOGAF reference:** TOGAF 10 §35 — Architecture Decisions. ADRs are not explicitly named in TOGAF but correspond to the Architecture Repository's Architecture Decisions category; they satisfy the T3-ADR compliance requirement across all domain architecture artifacts.
+
+**ADR lifecycle:** Candidate → In Progress → Completed → Superseded (by ADR-NNN) | Deprecated. Use `/ea-adrs` to manage. Run `/ea-adrs status` for a portfolio view.
+
+</details>
+
+# {{adrid}}: {{decision_title}}
+
+**Engagement:** {{engagement_name}}
+**Phase:** {{phase}}
+**Status:** Candidate
+**Decision Owner:** {{owner}}
+**Reviewed By:** {{reviewed_by}}
+**Decision Date:** {{YYYY-MM-DD}}
+
+---
+
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Brief summary of this architecture decision, the chosen option, and the key tradeoff accepted.
+Diagram: Decision options comparison table or simple before/after diagram
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
+## 1. Status
+
+<details>
+<summary>📋 Guidance</summary>
+
+Update this section as the ADR progresses through its lifecycle. Record the full history
+— when the ADR was proposed, when review began, when the decision was made, and if/when
+it was superseded.
+
+</details>
+
+| Date | Status | Changed By | Note |
+|---|---|---|---|
+| {{YYYY-MM-DD}} | Candidate | {{author}} | ADR proposed |
+| {{YYYY-MM-DD}} | In Progress | {{reviewer}} | Options analysis underway |
+| {{YYYY-MM-DD}} | Completed | {{decision_owner}} | Decision made |
+
+**Current Status:** Candidate / In Progress / Completed / Superseded / Deprecated
+
+**Superseded By:** *(if applicable)* — {{superseding_adr_id}}: {{superseding_adr_title}}
+
+**Deprecation Reason:** *(if applicable)* — {{deprecation_reason}}
+
+---
+
+## 2. Context
+
+<details>
+<summary>📋 Guidance</summary>
+
+Describe the situation that forces a decision. What is the problem or opportunity? What
+constraints or forces are at play? What would happen if no decision were made?
+
+Be concrete — describe the actual situation in this engagement, not a generic architecture
+problem. Reference specific business drivers (DRV-NNN), goals (G-NNN), or existing
+artifacts that surface the need for this decision.
+
+</details>
+
+{{decision_context}}
+
+**Related business drivers / goals:** {{linked_drivers_goals}}
+
+**Triggering artifact / section:** {{triggering_artifact}}
+*(e.g. "Architecture Vision §7 STR-002 — Cloud-first strategy requires a cloud platform selection")*
+
+---
+
+## 3. Decision Drivers
+
+<details>
+<summary>📋 Guidance</summary>
+
+List the specific criteria that must be satisfied by the decision. These become the
+evaluation framework for the options. Good decision drivers are specific and testable —
+"must support 10,000 concurrent users" is better than "must be scalable".
+
+Order by importance: must-haves first, then nice-to-haves.
+
+</details>
+
+| # | Driver | Priority | Notes |
+|---|---|---|---|
+| 1 | {{driver}} | Must / Should / Nice-to-have | {{notes}} |
+| 2 | {{driver}} | Must / Should / Nice-to-have | {{notes}} |
+| 3 | {{driver}} | Must / Should / Nice-to-have | {{notes}} |
+
+---
+
+## 3b. Evidence Assessment
+
+<details>
+<summary>📋 Guidance</summary>
+
+Before committing to a decision, assess whether the evidence available is sufficient to
+justify the choice. If evidence is insufficient, this ADR should remain in Candidate or
+In Progress status until the evidence is gathered, or the decision should be converted to
+a PAD-NNN (Pending Architecture Decision).
+
+Evidence types: benchmarks, POC results, vendor responses, regulatory opinions, production
+metrics, incident analysis, peer references, cost models, security reviews.
+
+For each option in §4, note the evidence quality supporting its assessment. If a MUST
+requirement disqualifies an option, state this explicitly and remove the option from
+consideration.
+
+</details>
+
+| Evidence Type | Status | Source | Confidence | Gap |
+|---|---|---|---|---|
+| {{type}} | ✅ Present / ⚠️ Partial / ❌ Missing | {{source}} | High / Med / Low | {{what_is_missing}} |
+
+**Overall evidence sufficiency:** {{Sufficient / Partial / Insufficient}}
+
+**Evidence gaps to close before decision:** {{gaps}}
+
+**Planned evidence gathering:** {{experiments_pocs_spikes}}
+
+---
+
+## 4. Options Considered
+
+<details>
+<summary>📋 Guidance</summary>
+
+Document every option that was seriously considered — including the status quo (do nothing)
+if that is a genuine option. For each option, list the pros and cons against the decision
+drivers. Avoid being superficial: if an option was rejected, explain exactly why.
+
+A minimum of two options should be documented. If only one option exists, document why
+alternatives were not feasible.
+
+For each option, note the evidence quality supporting its assessment. If a MUST requirement
+disqualifies an option, state this explicitly and remove the option from consideration.
+
+</details>
+
+### Option 1: {{option_1_title}}
+
+{{option_1_description}}
+
+**Pros:**
+- {{pro}}
+- {{pro}}
+
+**Cons:**
+- {{con}}
+- {{con}}
+
+**Assessment against drivers:**
+
+| Driver | Satisfies? | Notes |
+|---|---|---|
+| {{driver}} | ✅ Yes / ⚠️ Partial / ❌ No | {{notes}} |
+
+---
+
+### Option 2: {{option_2_title}}
+
+{{option_2_description}}
+
+**Pros:**
+- {{pro}}
+- {{pro}}
+
+**Cons:**
+- {{con}}
+- {{con}}
+
+**Assessment against drivers:**
+
+| Driver | Satisfies? | Notes |
+|---|---|---|
+| {{driver}} | ✅ Yes / ⚠️ Partial / ❌ No | {{notes}} |
+
+---
+
+### Option 3: {{option_3_title}} *(add or remove options as needed)*
+
+{{option_3_description}}
+
+**Pros:**
+- {{pro}}
+
+**Cons:**
+- {{con}}
+
+**Assessment against drivers:**
+
+| Driver | Satisfies? | Notes |
+|---|---|---|
+| {{driver}} | ✅ Yes / ⚠️ Partial / ❌ No | {{notes}} |
+
+---
+
+## 5. Decision
+
+<details>
+<summary>📋 Guidance</summary>
+
+State the decision clearly in one or two sentences. Name the chosen option. Do not
+justify here — justification belongs in the Rationale section. The decision statement
+should be unambiguous: a reader should be able to act on it without reading the rest
+of the ADR.
+
+</details>
+
+**Decision:** {{decision_statement}}
+
+**Chosen Option:** {{chosen_option_title}}
+
+**Decision Made By:** {{decision_owner}}
+**Decision Date:** {{YYYY-MM-DD}}
+**Governance Reference:** {{a3_reference_or_arb_minute}}
+*(Link to the A3 Decision Log entry or ARB meeting minute that formally recorded this decision)*
+
+---
+
+## 5b. Decision Timing
+
+<details>
+<summary>📋 Guidance</summary>
+
+When was this decision made relative to the ADM phase? Was it made at the right time,
+too early (premature), or too late (reactive)? Decisions made too early risk rework;
+decisions made too late block delivery. Reference the Decide vs Defer Matrix.
+
+</details>
+
+| Factor | Assessment |
+|---|---|
+| Phase when decision was made | {{phase}} |
+| Phase when decision should optimally be made | {{optimal_phase}} |
+| Timing verdict | ✅ On time / ⚠️ Early / ❌ Late |
+| If early: risk of rework | {{description}} |
+| If late: delivery blockers created | {{description}} |
+
+**Related PAD-NNN:** {{PAD-NNN if this was deferred from an earlier phase}}
+
+---
+
+## 5c. Political Alignment
+
+<details>
+<summary>📋 Guidance</summary>
+
+Record whether this decision faced stakeholder pressure, political contestation, or was
+a fiat. This helps future architects understand whether the decision was evidence-based
+or governance-driven. Document the defensible evidence-based position independently of
+political pressure.
+
+</details>
+
+| Factor | Assessment |
+|---|---|
+| Stakeholder pressure | None / Moderate / Strong |
+| Evidence-based counter-case documented | Yes / No / N/A |
+| Governance forum reviewed | Yes / No — if yes, reference: {{ARB minute or forum}} |
+| Decision type | Consensus / Vote / Fiat / Delegated |
+| Political risk if reversed | High / Medium / Low |
+
+**Defensible governance position:** {{one-paragraph summary of the evidence-based case, independent of political pressure}}
+
+---
+
+## 6. Rationale
+
+<details>
+<summary>📋 Guidance</summary>
+
+Explain why the chosen option was selected over the alternatives. Reference the decision
+drivers — show how the chosen option satisfies the must-have criteria and why the
+trade-offs on the nice-to-haves are acceptable. If the decision was close, say so and
+explain the tie-breaker.
+
+</details>
+
+{{rationale}}
+
+**Key trade-offs accepted:**
+- {{tradeoff}}
+- {{tradeoff}}
+
+---
+
+## 7. Consequences
+
+<details>
+<summary>📋 Guidance</summary>
+
+Describe the implications of this decision — what becomes easier, what becomes harder,
+what new decisions are now required, and what risks are introduced. Be honest about
+negative consequences — a decision with no downsides was probably not a hard decision.
+
+Consequences are what make an ADR valuable over time: they tell future architects why
+things are the way they are and what constraints they are working within.
+
+</details>
+
+### 7.1 Positive Consequences
+- {{positive_consequence}}
+- {{positive_consequence}}
+
+### 7.2 Negative Consequences / Trade-offs
+- {{negative_consequence}}
+- {{negative_consequence}}
+
+### 7.3 Neutral / Risks Introduced
+
+| Risk | Likelihood | Impact | Mitigation | Linked Risk Register |
+|---|---|---|---|---|
+| {{risk}} | High / Med / Low | High / Med / Low | {{mitigation}} | RIS-NNN / — |
+
+### 7.4 New Decisions Required
+
+*Decisions that must now be made as a result of this decision:*
+
+| Decision Needed | Priority | Suggested ADR | Owner |
+|---|---|---|---|
+| {{decision_needed}} | High / Med / Low | ADR-NNN (proposed) / — | {{owner}} |
+
+### 7d. Transition Architecture Linkage
+
+<details>
+<summary>📋 Guidance</summary>
+
+If this decision affects a transition state (intermediate plateau between baseline and
+target), document which transition architectures are impacted and how the decision enables
+or constrains them.
+
+</details>
+
+| Transition State | Impact | Enabling / Constraining |
+|---|---|---|
+| {{T1/T2/Target}} | {{description}} | Enabling / Constraining |
+
+---
+
+## 8. Related Architecture Decisions
+
+| ADR ID | Title | Relationship | Status |
+|---|---|---|---|
+| ADR-NNN | {{title}} | Precedes / Follows / Contradicts / Refines / Supersedes | {{status}} |
+
+---
+
+## 9. Affected Artifacts
+
+*Architecture artifacts that document or are affected by this decision:*
+
+| Artifact | Phase | Section | Nature of Impact |
+|---|---|---|---|
+| {{artifact_name}} | {{phase}} | §{N} {{section}} | {{impact_description}} |
+
+---
+
+## Appendix A4 — Stakeholder Concerns & Objections
+
+<details>
+<summary>📋 Guidance</summary>
+Record concerns and objections raised about this decision during review. Use `/ea-concerns` to generate a cross-artifact Concerns Register.
+</details>
+
+| ID | Concern | Raised By | Category | Status | Response | Action / Owner |
+|---|---|---|---|---|---|---|
+| *(no concerns recorded)* | — | — | — | — | — | — |
+
+---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
+
+*Use `/ea-adrs` to manage this ADR, update its status, and generate the ADR Register. Use `/ea-concerns` to manage concerns.*

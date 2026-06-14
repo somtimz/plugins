@@ -1,0 +1,414 @@
+---
+artifact: Technology Architecture
+artifactId: technology-architecture
+engagement: {{engagement_name}}
+phase: D
+status: Draft
+reviewStatus: Not Reviewed
+version: 0.1
+templateVersion: 0.9.55
+lastModified: {{YYYY-MM-DD}}
+taxonomy:
+  admPhases: [D]
+  zachmanCell: "Technology/Where"
+  domain: Technology
+  category: Design
+  audience: Architecture
+  layer: Target
+  sensitivity: Internal
+  tags: [infrastructure, platforms, technology, phase-d]
+relatedArtifacts: []
+diagrams: []
+links: []
+---
+<details>
+<summary>🔒 TOGAF/ADM Compliance Status (author only — collapses on export)</summary>
+
+## Compliance Checklist
+
+| Requirement | Status | Notes |
+|---|---|---|
+| T3-A3 | ⚠️ Pending | |
+| T3-A4 | ⚠️ Pending | |
+| T3-ADR | ⚠️ Pending | |
+| T3-RATIONALE | ⚠️ Pending | |
+| Linked to Architecture Vision | ⚠️ Pending | |
+| Traces to Requirements Register | ⚠️ Pending | |
+
+*This section is for author guidance only. Run `/ea-grill` to validate compliance.*
+
+</details>
+
+<details>
+<summary>📋 Guidance</summary>
+
+**Purpose:** The Technology Architecture describes the technology platforms, infrastructure components, and standards that host and connect the application and data layers. It translates application requirements into infrastructure and platform decisions, and is the primary artifact for technology vendor selection, cloud strategy, and security architecture decisions.
+
+**What to include:** Infrastructure and platform baseline, target platform architecture (with SBB-NNN references for selected components), cloud/hosting strategy, security architecture (zones, controls, identity), resilience and operational standards, vendor selection rationale (ADR references), decommission plan for retiring infrastructure, and technology standards that constrain implementation. Technology Architecture is driven by Application Architecture outputs — not technology preferences alone.
+
+**Quality indicators:**
+- Platform choices reference ADRs — a vendor selection without a rationale is a governance gap
+- Security architecture is addressed explicitly — zones, identity management, and key controls are visible at this layer
+- End-of-life dates for baseline infrastructure are surfaced — an undated EOL risk is an unmanaged risk
+- The target platform choices are consistent with Technology Principles (TP-NNN); any deviation is noted with a waiver reference
+
+**Common mistakes:**
+- Technology preferences driving architecture choices before Application Architecture requirements are defined — this produces a solution looking for a problem
+- "Cloud-native" as a strategy without specifying which cloud, which services, and the exit strategy
+- Security treated as a separate concern appended at the end rather than integrated into the platform design
+
+**TOGAF reference:** TOGAF 10 Part III, Phase D (§28) — Technology Architecture. Phase D gate artifact; required before Phase E (Opportunities and Solutions) commences.
+
+</details>
+
+# Technology Architecture
+
+**Engagement:** {{engagement_name}}
+**Organisation:** {{organisation}}
+**Date:** {{YYYY-MM-DD}}
+
+---
+
+## Related Matrices
+
+> **TOGAF relationship matrices for this domain** (manage with `/ea-matrix`; definitions in `matrix-catalogue.md`): System/Technology (`system-technology`). Run `/ea-matrix list` for status.
+
+---
+
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summary of technology platform decisions and infrastructure changes required.
+Diagram: Technology stack or platform map diagram
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
+## 1. Technology Context
+
+<details>
+<summary>📋 Guidance</summary>
+
+Describe the current technology environment and the strategic context for technology decisions.
+Include: existing infrastructure estate (on-premise, cloud, hybrid), organisational cloud
+strategy and maturity, constraints from existing contracts or vendor relationships, and any
+mandated technology standards from the enterprise or regulatory body.
+
+</details>
+
+{{technology_context}}
+
+---
+
+## 2. Technology Standards
+
+<details>
+<summary>📋 Guidance</summary>
+
+Document the agreed technology standards for this engagement. Standards constrain and guide
+technology choices throughout implementation. Distinguish between mandatory standards
+(must be followed) and preferred standards (default choice, deviation requires justification).
+Include standards for compute, storage, networking, middleware, security, and observability.
+
+</details>
+
+| Category | Standard | Mandatory / Preferred | Rationale |
+|---|---|---|---|
+| Compute | {{standard}} | Mandatory / Preferred | {{rationale}} |
+| Storage | {{standard}} | Mandatory / Preferred | {{rationale}} |
+| Networking | {{standard}} | Mandatory / Preferred | {{rationale}} |
+| Identity & Access | {{standard}} | Mandatory / Preferred | {{rationale}} |
+| Observability | {{standard}} | Mandatory / Preferred | {{rationale}} |
+| {{category}} | {{standard}} | Mandatory / Preferred | {{rationale}} |
+
+---
+
+## 3. Infrastructure Components
+
+<details>
+<summary>📋 Guidance</summary>
+
+Catalogue the key infrastructure components in the target state. For each component, describe
+its role, the platform or product used, deployment model, and sizing considerations. Use
+ArchiMate Technology layer elements (Node, Device, System Software) where applicable.
+Include a target infrastructure diagram.
+
+</details>
+
+*Reference diagram:* `../diagrams/{{infrastructure_diagram}}`
+
+| Component ID | Component | Role | Platform / Product | Deployment Model | Resilience |
+|---|---|---|---|---|---|
+| INF-001 | {{component}} | {{role}} | {{platform}} | On-premise / IaaS / PaaS / SaaS | Active-Active / Active-Passive / Single |
+| INF-002 | {{component}} | {{role}} | {{platform}} | On-premise / IaaS / PaaS / SaaS | Active-Active / Active-Passive / Single |
+
+### Hosting Model
+{{hosting_model_description}}
+
+### Disaster Recovery and Resilience
+<details>
+<summary>📋 Guidance</summary>
+
+Describe the DR strategy: RTO (Recovery Time Objective), RPO (Recovery Point Objective),
+and the mechanism used (warm standby, pilot light, multi-region active-active, backup/restore).
+
+</details>
+
+| Service Tier | RTO | RPO | DR Mechanism |
+|---|---|---|---|
+| {{tier_1}} | {{rto}} | {{rpo}} | {{mechanism}} |
+
+---
+
+## 3a. Architecture Building Blocks
+
+<details>
+<summary>📋 Guidance</summary>
+
+List the logical, vendor-neutral components (ABB-NNN) that realise technology requirements. ABBs describe WHAT capability is needed without specifying HOW it is implemented — that is captured in the Solution Building Blocks Register (near end of this document). Each ABB should reference the infrastructure component it supports (INF-NNN) and the requirement(s) it satisfies (REQ-NNN). Use `/ea-detail new ABB-NNN` for complex ABBs requiring extended rationale.
+
+**Naming Convention:**
+- Use a **noun phrase** describing the logical function (e.g. "Immutable Log Store", not "Back up logs")
+- Must be **vendor-neutral and technology-agnostic** — no product names, brands, versions, or cloud-provider terms
+- Be specific enough to distinguish from other ABBs
+
+Technology ABBs are typically drawn from: compute (container runtime, VM host), storage (object store, block store, immutable log), networking (load balancer, API gateway, service mesh), security (secrets manager, PKI), and observability (metrics collector, log aggregator, trace store).
+
+See `skills/ea-artifact-templates/references/abb-catalogue.md` for a standard set of reusable ABB names.
+
+**AI/ML engagements:** If the engagement scope includes AI/ML, include AI Systems & Applications ABBs from the catalogue — e.g., Model Serving Endpoint, Vector Database Service, RAG Orchestrator, Feature Store, AI Observability Service, Prompt Management Service. These sit alongside traditional infrastructure ABBs in the Technology Architecture.
+
+</details>
+
+| ABB-NNN | Name | Description | Satisfies (REQ-NNN) | Implemented by (SBB-NNN) |
+|---|---|---|---|---|
+| [[ABB-001]] | {{abb_name}} | {{description}} | {{req_id}} | {{sbb_id}} |
+
+---
+
+## 4. Network Architecture
+
+<details>
+<summary>📋 Guidance</summary>
+
+Describe the network topology, segmentation model, and connectivity approach. Include:
+network zones (DMZ, internal, management), connectivity to cloud providers or external
+parties, VPN/private connectivity, DNS, and load balancing strategy.
+Include a network diagram reference.
+
+</details>
+
+*Reference diagram:* `../diagrams/{{network_diagram}}`
+
+### Network Zones
+| Zone | Purpose | Trust Level | Key Components |
+|---|---|---|---|
+| {{zone_1}} | {{purpose}} | High / Medium / Low / Untrusted | {{components}} |
+| {{zone_2}} | {{purpose}} | High / Medium / Low / Untrusted | {{components}} |
+
+### Connectivity
+{{connectivity_description}}
+
+---
+
+## 5. Security Architecture
+
+<details>
+<summary>📋 Guidance</summary>
+
+Describe the security controls and patterns applied in the technology architecture. Cover:
+identity and access management (IAM), network security (firewalls, WAF, DDoS protection),
+data protection at rest and in transit, secrets management, vulnerability management, and
+compliance with relevant security standards (ISO 27001, SOC 2, NIST CSF, etc.).
+Security architecture should be reviewed by a security specialist.
+
+</details>
+
+### Identity and Access Management
+{{iam_description}}
+
+### Network Security Controls
+| Control | Implementation | Applies To |
+|---|---|---|
+| {{control_1}} | {{implementation_1}} | {{scope_1}} |
+| {{control_2}} | {{implementation_2}} | {{scope_2}} |
+
+### Data Protection
+{{data_protection_description}}
+
+### Security Standards and Compliance
+| Standard | Applicability | Status |
+|---|---|---|
+| {{standard_1}} | {{applicability_1}} | Compliant / In Progress / Gap |
+| {{standard_2}} | {{applicability_2}} | Compliant / In Progress / Gap |
+
+---
+
+## 6. Gap Analysis
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summarise technology architecture gaps between the current estate and the target state.
+Common technology gaps: end-of-life platforms, missing observability, inadequate DR posture,
+inconsistent security controls, unsupported or vendor lock-in risks.
+Reference the full Gap Analysis artifact for detail.
+
+</details>
+
+*See Gap Analysis artifact for full detail:* `gap-analysis.md`
+
+| Gap ID | Description | Priority | Impact |
+|---|---|---|---|
+| [[GAP-001]] | {{description}} | High / Med / Low | {{impact}} |
+
+---
+
+## 7. Requirements Addressed
+
+<details>
+<summary>📋 Guidance</summary>
+
+Trace technology decisions back to requirements from the Requirements Register.
+Non-functional requirements (performance, availability, security, scalability) are especially
+important to trace here, as they most directly shape technology choices.
+
+</details>
+
+| Req ID | Requirement | How Addressed |
+|---|---|---|
+| {{req_id}} | {{requirement}} | {{how}} |
+
+---
+
+## 8. Diagrams
+
+<details>
+<summary>📋 Guidance</summary>
+
+Standard diagrams for the Technology Architecture. Diagrams are stored in `diagrams/` relative to the engagement root and embedded in exported documents via `/ea-generate`. Use `/ea-diagram` to create or edit. See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid starters.
+
+</details>
+
+| Diagram | File | Status |
+|---|---|---|
+| Technology Stack View | `../../diagrams/technology-architecture-stack.mmd` | ❌ Missing |
+| Infrastructure Topology | `../../diagrams/technology-architecture-topology.mmd` | ❌ Missing |
+
+*Use `/ea-diagram` to create. Run `/ea-generate png` to render for export.*
+
+---
+
+## Solution Building Blocks Register
+
+<!-- GUIDANCE: List the concrete vendor-specific implementations (SBB-NNN) of each ABB. An SBB names the actual product, service, or tool chosen and records version, vendor, and any lock-in constraints. The SBB Register is the authoritative source for technology decisions — procurement, licensing, and implementation teams reference this directly. Each SBB must implement at least one ABB.
+
+- **Vendor / Source** — commercial vendor, open-source project, or internal build
+- **Version** — specific version or release channel (LTS, stable, managed)
+- **Constraints / Lock-in Risk** — proprietary APIs, egress costs, licensing restrictions, migration effort. Run `/ea-grill` to probe lock-in risks when populating this register. -->
+
+| SBB-NNN | Name | Implements (ABB-NNN) | Vendor / Source | Version | Constraints / Lock-in Risk |
+|---|---|---|---|---|---|
+| [[SBB-001]] | {{sbb_name}} | ABB-001 | {{vendor}} | {{version}} | {{constraints}} |
+
+---
+
+## Appendix A3 — Decision Log
+
+<details>
+<summary>📋 Guidance</summary>
+
+Record all decisions made during the development of this artifact.
+Use /ea-decisions to aggregate this table across all artifacts into a Decision Register.
+
+</details>
+
+| Item | Value | State | Captured By | Owner | Authority | Domain | Cost | Impact | Risk | Subject | Date |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| *(no decisions recorded)* | — | — | — | — | — | — | — | — | — | — | — |
+
+---
+
+## Appendix A4 — Stakeholder Concerns & Objections
+
+<details>
+<summary>📋 Guidance</summary>
+
+Record all stakeholder concerns, objections, and tough questions raised about this artifact.
+Sources include grill-me sessions, Architecture Review Board feedback, executive challenge
+sessions, and sponsor meetings. For each concern, record whether it is addressed in existing
+documentation (Addressed / Partially Addressed) or requires further action (Requires Attention).
+Use `/ea-concerns` to aggregate unresolved items across all artifacts. Concerns that represent
+a material risk should also be raised as RIS-NNN entries via `/ea-risks`.
+
+</details>
+
+| ID | Concern | Raised By | Category | Status | Response | Action / Owner |
+|---|---|---|---|---|---|---|
+| *(no concerns recorded)* | — | — | — | — | — | — |
+
+
+## Appendix A5 — Related Architecture Decisions
+
+<details>
+<summary>📋 Guidance</summary>
+
+List ADRs that informed, were informed by, or are otherwise relevant to this artifact.
+Reference the ADR-NNN ID so readers can navigate to the full decision record.
+Use `/ea-adrs` to manage the ADR Register and surface ADR summaries.
+
+When a significant decision is made during an interview for this artifact, the
+`ea-interviewer` will suggest creating an ADR if the decision meets the threshold
+criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
+
+</details>
+
+| ADR ID | Title | Status | Summary |
+|---|---|---|---|
+| *(no related ADRs recorded)* | — | — | — |
+
+---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
+
+*This document was created using the EA Assistant plugin.*
+*Use `/ea-decisions` to generate a cross-artifact Decision Register from all A3 tables.*
+*Use `/ea-concerns` to generate a cross-artifact Concerns Register from all A4 tables.*

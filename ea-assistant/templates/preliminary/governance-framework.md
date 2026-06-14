@@ -1,0 +1,580 @@
+---
+artifact: Architecture Governance Framework
+artifactId: governance-framework
+engagement: {{engagement_name}}
+phase: Preliminary
+status: Draft
+reviewStatus: Not Reviewed
+version: 0.1
+templateVersion: 0.9.55
+lastModified: {{YYYY-MM-DD}}
+taxonomy:
+  admPhases: [Preliminary]
+  zachmanCell: ""
+  domain: Cross-cutting
+  category: Strategy
+  audience: Governance
+  layer: Governance
+  sensitivity: Internal
+  tags: [governance, arb, decision-rights, preliminary]
+relatedArtifacts: []
+diagrams: []
+links: []
+---
+<details>
+<summary>🔒 TOGAF/ADM Compliance Status (author only — collapses on export)</summary>
+
+## Compliance Checklist
+
+| Requirement | Status | Notes |
+|---|---|---|
+| T3-A3 | ⚠️ Pending | |
+| T3-ADR | ⚠️ Pending | |
+| T3-RATIONALE | ⚠️ Pending | |
+| Decision rights defined | ⚠️ Pending | |
+| Escalation paths documented | ⚠️ Pending | |
+
+*This section is for author guidance only. Run `/ea-grill` to validate compliance.*
+
+</details>
+
+<details>
+<summary>💡 Practitioner Tip — Governance</summary>
+
+- **Federate decisions** — define which decisions are enterprise-level vs domain-level, and push domain decisions to domain architects. (Deep tactic #36)
+- Replace heavy approval gates with **explicit guardrails** — approved patterns, reference architectures, data ownership rules, and automated policy checks. (Deep tactic #37)
+- **Embed architects** in product teams, not a central pool — governance by presence, not by review. (Deep tactic #38)
+- Give solution architects **authority to approve designs within guardrails**. (Deep tactic #39)
+- **Measure governance by outcomes** — decision speed, delivery quality, and alignment, not checklist coverage. (Deep tactic #40)
+- Governance is **lightweight by design** — every review must justify its existence with a delivery outcome. (Tip #21)
+- Principles must be **enforceable**, not aspirational. If you cannot say "no" based on a principle, it is not a principle. (Tip #22)
+- Replace heavy gates with **guardrails** — pre-approved patterns and automated checks. (Tip #24)
+- Track architecture **KPIs with enterprise OKRs** — reuse rate, time-to-decision, pattern adoption. (Tip #25)
+
+</details>
+
+<details>
+<summary>📋 Guidance</summary>
+
+The Architecture Governance Framework is a Preliminary Phase artifact. It establishes the
+structures and processes that all subsequent ADM work operates within.
+
+**What this framework governs — and what it does not:**
+
+This framework governs the *architecture practice and process*. Its central question is:
+
+> **"Are we doing architecture properly?"**
+
+It controls:
+- how architecture decisions are made and approved
+- whether architecture deliverables meet required standards
+- whether principles, patterns, and compliance requirements are being applied
+- whether ADM phases are completed with the right rigour and sign-off
+
+It does **not** govern the delivery programme. Programme governance — controlling
+scope, schedule, budget, benefits, risk, and project delivery — is owned by the
+programme sponsor, PMO, and steering committee. This framework operates alongside
+those structures, not in place of them.
+
+The architecture-specific contribution to delivery governance is expressed through the
+**Implementation Governance Plan** (Phase G), which answers the complementary question:
+"Is the implementation conforming to the approved architecture?"
+
+**Two governance layers in TOGAF:**
+
+| Layer | Governs | Central question | Main artifacts |
+|---|---|---|---|
+| Architecture governance (this framework) | Architecture process, decisions, standards, compliance | "Are we doing architecture properly?" | Architecture Governance Framework, Architecture Principles, Compliance Assessments |
+| Programme governance | Delivery execution, scope, budget, benefits, risk | "Are we delivering the change effectively?" | Business case, programme plan, stage gates, benefits register |
+
+Architecture governance is an input and constraint on programme governance — the approved
+architecture sets the conformance bar that delivery must meet. It does not replace it.
+
+Create this artifact before beginning Phase A. Review it whenever the governance structure
+changes or the programme scope expands significantly.
+
+**Quality indicators:**
+- Decision rights are specific enough that a reviewer can determine who approves a given decision type without asking — "the ARB approves all technology vendor selections above $50k" is specific; "the ARB approves significant decisions" is not
+- Escalation paths have named roles and timeframes — "unresolved disputes escalate to the Sponsor within 5 working days"
+- The framework distinguishes architecture governance from programme governance — if it conflates the two, delivery teams will experience governance friction
+
+**Common mistakes:**
+- Governance framework so heavyweight that architects avoid it — every review gate must justify its existence; default to trust-then-audit over review-then-approve
+- Missing the difference between architecture standards enforcement (this framework) and delivery conformance monitoring (Implementation Governance Plan, Phase G)
+- Framework created but never reviewed — revisit when programme scope changes, ARB composition changes, or governance is causing delivery friction
+
+**TOGAF reference:** TOGAF 10 Part III, Preliminary Phase (§23) — Architecture Governance. The governance framework is established in the Preliminary Phase and forms the operating environment for all subsequent ADM phases.
+
+</details>
+
+# Architecture Governance Framework
+
+**Engagement:** {{engagement_name}}
+**Organisation:** {{organisation}}
+**Prepared By:** {{prepared_by}}
+**Date:** {{YYYY-MM-DD}}
+**Version:** {{version}}
+
+---
+
+## Executive Summary
+
+<details>
+<summary>📋 Guidance</summary>
+
+Summary of the governance structure, key decision-making bodies, and how architecture decisions are approved.
+Diagram: Governance structure chart (ARB / AWG / CoE hierarchy)
+Run `/ea-summary refresh` to regenerate this section from current artifact content.
+
+</details>
+
+{{executive_summary}}
+
+---
+
+## 1. Purpose & Scope
+
+<details>
+<summary>📋 Guidance</summary>
+
+State the purpose of this governance framework and the scope of architecture work it governs.
+Be explicit: does it cover the whole enterprise, a programme, a division, or a specific set
+of domains? Scope ambiguity is the most common governance failure mode.
+
+</details>
+
+**Purpose:** {{governance_purpose}}
+
+**Scope of Governance:**
+{{governance_scope}}
+
+**Out of Scope:**
+{{governance_out_of_scope}}
+
+**Relationship to existing governance frameworks (corporate, project, IT):**
+{{relationship_to_existing_governance}}
+
+**Relationship to the Engagement Charter:**
+The Engagement Charter defines the programme mandate, delivery phases, costs, benefits, and business approval. This Governance Framework defines how architecture decisions are made and enforced within that programme. Programme delivery structure (phases, milestones, sponsor accountability) is **not** repeated here — see `artifacts/engagement-charter.md §7`.
+
+---
+
+## 2. Governance Objectives
+
+<details>
+<summary>📋 Guidance</summary>
+
+List 3–6 specific, measurable objectives this governance framework is designed to achieve.
+Good governance objectives are outcomes ("Ensure all solution designs are reviewed before
+build approval") not activities ("Hold ARB meetings"). Link each objective to a business
+driver or strategic goal where possible.
+
+</details>
+
+| # | Objective | Linked Driver / Goal |
+|---|---|---|
+| 1 | {{objective}} | {{driver_or_goal}} |
+| 2 | {{objective}} | {{driver_or_goal}} |
+| 3 | {{objective}} | {{driver_or_goal}} |
+
+---
+
+## 3. Governance Structure
+
+<details>
+<summary>📋 Guidance</summary>
+
+Describe all governance bodies and their relationships. A typical structure has three levels:
+strategic (Architecture Review Board), operational (EA Team), and project-level (EA Liaisons).
+Define what each body is authorised to decide without escalation.
+
+</details>
+
+### 3.1 Governance Bodies
+
+| Body | Role | Chair | Members | Meeting Cadence |
+|---|---|---|---|---|
+| Architecture Review Board (ARB) | Strategic architecture decisions, principle approval, waiver authority | {{arb_chair}} | {{arb_members}} | {{arb_cadence}} |
+| EA Working Group | Operational governance, standard setting, compliance review | {{ewg_chair}} | {{ewg_members}} | {{ewg_cadence}} |
+| Project EA Liaison | Project-level conformance, local decisions | {{pel_role}} | {{pel_members}} | {{pel_cadence}} |
+
+### 3.2 Roles & Responsibilities
+
+| Role | Responsibilities | Named Individual |
+|---|---|---|
+| Chief / Lead Architect | Architecture strategy, principle ownership, ARB facilitation | {{lead_architect}} |
+| ARB Chair | Meeting governance, tie-breaking, escalation authority | {{arb_chair}} |
+| Domain Architects | Domain standards, review inputs, technical authority | {{domain_architects}} |
+| Project EA Liaison | Project conformance tracking, waiver requests, local decisions | {{ea_liaison}} |
+| Architecture Repository Owner | Artifact storage, version control, access management | {{repo_owner}} |
+
+---
+
+## 4. Architecture Review Board — Terms of Reference
+
+<details>
+<summary>📋 Guidance</summary>
+
+The Terms of Reference (ToR) formally establishes the ARB as a governance body. Without a
+ToR, the ARB has no agreed authority, quorum, or decision procedure — and its decisions
+can be challenged. Keep the ToR brief and practical.
+
+</details>
+
+**Mandate:** {{arb_mandate}}
+
+**Authority Level:** {{arb_authority_level}}
+*(e.g., "The ARB is authorised to approve or reject all architecture decisions rated Strategic or Tactical authority and escalate to the CTO/CIO only those with budget implications > $X")*
+
+**Quorum:** {{arb_quorum}}
+
+**Decision Method:** {{arb_decision_method}}
+*(e.g., consensus; majority; chair has casting vote)*
+
+**Minutes & Record-Keeping:** {{arb_record_keeping}}
+
+**Review & Renewal:** This ToR is reviewed annually or when governance structure changes.
+
+---
+
+## 5. Decision Rights Matrix
+
+<details>
+<summary>📋 Guidance</summary>
+
+Define who can decide what without escalation. Three levels are typical: ARB approval required,
+Lead Architect discretion, and Project-level discretion. Be specific — "technology choices"
+is too vague; "selection of a new integration platform" is useful.
+
+</details>
+
+| Decision Type | Examples | Authority Level | Escalation Path |
+|---|---|---|---|
+| Strategic | Architecture principles changes, enterprise platform selection, domain strategy | ARB approval required | CTO / CIO |
+| Tactical | Solution pattern selection, cross-domain integrations, significant NFR trade-offs | Lead Architect + ARB notification | ARB |
+| Operational | Within-project technology choices within approved patterns, minor deviations | Project EA Liaison | Lead Architect |
+| Emergency | Critical production issues requiring immediate deviation from architecture | Lead Architect approval + retrospective ARB review | ARB (next meeting) |
+
+Additional decision types specific to this engagement:
+
+| Decision Type | Examples | Authority Level | Escalation Path |
+|---|---|---|---|
+| {{decision_type}} | {{examples}} | {{authority}} | {{escalation}} |
+
+---
+
+## 6. ADM Tailoring Decisions
+
+<details>
+<summary>📋 Guidance</summary>
+
+Document which ADM phases apply to this engagement, which artifacts are mandatory versus
+optional, and any deliberate adaptations to the standard ADM process. Tailoring decisions
+are themselves governance decisions and should be recorded here so they cannot be revisited
+informally later.
+
+</details>
+
+### 6.1 Phase Applicability
+
+| Phase | Applicable? | Rationale |
+|---|---|---|
+| Preliminary | Yes | — |
+| Requirements | {{yes_no}} | {{rationale}} |
+| A — Architecture Vision | Yes | — |
+| B — Business Architecture | {{yes_no}} | {{rationale}} |
+| C — Data Architecture | {{yes_no}} | {{rationale}} |
+| C — Application Architecture | {{yes_no}} | {{rationale}} |
+| D — Technology Architecture | {{yes_no}} | {{rationale}} |
+| E — Opportunities & Solutions | {{yes_no}} | {{rationale}} |
+| F — Migration Planning | {{yes_no}} | {{rationale}} |
+| G — Implementation Governance | {{yes_no}} | {{rationale}} |
+| H — Architecture Change Management | {{yes_no}} | {{rationale}} |
+
+### 6.2 Mandatory vs Optional Artifacts
+
+| Artifact | Phase | Mandatory / Optional | Rationale if Optional |
+|---|---|---|---|
+| Architecture Vision | A | Mandatory | — |
+| Architecture Principles | Prelim | Mandatory | — |
+| {{artifact}} | {{phase}} | {{mandatory_optional}} | {{rationale}} |
+
+### 6.3 ADM Adaptations
+
+{{adm_adaptations}}
+
+---
+
+## 7. Architecture Compliance Process
+
+<details>
+<summary>📋 Guidance</summary>
+
+Define how compliance checking is triggered and conducted. Compliance is most effective when
+it is scheduled (built into project gates) rather than reactive. The waiver process must be
+simple enough that teams use it rather than ignore it — a complex waiver process encourages
+silent non-conformance.
+
+</details>
+
+### 7.1 Compliance Checkpoints
+
+| Checkpoint | Trigger | Assessor | Output |
+|---|---|---|---|
+| Design Review | Before build approval | Lead Architect | Compliance Assessment |
+| Pre-Deployment | Before production deployment | Lead Architect + Domain Architect | Compliance Assessment (updated) |
+| Post-Implementation | 30 days after go-live | EA Liaison | Conformance Confirmation |
+| {{checkpoint}} | {{trigger}} | {{assessor}} | {{output}} |
+
+### 7.2 Waiver & Exception Process
+
+**When a waiver is required:** {{waiver_trigger}}
+*(e.g., "Any deviation from an approved architecture principle or a pattern defined in the Technology Standards Catalogue")*
+
+**Waiver Request Process:**
+1. {{waiver_step_1}}
+2. {{waiver_step_2}}
+3. {{waiver_step_3}}
+
+**Waiver Approval Authority:** {{waiver_authority}}
+
+**Waiver Record:** All approved waivers are recorded in the relevant Compliance Assessment artifact and the Decision Register.
+
+---
+
+## 8. Architecture Repository
+
+<details>
+<summary>📋 Guidance</summary>
+
+Define where architecture artifacts are stored, how they are versioned, and who has access.
+The repository location is less important than the consistency of its use. A single well-known
+location is better than a "correct" tool that nobody uses.
+
+</details>
+
+**Repository Location:** {{repository_location}}
+
+**Version Control:** {{version_control_approach}}
+
+**Access Levels:**
+
+| Level | Who | Access |
+|---|---|---|
+| Author | EA Team | Read / Write / Publish |
+| Reviewer | ARB Members, Domain Architects | Read / Comment |
+| Consumer | Project Teams, Delivery Leads | Read |
+| {{level}} | {{who}} | {{access}} |
+
+**Naming Conventions:** {{naming_conventions}}
+
+**Retention Policy:** {{retention_policy}}
+
+---
+
+## 8a. Policy Catalogue
+
+<details>
+<summary>📋 Guidance</summary>
+
+Document the policies that govern architecture work in this engagement. Policies are formal governance documents enacted by an authority — they authorise constraints (CST-NNN) but are not constraints themselves. This catalogue links policies to the constraints and principles they generate, creating end-to-end traceability from external mandate to architecture restriction.
+
+Distinguish:
+- **Enterprise policies** (organisation-wide, read-only) — enacted by board, regulator, or enterprise governance
+- **Engagement-specific policy interpretations** — how this engagement applies an enterprise policy
+
+**Cross-reference:** The full Policies Register is maintained via `/ea-policies`. This section is a summary for governance stakeholders who need a quick view of the policy landscape without reading the full register.
+
+</details>
+
+**Policies Summary:**
+
+| Scope | Count | Types |
+|---|---|---|
+| Enterprise 🔒 | {{N}} | {{types}} |
+| Divisional / Geographic | {{N}} | {{types}} |
+
+**Key Policies Driving This Engagement:**
+
+| POL-NNN | Title | Type | Authority | Effective Date | Linked Constraints | Status |
+|---|---|---|---|---|---|---|
+| POL-001 | {{title}} | {{type}} | {{authority}} | {{date}} | {{CST-NNN list}} | {{status}} |
+
+**Policy Governance:**
+- **Review Cycle:** Enterprise policies are reviewed {{review_cycle}}.
+- **Stale Policy Handling:** Policies past their Review Cycle are flagged in `/ea-policies list` and may invalidate linked constraints.
+- **Policy Change Escalation:** Changes to Enterprise policies require {{escalation_path}}.
+
+---
+
+## 9. Escalation & Dispute Resolution
+
+<details>
+<summary>📋 Guidance</summary>
+
+Define what happens when governance decisions are disputed or when a project team refuses to
+comply with an architecture decision. The existence of a clear escalation path — even one
+rarely used — signals that governance has teeth.
+
+</details>
+
+**Escalation Triggers:** {{escalation_triggers}}
+
+**Escalation Path:**
+
+| Level | Body / Individual | Timeframe |
+|---|---|---|
+| 1 | Lead Architect | {{timeframe}} |
+| 2 | ARB | {{timeframe}} |
+| 3 | CTO / CIO | {{timeframe}} |
+| 4 | {{body}} | {{timeframe}} |
+
+**Dispute Resolution Process:** {{dispute_resolution}}
+
+---
+
+## 10. Governance Maturity & Review
+
+<details>
+<summary>📋 Guidance</summary>
+
+Governance frameworks that are never reviewed become irrelevant. Define a review cadence and
+the criteria for deciding when a major revision is needed (e.g., significant scope change,
+governance failures, programme closure).
+
+</details>
+
+**Review Cadence:** {{review_cadence}}
+
+**Review Trigger Conditions:**
+- {{trigger_1}}
+- {{trigger_2}}
+- {{trigger_3}}
+
+**Governance Effectiveness Metrics:**
+
+| Metric | Target | How Measured |
+|---|---|---|
+| % of projects with ARB review before build approval | {{target}} | {{measurement}} |
+| Average waiver decision time | {{target}} | {{measurement}} |
+| Non-conformances identified post-deployment | {{target}} | {{measurement}} |
+| {{metric}} | {{target}} | {{measurement}} |
+
+---
+
+## 11. Governance Across ADM Phases
+
+<details>
+<summary>📋 Guidance</summary>
+
+Architecture governance is not only defined once in the Preliminary Phase — it is *applied*
+throughout the ADM. This section documents how governance operates at each phase: what the
+governance mechanism is, what requires approval, and what the output is.
+
+Use this as the reference checklist when entering each phase. Delivery teams and project
+managers should also read this section to understand what architecture governance will
+require of them at each delivery stage.
+
+</details>
+
+| Phase | Governance mechanism | What requires approval / review | Typical output |
+|---|---|---|---|
+| **Preliminary** | Establish governance structures, ARB, principles, tailoring decisions | Governance Framework itself; Architecture Principles | Approved Governance Framework and Principles |
+| **Phase A — Architecture Vision** | Sponsor authorisation; scope and constraint confirmation | Statement of Architecture Work sign-off; engagement scope; key principles applied | Approved Architecture Vision; authorised SAoW |
+| **Phase B–D — Domain Architectures** | Architecture review at domain completion; principle compliance check | Domain architecture artifacts before proceeding to next phase; significant design decisions | Compliance-checked domain artifacts; ADRs for significant decisions |
+| **Phase E — Opportunities & Solutions** | Governance bridging to delivery — validate solution direction against architecture | Work package structures; proposed implementation approaches; architectural coherence of solutions | Approved work package list; solution directions aligned to architecture |
+| **Phase F — Migration Planning** | Governance of sequencing and prioritisation decisions | Transition architecture; roadmap phasing; interaction with portfolio / investment governance | Approved Architecture Roadmap; prioritised transition architectures |
+| **Phase G — Implementation Governance** | Compliance reviews at delivery gates; waiver decisions; change request processing | Solution designs before build; pre-deployment conformance; architecture change requests | Compliance Assessments; approved or rejected waivers; updated Change Register |
+| **Phase H — Architecture Change Management** | Control architecture change requests; assess whether changes require a new ADM cycle | Architecture Change Requests (ACRs); significance of requested changes | Updated baseline; decision on whether new ADM cycle is triggered |
+| **Requirements (all phases)** | Requirements traceability and change control | New or changed requirements that alter scope, principles, or target state | Updated Requirements Register; impact assessment on affected artifacts |
+
+**Key point — Phase G boundary:**
+Phase G is the strongest TOGAF linkage between architecture governance and programme
+governance. It does not replace the programme's own delivery governance (stage gates,
+PMO reviews, investment decisions, benefits tracking). Phase G adds the architectural
+lens: *is the solution being built conformant with the approved architecture?* Programme
+governance answers all the other delivery questions.
+
+---
+
+## Appendix A3 — Decision Log
+
+<details>
+<summary>📋 Guidance</summary>
+Record governance decisions made during the development of this framework. Use `/ea-decisions` to generate a cross-artifact Decision Register.
+</details>
+
+| ID | Decision | State | Authority | Domain | Cost | Impact | Risk | Subject | Captured By | Owner | Date |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| *(no decisions recorded)* | — | — | — | — | — | — | — | — | — | — | — |
+
+---
+
+## Appendix A4 — Stakeholder Concerns & Objections
+
+<details>
+<summary>📋 Guidance</summary>
+Record all stakeholder concerns, objections, and tough questions raised about this artifact. Use `/ea-concerns` to generate a cross-artifact Concerns Register.
+</details>
+
+| ID | Concern | Raised By | Category | Status | Response | Action / Owner |
+|---|---|---|---|---|---|---|
+| *(no concerns recorded)* | — | — | — | — | — | — |
+
+
+## Appendix A5 — Related Architecture Decisions
+
+<details>
+<summary>📋 Guidance</summary>
+
+List ADRs that informed, were informed by, or are otherwise relevant to this artifact.
+Reference the ADR-NNN ID so readers can navigate to the full decision record.
+Use `/ea-adrs` to manage the ADR Register and surface ADR summaries.
+
+When a significant decision is made during an interview for this artifact, the
+`ea-interviewer` will suggest creating an ADR if the decision meets the threshold
+criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
+
+</details>
+
+| ADR ID | Title | Status | Summary |
+|---|---|---|---|
+| *(no related ADRs recorded)* | — | — | — |
+
+---
+
+## Artifact Working Notes
+
+> Working-layer: persists across reviews. Populated by `/ea-grill` (Critiques), `/ea-review` (Comments), and manually. Never exported to Word/PPTX — stripped by `/ea-generate`.
+
+### Comments
+
+*Ad-hoc notes from architects, reviewers, or stakeholders.*
+
+| Date | Author | Note |
+|---|---|---|
+| — | — | — |
+
+### Critiques
+
+*Formal findings from `/ea-grill` or `/ea-review` that require a response before this artifact can be approved.*
+
+| # | Section | Finding | Source | Date | Status |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Open |
+
+### Exceptions
+
+*Formal exceptions granted to a standard, principle, or compliance rule — each must have a rationale and approver.*
+
+| # | Rule / Principle Waived | Rationale | Approver | Date |
+|---|---|---|---|---|
+| — | — | — | — | — |
+
+### Outstanding Tasks
+
+*Things that must be completed before this artifact can move to Approved status.*
+
+- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
+
+*This document was created using the EA Assistant plugin. Use `/ea-decisions` to manage decisions and `/ea-concerns` to manage concerns.*

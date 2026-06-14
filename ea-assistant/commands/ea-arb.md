@@ -82,7 +82,7 @@ If yes, scan `EA-projects/{slug}/artifacts/adr-*.md` for ADRs with status `Candi
 
 ### Step 5 — Create ARB Minutes File
 
-1. Read `templates/arb-minutes.md` as the template.
+1. Read `templates/cross-cutting/arb-minutes.md` as the template.
 2. Replace all `{{placeholder}}` tokens with collected values.
 3. Write to: `EA-projects/{slug}/artifacts/cross-cutting/arb-minutes-{NNN}-{YYYY-MM-DD}.md`
 4. Create `artifacts/cross-cutting/` folder if it does not exist.
