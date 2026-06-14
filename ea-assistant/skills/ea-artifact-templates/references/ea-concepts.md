@@ -456,6 +456,36 @@ A principle is a normative statement that governs all future architecture decisi
 
 ---
 
+### Direction
+
+**What it IS:**
+Direction is the **complete statement of intent** the organisation gives to architecture work — the *why*. It is the **superset** that is delivered through Goals, Objectives, and Strategies. At every level, direction consists of three things: a **performance expectation** (what outcome is required), a **constraint** (what limits apply), and a **risk appetite** (how much uncertainty is acceptable). Direction always comes from above — a chain runs shareholders → board → executive → management → teams — and in the **governance cascade**, the *execution* of one level becomes the *direction* for the level below. Held in `engagement.json → direction` (the parent object for vision, mission, drivers, goals, objectives, strategies, …).
+
+**The three components of any direction:**
+- **Performance expectation** — what outcome is required
+- **Constraint** — what limits apply
+- **Risk appetite** — how much uncertainty is acceptable
+
+**Delivered through (Direction is the superset; these operationalise it):**
+- **Goals** (where we want to be) → **Objectives** (how far, by when) → **Strategies** (how we get there)
+- **Drivers** establish *why* the direction is needed; **Principles**, **Constraints**, and **Standards** bound *how* it is pursued
+
+**What it is NOT:**
+- Not a **Goal / Objective / Strategy** — those are the parts; Direction is the whole performance-expectation-and-constraint set they decompose
+- Not a **Vision / Mission** — Vision/Mission are enduring identity statements; Direction is the specific intent for *this* change, carrying a performance expectation, constraint, and risk appetite
+- Not a **Decision** — Direction *shapes* decisions (Four Elements: Direction → Decision); a decision is a specific commitment made within direction's bounds
+
+**Governance role:** Direction is the first of the **Four Elements of Governance** (Direction → Decision → Execution, with Control wrapping all — see `governance-framework.md`). Every architecture decision should trace back to a clear source of direction; a decision with no direction anchor is ungoverned. Deviations from direction must be **escalated up the cascade**, never resolved silently.
+
+**TOGAF placement:** established in the Preliminary Phase and Phase A; communicated through the Statement of Architecture Work, Architecture Principles, and Architecture Vision. The risk-appetite component frames the Risk Register's tolerance.
+
+**Practitioner Notes:**
+- Capture **all three components** — a direction with a performance expectation but no stated constraint or risk appetite invites scope creep and risk blindness.
+- **Restate before decomposing** — when receiving direction, echo it back ("grow revenue with new products sold to existing customers") before breaking it into goals/objectives.
+- **Maturity marker (L1→L5):** L1 = direction is implicit/assumed; L3 = direction is explicit (performance expectation + constraint + risk appetite) and traced to decisions; L5 = direction is continuously re-validated and the cascade is governed end to end.
+
+---
+
 ### Goal
 
 **What it IS:**
@@ -945,6 +975,16 @@ The Operating Model is a high-level description of how the organisation function
 
 **What it IS:**
 Metrics are specific, quantifiable measures used to track progress, performance, and outcomes. They provide evidence as to whether Strategies are working and whether Objectives and Goals are being achieved. Metrics answer *"How do we know we are succeeding?"*
+
+**Governance role — metrics give Control its teeth:**
+Metrics are the **instruments that give the Control element of governance its teeth**. Without metrics, governance is **opinion-based**; with metrics, it is **evidence-based**. Control is the governance element that verifies execution conforms to decisions and that decisions align with direction — and it can only do so observably through measurement. Each metric type tracks a specific element of direction, which is why a metric with no linked direction item is an orphan:
+
+| Metric type | Tracks | Question it answers | Linked to |
+|---|---|---|---|
+| **Outcome** | A Goal | Is the desired state being approached? | G-NNN |
+| **Performance** | An Objective | Is the measurable target on track? | OBJ-NNN |
+| **Activity** | A Strategy | Is the chosen approach being executed? | STR-NNN |
+| **Benefit** | A projected value (Cost Entry) | Did we realise the value? | FIN-NNN |
 
 **Leading vs Lagging:**
 - **Leading metrics** — predictive; indicate whether future performance is likely to improve or worsen (e.g. number of teams trained on new process before go-live)

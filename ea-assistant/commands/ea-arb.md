@@ -7,6 +7,8 @@ allowed-tools: [Read, Write, Glob, Bash]
 
 Manage Architecture Review Board (ARB) meeting minutes for the active engagement.
 
+> The **ARB** is the engagement's strategic architecture governance body — the forum that ratifies hard-to-reverse decisions, governs principles/dispensations, and gates phase conformance. For its role and function within the governance model, see `skills/ea-engagement-lifecycle/references/governance-framework.md` → **The Architecture Review Board (ARB)**; for its duties, membership, and RACI, see `references/role-catalogue.md`. This command manages the **minutes** (`ARB-NNN`) — the record of what the board decided.
+
 ## Engagement Resolution
 
 Check conversation context for the active engagement slug. If none found, scan `EA-projects/*/engagement.json` and display a numbered list; ask the user to select one. Load `engagement.json`.
