@@ -53,6 +53,9 @@ If `--skill` was provided, use that skill. Otherwise, recommend a skill based on
 | Requirements Register | `grill-me-requirements` | NFR coverage, measurability, traceability, consistency, and feasibility review |
 | Decision Register | `grill-me-decision` | Reviews whether decisions are defensible, owned, and governed |
 | Business Model Canvas | `grill-me-boardroom-strategy` | Needs full strategic + commercial + execution review |
+| Business Case | `finance` | The financial instrument — review cost coverage, TCO, payback/value, and funding against the Cost Model (`FIN-NNN`) |
+
+**Cost review:** Any cost-bearing artifact (Business Case, Architecture Roadmap, Migration Plan, or a high-cost ADR) can be reviewed financially with `--skill finance`, which audits cost coverage, whole-life TCO, payback/value, and funding against the Cost Model Register (`FIN-NNN`) and the T4-TCO / T4-ECON rules.
 
 **Advanced mode overrides:** If the engagement is at L3+ maturity, the user may request an advanced review. When `--skill practitioner`, `--skill maturity`, `--skill failure-mode`, `--skill requirements`, `--skill direction`, `--skill waf`, `--skill caf`, or `--skill gcaf` is specified, bypass the default recommendation and use the requested skill. (The cloud lenses — `waf`, `caf`, `gcaf` — are available at any maturity level when the engagement has cloud scope.)
 
@@ -70,6 +73,7 @@ The `--skill` argument accepts these short names:
 | `artifact` | `ea-assistant:ea-grill-skills` | Structured artifact review: section-by-section completeness, traceability chains, consistency |
 | `diagram` | `ea-assistant:ea-grill-skills` | Visual design review: topology, missing components, anti-patterns, readability |
 | `boardroom-strategy` | `ea-assistant:ea-grill-skills` | Hybrid: strategic depth + board pressure + pre-mortem (most thorough) |
+| `finance` | `ea-assistant:ea-grill-skills` | Financial & cost critique: cost coverage vs `FIN-NNN`, whole-life TCO, payback/ROI, option economics, funding & cost risk — applies T4-TCO / T4-ECON |
 | `practitioner` | `ea-assistant:ea-grill-skills` | Practitioner-level review: economic framing, decision quality, optionality, complexity reduction — load from `skills/ea-engagement-lifecycle/references/practitioner-tips.md` |
 | `maturity` | `ea-assistant:ea-grill-skills` | Maturity assessment: evaluates artifact against L1–L5 model and suggests advancement steps — load from `skills/ea-engagement-lifecycle/references/adm-maturity-model.md` |
 | `failure-mode` | `ea-assistant:ea-grill-skills` | Failure-mode pre-mortem: detects symptoms of the 6 failure modes and suggests fixes — load from `skills/ea-engagement-lifecycle/references/failure-modes.md` |
@@ -79,7 +83,7 @@ The `--skill` argument accepts these short names:
 | `caf` | `ea-assistant:ea-framework-lenses` | Azure Cloud Adoption Framework lens: adoption-lifecycle review (Strategy, Plan, Ready, Adopt, Govern, Manage) — strongest on Phase A/B/E/F artifacts (vision, portfolio dispositions, roadmap, migration plan) — load from `skills/ea-framework-lenses/references/azure-caf.md` |
 | `gcaf` | `ea-assistant:ea-framework-lenses` | Google Cloud Architecture Framework lens: pillar review (System Design, Operational Excellence, Security, Reliability, Cost, Performance) against the artifact's phase — load from `skills/ea-framework-lenses/references/google-caf.md` |
 
-For the 9 core skills (stress-test through boardroom-strategy): after loading `ea-assistant:ea-grill-skills`, locate and follow the `## Mode: {short-name}` section that matches the requested skill. Ignore all other mode sections.
+For the 10 core skills (stress-test through finance): after loading `ea-assistant:ea-grill-skills`, locate and follow the `## Mode: {short-name}` section that matches the requested skill. Ignore all other mode sections.
 
 For the 8 advanced skills (practitioner, maturity, failure-mode, requirements, direction, waf, caf, gcaf): after loading the skill named in the table, if a `## Mode: {short-name}` section exists for the requested skill, follow it. If not, load the referenced file from the path in the table and follow its instructions as the review protocol.
 
@@ -265,6 +269,7 @@ When the review is complete (or the user types `done` or `finish`), produce the 
 - **artifact** → section-by-section completeness scorecard, traceability chain gaps, cross-artifact consistency issues, top recommended revisions
 - **diagram** → topology assessment, missing components, anti-patterns identified, readability issues, recommended structural changes
 - **boardroom-strategy** → executive summary, case for proceeding, case against, top unresolved risks, next decision required, 2-minute board-ready version
+- **finance** → cost coverage scorecard (% of options/Wave-1 WPs with FIN-backed estimates + uncosted list), whole-life TCO gaps, value/payback verdict, top financial risks, recommended `FIN-NNN` entries, funding decision required
 - **practitioner** → economic framing assessment, decision quality scorecard, optionality audit, complexity heatmap, top 5 practitioner recommendations
 - **maturity** → current maturity level (L1–L5), gap analysis vs next level, specific advancement actions, blockers to progress
 - **failure-mode** → failure mode symptom scan (6 modes), root cause analysis for any detected, prevention recommendations, proceed/pause/redesign verdict

@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.80 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.81 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -38,8 +38,8 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 
 ## Command Reference
 
-60 commands available — run `/ea-help` for the full table with agent assignments.
-Key entry points: `/ea-new` · `/ea-open` · `/ea-interview` · `/ea-grill` · `/ea-generate` · `/ea-status` · `/ea-brief` · `/ea-lens` · `/ea-git` · `/ea-goals` · `/ea-strategies` · `/ea-target` · `/ea-actions` · `/ea-issues` · `/ea-problems` · `/ea-scenarios` · `/ea-refarch` · `/ea-matrix` · `/ea-finance` · `/ea-score` · `/ea-capabilities`
+61 commands available — run `/ea-help` for the full table with agent assignments.
+Key entry points: `/ea-new` · `/ea-open` · `/ea-interview` · `/ea-grill` · `/ea-generate` · `/ea-status` · `/ea-brief` · `/ea-lens` · `/ea-council` · `/ea-git` · `/ea-goals` · `/ea-strategies` · `/ea-target` · `/ea-actions` · `/ea-issues` · `/ea-problems` · `/ea-scenarios` · `/ea-refarch` · `/ea-matrix` · `/ea-finance` · `/ea-score` · `/ea-capabilities`
 
 **Persona tailoring:** `/ea-help --persona <role>` and `/ea-publish --persona <role>` tailor the menu and report pack to a stakeholder role (enterprise-architect, cio, ciso, chief-product-officer, chief-privacy-officer, business-architect, data-architect). Persona definitions — interests, command subset, report bundle, audience tags, entry workflow — live in `skills/ea-engagement-lifecycle/references/persona-registry.md` (single source of truth; adding a persona is a data edit). `defaultPersona:` in `.claude/rules/ea-local-config.md` sets the engagement default. Personas map to the `audience` taxonomy (Executive/Business/Architecture/Delivery/Governance) — do not invent a parallel scheme.
 
@@ -197,6 +197,8 @@ ADRs are standalone documents capturing significant architecture decisions — t
 **ADR lifecycle:** `Candidate → In Progress → Completed → Superseded (by ADR-NNN) | Deprecated`
 
 When an ADR is ratified at an ARB meeting, set `arbReference: ARB-NNN` via `/ea-adrs update ADR-NNN arbReference ARB-NNN` and update the ADR's `Governance Reference` (§5) to `ARB-{NNN}`. Use `/ea-arb close` to propagate ARB decisions to the ADR register in bulk.
+
+**ARB Council:** `/ea-council` (alias `/ea-arb council`) convenes a multi-member advisory review panel — planner, security, budget, architect, innovator, conservative — that each examine a subject (artifact/phase/ADR/engagement) through one mandate and cast a vote; the consolidated verdict (tally, points of contention, conditions) feeds the ARB Decisions table. Panel logic lives in the `ea-arb-council` skill; membership is data in `skills/ea-engagement-lifecycle/references/arb-council-roster.md` (adding a member is a data edit — kept distinct from `persona-registry.md` and `role-catalogue.md`).
 
 **ADR vs A3 Decision Log:**
 - **A3** = governance state tracking inside an artifact (who decided what, at what authority, verified or not)

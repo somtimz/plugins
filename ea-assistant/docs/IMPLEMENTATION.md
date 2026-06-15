@@ -20,7 +20,7 @@ ea-assistant/
 │   ├── ea-engagement-lifecycle/ # ID scheme, facilitator styles, opt-out rules
 │   ├── ea-document-ingestion/   # format-layer extraction (docx, pdf, xlsx, ...)
 │   ├── ea-generation/           # export/generation logic
-│   ├── ea-grill-skills/         # 9 grill modes bundled as named sections (stress-test, premortem, decision, design, software-design, infra-design, artifact, diagram, boardroom-strategy)
+│   ├── ea-grill-skills/         # 10 grill modes bundled as named sections (stress-test, premortem, decision, design, software-design, infra-design, artifact, diagram, boardroom-strategy, finance)
 │   ├── ea-interview-ui/         # React interview form artifacts
 │   ├── ea-requirements-management/
 │   ├── ea-security/             # SABSA, ISO 27001, NIST CSF reference material
