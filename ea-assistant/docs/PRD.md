@@ -1,8 +1,30 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.80
+**Version:** 0.9.81
 **Status:** Current
 **Author:** Costa Pissaris
+
+---
+
+## v0.9.81 — ARB Council: multi-persona review panel
+
+### Summary
+Adds an **ARB Council** — an advisory review panel that examines a subject (an artifact, a phase, an ADR, or the whole engagement) through six independent reviewer viewpoints, each casting a recorded vote, then synthesises a consolidated verdict that feeds the Architecture Review Board's decision. The six members are **Planner** (delivery feasibility), **Security Analyst** (vulnerabilities), **Budget Analyst** (every penny, TCO/value), **Architect** (design quality), **Innovator** (latest technology, optionality), and **Conservative** (tried-and-true, anti-hype). The Innovator and Conservative deliberately oppose, so the panel surfaces real technology trade-offs for the board to adjudicate.
+
+Built by mirroring the `/ea-lens` split (thin command + rich skill) and reusing existing machinery — each member is anchored to an existing engine rather than a new one (grill premortem/design modes, `/ea-security-review` + `ea-security-auditor`, `/ea-finance` + FIN cost model, the grill scoring rubric's Quality dimension, the Technology Horizon Register, and the T4-PREMAT/T4-OPTION/T4-TCO/T4-ECON compliance rules).
+
+### Design decisions
+- **Two entry points:** standalone `/ea-council [artifact|phase X|adr ADR-NNN|--all] [--quick]` and the `/ea-arb council` alias that records the verdict into ARB minutes.
+- **Data-driven, extensible roster:** the six members live in `skills/ea-engagement-lifecycle/references/arb-council-roster.md`; adding/removing a member is a data edit, no command/skill code change. The roster is a third registry kept distinct from `persona-registry.md` (audience/reporting lenses) and `role-catalogue.md` (RACI participants).
+- **Formal votes:** each member votes `Approve | Approve-with-conditions | Reject | Abstain`; the tally populates the ARB Decisions table (Vote + Outcome), conditions become Actions, and a blocking Reject from Security/Budget yields "Do not endorse". No new ID prefixes — reuses ARB-NNN context plus CON-NNN/RIS-NNN.
+
+### Files
+- `skills/ea-arb-council/SKILL.md` — new panel engine (member loop, vote scheme, verdict synthesis, points-of-contention reconciliation, quick mode).
+- `skills/ea-engagement-lifecycle/references/arb-council-roster.md` — new data-driven 6-member roster.
+- `commands/ea-council.md` — new thin command (scope resolution, context load, present + persist).
+- `commands/ea-arb.md` — new `council` dispatcher mode + write-back into minutes; offered from `new`.
+- `templates/cross-cutting/arb-minutes.md` — new `## Council Review` section.
+- `commands/ea-help.md`, `CLAUDE.md`, `skills/ea-engagement-lifecycle/SKILL.md`, `README.md` — command registration + the three-registry distinction.
 
 ---
 

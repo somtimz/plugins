@@ -13,7 +13,7 @@ quorumRequired: {{N}}
 quorumMet: true
 status: Draft
 nextMeeting: null
-templateVersion: 0.9.55
+templateVersion: 0.9.81
 reviewStatus: Not Reviewed
 lastModified: {{YYYY-MM-DDTHH:MM:SSZ}}
 taxonomy:
@@ -93,10 +93,39 @@ links: []
 
 ---
 
+## Council Review
+
+<!-- GUIDANCE:
+  Populated by /ea-council or /ea-arb council. The ARB Council is an advisory review panel
+  (planner, security, budget, architect, innovator, conservative — see
+  skills/ea-engagement-lifecycle/references/arb-council-roster.md). Each member examines the
+  subject through one mandate and casts a vote; the consolidated verdict informs the Decisions
+  below. Leave as-is if no council review was held. Multiple reviews in one meeting stack as
+  sub-blocks under a "### {subject}" heading.
+-->
+
+**Subject reviewed:** {{council_subject or "—"}}
+
+| Member | Vote | Top Concern | Conditions |
+|---|---|---|---|
+| *(no council review held)* | — | — | — |
+
+**Tally:** {{X}} Approve · {{Y}} Approve-with-conditions · {{Z}} Reject · {{W}} Abstain
+
+**Consensus:** {{consensus}}
+
+**Points of contention:** {{contention — e.g. Innovator vs Conservative trade-off}}
+
+**Consolidated recommendation:** {{Endorse | Endorse with conditions | Do not endorse | Defer}}
+
+---
+
 ## Decisions
 
 <!-- GUIDANCE:
   Record each formal decision made at this ARB meeting.
+  A council-reviewed subject yields a row whose Vote is the council tally and Outcome is the
+  consolidated recommendation; conditions go to the Actions Register.
   Link to the relevant ADR-NNN when the decision relates to an Architecture Decision Record.
   Vote format: "X For / Y Against / Z Abstain"
   Governance Authority: Strategic / Tactical / Operational

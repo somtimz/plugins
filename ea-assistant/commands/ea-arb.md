@@ -1,8 +1,8 @@
 ---
 name: ea-arb
 description: Create, manage, and view Architecture Review Board meeting minutes — link decisions to the ADR register and concerns register
-argument-hint: "[new | list | view <ARB-NNN> | close <ARB-NNN>]"
-allowed-tools: [Read, Write, Glob, Bash]
+argument-hint: "[new | council [ARB-NNN] | list | view <ARB-NNN> | close <ARB-NNN>]"
+allowed-tools: [Read, Write, Glob, Grep, Bash]
 ---
 
 Manage Architecture Review Board (ARB) meeting minutes for the active engagement.
@@ -18,6 +18,7 @@ Check conversation context for the active engagement slug. If none found, scan `
 1. Read the argument (if any).
 2. Dispatch:
    - `new` → Mode: New
+   - `council [ARB-NNN]` → Mode: Council
    - `list` → Mode: List
    - `view <ARB-NNN>` → Mode: View
    - `close <ARB-NNN>` → Mode: Close
@@ -26,11 +27,12 @@ Check conversation context for the active engagement slug. If none found, scan `
      ARB Meeting Minutes — {engagement name}
 
        1. New ARB minutes
-       2. List ARB meetings
-       3. View ARB-NNN
-       4. Close ARB-NNN (approve minutes)
+       2. Convene the ARB council (panel review + vote)
+       3. List ARB meetings
+       4. View ARB-NNN
+       5. Close ARB-NNN (approve minutes)
 
-     Select (1–4) or Enter to exit:
+     Select (1–5) or Enter to exit:
      ```
 
 ---
@@ -109,11 +111,56 @@ Offer:
 ARB-{NNN} is ready. What next?
 
   1. Populate decisions now (facilitated session)
-  2. View the file
-  3. Done
+  2. Convene the ARB council on an agenda item (panel review + vote)
+  3. View the file
+  4. Done
 ```
 
 If option 1 selected, hand off to `ea-facilitator` in ARB facilitation mode (similar to Workshop Mode — run through agenda items, capture decisions in the Decisions table, record votes and governance references).
+
+If option 2 selected, run **Mode: Council** targeting this `ARB-{NNN}`.
+
+---
+
+## Mode: Council
+
+Convene the **ARB Council** — a multi-member review panel — on a subject, and record its votes and verdict into an ARB meeting. This is the `/ea-arb` alias for `/ea-council`; the panel logic lives in the `ea-arb-council` skill (membership in `skills/ea-engagement-lifecycle/references/arb-council-roster.md`). Do not restate the member logic here.
+
+### Step 1 — Resolve the target meeting
+
+- If a council subject is already in flight (called from Mode: New, or `council ARB-NNN` given), use that `ARB-{NNN}`.
+- Otherwise scan `EA-projects/{slug}/artifacts/cross-cutting/arb-minutes-*.md`. If a Draft meeting exists, offer it; else offer to create one via Mode: New first (a council review should be recorded against a meeting).
+
+### Step 2 — Resolve the subject
+
+Ask what the council should review:
+```
+What should the council review?
+  1. An agenda item from this meeting
+  2. A specific artifact            (e.g. architecture-vision)
+  3. A phase                        (e.g. phase A)
+  4. A specific ADR                 (e.g. ADR-003)
+  5. The whole engagement
+```
+Resolve the subject and load its context using the same load + exclusions list as `/ea-council` Step 3 (exclude `*.review.md` and generated `*-register*.md`).
+
+### Step 3 — Run the council
+
+Load the `ea-arb-council` skill. Pass the subject and context (and any `--member`/`--quick` flags). The skill produces per-member sections, votes, and a `## Council Verdict` (panel table, tally, consensus, points of contention, conditions, consolidated recommendation). Present it.
+
+### Step 4 — Write back into the minutes
+
+With confirmation, edit `arb-minutes-{NNN}-{YYYY-MM-DD}.md`:
+
+1. **`## Council Review` section** — populate the panel table (Member · Vote · Top Concern · Conditions) and the Consensus / Points of Contention / Consolidated Recommendation fields from the verdict. If the subject is a phase or the whole engagement, add a sub-heading naming the subject; multiple council reviews in one meeting stack as sub-blocks.
+2. **`## Decisions` row** — add a row for the subject: **Vote** = the council tally (`{Approve} For / {Reject} Against / {Abstain} Abstain`, with `Approve-with-conditions` counted as For and noted), **Decision** = the consolidated recommendation, **Outcome** = `Endorsed / Endorsed with conditions / Not endorsed / Deferred`, **ADR Reference** = the `ADR-NNN` if the subject was an ADR, **Governance Authority** per the subject, **Owner** as captured.
+3. **`## Actions Register`** — append each verdict **condition** as an action (Owner = the member or assignee, Status `Open`).
+4. **`## Appendix A4`** — add stakeholder-facing concerns as `CON-NNN` rows.
+5. Update `lastModified` (frontmatter and `engagement.json`).
+
+Then offer the standard `/ea-council` Step 5 follow-ups (raise `RIS-NNN` for blocking Security/Budget findings; push Critiques to the reviewed artifact). A blocking Reject or a "Not endorsed" recommendation should **not** be auto-approved — leave the meeting `Draft` for the board, and surface it for `/ea-arb close`.
+
+Confirm: `"Council review recorded in ARB-{NNN}: {recommendation}. {N} conditions added as actions."`
 
 ---
 

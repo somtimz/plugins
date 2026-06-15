@@ -147,6 +147,7 @@ You have existing engagements. Common next steps:
 | `/ea-detail new\|view\|list\|sync\|link\|check\|note resolve\|index` | Create, view, list, sync, cross-link, or integrity-check item detail files; generate index; add and resolve inline notes |
 | `/ea-consistency [options]` | Focused consistency check — cross-artifact contradictions, within-artifact section inconsistencies, or ID reference scan only (`--ids`); `--details` validates detail file link integrity and A4 sync |
 | `/ea-lens [--quick]` | Seasoned architect engagement review — eight practitioner lenses focused on what matters vs. completeness theatre |
+| `/ea-council [artifact\|phase X\|adr ADR-NNN\|--all] [--quick]` | Convene the ARB council — a multi-member panel (planner, security, budget, architect, innovator, conservative) that each examine a subject and vote, producing a consolidated verdict; `/ea-arb council` records it into the minutes |
 | `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman |
 | `/ea-security-review` | Security audit — SABSA, ISO 27001, and NIST CSF 2.0 coverage across the engagement or a single artifact |
 | `/ea-migrate [--report\|--reorganize]` | Align legacy engagement to current plugin version conventions; backfills template body sections/guidance (3i), reorders sections to template order (3j), and proposes user-confirmed moves of misplaced content within/across documents (3k) — body changes are snapshotted, confirmed per item, excluded from `--auto`; `--reorganize` moves flat-path artifacts into correct phase subfolders |
@@ -154,13 +155,13 @@ You have existing engagements. Common next steps:
 | `/ea-git [init\|status\|commit\|push\|sync\|log\|remote]` | Manage EA-projects/ as a git repository — init, commit, push to GitHub |
 | `/ea-brief [--focus decisions\|risks\|gaps\|strategy] [--save]` | Synthesized one-page engagement brief — ranked decisions, gaps, risks, open concerns |
 | `/ea-workshop [start\|resume\|export\|list]` | Facilitated multi-stakeholder workshops — WS-NNN minutes, agenda, decisions, actions |
-| `/ea-arb [new\|list\|view\|close]` | ARB meeting minutes — ARB-NNN, quorum, decisions, propagate to ADR register |
+| `/ea-arb [new\|council\|list\|view\|close]` | ARB meeting minutes — ARB-NNN, quorum, decisions, propagate to ADR register; `council` convenes the review panel and records its votes |
 | `/ea-config [section]` | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md |
 | `/ea-help` | This guide |
 
 ### Which Review Command?
 
-Five commands review work at different scopes — pick by what you want answered:
+Six commands review work at different scopes — pick by what you want answered:
 
 | You want to know… | Scope | Run |
 |---|---|---|
@@ -169,6 +170,7 @@ Five commands review work at different scopes — pick by what you want answered
 | "Do my artifacts contradict each other? Any broken IDs?" | Cross-artifact, mechanical checks | `/ea-consistency` |
 | "Is the whole engagement healthy — coverage, traceability, governance?" | Full engagement, structured | `/ea-engage-review` |
 | "What would a seasoned architect say actually matters here?" | Full engagement, opinionated | `/ea-lens` |
+| "Convene a multi-viewpoint panel to weigh a subject and vote." | Artifact / phase / ADR / engagement, panel + verdict | `/ea-council` |
 | "How complete and how good is each artifact — with numbers?" | Per section + overall, two scores | `/ea-score [artifact\|--all]` |
 
 Security has its own lane: `/ea-security-review` (SABSA / ISO 27001 / NIST CSF coverage).
