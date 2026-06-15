@@ -55,8 +55,9 @@ What next?
 ```
 
 - **1 — Save:** write to `EA-projects/{slug}/artifacts/cross-cutting/notes/reviews/council-review-{scope}-{YYYY-MM-DD}.md` (scope = `engagement`, the artifact id, `phase-{X}`, or the ADR id), with frontmatter `artifact`, `scope`, `date`, `reviewer: ea-council`.
-- **2 — Push findings (confirm-before-apply, reusing `/ea-grill` Step 7–8 mechanics):**
-  - For each reviewed artifact, add unresolved member findings to its **Artifact Working Notes → Critiques** table — `| {#} | {section} | {finding} | ea-council / {member} | {YYYY-MM-DD} | Open |` — and add stakeholder-facing concerns to **Appendix A4** as `CON-NNN` rows (Category, Status, Action/Owner).
+- **2 — Push findings (confirm-before-apply, one finding at a time):**
+  - For each reviewed artifact, add unresolved member findings to its **Artifact Working Notes → Critiques** table — `| {#} | {section} | {finding} | ea-council / {member} | {YYYY-MM-DD} | Open |`.
+  - Add stakeholder-facing concerns to **Appendix A4** as `CON-NNN` rows (Category, Status, Action/Owner). Before adding, read the existing A4 rows and skip any concern already present (matched by source `ea-council` or the same member name and finding text) to avoid duplicates if Option 3 is also selected.
   - For each **Security Analyst** or **Budget Analyst** finding flagged as a risk, offer to create a `RIS-NNN` entry via `/ea-risks add` (prefill statement from the finding, severity from the member's concern). Walk one finding at a time with `y/n/edit`.
 - **3 — Record in ARB:** invoke the `/ea-arb council` write-back (Mode: Council in `commands/ea-arb.md`) — pick or create the target `ARB-NNN`, then write the `## Council Review` section, a Decisions row (Vote tally + Outcome), and conditions into the Actions Register.
 

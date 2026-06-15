@@ -53,7 +53,7 @@ If `--skill` was provided, use that skill. Otherwise, recommend a skill based on
 | Requirements Register | `grill-me-requirements` | NFR coverage, measurability, traceability, consistency, and feasibility review |
 | Decision Register | `grill-me-decision` | Reviews whether decisions are defensible, owned, and governed |
 | Business Model Canvas | `grill-me-boardroom-strategy` | Needs full strategic + commercial + execution review |
-| Business Case | `grill-me-finance` | The financial instrument — review cost coverage, TCO, payback/value, and funding against the Cost Model (`FIN-NNN`) |
+| Business Case | `finance` | The financial instrument — review cost coverage, TCO, payback/value, and funding against the Cost Model (`FIN-NNN`) |
 
 **Cost review:** Any cost-bearing artifact (Business Case, Architecture Roadmap, Migration Plan, or a high-cost ADR) can be reviewed financially with `--skill finance`, which audits cost coverage, whole-life TCO, payback/value, and funding against the Cost Model Register (`FIN-NNN`) and the T4-TCO / T4-ECON rules.
 

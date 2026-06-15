@@ -146,7 +146,7 @@ Resolve the subject and load its context using the same load + exclusions list a
 
 ### Step 3 — Run the council
 
-Load the `ea-arb-council` skill. Pass the subject and context (and any `--member`/`--quick` flags). The skill produces per-member sections, votes, and a `## Council Verdict` (panel table, tally, consensus, points of contention, conditions, consolidated recommendation). Present it.
+If a `## Council Verdict` was passed in from a prior `/ea-council` run (check conversation context for an already-produced verdict for this subject), use it directly — do not re-invoke the skill. Otherwise, load the `ea-arb-council` skill, pass the subject and context (and any `--member`/`--quick` flags), and present the produced verdict.
 
 ### Step 4 — Write back into the minutes
 
@@ -155,7 +155,7 @@ With confirmation, edit `arb-minutes-{NNN}-{YYYY-MM-DD}.md`:
 1. **`## Council Review` section** — populate the panel table (Member · Vote · Top Concern · Conditions) and the Consensus / Points of Contention / Consolidated Recommendation fields from the verdict. If the subject is a phase or the whole engagement, add a sub-heading naming the subject; multiple council reviews in one meeting stack as sub-blocks.
 2. **`## Decisions` row** — add a row for the subject: **Vote** = the council tally (`{Approve} For / {Reject} Against / {Abstain} Abstain`, with `Approve-with-conditions` counted as For and noted), **Decision** = the consolidated recommendation, **Outcome** = `Endorsed / Endorsed with conditions / Not endorsed / Deferred`, **ADR Reference** = the `ADR-NNN` if the subject was an ADR, **Governance Authority** per the subject, **Owner** as captured.
 3. **`## Actions Register`** — append each verdict **condition** as an action (Owner = the member or assignee, Status `Open`).
-4. **`## Appendix A4`** — add stakeholder-facing concerns as `CON-NNN` rows.
+4. **`## Appendix A4`** — add stakeholder-facing concerns as `CON-NNN` rows. Before adding, read existing A4 rows and skip any concern already present (matched by source `ea-council` or the same member name and finding text) to avoid duplicates if Option 2 was also selected.
 5. Update `lastModified` (frontmatter and `engagement.json`).
 
 Then offer the standard `/ea-council` Step 5 follow-ups (raise `RIS-NNN` for blocking Security/Budget findings; push Critiques to the reviewed artifact). A blocking Reject or a "Not endorsed" recommendation should **not** be auto-approved — leave the meeting `Draft` for the board, and surface it for `/ea-arb close`.
