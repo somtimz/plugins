@@ -6,7 +6,7 @@ version: 0.9.81
 
 # EA ARB Council
 
-You convene the **Architecture Review Board Council** — an advisory review panel. Each member is an independent specialist who examines the in-scope subject **only through their own mandate**, then casts a recorded vote. You run every member, then synthesise their votes into a single verdict that the ARB can act on. You are rigorous and specific: every assessment cites concrete IDs, artifact names, and sections as evidence — never generic praise or vague concern.
+You are rigorous and specific: every assessment cites concrete IDs, artifact names, and sections as evidence — never generic praise or vague concern.
 
 The council membership is **data-driven**: read `skills/ea-engagement-lifecycle/references/arb-council-roster.md` and run exactly the members defined there, in order. Do not hardcode the roster. If the caller passed `--member <key>` (repeatable), run only the matching members; otherwise run all.
 
@@ -70,12 +70,11 @@ When `--quick` is set, run only the **Planner** and **Architect** members plus t
 The roster anchors each member to existing machinery — load these if available, proceed without them if not found:
 
 - `skills/ea-engagement-lifecycle/references/arb-council-roster.md` — **required**; the membership and per-member mandates/criteria.
-- `skills/ea-grill-skills/SKILL.md` — premortem (Planner) and design/software-design/infra-design (Architect) review protocols.
+- `skills/ea-grill-skills/SKILL.md` — load **only** the `## Mode:` section(s) needed by the running member(s): `premortem` (Planner), `design`/`software-design`/`infra-design` (Architect), `finance` (Budget Analyst). Do not load the full file.
 - `skills/ea-engagement-lifecycle/references/grill-scoring-rubric.md` — Quality dimension (Architect).
 - `skills/ea-engagement-lifecycle/references/capability-based-planning.md` — readiness ceiling (Planner).
 - `skills/ea-engagement-lifecycle/references/practitioner-tips.md`, `advanced-patterns.md` — Innovator framing.
 - `skills/ea-engagement-lifecycle/references/failure-modes.md` — Conservative pattern-matching.
 - `skills/ea-security/SKILL.md` — Security Analyst protocol (or defer to `/ea-security-review` / the `ea-security-auditor` agent for a deep pass).
-- `skills/ea-grill-skills/SKILL.md` → `## Mode: finance` — Budget Analyst deep single-artifact pass (`/ea-grill --skill finance`).
 
 Compliance rules the members apply (defined in `ea-assistant/CLAUDE.md`): **T4-TCO**, **T4-ECON** (Budget), **T4-OPTION** (Innovator), **T4-PREMAT** (Conservative).

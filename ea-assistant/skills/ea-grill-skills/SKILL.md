@@ -500,4 +500,4 @@ At the end, provide:
 5. **Recommended revisions** — specific `FIN-NNN` entries to create, options to re-cost, or figures to substantiate
 6. **Funding decision required** — the next budget decision and who must make it
 
-Anchor every finding to the engagement's cost data: the **Cost Model Register (`FIN-NNN`)** managed by `/ea-finance`, the **Business Case** (options, TCO, payback), and the compliance rules **T4-TCO** (numeric cost + confidence on options and Wave-1 work packages) and **T4-ECON** (cost/risk/value framing in decision rationale). Where a figure has no backing `FIN-NNN`, flag it and propose the entry rather than accepting the number.
+Anchor every finding to `FIN-NNN` Cost Entries in the Cost Model Register (managed by `/ea-finance`); where no backing entry exists, flag it and propose one rather than accepting the number.

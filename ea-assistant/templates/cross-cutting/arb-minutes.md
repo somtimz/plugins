@@ -104,7 +104,7 @@ links: []
   sub-blocks under a "### {subject}" heading.
 -->
 
-**Subject reviewed:** {{council_subject or "—"}}
+**Subject reviewed:** {{council_subject}}
 
 | Member | Vote | Top Concern | Conditions |
 |---|---|---|---|

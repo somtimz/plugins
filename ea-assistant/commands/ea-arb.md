@@ -133,7 +133,9 @@ Convene the **ARB Council** — a multi-member review panel — on a subject, an
 
 ### Step 2 — Resolve the subject
 
-Ask what the council should review:
+If a subject and its loaded context were passed in from a prior `/ea-council` run (Option 3), skip the prompt and context load — use what was passed.
+
+Otherwise ask what the council should review:
 ```
 What should the council review?
   1. An agenda item from this meeting
