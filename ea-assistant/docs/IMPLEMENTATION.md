@@ -14,18 +14,19 @@ EA Assistant is a Claude Code plugin. It has no runtime server — all behaviour
 ea-assistant/
 ├── .claude-plugin/plugin.json   # plugin identity and version
 ├── agents/                      # autonomous sub-agents (.md) — 12 agents
-├── commands/                    # user-invokable slash commands (.md) — 39 commands
-├── skills/                      # reusable instruction libraries (SKILL.md per skill) — 10 skills
+├── commands/                    # user-invokable slash commands (.md) — 61 commands
+├── skills/                      # reusable instruction libraries (SKILL.md per skill) — 19 skills
 │   ├── ea-artifact-templates/   # templates + reference files
 │   ├── ea-engagement-lifecycle/ # ID scheme, facilitator styles, opt-out rules
 │   ├── ea-document-ingestion/   # format-layer extraction (docx, pdf, xlsx, ...)
 │   ├── ea-generation/           # export/generation logic
 │   ├── ea-grill-skills/         # 10 grill modes bundled as named sections (stress-test, premortem, decision, design, software-design, infra-design, artifact, diagram, boardroom-strategy, finance)
+│   ├── ea-arb-council/          # ARB Council panel engine — 6-member roster, vote scheme, verdict synthesis
 │   ├── ea-interview-ui/         # React interview form artifacts
 │   ├── ea-requirements-management/
 │   ├── ea-security/             # SABSA, ISO 27001, NIST CSF reference material
 │   ├── archimate-notation/
-│   └── zachman-framework/
+│   └── zachman-framework/       # (plus 8 further skill directories)
 ├── templates/                   # TOGAF artifact .md templates (37)
 ├── scripts/                     # Python generators (generate-docx.py, generate-pptx.py)
 ├── hooks/hooks.json             # plugin lifecycle hooks
@@ -154,7 +155,7 @@ When adding logic to an agent or command, check these files before writing anyth
 
 2. Skills are reference material, not executable commands. Write them as clear prose or structured tables that agents and commands can cite. Avoid imperative step lists — those belong in commands.
 
-3. **Multi-mode skills:** If a skill has several distinct operating modes (e.g. `ea-grill-skills` with 9 modes), define each mode as a named `## Mode: {name}` section in a single SKILL.md rather than creating one skill directory per mode. The invoking command reads the skill and jumps to the matching section. This avoids skill directory proliferation.
+3. **Multi-mode skills:** If a skill has several distinct operating modes (e.g. `ea-grill-skills` with 10 modes), define each mode as a named `## Mode: {name}` section in a single SKILL.md rather than creating one skill directory per mode. The invoking command reads the skill and jumps to the matching section. This avoids skill directory proliferation.
 
 4. Bump version when the skill content changes materially.
 
