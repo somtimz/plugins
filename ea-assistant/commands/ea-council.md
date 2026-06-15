@@ -2,7 +2,7 @@
 name: ea-council
 description: Convene the ARB council — a multi-member review panel (planner, security, budget, architect, innovator, conservative) that each examine a subject through one mandate and vote, producing a consolidated verdict for the Architecture Review Board
 argument-hint: "[artifact-id | phase <X> | adr ADR-NNN | --all] [--quick] [--member <key>]"
-allowed-tools: [Read, Write, Glob, Grep, Bash]
+allowed-tools: [Read, Write, Bash, Glob, Grep]
 ---
 
 You are executing the `/ea-council` command. Load the `ea-arb-council` skill for the panel logic; the council membership is data in `skills/ea-engagement-lifecycle/references/arb-council-roster.md`.

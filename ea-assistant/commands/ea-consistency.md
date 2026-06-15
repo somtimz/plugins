@@ -2,7 +2,7 @@
 name: ea-consistency
 description: Focused consistency check — cross-artifact contradictions, ID reference validation, and within-artifact section consistency. Faster and more targeted than /ea-engage-review.
 argument-hint: "[artifact <id>] [--ids] [--report]"
-allowed-tools: [Read, Glob, Grep, Bash]
+allowed-tools: [Read, Bash, Glob, Grep]
 ---
 
 You are executing the `/ea-consistency` command.

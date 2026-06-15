@@ -111,6 +111,8 @@ links: []              # named refs: [{label: "Context Diagram", path: "../../di
 
 Plugin templates are organised by ADM phase: `templates/{preliminary,phase-a,…,phase-h,requirements}/` mirror the engagement `artifacts/` layout, multi-phase and `phase: All` templates live in `templates/cross-cutting/` (governed by their `admPhases` tag), and `templates/seeds/` holds engagement scaffolding. Look templates up by globbing recursively (`templates/**/*.md`); the source subfolder is organisational only — an artifact's storage folder is derived from the template's `phase:` value. Every template's `taxonomy:` block carries `admPhases` and an optional best-effort `zachmanCell` (cell vocabulary: `skills/zachman-framework/references/zachman-cell-descriptions.md`).
 
+**Placeholder convention:** All template placeholders use `{{lower_snake_case}}`. Date fields use `{{YYYY-MM-DD}}`. Do not embed inline defaults inside placeholders (no `{{x or "y"}}` patterns) — defaults belong in the command that populates the template, not the template itself. The `{{audience_or_All}}` and `{{applied_filters}}` patterns in generated registers are the canonical form for optional fields (suffix `_or_All` signals "omit filter row if empty").
+
 ---
 
 ## Advanced Practitioner References

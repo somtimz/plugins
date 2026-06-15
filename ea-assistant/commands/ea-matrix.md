@@ -2,7 +2,7 @@
 name: ea-matrix
 description: Manage TOGAF relationship matrices — create, list, show, edit, and check grid artifacts (Actor/Role, Application/Data CRUD, Capability/Application, System/Technology, and 10 more) per ADM phase, with axis seeding from existing artifacts
 argument-hint: "[list|new|show|edit|check] [key]"
-allowed-tools: [Read, Write, Glob, Grep, Bash]
+allowed-tools: [Read, Write, Bash, Glob, Grep]
 ---
 
 # /ea-matrix — TOGAF Relationship Matrices

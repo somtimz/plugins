@@ -2,7 +2,7 @@
 name: ea-adrs
 description: Create, manage, and track Architecture Decision Records (ADRs) — generate the ADR Register, create new ADRs, update ADR status, and surface ADR summaries across artifacts
 argument-hint: "[generate | status | new | update ADR-NNN <field> <value>] [--status <status>] [--domain <domain>] [--phase <phase>] [--owner <owner>]"
-allowed-tools: [Read, Write, Glob, Bash]
+allowed-tools: [Read, Write, Bash, Glob]
 ---
 
 You are executing the `/ea-adrs` command. Load the `ea-engagement-lifecycle` skill and the `ea-artifact-templates` skill for context.

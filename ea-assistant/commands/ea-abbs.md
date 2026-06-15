@@ -2,7 +2,7 @@
 name: ea-abbs
 description: Generate or view the Architecture Building Block (ABB) Register. Scan all artifacts for ABB-NNN entries, aggregate them into a consolidated register, and surface orphan or unlinked ABBs.
 argument-hint: "[generate | status | new | update ABB-NNN <field> <value>] [--domain Business|Data|Application|Technology] [--phase C|D] [--req REQ-NNN]"
-allowed-tools: [Read, Write, Glob, Grep, Bash]
+allowed-tools: [Read, Write, Bash, Glob, Grep]
 ---
 
 You are executing the `/ea-abbs` command.

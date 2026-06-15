@@ -2,7 +2,7 @@
 name: ea-lens
 description: Apply an opinionated practitioner lens to the full engagement — cuts through completeness theatre to identify what actually matters, where real risk lies, and what a seasoned architect would do differently
 argument-hint: "[architect] [--quick]"
-allowed-tools: [Read, Write, Glob, Grep, Bash]
+allowed-tools: [Read, Write, Bash, Glob, Grep]
 ---
 
 You are executing the `/ea-lens` command. Load the `ea-architect-lens` skill for the lens logic.

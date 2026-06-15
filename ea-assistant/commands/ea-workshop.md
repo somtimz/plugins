@@ -2,7 +2,7 @@
 name: ea-workshop
 description: Facilitate a multi-stakeholder architecture workshop — structured agenda, group capture, and outcome tracking
 argument-hint: "[start [artifact <name>|phase <phase>|topic <text>] | resume <WS-NNN> | export <WS-NNN> | list]"
-allowed-tools: [Read, Write, Glob, Bash]
+allowed-tools: [Read, Write, Bash, Glob]
 ---
 
 Facilitate a multi-stakeholder architecture workshop with structured agenda, outcome capture, and integration with the EA decision and concerns registers.

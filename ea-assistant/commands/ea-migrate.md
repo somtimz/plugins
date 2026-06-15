@@ -2,7 +2,7 @@
 name: ea-migrate
 description: Detect and resolve alignment gaps between an EA engagement and the current ea-assistant version — missing taxonomy, appendices, new artifacts, engagement.json schema fields, template body sections/guidance the artifact predates, section ordering, and heuristically-detected misplaced content (moved within or across documents). Body sections/reorder/content-moves are confirmed per item, snapshotted, and excluded from --auto. Always asks permission before making any change.
 argument-hint: "[--report] [--auto]"
-allowed-tools: [Read, Write, Glob, Bash]
+allowed-tools: [Read, Write, Bash, Glob]
 ---
 
 You are executing the `/ea-migrate` command. Load the `ea-engagement-lifecycle` skill and the `ea-artifact-templates` skill for context.

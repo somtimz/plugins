@@ -2,7 +2,7 @@
 name: ea-notes
 description: List, view, edit, delete, or resolve notes for the active engagement
 argument-hint: "[list [phase] | view <path> | edit <path> | delete <path>]"
-allowed-tools: [Read, Write, Glob, Bash]
+allowed-tools: [Read, Write, Bash, Glob]
 ---
 
 Browse, view, edit, or delete notes for the active EA engagement.

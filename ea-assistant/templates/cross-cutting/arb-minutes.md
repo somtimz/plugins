@@ -156,7 +156,7 @@ links: []
 
 ## Next Meeting
 
-**Proposed date:** {{YYYY-MM-DD or "TBD"}}
+**Proposed date:** {{next_meeting_date}}
 
 **Proposed agenda items:**
 - {{next_agenda_item}}

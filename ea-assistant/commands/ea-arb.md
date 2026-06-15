@@ -2,7 +2,7 @@
 name: ea-arb
 description: Create, manage, and view Architecture Review Board meeting minutes — link decisions to the ADR register and concerns register
 argument-hint: "[new | council [ARB-NNN] | list | view <ARB-NNN> | close <ARB-NNN>]"
-allowed-tools: [Read, Write, Glob, Grep, Bash]
+allowed-tools: [Read, Write, Bash, Glob, Grep]
 ---
 
 Manage Architecture Review Board (ARB) meeting minutes for the active engagement.

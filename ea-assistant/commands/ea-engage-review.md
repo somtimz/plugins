@@ -2,7 +2,7 @@
 name: ea-engage-review
 description: Comprehensive review, alignment check, and synchronization of an entire EA engagement — cross-artifact consistency, motivation chain traceability, open decisions/risks/concerns, and grill-me on key artifacts
 argument-hint: "[--quick] [--grill <artifact-name>] [--sync]"
-allowed-tools: [Read, Write, Glob, Grep, Bash]
+allowed-tools: [Read, Write, Bash, Glob, Grep]
 ---
 
 You are executing the `/ea-engage-review` command. Load the `ea-engagement-lifecycle` skill and the `ea-artifact-templates` skill for context.

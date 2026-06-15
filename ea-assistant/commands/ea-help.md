@@ -95,69 +95,69 @@ You have existing engagements. Common next steps:
 ```
 ### All Commands
 
-| Command | Description |
-|---|---|
-| `/ea-new` | Create a new engagement |
-| `/ea-open` | Open, edit, archive, or delete an engagement |
-| `/ea-status` | Portfolio dashboard — progress, artifacts, phases, opt-outs; `--next` for next action; `--direction` for Direction Register |
-| `/ea-phase [phase]` | Start, edit, or resume an ADM phase |
-| `/ea-artifact [action]` | Create, list, or view artifacts; `summary [refresh\|status]` for executive summary management |
-| `/ea-interview [mode]` | Stakeholder interviews (artifact or phase mode) |
-| `/ea-brainstorm [phase]` | Capture freeform thoughts and context for use during interviews |
-| `/ea-generate [artifact] [format]` | Export artifact as Word, PPTX, Mermaid, PNG, or SVG; embeds diagrams in docx/pptx by default; `--matrices` embeds the artifact's linked relationship matrices |
-| `/ea-review [artifact]` | Review and assess an artifact |
-| `/ea-grill [artifact] [--skill]` | Deep-review an artifact using a grill-me skill; then optionally apply findings back to the artifact one revision at a time |
-| `/ea-score [artifact\|--all\|--status]` | Score artifacts on Completeness + Quality (0–100 + band), per section and overall; writes an author-only 📊 Scorecard block into each artifact; `--all` scores the whole engagement, `--status` shows last scores |
-| `/ea-requirements [action]` | Manage architecture requirements |
-| `/ea-constraints [action]` | Manage architecture constraints — capture, trace, and assess impact on solution space |
-| `/ea-policies [mode]` | Manage architecture policies — capture governance documents, trace to constraints, and assess policy impact |
-| `/ea-drivers [mode]` | Business Driver Register — list, add, update, trace DRV→G→OBJ→STR→WP chain, or generate register |
-| `/ea-goals [mode]` | Goals Register — list, add, update, trace G→OBJ→STR→WP chain, or generate register; Domain + Type classification |
-| `/ea-objectives [mode]` | Objectives Register — list, add, update, trace OBJ→G/PRB/MET/WP chain, or generate register; measurability checks (measure, target, deadline) |
-| `/ea-strategies [mode]` | Strategy Register — list, add, update, trace the Goals→Strategies→Work Packages map, or generate register; Type (Build/Buy/Partner/Consolidate/Modernise/Defend) + Horizon classification; `trace` renders the Strategy Map |
-| `/ea-capabilities [list\|add\|update\|map\|score\|adopt]` | Manage business capabilities (CAP-NNN) in the Business Architecture capability model — create/edit the hierarchy, render the capability map, score Completeness + Quality, or adopt from the Architecture Repository's canonical capability map; each capability states the value/outcome it brings |
-| `/ea-target [new\|view\|update]` | Target State Declaration — capture per-domain target states, success criteria, and traceability to goals and objectives |
-| `/ea-actions [generate\|view\|update\|status]` | Stakeholder Action Plan — consolidated per-approver action view seeded from SAoW and Target State Declaration; suitable for governance forums and ARB |
-| `/ea-finance [list\|add\|update\|trace\|generate]` | Cost Model Register — manage FIN-NNN Cost Entries (capex/opex/TCO/payback with confidence), trace to work packages/ADRs/goals, generate register and roll up the roadmap budget |
-| `/ea-issues [mode]` | Issues Register — list, add, update, trace ISS→G→GAP chain, or generate register; Domain (incl. Engagement) + Type classification |
-| `/ea-problems [mode]` | Problems Register — list, add, update, trace PRB→OBJ→REQ chain, or generate register; Domain (incl. Engagement) + Type classification |
-| `/ea-scenarios [mode]` | Business Scenario Register — list, create, interview, trace, and generate Phase A scenario artifacts (BS-NNN) |
-| `/ea-repo [init\|link\|status\|open]` | Architecture Repository — initialize EA-Workspace, link engagements to the shared repo, view status |
-| `/ea-vendors [list\|add\|update\|link-sbb\|archive]` | Vendor Landscape Register — manage VDR-NNN org-wide vendor assessments with roadmap and lock-in tracking |
-| `/ea-horizon [list\|add\|update\|surface\|link-adr]` | Technology Horizon Register — manage THR-NNN technology radar with Adopt/Trial/Assess/Hold ring model |
-| `/ea-standards [list\|add\|link-constraint\|surface]` | Standards Information Base — manage STD-NNN industry/regulatory standards with adoption status |
-| `/ea-refarch [new\|list\|show\|edit\|adopt\|unadopt\|status]` | Reference Architecture Register — manage RA-NNN patterns with ABB/SBB layer catalogues, key decisions, and grill checklist integration |
-| `/ea-matrix [list\|new\|show\|edit\|check] [key]` | TOGAF relationship matrices — 16 grid artifacts (Actor/Role, App/Data CRUD, Capability/Application, Goal/Service, Data Entity/Component, System/Technology…) with axis seeding and catalogue-driven checks |
-| `/ea-gaps [mode]` | Architecture Gap Register — list, add, promote raw gaps to GAP-NNN, update, trace to work packages, or generate register |
-| `/ea-principles [mode]` | Architecture Principles Register — list, add, update, or trace BP/DP/AP/TP-NNN principle entries; `trace` detects ADR and constraint violations |
-| `/ea-abbs [mode]` | Architecture Building Block Register — generate, view, create, or update ABB-NNN entries |
-| `/ea-sbbs [mode]` | Solution Building Block Register — generate, view, create, or update SBB-NNN entries |
-| `/ea-stories [mode]` | User Story Register — generate, view, create, or update STY-NNN entries |
-| `/ea-trace [--gaps]` | Interactive traceability views — motivation chain from drivers to work packages; `--gaps` for consolidated gap report only |
-| `/ea-decisions [options]` | Generate Decision Register from all A3 decision logs |
-| `/ea-adrs [mode]` | Manage Architecture Decision Records (generate, new, update) |
-| `/ea-risks [mode]` | Generate and maintain a cross-cutting Risk Register |
-| `/ea-changes [mode]` | Generate Change Register for Phase H ACR artifacts |
-| `/ea-concerns` | Manage CON-NNN stakeholder concerns (Appendix A4) |
-| `/ea-roles [ROLE-ID\|--domain\|--generate\|--update]` | Role Catalogue — list, filter, and generate role assignments with RACI, triggers, and calendar |
-| `/ea-zachman [mode]` | Manage the Zachman 6×6 classification diagram (generate, review, gap, interview, audit, classify) |
-| `/ea-research [mode]` | Research library — add, note, link, list, view, apply findings to artifacts |
-| `/ea-notes [mode]` | List, view, edit, or delete interview notes, brainstorm notes, and review files |
-| `/ea-note [text] [--artifact <id>] \| resolve <path>` | Quick-capture an ad-hoc note with lifecycle (Open/Resolved) — inline annotation or linked note; `resolve` records resolution with rationale and impact |
-| `/ea-detail new\|view\|list\|sync\|link\|check\|note resolve\|index` | Create, view, list, sync, cross-link, or integrity-check item detail files; generate index; add and resolve inline notes |
-| `/ea-consistency [options]` | Focused consistency check — cross-artifact contradictions, within-artifact section inconsistencies, or ID reference scan only (`--ids`); `--details` validates detail file link integrity and A4 sync |
-| `/ea-lens [--quick]` | Seasoned architect engagement review — eight practitioner lenses focused on what matters vs. completeness theatre |
-| `/ea-council [artifact\|phase X\|adr ADR-NNN\|--all] [--quick]` | Convene the ARB council — a multi-member panel (planner, security, budget, architect, innovator, conservative) that each examine a subject and vote, producing a consolidated verdict; `/ea-arb council` records it into the minutes |
-| `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman |
-| `/ea-security-review` | Security audit — SABSA, ISO 27001, and NIST CSF 2.0 coverage across the engagement or a single artifact |
-| `/ea-migrate [--report\|--reorganize]` | Align legacy engagement to current plugin version conventions; backfills template body sections/guidance (3i), reorders sections to template order (3j), and proposes user-confirmed moves of misplaced content within/across documents (3k) — body changes are snapshotted, confirmed per item, excluded from `--auto`; `--reorganize` moves flat-path artifacts into correct phase subfolders |
-| `/ea-publish [--full\|--executive]` | Layered stakeholder report (default), full consolidated document (`--full`), or executive pack; `--matrices` inlines linked relationship matrices; writes `artifacts/index.md` reading guide |
-| `/ea-git [init\|status\|commit\|push\|sync\|log\|remote]` | Manage EA-projects/ as a git repository — init, commit, push to GitHub |
-| `/ea-brief [--focus decisions\|risks\|gaps\|strategy] [--save]` | Synthesized one-page engagement brief — ranked decisions, gaps, risks, open concerns |
-| `/ea-workshop [start\|resume\|export\|list]` | Facilitated multi-stakeholder workshops — WS-NNN minutes, agenda, decisions, actions |
-| `/ea-arb [new\|council\|list\|view\|close]` | ARB meeting minutes — ARB-NNN, quorum, decisions, propagate to ADR register; `council` convenes the review panel and records its votes |
-| `/ea-config [section]` | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md |
-| `/ea-help` | This guide |
+| Command | Description | Agent |
+|---|---|---|
+| `/ea-new` | Create a new engagement | — |
+| `/ea-open` | Open, edit, archive, or delete an engagement | — |
+| `/ea-status` | Portfolio dashboard — progress, artifacts, phases, opt-outs; `--next` for next action; `--direction` for Direction Register | — |
+| `/ea-phase [phase]` | Start, edit, or resume an ADM phase | ea-facilitator |
+| `/ea-artifact [action]` | Create, list, or view artifacts; `summary [refresh\|status]` for executive summary management | — |
+| `/ea-interview [mode]` | Stakeholder interviews (artifact or phase mode) | ea-interviewer |
+| `/ea-brainstorm [phase]` | Capture freeform thoughts and context for use during interviews | — |
+| `/ea-generate [artifact] [format]` | Export artifact as Word, PPTX, Mermaid, PNG, or SVG; embeds diagrams in docx/pptx by default; `--matrices` embeds the artifact's linked relationship matrices | — |
+| `/ea-review [artifact]` | Review and assess an artifact | — |
+| `/ea-grill [artifact] [--skill]` | Deep-review an artifact using a grill-me skill; then optionally apply findings back to the artifact one revision at a time | — |
+| `/ea-score [artifact\|--all\|--status]` | Score artifacts on Completeness + Quality (0–100 + band), per section and overall; writes an author-only 📊 Scorecard block into each artifact; `--all` scores the whole engagement, `--status` shows last scores | — |
+| `/ea-requirements [action]` | Manage architecture requirements | — |
+| `/ea-constraints [action]` | Manage architecture constraints — capture, trace, and assess impact on solution space | — |
+| `/ea-policies [mode]` | Manage architecture policies — capture governance documents, trace to constraints, and assess policy impact | — |
+| `/ea-drivers [mode]` | Business Driver Register — list, add, update, trace DRV→G→OBJ→STR→WP chain, or generate register | — |
+| `/ea-goals [mode]` | Goals Register — list, add, update, trace G→OBJ→STR→WP chain, or generate register; Domain + Type classification | — |
+| `/ea-objectives [mode]` | Objectives Register — list, add, update, trace OBJ→G/PRB/MET/WP chain, or generate register; measurability checks (measure, target, deadline) | — |
+| `/ea-strategies [mode]` | Strategy Register — list, add, update, trace the Goals→Strategies→Work Packages map, or generate register; Type (Build/Buy/Partner/Consolidate/Modernise/Defend) + Horizon classification; `trace` renders the Strategy Map | — |
+| `/ea-capabilities [list\|add\|update\|map\|score\|adopt]` | Manage business capabilities (CAP-NNN) in the Business Architecture capability model — create/edit the hierarchy, render the capability map, score Completeness + Quality, or adopt from the Architecture Repository's canonical capability map; each capability states the value/outcome it brings | — |
+| `/ea-target [new\|view\|update]` | Target State Declaration — capture per-domain target states, success criteria, and traceability to goals and objectives | — |
+| `/ea-actions [generate\|view\|update\|status]` | Stakeholder Action Plan — consolidated per-approver action view seeded from SAoW and Target State Declaration; suitable for governance forums and ARB | — |
+| `/ea-finance [list\|add\|update\|trace\|generate]` | Cost Model Register — manage FIN-NNN Cost Entries (capex/opex/TCO/payback with confidence), trace to work packages/ADRs/goals, generate register and roll up the roadmap budget | — |
+| `/ea-issues [mode]` | Issues Register — list, add, update, trace ISS→G→GAP chain, or generate register; Domain (incl. Engagement) + Type classification | — |
+| `/ea-problems [mode]` | Problems Register — list, add, update, trace PRB→OBJ→REQ chain, or generate register; Domain (incl. Engagement) + Type classification | — |
+| `/ea-scenarios [mode]` | Business Scenario Register — list, create, interview, trace, and generate Phase A scenario artifacts (BS-NNN) | — |
+| `/ea-repo [init\|link\|status\|open]` | Architecture Repository — initialize EA-Workspace, link engagements to the shared repo, view status | — |
+| `/ea-vendors [list\|add\|update\|link-sbb\|archive]` | Vendor Landscape Register — manage VDR-NNN org-wide vendor assessments with roadmap and lock-in tracking | — |
+| `/ea-horizon [list\|add\|update\|surface\|link-adr]` | Technology Horizon Register — manage THR-NNN technology radar with Adopt/Trial/Assess/Hold ring model | — |
+| `/ea-standards [list\|add\|link-constraint\|surface]` | Standards Information Base — manage STD-NNN industry/regulatory standards with adoption status | — |
+| `/ea-refarch [new\|list\|show\|edit\|adopt\|unadopt\|status]` | Reference Architecture Register — manage RA-NNN patterns with ABB/SBB layer catalogues, key decisions, and grill checklist integration | — |
+| `/ea-matrix [list\|new\|show\|edit\|check] [key]` | TOGAF relationship matrices — 16 grid artifacts (Actor/Role, App/Data CRUD, Capability/Application, Goal/Service, Data Entity/Component, System/Technology…) with axis seeding and catalogue-driven checks | — |
+| `/ea-gaps [mode]` | Architecture Gap Register — list, add, promote raw gaps to GAP-NNN, update, trace to work packages, or generate register | — |
+| `/ea-principles [mode]` | Architecture Principles Register — list, add, update, or trace BP/DP/AP/TP-NNN principle entries; `trace` detects ADR and constraint violations | — |
+| `/ea-abbs [mode]` | Architecture Building Block Register — generate, view, create, or update ABB-NNN entries | — |
+| `/ea-sbbs [mode]` | Solution Building Block Register — generate, view, create, or update SBB-NNN entries | — |
+| `/ea-stories [mode]` | User Story Register — generate, view, create, or update STY-NNN entries | — |
+| `/ea-trace [--gaps]` | Interactive traceability views — motivation chain from drivers to work packages; `--gaps` for consolidated gap report only | — |
+| `/ea-decisions [options]` | Generate Decision Register from all A3 decision logs | — |
+| `/ea-adrs [mode]` | Manage Architecture Decision Records (generate, new, update) | — |
+| `/ea-risks [mode]` | Generate and maintain a cross-cutting Risk Register | — |
+| `/ea-changes [mode]` | Generate Change Register for Phase H ACR artifacts | — |
+| `/ea-concerns` | Manage CON-NNN stakeholder concerns (Appendix A4) | — |
+| `/ea-roles [ROLE-ID\|--domain\|--generate\|--update]` | Role Catalogue — list, filter, and generate role assignments with RACI, triggers, and calendar | — |
+| `/ea-zachman [mode]` | Manage the Zachman 6×6 classification diagram (generate, review, gap, interview, audit, classify) | — |
+| `/ea-research [mode]` | Research library — add, note, link, list, view, apply findings to artifacts | ea-research |
+| `/ea-notes [mode]` | List, view, edit, or delete interview notes, brainstorm notes, and review files | — |
+| `/ea-note [text] [--artifact <id>] \| resolve <path>` | Quick-capture an ad-hoc note with lifecycle (Open/Resolved) — inline annotation or linked note; `resolve` records resolution with rationale and impact | — |
+| `/ea-detail new\|view\|list\|sync\|link\|check\|note resolve\|index` | Create, view, list, sync, cross-link, or integrity-check item detail files; generate index; add and resolve inline notes | — |
+| `/ea-consistency [options]` | Focused consistency check — cross-artifact contradictions, within-artifact section inconsistencies, or ID reference scan only (`--ids`); `--details` validates detail file link integrity and A4 sync | ea-consistency-checker |
+| `/ea-lens [--quick]` | Seasoned architect engagement review — eight practitioner lenses focused on what matters vs. completeness theatre | — |
+| `/ea-council [artifact\|phase X\|adr ADR-NNN\|--all] [--quick]` | Convene the ARB council — a multi-member panel (planner, security, budget, architect, innovator, conservative) that each examine a subject and vote, producing a consolidated verdict; `/ea-arb council` records it into the minutes | — |
+| `/ea-engage-review` | Full engagement health check — coverage, traceability, governance, ADR status, Zachman | — |
+| `/ea-security-review` | Security audit — SABSA, ISO 27001, and NIST CSF 2.0 coverage across the engagement or a single artifact | ea-security-auditor |
+| `/ea-migrate [--report\|--reorganize]` | Align legacy engagement to current plugin version conventions; backfills template body sections/guidance (3i), reorders sections to template order (3j), and proposes user-confirmed moves of misplaced content within/across documents (3k) — body changes are snapshotted, confirmed per item, excluded from `--auto`; `--reorganize` moves flat-path artifacts into correct phase subfolders | — |
+| `/ea-publish [--full\|--executive]` | Layered stakeholder report (default), full consolidated document (`--full`), or executive pack; `--matrices` inlines linked relationship matrices; writes `artifacts/index.md` reading guide | — |
+| `/ea-git [init\|status\|commit\|push\|sync\|log\|remote]` | Manage EA-projects/ as a git repository — init, commit, push to GitHub | — |
+| `/ea-brief [--focus decisions\|risks\|gaps\|strategy] [--save]` | Synthesized one-page engagement brief — ranked decisions, gaps, risks, open concerns | — |
+| `/ea-workshop [start\|resume\|export\|list]` | Facilitated multi-stakeholder workshops — WS-NNN minutes, agenda, decisions, actions | ea-facilitator |
+| `/ea-arb [new\|council\|list\|view\|close]` | ARB meeting minutes — ARB-NNN, quorum, decisions, propagate to ADR register; `council` convenes the review panel and records its votes | — |
+| `/ea-config [section]` | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md | — |
+| `/ea-help` | This guide | — |
 
 ### Which Review Command?
 
