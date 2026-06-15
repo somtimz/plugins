@@ -16,9 +16,7 @@ For triaging an ACR — classification (Simplification / Incremental / Re-archit
 
 ## Step 1 — Resolve Active Engagement
 
-1. Check the conversation context for an active engagement slug.
-2. If none found, scan `EA-projects/*/engagement.json` (excluding `.archive/`) and ask the user to select one.
-3. Load `engagement.json` to confirm the slug and engagement name.
+> Resolve the active engagement per `skills/ea-engagement-lifecycle/references/engagement-resolution.md`.
 
 ---
 

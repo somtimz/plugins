@@ -11,8 +11,7 @@ You are executing the `/ea-score` command. Load the `ea-grill-skills` skill (the
 
 ## Step 1 — Resolve Active Engagement
 
-1. Check conversation context for an active engagement slug. If none, scan `EA-projects/*/engagement.json` (excluding `.archive/`) and ask the user to select one.
-2. Load `engagement.json` — name, slug, `artifacts[]`.
+> Resolve the active engagement per `skills/ea-engagement-lifecycle/references/engagement-resolution.md`.
 
 ## Step 2 — Parse Arguments
 

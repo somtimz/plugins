@@ -26,7 +26,7 @@ Runs a focused consistency check on the active engagement. Unlike `/ea-engage-re
 
 ## Step 1 — Resolve Active Engagement
 
-Check context for active slug. If none, scan `EA-projects/*/engagement.json` and ask the user to select. Load `engagement.json` and extract `name` and `slug`.
+> Resolve the active engagement per `skills/ea-engagement-lifecycle/references/engagement-resolution.md`.
 
 ---
 

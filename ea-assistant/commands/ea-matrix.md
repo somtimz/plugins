@@ -16,9 +16,8 @@ The catalogue is the single source of truth for axes, seed sources, marker vocab
 ## Resolve context
 
 Before executing any mode:
-1. Resolve the active engagement: check context for slug; if none, scan `EA-projects/*/engagement.json` and ask the user to select. If no engagement exists, error: "No engagement is active. Run `/ea-open` or `/ea-new` first."
-2. Load `engagement.json` — extract `slug`, `currentPhase`.
-3. Read the catalogue: `skills/ea-artifact-templates/references/matrix-catalogue.md`.
+1. Resolve the active engagement per `skills/ea-engagement-lifecycle/references/engagement-resolution.md`. If no engagement exists, error: "No engagement is active. Run `/ea-open` or `/ea-new` first."
+2. Read the catalogue: `skills/ea-artifact-templates/references/matrix-catalogue.md`.
 4. If a `key` argument was given, look it up in the catalogue:
    - Unknown key → error listing the 14 valid keys.
    - Managed-elsewhere entry (Stakeholder Map, Requirements Traceability, Work Package/Gap, Requirement/Work Package) → print its **Managed by:** pointer and stop.

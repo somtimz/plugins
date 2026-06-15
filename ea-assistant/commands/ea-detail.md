@@ -15,9 +15,7 @@ Detail files are optional companion documents for table rows in EA artifacts. Th
 
 ## Instructions
 
-If no engagement is active in context, prompt the user to run `/ea-open` first.
-
-Read `engagement.json` to get the engagement `slug` and `name`.
+Resolve the active engagement per `skills/ea-engagement-lifecycle/references/engagement-resolution.md`.
 
 ---
 

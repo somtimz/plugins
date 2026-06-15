@@ -27,9 +27,7 @@ You are executing the `/ea-adrs` command. Load the `ea-engagement-lifecycle` ski
 
 ## Step 1 — Resolve Active Engagement
 
-1. Check the conversation context for an active engagement slug.
-2. If none found, scan `EA-projects/*/engagement.json` and ask the user to select one.
-3. Load `engagement.json` — extract: name, slug, currentPhase, artifacts.
+> Resolve the active engagement per `skills/ea-engagement-lifecycle/references/engagement-resolution.md`.
 
 ---
 
