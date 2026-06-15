@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram name="Business Model Canvas">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="2" value="Business Model Canvas" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=20;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="10" y="0" width="1090" height="35" as="geometry" />
+        </mxCell>
+
+        <!-- Key Partners (col 1, spans both rows) -->
+        <mxCell id="3" value="Key Partners" style="swimlane;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="10" y="45" width="210" height="385" as="geometry" />
+        </mxCell>
+        <mxCell id="4" value="&lt;i&gt;Who are our key partners and suppliers?&lt;/i&gt;&lt;br/&gt;&lt;br/&gt;&#x2022; Strategic alliances&lt;br/&gt;&#x2022; Joint ventures&lt;br/&gt;&#x2022; Buyer-supplier relationships&lt;br/&gt;&#x2022; Key resource acquirers&lt;br/&gt;&#x2022; Key activity performers" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacingLeft=6;spacingTop=6;fontSize=10;" vertex="1" parent="3">
+          <mxGeometry x="0" y="30" width="210" height="355" as="geometry" />
+        </mxCell>
+
+        <!-- Key Activities (col 2, top row) -->
+        <mxCell id="5" value="Key Activities" style="swimlane;startSize=30;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="230" y="45" width="210" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="6" value="&lt;i&gt;What key activities does our value proposition require?&lt;/i&gt;&lt;br/&gt;&lt;br/&gt;&#x2022; Production&lt;br/&gt;&#x2022; Problem solving&lt;br/&gt;&#x2022; Platform / network" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacingLeft=6;spacingTop=6;fontSize=10;" vertex="1" parent="5">
+          <mxGeometry x="0" y="30" width="210" height="160" as="geometry" />
+        </mxCell>
+
+        <!-- Key Resources (col 2, bottom row) -->
+        <mxCell id="7" value="Key Resources" style="swimlane;startSize=30;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="230" y="245" width="210" height="185" as="geometry" />
+        </mxCell>
+        <mxCell id="8" value="&lt;i&gt;What key resources does our value proposition require?&lt;/i&gt;&lt;br/&gt;&lt;br/&gt;&#x2022; Physical&lt;br/&gt;&#x2022; Intellectual&lt;br/&gt;&#x2022; Human&lt;br/&gt;&#x2022; Financial" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacingLeft=6;spacingTop=6;fontSize=10;" vertex="1" parent="7">
+          <mxGeometry x="0" y="30" width="210" height="155" as="geometry" />
+        </mxCell>
+
+        <!-- Value Propositions (col 3, spans both rows) -->
+        <mxCell id="9" value="Value Propositions" style="swimlane;startSize=30;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="450" y="45" width="210" height="385" as="geometry" />
+        </mxCell>
+        <mxCell id="10" value="&lt;i&gt;What value do we deliver to the customer?&lt;/i&gt;&lt;br/&gt;&lt;br/&gt;&#x2022; Newness&lt;br/&gt;&#x2022; Performance&lt;br/&gt;&#x2022; Customisation&lt;br/&gt;&#x2022; Getting the job done&lt;br/&gt;&#x2022; Design&lt;br/&gt;&#x2022; Brand / status&lt;br/&gt;&#x2022; Price&lt;br/&gt;&#x2022; Cost reduction&lt;br/&gt;&#x2022; Risk reduction&lt;br/&gt;&#x2022; Accessibility&lt;br/&gt;&#x2022; Convenience" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacingLeft=6;spacingTop=6;fontSize=10;" vertex="1" parent="9">
+          <mxGeometry x="0" y="30" width="210" height="355" as="geometry" />
+        </mxCell>
+
+        <!-- Customer Relationships (col 4, top row) -->
+        <mxCell id="11" value="Customer Relationships" style="swimlane;startSize=30;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="670" y="45" width="210" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="12" value="&lt;i&gt;What relationship does each segment expect?&lt;/i&gt;&lt;br/&gt;&lt;br/&gt;&#x2022; Personal assistance&lt;br/&gt;&#x2022; Self-service&lt;br/&gt;&#x2022; Automated services&lt;br/&gt;&#x2022; Communities&lt;br/&gt;&#x2022; Co-creation" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacingLeft=6;spacingTop=6;fontSize=10;" vertex="1" parent="11">
+          <mxGeometry x="0" y="30" width="210" height="160" as="geometry" />
+        </mxCell>
+
+        <!-- Channels (col 4, bottom row) -->
+        <mxCell id="13" value="Channels" style="swimlane;startSize=30;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="670" y="245" width="210" height="185" as="geometry" />
+        </mxCell>
+        <mxCell id="14" value="&lt;i&gt;How do we reach our customer segments?&lt;/i&gt;&lt;br/&gt;&lt;br/&gt;&#x2022; Awareness&lt;br/&gt;&#x2022; Evaluation&lt;br/&gt;&#x2022; Purchase&lt;br/&gt;&#x2022; Delivery&lt;br/&gt;&#x2022; After sales" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacingLeft=6;spacingTop=6;fontSize=10;" vertex="1" parent="13">
+          <mxGeometry x="0" y="30" width="210" height="155" as="geometry" />
+        </mxCell>
+
+        <!-- Customer Segments (col 5, spans both rows) -->
+        <mxCell id="15" value="Customer Segments" style="swimlane;startSize=30;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="890" y="45" width="210" height="385" as="geometry" />
+        </mxCell>
+        <mxCell id="16" value="&lt;i&gt;For whom are we creating value?&lt;/i&gt;&lt;br/&gt;&lt;br/&gt;&#x2022; Mass market&lt;br/&gt;&#x2022; Niche market&lt;br/&gt;&#x2022; Segmented&lt;br/&gt;&#x2022; Diversified&lt;br/&gt;&#x2022; Multi-sided platform" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacingLeft=6;spacingTop=6;fontSize=10;" vertex="1" parent="15">
+          <mxGeometry x="0" y="30" width="210" height="355" as="geometry" />
+        </mxCell>
+
+        <!-- Cost Structure (bottom left, cols 1-2) -->
+        <mxCell id="17" value="Cost Structure" style="swimlane;startSize=30;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="10" y="440" width="430" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="18" value="&lt;i&gt;What are the most important costs in our business model?&lt;/i&gt;&lt;br/&gt;&lt;br/&gt;&#x2022; Cost-driven &amp;nbsp;&#x2022; Value-driven &amp;nbsp;&#x2022; Fixed costs &amp;nbsp;&#x2022; Variable costs&lt;br/&gt;&#x2022; Economies of scale &amp;nbsp;&#x2022; Economies of scope" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacingLeft=6;spacingTop=6;fontSize=10;" vertex="1" parent="17">
+          <mxGeometry x="0" y="30" width="430" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Revenue Streams (bottom right, cols 3-5) -->
+        <mxCell id="19" value="Revenue Streams" style="swimlane;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="450" y="440" width="650" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="20" value="&lt;i&gt;For what value are our customers willing to pay?&lt;/i&gt;&lt;br/&gt;&lt;br/&gt;&#x2022; Asset sale &amp;nbsp;&#x2022; Usage fee &amp;nbsp;&#x2022; Subscription fees &amp;nbsp;&#x2022; Lending / Renting / Leasing&lt;br/&gt;&#x2022; Licensing &amp;nbsp;&#x2022; Brokerage fees &amp;nbsp;&#x2022; Advertising" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;spacingLeft=6;spacingTop=6;fontSize=10;" vertex="1" parent="19">
+          <mxGeometry x="0" y="30" width="650" height="120" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
