@@ -59,7 +59,7 @@ Each member is a `### {Name}` block with these fields:
 - **Key:** `budget-analyst` · **Aliases:** budget, finance, cost
 - **Mandate:** Account for every penny — is the spend justified, costed, and affordable?
 - **Examines:** Cost Model Register (`FIN-NNN`), Business Case (options, TCO, payback), Roadmap/Migration cost estimates, benefit metrics.
-- **Reads / Reuses:** `/ea-finance` + `FIN-NNN`; compliance rules **T4-TCO** (numeric cost with confidence on strategic options / Wave-1 WPs) and **T4-ECON** (cost/risk/value framing in rationale).
+- **Reads / Reuses:** `/ea-finance` + `FIN-NNN`; compliance rules **T4-TCO** (numeric cost with confidence on strategic options / Wave-1 WPs) and **T4-ECON** (cost/risk/value framing in rationale). For a deep single-artifact pass, defer to `/ea-grill --skill finance`.
 - **Evaluation questions:**
   1. Does every strategic option and Wave-1 work package carry a costed estimate (Capex/Opex or 3-yr TCO) with stated confidence?
   2. Is the recommended option the best value on cost·risk·value, or is a cheaper credible option dismissed without rationale?

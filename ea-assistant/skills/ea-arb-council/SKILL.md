@@ -76,5 +76,6 @@ The roster anchors each member to existing machinery — load these if available
 - `skills/ea-engagement-lifecycle/references/practitioner-tips.md`, `advanced-patterns.md` — Innovator framing.
 - `skills/ea-engagement-lifecycle/references/failure-modes.md` — Conservative pattern-matching.
 - `skills/ea-security/SKILL.md` — Security Analyst protocol (or defer to `/ea-security-review` / the `ea-security-auditor` agent for a deep pass).
+- `skills/ea-grill-skills/SKILL.md` → `## Mode: finance` — Budget Analyst deep single-artifact pass (`/ea-grill --skill finance`).
 
 Compliance rules the members apply (defined in `ea-assistant/CLAUDE.md`): **T4-TCO**, **T4-ECON** (Budget), **T4-OPTION** (Innovator), **T4-PREMAT** (Conservative).
