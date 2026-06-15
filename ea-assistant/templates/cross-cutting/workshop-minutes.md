@@ -53,7 +53,7 @@ links: []
 |---|---|---|---|
 | {{attendee_name}} | {{role}} | {{organisation}} | Y |
 
-**Quorum required:** {{quorum_required — or "Not specified"}}
+**Quorum required:** {{quorum_required}}
 **Quorum met:** {{Yes / No / Not applicable}}
 
 ---
@@ -82,7 +82,7 @@ One subsection per agenda item. Capture the key discussion points, decisions, an
 **Key points raised:**
 - ⚠️ Not answered
 
-**Outputs produced:** {{artifact links or "None"}}
+**Outputs produced:** {{artifact_links}}
 
 ---
 
@@ -130,7 +130,7 @@ One subsection per agenda item. Capture the key discussion points, decisions, an
 
 ## Next Meeting
 
-**Proposed date:** {{YYYY-MM-DD or "TBD"}}
+**Proposed date:** {{next_meeting_date}}
 
 **Proposed agenda items:**
 - {{next_agenda_item}}

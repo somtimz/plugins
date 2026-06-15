@@ -23,7 +23,8 @@ If a legacy capability table lacks the `Value / Outcome` column, add it (insert 
 
 ## Step 1 — Resolve Engagement & Artifact
 
-1. Resolve the active engagement (context, else scan `EA-projects/*/engagement.json`). Load `engagement.json`.
+> Resolve the active engagement per `skills/ea-engagement-lifecycle/references/engagement-resolution.md`.
+
 2. Locate `artifacts/phase-b/business-architecture.md`. If it does not exist: "No Business Architecture yet — run `/ea-artifact create business-architecture` first (the capability model lives in it)." Stop unless mode is `adopt` (which can create it).
 3. Read its `## 3. Capability Model` table.
 

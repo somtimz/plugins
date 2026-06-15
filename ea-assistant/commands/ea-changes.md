@@ -1,7 +1,7 @@
 ---
 name: ea-changes
 description: Generate or view a Change Register by aggregating all Architecture Change Request artifacts in the active engagement. Supports filtering by status, type, domain, risk, owner, and phase.
-allowed-tools: [Read, Write, Glob, Bash]
+allowed-tools: [Read, Write, Bash, Glob]
 ---
 
 You are executing the `/ea-changes` command. Load the `ea-engagement-lifecycle` skill and the `ea-artifact-templates` skill for context.
@@ -16,9 +16,7 @@ For triaging an ACR — classification (Simplification / Incremental / Re-archit
 
 ## Step 1 — Resolve Active Engagement
 
-1. Check the conversation context for an active engagement slug.
-2. If none found, scan `EA-projects/*/engagement.json` (excluding `.archive/`) and ask the user to select one.
-3. Load `engagement.json` to confirm the slug and engagement name.
+> Resolve the active engagement per `skills/ea-engagement-lifecycle/references/engagement-resolution.md`.
 
 ---
 

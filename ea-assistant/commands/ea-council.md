@@ -2,7 +2,7 @@
 name: ea-council
 description: Convene the ARB council — a multi-member review panel (planner, security, budget, architect, innovator, conservative) that each examine a subject through one mandate and vote, producing a consolidated verdict for the Architecture Review Board
 argument-hint: "[artifact-id | phase <X> | adr ADR-NNN | --all] [--quick] [--member <key>]"
-allowed-tools: [Read, Write, Glob, Grep, Bash]
+allowed-tools: [Read, Write, Bash, Glob, Grep]
 ---
 
 You are executing the `/ea-council` command. Load the `ea-arb-council` skill for the panel logic; the council membership is data in `skills/ea-engagement-lifecycle/references/arb-council-roster.md`.
@@ -17,9 +17,7 @@ This command resolves the engagement, scope, and context, runs the skill, presen
 
 ## Step 1 — Resolve Active Engagement
 
-1. Check the conversation context for an active engagement slug.
-2. If none found, scan `EA-projects/*/engagement.json` and ask the user to select one.
-3. Load full `engagement.json` — extract: name, slug, currentPhase, direction (all items), phases, metrics, artifacts list.
+> Resolve the active engagement per `skills/ea-engagement-lifecycle/references/engagement-resolution.md`.
 
 ## Step 2 — Resolve Scope
 

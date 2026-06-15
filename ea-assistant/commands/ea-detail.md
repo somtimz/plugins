@@ -2,7 +2,7 @@
 name: ea-detail
 description: Create, view, or list item detail files — extended narrative, rationale, risks, costs, issues, concerns, impact, and alternatives for individual engagement items
 argument-hint: "new <ID> [artifact-id] | view <ID> | list [phase] [--type] | sync <ID> | link <ID1> <ID2> [rel] | check [ID] | note resolve <ID> | index"
-allowed-tools: [Read, Write, Glob, Bash]
+allowed-tools: [Read, Write, Bash, Glob]
 ---
 
 Create, view, or list detail files for individual engagement items.
@@ -15,9 +15,7 @@ Detail files are optional companion documents for table rows in EA artifacts. Th
 
 ## Instructions
 
-If no engagement is active in context, prompt the user to run `/ea-open` first.
-
-Read `engagement.json` to get the engagement `slug` and `name`.
+Resolve the active engagement per `skills/ea-engagement-lifecycle/references/engagement-resolution.md`.
 
 ---
 

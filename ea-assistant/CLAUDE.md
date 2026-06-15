@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.81 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.82 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -18,7 +18,7 @@ These rules prevent the most common errors. Check them before writing any agent 
 - **Engagement discipline rules** — every project follows the 12 rules in `.claude/rules/ea-engagement.md` (seeded from `templates/seeds/engagement-rules.md`). For the canonical reference with citation guidance, see `skills/ea-engagement-lifecycle/references/engagement-rules-reference.md`
 - **Register snapshot convention** — generated registers use stable, undated filenames (e.g. `risk-register.md`); regeneration archives the prior version to a `snapshots/` subfolder. Rules in `skills/ea-artifact-templates/references/register-snapshot-convention.md`; do not restate inline
 - **No bulk empty stubs** — detail files (`artifacts/details/{ID}.md`) are created on demand only, when the user supplies content; never bulk-create empty stub files
-- **Vision is a strategic index** — the Architecture Vision summarises and links to the dedicated motivation registers (drivers/goals/objectives/strategy/issues/problems) rather than embedding their tables; do not re-add live motivation tables to §2–§6/§8. Those registers are regenerated from `engagement.json → direction` via `/ea-{concept} generate`; `add`/`update` touch only `engagement.json`. Review the Vision together with its linked registers at the Phase A gate
+- **Vision is a strategic index** — the Architecture Vision has two lifecycle states: (1) **Draft** (during Phase A authoring): §2–§6/§8 contain embedded motivation tables populated inline via `/ea-interview`. (2) **Indexed** (at the Phase A gate): `/ea-{concept} generate` externalises those tables into dedicated motivation registers; the Vision's §2–§6/§8 then become summary-and-link sections. Do not re-add live motivation tables after this gate — they live in the dedicated registers and are regenerated from `engagement.json → direction`. Review the Vision together with its linked registers at the Phase A gate
 
 ---
 
@@ -110,6 +110,8 @@ links: []              # named refs: [{label: "Context Diagram", path: "../../di
 ### Template Library Organisation
 
 Plugin templates are organised by ADM phase: `templates/{preliminary,phase-a,…,phase-h,requirements}/` mirror the engagement `artifacts/` layout, multi-phase and `phase: All` templates live in `templates/cross-cutting/` (governed by their `admPhases` tag), and `templates/seeds/` holds engagement scaffolding. Look templates up by globbing recursively (`templates/**/*.md`); the source subfolder is organisational only — an artifact's storage folder is derived from the template's `phase:` value. Every template's `taxonomy:` block carries `admPhases` and an optional best-effort `zachmanCell` (cell vocabulary: `skills/zachman-framework/references/zachman-cell-descriptions.md`).
+
+**Placeholder convention:** All template placeholders use `{{lower_snake_case}}`. Date fields use `{{YYYY-MM-DD}}`. Do not embed inline defaults inside placeholders (no `{{x or "y"}}` patterns) — defaults belong in the command that populates the template, not the template itself. The `{{audience_or_All}}` and `{{applied_filters}}` patterns in generated registers are the canonical form for optional fields (suffix `_or_All` signals "omit filter row if empty").
 
 ---
 

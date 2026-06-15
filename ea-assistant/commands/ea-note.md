@@ -2,7 +2,7 @@
 name: ea-note
 description: Quick-capture a note, concern, or annotation — saved immediately with routing suggestions
 argument-hint: "[text] [--artifact <id>] [--detail <id>] | resolve <path>"
-allowed-tools: [Read, Write, Glob, Bash]
+allowed-tools: [Read, Write, Bash, Glob]
 ---
 
 Quick-capture a note for the active EA engagement, optionally linked to a specific artifact.

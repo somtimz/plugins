@@ -2,7 +2,7 @@
 name: ea-trace
 description: Interactive traceability views across the motivation and implementation chain — Driver → Goal → Strategy → Requirement → Capability → Work Package, and Requirement → ABB → SBB → Story — with gap and contradiction detection
 argument-hint: "[--gaps]"
-allowed-tools: [Read, Write, Glob, Grep, Bash]
+allowed-tools: [Read, Write, Bash, Glob, Grep]
 ---
 
 You are executing the `/ea-trace` command.

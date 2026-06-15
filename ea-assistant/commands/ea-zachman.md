@@ -2,7 +2,7 @@
 name: ea-zachman
 description: Create, populate, review, and audit the Zachman Diagram for an EA engagement — generate from existing artifacts, interview to fill gaps, produce coverage analysis, audit completeness and consistency, and classify any artifact against the 6×6 grid
 argument-hint: "[generate | review | gap | interview | audit | classify <artifact-name>]"
-allowed-tools: [Read, Write, Glob, Bash]
+allowed-tools: [Read, Write, Bash, Glob]
 ---
 
 You are executing the `/ea-zachman` command. Load the `zachman-framework` skill and the `ea-artifact-templates` skill for context.

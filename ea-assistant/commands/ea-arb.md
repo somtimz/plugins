@@ -2,7 +2,7 @@
 name: ea-arb
 description: Create, manage, and view Architecture Review Board meeting minutes — link decisions to the ADR register and concerns register
 argument-hint: "[new | council [ARB-NNN] | list | view <ARB-NNN> | close <ARB-NNN>]"
-allowed-tools: [Read, Write, Glob, Grep, Bash]
+allowed-tools: [Read, Write, Bash, Glob, Grep]
 ---
 
 Manage Architecture Review Board (ARB) meeting minutes for the active engagement.
@@ -11,7 +11,7 @@ Manage Architecture Review Board (ARB) meeting minutes for the active engagement
 
 ## Engagement Resolution
 
-Check conversation context for the active engagement slug. If none found, scan `EA-projects/*/engagement.json` and display a numbered list; ask the user to select one. Load `engagement.json`.
+> Resolve the active engagement per `skills/ea-engagement-lifecycle/references/engagement-resolution.md`.
 
 ## Dispatcher
 

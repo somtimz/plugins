@@ -2,7 +2,7 @@
 name: ea-sbbs
 description: Generate or view the Solution Building Block (SBB) Register. Scan all artifacts for SBB-NNN entries, aggregate them into a consolidated register, and surface vendor-first selections or unlinked SBBs.
 argument-hint: "[generate | status | new | update SBB-NNN <field> <value>] [--vendor <vendor>] [--phase D|E|F] [--abb ABB-NNN]"
-allowed-tools: [Read, Write, Glob, Grep, Bash]
+allowed-tools: [Read, Write, Bash, Glob, Grep]
 ---
 
 You are executing the `/ea-sbbs` command.

@@ -2,7 +2,7 @@
 name: ea-security-review
 description: Security audit for EA artifacts — checks SABSA layer coverage, ISO 27001 control domains, and NIST CSF function coverage. Full engagement audit by default; single artifact with /ea-security-review <artifact-id>; filter by framework with --framework sabsa|iso|nist.
 argument-hint: "[<artifact-id>] [--framework sabsa|iso|nist]"
-allowed-tools: [Read, Write, Glob, Grep, Bash]
+allowed-tools: [Read, Write, Bash, Glob, Grep]
 ---
 
 You are executing the `/ea-security-review` command.

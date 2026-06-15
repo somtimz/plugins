@@ -1,7 +1,7 @@
 ---
 name: ea-architect-lens
 description: This skill should be used when the user asks for an "architect lens", "practitioner review", "seasoned architect review", "engagement health from a practitioner perspective", or invokes /ea-lens. Provides an opinionated engagement-level review from the perspective of a senior EA practitioner focused on what actually matters — not TOGAF compliance theatre.
-version: 0.9.60
+version: 0.9.81
 ---
 
 # EA Architect Lens

@@ -2,7 +2,7 @@
 name: ea-stories
 description: Generate or view the User Story Register. Scan all artifacts for STY-NNN entries, aggregate them into a consolidated register, and surface orphan stories or stories without acceptance criteria.
 argument-hint: "[generate | status | new | update STY-NNN <field> <value>] [--actor <actor>] [--sbb SBB-NNN] [--req REQ-NNN] [--enabler]"
-allowed-tools: [Read, Write, Glob, Grep, Bash]
+allowed-tools: [Read, Write, Bash, Glob, Grep]
 ---
 
 You are executing the `/ea-stories` command.

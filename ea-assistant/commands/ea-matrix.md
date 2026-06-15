@@ -2,7 +2,7 @@
 name: ea-matrix
 description: Manage TOGAF relationship matrices — create, list, show, edit, and check grid artifacts (Actor/Role, Application/Data CRUD, Capability/Application, System/Technology, and 10 more) per ADM phase, with axis seeding from existing artifacts
 argument-hint: "[list|new|show|edit|check] [key]"
-allowed-tools: [Read, Write, Glob, Grep, Bash]
+allowed-tools: [Read, Write, Bash, Glob, Grep]
 ---
 
 # /ea-matrix — TOGAF Relationship Matrices
@@ -16,9 +16,8 @@ The catalogue is the single source of truth for axes, seed sources, marker vocab
 ## Resolve context
 
 Before executing any mode:
-1. Resolve the active engagement: check context for slug; if none, scan `EA-projects/*/engagement.json` and ask the user to select. If no engagement exists, error: "No engagement is active. Run `/ea-open` or `/ea-new` first."
-2. Load `engagement.json` — extract `slug`, `currentPhase`.
-3. Read the catalogue: `skills/ea-artifact-templates/references/matrix-catalogue.md`.
+1. Resolve the active engagement per `skills/ea-engagement-lifecycle/references/engagement-resolution.md`. If no engagement exists, error: "No engagement is active. Run `/ea-open` or `/ea-new` first."
+2. Read the catalogue: `skills/ea-artifact-templates/references/matrix-catalogue.md`.
 4. If a `key` argument was given, look it up in the catalogue:
    - Unknown key → error listing the 14 valid keys.
    - Managed-elsewhere entry (Stakeholder Map, Requirements Traceability, Work Package/Gap, Requirement/Work Package) → print its **Managed by:** pointer and stop.

@@ -2,7 +2,7 @@
 name: ea-grill
 description: Deep-review an EA artifact using a grill-me skill — stress-test, boardroom simulation, pre-mortem, decision critique, or design critique
 argument-hint: "[artifact-name] [--skill stress-test|premortem|decision|design|software-design|infra-design|artifact|diagram|boardroom-strategy] | security <artifact-id> | all [--skill <name>]"
-allowed-tools: [Read, Glob, Bash]
+allowed-tools: [Read, Bash, Glob]
 ---
 
 Deeply review an EA artifact using a grill-me skill.

@@ -1,7 +1,7 @@
 ---
 name: ea-framework-lenses
 description: This skill should be used when the user asks to "apply a framework lens", "review against AWS Well-Architected", "well-architected review", "review against Azure CAF", "cloud adoption framework review", "review against the Google Cloud Architecture Framework", "apply cloud framework", "check pillar coverage", or when /ea-grill --skill waf|caf|gcaf is invoked or a phase interview offers framework lens questions. Provides a pluggable mechanism for reviewing EA artifacts and phases against external prescriptive frameworks.
-version: 0.9.60
+version: 0.9.81
 ---
 
 # EA Framework Lenses

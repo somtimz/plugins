@@ -2,7 +2,7 @@
 name: ea-abbs
 description: Generate or view the Architecture Building Block (ABB) Register. Scan all artifacts for ABB-NNN entries, aggregate them into a consolidated register, and surface orphan or unlinked ABBs.
 argument-hint: "[generate | status | new | update ABB-NNN <field> <value>] [--domain Business|Data|Application|Technology] [--phase C|D] [--req REQ-NNN]"
-allowed-tools: [Read, Write, Glob, Grep, Bash]
+allowed-tools: [Read, Write, Bash, Glob, Grep]
 ---
 
 You are executing the `/ea-abbs` command.
@@ -31,9 +31,7 @@ Architecture Building Blocks (ABBs) are logical, vendor-neutral components defin
 
 ## Step 1 — Resolve Active Engagement
 
-1. Check the conversation context for an active engagement slug.
-2. If none found, scan `EA-projects/*/engagement.json` and ask the user to select one.
-3. Load `engagement.json` — extract: name, slug, currentPhase, artifacts.
+> Resolve the active engagement per `skills/ea-engagement-lifecycle/references/engagement-resolution.md`.
 
 ---
 
