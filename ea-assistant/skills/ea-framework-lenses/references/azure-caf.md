@@ -70,7 +70,7 @@ Continuous security posture across the lifecycle. Principles: risk-driven priori
 ## Interview Questions
 
 ### Phase A
-1. What is driving cloud adoption — cost/datacentre exit, agility, or innovation — and what evidence supports it? → DRV-NNN; Architecture Vision §2
+1. What is driving cloud adoption — cost/datacentre exit, agility, or innovation — and what evidence supports it? → DRV-NNN; Architecture Vision §4
 2. What measurable outcomes will prove adoption succeeded, by when? → OBJ-NNN
 3. Who owns the cloud business case, and does it include skilling and dual-running costs? → Architecture Vision; A3 row
 

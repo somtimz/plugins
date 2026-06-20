@@ -206,7 +206,7 @@ Read `engagement.json → direction` — the single source of truth for directio
 
 Drivers, goals, objectives, strategies, issues, and problems are rendered by their **dedicated registers** (`artifacts/cross-cutting/{concept}-register.md`), regenerated from `engagement.json → direction` via `/ea-{concept} generate`. The Architecture Vision summarises and links to those registers rather than embedding live tables, so for these six concepts there is **no projection that can drift** — the register is overwritten from the source of truth. Set their `Displayed In` to the dedicated register path (or `—` if it has not been generated yet).
 
-Opportunities (Vision §7) and Key Metrics have no dedicated register and remain rendered as Vision tables; any sibling artifact may also embed a direction-ID display table. Detect residual drift in those:
+Opportunities (Vision §9) and Key Metrics have no dedicated register and remain rendered as Vision tables; any sibling artifact may also embed a direction-ID display table. Detect residual drift in those:
 
 1. List all `*.md` files under `EA-projects/{slug}/artifacts/` recursively, excluding `*.review.md` and `*-register*.md` files (the dedicated registers are generated outputs, never drift sources).
 2. In each file, locate **direction-bearing section tables**: a heading containing "Opportunities" (or, in sibling artifacts, "Goals"/"Objectives"/"Strategies"/"Issues"/"Problems") whose next table has first-cell rows matching the corresponding ID pattern (`OPP-\d{3}`, `G-\d{3}`, `OBJ-\d{3}`, `STR-\d{3}`, `ISS-\d{3}`, `PRB-\d{3}`). Skip `{{...}}` placeholder rows and `G-00N`-style template examples. ID tokens appearing elsewhere (e.g. a Roadmap's "Advances Goals/Objectives" column, A3 notes) are cross-references, not display rows — out of scope; broken references are surfaced by `/ea-trace`.
@@ -280,5 +280,5 @@ Load `skills/ea-engagement-lifecycle/references/grill-direction-quality.md`. App
 | All `direction` arrays empty or missing | "No direction items in engagement.json. Capture them via `/ea-interview start phase A` or the register commands (`/ea-goals add`, `/ea-objectives add`, ...)." Still run Step 2b — artifact-only IDs found with an empty register are all drift |
 | No artifacts directory or no `.md` files found | Skip Step 2b; `Displayed In` shows `—` for all items |
 | Artifact tables contain only `{{...}}` placeholders | Treat as empty for drift detection |
-| Same opportunity ID displayed in multiple artifacts | `Displayed In` shows the first occurrence (Architecture Vision §7 takes priority) |
+| Same opportunity ID displayed in multiple artifacts | `Displayed In` shows the first occurrence (Architecture Vision §9 takes priority) |
 | Dedicated register not yet generated | The six register-backed concepts show `Displayed In: —` until `/ea-{concept} generate` is run; this is not drift |

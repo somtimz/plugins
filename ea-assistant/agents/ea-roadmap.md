@@ -101,7 +101,7 @@ Read available source artifacts in this priority order:
 
 | Source | Extract |
 |---|---|
-| Architecture Vision | Goals (G-NNN) with descriptions, Objectives (OBJ-NNN), Strategies (STR-NNN) from §7 Strategic Direction Summary, Issues (ISS-NNN), Problems (PRB-NNN), strategic horizon |
+| Architecture Vision | Goals (G-NNN) with descriptions, Objectives (OBJ-NNN), Strategies (STR-NNN) from §11 Strategic Direction Summary, Issues (ISS-NNN), Problems (PRB-NNN), strategic horizon |
 | Gap Analysis | GAP-NNN IDs, descriptions, severity, affected domain |
 | Requirements Register | REQ-NNN IDs, priority, phase applicability |
 | Business Architecture | Key capability changes, process impacts |

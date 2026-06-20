@@ -141,7 +141,7 @@ artifacts that surface the need for this decision.
 **Related business drivers / goals:** {{linked_drivers_goals}}
 
 **Triggering artifact / section:** {{triggering_artifact}}
-*(e.g. "Architecture Vision §7 STR-002 — Cloud-first strategy requires a cloud platform selection")*
+*(e.g. "Architecture Vision §11 STR-002 — Cloud-first strategy requires a cloud platform selection")*
 
 ---
 

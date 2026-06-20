@@ -93,13 +93,13 @@ Artefacts are listed by ADM phase. Where an artefact spans multiple phases (e.g.
 
 ### Architecture Vision
 
-**Purpose:** Provides a high-level, stakeholder-oriented description of the target architecture and the value it will deliver. It is the primary communication document for executive and business stakeholders, and the **strategic index** for the engagement: §2–§8 summarise the motivation chain and link to the dedicated registers (Drivers/Goals/Objectives/Strategy/Issues/Problems) rather than embedding their full tables. Sign-off reviews the Vision together with its linked registers.
+**Purpose:** Provides a high-level, stakeholder-oriented description of the target architecture and the value it will deliver. It is the primary communication document for executive and business stakeholders, and the **strategic index** for the engagement: §4–§11 summarise the motivation chain and link to the dedicated registers (Drivers/Goals/Objectives/Strategy/Issues/Problems) rather than embedding their full tables. Sign-off reviews the Vision together with its linked registers.
 
 **Audience:** Executive sponsors, programme sponsors, senior business and IT stakeholders.
 
 **Contents:**
 - Executive summary of the problem being solved
-- **Direction summaries (§2–§8)** — concise prose/summary per motivation concept drawn from `engagement.json direction`, each with a **"Full register" link** to its dedicated register ([[drivers-register]], [[goals-register]], [[objectives-register]], [[issues-register]], [[problems-register]], [[strategy-register]]). The Vision does not embed the full item tables — those live in the registers. Opportunities (§7) and Key Metrics (§8) have no dedicated register and keep a lean Vision table.
+- **Direction summaries (§4–§11)** — concise prose/summary per motivation concept drawn from `engagement.json direction`, each with a **"Full register" link** to its dedicated register ([[drivers-register]], [[goals-register]], [[objectives-register]], [[issues-register]], [[problems-register]], [[strategy-register]]). The Vision does not embed the full item tables — those live in the registers. Opportunities (§9) and Key Metrics (within §11) have no dedicated register and keep a lean Vision table.
 - **Metrics Summary** — cross-domain table drawn from `engagement.json metrics`, listing all metrics grouped by type (Outcome / Performance / Activity), showing name, measure, baseline → target, deadline, frequency, source, linked direction ID, and current status. Metrics with no `name` or `measure` are excluded.
 - Business goals and strategic drivers
 - Scope of the architecture engagement

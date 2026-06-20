@@ -108,7 +108,7 @@ Run `/ea-summary refresh` to regenerate this section from current artifact conte
 <summary>📋 Guidance</summary>
 List the major categories of things important to this engagement — the vocabulary of the business domain. Not a data model; just the key subject areas and entities.
 Examples: Customer, Product, Order, Contract, Asset, Employee
-Source: Architecture Vision §3 Goals, Engagement Charter §1 Organisation Background, interviews
+Source: Architecture Vision §5 Goals, Engagement Charter §1 Organisation Background, interviews
 </details>
 
 {{r1c1_content}}
@@ -123,7 +123,7 @@ Source: Architecture Vision §3 Goals, Engagement Charter §1 Organisation Backg
 <summary>📋 Guidance</summary>
 List the high-level business functions and processes in scope for this engagement. Sets the boundary for process coverage.
 Examples: Customer Acquisition, Order Fulfilment, Financial Reporting, HR Lifecycle
-Source: Architecture Vision §2 Business Drivers, Engagement Charter §3 Scope
+Source: Architecture Vision §4 Business Drivers, Engagement Charter §3 Scope
 </details>
 
 {{r1c2_content}}
@@ -181,7 +181,7 @@ Source: Engagement Charter §7 Programme Structure, Architecture Vision constrai
 <details>
 <summary>📋 Guidance</summary>
 Capture the enterprise's goals, strategic drivers, and objectives at a scope level. This is the contextual motivation — why this engagement exists.
-Source: Architecture Vision §2 Business Drivers (DRV-NNN), §3 Goals (G-NNN), §4 Objectives (OBJ-NNN), §7 Strategic Direction; Engagement Charter §6 Motivation Framework
+Source: Architecture Vision §4 Business Drivers (DRV-NNN), §5 Goals (G-NNN), §10 Objectives (OBJ-NNN), §11 Strategic Direction; Engagement Charter §6 Motivation Framework
 </details>
 
 {{r1c6_content}}
@@ -272,7 +272,7 @@ Source: Business Architecture §4 Business Processes, Architecture Roadmap miles
 <details>
 <summary>📋 Guidance</summary>
 Articulate goals, strategies, issues, problems, and their relationships in a structured model.
-Source: Architecture Vision §3 Goals (G-NNN), §4 Objectives (OBJ-NNN), §5 Issues (ISS-NNN), §6 Problems (PRB-NNN), §7 Strategies (STR-NNN); Requirements Register (Motivation column)
+Source: Architecture Vision §5 Goals (G-NNN), §10 Objectives (OBJ-NNN), §7 Issues (ISS-NNN), §8 Problems (PRB-NNN), §11 Strategies (STR-NNN); Requirements Register (Motivation column)
 </details>
 
 {{r2c6_content}}

@@ -6,18 +6,18 @@ Defines which source artifacts and sections feed each cell when auto-populating 
 
 | Cell | Source Artifacts | Sections / Fields |
 |---|---|---|
-| R1,C1 | Architecture Vision, Engagement Charter | §1 Organisation Background, §3 Scope — in-scope subject areas |
-| R1,C2 | Architecture Vision, Engagement Charter | §3 Scope in-scope processes, §2 Business Drivers process scope |
-| R1,C3 | Architecture Vision, Engagement Charter | §3 Scope locations, §1 Organisation Background geography |
+| R1,C1 | Architecture Vision, Engagement Charter | §1 Organisation Background, §2 Scope — in-scope subject areas |
+| R1,C2 | Architecture Vision, Engagement Charter | §2 Scope in-scope processes, §4 Business Drivers process scope |
+| R1,C3 | Architecture Vision, Engagement Charter | §2 Scope locations, §1 Organisation Background geography |
 | R1,C4 | Stakeholder Map, Engagement Charter | All stakeholder rows; §5 Organisations Affected |
 | R1,C5 | Engagement Charter, Architecture Vision | §7 Programme Structure phase table; scope constraints on timing |
-| R1,C6 | Architecture Vision, Engagement Charter | §2 DRV-NNN, §3 G-NNN, §4 OBJ-NNN, §7 STR-NNN; §6 Motivation Framework |
+| R1,C6 | Architecture Vision, Engagement Charter | §4 DRV-NNN, §5 G-NNN, §10 OBJ-NNN, §11 STR-NNN; §6 Motivation Framework |
 | R2,C1 | Data Architecture, Business Architecture | §2 Conceptual Data Model, §4 Data Entity Catalogue |
 | R2,C2 | Business Architecture, Business Model Canvas | §3 Capability Model, §4 Business Process Catalogue, Value Propositions, Key Activities |
 | R2,C3 | Business Architecture | §5 Business Logistics / Location model |
 | R2,C4 | Business Architecture, Stakeholder Map | §6 Organisation Model, Role Catalogue |
 | R2,C5 | Business Architecture, Architecture Roadmap | §4 Business Event Cycles, milestone sequence |
-| R2,C6 | Architecture Vision, Requirements Register | §5 ISS-NNN, §6 PRB-NNN, §7 STR-NNN; Motivation column |
+| R2,C6 | Architecture Vision, Requirements Register | §7 ISS-NNN, §8 PRB-NNN, §11 STR-NNN; Motivation column |
 | R3,C1 | Data Architecture | §3 Logical Data Model, §4 Data Entity Catalogue |
 | R3,C2 | Application Architecture | §3 Application Portfolio, §4 Application Function Catalogue |
 | R3,C3 | Application Architecture | §6 Application Communication Diagram, §5 Integration Architecture |

@@ -17,7 +17,7 @@ Each entry includes: **Why it matters**, **When to apply** (phase + artifact), *
 **Why it matters:** Architecture that cannot demonstrate business value becomes overhead. Every phase must show measurable impact.  
 **When to apply:** All phases. Every artifact should trace to a business outcome.  
 **Related concept:** Business Driver, Goal, Objective, Metric.  
-**How to incorporate:** In `architecture-vision.md` §2 Business Drivers, link every driver to a measurable outcome. In `statement-of-architecture-work.md` §6 Acceptance Criteria, define objective criteria.
+**How to incorporate:** In `architecture-vision.md` §4 Business Drivers, link every driver to a measurable outcome. In `statement-of-architecture-work.md` §6 Acceptance Criteria, define objective criteria.
 
 #### Tip 2 — Position architecture as a decision-support function, not a documentation function
 **Why it matters:** The real output of architecture is a managed constraint system (principles, standards, guardrails, patterns), not documents.  
@@ -39,13 +39,13 @@ Each entry includes: **Why it matters**, **When to apply** (phase + artifact), *
 
 #### Tip 5 — Treat the Architecture Vision as a negotiation tool, not a static deliverable
 **Why it matters:** Phase A is where competing stakeholder interests are reconciled. The vision secures alignment, funding, and executive sponsorship.  
-**When to apply:** Phase A. `architecture-vision.md` §1 Executive Summary, §9 Scope.  
+**When to apply:** Phase A. `architecture-vision.md` §1 Executive Summary, §2 Scope.  
 **Related concept:** Vision, Mission.  
 **How to incorporate:** Build multiple candidate visions and force trade-off discussions. Co-create with business leaders. Define success metrics before Phase B.
 
 #### Tip 6 — Explicitly connect architecture work to strategic themes (growth, cost, risk, compliance)
 **Why it matters:** Without explicit strategic theme linkage, architecture appears disconnected from enterprise priorities.  
-**When to apply:** Phase A. `architecture-vision.md` §2 Business Drivers.  
+**When to apply:** Phase A. `architecture-vision.md` §4 Business Drivers.  
 **Related concept:** Business Driver, Strategy.  
 **How to incorporate:** Tag each driver with its strategic theme. Validate that all major themes are represented.
 
@@ -209,13 +209,13 @@ Each entry includes: **Why it matters**, **When to apply** (phase + artifact), *
 **Why it matters:** A single view cannot serve both strategic and technical concerns. Segmentation improves understanding and buy-in.  
 **When to apply:** Phase A. `stakeholder-map.md`, `architecture-vision.md`.  
 **Related concept:** Stakeholder, Viewpoint, Communication.  
-**How to incorporate:** In `stakeholder-map.md` §2, segment by power/interest and information needs. In `architecture-vision.md` §10, map viewpoints to segments.
+**How to incorporate:** In `stakeholder-map.md` §2, segment by power/interest and information needs. In `architecture-vision.md` §3, map viewpoints to segments.
 
 #### Tip 32 — Translate architecture into financial and risk language for senior stakeholders
 **Why it matters:** Architecture that cannot be expressed in economic terms will lose to more financially legible initiatives.  
 **When to apply:** Phase A, E, F. `architecture-vision.md`, `architecture-roadmap.md`, `migration-plan.md`.  
 **Related concept:** Metric, Risk, Business Driver.  
-**How to incorporate:** In `architecture-vision.md` §2, quantify driver impact where possible. In `architecture-roadmap.md`, show cost/benefit per work package.
+**How to incorporate:** In `architecture-vision.md` §4, quantify driver impact where possible. In `architecture-roadmap.md`, show cost/benefit per work package.
 
 #### Tip 33 — Use visuals (heatmaps, capability maps, roadmaps) instead of verbose documents
 **Why it matters:** Visuals compress complexity and improve retention. They are more likely to be referenced than long documents.  
@@ -227,7 +227,7 @@ Each entry includes: **Why it matters**, **When to apply** (phase + artifact), *
 **Why it matters:** Formal authority alone does not drive adoption. Informal networks accelerate buy-in and resolve resistance.  
 **When to apply:** Phase A. `stakeholder-map.md`, `architecture-vision.md`.  
 **Related concept:** Stakeholder, Influence, Communication.  
-**How to incorporate:** In `stakeholder-map.md`, identify "champions" and "blockers." In `architecture-vision.md` §10, note coalition-building status.
+**How to incorporate:** In `stakeholder-map.md`, identify "champions" and "blockers." In `architecture-vision.md` §3, note coalition-building status.
 
 #### Tip 35 — Treat resistance as signal — use it to refine assumptions and constraints
 **Why it matters:** Resistance often surfaces valid concerns that the architecture has not adequately addressed.  
