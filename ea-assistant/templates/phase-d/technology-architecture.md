@@ -6,7 +6,7 @@ phase: D
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-templateVersion: 0.9.55
+templateVersion: 0.9.82
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   admPhases: [D]
@@ -143,10 +143,10 @@ Include a target infrastructure diagram.
 
 *Reference diagram:* `../diagrams/{{infrastructure_diagram}}`
 
-| Component ID | Component | Role | Platform / Product | Deployment Model | Resilience |
-|---|---|---|---|---|---|
-| INF-001 | {{component}} | {{role}} | {{platform}} | On-premise / IaaS / PaaS / SaaS | Active-Active / Active-Passive / Single |
-| INF-002 | {{component}} | {{role}} | {{platform}} | On-premise / IaaS / PaaS / SaaS | Active-Active / Active-Passive / Single |
+| Component ID | Component | Role | Platform / Product | Deployment Model | Resilience | Details |
+|---|---|---|---|---|---|---|
+| [[INF-001]] | {{component}} | {{role}} | {{platform}} | On-premise / IaaS / PaaS / SaaS | Active-Active / Active-Passive / Single | [[INF-001\|→]] |
+| [[INF-002]] | {{component}} | {{role}} | {{platform}} | On-premise / IaaS / PaaS / SaaS | Active-Active / Active-Passive / Single | [[INF-002\|→]] |
 
 ### Hosting Model
 {{hosting_model_description}}
@@ -186,9 +186,9 @@ See `skills/ea-artifact-templates/references/abb-catalogue.md` for a standard se
 
 </details>
 
-| ABB-NNN | Name | Description | Satisfies (REQ-NNN) | Implemented by (SBB-NNN) |
-|---|---|---|---|---|
-| [[ABB-001]] | {{abb_name}} | {{description}} | {{req_id}} | {{sbb_id}} |
+| ABB-NNN | Name | Description | Satisfies (REQ-NNN) | Implemented by (SBB-NNN) | Details |
+|---|---|---|---|---|---|
+| [[ABB-001]] | {{abb_name}} | {{description}} | {{req_id}} | {{sbb_id}} | [[ABB-001\|→]] |
 
 ---
 
@@ -313,9 +313,9 @@ Standard diagrams for the Technology Architecture. Diagrams are stored in `diagr
 - **Version** — specific version or release channel (LTS, stable, managed)
 - **Constraints / Lock-in Risk** — proprietary APIs, egress costs, licensing restrictions, migration effort. Run `/ea-grill` to probe lock-in risks when populating this register. -->
 
-| SBB-NNN | Name | Implements (ABB-NNN) | Vendor / Source | Version | Constraints / Lock-in Risk |
-|---|---|---|---|---|---|
-| [[SBB-001]] | {{sbb_name}} | ABB-001 | {{vendor}} | {{version}} | {{constraints}} |
+| SBB-NNN | Name | Implements (ABB-NNN) | Vendor / Source | Version | Constraints / Lock-in Risk | Details |
+|---|---|---|---|---|---|---|
+| [[SBB-001]] | {{sbb_name}} | ABB-001 | {{vendor}} | {{version}} | {{constraints}} | [[SBB-001\|→]] |
 
 ---
 

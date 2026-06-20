@@ -353,6 +353,13 @@ When the user types `a: {text}` during any interview, the `ea-interviewer` agent
      - Update `lastModified` in the detail file frontmatter to today's date.
    - If no ID is present in the item, skip this step silently.
 
+6. **Offer cross-artifact link recording** (the artifacts are a web of links — build it as you go):
+   If the captured answer names or implies another artifact or item — e.g. a capability that *supports* a goal, a requirement that *traces to* a use case, a risk *raised by* a decision — offer to record the relationship (do not write silently):
+   > "This links {this item} to {other artifact/item}. Record the cross-reference? (y/n)"
+   - If accepted: add the target to this artifact's `relatedArtifacts` frontmatter (artifact-id) and/or, when both ends have detail files, add the counterpart to each detail file's `relatedItems` so the link is bidirectional.
+   - Use the signal map in `skills/ea-artifact-templates/references/cross-topic-detection.md` to recognise which mentions imply a link; do not restate those rules here. For motivation-chain links (DRV→G→OBJ→STR→REQ), defer to the trace semantics in `register-protocol.md` rather than duplicating them.
+   - This is an *offer*, consistent with cross-topic routing — never auto-create links the user has not confirmed.
+
 The A3.N block format is defined in `skills/ea-artifact-templates/SKILL.md` under "A3.N Decision Rationale Blocks".
 
 ---

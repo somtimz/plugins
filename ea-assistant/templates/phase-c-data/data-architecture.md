@@ -6,7 +6,7 @@ phase: C-Data
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-templateVersion: 0.9.55
+templateVersion: 0.9.82
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   admPhases: [C-Data]
@@ -154,6 +154,8 @@ Describe each significant data entity. Focus on entities that are shared across 
 subject to governance, or represent master/reference data. For each entity, capture its
 definition, authoritative source, and key attributes.
 
+Keep each entity block to the summary fields below. For extended attribute catalogues, lineage, or rationale, create a detail file with `/ea-detail new {entity-name}` and link it — do not expand this section into a full data dictionary.
+
 </details>
 
 ### {{entity_name_1}}
@@ -199,10 +201,10 @@ Gap Analysis — a flow listed as Current must not also appear as a gap to be bu
 
 *Reference diagram:* `../diagrams/{{data_flow_diagram}}`
 
-| Flow ID | Description | Source | Destination | Frequency | State | Classification |
-|---|---|---|---|---|---|---|
-| [[DF-001]] | {{description}} | {{source}} | {{destination}} | Real-time / Batch / On-demand | Current / Planned (Target) / Deprecated | {{classification}} |
-| [[DF-002]] | {{description}} | {{source}} | {{destination}} | Real-time / Batch / On-demand | Current / Planned (Target) / Deprecated | {{classification}} |
+| Flow ID | Description | Source | Destination | Frequency | State | Classification | Details |
+|---|---|---|---|---|---|---|---|
+| [[DF-001]] | {{description}} | {{source}} | {{destination}} | Real-time / Batch / On-demand | Current / Planned (Target) / Deprecated | {{classification}} | [[DF-001\|→]] |
+| [[DF-002]] | {{description}} | {{source}} | {{destination}} | Real-time / Batch / On-demand | Current / Planned (Target) / Deprecated | {{classification}} | [[DF-002\|→]] |
 
 ---
 

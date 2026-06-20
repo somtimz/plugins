@@ -402,5 +402,9 @@ After any handler completes, resume: `"Resuming — Q{N} of {total}: {question t
 
 Applied at step 7b (Text mode) and before routing in phase interview step 4 (Phase mode). Apply the full detection process, signal map, and "Do NOT flag" rules from `skills/ea-artifact-templates/references/cross-topic-detection.md`.
 
+**Cross-Artifact Link Offers:**
+
+The artifacts form a web of links — help build it during capture. When an answer names or implies a relationship to another artifact or item (a capability that supports a goal, a requirement that traces to a use case, a risk raised by a decision), offer to record the cross-reference per the "Offer cross-artifact link recording" step in `commands/ea-interview.md` (update `relatedArtifacts` / detail-file `relatedItems`). This is distinct from cross-topic detection: cross-topic *routes mis-placed content elsewhere*; a link offer *records a relationship while keeping the content here*. Always offer, never auto-write; reuse the cross-topic signal map and `register-protocol.md` trace semantics rather than restating them.
+
 **Skipping Questions:**
 When a user skips: acknowledge briefly and move on without pressure. "Noted — marked as not answered. Moving on."

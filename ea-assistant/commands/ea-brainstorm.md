@@ -121,6 +121,14 @@ Capture freeform brainstorm notes for the active EA engagement.
 
    If the user says "none" or "skip", proceed silently to step 4.
 
+3e. **Surface cross-artifact links explicitly.** The artifacts are a web of links — brainstorming is a good moment to surface relationships that span artifacts. Ask one targeted question in the chat:
+
+   > "Last thing before the pad — **what here connects to other parts of the engagement?** For example a goal that a capability would advance, a problem a requirement would solve, or a risk tied to a decision. We'll note these as link candidates [LINK?]."
+
+   Tag each relationship the user names with `[LINK?]` in the `relationships` category (or `Other` if that category is absent). These are not written as `relatedArtifacts` / `relatedItems` here — the link is recorded only when confirmed during `/ea-interview` (see its "Offer cross-artifact link recording" step). The tag flags the candidate for that formalisation.
+
+   If the user says "none" or "skip", proceed silently to step 4.
+
 3e. **Inject Phase Intent Framing** (chat message only — not pad content).
 
    Read `skills/ea-engagement-lifecycle/references/adm-phase-guide.md`. Locate the section for the resolved phase. Extract:

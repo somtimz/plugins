@@ -163,6 +163,7 @@ When asking questions, actively use the loaded context — do not treat it as pa
 - **Review / grill files:** If a prior grill identified revisions that were recommended but appear unapplied, flag them.
 - **Research items:** If a research item contains findings that contradict or qualify an artifact claim, cite it: `[research: {title}]`
 - **Related artifacts:** If a cross-referenced artifact labels the same ID differently or states a contradicting fact, challenge the inconsistency.
+- **Missing links (web of links):** If the artifact describes a relationship that is not yet recorded as a link — an item that clearly traces to a goal, capability, requirement, or decision in another artifact but carries no `relatedArtifacts` / detail-file `relatedItems` entry — flag it and propose the missing link as a Step 7 revision. Treat an unrecorded but evident relationship as a gap, not just a stylistic omission.
 
 ### Decision-Specific Grilling Protocol
 
