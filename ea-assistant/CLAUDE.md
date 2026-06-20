@@ -178,6 +178,10 @@ These are loaded automatically by `/ea-grill --skill practitioner|maturity|failu
 | IFC-NNN | Interface (interface catalogue — contract/access point) | IFC-001 |
 | RA-NNN | Reference Architecture (Architecture Repository) | RA-001 |
 | FIN-NNN | Cost Entry (Cost Model Register — capex/opex/TCO/payback) | FIN-001 |
+| DF-NNN | Data Flow (Data Architecture flow catalogue) | DF-001 |
+| INF-NNN | Infrastructure Component (Technology Architecture) | INF-001 |
+| INT-NNN | Integration (Application Architecture integration catalogue) | INT-001 |
+| API-NNN | API endpoint (Application Architecture API catalogue) | API-001 |
 
 **Do not use domain-prefixed IDs** (BG-/DG-/AG-/TG- etc.) — the scheme is unified and domain-agnostic. **Exception:** Architecture Principles use the TOGAF-standard four-domain prefixes (BP/DP/AP/TP) because the principle domain is itself a first-class classification, not a field-level qualifier.
 
