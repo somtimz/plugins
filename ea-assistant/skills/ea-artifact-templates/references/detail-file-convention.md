@@ -197,6 +197,16 @@ When interview, review, brainstorm, or grill sessions surface concerns or issues
 - Do not overwrite existing entries — always append.
 - Update `lastModified` in the detail file frontmatter after every write.
 
+### Creating links during sessions
+
+The artifacts are a web of links, and sessions are where new links are discovered. In addition to recording concerns/issues, interview, brainstorm, and grill may surface a **relationship** between this item and another item or artifact:
+
+- **Interview** offers to record the link as it captures the item (see the "Offer cross-artifact link recording" step in `commands/ea-interview.md`).
+- **Brainstorm** tags relationship candidates `[LINK?]` for later formalisation during `/ea-interview` (it does not write links itself).
+- **Grill** flags an evident-but-unrecorded relationship as a Step 7 revision.
+
+When a link is confirmed, add the counterpart ID to this detail file's `relatedItems` frontmatter and `## Related Items` table, and the reciprocal entry to the other item's detail file so the link is bidirectional. Link creation is **offer-based** on the same terms as session recording above — never write a link the user has not confirmed.
+
 ---
 
 ## Sync Rules
