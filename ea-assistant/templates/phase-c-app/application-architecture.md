@@ -6,7 +6,7 @@ phase: C-App
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-templateVersion: 0.9.55
+templateVersion: 0.9.82
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   admPhases: [C-App]
@@ -120,9 +120,9 @@ Gaps: any UC-NNN from the Business Architecture that maps to no application comp
 
 </details>
 
-| UC-NNN | Use Case | Primary Actor | Supported By (APP-NNN) | Key Interaction Points | NFR Sensitivity |
-|---|---|---|---|---|---|
-| [[UC-001]] | {{use_case}} | {{actor}} | {{app_ids}} | {{interaction_points}} | Performance / Availability / Security / None |
+| UC-NNN | Use Case | Primary Actor | Supported By (APP-NNN) | Key Interaction Points | NFR Sensitivity | Details |
+|---|---|---|---|---|---|---|
+| [[UC-001]] | {{use_case}} | {{actor}} | {{app_ids}} | {{interaction_points}} | Performance / Availability / Security / None | [[UC-001\|→]] |
 
 ---
 
@@ -137,10 +137,10 @@ the baseline. Flag applications that are end-of-life, unsupported, or candidates
 
 </details>
 
-| App ID | Application Name | Function | Technology | Lifecycle Status | Capabilities Supported |
-|---|---|---|---|---|---|
-| [[APP-001]] | {{app_name}} | {{function}} | {{technology}} | Current / Aging / EOL / Retiring | {{capabilities}} |
-| [[APP-002]] | {{app_name}} | {{function}} | {{technology}} | Current / Aging / EOL / Retiring | {{capabilities}} |
+| App ID | Application Name | Function | Technology | Lifecycle Status | Capabilities Supported | Details |
+|---|---|---|---|---|---|---|
+| [[APP-001]] | {{app_name}} | {{function}} | {{technology}} | Current / Aging / EOL / Retiring | {{capabilities}} | [[APP-001\|→]] |
+| [[APP-002]] | {{app_name}} | {{function}} | {{technology}} | Current / Aging / EOL / Retiring | {{capabilities}} | [[APP-002\|→]] |
 
 *Reference diagram:* `../diagrams/{{current_app_landscape_diagram}}`
 
@@ -173,6 +173,8 @@ why a legacy system is being retained). Include a target landscape diagram.
 <summary>📋 Guidance</summary>
 
 For each significant target application or component, describe its responsibilities, boundaries, internal structure, and service contracts. Use ArchiMate Application Component notation where applicable. Focus on components that are new, changed, or architecturally significant.
+
+Keep each component block to architecturally significant components. For extended internal design, full service-contract catalogues, or rationale, create a detail file with `/ea-detail` and link it rather than expanding this section.
 
 - **Architecture Pattern** — the dominant structural style for this component.
 - **Internal Modules / Layers** — major internal divisions. Common layers: Presentation (UI / API surface), Business Logic (rules, workflows), Data Access (persistence, caching), Integration Adapter (outbound connectors). Only document layers that are architecturally distinct — don't invent layers that don't exist.
@@ -287,10 +289,10 @@ parties. Include an integration diagram.
 
 *Reference diagram:* `../diagrams/{{integration_diagram}}`
 
-| Integration ID | Source App | Target App | Pattern | Protocol | Data Exchanged |
-|---|---|---|---|---|---|
-| [[INT-001]] | {{source}} | {{target}} | Sync API / Async Event / Batch | {{protocol}} | {{data}} |
-| [[INT-002]] | {{source}} | {{target}} | Sync API / Async Event / Batch | {{protocol}} | {{data}} |
+| Integration ID | Source App | Target App | Pattern | Protocol | Data Exchanged | Details |
+|---|---|---|---|---|---|---|
+| [[INT-001]] | {{source}} | {{target}} | Sync API / Async Event / Batch | {{protocol}} | {{data}} | [[INT-001\|→]] |
+| [[INT-002]] | {{source}} | {{target}} | Sync API / Async Event / Batch | {{protocol}} | {{data}} | [[INT-002\|→]] |
 
 ### API Catalog
 
