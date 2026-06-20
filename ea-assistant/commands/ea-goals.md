@@ -7,7 +7,7 @@ allowed-tools: [Read, Write, Bash]
 
 You are executing the `/ea-goals` command. All mode mechanics (engagement resolution, ID assignment, list/add/update/trace/generate flows, common edge cases) follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the Goal concept and its distinctions from Driver/Objective/Strategy, read `ea-concepts.md`; do not restate definitions here.
 
-Goals sit in the middle of the motivation chain (DRV → **G** → OBJ → WP). Every goal must trace to at least one Business Driver; every goal should be operationalised by at least one Objective. The **Goals Register** is the management interface; the Architecture Vision (§3) summarises and links to it rather than rendering a live table.
+Goals sit in the middle of the motivation chain (DRV → **G** → OBJ → WP). Every goal must trace to at least one Business Driver; every goal should be operationalised by at least one Objective. The **Goals Register** is the management interface; the Architecture Vision (§5) summarises and links to it rather than rendering a live table.
 
 ## Register Spec
 

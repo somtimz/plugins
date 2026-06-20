@@ -53,7 +53,7 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 
 ### Preliminary — Part 3: Motivation Framework
 
-*Routes to: Engagement Charter §6, engagement.json → direction (rendered in the motivation registers), Architecture Vision §2–§6 summaries*
+*Routes to: Engagement Charter §6, engagement.json → direction (rendered in the motivation registers), Architecture Vision §4–§5/§7–§8/§10 summaries*
 
 12. What external forces (market shifts, regulatory changes, competitive pressure, technology change) are creating pressure to act now? Assign each a DRV-NNN ID.
 13. What internal forces (cost pressure, strategic mandate, leadership change, capability gap) are pushing this engagement forward? Assign each a DRV-NNN ID.
@@ -116,11 +116,11 @@ Curated interview questions for each TOGAF ADM phase, with output routing tables
 | Constraints | Engagement Charter / Constraints Register | `§3.5 Constraints` + `CST-NNN` entries via `/ea-constraints` |
 | Related engagements | Engagement Charter | `§4` |
 | Organisations affected | Engagement Charter | `§5` |
-| Business drivers (DRV-NNN) | Engagement Charter `§6.2` + Architecture Vision `§2` + `engagement.json → direction.drivers` | — |
-| Goals (G-NNN) | Engagement Charter `§6.3` + Architecture Vision `§3` + `engagement.json → direction.goals` | — |
-| Objectives (OBJ-NNN) | Engagement Charter `§6.4` + Architecture Vision `§4` + `engagement.json → direction.objectives` | — |
-| Strategies (STR-NNN) | Engagement Charter `§6.5` + Architecture Vision `§7` + `engagement.json → direction.strategies` | — |
-| Issues / Problems | Engagement Charter `§6.6` + Architecture Vision `§5` + `§6` | — |
+| Business drivers (DRV-NNN) | Engagement Charter `§6.2` + Architecture Vision `§4` + `engagement.json → direction.drivers` | — |
+| Goals (G-NNN) | Engagement Charter `§6.3` + Architecture Vision `§5` + `engagement.json → direction.goals` | — |
+| Objectives (OBJ-NNN) | Engagement Charter `§6.4` + Architecture Vision `§10` + `engagement.json → direction.objectives` | — |
+| Strategies (STR-NNN) | Engagement Charter `§6.5` + Architecture Vision `§11` + `engagement.json → direction.strategies` | — |
+| Issues / Problems | Engagement Charter `§6.6` + Architecture Vision `§7` + `§8` | — |
 | Programme structure | Engagement Charter | `§7 Programme Structure` |
 | Expected outcomes | Engagement Charter | `§8` |
 | Benefits | Engagement Charter | `§9` |
@@ -268,26 +268,26 @@ Assign IDs sequentially within each prefix as responses are confirmed. Record ID
 
 | Response Topic | Target Artifact | Target Field |
 |---|---|---|
-| External business drivers | Drivers Register (+ engagement.json) | `direction.drivers[]`; Vision §2 summary |
-| Internal business drivers | Drivers Register (+ engagement.json) | `direction.drivers[]`; Vision §2 summary |
-| Goals | Goals Register + engagement.json | `direction.goals[]`; Vision §3 summary |
-| Objectives | Objectives Register + engagement.json | `direction.objectives[]`; Vision §4 summary |
-| Systemic issues | Issues Register (+ engagement.json) | `direction.issues[]`; Vision §5 summary |
-| Specific problems | Problems Register (+ engagement.json) | `direction.problems[]`; Vision §6 summary |
-| Opportunities | Architecture Vision | `§7 Opportunities` (OPP-NNN rows) |
+| External business drivers | Drivers Register (+ engagement.json) | `direction.drivers[]`; Vision §4 summary |
+| Internal business drivers | Drivers Register (+ engagement.json) | `direction.drivers[]`; Vision §4 summary |
+| Goals | Goals Register + engagement.json | `direction.goals[]`; Vision §5 summary |
+| Objectives | Objectives Register + engagement.json | `direction.objectives[]`; Vision §10 summary |
+| Systemic issues | Issues Register (+ engagement.json) | `direction.issues[]`; Vision §7 summary |
+| Specific problems | Problems Register (+ engagement.json) | `direction.problems[]`; Vision §8 summary |
+| Opportunities | Architecture Vision | `§9 Opportunities` (OPP-NNN rows) |
 | Performance metrics | engagement.json | `metrics[]` linked to OBJ-NNN |
-| Success criteria | Architecture Vision | `§1 Executive Summary` + `§3 Goals` |
+| Success criteria | Architecture Vision | `§1 Executive Summary` + `§5 Goals` |
 | Key stakeholders | Stakeholder Map | `{{stakeholder_list}}` |
 | Stakeholder concerns | Stakeholder Map | `{{stakeholder_concerns}}` |
-| Strategies | Strategy Register + engagement.json | `direction.strategies[]`; Vision §8 summary |
-| Metrics | engagement.json | `§8 Strategic Direction Summary` (MET-NNN rows) + `metrics[]` |
-| In-scope items | Architecture Vision | `§9 Scope — {{scope_in}}` |
-| Out-of-scope items | Architecture Vision | `§9 Scope — {{scope_out}}` |
+| Strategies | Strategy Register + engagement.json | `direction.strategies[]`; Vision §11 summary |
+| Metrics | engagement.json | `§11 Strategic Direction Summary` (MET-NNN rows) + `metrics[]` |
+| In-scope items | Architecture Vision | `§2 Scope — {{scope_in}}` |
+| Out-of-scope items | Architecture Vision | `§2 Scope — {{scope_out}}` |
 | Constraints | Statement of Architecture Work / Constraints Register | `{{constraints}}` + `CST-NNN` via `/ea-constraints` |
 | Assumptions | Statement of Architecture Work | `{{assumptions}}` |
 | Existing architecture assets | Statement of Architecture Work | `§3 Approach` (reference existing assets as inputs) |
 | Timeline | Statement of Architecture Work | `{{timeline}}` |
-| Key risks | Architecture Vision | `§15 Key Risks` (table rows) |
+| Key risks | Architecture Vision | `§16 Key Risks` (summary; full detail in Risk Register) |
 | Strategies | engagement.json | `direction.strategies[]` |
 
 **Facilitation Notes:**
@@ -865,7 +865,7 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 
 **Goal:** Prioritise work packages and build the initial architecture roadmap, grounded in the Goals, Objectives, and Strategies established in Phase A.
 
-**Pre-session preparation:** Load the Architecture Vision and read §3 Goals (G-NNN), §4 Objectives (OBJ-NNN), §7 Opportunities (OPP-NNN), and §8 Strategic Direction Summary (STR-NNN) before starting. Present this list to participants so work package prioritisation is anchored to stated intent.
+**Pre-session preparation:** Load the Architecture Vision and read §5 Goals (G-NNN), §10 Objectives (OBJ-NNN), §9 Opportunities (OPP-NNN), and §11 Strategic Direction Summary (STR-NNN) before starting. Present this list to participants so work package prioritisation is anchored to stated intent.
 
 **Key questions:**
 
@@ -877,7 +877,7 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 3. Which capability gaps identified in earlier phases are the highest priority to close?
 4. For each high-priority gap — does it represent an Opportunity (OPP-NNN) to capture, not just a problem to fix? Assign an OPP-NNN if so, and link it to the work package it will be addressed by.
    - If an OPP-NNN was already recorded in Phase A, link the WP to it now.
-   - If no OPP-NNN exists yet, create one and add it to Architecture Vision §7.
+   - If no OPP-NNN exists yet, create one and add it to Architecture Vision §9.
 5. What projects are already in flight that this roadmap must align with or avoid conflicting with?
 
 *Resources and capacity*
@@ -947,7 +947,7 @@ See `skills/ea-artifact-templates/references/diagram-catalogue.md` for Mermaid s
 | Delivery risks | Architecture Roadmap | `{{delivery_risks}}` |
 
 **Facilitation Notes:**
-- **Always anchor to Phase A Goals first.** Without this, prioritisation defaults to loudest voice or easiest wins rather than strategic intent. If the Architecture Vision is incomplete or has no Goals defined, flag this as a blocker and recommend completing §3–§4 before proceeding.
+- **Always anchor to Phase A Goals first.** Without this, prioritisation defaults to loudest voice or easiest wins rather than strategic intent. If the Architecture Vision is incomplete or has no Goals defined, flag this as a blocker and recommend completing §5–§10 before proceeding.
 - The Strategic Alignment table in the roadmap must have every G-NNN and STR-NNN from Phase A appear at least once. Anything missing is an explicit coverage gap.
 - The "halved budget" question is the most powerful prioritisation tool — framing it as "which Goals do we protect?" makes the trade-off explicit and strategic rather than tactical.
 - In-flight project alignment is frequently underestimated; request a project portfolio list before the session and map conflicts in advance.

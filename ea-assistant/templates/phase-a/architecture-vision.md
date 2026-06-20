@@ -6,7 +6,7 @@ phase: A
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-templateVersion: 0.9.80
+templateVersion: 0.9.82
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   admPhases: [A]
@@ -96,7 +96,45 @@ Written for an executive audience. Avoid technical jargon.
 
 ---
 
-## 2. Business Drivers
+## 2. Scope
+
+<details>
+<summary>📋 Guidance</summary>
+
+Define what is IN and OUT of scope for this engagement.
+Be specific about organisational units, systems, geographies, and time horizons.
+
+</details>
+
+**Statement of Architecture Work:** [[statement-of-architecture-work]]
+
+### In Scope
+{{scope_in}}
+
+### Out of Scope
+{{scope_out}}
+
+### Time Horizon
+{{time_horizon}}
+
+---
+
+## 3. Stakeholders
+
+<details>
+<summary>📋 Guidance</summary>
+
+The Stakeholder Map artifact is the authoritative record of all stakeholders, their power/interest profile, RACI, and communication preferences. This section provides a brief contextual note only — do not maintain a parallel stakeholder list here.
+
+</details>
+
+**Sponsor:** {{sponsor}}
+
+Stakeholder details are maintained in the **Stakeholder Map** — see [[stakeholder-map]] · manage with `/ea-interview` (Stakeholder Map artifact).
+
+---
+
+## 4. Business Drivers
 
 <details>
 <summary>📋 Guidance</summary>
@@ -120,7 +158,7 @@ Summary:
 
 ---
 
-## 3. Goals
+## 5. Goals
 
 <details>
 <summary>📋 Guidance</summary>
@@ -142,27 +180,24 @@ Summary:
 
 ---
 
-## 4. Objectives
+## 6. Business Scenarios
 
 <details>
 <summary>📋 Guidance</summary>
 
-Objectives are specific, measurable, time-bound results that operationalise the goals. They
-answer "how far, and by when?" Each objective must have a unit of measure, a target value, and
-a deadline. Objectives are the primary anchor for Problems (the specific symptoms that block them).
+Business Scenarios are a Phase A discovery technique (TOGAF 10 §25.3.3) that translate business problems, actors, and desired outcomes into structured narratives. Each scenario validates that the Architecture Vision addresses a real business need. Use `/ea-scenarios` to create and manage BS-NNN items; they are referenced here.
+
+Not every engagement requires multiple formal scenarios — a single scenario may suffice.
 
 </details>
 
-Objectives are maintained in the **Objectives Register** — measure, target, deadline, and goal linkage live there. This section carries the executive summary only.
-
-Summary:
-{{objectives_summary}}
-
-**Full register:** [[objectives-register]] · manage with `/ea-objectives`
+| ID | Scenario | Problem / Opportunity | Actor(s) | Desired Outcome | Environment Required |
+|---|---|---|---|---|---|
+| *(none — use `/ea-scenarios` to add)* | — | — | — | — | — |
 
 ---
 
-## 5. Issues
+## 7. Issues
 
 <details>
 <summary>📋 Guidance</summary>
@@ -183,7 +218,7 @@ Summary:
 
 ---
 
-## 6. Problems
+## 8. Problems
 
 <details>
 <summary>📋 Guidance</summary>
@@ -204,7 +239,7 @@ Summary:
 
 ---
 
-## 7. Opportunities
+## 9. Opportunities
 
 <details>
 <summary>📋 Guidance</summary>
@@ -215,7 +250,7 @@ Types: **Exploit** (capitalise on existing advantage) / **Enhance** (amplify cur
 
 </details>
 
-<!-- follow-up: no dedicated Opportunities register/command yet — keep this lean Vision summary; promote to a register if OPP volume grows -->
+<!-- follow-up: Opportunities register (/ea-opportunities) is planned; until then OPP-NNN items are maintained in this inline table -->
 
 Opportunities are summarised here in the Vision (there is no dedicated register yet). Each OPP-NNN should advance at least one Goal and, in Phase E, be elaborated into Work Packages (WP-NNN).
 
@@ -225,7 +260,27 @@ Opportunities are summarised here in the Vision (there is no dedicated register 
 
 ---
 
-## 8. Strategic Direction Summary
+## 10. Objectives
+
+<details>
+<summary>📋 Guidance</summary>
+
+Objectives are specific, measurable, time-bound results that operationalise the goals. They
+answer "how far, and by when?" Each objective must have a unit of measure, a target value, and
+a deadline. Objectives are the primary anchor for Problems (the specific symptoms that block them).
+
+</details>
+
+Objectives are maintained in the **Objectives Register** — measure, target, deadline, and goal linkage live there. This section carries the executive summary only.
+
+Summary:
+{{objectives_summary}}
+
+**Full register:** [[objectives-register]] · manage with `/ea-objectives`
+
+---
+
+## 11. Strategic Direction Summary
 
 <details>
 <summary>📋 Guidance</summary>
@@ -259,45 +314,7 @@ Summary:
 
 ---
 
-## 9. Scope
-
-<details>
-<summary>📋 Guidance</summary>
-
-Define what is IN and OUT of scope for this engagement.
-Be specific about organisational units, systems, geographies, and time horizons.
-
-</details>
-
-### In Scope
-{{scope_in}}
-
-### Out of Scope
-{{scope_out}}
-
-### Time Horizon
-{{time_horizon}}
-
----
-
-## 10. Stakeholders
-
-<details>
-<summary>📋 Guidance</summary>
-
-List all key stakeholders, their roles, concerns, and level of engagement.
-This feeds directly into the Stakeholder Map artifact.
-
-</details>
-
-| Stakeholder | Role | Concerns | Engagement Level |
-|---|---|---|---|
-| {{stakeholder_1}} | {{role_1}} | {{concerns_1}} | Informed / Consulted / Responsible |
-| {{stakeholder_2}} | {{role_2}} | {{concerns_2}} | Informed / Consulted / Responsible |
-
----
-
-## 11. Architecture Principles
+## 12. Architecture Principles
 
 <details>
 <summary>📋 Guidance</summary>
@@ -315,23 +332,27 @@ Summary:
 
 ---
 
-## 12. Constraints
+## 13. Constraints
 
 <details>
 <summary>📋 Guidance</summary>
 
-List constraints that must be respected — regulatory, technical, financial, or political.
-Distinguish between hard constraints (non-negotiable) and soft constraints (preferences).
+Constraints are non-negotiable restrictions that bound this engagement — regulatory, technical, financial, or organisational. Each CST-NNN has a source (the policy, regulation, or mandate that created it) and an owner. The Constraints Register is the authoritative record; this section carries the executive summary only.
+
+Distinguish hard constraints (non-negotiable) from soft constraints (preferences that can be overridden with justification).
 
 </details>
 
-| Constraint | Type | Impact |
-|---|---|---|
-| {{constraint_1}} | Hard / Soft | {{impact_1}} |
+Constraints are maintained in the **Constraints Register** — type, source, owner, scope, and linked artifacts live there. This section carries the executive summary only.
+
+Summary:
+{{constraints_summary}}
+
+**Full register:** [[constraints-register]] · manage with `/ea-constraints`
 
 ---
 
-## 13. Assumptions
+## 14. Assumptions
 
 <details>
 <summary>📋 Guidance</summary>
@@ -344,48 +365,54 @@ List the assumptions being made. These should be validated and updated throughou
 
 ---
 
-## 14. High-Level Target Architecture
+## 15. High-Level Target Architecture
 
 <details>
 <summary>📋 Guidance</summary>
 
-A high-level description of the target state architecture. This should be visual where possible.
-Reference diagrams stored in the diagrams/ folder. Avoid detailed design at this stage.
+A high-level description of the target state, organised by architecture domain. Populate only the domains in scope; mark others ➖ Not applicable. Descriptions at Phase A are directional — principle-and-pattern statements, not system designs. Specific technology or vendor choices are premature here; capture them as PAD-NNN items instead.
 
 </details>
 
-{{target_architecture_description}}
+### Architecture Vision Statement
 
-*Reference diagram:* `../diagrams/{{diagram_filename}}`
+{{architecture_vision_statement}}
+
+### Business Domain
+
+{{target_business_domain}}
+
+### Data / Information Domain
+
+{{target_data_domain}}
+
+### Application Domain
+
+{{target_application_domain}}
+
+### Technology Domain
+
+{{target_technology_domain}}
+
+*Reference diagram:* `../../diagrams/{{diagram_filename}}`
 
 ---
 
-## 15. Key Risks
+## 16. Key Risks
 
 <details>
 <summary>📋 Guidance</summary>
 
-Identify the top 3-5 risks to the architecture or engagement. Include mitigation approaches.
+Key risks are uncertain future events that could derail the engagement or undermine the target architecture. Each RIS-NNN has a likelihood, impact, mitigation approach, and owner. The Risk Register is the authoritative record; this section carries the top risks summary only.
 
 </details>
 
-| Risk | Likelihood | Impact | Mitigation |
-|---|---|---|---|
-| {{risk_1}} | High/Med/Low | High/Med/Low | {{mitigation_1}} |
+Key risks are maintained in the **Risk Register** — likelihood, impact, mitigation, ownership, and status live there. This section carries the top risks summary only.
 
----
+Summary:
+{{key_risks_summary}}
 
-## 16. Next Steps
-
-<details>
-<summary>📋 Guidance</summary>
-
-List the immediate next steps following approval of this document.
-Typically: approve Statement of Architecture Work, proceed to Phase B/C/D.
-
-</details>
-
-{{next_steps}}
+**Full register:** [[risk-register]] · manage with `/ea-risks`
 
 ---
 
@@ -499,7 +526,7 @@ criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
 
 *Things that must be completed before this artifact can move to Approved status.*
 
-- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
+- [ ] *(Add tasks — e.g. "Populate §14 Assumptions before Phase B sign-off", "Get sponsor sign-off before proceeding to Phase B")*
 
 *This document was created using the EA Assistant plugin.*
 *Sections marked ⚠️ are unanswered. Sections marked 🤖 contain AI-suggested content requiring review.*

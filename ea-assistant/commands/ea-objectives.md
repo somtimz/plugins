@@ -7,7 +7,7 @@ allowed-tools: [Read, Write, Bash]
 
 You are executing the `/ea-objectives` command. All mode mechanics (engagement resolution, ID assignment, list/add/update/trace/generate flows, common edge cases) follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the Objective concept and its distinctions from Goal/Metric/Problem, read `ea-concepts.md`; do not restate definitions here.
 
-Objectives operationalise goals (DRV → G → **OBJ**): each is a specific, measurable, time-bound result with a unit of measure, a target value, and a deadline. Every objective must link to exactly one goal; Problems block objectives; Metrics (MET-NNN) track them. The **Objectives Register** is the management interface; the Architecture Vision (§4) summarises and links to it rather than rendering a live table.
+Objectives operationalise goals (DRV → G → **OBJ**): each is a specific, measurable, time-bound result with a unit of measure, a target value, and a deadline. Every objective must link to exactly one goal; Problems block objectives; Metrics (MET-NNN) track them. The **Objectives Register** is the management interface; the Architecture Vision (§10) summarises and links to it rather than rendering a live table.
 
 ## Register Spec
 
@@ -72,5 +72,5 @@ Capture it now, or proceed and complete later via /ea-objectives update? (captur
 ## Messages
 
 - **Empty state:** "No objectives found. Capture objectives during Phase A interviews (`/ea-interview start phase A`) or `/ea-brainstorm`, then add them with `/ea-objectives add`."
-- **Add success:** "OBJ-NNN added to engagement.json. Run `/ea-objectives generate` to refresh the Objectives Register, use '/ea-objectives trace OBJ-NNN' to verify the goal linkage, and add a tracking metric in Architecture Vision §8 Key Metrics."
+- **Add success:** "OBJ-NNN added to engagement.json. Run `/ea-objectives generate` to refresh the Objectives Register, use '/ea-objectives trace OBJ-NNN' to verify the goal linkage, and add a tracking metric in Architecture Vision §11 Key Metrics."
 - **Orphan nudge:** "⚠️ No goal linked. Run `/ea-goals list` to see available goals, then `/ea-objectives update OBJ-NNN linkedGoal G-NNN`."

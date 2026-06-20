@@ -148,7 +148,7 @@ Artifacts checked: {N}
 ### Broken References
 | Artifact | Section | ID | Line excerpt |
 |---|---|---|---|
-| phase-a/architecture-vision.md | §14 Key Risks | RIS-007 | "linked to RIS-007 (see Risk Register)" |
+| phase-a/architecture-vision.md | §16 Key Risks | RIS-007 | "linked to RIS-007 (see Risk Register)" |
 
 ### Orphaned IDs (Info)
 | Artifact | ID | Never referenced elsewhere |

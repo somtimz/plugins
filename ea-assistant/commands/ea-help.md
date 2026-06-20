@@ -231,7 +231,7 @@ Type these at any interview prompt:
 • Use `/ea-strategies` to make strategy first-class — the "how" in the
   DRV→G→OBJ→STR→WP chain. Each STR-NNN carries Type (Build/Buy/Partner/
   Consolidate/Modernise/Defend), Horizon, and rationale; `add`/`update` sync
-  into Architecture Vision §8. Run `/ea-strategies trace` for the Strategy Map
+  into Architecture Vision §11. Run `/ea-strategies trace` for the Strategy Map
   (which goals each strategy serves and which work packages execute it).
 • Use `/ea-score` to put numbers on every deliverable — Completeness and Quality
   (0–100 + band), scored per section and overall against the EA definitions, each

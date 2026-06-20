@@ -220,7 +220,7 @@ IDs referenced: {N}
 🔴 Broken references ({N})
 | Artifact | Section | ID | Context |
 |---|---|---|---|
-| phase-a/architecture-vision.md | §14 Key Risks | RIS-007 | "linked to RIS-007" |
+| phase-a/architecture-vision.md | §16 Key Risks | RIS-007 | "linked to RIS-007" |
 
 ℹ️  Orphaned IDs — defined but never referenced elsewhere ({N})
 | Artifact | ID |

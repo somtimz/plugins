@@ -95,11 +95,11 @@ None required at this phase — this phase establishes the foundation for tracea
 | Constraint | Severity |
 |---|---|
 | §1 Executive Summary must be populated (not `⚠️ Not answered`) | Blocking |
-| `direction.drivers[]` must contain at least one DRV-NNN (rendered in the Drivers Register; Vision §2 carries the summary + link) | Blocking |
-| §8 Scope must be populated | Blocking |
-| §9 Stakeholders must list at least one stakeholder | Warning |
-| §10 Architecture Principles must reference Preliminary phase principles | Warning |
-| §14 Key Risks must be populated | Warning |
+| `direction.drivers[]` must contain at least one DRV-NNN (rendered in the Drivers Register; Vision §4 carries the summary + link) | Blocking |
+| §2 Scope must be populated | Blocking |
+| §3 Stakeholders must reference the Stakeholder Map | Warning |
+| §12 Architecture Principles must reference Preliminary phase principles | Warning |
+| §16 Key Risks summary must be populated | Warning |
 | Appendix A3 — Decision Log must be present | Warning |
 
 ### Traceability

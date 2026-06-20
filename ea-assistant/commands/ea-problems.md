@@ -7,7 +7,7 @@ allowed-tools: [Read, Write, Bash]
 
 You are executing the `/ea-problems` command. All mode mechanics follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the Problem concept and its distinctions from Issue/Risk/Gap/Constraint, read `ea-concepts.md`; do not restate definitions here.
 
-Problems are specific, observable, fixable symptoms actively blocking objectives — certain and present, with a measurable symptom. The **Problems Register** is the management interface; the Architecture Vision (§6) summarises and links to it rather than rendering a live table. The **Engagement** domain covers problems with the EA engagement itself (methodology, governance, team, tooling).
+Problems are specific, observable, fixable symptoms actively blocking objectives — certain and present, with a measurable symptom. The **Problems Register** is the management interface; the Architecture Vision (§8) summarises and links to it rather than rendering a live table. The **Engagement** domain covers problems with the EA engagement itself (methodology, governance, team, tooling).
 
 ## Register Spec
 
