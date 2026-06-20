@@ -751,7 +751,7 @@ A risk is an uncertain future event or condition that, if it occurs, will have a
 - "We assume stakeholder buy-in" — this is an **Assumption**. The associated risk is: "If stakeholder buy-in is not secured, adoption of the target architecture may fail"
 - "The integration is broken" — this is an **Issue** (already occurred), not a risk
 
-**TOGAF placement:** Architecture Vision (preliminary risks, §14); Statement of Architecture Work (risk register); Architecture Compliance Assessment (outstanding risks); Migration Plan (risk register per wave, §4). The consolidated **Risk Register** artifact aggregates all of the above into a single cross-cutting view — use `/ea-risks` to generate it. Risk likelihood and impact ratings also appear in the A3 Decision Log `Risk` column.
+**TOGAF placement:** Architecture Vision (preliminary risks, §15); Statement of Architecture Work (risk register); Architecture Compliance Assessment (outstanding risks); Migration Plan (risk register per wave, §4). The consolidated **Risk Register** artifact aggregates all of the above into a single cross-cutting view — use `/ea-risks` to generate it. Risk likelihood and impact ratings also appear in the A3 Decision Log `Risk` column.
 
 **ArchiMate:** `Risk` element in the Motivation aspect (Strategy layer, introduced in ArchiMate 3.0). Associated with `Goal` and `Outcome` via influence relationships.
 
@@ -799,7 +799,7 @@ Every policy must have an **Issuing Authority** (who enacted it), an **Effective
 - "The system must handle 10,000 concurrent users" — this is a **Requirement** (verifiable outcome), not a policy
 - "Budget overrun is a risk" — this is a **Risk** (uncertain), not a policy. "The CFO has mandated a $2M budget cap" — that is a **Policy** ✓
 
-**TOGAF placement:** Preliminary phase (capture existing enterprise policies); Architecture Vision (cite policies as constraint sources, §11); Governance Framework (list policies that govern architecture work). Policies are external inputs — the EA function does not create them, it discovers, catalogues, and traces them.
+**TOGAF placement:** Preliminary phase (capture existing enterprise policies); Architecture Vision (cite policies as constraint sources, §12); Governance Framework (list policies that govern architecture work). Policies are external inputs — the EA function does not create them, it discovers, catalogues, and traces them.
 
 **ArchiMate:** `Contract` element (if the policy is a formal agreement) or `Business Object` element (if the policy is a governance document) in the Motivation aspect. Related to `Constraint` (policies generate constraints) and `Principle` (policies may motivate principles).
 
@@ -848,7 +848,7 @@ A constraint is a non-negotiable restriction on the architecture or its implemen
 - "We cannot use on-premise infrastructure" — this is a **Constraint** ✓ (restricts implementation choices)
 - "Budget overrun is a risk" — this is a **Risk** (uncertain), not a constraint. "Budget is capped at $2M" — that is a **Constraint** (certain)
 
-**TOGAF placement:** Architecture Vision (engagement constraints, §11); Architecture Principles (principles may generate constraints); Requirements Register (category: Constraint — legacy location, now deprecated in favour of standalone Constraints Register). The consolidated **Constraints Register** artifact aggregates all constraints into a single cross-cutting view — use `/ea-constraints` to generate it.
+**TOGAF placement:** Architecture Vision (engagement constraints, §12); Architecture Principles (principles may generate constraints); Requirements Register (category: Constraint — legacy location, now deprecated in favour of standalone Constraints Register). The consolidated **Constraints Register** artifact aggregates all constraints into a single cross-cutting view — use `/ea-constraints` to generate it.
 
 **ArchiMate:** `Constraint` element in the Motivation aspect. A restriction on implementation choices. Related to `Principle` (principles may motivate constraints), `Policy` (policies authorise constraints), and `Requirement` (constraints bound which requirements can be satisfied).
 

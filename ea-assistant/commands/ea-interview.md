@@ -174,7 +174,7 @@ Capture the full engagement direction in one cross-phase session before any TOGA
    - **Part 2 — Stakeholders** (Prelim Q8–11): related programmes, affected internal/external orgs, regulatory bodies
    - **Part 3 — Motivation** (Prelim Q12–17 + Phase A §2–§6): drivers (with evidence), vision, mission, goals (with rationale), objectives, strategies, issues (with evidence and raised-by), problems (with evidence and raised-by)
    - **Part 4 — Opportunities & Metrics** (Phase A §7): opportunities, success measures, baseline sources
-   - **Part 5 — Programme & Risks** (Prelim Q18–20 + Phase A §10–§16): programme structure, timeline, constraints, assumptions, key risks
+   - **Part 5 — Programme & Risks** (Prelim Q18–20 + Phase A §10–§15): programme structure, timeline, constraints, assumptions, key risks
 
 2. **Check for cross-cutting brainstorm notes.** Look for `EA-projects/{slug}/artifacts/cross-cutting/notes/brainstorm/brainstorm-notes.md`. If found, pass to `ea-interviewer` as pre-context — items tagged `[ISS?]`/`[PRB?]` should be promoted to formal ISS-NNN/PRB-NNN entries during this session.
 

@@ -12,7 +12,7 @@ You are executing the `/ea-risks` command. Load the `ea-engagement-lifecycle` sk
 The Risk Register aggregates all architecture risks from every artifact in the active engagement into a single cross-cutting view. It tracks likelihood, impact, mitigation, ownership, and status for every risk identified during the engagement.
 
 **Risk sources scanned:**
-- Architecture Vision — §14 Key Risks table
+- Architecture Vision — §15 Key Risks table
 - Statement of Architecture Work — Risk section
 - Business Architecture, Data Architecture, Application Architecture, Technology Architecture — any `Risk` or `Key Risks` section
 - Gap Analysis — unresolved GAP-NNN entries (gaps with no closed mitigation path)

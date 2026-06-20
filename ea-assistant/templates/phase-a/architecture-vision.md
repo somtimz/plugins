@@ -6,7 +6,7 @@ phase: A
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-templateVersion: 0.9.80
+templateVersion: 0.9.82
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   admPhases: [A]
@@ -93,6 +93,21 @@ Written for an executive audience. Avoid technical jargon.
 </details>
 
 {{executive_summary}}
+
+### Business Scenarios
+
+<details>
+<summary>📋 Guidance</summary>
+
+Business Scenarios are a Phase A discovery technique (TOGAF 10 §25.3.3) that translate business problems, actors, and desired outcomes into structured narratives. Each scenario validates that the Architecture Vision addresses a real business need. Use `/ea-scenarios` to create and manage BS-NNN items; they are referenced here.
+
+Not every engagement requires multiple formal scenarios — a single scenario may suffice.
+
+</details>
+
+| ID | Scenario | Problem / Opportunity | Actor(s) | Desired Outcome | Environment Required |
+|---|---|---|---|---|---|
+| *(none — use `/ea-scenarios` to add)* | — | — | — | — | — |
 
 ---
 
@@ -269,6 +284,8 @@ Be specific about organisational units, systems, geographies, and time horizons.
 
 </details>
 
+**Statement of Architecture Work:** [[statement-of-architecture-work]]
+
 ### In Scope
 {{scope_in}}
 
@@ -294,6 +311,8 @@ This feeds directly into the Stakeholder Map artifact.
 |---|---|---|---|
 | {{stakeholder_1}} | {{role_1}} | {{concerns_1}} | Informed / Consulted / Responsible |
 | {{stakeholder_2}} | {{role_2}} | {{concerns_2}} | Informed / Consulted / Responsible |
+
+**Full detail:** [[stakeholder-map]] · manage with `/ea-interview` (Stakeholder Map artifact)
 
 ---
 
@@ -349,14 +368,31 @@ List the assumptions being made. These should be validated and updated throughou
 <details>
 <summary>📋 Guidance</summary>
 
-A high-level description of the target state architecture. This should be visual where possible.
-Reference diagrams stored in the diagrams/ folder. Avoid detailed design at this stage.
+A high-level description of the target state, organised by architecture domain. Populate only the domains in scope; mark others ➖ Not applicable. Descriptions at Phase A are directional — principle-and-pattern statements, not system designs. Specific technology or vendor choices are premature here; capture them as PAD-NNN items instead.
 
 </details>
 
-{{target_architecture_description}}
+### Architecture Vision Statement
 
-*Reference diagram:* `../diagrams/{{diagram_filename}}`
+{{architecture_vision_statement}}
+
+### Business Domain
+
+{{target_business_domain}}
+
+### Data / Information Domain
+
+{{target_data_domain}}
+
+### Application Domain
+
+{{target_application_domain}}
+
+### Technology Domain
+
+{{target_technology_domain}}
+
+*Reference diagram:* `../../diagrams/{{diagram_filename}}`
 
 ---
 
@@ -375,21 +411,7 @@ Identify the top 3-5 risks to the architecture or engagement. Include mitigation
 
 ---
 
-## 16. Next Steps
-
-<details>
-<summary>📋 Guidance</summary>
-
-List the immediate next steps following approval of this document.
-Typically: approve Statement of Architecture Work, proceed to Phase B/C/D.
-
-</details>
-
-{{next_steps}}
-
----
-
-## 17. Diagrams
+## 16. Diagrams
 
 <details>
 <summary>📋 Guidance</summary>
@@ -499,7 +521,7 @@ criteria (technology/vendor selection, high cost/risk, hard to reverse, etc.).
 
 *Things that must be completed before this artifact can move to Approved status.*
 
-- [ ] *(Add tasks — e.g. "Populate §3 Assumptions before Phase B sign-off")*
+- [ ] *(Add tasks — e.g. "Populate §13 Assumptions before Phase B sign-off", "Get sponsor sign-off before proceeding to Phase B")*
 
 *This document was created using the EA Assistant plugin.*
 *Sections marked ⚠️ are unanswered. Sections marked 🤖 contain AI-suggested content requiring review.*
