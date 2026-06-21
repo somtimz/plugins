@@ -74,7 +74,7 @@ Load context using **Scope A** from `skills/ea-engagement-lifecycle/references/c
 
 **2. Within-artifact section consistency**
 
-Read the artifact. For each top-level section heading (`## ...`), collect all ID tokens matching `(G|OBJ|DRV|STR|ISS|PRB|MET|REQ|RIS|ADR|WP|GAP|CON)-\d{3}` and the label or description text immediately associated with each token (the same table row, or the inline text surrounding it).
+Read the artifact. For each top-level section heading (`## ...`), collect all ID tokens matching `(G|OBJ|DRV|STR|ISS|PRB|MET|REQ|RIS|ADR|WP|GAP|CON|CAP|ABB|SBB|STY|POL|CST|DF|INF|INT|API|OPP|BS|FIN|VS|UC|ROLE|SVC|IFC|RA)-\d{3}` and the label or description text immediately associated with each token (the same table row, or the inline text surrounding it).
 
 Build a map: `{ id → [ { section, label_text } ] }`
 
@@ -203,7 +203,7 @@ Scan every `.md` file in `EA-projects/{slug}/artifacts/**/*.md`. An ID is **defi
 - First cell of a Markdown table row: `| G-001 | ...`
 - A heading that begins with the ID token: `## G-001 — label`
 
-Pattern: `(G|OBJ|DRV|STR|ISS|PRB|MET|REQ|RIS|ADR|WP|GAP|CON)-\d{3}`
+Pattern: `(G|OBJ|DRV|STR|ISS|PRB|MET|REQ|RIS|ADR|WP|GAP|CON|CAP|ABB|SBB|STY|POL|CST|DF|INF|INT|API|OPP|BS|FIN|VS|UC|ROLE|SVC|IFC|RA)-\d{3}`
 
 **2. Scan for references**
 
