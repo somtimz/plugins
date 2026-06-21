@@ -157,6 +157,7 @@ You have existing engagements. Common next steps:
 | `/ea-workshop [start\|resume\|export\|list]` | Facilitated multi-stakeholder workshops — WS-NNN minutes, agenda, decisions, actions | ea-facilitator |
 | `/ea-arb [new\|council\|list\|view\|close]` | ARB meeting minutes — ARB-NNN, quorum, decisions, propagate to ADR register; `council` convenes the review panel and records its votes | — |
 | `/ea-config [section]` | Configure plugin settings, engagement rules, opt-outs, and refresh CLAUDE.md | — |
+| `/ea-details [view\|edit\|raw]` | Full engagement.json overview in one place — see every field grouped, edit metadata, or view the raw JSON | — |
 | `/ea-help` | This guide | — |
 
 ### Which Review Command?

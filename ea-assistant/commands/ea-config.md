@@ -323,6 +323,7 @@ Allows editing of key engagement classification fields that may need updating af
      targetEndDate        {value or "(not set)"}
 
    Say "set <field> to <value>" to update a field, or Enter to go back.
+   For the full engagement.json overview and a complete metadata editor, run `/ea-details`.
    ```
 
 3. Wait for input.
