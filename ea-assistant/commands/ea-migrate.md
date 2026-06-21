@@ -1,7 +1,7 @@
 ---
 name: ea-migrate
 description: Detect and resolve alignment gaps between an EA engagement and the current ea-assistant version — missing taxonomy, appendices, new artifacts, engagement.json schema fields, template body sections/guidance the artifact predates, section ordering, and heuristically-detected misplaced content (moved within or across documents). Body sections/reorder/content-moves are confirmed per item, snapshotted, and excluded from --auto. Always asks permission before making any change.
-argument-hint: "[--report] [--auto]"
+argument-hint: "[--report] [--auto] [--force]"
 allowed-tools: [Read, Write, Bash, Glob]
 ---
 
@@ -15,7 +15,8 @@ Scans the active engagement for alignment gaps between its artifacts and the cur
 
 Flags:
 - `--report` — scan and report only; do not offer remediation
-- `--auto` — apply all non-destructive remediations without confirmation (excludes 3g detail-file creation, which always requires per-item selection and content)
+- `--auto` — apply all non-destructive remediations without confirmation (excludes 3g detail-file creation and the 3a structural flattens, which always require per-item confirmation)
+- `--force` — run the full gap scan even when version stamps already match the current version (structural drift can persist across matching versions)
 
 ---
 
@@ -29,8 +30,16 @@ Check context for active slug; if none, scan `EA-projects/*/engagement.json`. Re
 
 Read current plugin version from `.claude-plugin/plugin.json`.
 
-If `pluginVersion` equals current version AND `lastMigratedVersion` equals current version:
+If `pluginVersion` equals current version AND `lastMigratedVersion` equals current version **AND `--force` was not passed**, run a fast **structural integrity probe** before short-circuiting (version stamps can match while the structure is still legacy — see 3a):
+
+- `direction` is **concept-keyed** (not domain-keyed `Business`/`Data`/`Application`/`Technology`/`Motivation`)
+- `metrics` is a **flat array** (not a domain-keyed object)
+- top-level `finance`, `policies`, `adoptedRAs`, `localRA`, `constraintsRepoPath` and `direction.opportunities`/`direction.gaps` are present
+
+If the probe finds **no** structural gaps:
 > "✅ This engagement is fully aligned with ea-assistant v{current_version}. No migration needed." → stop.
+
+If the probe finds structural gaps (or `--force` was passed), continue to Step 3 — the version match does not exempt structural drift.
 
 ---
 
@@ -160,7 +169,7 @@ How would you like to proceed?
   4. Skip — close without changes
 ```
 
-**Never apply any change without the user selecting an option.** If `--auto` was specified, proceed as option 1 — but still announce each change before writing. **3g (detail files), 3i (body sections/guidance), 3j (section reorder), and 3k (misplaced content) are always excluded from `--auto`** — they require interactive per-item confirmation even under `--auto`, because they touch artifact bodies rather than metadata/structure. 3j and 3k relocate **populated** content and additionally **snapshot the affected artifact(s) before applying** (see the gap catalogue's "Snapshot Before Restructure"); a content-preservation check runs after every reorder/move, restoring from the snapshot if anything would be lost or duplicated.
+**Never apply any change without the user selecting an option.** If `--auto` was specified, proceed as option 1 — but still announce each change before writing. **The 3a structural flattens (domain-keyed `direction` → concept-keyed; domain-keyed `metrics` object → flat array), 3g (detail files), 3i (body sections/guidance), 3j (section reorder), and 3k (misplaced content) are always excluded from `--auto`**. The 3a structural flattens relocate **populated** direction/metrics data, so they **snapshot `engagement.json` first** and run the uniqueness/unknown-key guard from the gap catalogue, aborting without writing if either check fails. — they require interactive per-item confirmation even under `--auto`, because they touch artifact bodies rather than metadata/structure. 3j and 3k relocate **populated** content and additionally **snapshot the affected artifact(s) before applying** (see the gap catalogue's "Snapshot Before Restructure"); a content-preservation check runs after every reorder/move, restoring from the snapshot if anything would be lost or duplicated.
 
 ---
 

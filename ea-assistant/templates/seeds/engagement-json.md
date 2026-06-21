@@ -14,6 +14,7 @@
   "currentPhase": "Prelim",
   "architectureDomains": [],
   "requirementsRepoPath": "",
+  "constraintsRepoPath": "",
   "pluginVersion": "",
   "lastMigratedVersion": "",
   "schemaVersion": 1,
@@ -31,9 +32,11 @@
     "strategies": [],
     "issues": [],
     "problems": [],
-    "metrics": [],
-    "policies": []
+    "opportunities": [],
+    "gaps": []
   },
+  "metrics": [],
+  "policies": [],
   "finance": [],
   "optOuts": [],
   "phases": {

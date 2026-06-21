@@ -9,26 +9,45 @@ Reference for `/ea-migrate`. Defines all gap checks, severity levels, and remedi
 | `pluginVersion` field present | Field absent | Low |
 | `lastMigratedVersion` field present | Field absent | Low |
 | `direction` field present | Absent (pre-0.4.0) | Medium |
+| **`direction` is concept-keyed** | `direction` is **domain-keyed** — has keys `Business`/`Data`/`Application`/`Technology`/`Motivation` instead of `vision`/`mission`/`drivers`/`goals`/… (legacy pre-0.9.x structure) | **Medium** |
+| `direction.opportunities` field present | Absent (pre-0.9.77) | Low |
+| `direction.gaps` field present | Absent | Low |
 | `metrics` field present | Absent (pre-0.5.0) | Low |
+| **`metrics` is a flat array** | `metrics` is a **domain-keyed object** (`{Business:[],Data:[],…}`) instead of a top-level array (legacy) | **Medium** |
 | `engagementType` field present | Absent (pre-0.2.0) | Low |
 | `architectureDomains` field present | Absent (pre-0.2.0) | Low |
 | `optOuts` field present | Absent (pre-0.8.0) | Low |
 | `architectureLevel` field present | Absent (pre-0.9.28) | Low |
 | `schemaVersion` field present | Absent (pre-0.9.59) | Low |
 | `migrations` field present | Absent (pre-0.9.59) | Low |
+| `policies` field present (top-level) | Absent | Low |
+| `finance` field present (top-level) | Absent (pre-0.9.66) | Low |
+| `adoptedRAs` field present | Absent (pre-0.9.54) | Low |
+| `localRA` field present | Absent (pre-0.9.54) | Low |
+| `constraintsRepoPath` field present | Absent | Low |
 | `requirements-index.json` scope values use Enterprise/Program | `scope: "Corporate"` or `"Project"` found (pre-0.9.35) | Low |
+
+**Field locations (canonical):** `direction` is **concept-keyed** (`vision`, `mission`, `drivers[]`, `goals[]`, `objectives[]`, `strategies[]`, `issues[]`, `problems[]`, `opportunities[]`, `gaps[]`). `metrics[]`, `policies[]`, and `finance[]` are **top-level** arrays (siblings of `direction`, not inside it) — this matches the read paths in the register commands (`/ea-goals` reads `direction.goals[]`; `/ea-policies` reads top-level `policies[]`; `/ea-finance` reads top-level `finance[]`).
 
 **Remediations:**
 - `pluginVersion` absent → add `"pluginVersion": "{current_version}"`
 - `lastMigratedVersion` absent → add `"lastMigratedVersion": "0.0.0"`
-- `direction` absent → add empty `direction` object with keys matching `architectureDomains`
-- `metrics` absent → add empty `metrics` object with keys matching `architectureDomains`
+- `direction` absent → add concept-keyed object: `{ "vision": "", "mission": "", "drivers": [], "goals": [], "objectives": [], "strategies": [], "issues": [], "problems": [], "opportunities": [], "gaps": [] }`
+- **`direction` domain-keyed → flatten to concept-keyed** (lossless): collect `goals`/`objectives`/`strategies` from every domain bucket (`Business`/`Data`/`Application`/`Technology`) **and** from `Motivation`; take `vision`/`mission`/`drivers`/`issues`/`problems` from `Motivation`. Each item already carries its own `domain` field, so the bucket key is redundant — discard it. **Guard:** before writing, assert all IDs are unique across buckets and that no bucket holds keys other than the known ones (`goals`/`objectives`/`strategies` per domain; `vision`/`mission`/`drivers`/`issues`/`problems`/`goals`/`objectives`/`strategies` for `Motivation`). If either check fails, **abort and report** — do not write. Snapshot `engagement.json` first (per "Snapshot Before Restructure").
+- `direction.opportunities`/`direction.gaps` absent → add `[]` to `direction`
+- `metrics` absent → add top-level `"metrics": []` (a **flat array**, not an object)
+- **`metrics` domain-keyed object → flatten to top-level array** (lossless): concatenate every domain bucket's entries into one `metrics[]`; each entry already carries `domain`. Same uniqueness guard and snapshot as above.
 - `engagementType` absent → add `"engagementType": null`
 - `architectureDomains` absent → add `"architectureDomains": ["Business","Data","Application","Technology"]`
 - `optOuts` absent → add `"optOuts": []`
-- `architectureLevel` absent → add `"architectureLevel": null`; inform: "Set this via `/ea-config metadata` — allowed values: Strategic, Segment, Capability, Solution. Defaults to Segment until set."
+- `architectureLevel` absent → add `"architectureLevel": null`; inform: "Set this via `/ea-details edit` (or `/ea-config metadata`) — allowed values: Strategic, Segment, Capability, Solution. Defaults to Segment until set."
 - `schemaVersion` absent → add `"schemaVersion": 1` (current schema version per `engagement-schema.md`)
 - `migrations` absent → add `"migrations": []` (the current run appends its audit entry in Step 7)
+- `policies` absent → add top-level `"policies": []`
+- `finance` absent → add top-level `"finance": []`
+- `adoptedRAs` absent → add `"adoptedRAs": []`
+- `localRA` absent → add `"localRA": { "nextId": 1 }`
+- `constraintsRepoPath` absent → add `"constraintsRepoPath": ""`
 - Legacy scope values (`Corporate`/`Project`) → rename all `"Corporate"` → `"Enterprise"` and `"Project"` → `"Program"` in `requirements-index.json`. Non-destructive; no content change.
 
 ## 3b — Expected Artifacts Missing

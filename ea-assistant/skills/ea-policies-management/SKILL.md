@@ -1,7 +1,7 @@
 ---
 name: ea-policies-management
 description: This skill should be used when the user asks to "manage architecture policies", "add a policy", "view policies", "trace a policy to constraints", "update the policies register", or "assess policy impact". Handles the full policy lifecycle from capture through traceability and linkage to constraints.
-version: 0.9.81
+version: 0.9.83
 ---
 
 # EA Policies Management
@@ -71,28 +71,26 @@ The `policies` array in `engagement.json` stores metadata and links for fast loo
 
 ## Engagement.json Schema
 
-Policies are tracked in `engagement.json` under the `direction` object:
+Policies are tracked in `engagement.json` under the **top-level `policies[]` array** (a governance register, sibling to `metrics[]`/`finance[]` — not inside `direction`):
 
 ```json
 {
-  "direction": {
-    "policies": [
-      {
-        "id": "POL-001",
-        "title": "",
-        "type": "Security | Procurement | Data Governance | Technology | Compliance | HR | Operational",
-        "issuingAuthority": "",
-        "effectiveDate": "YYYY-MM-DD",
-        "reviewCycle": "YYYY-MM-DD",
-        "scope": "Enterprise | Divisional | Geographic",
-        "status": "Draft | Enacted | Under Review | Superseded | Retired",
-        "supersededBy": "",
-        "linkedConstraints": [],
-        "linkedPrinciples": [],
-        "sourceFile": "policies-register.md"
-      }
-    ]
-  }
+  "policies": [
+    {
+      "id": "POL-001",
+      "title": "",
+      "type": "Security | Procurement | Data Governance | Technology | Compliance | HR | Operational",
+      "issuingAuthority": "",
+      "effectiveDate": "YYYY-MM-DD",
+      "reviewCycle": "YYYY-MM-DD",
+      "scope": "Enterprise | Divisional | Geographic",
+      "status": "Draft | Enacted | Under Review | Superseded | Retired",
+      "supersededBy": "",
+      "linkedConstraints": [],
+      "linkedPrinciples": [],
+      "sourceFile": "policies-register.md"
+    }
+  ]
 }
 ```
 
