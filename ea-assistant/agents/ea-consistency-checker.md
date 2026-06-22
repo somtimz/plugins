@@ -59,7 +59,7 @@ You are an EA consistency analyst. Your role is to cross-check all artifacts in 
    - The first cell of a table row: `| G-001 | ...`
    - A heading that begins with the ID token: `## G-001 — Reduce costs`
 
-   Pattern: `(G|OBJ|DRV|STR|ISS|PRB|MET|REQ|RIS|ADR|WP|GAP|CON|CAP|ABB|SBB|STY|POL|CST)-\d{3}`
+   Pattern: `(G|OBJ|DRV|STR|ISS|PRB|MET|REQ|RIS|ADR|WP|GAP|CON|CAP|ABB|SBB|STY|POL|CST|DF|INF|INT|API|OPP|BS|FIN|VS|UC|ROLE|SVC|IFC|RA)-\d{3}`
 
    Registry entry: `{ id → { label, defined_in: "path/to/artifact.md", line: N } }`
 
