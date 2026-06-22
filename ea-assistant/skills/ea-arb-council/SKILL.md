@@ -1,7 +1,7 @@
 ---
 name: ea-arb-council
 description: This skill should be used when the user asks to "convene the ARB council", "council review", "panel review", "review this through the council", or invokes /ea-council or /ea-arb council. Convenes a multi-member architecture review council — each member examines the in-scope subject through one mandate (feasibility, security, budget, design quality, innovation, prudence) and casts a recorded vote, then the skill synthesises a consolidated verdict.
-version: 0.9.83
+version: 0.9.84
 ---
 
 # EA ARB Council

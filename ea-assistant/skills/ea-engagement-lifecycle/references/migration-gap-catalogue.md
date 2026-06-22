@@ -40,7 +40,7 @@ Reference for `/ea-migrate`. Defines all gap checks, severity levels, and remedi
 - `engagementType` absent → add `"engagementType": null`
 - `architectureDomains` absent → add `"architectureDomains": ["Business","Data","Application","Technology"]`
 - `optOuts` absent → add `"optOuts": []`
-- `architectureLevel` absent → add `"architectureLevel": null`; inform: "Set this via `/ea-details edit` (or `/ea-config metadata`) — allowed values: Strategic, Segment, Capability, Solution. Defaults to Segment until set."
+- `architectureLevel` absent → add `"architectureLevel": null`; inform: "Set this via `/ea-meta edit` (or `/ea-config metadata`) — allowed values: Strategic, Segment, Capability, Solution. Defaults to Segment until set."
 - `schemaVersion` absent → add `"schemaVersion": 1` (current schema version per `engagement-schema.md`)
 - `migrations` absent → add `"migrations": []` (the current run appends its audit entry in Step 7)
 - `policies` absent → add top-level `"policies": []`

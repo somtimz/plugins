@@ -169,7 +169,7 @@ uiMode: html
 |---|---|
 | `/ea-new` | Create a new EA engagement with guided setup, engagement type selection, domain scoping, and Preliminary phase scaffolding |
 | `/ea-open` | Open an engagement with full details, edit metadata/phases/artifacts, archive or delete |
-| `/ea-details [view\|edit\|raw]` | Full `engagement.json` in one place — grouped read-only overview of every field, single authoritative metadata editor, and raw JSON view |
+| `/ea-meta [view\|edit\|raw]` | Full `engagement.json` record in one place — grouped read-only overview of every field, single authoritative metadata editor, and raw JSON view |
 | `/ea-status` | Portfolio dashboard with type, domains, phase progress, artifact counts, opt-outs, and non-standard artifact flags; `--next` for next action; `--direction` for Direction Register |
 | `/ea-phase [phase]` | Start, edit, or resume an ADM phase |
 | `/ea-artifact [action]` | Create, view, or list artifacts; runs compliance check on view; `summary [refresh\|status]` for executive summary management |
