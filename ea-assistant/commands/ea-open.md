@@ -213,6 +213,8 @@ Do not move existing artifact files — file migration is handled explicitly by 
 
    For option 4, show the count of items in `ResearchAndReferences/research-index.md` (count rows in the Items table). If the index is empty or missing, show "0 items".
 
+   After the menu, add a one-line pointer: `See the full engagement.json (every field, in one place): /ea-details`.
+
 ### Action: Research & References (option 4)
 
 Invoke `/ea-research` for the active engagement.

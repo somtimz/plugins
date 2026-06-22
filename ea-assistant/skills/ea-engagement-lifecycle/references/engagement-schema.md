@@ -88,6 +88,22 @@
       "source": ""
     }
   ],
+  "policies": [
+    {
+      "id": "POL-001",
+      "title": "",
+      "type": "Security | Procurement | Data Governance | Technology | Compliance | HR | Operational",
+      "issuingAuthority": "",
+      "effectiveDate": "YYYY-MM-DD",
+      "reviewCycle": "YYYY-MM-DD",
+      "scope": "Enterprise | Divisional | Geographic",
+      "status": "Draft | Enacted | Under Review | Superseded | Retired",
+      "supersededBy": "",
+      "linkedConstraints": [],
+      "linkedPrinciples": [],
+      "sourceFile": "policies-register.md"
+    }
+  ],
   "phases": {
     "Prelim":        { "status": "Not Started", "startedAt": null, "completedAt": null },
     "Requirements":  { "status": "Not Started", "startedAt": null, "completedAt": null },
@@ -114,7 +130,7 @@
 
 **`migrations[]`** is the audit trail: `/ea-migrate` appends one entry per run — `{ date, fromPluginVersion, toPluginVersion, fromSchemaVersion, toSchemaVersion, gapsFound, gapsFixed, gapsSkipped }`. Never edit or prune entries manually.
 
-**Source of truth:** `engagement.json` is the single source of truth for all direction items (drivers, goals, objectives, strategies, issues, problems, metrics, policies, gaps), phase state, and the artifact registry. Generated register markdown files (`*-register.md`) are **rendered views** — regenerate them after any change; never edit them to change state (the exceptions are registers whose content lives only in markdown: Risk, Requirements, Constraints, Policies registers, which are file-mastered with `engagement.json` holding metadata). Snapshot files under `snapshots/` are point-in-time archives per the register snapshot convention.
+**Source of truth:** `engagement.json` is the single source of truth for the strategic direction (`direction.{vision, mission, drivers, goals, objectives, strategies, issues, problems, opportunities, gaps}`), the top-level governance/measurement registers (`metrics[]`, `policies[]`, `finance[]` — siblings of `direction`, not nested in it), phase state, and the artifact registry. Generated register markdown files (`*-register.md`) are **rendered views** — regenerate them after any change; never edit them to change state (the exceptions are registers whose content lives only in markdown: Risk, Requirements, Constraints, Policies registers, which are file-mastered with `engagement.json` holding metadata). Snapshot files under `snapshots/` are point-in-time archives per the register snapshot convention.
 
 ## Field Version History
 
