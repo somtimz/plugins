@@ -1,8 +1,19 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.81
+**Version:** 0.9.84
 **Status:** Current
 **Author:** Costa Pissaris
+
+---
+
+## v0.9.84 — Command rename + documentation hygiene
+
+### Summary
+Renames `/ea-details` → **`/ea-meta`** to remove a confusing singular/plural collision with `/ea-detail` (per-item detail files). `/ea-meta` is the engagement.json record viewer and metadata editor; `/ea-detail` remains the per-item detail-file manager. All in-repo references updated (README, `ea-help`, `ea-config`, `ea-open`, `migration-gap-catalogue`).
+
+### Also in 0.9.84 — documentation & version hygiene
+- `CLAUDE.md` command count corrected (61 → **62**) and version pointer refreshed.
+- `skills/ea-artifact-templates/SKILL.md` version corrected (was stuck at `0.1`) and all skill versions aligned to the plugin version.
 
 ---
 

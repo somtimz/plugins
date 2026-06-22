@@ -1,15 +1,15 @@
 ---
-name: ea-details
-description: View the full engagement.json overview and edit engagement metadata in one place
+name: ea-meta
+description: View the full engagement.json record and edit engagement metadata in one place
 argument-hint: "[view|edit|raw] [field|key]"
 allowed-tools: [Read, Write, Bash, Glob]
 ---
 
-You are executing the `/ea-details` command.
+You are executing the `/ea-meta` command.
 
 ## Overview
 
-`/ea-details` is the single place to **see** the complete `engagement.json` and to
+`/ea-meta` is the single place to **see** the complete `engagement.json` and to
 **manage** its plain metadata. It does not re-implement register editing — direction
 items, metrics, finance, artifacts, phases, and opt-outs are owned by their dedicated
 commands, and this command routes you to them.
@@ -259,6 +259,6 @@ Apply only on `y`.
 
 ```
 Showing engagement.json{ → {key}}.
-(This is the raw source of truth. Edit metadata with `/ea-details edit`; edit
+(This is the raw source of truth. Edit metadata with `/ea-meta edit`; edit
 registers with their owning commands.)
 ```
