@@ -25,7 +25,6 @@ try:
     from pptx.util import Inches, Pt, Emu
     from pptx.dml.color import RGBColor
     from pptx.enum.text import PP_ALIGN
-    from pptx.util import Emu
 except ImportError:
     print("ERROR: python-pptx not installed. Run: pip3 install python-pptx")
     sys.exit(1)
