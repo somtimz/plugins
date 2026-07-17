@@ -48,8 +48,11 @@ Offer: add a requirement, sync from repo, view traceability.
    - Category: Functional / Non-Functional / Principle
      - **Deprecated:** `Constraint` category is deprecated for new capture. Use `/ea-constraints add` to create standalone constraints with `CST-NNN` IDs. Legacy `category: Constraint` rows remain valid for backward compatibility.
    - Priority: High / Medium / Low
-   - Source: stakeholder name or document reference
+   - Source Type: Driver / Goal / Objective / Use Case / Business Scenario / Process (or press Enter to leave unclassified)
+   - Source Reference: stakeholder name or document reference (required if Source Type is selected)
    - ADM phase relevance
+   - Acceptance Criteria (comma-separated, or press Enter): measurable conditions that prove this requirement is satisfied
+   - Upstream Links: comma-separated IDs of linked VS-NNN / PROC-NNN / UC-NNN items (or press Enter)
 2. **If Category = Non-Functional**, ask additional NFR fields:
    - "NFR Sub-Type? (Performance / Reliability / Availability / Usability / Security / Maintainability / Portability / Compatibility / Recoverability)"
    - "Measurable Target? Enter the quantifiable threshold (e.g. 99.9% availability, RTO 4h, <200ms p95 response time). Press Enter to skip."

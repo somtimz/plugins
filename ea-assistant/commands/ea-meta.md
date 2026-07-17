@@ -113,8 +113,11 @@ Direction
   opportunities  {N}   → /ea-objectives (opportunities)
   gaps           {N}   → /ea-gaps
   policies       {N}   → /ea-policies
-  rules          {N}   → /ea-rules
-  services       {N}   → /ea-services
+  rules             {N}   → /ea-rules
+  services          {N}   → /ea-services
+  valueStreams      {N}   → /ea-valuestreams
+  businessProcesses {N}   → /ea-processes
+  useCases          {N}   → /ea-usecases
 ```
 
 **6. Metrics & Finance**
@@ -214,6 +217,9 @@ Apply only on `y`.
 | `policies` | `/ea-policies` |
 | `rules` | `/ea-rules` |
 | `services` | `/ea-services` |
+| `valueStreams` | `/ea-valuestreams` |
+| `businessProcesses` | `/ea-processes` |
+| `useCases` | `/ea-usecases` |
 | `metrics` | captured via `/ea-interview` |
 | `finance` | `/ea-finance` |
 | `optOuts` | `/ea-config optouts` |

@@ -1,7 +1,7 @@
 ---
 name: ea-grill-skills
 description: Ten grill modes bundled for ea-assistant — stress-test, premortem, decision, design, software-design, infra-design, artifact, diagram, boardroom-strategy, finance. Load this skill and follow the ## Mode section matching the requested short name.
-version: 0.9.84
+version: 0.9.86
 ---
 
 When this skill is loaded, locate the `## Mode: {short-name}` section that matches the mode requested by `/ea-grill` and follow it exclusively. Ignore all other mode sections.
@@ -251,8 +251,8 @@ Act as a meticulous architecture reviewer. You will be given a structured artifa
 First, assess the artifact structurally:
 - identify which sections are populated, empty, or contain only placeholder text
 - check frontmatter fields (artifact type, phase, status, version, date)
-- map all ID references (DRV-NNN, G-NNN, OBJ-NNN, ISS-NNN, PRB-NNN, REQ-NNN, GAP-NNN, ABB-NNN, SBB-NNN, STY-NNN) and verify they resolve — flag dangling references
-- check traceability chains: do drivers link to goals? do goals link to objectives? do issues reference goals? do problems reference objectives? do requirements link to ABBs? do ABBs link to SBBs? do SBBs link to stories?
+- map all ID references (DRV-NNN, G-NNN, OBJ-NNN, ISS-NNN, PRB-NNN, REQ-NNN, GAP-NNN, ABB-NNN, SBB-NNN, STY-NNN, VS-NNN, PROC-NNN, UC-NNN) and verify they resolve — flag dangling references
+- check traceability chains: do drivers link to goals? do goals link to objectives? do issues reference goals? do problems reference objectives? do capabilities link to value streams? do value streams link to processes? do processes link to use cases? do use cases link to requirements? do requirements link to ABBs? do ABBs link to SBBs? do SBBs link to stories?
 - note any section that contradicts another section in the same artifact
 
 Then interrogate the content one section at a time using **guidance-driven scoring**:
@@ -322,6 +322,14 @@ After the section-by-section review, explicitly scan the artifact for these high
 - **Orphan SBB:** SBB-NNN with no ABB-NNN in Implements column. Flag: "SBB has no ABB — vendor-first selection."
 - **Lock-in blind spot:** SBB Constraints field is blank or contains generic text ("standard licensing", "none") when the product has known lock-in characteristics. Flag: "Lock-in constraints under-documented."
 - **Enabler story untagged:** Story with no actor-facing benefit and no `[Enabler]` tag. Flag: "Enabler story missing tag — add [Enabler] for clarity."
+
+**Business Architecture orphan checks (for `business-architecture` artifacts):**
+- **Orphan value stream:** VS-NNN listed in §3a with no linked CAP-NNN, no linked PROC-NNN, and no G-NNN / STR-NNN strategic link. Flag: "Orphan value stream — link to capability, process, or goal."
+- **Orphan process:** PROC-NNN listed in §4 with no linked VS-NNN value stream and no linked CAP-NNN capability. Flag: "Orphan process — link to value stream or capability."
+- **Orphan use case:** UC-NNN listed in §4a with no linked REQ-NNN requirement, no linked PROC-NNN process, and no linked CAP-NNN capability. Flag: "Orphan use case — link to requirement, process, or capability."
+- **Stage gap:** A value stream stage in the register has no covering CAP-NNN capability (i.e. no capability linked to that stream). Flag: "Value stream stage has no enabling capability — add CAP-NNN or record as gap."
+- **Process without owner:** Active (non-Draft) PROC-NNN with empty Owner field in the register. Flag: "Active process lacks owner — assign accountable role."
+- **Use case without actor or goal:** UC-NNN with empty Actor or Goal. Flag: "Use case missing actor or goal — complete before approval."
 
 **Policy anti-patterns:**
 - **Policy as constraint:** A POL-NNN entry phrased as a binding restriction rather than a governance document (e.g. "Budget is capped at $2M" with no authority or effective date). Flag: "Policy states a restriction — this belongs in a CST-NNN constraint derived from the policy."

@@ -40,6 +40,9 @@
   "finance": [],
   "rules": [],
   "services": [],
+  "valueStreams": [],
+  "businessProcesses": [],
+  "useCases": [],
   "optOuts": [],
   "phases": {
     "Prelim":        { "status": "Not Started", "startedAt": null, "completedAt": null },

@@ -1,8 +1,52 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.85
+**Version:** 0.9.86
 **Status:** Current
 **Author:** Costa Pissaris
+
+---
+
+## v0.9.86 — Business Architecture layer: Value Streams, Business Processes, Use Cases, and Stakeholder Goal Classification
+
+### Summary
+Adds first-class Business Architecture objects and traceability so the engagement can model **Value Streams** (`VS-NNN`), **Business Processes** (`PROC-NNN`), and **Use Cases** (`UC-NNN`) end-to-end. The Phase B Business Architecture template now holds summary-and-link sections that delegate to dedicated registers, while the traceability chain extends from `G-NNN / STR-NNN → CAP-NNN → VS-NNN → PROC-NNN → UC-NNN → REQ-NNN`. A new **Stakeholder Goal Classification** reference lets goals be tagged by the four classic stakeholder perspectives (Senior Management, Business Unit Manager, Staff, Ultimate Client). Existing goal, capability, requirement, business-rule, and business-service commands are enriched with Business Architecture links.
+
+### New
+- **Value Stream concept** in `skills/ea-artifact-templates/references/ea-concepts.md` — canonical definition, lifecycle stages, and traceability to capabilities, goals, processes. New `VS-NNN` ID in `ea-assistant/CLAUDE.md` ID scheme.
+- **Business Process concept** in `ea-concepts.md` — canonical definition, steps, inputs/outputs, actors, and links to value streams, capabilities, use cases, rules, and services. New `PROC-NNN` ID chosen to avoid collision with `BP-NNN` (Business Principle) and `PRB-NNN` (Problem).
+- **Use Case concept** in `ea-concepts.md` — canonical definition, actor/goal/trigger structure, main/alternative flows, and links to requirements, processes, capabilities, value streams. New `UC-NNN` ID (already reserved; now first-class).
+- **Stakeholder Goal Classification reference** — `skills/ea-engagement-lifecycle/references/stakeholder-goal-classification.md` defines the four categories and usage rules.
+- **`/ea-valuestreams` command** — `list/add/update/trace/generate` for `VS-NNN`; top-level `valueStreams[]` array in `engagement.json`; register at `artifacts/cross-cutting/operations/value-streams-register.md`.
+- **`/ea-processes` command** — `list/add/update/trace/generate` for `PROC-NNN`; top-level `businessProcesses[]` array; register at `artifacts/cross-cutting/operations/business-processes-register.md`; offers detail file creation for process steps.
+- **`/ea-usecases` command** — `list/add/update/trace/generate` for `UC-NNN`; top-level `useCases[]` array; register at `artifacts/cross-cutting/operations/use-cases-register.md`; offers detail file creation for use-case flows.
+- **`skills/ea-value-streams-management/SKILL.md`**, **`skills/ea-business-processes-management/SKILL.md`**, **`skills/ea-use-cases-management/SKILL.md`** — full lifecycle, schema, traceability, and validation guidance.
+- **Register templates** — `templates/cross-cutting/operations/value-streams-register.md`, `business-processes-register.md`, `use-cases-register.md` with frontmatter, guidance, compliance blocks, and summary tables.
+- **Cross-cutting index** — `templates/cross-cutting/cross-cutting-index.md` lists the three new registers under Operations and updates maintenance commands.
+- **Phase B Business Architecture template** — `templates/phase-b/business-architecture.md` now renders summary-and-link §3a Value Streams, §4 Business Processes, and §4a Use Case Catalog pointing to the new registers; Capability Model table gains `Differentiation` and `Linked Value Streams (VS-NNN)` columns; traceability chain updated to include VS/PROC/UC.
+- **Relationship matrices** — `matrix-catalogue.md` adds `process-value-stream`, `use-case-capability`, and `use-case-process` matrices for Phase B; `/ea-trace` adds views 11–14 for the new link types.
+- **Enriched existing commands:**
+  - `/ea-goals` — optional `stakeholder` field and grouping by Stakeholder; Goals Register gains a Stakeholder row.
+  - `/ea-interview` — Phase A Goal direction quality challenge now asks for stakeholder classification.
+  - `/ea-capabilities` — Capability Model gains `Differentiation` and `Linked Value Streams (VS-NNN)` columns/prompts.
+  - `/ea-requirements` — add mode captures `sourceType`, `source`, `acceptanceCriteria`, and `upstreamLinks` (VS/PROC/UC).
+  - `/ea-rules` — add/update supports `linkedProcesses` and `linkedUseCases`.
+  - `/ea-services` — add/update supports `linkedValueStreams` and `linkedProcesses`.
+- **Grill/consistency updates** — `ea-grill-skills` structural assessment and orphan checks cover VS-NNN / PROC-NNN / UC-NNN and the extended traceability chain; `/ea-consistency` ID pattern includes `PROC`.
+- **Schema + migration** — `engagement-schema.md`, `templates/seeds/engagement-json.md`, `migration-gap-catalogue.md`, and `commands/ea-migrate.md` updated for `valueStreams[]`, `businessProcesses[]`, `useCases[]`, stakeholder goal classification, and enriched link fields.
+
+### Files
+- `skills/ea-artifact-templates/references/ea-concepts.md`, `ea-assistant/CLAUDE.md` — concept + ID scheme updates.
+- `skills/ea-engagement-lifecycle/references/engagement-schema.md`, `templates/seeds/engagement-json.md`, `skills/ea-engagement-lifecycle/references/migration-gap-catalogue.md`, `commands/ea-migrate.md` — schema + migration.
+- `skills/ea-engagement-lifecycle/references/stakeholder-goal-classification.md` — new reference.
+- `skills/ea-value-streams-management/SKILL.md`, `skills/ea-business-processes-management/SKILL.md`, `skills/ea-use-cases-management/SKILL.md` — new skills.
+- `commands/ea-valuestreams.md`, `commands/ea-processes.md`, `commands/ea-usecases.md` — new commands.
+- `templates/cross-cutting/operations/value-streams-register.md`, `templates/cross-cutting/operations/business-processes-register.md`, `templates/cross-cutting/operations/use-cases-register.md`, `templates/cross-cutting/cross-cutting-index.md` — new/updated templates.
+- `templates/phase-b/business-architecture.md` — Phase B template alignment.
+- `skills/ea-artifact-templates/references/matrix-catalogue.md`, `commands/ea-trace.md` — matrices + traceability views.
+- `commands/ea-goals.md`, `commands/ea-interview.md`, `commands/ea-capabilities.md`, `commands/ea-requirements.md`, `skills/ea-requirements-management/SKILL.md`, `commands/ea-rules.md`, `skills/ea-business-rules-management/SKILL.md`, `commands/ea-services.md`, `skills/ea-business-services-management/SKILL.md` — enriched commands/skills.
+- `skills/ea-grill-skills/SKILL.md`, `commands/ea-consistency.md` — grill/consistency updates.
+- `templates/phase-a/goals-register.md` — Stakeholder row.
+- `.claude-plugin/plugin.json`, `../.claude-plugin/marketplace.json`, `docs/PRD.md`, `commands/ea-help.md`, `README.md`, `CLAUDE.md`, all `skills/*/SKILL.md` — version + description hygiene.
 
 ---
 

@@ -54,7 +54,7 @@ Untraced:      {N} rule(s) with broken link references
 Detail Files:  {N} BR-NNN(s) with detail files  |  {N} open issues across all rule detail files
 ```
 
-3. If any rules have `Status: Active` but no linked services or enforcement, flag: "⚠️ {N} active rule(s) with no operational linkage — run `/ea-rules trace` to bind them."
+3. If any rules have `Status: Active` but no linked services, processes, use cases, or enforcement, flag: "⚠️ {N} active rule(s) with no operational linkage — run `/ea-rules trace` to bind them."
 4. If any rules have `Source: Policy-derived` but no linked policy, flag: "⚠️ {N} policy-derived rule(s) with no POL-NNN linkage — run `/ea-rules update BR-NNN linkedPolicies` to bind them."
 
 ---
@@ -80,9 +80,11 @@ Creating new business rule — BR-{NNN}
 8. Scope (Enterprise 🔒 / Program):
 9. ADM Phase (Prelim / A / B / C-Data / C-App / D / E / F / G / H / Requirements):
 10. Linked Business Services (SVC-NNN IDs, comma-separated, or press Enter) [optional]:
-11. Linked Policies (POL-NNN IDs, comma-separated, or press Enter) [optional]:
-12. Linked Constraints (CST-NNN IDs, comma-separated, or press Enter) [optional]:
-13. Trace to Motivation (DRV-NNN / G-NNN / OBJ-NNN / STR-NNN IDs, comma-separated, or press Enter) [optional]:
+11. Linked Business Processes (PROC-NNN IDs, comma-separated, or press Enter) [optional]:
+12. Linked Use Cases (UC-NNN IDs, comma-separated, or press Enter) [optional]:
+13. Linked Policies (POL-NNN IDs, comma-separated, or press Enter) [optional]:
+14. Linked Constraints (CST-NNN IDs, comma-separated, or press Enter) [optional]:
+15. Trace to Motivation (DRV-NNN / G-NNN / OBJ-NNN / STR-NNN IDs, comma-separated, or press Enter) [optional]:
 ```
 
 4. If `Scope = Enterprise 🔒` and `Authority` is blank, warn: "⚠️ Enterprise rules require an Authority. Provide one or change Scope to Program."
@@ -97,6 +99,8 @@ Directive: {directive}  |  Outcome: {outcome}
 Authority: {authority}  |  Source: {source}  |  Enforcement: {enforcement}
 Scope: {scope}  |  Phase: {admPhase}
 Linked Services: {linkedServices or "—"}
+Linked Processes: {linkedProcesses or "—"}
+Linked Use Cases: {linkedUseCases or "—"}
 Linked Policies: {linkedPolicies or "—"}
 Linked Constraints: {linkedConstraints or "—"}
 Trace to Motivation: {linkedMotivation or "—"}
@@ -134,6 +138,8 @@ Invoked as: `/ea-rules update BR-NNN <field> <value>`
 | `admPhase` | Prelim / A / B / C-Data / C-App / D / E / F / G / H / Requirements |
 | `zachmanCell` | any string |
 | `linkedServices` | comma-separated SVC-NNN list |
+| `linkedProcesses` | comma-separated PROC-NNN list |
+| `linkedUseCases` | comma-separated UC-NNN list |
 | `linkedPolicies` | comma-separated POL-NNN list |
 | `linkedConstraints` | comma-separated CST-NNN list |
 | `linkedMotivation` | comma-separated DRV/G/OBJ/STR IDs |
@@ -142,7 +148,7 @@ Invoked as: `/ea-rules update BR-NNN <field> <value>`
    - Setting `status` to `Superseded` → require `supersededBy: BR-NNN`
    - Setting `status` to `Retired` → warn: "Retiring a rule may leave services without governance. Continue? (y/n)"
    - Setting `authority` to blank → warn: "Authority is mandatory. Keep existing? (y/n)"
-   - Removing all `linkedServices`, `linkedPolicies`, `linkedConstraints`, and `linkedMotivation` → warn: "This rule will have no linkages. Continue? (y/n)"
+   - Removing all `linkedServices`, `linkedProcesses`, `linkedUseCases`, `linkedPolicies`, `linkedConstraints`, and `linkedMotivation` → warn: "This rule will have no linkages. Continue? (y/n)"
    - Link values must match existing IDs in the engagement; flag unknown IDs as broken references
 4. Show proposed change: `"BR-NNN: {field} — '{old}' → '{new}'"`
 5. Ask: `"Apply? (y/n)"`

@@ -1,7 +1,7 @@
 ---
 name: ea-business-rules-management
 description: This skill should be used when the user asks to "manage business rules", "add a business rule", "view business rules", "trace a rule to services or motivation", "update the business rules register", or "assess rule impact". Handles the full business-rule lifecycle from capture through traceability and linkage to services, policies, constraints, and motivation elements.
-version: 0.9.85
+version: 0.9.86
 ---
 
 # EA Business Rules Management
@@ -51,6 +51,8 @@ The `rules` array in `engagement.json` stores metadata and links for fast lookup
 | **ADM Phase** | {{phase}} |
 | **Zachman Cell** | {{zachman_cell}} |
 | **Linked Business Services** | {{SVC-NNN IDs}} |
+| **Linked Business Processes** | {{PROC-NNN IDs}} |
+| **Linked Use Cases** | {{UC-NNN IDs}} |
 | **Linked Policies** | {{POL-NNN IDs}} |
 | **Linked Constraints** | {{CST-NNN IDs}} |
 | **Trace to Motivation** | {{DRV/G/OBJ/STR IDs}} |
@@ -86,6 +88,8 @@ Business Rules are tracked in `engagement.json` under the **top-level `rules[]` 
       "admPhase": "Prelim | A | B | C-Data | C-App | D | E | F | G | H | Requirements",
       "zachmanCell": "",
       "linkedServices": [],
+      "linkedProcesses": [],
+      "linkedUseCases": [],
       "linkedPolicies": [],
       "linkedConstraints": [],
       "linkedMotivation": [],
@@ -143,7 +147,7 @@ When prompting for a new rule:
 - `enforcement` must be one of the allowed enum values.
 - A rule with `status: Active` requires non-empty `authority` and `enforcement`.
 - Linked IDs must exist in the engagement; flag broken references in `trace` and `list`.
-- A rule with no linked service, policy, constraint, or motivation element is an **orphan** — flag in `list` and suggest `/ea-rules update BR-NNN linkedServices` or `linkedMotivation`.
+- A rule with no linked service, process, use case, policy, constraint, or motivation element is an **orphan** — flag in `list` and suggest `/ea-rules update BR-NNN linkedServices`, `linkedProcesses`, `linkedUseCases`, or `linkedMotivation`.
 
 ## Maturity Marker
 

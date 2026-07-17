@@ -203,7 +203,7 @@ Scan every `.md` file in `EA-projects/{slug}/artifacts/**/*.md`. An ID is **defi
 - First cell of a Markdown table row: `| G-001 | ...`
 - A heading that begins with the ID token: `## G-001 — label`
 
-Pattern: `(G|OBJ|DRV|STR|ISS|PRB|MET|REQ|RIS|ADR|WP|GAP|CON|CAP|ABB|SBB|STY|POL|CST|DF|INF|INT|API|OPP|BS|FIN|VS|UC|ROLE|SVC|IFC|RA)-\d{3}`
+Pattern: `(G|OBJ|DRV|STR|ISS|PRB|MET|REQ|RIS|ADR|WP|GAP|CON|CAP|ABB|SBB|STY|POL|CST|DF|INF|INT|API|OPP|BS|FIN|VS|PROC|UC|ROLE|SVC|IFC|RA)-\d{3}`
 
 **2. Scan for references**
 

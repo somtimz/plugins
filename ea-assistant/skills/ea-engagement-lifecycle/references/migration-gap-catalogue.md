@@ -24,6 +24,9 @@ Reference for `/ea-migrate`. Defines all gap checks, severity levels, and remedi
 | `finance` field present (top-level) | Absent (pre-0.9.66) | Low |
 | `rules` field present (top-level) | Absent (pre-0.9.85) | Low |
 | `services` field present (top-level) | Absent (pre-0.9.85) | Low |
+| `valueStreams` field present (top-level) | Absent (pre-0.9.86) | Low |
+| `businessProcesses` field present (top-level) | Absent (pre-0.9.86) | Low |
+| `useCases` field present (top-level) | Absent (pre-0.9.86) | Low |
 | `adoptedRAs` field present | Absent (pre-0.9.54) | Low |
 | `localRA` field present | Absent (pre-0.9.54) | Low |
 | `constraintsRepoPath` field present | Absent | Low |
@@ -49,6 +52,9 @@ Reference for `/ea-migrate`. Defines all gap checks, severity levels, and remedi
 - `finance` absent → add top-level `"finance": []`
 - `rules` absent → add top-level `"rules": []`
 - `services` absent → add top-level `"services": []`
+- `valueStreams` absent → add top-level `"valueStreams": []`
+- `businessProcesses` absent → add top-level `"businessProcesses": []`
+- `useCases` absent → add top-level `"useCases": []`
 - `adoptedRAs` absent → add `"adoptedRAs": []`
 - `localRA` absent → add `"localRA": { "nextId": 1 }`
 - `constraintsRepoPath` absent → add `"constraintsRepoPath": ""`

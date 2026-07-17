@@ -11,15 +11,17 @@ Capabilities are **mastered in the Business Architecture artifact** — the `## 
 
 ## Capability table columns
 
-`CAP-NNN | Level | Capability Type | Domain | Capability | Value / Outcome | Description | Current Maturity | Target Maturity | Supports (STR-NNN / G-NNN) | Details`
+`CAP-NNN | Level | Capability Type | Domain | Capability | Value / Outcome | Differentiation | Description | Current Maturity | Target Maturity | Supports (STR-NNN / G-NNN) | Linked Value Streams (VS-NNN) | Details`
 
 - **Level** — L1 (domain) / L2 (capability) / L3 (sub-capability); the map is box-in-box, hierarchical, **not** flow-based
 - **Capability Type** — Business (delivers stakeholder value; survives EA team) / Technology (enables/governs how the org operates)
 - **Value / Outcome** — the business outcome this capability enables (the value it brings); a capability with no value and no `Supports` anchor is flagged for removal (capability inflation)
+- **Differentiation** — `Differentiating` (creates competitive advantage; invest/differentiate) / `Enabling` (necessary but not differentiating; optimise cost/quality) / `Commodity` (table stakes; minimise cost). Leave blank if not assessed.
 - **Current / Target Maturity** — Absent / Immature / Developing / Mature
 - **Supports** — STR-NNN strategies or G-NNN goals it enables (strategy→capability traceability)
+- **Linked Value Streams** — VS-NNN IDs of value streams this capability enables or participates in; used for coverage checks
 
-If a legacy capability table lacks the `Value / Outcome` column, add it (insert after `Capability`) before writing.
+If a legacy capability table lacks the `Value / Outcome` column, add it (insert after `Capability`) before writing. If it lacks `Differentiation` or `Linked Value Streams`, add those columns after `Value / Outcome`.
 
 ## Step 1 — Resolve Engagement & Artifact
 
@@ -37,13 +39,13 @@ Render the capability hierarchy grouped by L1 domain, showing Type, Current→Ta
 
 ### `add`
 1. Assign the next `CAP-NNN` (scan all `CAP-\d{3}` in the table, max + 1).
-2. Prompt in order: **Level** (L1/L2/L3) → if L2/L3, **Parent** (CAP-NNN) → **Capability Type** (Business/Technology) → **Domain** (L1 group) → **Name** (a noun; reject verb-noun process names with a warning) → **Value / Outcome** (the business outcome it enables — required; "what do we gain by being able to do this?") → **Description** → **Current Maturity** → **Target Maturity** → **Supports** (list available STR-NNN/G-NNN from `engagement.json → direction`).
+2. Prompt in order: **Level** (L1/L2/L3) → if L2/L3, **Parent** (CAP-NNN) → **Capability Type** (Business/Technology) → **Domain** (L1 group) → **Name** (a noun; reject verb-noun process names with a warning) → **Value / Outcome** (the business outcome it enables — required; "what do we gain by being able to do this?") → **Differentiation** (Differentiating / Enabling / Commodity, or press Enter to skip) → **Description** → **Current Maturity** → **Target Maturity** → **Supports** (list available STR-NNN/G-NNN from `engagement.json → direction`) → **Linked Value Streams** (VS-NNN IDs, comma-separated, or press Enter).
 3. **Process-name check:** if the name reads as a process (starts with a verb, or matches "process/manage/handle X" as an action), warn: "⚠️ '{name}' looks like a process (how), not a capability (what). A capability is a noun — e.g. 'Order Management', not 'Process Orders'. Proceed? (y/n)".
 4. **Value check:** if Value/Outcome is empty, warn it will be flagged as inflation; offer to add one.
 5. Show a preview, confirm, then append the row in the correct domain group (keep L1→L2→L3 ordering). Update the artifact `lastModified`. Confirm: "CAP-NNN added under {domain}. Link it to a value stream with `/ea-matrix` (capability-value-stream)."
 
 ### `update CAP-NNN <field> <value>`
-Validate `<field>` against the columns (level, type, domain, name, value, description, currentMaturity, targetMaturity, supports, parent). Apply the same process-name and value checks. Show old→new, confirm, write, update `lastModified`.
+Validate `<field>` against the columns (level, type, domain, name, value, differentiation, description, currentMaturity, targetMaturity, supports, linkedValueStreams, parent). Apply the same process-name and value checks. Show old→new, confirm, write, update `lastModified`.
 
 ### `map`
 Render the capability model as a hierarchical **box-in-box map** (no arrows — it is not a flow): an indented text tree (L1 → L2 → L3) annotated with Current→Target maturity, and a Mermaid `graph TD` (or `flowchart`) hierarchy. Offer to write it to `diagrams/capability-map.{mmd}` and register it. A heatmap variant: colour/annotate by maturity gap (Target − Current) to surface investment priorities.
@@ -51,7 +53,7 @@ Render the capability model as a hierarchical **box-in-box map** (no arrows — 
 ### `score`
 Score the capability model on **Completeness** and **Quality** (0–100 + band), using `skills/ea-engagement-lifecycle/references/grill-scoring-rubric.md` specialised for capabilities:
 - **Completeness** — share of capabilities with: a Value/Outcome, Current and Target maturity, a `Supports` anchor, and (for L2/L3) a parent; plus whether the model covers the enterprise scope implied by the strategies/value streams.
-- **Quality** — capabilities are outcome-based **nouns** (not processes); no duplication / inflation; each is value-stream traced (via `/ea-matrix`); Business vs Technology correctly classified; value statements are concrete (an outcome, not a restatement of the name); differentiating vs commodity is distinguishable; **readability** of names and value statements.
+- **Quality** — capabilities are outcome-based **nouns** (not processes); no duplication / inflation; each is value-stream traced (via `/ea-matrix` or `Linked Value Streams`); Business vs Technology correctly classified; value statements are concrete (an outcome, not a restatement of the name); `Differentiation` is populated and consistent with the stated value/outcome; **readability** of names and value statements.
 Output the two scores, a per-capability flag table (✅ / ⚠️ with the issue), and the three weakest capabilities. Note this scores the capability model specifically; `/ea-score business-architecture` scores the whole artifact.
 
 ### `adopt`

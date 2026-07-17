@@ -1,7 +1,7 @@
 ---
 name: ea-business-services-management
 description: This skill should be used when the user asks to "manage business services", "add a service", "view services", "trace a service to rules or capabilities", "update the business services register", or "assess service coverage". Handles the full service lifecycle from capture through the Consumer–Outcome–Interface triad and linkage to business rules, capabilities, ABB/SBB, and interfaces.
-version: 0.9.85
+version: 0.9.86
 ---
 
 # EA Business Services Management
@@ -49,6 +49,8 @@ The `services` array in `engagement.json` stores metadata and links for fast loo
 | **SLA / NFR** | {{REQ-NNN or SLA statement}} |
 | **Linked Business Rules** | {{BR-NNN IDs}} |
 | **Linked Capabilities** | {{CAP-NNN IDs}} |
+| **Linked Value Streams** | {{VS-NNN IDs}} |
+| **Linked Business Processes** | {{PROC-NNN IDs}} |
 | **Linked ABB** | {{ABB-NNN IDs}} |
 | **Linked SBB** | {{SBB-NNN IDs}} |
 | **Linked Interfaces** | {{IFC-NNN IDs}} |
@@ -69,6 +71,8 @@ The `services` array in `engagement.json` stores metadata and links for fast loo
 | **Owner** | {{owner}} |
 | **SLA / NFR** | {{REQ-NNN or SLA statement}} |
 | **Linked Capabilities** | {{CAP-NNN IDs}} |
+| **Linked Value Streams** | {{VS-NNN IDs}} |
+| **Linked Business Processes** | {{PROC-NNN IDs}} |
 | **Linked ABB** | {{ABB-NNN IDs}} |
 | **Linked SBB** | {{SBB-NNN IDs}} |
 | **Linked Interfaces** | {{IFC-NNN IDs}} |
@@ -93,6 +97,8 @@ Services are tracked in `engagement.json` under the **top-level `services[]` arr
       "sla": "",
       "linkedRules": [],
       "linkedCapabilities": [],
+      "linkedValueStreams": [],
+      "linkedProcesses": [],
       "linkedABB": [],
       "linkedSBB": [],
       "linkedInterfaces": [],
@@ -120,6 +126,8 @@ Capture every Business-level service with the **Consumer–Outcome–Interface**
 Services trace to:
 - **Business Rules** they operationalise (`linkedRules`) — only meaningful at Business level; Application/Technology services may leave this empty
 - **Capabilities** that realise the service (`linkedCapabilities`)
+- **Value Streams** the service contributes to (`linkedValueStreams`)
+- **Business Processes** the service supports (`linkedProcesses`)
 - **Architecture Building Blocks (ABB)** that expose the service (`linkedABB`)
 - **Solution Building Blocks (SBB)** that implement it (`linkedSBB`)
 - **Interfaces (IFC-NNN)** through which the service is consumed (`linkedInterfaces`)
@@ -154,5 +162,5 @@ When prompting for a new service:
 - A service with empty `name` is a placeholder — must not be rendered.
 - A Business-level service without `consumer`, `outcome`, or `interface` is incomplete.
 - Linked IDs must exist in the engagement; flag broken references in `trace` and `list`.
-- A service with no linked capability, ABB, SBB, or interface is an **orphan** — flag in `list` and suggest `/ea-services update SVC-NNN linkedCapabilities` or `linkedInterfaces`.
+- A service with no linked capability, value stream, process, ABB, SBB, or interface is an **orphan** — flag in `list` and suggest `/ea-services update SVC-NNN linkedCapabilities`, `linkedValueStreams`, `linkedProcesses`, or `linkedInterfaces`.
 - For Business-level services, suggest linking to BR-NNN rules where applicable; do not require it.

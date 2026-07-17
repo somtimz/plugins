@@ -1,7 +1,7 @@
 ---
 name: ea-generation
 description: This skill should be used when the user asks to "generate a Word document", "export an artifact as PowerPoint", "create a .docx", "produce slides", "make a Mermaid diagram", "export artifact", "create a presentation", or any request to produce a formatted file output from an EA artifact.
-version: 0.9.84
+version: 0.9.86
 ---
 
 # EA Artifact Generation — Word, PowerPoint, and Mermaid

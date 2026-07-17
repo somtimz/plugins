@@ -1,7 +1,7 @@
 ---
 name: ea-requirements-management
 description: This skill should be used when the user asks to "manage architecture requirements", "add a requirement", "sync requirements from the repo", "view requirements", "trace a requirement to an artifact", "update the requirements register", or "start the architecture requirements phase". Handles the full requirements lifecycle from capture through traceability and sync with a shared requirements repository.
-version: 0.9.84
+version: 0.9.86
 ---
 
 # EA Requirements Management
@@ -95,7 +95,10 @@ The `requirementsRepoPath` in `engagement.json` points to a shared folder (curre
       "status": "Draft | Approved | Deferred | Rejected | Waived",
       "priority": "High | Medium | Low",
       "phase": "A",
+      "sourceType": "Driver | Goal | Objective | Use Case | Business Scenario | Process | null",
       "source": "",
+      "acceptanceCriteria": [],
+      "upstreamLinks": [],
       "linkedArtifacts": [],
       "derivedFrom": [],
       "waiverJustification": "",
@@ -112,7 +115,7 @@ The `requirementsRepoPath` in `engagement.json` points to a shared folder (curre
 Requirements with `scope: "Enterprise"` have restricted editability. The following rules apply:
 
 **Read-only fields (content is authoritative from the shared repo):**
-- `title`, `statement`, `category`, `priority`, `source`, `phase`, `nfrSubType`, `measurableTarget`
+- `title`, `statement`, `category`, `priority`, `sourceType`, `source`, `phase`, `acceptanceCriteria`, `upstreamLinks`, `nfrSubType`, `measurableTarget`
 
 **Editable fields (engagement-specific state):**
 - `status`, `linkedArtifacts`, `derivedFrom`, `waiverJustification`

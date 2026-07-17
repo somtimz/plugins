@@ -76,9 +76,11 @@ Creating new service — SVC-{NNN}
 8. SLA / NFR (REQ-NNN ID or free-text SLA statement) [optional]:
 9. Linked Business Rules (BR-NNN IDs, comma-separated; Business-level only, or press Enter) [optional]:
 10. Linked Capabilities (CAP-NNN IDs, comma-separated, or press Enter) [optional]:
-11. Linked ABB (ABB-NNN IDs, comma-separated, or press Enter) [optional]:
-12. Linked SBB (SBB-NNN IDs, comma-separated, or press Enter) [optional]:
-13. Linked Interfaces (IFC-NNN IDs, comma-separated, or press Enter) [optional]:
+11. Linked Value Streams (VS-NNN IDs, comma-separated, or press Enter) [optional]:
+12. Linked Business Processes (PROC-NNN IDs, comma-separated, or press Enter) [optional]:
+13. Linked ABB (ABB-NNN IDs, comma-separated, or press Enter) [optional]:
+14. Linked SBB (SBB-NNN IDs, comma-separated, or press Enter) [optional]:
+15. Linked Interfaces (IFC-NNN IDs, comma-separated, or press Enter) [optional]:
 ```
 
 4. If `Level = Business` and `Consumer` or `Outcome` is blank, warn: "⚠️ Business services require Consumer and Outcome. Provide them or change Level."
@@ -93,6 +95,8 @@ Interface: {interface or "—"}  |  Owner: {owner or "—"}
 SLA / NFR: {sla or "—"}
 Linked Rules: {linkedRules or "—"}
 Linked Capabilities: {linkedCapabilities or "—"}
+Linked Value Streams: {linkedValueStreams or "—"}
+Linked Processes: {linkedProcesses or "—"}
 Linked ABB: {linkedABB or "—"}
 Linked SBB: {linkedSBB or "—"}
 Linked Interfaces: {linkedInterfaces or "—"}
@@ -128,6 +132,8 @@ Invoked as: `/ea-services update SVC-NNN <field> <value>`
 | `status` | Active / Draft / Under Review / Deprecated / Retired |
 | `linkedRules` | comma-separated BR-NNN list |
 | `linkedCapabilities` | comma-separated CAP-NNN list |
+| `linkedValueStreams` | comma-separated VS-NNN list |
+| `linkedProcesses` | comma-separated PROC-NNN list |
 | `linkedABB` | comma-separated ABB-NNN list |
 | `linkedSBB` | comma-separated SBB-NNN list |
 | `linkedInterfaces` | comma-separated IFC-NNN list |
@@ -136,7 +142,7 @@ Invoked as: `/ea-services update SVC-NNN <field> <value>`
    - Setting `status` to `Deprecated` → suggest documenting the replacement or successor service
    - Setting `status` to `Retired` → warn: "Retiring a service may break consumers. Continue? (y/n)"
    - Setting `level` to `Business` with empty `consumer` or `outcome` → warn: "Business services require Consumer and Outcome."
-   - Removing all `linkedCapabilities`, `linkedABB`, `linkedSBB`, and `linkedInterfaces` → warn: "This service will have no delivery linkage. Continue? (y/n)"
+   - Removing all `linkedCapabilities`, `linkedValueStreams`, `linkedProcesses`, `linkedABB`, `linkedSBB`, and `linkedInterfaces` → warn: "This service will have no delivery linkage. Continue? (y/n)"
    - Link values must match existing IDs in the engagement; flag unknown IDs as broken references
 4. Show proposed change: `"SVC-NNN: {field} — '{old}' → '{new}'"`
 5. Ask: `"Apply? (y/n)"`

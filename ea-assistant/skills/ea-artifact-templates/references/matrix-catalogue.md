@@ -28,7 +28,7 @@ Entries marked **Managed by:** are not handled by `/ea-matrix` — follow the po
 |---|---|
 | Preliminary | `principle-decision` |
 | A | Stakeholder Map Matrix (managed elsewhere) |
-| B | `business-interaction`, `actor-role`, `capability-organization`, `capability-value-stream`, `capability-application`, `goal-service`, `capability-service` |
+| B | `business-interaction`, `actor-role`, `capability-organization`, `capability-value-stream`, `capability-application`, `goal-service`, `capability-service`, `process-value-stream`, `use-case-capability`, `use-case-process` |
 | C-Data | `data-function`, `app-data`, `data-entity-component` |
 | C-App | `app-organization`, `role-application`, `app-function`, `app-interaction`, `capability-application` |
 | D | `system-technology` |
@@ -308,6 +308,54 @@ Entries marked **Managed by:** are not handled by `/ea-matrix` — follow the po
 - **Elicitation questions:**
   1. "Which services realise or use the {capability} capability today?"
   2. "Are there capabilities with no service coverage, or services that do not map to a capability?"
+
+### process-value-stream — Process / Value Stream Matrix
+- **Phase:** B · **Folder:** `artifacts/phase-b/` · **File:** `process-value-stream-matrix.md`
+- **Axes:** rows = business processes (PROC-NNN), columns = value streams (VS-NNN)
+- **Seed sources:** rows — `engagement.json → businessProcesses[]`; columns — `engagement.json → valueStreams[]`
+- **Markers:** `C` contributes to · `S` supports · `O` owns end-to-end · `N` not applicable · `?` needs review
+- **Shows:** which processes participate in each value stream and whether a process is core or supporting
+- **Why:** exposes processes that are not aligned to any value stream and value streams with insufficient process coverage
+- **How:** processes on rows, value streams on columns; mark `C` where the process is a primary contributor, `S` where it supports, `O` where the process owns the end-to-end stream; `?` cells are captured in `## Open Questions`
+- **Grill checks:**
+  1. Every process row has at least one `C` or `S` — a process with no value stream is an orphan unless justified in `## Observations`.
+  2. Every value stream column has at least one `C` or `O` — a stream with no contributing process cannot deliver value.
+  3. Every `?` cell has a corresponding note in `## Open Questions`.
+- **Elicitation questions:**
+  1. "Which business processes contribute to the {value stream} value stream?"
+  2. "Are there processes that do not map to any value stream, or value streams with no process coverage?"
+
+### use-case-capability — Use Case / Capability Matrix
+- **Phase:** B · **Folder:** `artifacts/phase-b/` · **File:** `use-case-capability-matrix.md`
+- **Axes:** rows = use cases (UC-NNN), columns = capabilities (CAP-NNN)
+- **Seed sources:** rows — `engagement.json → useCases[]`; columns — `artifacts/phase-b/business-architecture.md` capability model (CAP-NNN tokens)
+- **Markers:** `E` exercises · `R` requires · `P` planned · `N` not applicable · `?` needs review
+- **Shows:** which capabilities each use case exercises or requires
+- **Why:** exposes use cases with no covering capability (capability gap) and capabilities never exercised by a use case (potentially out of scope)
+- **How:** use cases on rows, capabilities on columns; mark `E` where the use case exercises the capability today, `R` where it requires it but it is missing, `P` where it is planned; `?` cells are captured in `## Open Questions`
+- **Grill checks:**
+  1. Every use case row has at least one `E`, `R`, or `P` — a use case with no capability link is an orphan.
+  2. Every `R` cell has a corresponding GAP-NNN entry or is listed in `## Open Questions`.
+  3. Every `?` cell has a corresponding note in `## Open Questions`.
+- **Elicitation questions:**
+  1. "Which capabilities does the {use case} use case exercise or require?"
+  2. "Are there use cases that need capabilities we do not yet have?"
+
+### use-case-process — Use Case / Process Matrix
+- **Phase:** B · **Folder:** `artifacts/phase-b/` · **File:** `use-case-process-matrix.md`
+- **Axes:** rows = use cases (UC-NNN), columns = business processes (PROC-NNN)
+- **Seed sources:** rows — `engagement.json → useCases[]`; columns — `engagement.json → businessProcesses[]`
+- **Markers:** `T` triggers · `P` participates in · `N` not applicable · `?` needs review
+- **Shows:** which processes a use case triggers or participates in
+- **Why:** bridges actor-goal interactions and the organisational "how"; exposes use cases that cannot be operationalised or processes with no driving use case
+- **How:** use cases on rows, processes on columns; mark `T` where the use case triggers the process, `P` where it participates; `?` cells are captured in `## Open Questions`
+- **Grill checks:**
+  1. Every use case row has at least one `T` or `P` — a use case with no linked process may be unoperationalisable.
+  2. Every process column has at least one `T` or `P` — a process with no driving use case may be a candidate for retirement or scope clarification.
+  3. Every `?` cell has a corresponding note in `## Open Questions`.
+- **Elicitation questions:**
+  1. "Which business processes does the {use case} trigger or participate in?"
+  2. "Are there processes with no use case that still need to exist?"
 
 ### rule-service — Business Rule / Service Matrix
 - **Phase:** Cross-cutting · **Folder:** `artifacts/cross-cutting/operations/` · **File:** `rule-service-matrix.md`

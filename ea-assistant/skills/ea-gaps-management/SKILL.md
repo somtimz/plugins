@@ -1,7 +1,7 @@
 ---
 name: ea-gaps-management
 description: This skill should be used when the user asks to "manage architecture gaps", "add a gap", "promote a gap", "view gaps", "trace a gap to work packages", "update the gap register", or "generate the gap register". Handles the full gap lifecycle from identification through formal promotion, status tracking, and linkage to work packages.
-version: 0.9.84
+version: 0.9.86
 ---
 
 # EA Gaps Management

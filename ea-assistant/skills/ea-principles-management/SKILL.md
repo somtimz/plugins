@@ -1,7 +1,7 @@
 ---
 name: ea-principles-management
 description: Principles lifecycle management — ID assignment, traceability to policies and constraints, violation detection
-version: 0.9.84
+version: 0.9.86
 allowed-tools: [Read, Grep, Glob]
 ---
 

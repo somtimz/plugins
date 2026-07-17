@@ -29,7 +29,7 @@
       { "id": "DRV-001", "statement": "", "type": "External | Internal", "priority": "High | Medium | Low", "evidence": "", "linkedGoals": ["G-001"] }
     ],
     "goals": [
-      { "id": "G-001", "statement": "", "priority": "High | Medium | Low", "drivers": ["DRV-001"], "rationale": "" }
+      { "id": "G-001", "statement": "", "priority": "High | Medium | Low", "stakeholder": "Senior Management | Business Unit Manager | Staff | Ultimate Client | null", "drivers": ["DRV-001"], "rationale": "" }
     ],
     "objectives": [
       { "id": "OBJ-001", "statement": "", "measure": "", "target": "", "deadline": "", "priority": "High | Medium | Low", "linkedGoal": "G-001" }
@@ -123,6 +123,8 @@
       "linkedPolicies": [],
       "linkedConstraints": [],
       "linkedMotivation": [],
+      "linkedProcesses": [],
+      "linkedUseCases": [],
       "sourceFile": "business-rules-register.md"
     }
   ],
@@ -139,10 +141,60 @@
       "sla": "",
       "linkedRules": [],
       "linkedCapabilities": [],
+      "linkedValueStreams": [],
+      "linkedProcesses": [],
       "linkedABB": [],
       "linkedSBB": [],
       "linkedInterfaces": [],
       "sourceFile": "business-services-register.md"
+    }
+  ],
+  "valueStreams": [
+    {
+      "id": "VS-001",
+      "name": "",
+      "description": "",
+      "trigger": "",
+      "endOutcome": "",
+      "linkedCapabilities": [],
+      "linkedGoals": [],
+      "linkedProcesses": [],
+      "status": "Draft | Active | Under Review | Retired",
+      "sourceFile": "value-streams-register.md"
+    }
+  ],
+  "businessProcesses": [
+    {
+      "id": "PROC-001",
+      "name": "",
+      "purpose": "",
+      "valueStream": "VS-001 | null",
+      "trigger": "",
+      "inputs": "",
+      "outputs": "",
+      "actors": "",
+      "linkedCapabilities": [],
+      "linkedUseCases": [],
+      "linkedRules": [],
+      "linkedServices": [],
+      "status": "Draft | Active | Under Review | Retired",
+      "sourceFile": "business-processes-register.md"
+    }
+  ],
+  "useCases": [
+    {
+      "id": "UC-001",
+      "name": "",
+      "primaryActor": "",
+      "goal": "",
+      "trigger": "",
+      "preconditions": "",
+      "mainScenario": "",
+      "linkedCapabilities": [],
+      "linkedProcesses": [],
+      "linkedRequirements": [],
+      "status": "Draft | Active | Under Review | Retired",
+      "sourceFile": "use-cases-register.md"
     }
   ],
   "phases": {
@@ -183,7 +235,7 @@
 **v0.4.0 fields** — `direction` (flat structure, current):
 - Flat object at engagement level (not domain-scoped): `{ vision, mission, drivers[], goals[], objectives[], strategies[], issues[], problems[], opportunities[], gaps[] }`
 - **Driver** `{ id: DRV-NNN, statement, type, priority, evidence?, linkedGoals[] }` — WHY the engagement is needed
-- **Goal** `{ id: G-NNN, statement, priority, drivers[], rationale? }` — WHERE you want to be (qualitative)
+- **Goal** `{ id: G-NNN, statement, priority, stakeholder?, drivers[], rationale? }` — WHERE you want to be (qualitative). `stakeholder` is v0.9.86 (Senior Management / Business Unit Manager / Staff / Ultimate Client).
 - **Objective** `{ id: OBJ-NNN, statement, measure, target, deadline, priority, linkedGoal }` — HOW FAR and BY WHEN (measurable)
 - **Strategy** `{ id: STR-NNN, statement, type, supports: [id,...], horizon, priority, status, rationale? }` — HOW you'll get there. `type` ∈ Build/Buy/Partner/Consolidate/Modernise/Defend/Other; `horizon` ∈ Near/Mid/Long; `status` ∈ Active/Completed/Superseded. Managed via `/ea-strategies`. `type`/`horizon`/`status`/`rationale` are v0.9.67 fields — absent in legacy engagements; default `type: Other`, `horizon: Mid`, `status: Active`, `rationale: ""`. Executing work packages are **derived** from the Architecture Roadmap WP `Executes Strategies` field (not stored on the strategy), mirroring how goals/objectives derive their WPs.
 - **Issue** `{ id: ISS-NNN, statement, area, threatensGoals[], evidence?, raisedBy? }` — strategic threats to goals
@@ -263,6 +315,8 @@
 | `linkedPolicies` | `POL-NNN` authorising the rule |
 | `linkedConstraints` | `CST-NNN` enforcing the rule |
 | `linkedMotivation` | `DRV-NNN` / `G-NNN` / `OBJ-NNN` / `STR-NNN` traced |
+| `linkedProcesses` | `PROC-NNN` governed by this rule (v0.9.86) |
+| `linkedUseCases` | `UC-NNN` consuming this rule (v0.9.86) |
 | `sourceFile` | Register file the rule renders into |
 
 - `services[]` — flat array at engagement level. Each entry is a **Service** (`SVC-NNN`) at Business, Application, or Technology level. Managed via `/ea-services`. See `skills/ea-artifact-templates/references/ea-concepts.md` for the canonical Service definition.
@@ -280,13 +334,74 @@
 | `sla` | Service-level reference |
 | `linkedRules` | `BR-NNN` enacted by Business services |
 | `linkedCapabilities` | `CAP-NNN` realising the service |
+| `linkedValueStreams` | `VS-NNN` this service supports (v0.9.86) |
+| `linkedProcesses` | `PROC-NNN` this service operationalises (v0.9.86) |
 | `linkedABB` | Logical components |
 | `linkedSBB` | Concrete products |
 | `linkedInterfaces` | `IFC-NNN` access points |
 | `sourceFile` | Register file the service renders into |
 
-- Entries with empty `subject` (rules) or empty `name` (services) are placeholders — MUST NOT be displayed in artifacts.
+- `valueStreams[]` — flat array at engagement level. Each entry is a **Value Stream** (`VS-NNN`). Managed via `/ea-valuestreams`.
+
+| Field | Meaning |
+|---|---|
+| `id` | `VS-NNN` canonical ID |
+| `name` | Value stream name |
+| `description` | Short description |
+| `trigger` | What initiates the stream |
+| `endOutcome` | What the stakeholder receives |
+| `linkedCapabilities` | `CAP-NNN` exercised by this stream |
+| `linkedGoals` | `G-NNN` / `STR-NNN` this stream serves |
+| `linkedProcesses` | `PROC-NNN` that compose this stream |
+| `status` | `Draft` / `Active` / `Under Review` / `Retired` |
+| `sourceFile` | `value-streams-register.md` |
+
+- `businessProcesses[]` — flat array at engagement level. Each entry is a **Business Process** (`PROC-NNN`). Managed via `/ea-processes`.
+
+| Field | Meaning |
+|---|---|
+| `id` | `PROC-NNN` canonical ID |
+| `name` | Process name |
+| `purpose` | Why the process exists |
+| `valueStream` | Parent `VS-NNN` |
+| `trigger` | What starts it |
+| `inputs` | Key inputs |
+| `outputs` | Key outputs |
+| `actors` | Roles / actors |
+| `linkedCapabilities` | `CAP-NNN` exercised |
+| `linkedUseCases` | `UC-NNN` that consume this process |
+| `linkedRules` | `BR-NNN` applied |
+| `linkedServices` | `SVC-NNN` that operationalise it |
+| `status` | `Draft` / `Active` / `Under Review` / `Retired` |
+| `sourceFile` | `business-processes-register.md` |
+
+- `useCases[]` — flat array at engagement level. Each entry is a **Use Case** (`UC-NNN`). Managed via `/ea-usecases`.
+
+| Field | Meaning |
+|---|---|
+| `id` | `UC-NNN` canonical ID |
+| `name` | Use case name |
+| `primaryActor` | Actor role |
+| `goal` | Actor goal |
+| `trigger` | What starts it |
+| `preconditions` | Preconditions |
+| `mainScenario` | One-sentence main success path |
+| `linkedCapabilities` | `CAP-NNN` used |
+| `linkedProcesses` | `PROC-NNN` consumed |
+| `linkedRequirements` | `REQ-NNN` generated |
+| `status` | `Draft` / `Active` / `Under Review` / `Retired` |
+| `sourceFile` | `use-cases-register.md` |
+
+- Entries with empty `subject` (rules), empty `name` (services), or empty `name` (value streams/processes/use cases) are placeholders — MUST NOT be displayed in artifacts.
 - IDs are unique across the engagement; do not restart numbering per type.
+
+**v0.9.86 fields** — Business Architecture layer + enrichment fields:
+
+- `valueStreams[]`, `businessProcesses[]`, `useCases[]` — three new top-level arrays for first-class Business Architecture objects. Managed via `/ea-valuestreams`, `/ea-processes`, `/ea-usecases`. Process ID prefix is `PROC-NNN` to avoid collision with `BP-NNN` (Business Principle) and `PRB-NNN` (Problem).
+- `direction.goals[].stakeholder` — optional stakeholder classification (`Senior Management` / `Business Unit Manager` / `Staff` / `Ultimate Client`). Used by `/ea-goals` grouping and the Goals Register. See `skills/ea-engagement-lifecycle/references/stakeholder-goal-classification.md`.
+- `rules[].linkedProcesses` / `rules[].linkedUseCases` — optional `PROC-NNN` / `UC-NNN` links for Business Rules, enabling process-level rule traceability.
+- `services[].linkedValueStreams` / `services[].linkedProcesses` — optional `VS-NNN` / `PROC-NNN` links for Business Services, enabling value-stream and process service traceability.
+- `requirements-index.json` fields — `sourceType` (`Driver` / `Goal` / `Objective` / `Use Case` / `Business Scenario` / `Process` / `null`), `acceptanceCriteria[]`, and `upstreamLinks[]` (VS-NNN / PROC-NNN / UC-NNN / etc.) for richer requirement provenance. See `skills/ea-requirements-management/SKILL.md`.
 
 **v0.9.5 fields**:
 - `pluginVersion` — ea-assistant version that last opened this engagement (set by `/ea-open`); absent in legacy → treat as `"0.0.0"`

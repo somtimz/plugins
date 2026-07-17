@@ -17,7 +17,7 @@ Goals sit in the middle of the motivation chain (DRV → **G** → OBJ → WP). 
 | Storage | `engagement.json → direction.goals[]` |
 | Register file | `artifacts/cross-cutting/goals-register.md` (artifactId `goals-register`; relatedArtifacts `["architecture-vision"]`) |
 | Seed template | `templates/phase-a/goals-register.md` (scored artifact; `generate` fills its Summary + per-domain item blocks) |
-| Groupings | `list` and `generate` group by Domain; summary counts by Type, Priority, Status, plus "Orphans (no driver)" and "Not operationalised (no objective)" |
+| Groupings | `list` and `generate` group by Domain; summary counts by Type, Priority, Status, Stakeholder, plus "Orphans (no driver)" and "Not operationalised (no objective)" |
 | Orphan rule | No linked drivers AND no linked objectives → `⚠️ Orphan` |
 
 ### Fields
@@ -29,6 +29,7 @@ Goals sit in the middle of the motivation chain (DRV → **G** → OBJ → WP). 
 | `type` | What kind of goal is this? | Strategic (organisational direction) / Operational (process/efficiency) / Capability (capability development) / Compliance (regulatory/governance) | ✓ |
 | `priority` | Priority | High / Medium / Low | ✓ |
 | `status` | Status | Active / Achieved / Superseded (default Active) | ✓ |
+| `stakeholder` | Primary stakeholder perspective this goal serves | Senior Management / Business Unit Manager / Staff / Ultimate Client | opt |
 | `drivers` | Linked Drivers (list available DRV-NNN) | comma-separated DRV-NNN | opt |
 | `rationale` | Why is this a goal for this engagement? What happens if not achieved? | any string | opt |
 

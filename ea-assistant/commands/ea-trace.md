@@ -13,6 +13,7 @@ Renders traceability views across the EA motivation chain and implementation cha
 
 Two chains are traced:
 - **Motivation chain:** Driver → Goal → Strategy → Requirement → Capability → Work Package
+- **Execution chain:** Goal → Capability → Value Stream → Process → Use Case → Requirement
 - **Implementation chain:** Requirement → ABB → SBB → Story
 
 **Modes:**
@@ -65,7 +66,11 @@ EA Traceability Views — {engagement name}
   8. SBB → Story                   ({N} gaps)
   9. Gap → Work Package            ({N} gaps)
  10. Requirement → Work Package    ({N} gaps)
- 11. Full gap report               (all views, gaps + contradictions only)
+ 11. Capability → Value Stream     ({N} gaps)
+ 12. Value Stream → Process        ({N} gaps)
+ 13. Process → Use Case            ({N} gaps)
+ 14. Use Case → Requirement       ({N} gaps)
+ 15. Full gap report               (all views, gaps + contradictions only)
   Q. Quit
 
 Enter a number:
@@ -456,12 +461,145 @@ For each REQ-NNN with no derived path to any WP:
 
 ---
 
+### View 11: Capability → Value Stream
+
+**Entity sources:**
+- CAP-NNN: scan `EA-projects/{slug}/artifacts/phase-b/*.md` for tokens matching `CAP-\d{3}`
+- VS-NNN: read `engagement.json → valueStreams[]`
+
+**Render matrix:** rows = CAP-NNN, columns = VS-NNN, link type = `enables`
+
+**Gaps section:**
+
+For each CAP-NNN with no outgoing `enables` link:
+```
+⚠️ CAP-001 enables no value stream
+   → Link to a value stream via /ea-valuestreams update VS-NNN linkedCapabilities CAP-001
+   → Or add: {"from":"CAP-001","to":"VS-XXX","type":"enables"}
+```
+
+For each VS-NNN with no incoming `enables` link:
+```
+⚠️ VS-002 has no enabling capability
+   → Link to a capability via /ea-valuestreams update VS-002 linkedCapabilities CAP-NNN
+   → Or verify the value stream is within scope
+```
+
+**Contradictions section:**
+
+Two capabilities both marked `enables` for the same VS-NNN but described as `Differentiating` and `Commodity` for the same stage — verify the differentiation claim is consistent across the value stream.
+
+**Bootstrap mechanism:** Scan phase-b artifacts for rows where CAP-NNN and VS-NNN co-occur in the same table row or section. Propose each candidate pair for confirmation before linking.
+
+**After view:** Return to the persistent menu (Step 3).
+
+---
+
+### View 12: Value Stream → Process
+
+**Entity sources:**
+- VS-NNN: read `engagement.json → valueStreams[]`
+- PROC-NNN: read `engagement.json → businessProcesses[]`
+
+**Render matrix:** rows = VS-NNN, columns = PROC-NNN, link type = `includes`
+
+**Gaps section:**
+
+For each VS-NNN with no outgoing `includes` link:
+```
+⚠️ VS-001 includes no business process
+   → Link to a process via /ea-processes update PROC-NNN linkedValueStreams VS-001
+   → Or add: {"from":"VS-001","to":"PROC-XXX","type":"includes"}
+```
+
+For each PROC-NNN with no incoming `includes` link:
+```
+⚠️ PROC-003 is not included in any value stream
+   → Link to a value stream or verify this process is in scope
+```
+
+**Contradictions section:**
+
+A process linked to a value stream but whose `linkedCapabilities` do not intersect with the stream's `linkedCapabilities` — flag: "PROC-NNN participates in VS-NNN but shares no capabilities with it. Verify capability coverage."
+
+**Bootstrap mechanism:** Scan `artifacts/cross-cutting/operations/business-processes-register.md` for rows where VS-NNN and PROC-NNN co-occur. Propose each candidate pair for confirmation before linking.
+
+**After view:** Return to the persistent menu (Step 3).
+
+---
+
+### View 13: Process → Use Case
+
+**Entity sources:**
+- PROC-NNN: read `engagement.json → businessProcesses[]`
+- UC-NNN: read `engagement.json → useCases[]`
+
+**Render matrix:** rows = PROC-NNN, columns = UC-NNN, link type = `triggers`
+
+**Gaps section:**
+
+For each PROC-NNN with no outgoing `triggers` link:
+```
+⚠️ PROC-001 triggers no use case
+   → Link to a use case via /ea-usecases update UC-NNN linkedProcesses PROC-001
+   → Or add: {"from":"PROC-001","to":"UC-XXX","type":"triggers"}
+```
+
+For each UC-NNN with no incoming `triggers` link:
+```
+⚠️ UC-002 is not triggered by any process
+   → Link to a process or verify the use case is driven by a business event
+```
+
+**Contradictions section:**
+
+Two processes linked to the same UC-NNN with different `admPhase` values — a use case should not straddle incompatible phases without a PAD-NNN or transition note.
+
+**Bootstrap mechanism:** Scan `artifacts/cross-cutting/operations/use-cases-register.md` for rows where PROC-NNN and UC-NNN co-occur. Propose each candidate pair for confirmation before linking.
+
+**After view:** Return to the persistent menu (Step 3).
+
+---
+
+### View 14: Use Case → Requirement
+
+**Entity sources:**
+- UC-NNN: read `engagement.json → useCases[]`
+- REQ-NNN: read `EA-projects/{slug}/artifacts/requirements/requirements-index.json` — Draft and Approved only
+
+**Render matrix:** rows = UC-NNN, columns = REQ-NNN, link type = `generates`
+
+**Gaps section:**
+
+For each UC-NNN with no outgoing `generates` link:
+```
+⚠️ UC-001 generates no requirement
+   → Derive a requirement via /ea-requirements add
+   → Or add: {"from":"UC-001","to":"REQ-XXX","type":"generates"}
+```
+
+For each active REQ-NNN with no incoming `generates` link:
+```
+⚠️ REQ-005 is not generated by any use case
+   → Link to a use case or verify it is derived from a capability / value stream / process instead
+```
+
+**Contradictions section:**
+
+Two use cases linked to the same REQ-NNN but with conflicting priority or scope — verify the requirement is correctly shared or split.
+
+**Bootstrap mechanism:** Scan requirements artifact for rows where UC-NNN and REQ-NNN co-occur in the same table row or section. Propose each candidate pair for confirmation before linking.
+
+**After view:** Return to the persistent menu (Step 3).
+
+---
+
 ## Step 5 — Write Links
 
 When a user confirms a bootstrap suggestion or manually adds a link (by typing the JSON):
 
 1. Parse the link object: `{"from": "X", "to": "Y", "type": "Z"}`
-2. Validate that `type` is one of the eight types: `motivates`, `addresses`, `supports`, `satisfiedBy`, `deliveredBy`, `realisedBy`, `implementedBy`, `deliveredAs`
+2. Validate that `type` is one of the link types used by the views: `motivates`, `addresses`, `supports`, `satisfiedBy`, `deliveredBy`, `realisedBy`, `implementedBy`, `deliveredAs`, `enables`, `includes`, `triggers`, `generates`
 3. Check for duplicates: if an identical `from`/`to`/`type` triple already exists, skip and notify: `Link already exists — no change made.`
 4. Append to the `links` array in `traceability-index.json`
 5. Set `lastUpdated` to the current ISO 8601 timestamp
@@ -473,9 +611,9 @@ When a user confirms a bootstrap suggestion or manually adds a link (by typing t
 
 ## Step 6 — Full Gap Report
 
-Triggered by menu option 11 or the `--gaps` argument.
+Triggered by menu option 15 or the `--gaps` argument.
 
-Run all ten views silently (generate findings but do not render matrices). Collect all gap and contradiction findings. Print:
+Run all fourteen views silently (generate findings but do not render matrices). Collect all gap and contradiction findings. Print:
 
 ```
 Full Gap Report — {engagement name}
@@ -492,8 +630,12 @@ Capability → Work Package {N} gaps, {N} contradictions
 Requirement → ABB         {N} gaps, {N} contradictions
 ABB → SBB                 {N} gaps, {N} contradictions
 SBB → Story               {N} gaps, {N} contradictions
-Gap → Work Package        {N} gaps
-Requirement → Work Package {N} gaps
+Gap → Work Package              {N} gaps
+Requirement → Work Package      {N} gaps
+Capability → Value Stream       {N} gaps, {N} contradictions
+Value Stream → Process          {N} gaps, {N} contradictions
+Process → Use Case              {N} gaps, {N} contradictions
+Use Case → Requirement          {N} gaps, {N} contradictions
 
 Total: {N} gaps, {N} contradictions
 
@@ -508,7 +650,7 @@ Total: {N} gaps, {N} contradictions
 
 After the report, offer:
 ```
-  1. Open a specific view  →  enter 1–10
+  1. Open a specific view  →  enter 1–14
   2. Run /ea-consistency for artifact-level checks
   Q. Quit
 ```

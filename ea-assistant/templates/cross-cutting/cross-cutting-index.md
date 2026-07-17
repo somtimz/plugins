@@ -6,7 +6,7 @@ phase: All
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-templateVersion: 0.9.56
+templateVersion: 0.9.86
 lastModified: {{YYYY-MM-DDTHH:MM:SSZ}}
 taxonomy:
   admPhases: [Preliminary, Requirements, A, B, C-Data, C-App, D, E, F, G, H]
@@ -21,7 +21,7 @@ taxonomy:
 
 # Cross-cutting Artifacts — {{engagement_name}}
 
-Navigation hub for all artifacts that apply across ADM phases. Maintained automatically by `/ea-adrs`, `/ea-decisions`, `/ea-risks`, `/ea-concerns`, `/ea-changes`, `/ea-constraints`, `/ea-policies`, `/ea-rules`, `/ea-services`, `/ea-zachman`, and `/ea-roles`.
+Navigation hub for all artifacts that apply across ADM phases. Maintained automatically by `/ea-adrs`, `/ea-decisions`, `/ea-risks`, `/ea-concerns`, `/ea-changes`, `/ea-constraints`, `/ea-policies`, `/ea-rules`, `/ea-services`, `/ea-valuestreams`, `/ea-processes`, `/ea-usecases`, `/ea-zachman`, and `/ea-roles`.
 
 ---
 
@@ -42,17 +42,20 @@ Architecture decisions, decision log, constraints, and policies.
 
 ## Operations
 
-Risk tracking, change requests, stakeholder concerns, business rules, and services.
+Risk tracking, change requests, stakeholder concerns, value streams, business processes, use cases, business rules, and services.
 
 | Artifact | File | Status | Last Modified |
 |---|---|---|---|
 | Risk Register | [risk-register.md](operations/risk-register.md) | ⚠️ Not generated | — |
 | Change Register | [change-register.md](operations/change-register.md) | ⚠️ Not generated | — |
 | Stakeholder Concerns | [concerns-register.md](operations/concerns-register.md) | ⚠️ Not generated | — |
+| Value Streams Register | [value-streams-register.md](operations/value-streams-register.md) | ⚠️ Not generated | — |
+| Business Processes Register | [business-processes-register.md](operations/business-processes-register.md) | ⚠️ Not generated | — |
+| Use Cases Register | [use-cases-register.md](operations/use-cases-register.md) | ⚠️ Not generated | — |
 | Business Rules Register | [business-rules-register.md](operations/business-rules-register.md) | ⚠️ Not generated | — |
 | Business Services Register | [business-services-register.md](operations/business-services-register.md) | ⚠️ Not generated | — |
 
-> Use `/ea-risks generate`, `/ea-changes generate`, `/ea-concerns generate`, `/ea-rules generate`, `/ea-services generate` to create or refresh these registers.
+> Use `/ea-risks generate`, `/ea-changes generate`, `/ea-concerns generate`, `/ea-valuestreams generate`, `/ea-processes generate`, `/ea-usecases generate`, `/ea-rules generate`, `/ea-services generate` to create or refresh these registers.
 
 ---
 

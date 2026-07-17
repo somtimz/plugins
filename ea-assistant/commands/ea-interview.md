@@ -194,6 +194,7 @@ Capture the full engagement direction in one cross-phase session before any TOGA
    - **Missing evidence (Driver, Issue, Problem):** Prompt — "This item needs supporting evidence. Can you cite a source, metric, or document?" If the user skips, note the item with `⚠️ Evidence pending` in the interview notes.
    - **Ambiguous phrasing (Advisory):** Prompt — "This statement could mean different things. Could you be more specific about '{vague element}'?" If the user declines, note `ℹ️ Phrasing advisory` in the interview notes.
    - **Isolated item:** Inform — "This item has no linked {goals/drivers/objectives} yet. You can add links now or address this in `/ea-status --direction --quality` after the session."
+   - **Goal stakeholder classification (Goal items only):** Ask — "From whose perspective is this goal most important — Senior Management, Business Unit Manager, Staff, or Ultimate Client?" Record the answer in the goal's `stakeholder` field. If the user is unsure, leave it blank and flag as `ℹ️ Stakeholder perspective not classified`.
    - Do **not** block progress — if the user declines to revise any item, accept it and continue. Flag it for the Direction Quality Summary below.
 
    **Direction Quality Summary — end of Part 3:** After all Part 3 items are captured, before moving to Part 4, present:

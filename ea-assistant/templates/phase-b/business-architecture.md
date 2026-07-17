@@ -6,7 +6,7 @@ phase: B
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-templateVersion: 0.9.55
+templateVersion: 0.9.86
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   admPhases: [B]
@@ -83,7 +83,7 @@ links: []
 
 ## Related Matrices
 
-> **TOGAF relationship matrices for this domain** (manage with `/ea-matrix`; definitions in `matrix-catalogue.md`): Business Interaction (`business-interaction`), Actor/Role (`actor-role`), Capability/Organization (`capability-organization`), Capability/Value Stream (`capability-value-stream`), Capability/Application (`capability-application`), Goal/Service (`goal-service`). Run `/ea-matrix list` for status.
+> **TOGAF relationship matrices for this domain** (manage with `/ea-matrix`; definitions in `matrix-catalogue.md`): Business Interaction (`business-interaction`), Actor/Role (`actor-role`), Capability/Organization (`capability-organization`), Capability/Value Stream (`capability-value-stream`), Capability/Application (`capability-application`), Goal/Service (`goal-service`), Process/Value Stream (`process-value-stream`), Use Case/Capability (`use-case-capability`), Use Case/Process (`use-case-process`). Run `/ea-matrix list` for status.
 
 ---
 
@@ -160,17 +160,19 @@ Define capabilities using a three-level hierarchy. Each capability gets a CAP-NN
 **Supports column:** link each capability to the STR-NNN strategy or G-NNN goal it enables.
 A capability with no strategic anchor should be flagged for removal or reclassification.
 
-**A capability with no value stream exercising it is an orphan — flag it.** Every capability should be traceable to at least one value stream or one use case.
+**Differentiation column:** classify each capability as `Differentiating` (creates competitive advantage; invest), `Enabling` (necessary but not differentiating; optimise cost/quality), or `Commodity` (table stakes; minimise cost). Leave blank only when not yet assessed. This classification drives investment and sourcing decisions.
+
+**Linked Value Streams column:** list VS-NNN IDs of value streams this capability enables or participates in. **A capability with no linked value stream or use case is an orphan — flag it.** Every capability should be traceable to at least one value stream or one use case.
 
 **ABB subsections:** For each capability, add an optional `#### ABBs for CAP-NNN` subsection below the table listing the logical architecture components needed to realise it. ABBs are populated by Phase C/D architects; Phase B architects may leave these as placeholders.
 
 </details>
 
-| CAP-NNN | Level | Capability Type | Domain | Capability | Value / Outcome | Description | Current Maturity | Target Maturity | Supports (STR-NNN / G-NNN) | Details |
-|---|---|---|---|---|---|---|---|---|---|---|
-| [[CAP-001]] | L1 | Business Capability | Customer Management | {{domain_name}} | {{value_outcome}} | {{domain_description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | [[CAP-001\|→]] |
-| [[CAP-002]] | L2 | Business Capability | Customer Management | {{capability_name}} | {{value_outcome}} | {{description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | [[CAP-002\|→]] |
-| [[CAP-003]] | L3 | Technology Capability | Business Continuity | {{sub_capability_name}} | {{value_outcome}} | {{description}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | [[CAP-003\|→]] |
+| CAP-NNN | Level | Capability Type | Domain | Capability | Value / Outcome | Differentiation | Linked Value Streams (VS-NNN) | Current Maturity | Target Maturity | Supports (STR-NNN / G-NNN) | Details |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| [[CAP-001]] | L1 | Business Capability | Customer Management | {{domain_name}} | {{value_outcome}} | Differentiating / Enabling / Commodity | {{vs_ids}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | [[CAP-001\|→]] |
+| [[CAP-002]] | L2 | Business Capability | Customer Management | {{capability_name}} | {{value_outcome}} | Differentiating / Enabling / Commodity | {{vs_ids}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | [[CAP-002\|→]] |
+| [[CAP-003]] | L3 | Technology Capability | Business Continuity | {{sub_capability_name}} | {{value_outcome}} | Differentiating / Enabling / Commodity | {{vs_ids}} | Absent / Immature / Developing / Mature | {{target}} | {{STR-NNN or G-NNN}} | [[CAP-003\|→]] |
 
 <!-- GUIDANCE: For each capability, add an optional #### ABBs subsection below listing the logical
      architecture components needed to realise it. ABBs are vendor-neutral logical components —
@@ -198,7 +200,7 @@ A capability with no strategic anchor should be flagged for removal or reclassif
 
 A value stream is an end-to-end set of activities that delivers a result of value to a stakeholder (customer, partner, regulator, or internal consumer). Value streams sit above processes — a single value stream typically spans multiple business processes and exercises several capabilities.
 
-Populate this section before detailing processes in §4 — value streams provide the organising context for process decomposition.
+This section is a **summary-and-link index** into the authoritative Value Streams Register (`../../artifacts/cross-cutting/operations/value-streams-register.md`). Detailed stage tables and per-stream narratives live in the register and in optional detail files (`artifacts/details/VS-NNN.md`). Do not duplicate full stage tables here; edit the register with `/ea-valuestreams` and link detail files below.
 
 - Every value stream must have a named trigger (what initiates it) and a named end outcome (what the stakeholder receives).
 - Map each value stream to the capabilities it exercises — this reveals which capabilities are strategically load-bearing.
@@ -207,9 +209,11 @@ Populate this section before detailing processes in §4 — value streams provid
 
 </details>
 
-| VS-NNN | Value Stream | Description | Trigger | End Outcome | Key Capabilities (CAP-NNN) | Strategic Link (G-NNN / STR-NNN) | Details |
+| VS-NNN | Value Stream | Stakeholder | Status | Key Capabilities (CAP-NNN) | Strategic Link (G-NNN / STR-NNN) | Register | Details |
 |---|---|---|---|---|---|---|---|
-| [[VS-001]] | {{value_stream_name}} | {{description}} | {{trigger}} | {{end_outcome}} | {{cap_ids}} | {{strategic_link}} | [[VS-001\|→]] |
+| [[VS-001]] | {{value_stream_name}} | {{stakeholder}} | {{status}} | {{cap_ids}} | {{strategic_link}} | [Value Streams Register](../../artifacts/cross-cutting/operations/value-streams-register.md) | [[VS-001\|→]] |
+
+*Generate or refresh the register with `/ea-valuestreams generate`. Add or edit streams with `/ea-valuestreams add` or `/ea-valuestreams update VS-NNN`.*
 
 ---
 
@@ -220,32 +224,19 @@ Populate this section before detailing processes in §4 — value streams provid
 
 Describe the key business processes in scope. Map each process to the value stream it contributes to (§3a) and the capabilities it exercises (§3).
 
-For each process, capture the step-by-step flow using the Steps table — this is the primary architecture deliverable. Actors should be roles (not individuals). System/App column should reference APP-NNN IDs from the Application Architecture once available; use system names if IDs are not yet assigned.
+This section is a **summary-and-link index** into the authoritative Business Processes Register (`../../artifacts/cross-cutting/operations/business-processes-register.md`). Detailed step tables and per-process narratives live in the register and in optional detail files (`artifacts/details/PROC-NNN.md`) created on demand when the user supplies step content. Do not duplicate full step tables here; edit the register with `/ea-processes` and link detail files below.
 
-Decision / Rule column captures the business logic applied at each step — this is often where integration complexity, compliance requirements, and system boundaries emerge.
+- Every process must have an owner and a trigger.
+- A process with no parent value stream is an orphan — flag it in §8a Traceability Summary.
+- A process step governed by a business rule should cite the BR-NNN in the register.
 
 </details>
 
-### {{process_name}}
+| PROC-NNN | Process | Owner | Trigger | Status | Linked Value Streams (VS-NNN) | Linked Capabilities (CAP-NNN) | Register | Details |
+|---|---|---|---|---|---|---|---|---|
+| [[PROC-001]] | {{process_name}} | {{owner}} | {{trigger}} | {{status}} | {{vs_ids}} | {{cap_ids}} | [Business Processes Register](../../artifacts/cross-cutting/operations/business-processes-register.md) | [[PROC-001\|→]] |
 
-- **Purpose:** {{purpose}}
-- **Value Stream:** {{VS-NNN — value stream this process contributes to}}
-- **Trigger:** {{trigger}}
-- **Inputs:** {{inputs}}
-- **Outputs:** {{outputs}}
-- **Actors:** {{actors}}
-- **SLA / Performance:** {{e.g. "Complete within 2 business days"}}
-- **Diagram:** `../diagrams/{{process_diagram}}`
-
-**Steps:**
-
-| Step | Description | Actor / Role | System / App | Decision / Business Rule |
-|---|---|---|---|---|
-| 1 | {{step_description}} | {{actor}} | {{system}} | {{decision_or_rule}} |
-| 2 | {{step_description}} | {{actor}} | {{system}} | {{decision_or_rule}} |
-
-**Exceptions:**
-- {{exception_name}}: {{what triggers it and what happens}}
+*Generate or refresh the register with `/ea-processes generate`. Add or edit processes with `/ea-processes add` or `/ea-processes update PROC-NNN`. Create a detail file for step-by-step narrative with `/ea-detail PROC-001`.*
 
 ---
 
@@ -256,9 +247,11 @@ Decision / Rule column captures the business logic applied at each step — this
 
 A use case captures what an actor needs to accomplish, not how the system implements it. Use cases bridge the business architecture (what capabilities are needed) and the application architecture (which components must support the actor's goal).
 
+This section is a **summary-and-link index** into the authoritative Use Cases Register (`../../artifacts/cross-cutting/operations/use-cases-register.md`). Detailed flow tables and per-use-case narratives live in the register and in optional detail files (`artifacts/details/UC-NNN.md`) created on demand when the user supplies flow content. Do not duplicate full flow tables here; edit the register with `/ea-usecases` and link detail files below.
+
 - **Actors** are roles, not individuals: Customer, Supplier, Finance Officer, Regulator, External System.
 - **Goal** is the outcome the actor wants — stated from the actor's perspective.
-- **Main Success Scenario** — one sentence summarising the normal path to success. Detailed step-by-step flows belong in functional specifications, not here.
+- **Main Success Scenario** — one sentence summarising the normal path to success. Detailed step-by-step flows belong in functional specifications or detail files, not here.
 - **Capabilities Used** — links to CAP-NNN entries. Any use case with no covering capability is a capability gap; flag it in §7.
 - **Requirements generation** — every use case must generate at least one REQ-NNN requirement. A use case with no requirements is a modeling gap — flag it.
 
@@ -268,9 +261,11 @@ Assign UC-NNN IDs sequentially. These IDs are referenced in the Application Arch
 
 </details>
 
-| UC-NNN | Use Case | Primary Actor | Goal | Trigger | Preconditions | Main Success Scenario | Capabilities Used (CAP-NNN) | Details |
+| UC-NNN | Use Case | Primary Actor | Goal | Priority | Capabilities Used (CAP-NNN) | Linked Processes (PROC-NNN) | Register | Details |
 |---|---|---|---|---|---|---|---|---|
-| [[UC-001]] | {{use_case_name}} | {{actor}} | {{goal}} | {{trigger}} | {{preconditions}} | {{one-sentence summary}} | {{cap_ids}} | [[UC-001\|→]] |
+| [[UC-001]] | {{use_case_name}} | {{actor}} | {{goal}} | {{priority}} | {{cap_ids}} | {{proc_ids}} | [Use Cases Register](../../artifacts/cross-cutting/operations/use-cases-register.md) | [[UC-001\|→]] |
+
+*Generate or refresh the register with `/ea-usecases generate`. Add or edit use cases with `/ea-usecases add` or `/ea-usecases update UC-NNN`. Create a detail file for full flow narrative with `/ea-detail UC-001`.*
 
 ---
 
@@ -346,12 +341,13 @@ The Business Architecture is the bridge between strategic intent and execution. 
 
 - **Every CAP-NNN** links to at least one G-NNN or STR-NNN (via the Supports column). A capability with no strategic anchor is an orphan. Business Capabilities trace primarily through Phase B; Technology Capabilities (Capability Type = Technology Capability) should additionally trace to Phase C/D artifacts (Application Architecture, Technology Architecture).
 - **Every VS-NNN** exercises CAP-NNN capabilities and links to G-NNN/STR-NNN (via the Strategic Link column). A value stream with no linked Goal or Strategy is an orphan.
-- **Every Business Process** contributes to a VS-NNN value stream. A process with no parent value stream is an orphan.
-- **Every UC-NNN** consumes processes and generates REQ-NNN requirements. A use case with no requirements is a modeling gap.
-- **Every REQ-NNN** traces back through UC/CAP/VS to G-NNN/OBJ-NNN. A requirement with no upstream trace is an orphan.
+- **Every PROC-NNN** contributes to at least one VS-NNN value stream and links to CAP-NNN capabilities it exercises. A process with no parent value stream or capability is an orphan.
+- **Every UC-NNN** consumes processes (PROC-NNN) and capabilities (CAP-NNN), and generates REQ-NNN requirements. A use case with no requirements is a modeling gap.
+- **Every REQ-NNN** traces back through UC/CAP/VS/PROC to G-NNN/OBJ-NNN. A requirement with no upstream trace is an orphan.
 
 ```
-G-NNN / STR-NNN ──► CAP-NNN ──► VS-NNN ──► Process ──► UC-NNN ──► REQ-NNN
+G-NNN / STR-NNN ──► CAP-NNN ──► VS-NNN ──► PROC-NNN ──► UC-NNN ──► REQ-NNN
+                              └──────►──────┘
 ```
 
 Flag any orphan or gap in §7 Gap Analysis.

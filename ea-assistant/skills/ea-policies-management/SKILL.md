@@ -1,7 +1,7 @@
 ---
 name: ea-policies-management
 description: This skill should be used when the user asks to "manage architecture policies", "add a policy", "view policies", "trace a policy to constraints", "update the policies register", or "assess policy impact". Handles the full policy lifecycle from capture through traceability and linkage to constraints.
-version: 0.9.84
+version: 0.9.86
 ---
 
 # EA Policies Management

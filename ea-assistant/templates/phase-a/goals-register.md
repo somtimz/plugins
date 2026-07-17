@@ -6,7 +6,7 @@ phase: A
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-templateVersion: 0.9.80
+templateVersion: 0.9.86
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   admPhases: [A]
@@ -82,6 +82,7 @@ Goals are broad, qualitative outcomes the strategy is intended to achieve. Group
 | **Type** | Strategic / Operational / Capability / Compliance |
 | **Priority** | High / Medium / Low |
 | **Status** | Active / Achieved / Superseded |
+| **Stakeholder** | Senior Management / Business Unit Manager / Staff / Ultimate Client |
 | **Business Driver(s)** | DRV-NNN |
 | **Rationale** | {{rationale}} |
 | **Details** | [[G-001\|→]] |
@@ -98,6 +99,7 @@ Goals are broad, qualitative outcomes the strategy is intended to achieve. Group
 | **Type** | Strategic / Operational / Capability / Compliance |
 | **Priority** | High / Medium / Low |
 | **Status** | Active / Achieved / Superseded |
+| **Stakeholder** | Senior Management / Business Unit Manager / Staff / Ultimate Client |
 | **Business Driver(s)** | DRV-NNN |
 | **Rationale** | {{rationale}} |
 | **Details** | G-00N |
