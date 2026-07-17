@@ -159,7 +159,7 @@
       "linkedCapabilities": [],
       "linkedGoals": [],
       "linkedProcesses": [],
-      "status": "Draft | Active | Under Review | Retired",
+      "status": "Draft | Active | Under Review | Deprecated | Retired",
       "sourceFile": "value-streams-register.md"
     }
   ],
@@ -177,7 +177,7 @@
       "linkedUseCases": [],
       "linkedRules": [],
       "linkedServices": [],
-      "status": "Draft | Active | Under Review | Retired",
+      "status": "Draft | Active | Under Review | Deprecated | Retired",
       "sourceFile": "business-processes-register.md"
     }
   ],
@@ -193,7 +193,7 @@
       "linkedCapabilities": [],
       "linkedProcesses": [],
       "linkedRequirements": [],
-      "status": "Draft | Active | Under Review | Retired",
+      "status": "Draft | Active | Under Review | Deprecated | Retired",
       "sourceFile": "use-cases-register.md"
     }
   ],
@@ -353,7 +353,7 @@
 | `linkedCapabilities` | `CAP-NNN` exercised by this stream |
 | `linkedGoals` | `G-NNN` / `STR-NNN` this stream serves |
 | `linkedProcesses` | `PROC-NNN` that compose this stream |
-| `status` | `Draft` / `Active` / `Under Review` / `Retired` |
+| `status` | `Draft` / `Active` / `Under Review` / `Deprecated` / `Retired` |
 | `sourceFile` | `value-streams-register.md` |
 
 - `businessProcesses[]` — flat array at engagement level. Each entry is a **Business Process** (`PROC-NNN`). Managed via `/ea-processes`.
@@ -372,7 +372,7 @@
 | `linkedUseCases` | `UC-NNN` that consume this process |
 | `linkedRules` | `BR-NNN` applied |
 | `linkedServices` | `SVC-NNN` that operationalise it |
-| `status` | `Draft` / `Active` / `Under Review` / `Retired` |
+| `status` | `Draft` / `Active` / `Under Review` / `Deprecated` / `Retired` |
 | `sourceFile` | `business-processes-register.md` |
 
 - `useCases[]` — flat array at engagement level. Each entry is a **Use Case** (`UC-NNN`). Managed via `/ea-usecases`.
@@ -389,7 +389,7 @@
 | `linkedCapabilities` | `CAP-NNN` used |
 | `linkedProcesses` | `PROC-NNN` consumed |
 | `linkedRequirements` | `REQ-NNN` generated |
-| `status` | `Draft` / `Active` / `Under Review` / `Retired` |
+| `status` | `Draft` / `Active` / `Under Review` / `Deprecated` / `Retired` |
 | `sourceFile` | `use-cases-register.md` |
 
 - Entries with empty `subject` (rules), empty `name` (services), or empty `name` (value streams/processes/use cases) are placeholders — MUST NOT be displayed in artifacts.

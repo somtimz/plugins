@@ -1,14 +1,12 @@
 ---
 name: ea-use-cases-management
 description: This skill should be used when the user asks to "manage use cases", "add a use case", "view use cases", "trace a use case to requirements or processes", "update the use cases register", or "assess use case coverage". Handles the full use-case lifecycle from capture through traceability and linkage to requirements, processes, capabilities, and value streams.
-version: 0.9.86
+version: 0.9.87
 ---
 
 # EA Use Cases Management
 
-Use Cases Management captures, classifies, traces, and manages discrete units of interaction between an **actor** and the business/system to achieve a **goal**. A Use Case defines what the actor wants, the preconditions, the main flow, alternative flows, and the postconditions. Use Cases are distinct from business processes (organisation-wide "how") and user stories (small, incremental deliverables).
-
-Load `skills/ea-artifact-templates/references/ea-concepts.md` for the canonical Use Case, Business Process, Capability, and Requirement definitions before prompting for or validating any use case.
+This skill manages `UC-NNN` entries. Load `skills/ea-artifact-templates/references/ea-concepts.md` for the canonical **Use Case**, **Business Process**, **Capability**, and **Requirement** definitions before prompting for or validating any use case.
 
 ## Use Cases Storage
 
@@ -45,7 +43,7 @@ The `useCases` array in `engagement.json` stores metadata and links for fast loo
 | **Preconditions** | {{preconditions}} |
 | **Postconditions** | {{postconditions}} |
 | **Priority** | High / Medium / Low |
-| **Status** | Active / Draft / Under Review / Deprecated |
+| **Status** | Active / Draft / Under Review / Deprecated / Retired |
 | **ADM Phase** | {{phase}} |
 | **Zachman Cell** | {{zachman_cell}} |
 | **Linked Requirements** | {{REQ-NNN IDs}} |
@@ -82,7 +80,7 @@ Use Cases are tracked in `engagement.json` under the **top-level `useCases[]` ar
       "preconditions": "",
       "postconditions": "",
       "priority": "High | Medium | Low",
-      "status": "Active | Draft | Under Review | Deprecated",
+      "status": "Active | Draft | Under Review | Deprecated | Retired",
       "admPhase": "Prelim | A | B | C-Data | C-App | D | E | F | G | H | Requirements",
       "zachmanCell": "",
       "mainFlow": [
@@ -120,13 +118,14 @@ Use Cases trace to:
 ## Use Case Lifecycle
 
 ```
-Draft → Active → Under Review → Deprecated
+Draft → Active → Under Review → Deprecated → Retired
 ```
 
 - **Draft:** Use case captured but not yet ratified. Flows and links may be incomplete.
 - **Active:** Use case is in scope and should be supported by linked processes/requirements.
 - **Under Review:** Use case is being reassessed. Linked requirements/processes remain active but may need revalidation.
 - **Deprecated:** Use case no longer in scope. Linked requirements/processes should be reviewed.
+- **Retired:** Use case no longer used. Linked requirements/processes should be reviewed for removal or waiver.
 
 ## Capture Guidance
 

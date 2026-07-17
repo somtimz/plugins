@@ -1,7 +1,7 @@
 ---
 name: ea-valuestreams
 description: Manage value streams — capture end-to-end stakeholder-to-outcome flows, trace to capabilities, processes, and goals
-argument-hint: "[list|add|update|trace|generate] [--status Active|Draft|Under Review|Deprecated] [--stakeholder name]"
+argument-hint: "[list|add|update|trace|generate] [--status Active|Draft|Under Review|Deprecated|Retired] [--stakeholder name]"
 allowed-tools: [Read, Write, Bash]
 ---
 
@@ -9,7 +9,7 @@ You are executing the `/ea-valuestreams` command. Load the `ea-value-streams-man
 
 ## Overview
 
-Value Streams are **end-to-end, stakeholder-to-outcome flows** composed of stages; each stage has a trigger, activities, and a value-adding outcome. They answer *"what must happen for the stakeholder to receive value?"* and are distinct from Business Processes (internal "how") and Capabilities (potential). This command aggregates all `VS-NNN` entries into a single Value Streams Register, supports creating or updating individual streams, traces streams to linked capabilities/processes/goals, and regenerates the register artifact.
+This command manages `VS-NNN` entries. Read `skills/ea-artifact-templates/references/ea-concepts.md` (**Value Stream**) for the canonical definition before prompting or validating. The command aggregates all `VS-NNN` entries into a single Value Streams Register, supports creating or updating individual streams, traces streams to linked capabilities/processes/goals, and regenerates the register artifact.
 
 **Modes:**
 - `list` (default) — read the Value Streams Register, render a summary table
@@ -40,7 +40,7 @@ Value Streams are **end-to-end, stakeholder-to-outcome flows** composed of stage
 ```
 Value Streams Register — {engagement name}
 ══════════════════════════════════════════════════════════
-Total: {N}  |  Active: {N}  |  Draft: {N}  |  Under Review: {N}  |  Deprecated: {N}
+Total: {N}  |  Active: {N}  |  Draft: {N}  |  Under Review: {N}  |  Deprecated: {N}  |  Retired: {N}
 
 By Stakeholder:  {N} distinct stakeholder(s)
 Stages (avg):    {N}
@@ -68,7 +68,7 @@ Creating new value stream — VS-{NNN}
 1. Name (outcome-oriented noun phrase, e.g. "Procure to Pay"):
 2. Description (one-sentence value proposition):
 3. Stakeholder (who ultimately receives value, e.g. "Customer"):
-4. Status (Active / Draft / Under Review / Deprecated) [default: Draft]:
+4. Status (Active / Draft / Under Review / Deprecated / Retired) [default: Draft]:
 5. ADM Phase (Prelim / A / B / C-Data / C-App / D / E / F / G / H / Requirements):
 6. Linked Capabilities (CAP-NNN IDs, comma-separated, or press Enter) [optional]:
 7. Linked Business Processes (PROC-NNN IDs, comma-separated, or press Enter) [optional]:

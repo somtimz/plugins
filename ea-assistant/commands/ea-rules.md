@@ -9,9 +9,7 @@ You are executing the `/ea-rules` command. Load the `ea-business-rules-managemen
 
 ## Overview
 
-Business Rules are **declarative governance statements** that govern specific business operations, independent of how those operations are automated. Each rule has a **Subject** (what is governed), a **Condition** (when it applies), a **Directive** (Must / Must Not / Should / Should Not), and an **Outcome** (the result or action). Business Rules trace to **Business Services** that operationalise them, **Policies** that authorise them, **Constraints** that enforce them, and **Motivation elements** (drivers, goals, objectives, strategies) that they realise or constrain.
-
-This command aggregates all `BR-NNN` entries into a single Business Rules Register, supports creating or updating individual rules, traces rules to linked services and motivation, and assesses the impact of a rule across the service and capability landscape.
+This command manages `BR-NNN` entries. Read `skills/ea-artifact-templates/references/ea-concepts.md` (**Business Rule**) for the canonical definition before prompting or validating. The command aggregates all `BR-NNN` entries into a single Business Rules Register, supports creating or updating individual rules, traces rules to linked services and motivation, and assesses the impact of a rule across the service and capability landscape.
 
 **Modes:**
 - `list` (default) — read the Business Rules Register, render a table grouped by Source

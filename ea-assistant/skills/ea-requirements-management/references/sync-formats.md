@@ -10,7 +10,7 @@ The EA Assistant can ingest requirements from four source formats. The goal of e
 
 | Field | Type | Required | Description |
 |---|---|---|---|
-| `id` | String | Yes | Unique identifier (e.g., FR-001, NFR-023) |
+| `id` | String | Yes | Unique identifier (e.g., REQ-001). All functional and non-functional requirements use the `REQ-NNN` prefix per the canonical ea-assistant ID scheme. |
 | `category` | Enum | Yes | FR / NFR / CON / PRI / ASS |
 | `title` | String | Yes | Short title (one line) |
 | `statement` | String | Yes | The full requirement statement |
@@ -60,7 +60,7 @@ Expected column header names (case-insensitive, leading/trailing spaces stripped
 Each requirement is expressed as a section in the document:
 
 ```
-### FR-001: Support multi-currency invoicing
+### REQ-001: Support multi-currency invoicing
 
 **Statement:** The invoicing module must support generation of invoices in the customer's preferred currency.
 
@@ -161,8 +161,8 @@ A Markdown table with a header row defining field names.
 ```markdown
 | ID     | Category | Title                            | Statement                                           | Priority |
 |--------|----------|----------------------------------|-----------------------------------------------------|----------|
-| FR-001 | FR       | Multi-currency invoicing support | The invoicing module must support multiple currencies | Must    |
-| NFR-001| NFR      | API response time                | 95% of API requests must complete within 200ms      | Must    |
+| REQ-001 | Functional    | Multi-currency invoicing support | The invoicing module must support multiple currencies | Must    |
+| REQ-002 | Non-Functional| API response time                | 95% of API requests must complete within 200ms      | Must    |
 ```
 
 Column name variations are the same as other formats. The header row separator (`|---|---|`) is ignored.
@@ -172,7 +172,7 @@ Column name variations are the same as other formats. The header row separator (
 Each requirement is a section:
 
 ```markdown
-## FR-001: Multi-currency invoicing support
+## REQ-001: Multi-currency invoicing support
 
 **Statement:** The invoicing module must support generation of invoices in the customer's preferred currency.
 
@@ -233,6 +233,6 @@ All imported requirements are validated against the following rules:
 | `category` must be a valid enum value | Warning | Unknown categories are imported with category `UNKNOWN` and flagged |
 | `priority` must be a valid MoSCoW value | Warning | Unknown priority values are imported as-is and flagged |
 | `id` must be unique within the import batch | Warning | Duplicate IDs in the source result in only the last occurrence being imported; earlier occurrences are logged |
-| `id` should follow the [CATEGORY]-[NNN] pattern | Info | IDs not matching the pattern are accepted but flagged for review |
+| `id` should follow a canonical ea-assistant ID pattern (e.g. `REQ-NNN`, `CST-NNN`) | Info | IDs not matching a known scheme prefix are accepted but flagged for review |
 | `scope` must be `Corporate` or `Project` if present | Warning | Unknown scope values are imported as `Corporate` (safe default for sync-imported records) and flagged |
 | `status: Waived` requires non-empty `waiverJustification` for Corporate-scoped requirements | Error | Waived Corporate requirements with no justification are rejected; set status to `Draft` and flag for review |

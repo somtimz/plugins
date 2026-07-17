@@ -1,14 +1,12 @@
 ---
 name: ea-value-streams-management
 description: This skill should be used when the user asks to "manage value streams", "add a value stream", "view value streams", "trace a value stream to capabilities or processes", "update the value streams register", or "assess value stream coverage". Handles the full value-stream lifecycle from capture through traceability and linkage to capabilities, processes, goals, and stakeholders.
-version: 0.9.86
+version: 0.9.87
 ---
 
 # EA Value Streams Management
 
-Value Streams Management captures, classifies, traces, and manages end-to-end sequences of activities that create value for a defined stakeholder. A Value Stream is a **cross-functional, customer-to-outcome flow** made of stages; each stage has a triggering event, activities, and a value-adding outcome. Value Streams are distinct from business processes (how the organisation performs work) and capabilities (what the organisation can do).
-
-Load `skills/ea-artifact-templates/references/ea-concepts.md` for the canonical Value Stream, Capability, and Business Process definitions before prompting for or validating any value stream.
+This skill manages `VS-NNN` entries. Load `skills/ea-artifact-templates/references/ea-concepts.md` for the canonical **Value Stream**, **Capability**, and **Business Process** definitions before prompting for or validating any value stream.
 
 ## Value Streams Storage
 
@@ -42,7 +40,7 @@ The `valueStreams` array in `engagement.json` stores metadata and links for fast
 | **Name** | {{name}} |
 | **Description** | {{description}} |
 | **Stakeholder** | {{stakeholder}} |
-| **Status** | Active / Draft / Under Review / Deprecated |
+| **Status** | Active / Draft / Under Review / Deprecated / Retired |
 | **ADM Phase** | {{phase}} |
 | **Zachman Cell** | {{zachman_cell}} |
 | **Linked Capabilities** | {{CAP-NNN IDs}} |
@@ -69,7 +67,7 @@ Value Streams are tracked in `engagement.json` under the **top-level `valueStrea
       "name": "",
       "description": "",
       "stakeholder": "",
-      "status": "Active | Draft | Under Review | Deprecated",
+      "status": "Active | Draft | Under Review | Deprecated | Retired",
       "admPhase": "Prelim | A | B | C-Data | C-App | D | E | F | G | H | Requirements",
       "zachmanCell": "",
       "stages": [
@@ -101,13 +99,14 @@ Value Streams trace to:
 ## Value Stream Lifecycle
 
 ```
-Draft → Active → Under Review → Deprecated
+Draft → Active → Under Review → Deprecated → Retired
 ```
 
 - **Draft:** Stream captured but not yet ratified. Links may be incomplete.
 - **Active:** Stream is the target operating model and should be supported by linked processes and capabilities.
 - **Under Review:** Stream is being reassessed. Linked processes/capabilities remain active but may need revalidation.
 - **Deprecated:** Stream replaced by a newer design. Linked processes/capabilities should be reviewed for migration.
+- **Retired:** Stream no longer used. Linked processes/capabilities should be reviewed for removal or waiver.
 
 ## Capture Guidance
 

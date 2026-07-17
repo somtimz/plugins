@@ -104,20 +104,20 @@ Direction
   vision        {set / (not set)}
   mission       {set / (not set)}
 
-  drivers        {N}   → /ea-drivers
-  goals          {N}   → /ea-goals
-  objectives     {N}   → /ea-objectives
-  strategies     {N}   → /ea-strategies
-  issues         {N}   → /ea-issues
-  problems       {N}   → /ea-problems
-  opportunities  {N}   → /ea-objectives (opportunities)
-  gaps           {N}   → /ea-gaps
-  policies       {N}   → /ea-policies
-  rules             {N}   → /ea-rules
-  services          {N}   → /ea-services
-  valueStreams      {N}   → /ea-valuestreams
-  businessProcesses {N}   → /ea-processes
-  useCases          {N}   → /ea-usecases
+  drivers           {N}  → /ea-drivers
+  goals             {N}  → /ea-goals
+  objectives        {N}  → /ea-objectives
+  strategies        {N}  → /ea-strategies
+  issues            {N}  → /ea-issues
+  problems          {N}  → /ea-problems
+  opportunities     {N}  → /ea-objectives (opportunities)
+  gaps              {N}  → /ea-gaps
+  policies          {N}  → /ea-policies
+  rules             {N}  → /ea-rules
+  services          {N}  → /ea-services
+  valueStreams      {N}  → /ea-valuestreams
+  businessProcesses {N}  → /ea-processes
+  useCases          {N}  → /ea-usecases
 ```
 
 **6. Metrics & Finance**

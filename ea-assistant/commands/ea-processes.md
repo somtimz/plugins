@@ -9,7 +9,7 @@ You are executing the `/ea-processes` command. Load the `ea-business-processes-m
 
 ## Overview
 
-Business Processes are **structured, repeatable activity flows** triggered by an event, consuming inputs and producing outputs, governed by business rules and enabled by capabilities and services. They answer *"how does the organisation perform the work?"* and are distinct from Value Streams (stakeholder-to-outcome flows) and Use Cases (actor-goal interactions). This command aggregates all `PROC-NNN` entries into a single Business Processes Register, supports creating or updating individual processes, traces processes to linked items, and regenerates the register artifact.
+This command manages `PROC-NNN` entries. Read `skills/ea-artifact-templates/references/ea-concepts.md` (**Business Process**) for the canonical definition before prompting or validating. The command aggregates all `PROC-NNN` entries into a single Business Processes Register, supports creating or updating individual processes, traces processes to linked items, and regenerates the register artifact.
 
 **Modes:**
 - `list` (default) — read the Business Processes Register, render a summary table

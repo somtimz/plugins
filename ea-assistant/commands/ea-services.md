@@ -9,7 +9,7 @@ You are executing the `/ea-services` command. Load the `ea-business-services-man
 
 ## Overview
 
-Services are externally visible units of behaviour offered to consumers through a defined contract. They exist at three levels: **Business Service** (offered to customers or business units), **Application Service** (offered by an application), and **Technology Service** (offered by infrastructure). This command aggregates all `SVC-NNN` entries into a single Business Services Register, supports creating or updating individual services, traces services to linked rules and building blocks, and assesses service coverage across capabilities.
+This command manages `SVC-NNN` entries. Read `skills/ea-artifact-templates/references/ea-concepts.md` (**Service**) for the canonical definition before prompting or validating. The command aggregates all `SVC-NNN` entries into a single Business Services Register, supports creating or updating individual services, traces services to linked rules and building blocks, and assesses service coverage across capabilities.
 
 **Modes:**
 - `list` (default) — read the Business Services Register, render a table grouped by Level
