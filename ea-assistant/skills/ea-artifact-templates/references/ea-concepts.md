@@ -813,6 +813,61 @@ Every policy must have an **Issuing Authority** (who enacted it), an **Effective
 
 ---
 
+### Business Rule (BR-NNN)
+
+**What it IS:**
+A Business Rule is a **declarative governance statement that governs a specific business operation**, independent of how that operation is automated. It states *what* the business must, must not, should, or should not do under a defined condition, and *what outcome* follows. Business Rules are the operational source of truth for decisions that may be executed by people, applications, or both. They answer *"What operational rule must the business consistently enforce?"*
+
+Every business rule has a **Subject** (the business entity or process it governs), a **Condition** (when it applies), a **Directive** (Must / Must Not / Should / Should Not), an **Outcome** (the result or action), and an **Authority** (who owns or enacted it). It is also linked to **Enforcement** (how compliance is verified) and to the **Business Service(s)** that operationalise it.
+
+**ID scheme:** `BR-NNN` (e.g., BR-001, BR-002). Sequential within the engagement. Assigned by `/ea-rules add` when business rules are captured in the Business Rules Register.
+
+**Structural parts (Business Rules Register row):**
+- **BR-NNN** — canonical business rule ID
+- **Subject** — the business entity, process, or decision the rule governs (e.g. "Customer eligibility for senior discount")
+- **Condition** — the circumstance under which the rule applies (e.g. "Customer age is 65 or older AND purchase is made on a weekday")
+- **Directive** — `Must` / `Must Not` / `Should` / `Should Not`
+- **Outcome** — the business result or action produced when the condition is met (e.g. "Discount of 10% is applied")
+- **Authority** — the role, policy, or body that owns the rule (preferred: link to POL-NNN or a named governance role)
+- **Source** — Regulatory / Internal / Contractual / Market Practice / Policy-derived
+- **Enforcement** — how compliance is verified: Manual review, Automated check, Workflow approval, Audit sample, System validation
+- **Scope** — Enterprise 🔒 (organisation-wide) / Program (engagement-specific)
+- **Status** — Active / Draft / Under Review / Superseded (by BR-NNN) / Retired
+- **ADM Phase** — where the rule was identified or validated
+- **Zachman Cell** — classification
+- **Linked Business Services** — SVC-NNN IDs that operationalise this rule (Business-level services)
+- **Linked Policies / Constraints** — POL-NNN and CST-NNN IDs derived from or enforcing this rule
+- **Trace to Motivation** — DRV-NNN / G-NNN / OBJ-NNN / STR-NNN that the rule realises or constrains
+
+**What it is NOT:**
+- Not a **Policy** — a policy is the governance document or mandate that authorises rules; a business rule is the operational statement that operationalises the policy
+- Not a **Constraint** — a constraint is a binding restriction on architecture or implementation choices; a business rule governs business behaviour and may *generate* constraints, but it is not itself an implementation boundary
+- Not a **Requirement** — a requirement defines what the architecture must achieve with a measurable target ("API must respond within 200ms"); a business rule governs a business decision or condition
+- Not a **Business Process** — a process is the step-by-step *how*; a rule is the declarative *what* that the process must satisfy
+- Not an **Algorithm** — a rule states the business intent; the algorithm is an implementation choice for enforcing it
+
+**Common confusions:**
+- "A customer must be 18 or older to open an account" — this is a **Business Rule** ✓ (declarative operational rule with condition and directive)
+- "All vendor contracts >$100K require board approval" — this is a **Policy** ✓ (governance mandate). The business rule derived from it is: "A vendor contract request with value >$100K must be routed to the board for approval — BR-021"
+- "We must use AES-256-GCM encryption" — this is a **Constraint** ✓ (implementation restriction). The business rule behind it might be: "Customer data at rest must be protected against unauthorised disclosure — BR-042"
+- "The claims system must settle 95% of claims within 24 hours" — this is a **Requirement** (measurable target), not a business rule
+- "First verify identity, then check credit" — this is a **Business Process** (ordering of steps), not a business rule
+
+**TOGAF placement:** Business Architecture (Phase B — business rules are discovered during capability and service modelling); Architecture Vision (cite high-level business rules as operational context); Requirements (business rules may generate or constrain REQ-NNN entries); Governance Framework (rules feed compliance and enforcement mechanisms). Business Rules are inputs from the business domain, not decisions made by the architecture function.
+
+**ArchiMate:** Modelled as a `Business Object` or captured in a `Constraint` / `Business Process` relationship in the Business layer. A business rule is often realised by a `Business Service` and enforced by a `Business Process` or `Application Service`.
+
+**Practitioner Notes:**
+- Every business rule must have a **named Authority**. Without an authority, the rule is unenforceable and unverifiable.
+- Keep rules **implementation-neutral**. A rule should not prescribe a system, API, or algorithm unless that restriction is itself a constraint.
+- A single rule can generate **multiple constraints** (CST-NNN) and be operationalised by **multiple business services** (SVC-NNN). Maintain the traceability in both directions.
+- **Traceability check:** Every BR-NNN should trace to at least one motivation element (driver, goal, objective, strategy) or policy. An orphan business rule is a governance gap.
+- **Enforcement clarity:** "Manual review" is acceptable only if the review owner, frequency, and sample size are documented. Vague enforcement makes a rule ungovernable.
+- **Maturity marker (L1→L5):** L1 = rules scattered as free-text in process documents; L3 = rules catalogued with condition/directive/outcome and linked to services; L5 = rules versioned, traced to automated decision services, and validated by conformance tests
+- **Cross-artifact consistency:** If a business rule appears in both the Business Rules Register and a service or process artifact, the register version is authoritative. Update the rule once and propagate the BR-NNN reference.
+
+---
+
 ### Constraint
 
 **What it IS:**
@@ -1548,16 +1603,29 @@ A Service is an externally visible unit of behaviour offered to consumers throug
 **ID scheme:** SVC-NNN (e.g. SVC-001) when tracked formally in a service catalogue. Record the level in a `Level` column (Business / Application / Technology).
 
 **Structural parts (catalogue row):**
-- Name — noun phrase for the offered behaviour (e.g. "Payment Authorisation")
-- Level — Business / Application / Technology
-- Consumers — actors, processes, or higher-layer services that use it
-- Realised by — the component(s) or capability that deliver it (ABB/SBB or component name)
-- Contract — SLA/NFR references (REQ-NNN) and the Interface(s) through which it is accessed (IFC-NNN)
+- **Name** — noun phrase for the offered behaviour (e.g. "Payment Authorisation")
+- **Level** — Business / Application / Technology
+- **Purpose / Outcome** — the value or result the consumer receives (the "why")
+- **Consumers** — actors, roles, processes, or higher-layer services that use it
+- **Interfaces** — IFC-NNN access points through which the service is reached (API, event, file, human channel)
+- **Realised by** — the component(s) or capability that deliver it (CAP-NNN, ABB-NNN, SBB-NNN)
+- **Contract** — SLA/NFR references (REQ-NNN), owner, change policy
+- **Linked Business Rules** — for Business-level services: BR-NNN IDs that the service operationalises or enforces
+
+**Business Service Passport (Business-level services):**
+A Business Service is an externally visible unit of business behaviour offered to a defined consumer, producing a defined outcome. Capture it with the **Consumer–Outcome–Interface** triad:
+- **Consumer** — who uses the service (role, business unit, external party)
+- **Outcome** — the business result the consumer obtains
+- **Interface** — the human or digital channel through which it is consumed (IFC-NNN)
+- **Owner** — business role accountable for the service definition and delivery
+- **SLA / NFR** — REQ-NNN references for timeliness, quality, availability
+- **Linked Business Rules (BR-NNN)** — operational rules the service enacts
 
 **What it is NOT:**
 - Not a **Capability** — a capability is the organisation's *potential* to do something (people + process + information + tools); a service is behaviour *actually offered* through a contract. "Fraud Detection" the capability vs "Transaction Fraud Scoring" the application service.
 - Not an **ABB** — an ABB is the logical *component*; the service is the *behaviour* the component exposes. One ABB may expose several services.
 - Not a **Business Process** — a process is the internal step-by-step *how*; the service is the external *what*, abstracting the process away from the consumer.
+- Not a **Business Rule** — a rule is the declarative governance statement (BR-NNN) that the service may operationalise; the service is the offered behaviour that enacts the rule.
 
 ---
 

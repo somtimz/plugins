@@ -1,8 +1,37 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.84
+**Version:** 0.9.85
 **Status:** Current
 **Author:** Costa Pissaris
+
+---
+
+## v0.9.85 — Business Rules (BR-NNN) and Business Services (SVC-NNN)
+
+### Summary
+Makes **Business Rules** and **Business Services** first-class architecture objects with their own registers, commands, and traceability. A Business Rule is a declarative governance statement (`BR-NNN`) with Subject, Condition, Directive, Outcome, Authority, and Enforcement. A Business Service is a `SVC-NNN` entry with Level `Business`, captured through the **Consumer–Outcome–Interface** triad (the Service Passport). Rules operationalise policies, generate constraints, and are enacted by services; services realise capabilities and connect to ABB/SBB/IFC.
+
+### New
+- **Business Rule concept** in `skills/ea-artifact-templates/references/ea-concepts.md` — canonical definition, structural parts, disambiguation from policy/constraint/requirement/process, and practitioner notes. New `BR-NNN` ID in `CLAUDE.md` ID scheme.
+- **Enhanced Service concept** in `ea-concepts.md` — Service Passport (Consumer, Outcome, Interface, Owner, SLA, linked rules) and explicit Business/Application/Technology levels.
+- **`/ea-rules` command** — `list/add/update/trace/impact` for `BR-NNN`; top-level `rules[]` array in `engagement.json`; register at `artifacts/cross-cutting/operations/business-rules-register.md`.
+- **`/ea-services` command** — `list/add/update/trace/coverage` for `SVC-NNN`; top-level `services[]` array in `engagement.json`; register at `artifacts/cross-cutting/operations/business-services-register.md`.
+- **`skills/ea-business-rules-management/SKILL.md`** and **`skills/ea-business-services-management/SKILL.md`** — full lifecycle, schema, traceability, and validation guidance.
+- **Register templates** — `templates/cross-cutting/business-rules-register.md` and `business-services-register.md` with frontmatter, guidance, compliance blocks, and summary tables.
+- **Cross-cutting index** — `templates/cross-cutting/cross-cutting-index.md` now lists the two new registers under Operations.
+- **Relationship matrices** — `matrix-catalogue.md` adds `capability-service` (Phase B) and `rule-service` (Cross-cutting), bringing the catalogue to **18 matrices**.
+- **Help/Status/Meta** — `/ea-help`, `/ea-status`, and `/ea-meta` updated to surface `/ea-rules`, `/ea-services`, and counts of BR-NNN / SVC-NNN tokens.
+- **Schema + migration** — `engagement-schema.md`, `templates/seeds/engagement-json.md`, `migration-gap-catalogue.md`, and `commands/ea-migrate.md` updated for top-level `rules[]` and `services[]`; `/ea-migrate` backfills empty arrays for legacy engagements.
+
+### Files
+- `skills/ea-artifact-templates/references/ea-concepts.md`, `ea-assistant/CLAUDE.md` — concept + ID scheme updates.
+- `skills/ea-engagement-lifecycle/references/engagement-schema.md`, `templates/seeds/engagement-json.md`, `skills/ea-engagement-lifecycle/references/migration-gap-catalogue.md`, `commands/ea-migrate.md` — schema + migration.
+- `skills/ea-business-rules-management/SKILL.md`, `skills/ea-business-services-management/SKILL.md` — new skills.
+- `commands/ea-rules.md`, `commands/ea-services.md` — new commands.
+- `templates/cross-cutting/business-rules-register.md`, `templates/cross-cutting/business-services-register.md`, `templates/cross-cutting/cross-cutting-index.md` — new/updated templates.
+- `skills/ea-artifact-templates/references/matrix-catalogue.md` — new matrices.
+- `commands/ea-help.md`, `commands/ea-status.md`, `commands/ea-meta.md` — command/menu updates.
+- `.claude-plugin/plugin.json`, `../.claude-plugin/marketplace.json`, `docs/PRD.md`, `README.md` — version + description hygiene.
 
 ---
 

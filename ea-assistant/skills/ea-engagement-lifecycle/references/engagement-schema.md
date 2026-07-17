@@ -104,6 +104,47 @@
       "sourceFile": "policies-register.md"
     }
   ],
+  "rules": [
+    {
+      "id": "BR-001",
+      "subject": "",
+      "condition": "",
+      "directive": "Must | Must Not | Should | Should Not",
+      "outcome": "",
+      "authority": "",
+      "source": "Regulatory | Internal | Contractual | Market Practice | Policy-derived",
+      "enforcement": "Manual review | Automated check | Workflow approval | Audit sample | System validation",
+      "scope": "Enterprise | Program",
+      "status": "Active | Draft | Under Review | Superseded | Retired",
+      "supersededBy": "",
+      "admPhase": "Prelim | A | B | C-Data | C-App | D | E | F | G | H | Requirements",
+      "zachmanCell": "",
+      "linkedServices": [],
+      "linkedPolicies": [],
+      "linkedConstraints": [],
+      "linkedMotivation": [],
+      "sourceFile": "business-rules-register.md"
+    }
+  ],
+  "services": [
+    {
+      "id": "SVC-001",
+      "name": "",
+      "level": "Business | Application | Technology",
+      "purpose": "",
+      "consumer": "",
+      "outcome": "",
+      "interface": "",
+      "owner": "",
+      "sla": "",
+      "linkedRules": [],
+      "linkedCapabilities": [],
+      "linkedABB": [],
+      "linkedSBB": [],
+      "linkedInterfaces": [],
+      "sourceFile": "business-services-register.md"
+    }
+  ],
   "phases": {
     "Prelim":        { "status": "Not Started", "startedAt": null, "completedAt": null },
     "Requirements":  { "status": "Not Started", "startedAt": null, "completedAt": null },
@@ -198,6 +239,54 @@
 - A `benefit`-type metric (below) tracks realisation of a Cost Entry's projected `annualBenefit`.
 
 - `metrics[].type` gains a fourth value `benefit` — tracks realisation of projected financial value (revenue, cost saving, or avoided cost) against a Cost Entry. `linkedTo` for a `benefit` metric may reference a `FIN-NNN` Cost Entry (in addition to `G-NNN`/`OBJ-NNN`). Used in Phase G to answer the implementation-governance question *"did we deliver the expected benefit?"*. Absent in legacy engagements — the three original types remain valid.
+
+**v0.9.85 fields** — `rules` and `services` (flat arrays):
+
+- `rules[]` — flat array at engagement level (sibling to `metrics[]`, `policies[]`, `finance[]`). Each entry is a **Business Rule** (`BR-NNN`) capturing a declarative governance statement. Managed via `/ea-rules`. See `skills/ea-artifact-templates/references/ea-concepts.md` for the canonical Business Rule definition.
+
+| Field | Meaning |
+|---|---|
+| `id` | `BR-NNN` canonical ID |
+| `subject` | What the rule governs |
+| `condition` | When the rule applies |
+| `directive` | `Must` / `Must Not` / `Should` / `Should Not` |
+| `outcome` | Business result or action |
+| `authority` | Owner or enacting body |
+| `source` | `Regulatory` / `Internal` / `Contractual` / `Market Practice` / `Policy-derived` |
+| `enforcement` | How compliance is verified |
+| `scope` | `Enterprise` / `Program` |
+| `status` | `Active` / `Draft` / `Under Review` / `Superseded` / `Retired` |
+| `supersededBy` | `BR-NNN` that replaces this rule |
+| `admPhase` | Where identified |
+| `zachmanCell` | Classification |
+| `linkedServices` | `SVC-NNN` operationalising the rule |
+| `linkedPolicies` | `POL-NNN` authorising the rule |
+| `linkedConstraints` | `CST-NNN` enforcing the rule |
+| `linkedMotivation` | `DRV-NNN` / `G-NNN` / `OBJ-NNN` / `STR-NNN` traced |
+| `sourceFile` | Register file the rule renders into |
+
+- `services[]` — flat array at engagement level. Each entry is a **Service** (`SVC-NNN`) at Business, Application, or Technology level. Managed via `/ea-services`. See `skills/ea-artifact-templates/references/ea-concepts.md` for the canonical Service definition.
+
+| Field | Meaning |
+|---|---|
+| `id` | `SVC-NNN` canonical ID |
+| `name` | Service name |
+| `level` | `Business` / `Application` / `Technology` |
+| `purpose` | Why the service exists |
+| `consumer` | Who uses it |
+| `outcome` | Value delivered |
+| `interface` | Access channel (often `IFC-NNN`) |
+| `owner` | Accountable role |
+| `sla` | Service-level reference |
+| `linkedRules` | `BR-NNN` enacted by Business services |
+| `linkedCapabilities` | `CAP-NNN` realising the service |
+| `linkedABB` | Logical components |
+| `linkedSBB` | Concrete products |
+| `linkedInterfaces` | `IFC-NNN` access points |
+| `sourceFile` | Register file the service renders into |
+
+- Entries with empty `subject` (rules) or empty `name` (services) are placeholders — MUST NOT be displayed in artifacts.
+- IDs are unique across the engagement; do not restart numbering per type.
 
 **v0.9.5 fields**:
 - `pluginVersion` — ea-assistant version that last opened this engagement (set by `/ea-open`); absent in legacy → treat as `"0.0.0"`

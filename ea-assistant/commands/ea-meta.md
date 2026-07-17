@@ -113,6 +113,8 @@ Direction
   opportunities  {N}   → /ea-objectives (opportunities)
   gaps           {N}   → /ea-gaps
   policies       {N}   → /ea-policies
+  rules          {N}   → /ea-rules
+  services       {N}   → /ea-services
 ```
 
 **6. Metrics & Finance**
@@ -210,6 +212,8 @@ Apply only on `y`.
 | `drivers`, `goals`, `objectives`, `strategies`, `issues`, `problems`, `opportunities` | `/ea-{register}` |
 | `gaps` | `/ea-gaps` |
 | `policies` | `/ea-policies` |
+| `rules` | `/ea-rules` |
+| `services` | `/ea-services` |
 | `metrics` | captured via `/ea-interview` |
 | `finance` | `/ea-finance` |
 | `optOuts` | `/ea-config optouts` |
