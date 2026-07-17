@@ -22,6 +22,8 @@ Reference for `/ea-migrate`. Defines all gap checks, severity levels, and remedi
 | `migrations` field present | Absent (pre-0.9.59) | Low |
 | `policies` field present (top-level) | Absent | Low |
 | `finance` field present (top-level) | Absent (pre-0.9.66) | Low |
+| `rules` field present (top-level) | Absent (pre-0.9.85) | Low |
+| `services` field present (top-level) | Absent (pre-0.9.85) | Low |
 | `adoptedRAs` field present | Absent (pre-0.9.54) | Low |
 | `localRA` field present | Absent (pre-0.9.54) | Low |
 | `constraintsRepoPath` field present | Absent | Low |
@@ -45,6 +47,8 @@ Reference for `/ea-migrate`. Defines all gap checks, severity levels, and remedi
 - `migrations` absent → add `"migrations": []` (the current run appends its audit entry in Step 7)
 - `policies` absent → add top-level `"policies": []`
 - `finance` absent → add top-level `"finance": []`
+- `rules` absent → add top-level `"rules": []`
+- `services` absent → add top-level `"services": []`
 - `adoptedRAs` absent → add `"adoptedRAs": []`
 - `localRA` absent → add `"localRA": { "nextId": 1 }`
 - `constraintsRepoPath` absent → add `"constraintsRepoPath": ""`

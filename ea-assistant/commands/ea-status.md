@@ -31,6 +31,8 @@ Display a comprehensive status dashboard for all EA engagements.
    - Count `ABB-\d{3}` tokens across all artifact `.md` files (0 if none found)
    - Count `SBB-\d{3}` tokens across all artifact `.md` files (0 if none found)
    - Count `STY-\d{3}` tokens across all artifact `.md` files (0 if none found)
+   - Count `BR-\d{3}` tokens across all artifact `.md` files (0 if none found)
+   - Count `SVC-\d{3}` tokens across all artifact `.md` files (0 if none found)
 
    **Backward compatibility**: If `engagementType`, `architectureDomains`, `targetEndDate`, or `optOuts` fields are missing, apply defaults: type = null (display "—"), domains = all four, targetEndDate = null (display "—"), optOuts = [] (display nothing).
 
@@ -51,7 +53,7 @@ Display a comprehensive status dashboard for all EA engagements.
       📚 Research    : {N items in ResearchAndReferences/ — omit this line entirely if 0}
       ⊘ Opt-outs    : {N artifact opt-outs, N question opt-outs — omit this line entirely if optOuts[] is empty}
       ⚠️ Non-standard: {N} artifact(s) accepted as-is — run /ea-review to remediate (omit if none)
-      🧱 Blocks      : {N} ABBs, {N} SBBs, {N} Stories — omit this line entirely if all three counts are 0
+      🧱 Blocks      : {N} ABBs, {N} SBBs, {N} Stories, {N} Rules, {N} Services — omit this line entirely if all five counts are 0
 
    [repeat for each engagement]
 

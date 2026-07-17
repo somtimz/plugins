@@ -111,6 +111,8 @@ You have existing engagements. Common next steps:
 | `/ea-requirements [action]` | Manage architecture requirements | — |
 | `/ea-constraints [action]` | Manage architecture constraints — capture, trace, and assess impact on solution space | — |
 | `/ea-policies [mode]` | Manage architecture policies — capture governance documents, trace to constraints, and assess policy impact | — |
+| `/ea-rules [mode]` | Business Rules Register — list, add, update, trace BR-NNN rules to services, policies, constraints, and motivation | — |
+| `/ea-services [mode]` | Business Services Register — list, add, update, trace SVC-NNN services to rules, capabilities, ABB/SBB, and interfaces | — |
 | `/ea-drivers [mode]` | Business Driver Register — list, add, update, trace DRV→G→OBJ→STR→WP chain, or generate register | — |
 | `/ea-goals [mode]` | Goals Register — list, add, update, trace G→OBJ→STR→WP chain, or generate register; Domain + Type classification | — |
 | `/ea-objectives [mode]` | Objectives Register — list, add, update, trace OBJ→G/PRB/MET/WP chain, or generate register; measurability checks (measure, target, deadline) | — |
@@ -127,7 +129,7 @@ You have existing engagements. Common next steps:
 | `/ea-horizon [list\|add\|update\|surface\|link-adr]` | Technology Horizon Register — manage THR-NNN technology radar with Adopt/Trial/Assess/Hold ring model | — |
 | `/ea-standards [list\|add\|link-constraint\|surface]` | Standards Information Base — manage STD-NNN industry/regulatory standards with adoption status | — |
 | `/ea-refarch [new\|list\|show\|edit\|adopt\|unadopt\|status]` | Reference Architecture Register — manage RA-NNN patterns with ABB/SBB layer catalogues, key decisions, and grill checklist integration | — |
-| `/ea-matrix [list\|new\|show\|edit\|check] [key]` | TOGAF relationship matrices — 16 grid artifacts (Actor/Role, App/Data CRUD, Capability/Application, Goal/Service, Data Entity/Component, System/Technology…) with axis seeding and catalogue-driven checks | — |
+| `/ea-matrix [list\|new\|show\|edit\|check] [key]` | TOGAF relationship matrices — 18 grid artifacts (Actor/Role, App/Data CRUD, Capability/Application, Goal/Service, Capability/Service, Rule/Service, Data Entity/Component, System/Technology…) with axis seeding and catalogue-driven checks | — |
 | `/ea-gaps [mode]` | Architecture Gap Register — list, add, promote raw gaps to GAP-NNN, update, trace to work packages, or generate register | — |
 | `/ea-principles [mode]` | Architecture Principles Register — list, add, update, or trace BP/DP/AP/TP-NNN principle entries; `trace` detects ADR and constraint violations | — |
 | `/ea-abbs [mode]` | Architecture Building Block Register — generate, view, create, or update ABB-NNN entries | — |

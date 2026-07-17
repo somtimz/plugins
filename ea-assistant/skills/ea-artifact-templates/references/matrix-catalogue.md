@@ -28,12 +28,13 @@ Entries marked **Managed by:** are not handled by `/ea-matrix` — follow the po
 |---|---|
 | Preliminary | `principle-decision` |
 | A | Stakeholder Map Matrix (managed elsewhere) |
-| B | `business-interaction`, `actor-role`, `capability-organization`, `capability-value-stream`, `capability-application`, `goal-service` |
+| B | `business-interaction`, `actor-role`, `capability-organization`, `capability-value-stream`, `capability-application`, `goal-service`, `capability-service` |
 | C-Data | `data-function`, `app-data`, `data-entity-component` |
 | C-App | `app-organization`, `role-application`, `app-function`, `app-interaction`, `capability-application` |
 | D | `system-technology` |
 | E / F | `wp-dependency`, Work Package / Gap (managed elsewhere) |
 | Requirements / Cross-cutting | Requirements Traceability Matrix, Requirement / Work Package (both managed elsewhere) |
+| Cross-cutting | `rule-service` |
 
 > `capability-application` spans Phases B and C-App (single file in `artifacts/phase-b/`); it appears in both rows above by design.
 
@@ -291,6 +292,38 @@ Entries marked **Managed by:** are not handled by `/ea-matrix` — follow the po
 - **Elicitation questions:**
   1. "Which component is the authoritative master for {entity} — and where is it replicated?"
   2. "Are there entities with no clear system of record, or with two systems both claiming to master them?"
+
+### capability-service — Capability / Service Matrix
+- **Phase:** B · **Folder:** `artifacts/phase-b/` · **File:** `capability-service-matrix.md`
+- **Axes:** rows = capabilities (CAP-NNN), columns = services (SVC-NNN)
+- **Seed sources:** rows — `artifacts/phase-b/business-architecture.md` capability model (CAP-NNN tokens); columns — `engagement.json → services[]` (Business-level services), plus application/technology service sections in Phase C-App / D architectures
+- **Markers:** `R` realises · `U` uses · `P` planned · `G` gap (no service yet) · `N` not applicable
+- **Shows:** which services realise or use each business capability
+- **Why:** exposes capabilities with no service coverage, services that do not map to capabilities, and planned service realisations
+- **How:** capabilities on rows, services on columns; mark realisation/use/planned/gap; `G` cells are direct gap-analysis inputs; a capability row with no `R`/`U`/`P` is uncovered and a Business service column with no marks needs justification
+- **Grill checks:**
+  1. Every capability row has at least one `R`, `U`, or `P` — an uncovered capability is a gap unless noted in `## Observations`.
+  2. Every Business-level service column has at least one `R` or `U` — a service that realises no capability needs justification in `## Observations`.
+  3. Every `G` (gap) cell has a corresponding GAP-NNN entry or is listed in `## Open Questions`.
+- **Elicitation questions:**
+  1. "Which services realise or use the {capability} capability today?"
+  2. "Are there capabilities with no service coverage, or services that do not map to a capability?"
+
+### rule-service — Business Rule / Service Matrix
+- **Phase:** Cross-cutting · **Folder:** `artifacts/cross-cutting/operations/` · **File:** `rule-service-matrix.md`
+- **Axes:** rows = business rules (BR-NNN), columns = services (SVC-NNN)
+- **Seed sources:** rows — `engagement.json → rules[]`; columns — `engagement.json → services[]`
+- **Markers:** `E` enforces / operationalises · `I` informs · `N` not applicable · `?` needs review
+- **Shows:** which services operationalise or are informed by each business rule
+- **Why:** proves that Active business rules are enacted somewhere in the service landscape and exposes services that enact undocumented rules
+- **How:** business rules on rows, services on columns; mark `E` where the service enforces the rule; mark `I` where the service is shaped by the rule but does not enforce it; `?` cells are captured in `## Open Questions`
+- **Grill checks:**
+  1. Every Active rule row has at least one `E` or a justification in `## Observations` explaining why it is not yet operationalised.
+  2. Every Business-level service column has at least one `E` or `I` — a Business service with no rule relationship may be missing governance links.
+  3. Every `?` cell has a corresponding note in `## Open Questions`.
+- **Elicitation questions:**
+  1. "Which service(s) enforce the {rule}?"
+  2. "Are there services that implement business rules that are not yet catalogued?"
 
 ---
 

@@ -21,7 +21,7 @@ taxonomy:
 
 # Cross-cutting Artifacts — {{engagement_name}}
 
-Navigation hub for all artifacts that apply across ADM phases. Maintained automatically by `/ea-adrs`, `/ea-decisions`, `/ea-risks`, `/ea-concerns`, `/ea-changes`, `/ea-constraints`, `/ea-zachman`, and `/ea-roles`.
+Navigation hub for all artifacts that apply across ADM phases. Maintained automatically by `/ea-adrs`, `/ea-decisions`, `/ea-risks`, `/ea-concerns`, `/ea-changes`, `/ea-constraints`, `/ea-policies`, `/ea-rules`, `/ea-services`, `/ea-zachman`, and `/ea-roles`.
 
 ---
 
@@ -42,15 +42,17 @@ Architecture decisions, decision log, constraints, and policies.
 
 ## Operations
 
-Risk tracking, change requests, and stakeholder concerns.
+Risk tracking, change requests, stakeholder concerns, business rules, and services.
 
 | Artifact | File | Status | Last Modified |
 |---|---|---|---|
 | Risk Register | [risk-register.md](operations/risk-register.md) | ⚠️ Not generated | — |
 | Change Register | [change-register.md](operations/change-register.md) | ⚠️ Not generated | — |
 | Stakeholder Concerns | [concerns-register.md](operations/concerns-register.md) | ⚠️ Not generated | — |
+| Business Rules Register | [business-rules-register.md](operations/business-rules-register.md) | ⚠️ Not generated | — |
+| Business Services Register | [business-services-register.md](operations/business-services-register.md) | ⚠️ Not generated | — |
 
-> Use `/ea-risks generate`, `/ea-changes generate`, `/ea-concerns generate` to create or refresh these registers.
+> Use `/ea-risks generate`, `/ea-changes generate`, `/ea-concerns generate`, `/ea-rules generate`, `/ea-services generate` to create or refresh these registers.
 
 ---
 

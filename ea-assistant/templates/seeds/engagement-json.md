@@ -38,6 +38,8 @@
   "metrics": [],
   "policies": [],
   "finance": [],
+  "rules": [],
+  "services": [],
   "optOuts": [],
   "phases": {
     "Prelim":        { "status": "Not Started", "startedAt": null, "completedAt": null },

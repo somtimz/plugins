@@ -34,7 +34,7 @@ If `pluginVersion` equals current version AND `lastMigratedVersion` equals curre
 
 - `direction` is **concept-keyed** (not domain-keyed `Business`/`Data`/`Application`/`Technology`/`Motivation`)
 - `metrics` is a **flat array** (not a domain-keyed object)
-- top-level `finance`, `policies`, `adoptedRAs`, `localRA`, `constraintsRepoPath` and `direction.opportunities`/`direction.gaps` are present
+- top-level `finance`, `policies`, `rules`, `services`, `adoptedRAs`, `localRA`, `constraintsRepoPath` and `direction.opportunities`/`direction.gaps` are present
 
 If the probe finds **no** structural gaps:
 > "✅ This engagement is fully aligned with ea-assistant v{current_version}. No migration needed." → stop.
