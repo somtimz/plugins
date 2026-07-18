@@ -112,7 +112,7 @@ technical debt, unsupported systems). Reference the Business Architecture.
 
 Map the key user journeys this application landscape must support. Trace from the Business Architecture Use Case Catalog (UC-NNN). Every architecturally significant use case should resolve to at least one application component that owns its execution.
 
-- **Supported By** — list the APP-NNN IDs of the application components that jointly deliver this use case.
+- **Supported By** — list the ABB-NNN IDs of the application components that jointly deliver this use case.
 - **Key Interaction Points** — the named touchpoints where the actor interacts with the application (e.g. "web portal checkout page", "mobile push notification", "batch import API").
 - **NFR Sensitivity** — the non-functional characteristic most at risk for this use case: Performance (latency / throughput), Availability (uptime / failover), Security (auth / data protection), or None (low sensitivity).
 
@@ -120,7 +120,7 @@ Gaps: any UC-NNN from the Business Architecture that maps to no application comp
 
 </details>
 
-| UC-NNN | Use Case | Primary Actor | Supported By (APP-NNN) | Key Interaction Points | NFR Sensitivity | Details |
+| UC-NNN | Use Case | Primary Actor | Supported By (ABB-NNN) | Key Interaction Points | NFR Sensitivity | Details |
 |---|---|---|---|---|---|---|
 | [[UC-001]] | {{use_case}} | {{actor}} | {{app_ids}} | {{interaction_points}} | Performance / Availability / Security / None | [[UC-001\|→]] |
 
@@ -137,10 +137,10 @@ the baseline. Flag applications that are end-of-life, unsupported, or candidates
 
 </details>
 
-| App ID | Application Name | Function | Technology | Lifecycle Status | Capabilities Supported | Details |
+| Component ID | Application Name | Function | Technology | Lifecycle Status | Capabilities Supported | Details |
 |---|---|---|---|---|---|---|
-| [[APP-001]] | {{app_name}} | {{function}} | {{technology}} | Current / Aging / EOL / Retiring | {{capabilities}} | [[APP-001\|→]] |
-| [[APP-002]] | {{app_name}} | {{function}} | {{technology}} | Current / Aging / EOL / Retiring | {{capabilities}} | [[APP-002\|→]] |
+| [[SBB-001]] | {{app_name}} | {{function}} | {{technology}} | Current / Aging / EOL / Retiring | {{capabilities}} | [[SBB-001\|→]] |
+| [[SBB-002]] | {{app_name}} | {{function}} | {{technology}} | Current / Aging / EOL / Retiring | {{capabilities}} | [[SBB-002\|→]] |
 
 *Reference diagram:* `../diagrams/{{current_app_landscape_diagram}}`
 
@@ -303,7 +303,7 @@ List all APIs exposed by application components to other components or external 
 
 </details>
 
-| API ID | Name | Provider (APP-NNN) | Consumers | Type | Protocol | Auth Method | SLA |
+| API ID | Name | Provider (ABB-NNN) | Consumers | Type | Protocol | Auth Method | SLA |
 |---|---|---|---|---|---|---|---|
 | [[API-001]] | {{api_name}} | {{provider_app}} | {{consumers}} | REST / GraphQL / Event / gRPC | {{protocol}} | OAuth2 / mTLS / API Key / None | {{response_time, availability}} |
 

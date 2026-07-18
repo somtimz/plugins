@@ -1,14 +1,12 @@
 ---
 name: ea-business-services-management
 description: This skill should be used when the user asks to "manage business services", "add a service", "view services", "trace a service to rules or capabilities", "update the business services register", or "assess service coverage". Handles the full service lifecycle from capture through the Consumer–Outcome–Interface triad and linkage to business rules, capabilities, ABB/SBB, and interfaces.
-version: 0.9.86
+version: 0.9.87
 ---
 
 # EA Business Services Management
 
-Business Services Management captures, classifies, traces, and manages externally visible units of behaviour offered to consumers through a defined contract. Services exist at three levels: **Business Service** (offered to customers or business units), **Application Service** (offered by an application), and **Technology Service** (offered by infrastructure). This skill focuses on registering services, maintaining the **Service Passport**, and linking services to business rules, capabilities, building blocks, and interfaces.
-
-Load `skills/ea-artifact-templates/references/ea-concepts.md` for the canonical Service and Business Rule definitions before prompting for or validating any service.
+This skill manages `SVC-NNN` entries. Load `skills/ea-artifact-templates/references/ea-concepts.md` for the canonical **Service** and **Business Rule** definitions before prompting for or validating any service.
 
 ## Business Services Storage
 

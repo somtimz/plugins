@@ -101,9 +101,9 @@ artifact linkage and coverage status only. Waived requirements show 🚫 in all 
 
 </details>
 
-| Req ID | Requirement | Priority | Arch Vision | Biz Arch | Data | App | Tech | Roadmap |
-|---|---|---|---|---|---|---|---|---|
-| 🔒REQ-001 | {{requirement}} | High | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| Req ID | Requirement | Priority | Coverage |
+|---|---|---|---|
+| 🔒REQ-001 | {{requirement}} | High | ArchVision ⬜ · BizArch ⬜ · Data ⬜ · App ⬜ · Tech ⬜ · Roadmap ⬜ |
 
 ---
 
@@ -117,9 +117,9 @@ this project requirement responds to, if applicable (— if none).
 
 </details>
 
-| Req ID | Requirement | Priority | Derives From | Arch Vision | Biz Arch | Data | App | Tech | Roadmap |
-|---|---|---|---|---|---|---|---|---|---|
-| REQ-00N | {{requirement}} | Medium | — | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| Req ID | Requirement | Priority | Derives From | Coverage |
+|---|---|---|---|---|
+| REQ-00N | {{requirement}} | Medium | — | ArchVision ⬜ · BizArch ⬜ · Data ⬜ · App ⬜ · Tech ⬜ · Roadmap ⬜ |
 
 Legend: ✅ Addressed | ⚠️ Partially addressed | ⬜ Not addressed | 🚫 Waived
 

@@ -8,16 +8,18 @@ This reference defines the taxonomy of requirement types used by the EA Assistan
 
 Enterprise architecture work deals with requirements at multiple levels of abstraction. Not all requirements are functional system requirements in the traditional software engineering sense. Architecture requirements include the full spectrum from strategic constraints to detailed data quality rules.
 
+> **Canonical ID note:** The category codes below are classification labels. All canonical IDs use the ea-assistant ID scheme (`skills/ea-artifact-templates/references/ea-concepts.md`): requirements use `REQ-NNN`, constraints use `CST-NNN`, principles use the domain-specific prefixes `BP/DP/AP/TP-NNN`, drivers use `DRV-NNN`, and assumptions are recorded as textual notes with no canonical ID.
+
 The EA Assistant classifies requirements into five primary categories, plus one motivational category:
 
-| Category | Code Prefix | Primary Concern |
-|---|---|---|
-| Functional Requirement | FR | What the system or architecture must do |
-| Non-Functional Requirement | NFR | How well it must do it (quality attributes) |
-| Constraint | CON | What limits or restricts the solution space |
-| Principle | PRI | Normative statements that govern decisions |
-| Assumption | ASS | Statements accepted as true without proof |
-| Business Driver | DRV | Forces or imperatives that motivate the architecture work |
+| Category | Classification Code | Canonical ID Prefix | Primary Concern |
+|---|---|---|---|
+| Functional Requirement | FR | REQ-NNN | What the system or architecture must do |
+| Non-Functional Requirement | NFR | REQ-NNN | How well it must do it (quality attributes) |
+| Constraint | CON | CST-NNN | What limits or restricts the solution space |
+| Principle | PRI | BP / DP / AP / TP | Normative statements that govern decisions |
+| Assumption | ASS | *(none)* | Statements accepted as true without proof |
+| Business Driver | DRV | DRV-NNN | Forces or imperatives that motivate the architecture work |
 
 Additionally, two derived types are used for traceability:
 
@@ -63,13 +65,13 @@ A Functional Requirement specifies a behaviour, capability, or function that a s
 
 ### Examples
 
-**FR-001:** The Customer Portal must allow authenticated customers to view all invoices issued in the past 24 months.
+**REQ-001:** The Customer Portal must allow authenticated customers to view all invoices issued in the past 24 months.
 
-**FR-002:** The Order Management System must send a confirmation notification to the customer within 30 seconds of order acceptance.
+**REQ-002:** The Order Management System must send a confirmation notification to the customer within 30 seconds of order acceptance.
 
-**FR-003:** The integration between the CRM and ERP systems must synchronise customer address changes within 15 minutes of the update occurring in either system.
+**REQ-003:** The integration between the CRM and ERP systems must synchronise customer address changes within 15 minutes of the update occurring in either system.
 
-**FR-004:** The data platform must support data lineage tracking from source system to report cell for all regulated reporting data.
+**REQ-004:** The data platform must support data lineage tracking from source system to report cell for all regulated reporting data.
 
 ---
 
@@ -110,15 +112,15 @@ A Non-Functional Requirement (NFR) specifies a quality attribute or operational 
 
 ### Examples
 
-**NFR-001 (Availability):** The Customer Portal must achieve 99.9% availability measured monthly, excluding approved maintenance windows of no more than 4 hours per month.
+**REQ-005 (Availability):** The Customer Portal must achieve 99.9% availability measured monthly, excluding approved maintenance windows of no more than 4 hours per month.
 
-**NFR-002 (Performance):** The API Gateway must respond to 95% of requests within 200ms under a load of 5,000 concurrent users.
+**REQ-006 (Performance):** The API Gateway must respond to 95% of requests within 200ms under a load of 5,000 concurrent users.
 
-**NFR-003 (Security):** All data at rest classified as Confidential or above must be encrypted using AES-256 or equivalent.
+**REQ-007 (Security):** All data at rest classified as Confidential or above must be encrypted using AES-256 or equivalent.
 
-**NFR-004 (Recoverability):** The core banking platform must achieve an RTO of 4 hours and an RPO of 1 hour for a complete data centre failure scenario.
+**REQ-008 (Recoverability):** The core banking platform must achieve an RTO of 4 hours and an RPO of 1 hour for a complete data centre failure scenario.
 
-**NFR-005 (Accessibility):** The customer-facing web application must comply with WCAG 2.1 Level AA accessibility standards.
+**REQ-009 (Accessibility):** The customer-facing web application must comply with WCAG 2.1 Level AA accessibility standards.
 
 ---
 
@@ -161,11 +163,11 @@ A requirement is something the architecture must achieve; a constraint is someth
 
 ### Examples
 
-**CON-001:** All solution components must be deployed within the organisation's existing Microsoft Azure tenancy in the Australia East and Australia Southeast regions.
+**CST-001:** All solution components must be deployed within the organisation's existing Microsoft Azure tenancy in the Australia East and Australia Southeast regions.
 
-**CON-002:** The solution must not require replacement of the existing SAP ECC instance until the planned ECC end-of-life date in 2027.
+**CST-002:** The solution must not require replacement of the existing SAP ECC instance until the planned ECC end-of-life date in 2027.
 
-**CON-003:** Personal data of EU-resident customers must not be stored or processed outside the European Economic Area.
+**CST-003:** Personal data of EU-resident customers must not be stored or processed outside the European Economic Area.
 
 ---
 
@@ -191,17 +193,17 @@ A Principle is a normative, declarative statement that provides a rule or guidel
 
 ### Examples
 
-**PRI-001 — Open Standards Preferred**
+**TP-001 — Open Standards Preferred**
 *Statement:* The architecture will prefer open standards over proprietary solutions where functional equivalence exists.
 *Rationale:* Open standards reduce vendor lock-in, improve interoperability, and lower long-term total cost of ownership.
 *Implications:* Procurement evaluation must include a standards-alignment criterion. Exceptions require architecture board approval and a documented exit strategy.
 
-**PRI-002 — Data is an Asset**
+**DP-001 — Data is an Asset**
 *Statement:* Data will be managed as a shared enterprise asset, not owned by individual systems or teams.
 *Rationale:* Siloed data ownership leads to duplication, inconsistency, and barriers to analytics and reporting.
 *Implications:* All new systems must expose data via approved integration interfaces. A data custodian must be assigned to each canonical data entity.
 
-**PRI-003 — Design for Change**
+**AP-001 — Design for Change**
 *Statement:* Architecture components will be designed with modularity and loose coupling to facilitate future change.
 *Rationale:* Business requirements evolve; architectures that assume stability become expensive to modify.
 *Implications:* All services must define clear boundaries and contracts. Tight coupling between components requires architectural justification.
@@ -229,11 +231,11 @@ An Assumption is a statement that is accepted as true for the purposes of the ar
 
 ### Examples
 
-**ASS-001:** It is assumed that the organisation's current Azure tenancy has sufficient capacity quota to accommodate the target workloads without requiring a quota increase request. *(Consequence if false: deployment timeline is extended by 4–8 weeks for quota approval.)*
+It is assumed that the organisation's current Azure tenancy has sufficient capacity quota to accommodate the target workloads without requiring a quota increase request. *(Consequence if false: deployment timeline is extended by 4–8 weeks for quota approval.)*
 
-**ASS-002:** It is assumed that the existing integration middleware (MuleSoft) will be retained and is capable of supporting the additional integration load in the target state. *(Consequence if false: a middleware capacity assessment is required before Phase D is finalised.)*
+It is assumed that the existing integration middleware (MuleSoft) will be retained and is capable of supporting the additional integration load in the target state. *(Consequence if false: a middleware capacity assessment is required before Phase D is finalised.)*
 
-**ASS-003:** It is assumed that business stakeholders can commit 4 hours per week per workstream for architecture engagement activities. *(Consequence if false: discovery and validation activities will be delayed, extending the engagement timeline.)*
+It is assumed that business stakeholders can commit 4 hours per week per workstream for architecture engagement activities. *(Consequence if false: discovery and validation activities will be delayed, extending the engagement timeline.)*
 
 ---
 
@@ -254,7 +256,7 @@ A Business Driver is a force, trend, challenge, or strategic imperative that mot
 Drivers motivate Goals, which in turn spawn Objectives, which generate Requirements. The chain is:
 
 ```text
-Business Driver (DRV) → Goal (G) → Objective (OBJ) → Requirement (FR/NFR/CON)
+Business Driver (DRV) → Goal (G) → Objective (OBJ) → Requirement (REQ) / Constraint (CST)
 ```
 
 When the `ea-requirements-analyst` extracts DRV items from documents, it flags them for the Architecture Vision's Drivers section rather than writing them directly into the requirements register. They are tracked separately with DRV-NNN IDs in the engagement's motivation framework.
@@ -288,9 +290,9 @@ When the `ea-requirements-analyst` extracts DRV items from documents, it flags t
 
 | Category | TOGAF Phase Focus | TOGAF Artefact | Zachman Primary Cell | Zachman Secondary |
 |---|---|---|---|---|
-| Functional (FR) | B, C, D | Architecture Requirements Specification | R2,C2 | R3,C2 |
-| Non-Functional (NFR) | C, D | Architecture Requirements Specification | R3,C3 | R4,C3, R4,C2 |
-| Constraint (CON) | Prelim, A | Statement of Architecture Work | R1,C6 | R4,C3 |
-| Principle (PRI) | Prelim | Architecture Principles Catalogue | R1,C6 | R2,C6 |
-| Assumption (ASS) | A, Req. Mgmt | Architecture Requirements Specification | R1,C6 | — |
+| Functional (REQ) | B, C, D | Architecture Requirements Specification | R2,C2 | R3,C2 |
+| Non-Functional (REQ) | C, D | Architecture Requirements Specification | R3,C3 | R4,C3, R4,C2 |
+| Constraint (CST) | Prelim, A | Statement of Architecture Work | R1,C6 | R4,C3 |
+| Principle (BP/DP/AP/TP) | Prelim | Architecture Principles Catalogue | R1,C6 | R2,C6 |
+| Assumption | A, Req. Mgmt | Architecture Requirements Specification | R1,C6 | — |
 | Business Driver (DRV) | Prelim, A | Architecture Vision | R1,C6 | — |

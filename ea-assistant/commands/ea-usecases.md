@@ -1,7 +1,7 @@
 ---
 name: ea-usecases
 description: Manage use cases — capture actor-goal interactions, trace to requirements, processes, capabilities, and value streams
-argument-hint: "[list|add|update|trace|generate] [--status Active|Draft|Under Review|Deprecated] [--actor name] [--priority High|Medium|Low]"
+argument-hint: "[list|add|update|trace|generate] [--status Active|Draft|Under Review|Deprecated|Retired] [--actor name] [--priority High|Medium|Low]"
 allowed-tools: [Read, Write, Bash]
 ---
 
@@ -9,7 +9,7 @@ You are executing the `/ea-usecases` command. Load the `ea-use-cases-management`
 
 ## Overview
 
-Use Cases are **discrete units of interaction** between an actor and the business/system to achieve a goal. They define preconditions, a main flow, alternative/exception flows, and postconditions. This command aggregates all `UC-NNN` entries into a single Use Cases Register, supports creating or updating individual use cases, traces use cases to linked requirements/processes/capabilities/value streams, and regenerates the register artifact.
+This command manages `UC-NNN` entries. Read `skills/ea-artifact-templates/references/ea-concepts.md` (**Use Case**) for the canonical definition before prompting or validating. The command aggregates all `UC-NNN` entries into a single Use Cases Register, supports creating or updating individual use cases, traces use cases to linked requirements/processes/capabilities/value streams, and regenerates the register artifact.
 
 **Modes:**
 - `list` (default) — read the Use Cases Register, render a summary table
@@ -41,7 +41,7 @@ Use Cases are **discrete units of interaction** between an actor and the busines
 ```
 Use Cases Register — {engagement name}
 ══════════════════════════════════════════════════════════
-Total: {N}  |  Active: {N}  |  Draft: {N}  |  Under Review: {N}  |  Deprecated: {N}
+Total: {N}  |  Active: {N}  |  Draft: {N}  |  Under Review: {N}  |  Deprecated: {N}  |  Retired: {N}
 
 By Priority:     High {N}  |  Medium {N}  |  Low {N}
 By Actor:        {N} distinct actor(s)
@@ -72,7 +72,7 @@ Creating new use case — UC-{NNN}
 4. Preconditions (what must be true before; comma-separated, or press Enter):
 5. Postconditions (what must be true after; comma-separated, or press Enter):
 6. Priority (High / Medium / Low) [default: Medium]:
-7. Status (Active / Draft / Under Review / Deprecated) [default: Draft]:
+7. Status (Active / Draft / Under Review / Deprecated / Retired) [default: Draft]:
 8. ADM Phase (Prelim / A / B / C-Data / C-App / D / E / F / G / H / Requirements):
 9. Linked Requirements (REQ-NNN IDs, comma-separated, or press Enter) [optional]:
 10. Linked Business Processes (PROC-NNN IDs, comma-separated, or press Enter) [optional]:
