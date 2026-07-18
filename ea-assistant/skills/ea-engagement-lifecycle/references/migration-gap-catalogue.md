@@ -203,6 +203,7 @@ Surfaces content that likely belongs in a **different section** (within the docu
 | Requirement-shaped statements ("the system must/shall …") in narrative body | Requirements Register (`/ea-requirements`) | register registration |
 | A populated section that belongs to a different artifact type per the templates (e.g. a `Work Packages` section authored inside Architecture Vision) | the owning artifact (e.g. Architecture Roadmap) | cross-document block move |
 | A block clearly under the wrong heading within the same doc (e.g. constraints listed under `Assumptions`) | the correct section in the same doc | within-document block move |
+| `## 2. Organisation Model` or `## 4. Business Processes` populated sections inside `business-architecture.md` (post-v0.9.88 templates move these to the Operating Model artifact) | Operating Model artifact (`/ea-operatingmodel create` or `/ea-artifact create operating-model`) | cross-document block move + register links for processes |
 
 ### Remediation (per-move, user-confirmed)
 

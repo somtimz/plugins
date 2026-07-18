@@ -139,6 +139,8 @@
       "interface": "",
       "owner": "",
       "sla": "",
+      "deliveryChannel": "Digital | Branch | Phone | Partner | Field | Shared Service | Other",
+      "operatingModelNote": "",
       "linkedRules": [],
       "linkedCapabilities": [],
       "linkedValueStreams": [],
@@ -224,6 +226,8 @@
 **`migrations[]`** is the audit trail: `/ea-migrate` appends one entry per run — `{ date, fromPluginVersion, toPluginVersion, fromSchemaVersion, toSchemaVersion, gapsFound, gapsFixed, gapsSkipped }`. Never edit or prune entries manually.
 
 **Source of truth:** `engagement.json` is the single source of truth for the strategic direction (`direction.{vision, mission, drivers, goals, objectives, strategies, issues, problems, opportunities, gaps}`), the top-level governance/measurement registers (`metrics[]`, `policies[]`, `finance[]` — siblings of `direction`, not nested in it), phase state, and the artifact registry. Generated register markdown files (`*-register.md`) are **rendered views** — regenerate them after any change; never edit them to change state (the exceptions are registers whose content lives only in markdown: Risk, Requirements, Constraints, Policies registers, which are file-mastered with `engagement.json` holding metadata). Snapshot files under `snapshots/` are point-in-time archives per the register snapshot convention.
+
+**Operating Model artifact storage:** The Operating Model is an **authored Phase B artifact** (`artifacts/phase-b/operating-model.md`) tracked in `engagement.json → artifacts[]`. It has no dedicated top-level array: structured business processes live in `businessProcesses[]`, service delivery notes in `services[]`, and org design / decision rights / controls / sourcing / workforce content in the artifact body. This keeps the OM artifact free-form while reusing the existing registers for mastered items.
 
 ## Field Version History
 

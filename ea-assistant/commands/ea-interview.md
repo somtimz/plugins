@@ -66,7 +66,7 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
    Select phase for interview:
    1. Preliminary
    2. Phase A — Architecture Vision
-   3. Phase B — Business Architecture
+   3. Phase B — Business Architecture & Operating Model
    4. Phase C — Information Systems
    5. Phase D — Technology Architecture
    6. Phase E — Opportunities and Solutions
@@ -77,6 +77,8 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
    ```
 
 2. Load the question bank from `skills/ea-artifact-templates/references/phase-interview-questions.md` for the selected phase.
+
+   **Phase B — Business Architecture & Operating Model:** Phase B now produces two distinct authored artifacts. Load the **Business Architecture** question bank first. When that section is complete, check whether `artifacts/phase-b/operating-model.md` exists or the user wants to capture operating-model content. If either is true, load the **Operating Model** question bank as a continuation of the same Phase B interview. Route Operating Model answers to `operating-model.md`; do not merge them into `business-architecture.md`.
 
 2b. **Inject Phase Intent Framing.**
 

@@ -1,8 +1,49 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.87
+**Version:** 0.9.88
 **Status:** Current
 **Author:** Costa Pissaris
+
+---
+
+## v0.9.88 — Operating Model as a first-class Phase B artifact
+
+### Summary
+Promotes the **Operating Model** from a concept in `ea-concepts.md` to a first-class, authored Phase B artifact with its own template, slash command, scoring, and compliance rules. **Business Architecture** remains the stable blueprint (capabilities, value streams, services, information, rules, measures, use cases); the **Operating Model** becomes the execution design (organisation design, roles/decision rights, controls, processes, workforce, sourcing, technology enablement, performance management). The Phase B `business-architecture.md` template is refactored to remove organisation-model and process-detail sections, delegating execution design to the new `operating-model.md`. A new `/ea-operatingmodel` command provides `create | view | check | link | interview` modes. Interview, persona, service, process, role, compliance, scoring, and migration references are updated to treat OM as a distinct artifact. No new `engagement.json` top-level arrays or ID prefixes are introduced; OM reuses existing `CAP-NNN`, `VS-NNN`, `SVC-NNN`, `BR-NNN`, `PROC-NNN`, `UC-NNN`, `ROLE-NNN`, and `GAP-NNN` objects.
+
+### New
+- **`templates/phase-b/operating-model.md`** — full artifact template with §1 context, §2 organisation design, §3 roles/decision rights, §4 governance/controls/SLAs, §5 business process execution index, §6 workforce/locations/channels, §7 sourcing/partnership, §8 information/technology enablement, §9 performance management, §10 gap analysis, §11 requirements, §12 traceability, §13 diagrams, Appendices A3/A4/A5.
+- **`commands/ea-operatingmodel.md`** — `/ea-operatingmodel create|view|check|link|interview`; routes to `templates/phase-b/operating-model.md`.
+- **Operating Model concept sharpening** in `skills/ea-artifact-templates/references/ea-concepts.md` — explicit BA vs OM distinction; concept-home table mapping each concept to BA, OM, or both.
+- **`deliveryChannel` and `operatingModelNote`** fields added to `engagement.json → services[]` and the Business Services Register, so service delivery model is captured without duplicating BA service definitions.
+- **Phase B interview split** in `commands/ea-interview.md` and `phase-interview-questions.md` — Business Architecture question bank followed by optional Operating Model question bank.
+- **Operating Model scoring weights** added to the grill scoring rubric; `operating-model` explicitly scored as an authored artifact.
+- **Compliance rules** updated: Operating Model added to T3-A3/A4/ADR artifact lists; new T3-OM-LINK rule requiring OM-to-BA traceability.
+- **`/ea-migrate` 3l probe** detects legacy Organisation Model / Business Processes content inside old `business-architecture.md` files and offers to split it into the new OM artifact.
+- **Persona updates** — `/ea-operatingmodel` added to Enterprise Architect, CIO, Chief Product Officer, and Business Architect command subsets and report bundles.
+
+### Files
+- `templates/phase-b/operating-model.md` — new OM artifact template.
+- `commands/ea-operatingmodel.md` — new slash command.
+- `skills/ea-artifact-templates/references/ea-concepts.md` — BA/OM distinction and concept-home table.
+- `templates/phase-b/business-architecture.md` — refactored to focus on stable blueprint; OM link in §1; removed §2 Organisation Model and §4 Business Processes detail.
+- `skills/ea-engagement-lifecycle/references/engagement-schema.md` — OM storage prose + service schema additions.
+- `templates/cross-cutting/business-services-register.md` — Delivery Channel and Operating Model Note columns.
+- `commands/ea-services.md` — prompts for `deliveryChannel` and `operatingModelNote`.
+- `commands/ea-processes.md` — offer to link new process to OM §5 when OM exists.
+- `commands/ea-roles.md` — boundary note: ROLE-NNN = EA engagement roles; business operating roles live in OM.
+- `commands/ea-artifact.md` — Operating Model naming map.
+- `commands/ea-score.md` — `operating-model` added to scored authored artifacts.
+- `commands/ea-grill.md` — OM → `grill-me-design` skill entry.
+- `skills/ea-artifact-templates/references/compliance-check.md` — T3 lists + T3-OM-LINK.
+- `skills/ea-engagement-lifecycle/references/grill-scoring-rubric.md` — OM section weights; updated BA weights.
+- `commands/ea-interview.md`, `skills/ea-artifact-templates/references/phase-interview-questions.md` — Phase B BA + OM interview flow.
+- `skills/ea-engagement-lifecycle/references/adm-phase-guide.md` — Operating Model listed as a Phase B artifact.
+- `skills/ea-engagement-lifecycle/references/persona-registry.md` — persona command/report bundles updated.
+- `skills/ea-engagement-lifecycle/references/migration-gap-catalogue.md`, `commands/ea-migrate.md` — 3l probe for legacy BA→OM split.
+- `decisions/2026-07-17-operating-model-artifact.md` — decision journal entry.
+- `docs/plans/2026-07-17-003-feat-operating-model-artifact-plan.md` — implementation plan.
+- `.claude-plugin/plugin.json`, `../.claude-plugin/marketplace.json`, `docs/PRD.md`, `commands/ea-help.md`, `README.md`, `CLAUDE.md`, all `skills/*/SKILL.md` — version + description hygiene.
 
 ---
 

@@ -25,7 +25,9 @@ You are executing the `/ea-score` command. Load the `ea-grill-skills` skill (the
 
 ## Scope (which artifacts are scored)
 
-Score **authored** artifacts. **Skip command-generated artifacts** (their bodies are owned by a generating command, so a "quality" score is not meaningful): any artifact with a `generated:` frontmatter field, or whose `artifactId` matches `*-register`, `*-matrix`, `decision-register`, `cost-model-register`, `traceability-matrix`, `zachman-diagram`, `role-catalogue`, `consolidated-report`, or `cross-cutting-index`. List skipped artifacts under the roll-up as `— (generated; not scored)`. This mirrors the `/ea-migrate` 3i/3j/3k scope.
+Score **authored** artifacts. This includes primary Phase artifacts such as `architecture-vision`, `business-architecture`, `operating-model`, `data-architecture`, `application-architecture`, `technology-architecture`, `gap-analysis-*`, `architecture-roadmap`, `statement-of-architecture-work`, `migration-plan`, `engagement-charter`, `governance-framework`, and `implementation-governance-plan`.
+
+**Skip command-generated artifacts** (their bodies are owned by a generating command, so a "quality" score is not meaningful): any artifact with a `generated:` frontmatter field, or whose `artifactId` matches `*-register`, `*-matrix`, `decision-register`, `cost-model-register`, `traceability-matrix`, `zachman-diagram`, `role-catalogue`, `consolidated-report`, or `cross-cutting-index`. List skipped artifacts under the roll-up as `— (generated; not scored)`. This mirrors the `/ea-migrate` 3i/3j/3k scope.
 
 ## Step 3 — Score an Artifact (single, and per artifact under `--all`)
 

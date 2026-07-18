@@ -234,6 +234,7 @@ This guide provides a concise but complete reference for each phase of the TOGAF
 - What changes are required to the business to achieve the vision?
 - What are the business capability gaps?
 - What organisational changes are implied?
+- What operating model is required to execute the target business architecture?
 
 ### Artefacts Produced
 | Artefact | Description |
@@ -244,6 +245,7 @@ This guide provides a concise but complete reference for each phase of the TOGAF
 | Business Process Catalogue | Documented business processes in scope |
 | Organisation Map | Structure of business units and relationships |
 | Business Gap Analysis | Gaps between baseline and target business architecture |
+| Operating Model | Execution design: org design, roles/decision rights, controls, processes, workforce, sourcing, enablement, performance management |
 
 ### Deep Tactics
 - **Map capabilities to value streams** — don't model capabilities in isolation.

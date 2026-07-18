@@ -95,6 +95,7 @@ Map common names to file IDs:
 - "Engagement Charter" / "Charter" → `engagement-charter`
 - "Architecture Vision" → `architecture-vision`
 - "Business Architecture" → `business-architecture`
+- "Operating Model" / "Operating Model Design" → `operating-model`
 - "Data Architecture" / "Information Architecture" → `data-architecture`
 - "Application Architecture" → `application-architecture`
 - "Technology Architecture" → `technology-architecture`

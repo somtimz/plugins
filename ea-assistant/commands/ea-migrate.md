@@ -96,6 +96,25 @@ Also check `engagement.json → artifacts[]`: if any `file` path contains `artif
 
 **Remediation for 3h:** Move the files to their target sub-folders (creating the sub-folder if needed) and update `engagement.json → artifacts[]` file paths to match. Handled by `/ea-migrate --reorganize`.
 
+**3l — Business Architecture / Operating Model split (introduced v0.9.88)**
+
+Scan `artifacts/phase-b/business-architecture.md` for legacy sections that now belong in the Operating Model artifact:
+
+| Pattern | Gap if… | Severity |
+|---|---|---|
+| `## 2. Organisation Model` section present with non-placeholder content | Operating-model content still inside Business Architecture | Info |
+| `## 4. Business Processes` section contains detailed step tables (not a summary-and-link table) | Process detail still inside Business Architecture instead of the Business Processes Register / Operating Model | Info |
+| `operating-model.md` artifact missing while Organisation Model or Business Processes content exists in BA | No first-class OM artifact for execution design | Low |
+
+For each detected gap, report:
+
+```
+GAP-M-{NNN}  [Info]  business-architecture.md — {section} contains operating-model content
+             Suggested: create /ea-operatingmodel and move this section; link processes to PROC-NNN register
+```
+
+**Remediation for 3l:** Offer to create `artifacts/phase-b/operating-model.md` from the current template, move the identified sections into it as an atomic block move, and replace the BA sections with summary-and-link pointers. Process step tables should be registered as `PROC-NNN` entries (via `/ea-processes add`) rather than pasted raw. Snapshot both artifacts before moving; excluded from `--auto`.
+
 Track each gap found with: gap ID (GAP-M-NNN), type, affected file, severity, proposed remediation.
 
 ---

@@ -23,17 +23,17 @@ Personas build on the existing `audience` taxonomy (`skills/ea-artifact-template
 - **Key:** `enterprise-architect` · **Aliases:** ea, architect, chief-architect
 - **Audience:** Architecture, All
 - **Interests:** Cross-domain coherence, traceability, governance, decision quality, the whole ADM
-- **Commands:** `/ea-status` · `/ea-engage-review` · `/ea-lens` · `/ea-consistency` · `/ea-trace` · `/ea-grill` · `/ea-decisions` · `/ea-adrs` · `/ea-strategies` · `/ea-matrix`
+- **Commands:** `/ea-status` · `/ea-engage-review` · `/ea-lens` · `/ea-consistency` · `/ea-trace` · `/ea-grill` · `/ea-decisions` · `/ea-adrs` · `/ea-strategies` · `/ea-matrix` · `/ea-operatingmodel`
 - **Report bundle:** `/ea-publish --full`; `/ea-engage-review`; `/ea-lens`
-- **Entry workflow:** Full ADM — Prelim → A → B → C → D → E/F → G/H; review with `/ea-engage-review` and `/ea-lens` at phase gates
+- **Entry workflow:** Full ADM — Prelim → A → B (Business Architecture + Operating Model) → C → D → E/F → G/H; review with `/ea-engage-review` and `/ea-lens` at phase gates
 
 ### CIO
 - **Key:** `cio` · **Aliases:** chief-information-officer, it-exec
 - **Audience:** Executive
 - **Interests:** Strategic alignment, cost and value (TCO/payback), roadmap delivery, risk posture, decisions requiring sponsor authority
-- **Commands:** `/ea-status` · `/ea-brief` · `/ea-strategies` · `/ea-finance` · `/ea-goals` · `/ea-target` · `/ea-actions` · `/ea-risks` · `/ea-decisions`
-- **Report bundle:** `/ea-publish --executive`; `/ea-finance generate` (cost roll-up); `/ea-brief --focus strategy`; Business Case
-- **Entry workflow:** Architecture Vision → Strategy Map (`/ea-strategies trace`) → Roadmap budget (`/ea-finance`) → Decisions/Risks
+- **Commands:** `/ea-status` · `/ea-brief` · `/ea-strategies` · `/ea-finance` · `/ea-goals` · `/ea-target` · `/ea-actions` · `/ea-risks` · `/ea-decisions` · `/ea-operatingmodel`
+- **Report bundle:** `/ea-publish --executive`; `/ea-finance generate` (cost roll-up); `/ea-brief --focus strategy`; Business Case; Operating Model
+- **Entry workflow:** Architecture Vision → Strategy Map (`/ea-strategies trace`) → Operating Model → Roadmap budget (`/ea-finance`) → Decisions/Risks
 
 ### CISO
 - **Key:** `ciso` · **Aliases:** security, chief-information-security-officer, security-officer
@@ -47,9 +47,9 @@ Personas build on the existing `audience` taxonomy (`skills/ea-artifact-template
 - **Key:** `chief-product-officer` · **Aliases:** cpo-product, product, cpo
 - **Audience:** Business, Executive
 - **Interests:** Product value streams, business capabilities, customer outcomes, benefits realisation
-- **Commands:** `/ea-goals` · `/ea-objectives` · `/ea-strategies` · `/ea-scenarios` · `/ea-stories` · `/ea-matrix` · `/ea-finance`
-- **Report bundle:** Business Architecture; Capability/Value-Stream matrices (`/ea-matrix`); Objectives & benefits (`/ea-objectives`, benefit metrics); `/ea-brief --focus strategy`
-- **Entry workflow:** Phase B (capabilities, value streams) → Objectives/Metrics → benefits realisation (`/ea-finance` + benefit metrics)
+- **Commands:** `/ea-goals` · `/ea-objectives` · `/ea-strategies` · `/ea-scenarios` · `/ea-stories` · `/ea-matrix` · `/ea-finance` · `/ea-operatingmodel`
+- **Report bundle:** Business Architecture; Operating Model; Capability/Value-Stream matrices (`/ea-matrix`); Objectives & benefits (`/ea-objectives`, benefit metrics); `/ea-brief --focus strategy`
+- **Entry workflow:** Phase B (capabilities, value streams) → Operating Model (channels, delivery) → Objectives/Metrics → benefits realisation (`/ea-finance` + benefit metrics)
 
 > **CPO note:** `cpo` is ambiguous. This registry treats `chief-product-officer` and `chief-privacy-officer` as **two distinct personas**. The bare alias `cpo` resolves to Chief Product Officer; use `chief-privacy-officer` / `privacy` for the privacy role.
 
@@ -65,9 +65,9 @@ Personas build on the existing `audience` taxonomy (`skills/ea-artifact-template
 - **Key:** `business-architect` · **Aliases:** ba
 - **Audience:** Business
 - **Interests:** Business capabilities, value streams, processes, business drivers and goals, operating model
-- **Commands:** `/ea-drivers` · `/ea-goals` · `/ea-objectives` · `/ea-strategies` · `/ea-scenarios` · `/ea-matrix` · `/ea-gaps`
-- **Report bundle:** Business Architecture; Business Model Canvas; Capability/Value-Stream matrices (`/ea-matrix`); business Gap Analysis
-- **Entry workflow:** Phase B — drivers/goals → capabilities & value streams → business gaps → strategies that close them
+- **Commands:** `/ea-drivers` · `/ea-goals` · `/ea-objectives` · `/ea-strategies` · `/ea-scenarios` · `/ea-matrix` · `/ea-gaps` · `/ea-operatingmodel`
+- **Report bundle:** Business Architecture; Operating Model; Business Model Canvas; Capability/Value-Stream matrices (`/ea-matrix`); business Gap Analysis
+- **Entry workflow:** Phase B — drivers/goals → capabilities & value streams → operating model → business gaps → strategies that close them
 
 ### Data Architect
 - **Key:** `data-architect` · **Aliases:** da

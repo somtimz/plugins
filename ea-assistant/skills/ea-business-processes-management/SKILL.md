@@ -1,7 +1,7 @@
 ---
 name: ea-business-processes-management
 description: This skill should be used when the user asks to "manage business processes", "add a business process", "view business processes", "trace a process to value streams or use cases", "update the business processes register", or "assess process coverage". Handles the full business-process lifecycle from capture through traceability and linkage to value streams, capabilities, use cases, services, and rules.
-version: 0.9.87
+version: 0.9.88
 ---
 
 # EA Business Processes Management

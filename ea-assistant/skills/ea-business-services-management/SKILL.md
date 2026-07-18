@@ -1,7 +1,7 @@
 ---
 name: ea-business-services-management
 description: This skill should be used when the user asks to "manage business services", "add a service", "view services", "trace a service to rules or capabilities", "update the business services register", or "assess service coverage". Handles the full service lifecycle from capture through the Consumer–Outcome–Interface triad and linkage to business rules, capabilities, ABB/SBB, and interfaces.
-version: 0.9.87
+version: 0.9.88
 ---
 
 # EA Business Services Management

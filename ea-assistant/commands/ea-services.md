@@ -74,7 +74,9 @@ Creating new service — SVC-{NNN}
 6. Interface (access channel; prefer IFC-NNN ID, or free-text for human channels):
 7. Owner (accountable role):
 8. SLA / NFR (REQ-NNN ID or free-text SLA statement) [optional]:
-9. Linked Business Rules (BR-NNN IDs, comma-separated; Business-level only, or press Enter) [optional]:
+9. Delivery Channel (Digital / Branch / Phone / Partner / Field / Shared Service / Other) [optional]:
+10. Operating Model Note (delivery arrangement, sourcing, location, or control context) [optional]:
+11. Linked Business Rules (BR-NNN IDs, comma-separated; Business-level only, or press Enter) [optional]:
 10. Linked Capabilities (CAP-NNN IDs, comma-separated, or press Enter) [optional]:
 11. Linked Value Streams (VS-NNN IDs, comma-separated, or press Enter) [optional]:
 12. Linked Business Processes (PROC-NNN IDs, comma-separated, or press Enter) [optional]:
@@ -93,6 +95,8 @@ Level: {level}
 Consumer: {consumer}  |  Outcome: {outcome}
 Interface: {interface or "—"}  |  Owner: {owner or "—"}
 SLA / NFR: {sla or "—"}
+Delivery Channel: {deliveryChannel or "—"}
+Operating Model Note: {operatingModelNote or "—"}
 Linked Rules: {linkedRules or "—"}
 Linked Capabilities: {linkedCapabilities or "—"}
 Linked Value Streams: {linkedValueStreams or "—"}
@@ -129,6 +133,8 @@ Invoked as: `/ea-services update SVC-NNN <field> <value>`
 | `interface` | any string or IFC-NNN |
 | `owner` | any string |
 | `sla` | any string or REQ-NNN |
+| `deliveryChannel` | Digital / Branch / Phone / Partner / Field / Shared Service / Other |
+| `operatingModelNote` | any string |
 | `status` | Active / Draft / Under Review / Deprecated / Retired |
 | `linkedRules` | comma-separated BR-NNN list |
 | `linkedCapabilities` | comma-separated CAP-NNN list |

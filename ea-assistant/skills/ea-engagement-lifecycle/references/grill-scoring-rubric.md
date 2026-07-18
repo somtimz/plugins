@@ -69,3 +69,46 @@ Assess per section: average sentence length and clarity; acronyms/jargon defined
 ```
 
 When refreshing, **replace** the existing Scorecard block in place (match on the `📊 Scorecard` summary) — never append a second one. If the artifact is `Approved`, scoring is read-only by default: write the block only on explicit confirmation, and leave `reviewStatus` unchanged (a score is an assessment, not a content edit).
+
+---
+
+## Artifact-Specific Section Weights
+
+Completeness weights by artifact type. Required / compliance-bearing sections are weighted **2×** in the overall Completeness roll-up; optional sections are weighted **1×**.
+
+### Operating Model (`operating-model.md`)
+
+| Section | Weight | Required? | Rationale |
+|---|---|---|---|
+| 1. Operating Model Context | 2× | Yes | Must anchor the OM to the Business Architecture and Architecture Vision |
+| 2. Organisation Design | 2× | Yes | Core OM content — how operating units are arranged |
+| 3. Roles, Decision Rights & Accountability | 2× | Yes | Core OM content — who decides and who is accountable |
+| 4. Governance, Controls & SLAs | 2× | Yes | Core OM content — how conformance is managed |
+| 5. Business Processes Execution Model | 2× | Yes | Must link to the authoritative PROC-NNN register |
+| 6. Workforce, Locations & Channels | 1× | No | Contextual; omit only if genuinely not applicable |
+| 7. Sourcing & Partnership Model | 1× | No | Required when make/buy/partner choices exist |
+| 8. Information & Technology Enablement | 1× | No | Required when Phase C/D enablement is in scope |
+| 9. Performance Management | 1× | No | Required when metrics are part of the OM |
+| 10. Gap Analysis | 1× | No | Required when OM gaps are identified |
+| 11. Requirements Addressed | 1× | No | Required when OM generates requirements |
+| Appendix A3 — Decision Log | 2× | Yes | T3-A3 compliance |
+| Appendix A4 — Stakeholder Concerns | 2× | Yes | T3-A4 compliance |
+| Appendix A5 — Related ADRs | 1× | No | T3-ADR compliance |
+
+### Business Architecture (`business-architecture.md`)
+
+| Section | Weight | Required? | Rationale |
+|---|---|---|---|
+| 1. Business Context | 1× | No | Context setting |
+| 2. Business Capabilities | 2× | Yes | Core BA content — the stable capability blueprint |
+| 3. Value Streams | 2× | Yes | Core BA content — how capabilities deliver value |
+| 4. Use Case Catalog | 1× | No | Required when use cases are part of the scope |
+| 5. Business Services | 1× | No | Required when service catalogue is part of the scope |
+| 6. Business Information / Data Objects | 1× | No | Required when information model is part of the scope |
+| 7. Gap Analysis | 1× | No | Required when capability/value-stream gaps exist |
+| 8. Requirements Addressed | 1× | No | Required when BA generates requirements |
+| 9. Traceability Summary | 2× | Yes | Ensures the blueprint traces back to direction |
+| 10. Diagrams | 1× | No | Required when visual models are produced |
+| Appendix A3 — Decision Log | 2× | Yes | T3-A3 compliance |
+| Appendix A4 — Stakeholder Concerns | 2× | Yes | T3-A4 compliance |
+| Appendix A5 — Related ADRs | 1× | No | T3-ADR compliance |

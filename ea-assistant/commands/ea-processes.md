@@ -113,7 +113,8 @@ Add to register? (y/n)
    - Insert the process into the register file (or regenerate if easier).
    - If accepted, create `artifacts/details/PROC-NNN.md` from the item-detail template with the step narrative.
    - Set `status: Draft` if not explicitly set otherwise, `lastModified: today`.
-9. Confirm: `"PROC-NNN added to Business Processes Register. Use '/ea-processes trace' to verify linkages."`
+9. If an `operating-model.md` artifact exists, offer: "Link this process to the Operating Model §5 Business Processes Execution Model? (y/n)". If yes, append a summary row to `artifacts/phase-b/operating-model.md` §5 and update `relatedArtifacts`/`links` frontmatter if needed.
+10. Confirm: `"PROC-NNN added to Business Processes Register. Use '/ea-processes trace' to verify linkages."`
 
 ---
 
