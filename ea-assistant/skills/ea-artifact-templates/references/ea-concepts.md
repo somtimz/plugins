@@ -997,27 +997,55 @@ A Capability Model is a stable, hierarchical map of what the organisation must b
 ### Operating Model
 
 **What it IS:**
-The Operating Model is a high-level description of how the organisation functions in order to deliver value. It describes how process, information, technology, and governance are organised and coordinated — the "how" to the Capability Model's "what". The Operating Model answers *"How does the organisation function to deliver value?"*
+The Operating Model is the **execution design** of the enterprise: it describes how the organisation will reliably operate its business to deliver value. It answers *"How will the organisation function to deliver value?"*
+
+Where **Business Architecture** defines the stable business blueprint — what the organisation needs to be able to do — the **Operating Model** designs the operating system that makes that blueprint run day after day. The Operating Model is the "how" to the Capability Model's "what".
+
+**Concept Home — Business Architecture vs Operating Model**
+
+| Concept | Primary Home | Why |
+|---|---|---|
+| Capability Model (`CAP-NNN`) | **Business Architecture** | Stable "what the org must be able to do", independent of structure, process, or technology |
+| Value Streams (`VS-NNN`) | **Business Architecture** | End-to-end value delivery chains that exercise capabilities |
+| Business Services (`SVC-NNN`) | **Business Architecture** | Named business outcomes consumed by stakeholders; the service *definition* is part of the blueprint |
+| Business Information / Measures | **Business Architecture** | What the business needs to know and measure to operate |
+| Business Rules (`BR-NNN`) | **Business Architecture** | Decision logic that constrains or directs business behaviour |
+| Use Cases (`UC-NNN`) | **Business Architecture** | Actor goals the business must support |
+| Organisation Design | **Operating Model** | How operating units, teams, and governance fora are arranged |
+| Business Operating Roles & Decision Rights | **Operating Model** | Who does the work, who decides, and who is accountable |
+| Business Processes (`PROC-NNN`) | **Operating Model** | Structured activity flows that execute capabilities and value streams |
+| Governance, Controls & SLAs | **Operating Model** | How decisions are made, how conformance is verified, and what levels of service are committed |
+| Workforce, Locations & Channels | **Operating Model** | People, skills, geography, and delivery channels |
+| Sourcing & Partnership Model | **Operating Model** | Make / buy / partner choices and vendor roles |
+| Technology / Data Enablement | **Operating Model** (with detail in Phase C/D) | How applications, data, and infrastructure enable the operating design |
+| Performance Management | **Operating Model** | KPIs, metrics, review cadence, and continuous improvement |
+| Requirements (`REQ-NNN`) | **Both** | Trace from BA intent *and* OM execution design into solution delivery |
+| Gaps (`GAP-NNN`) | **Both** | Capability gaps are BA concerns; operating-model gaps are OM concerns |
 
 **Typical components:**
-- **Process** — how work flows across the organisation to produce outcomes
+- **Process** — how work flows across the organisation to produce outcomes (mastered in the `PROC-NNN` Business Processes Register)
 - **Information** — what data and knowledge is required, where it lives, and how it flows
 - **Technology** — the platforms, systems, and tools that enable operations
 - **Governance** — how decisions are made, who has authority, and how performance is managed
+- **People & Organisation** — operating roles, skills, locations, and structural units
+- **Sourcing** — which capabilities and services are built, bought, or partnered
 
 **Key relationships:**
 - **Capability Model shapes** the Operating Model — the design of processes, information flows, and technology choices follow from capability requirements
+- **Value Streams are executed by** the Operating Model — processes, roles, and controls turn value-stream stages into operational reality
 - **Operating Model performance is measured by** Metrics — the operating model is the source of most operational metrics
-- Changes to the Operating Model are the primary driver of Business Architecture and Technology Architecture work
+- Changes to the Operating Model are a primary driver of Business Architecture and Technology Architecture work
 
 **What it is NOT:**
 - Not a Capability Model — the Operating Model describes how work happens; the Capability Model describes what the org can do
-- Not an org chart — an Operating Model includes process, information, and technology alongside people
+- Not an org chart — an Operating Model includes process, information, and technology alongside people; org structure is only one input
 - Not a system architecture — the Operating Model operates at the business level; the Technology Architecture is its technical expression
+- Not a process repository — the `PROC-NNN` register owns process detail; the OM artifact *integrates* process, role, control, and sourcing choices into a coherent execution design
 
 **TOGAF placement:** Business Architecture (Phase B) — particularly the Business Model Canvas and process views. Technology Architecture (Phase D) — the technical dimensions of the Operating Model.
 
 **Practitioner Notes:**
+- Keep the Business Architecture artifact focused on the stable blueprint; keep the Operating Model artifact focused on execution design. Mixing them produces a document that is neither a good blueprint nor a good operating design.
 - Align ADM phases with **agile increments** (e.g., Vision with PI planning, Opportunities with backlog shaping).
 - Treat **cloud adoption as an operating model shift**, not just a hosting change.
 - **Maturity marker (L1→L5):** L1 = operating model reflects current state only; L3 = target operating model designed with delivery teams; L5 = operating model co-evolves with architecture and org design

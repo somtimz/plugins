@@ -1,7 +1,7 @@
 ---
 name: ea-value-streams-management
 description: This skill should be used when the user asks to "manage value streams", "add a value stream", "view value streams", "trace a value stream to capabilities or processes", "update the value streams register", or "assess value stream coverage". Handles the full value-stream lifecycle from capture through traceability and linkage to capabilities, processes, goals, and stakeholders.
-version: 0.9.87
+version: 0.9.88
 ---
 
 # EA Value Streams Management

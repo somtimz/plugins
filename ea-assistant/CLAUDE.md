@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.87 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.88 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -38,8 +38,8 @@ For cross-engagement or end-of-phase validation: `/ea-engage-review` (consistenc
 
 ## Command Reference
 
-67 commands available — run `/ea-help` for the full table with agent assignments.
-Key entry points: `/ea-new` · `/ea-open` · `/ea-interview` · `/ea-grill` · `/ea-generate` · `/ea-status` · `/ea-brief` · `/ea-lens` · `/ea-council` · `/ea-git` · `/ea-goals` · `/ea-strategies` · `/ea-target` · `/ea-actions` · `/ea-issues` · `/ea-problems` · `/ea-scenarios` · `/ea-refarch` · `/ea-matrix` · `/ea-finance` · `/ea-score` · `/ea-capabilities`
+68 commands available — run `/ea-help` for the full table with agent assignments.
+Key entry points: `/ea-new` · `/ea-open` · `/ea-interview` · `/ea-grill` · `/ea-generate` · `/ea-status` · `/ea-brief` · `/ea-lens` · `/ea-council` · `/ea-git` · `/ea-goals` · `/ea-strategies` · `/ea-target` · `/ea-actions` · `/ea-issues` · `/ea-problems` · `/ea-scenarios` · `/ea-refarch` · `/ea-matrix` · `/ea-finance` · `/ea-score` · `/ea-capabilities` · `/ea-operatingmodel`
 
 **Persona tailoring:** `/ea-help --persona <role>` and `/ea-publish --persona <role>` tailor the menu and report pack to a stakeholder role (enterprise-architect, cio, ciso, chief-product-officer, chief-privacy-officer, business-architect, data-architect). Persona definitions — interests, command subset, report bundle, audience tags, entry workflow — live in `skills/ea-engagement-lifecycle/references/persona-registry.md` (single source of truth; adding a persona is a data edit). `defaultPersona:` in `.claude/rules/ea-local-config.md` sets the engagement default. Personas map to the `audience` taxonomy (Executive/Business/Architecture/Delivery/Governance) — do not invent a parallel scheme.
 
@@ -60,7 +60,7 @@ EA-projects/{slug}/
 │   ├── preliminary/          # Prelim: Architecture Principles, Engagement Charter
 │   ├── requirements/         # Requirements: Register, Traceability Matrix
 │   ├── phase-a/              # Phase A: Architecture Vision, SAoW, Stakeholder Map
-│   ├── phase-b/              # Phase B: Business Architecture, Business Model Canvas
+│   ├── phase-b/              # Phase B: Business Architecture, Business Model Canvas, Operating Model
 │   ├── phase-c-data/         # Phase C: Data Architecture
 │   ├── phase-c-app/          # Phase C: Application Architecture
 │   ├── phase-d/              # Phase D: Technology Architecture
@@ -228,7 +228,7 @@ When an ADR is ratified at an ARB meeting, set `arbReference: ARB-NNN` via `/ea-
 
 | Rule | Artifact | Requirement |
 |---|---|---|
-| T3-A3 | Architecture Vision, Business/Data/App/Tech Architecture, Gap Analysis, Consolidated Gap Analysis, Architecture Roadmap, Statement of Architecture Work, Migration Plan, Engagement Charter, Governance Framework, Implementation Governance Plan, Communications Plan, Architecture Definition Document, Transition Architectures | `## Appendix A3 — Decision Log` section present |
+| T3-A3 | Architecture Vision, **Operating Model**, Business/Data/App/Tech Architecture, Gap Analysis, Consolidated Gap Analysis, Architecture Roadmap, Statement of Architecture Work, Migration Plan, Engagement Charter, Governance Framework, Implementation Governance Plan, Communications Plan, Architecture Definition Document, Transition Architectures | `## Appendix A3 — Decision Log` section present |
 | T3-A5-ADR | Same artifact list as T3-A3 | `## Appendix A5 — Related Architecture Decisions` section present |
 | T3-RATIONALE | Same artifact list as T3-A3 | Any A3 row with `Authority = Strategic` has no `#### A3.N — {Item}` block and no sentinel `*(rationale not captured)*` — surfaces in `/ea-artifact view`, `/ea-engage-review`, `/ea-grill` |
 | T3-ROAD-SA | Architecture Roadmap | `## Strategic Alignment` section with at least one non-placeholder row |

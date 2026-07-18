@@ -1,7 +1,7 @@
 ---
 name: ea-use-cases-management
 description: This skill should be used when the user asks to "manage use cases", "add a use case", "view use cases", "trace a use case to requirements or processes", "update the use cases register", or "assess use case coverage". Handles the full use-case lifecycle from capture through traceability and linkage to requirements, processes, capabilities, and value streams.
-version: 0.9.87
+version: 0.9.88
 ---
 
 # EA Use Cases Management

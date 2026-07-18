@@ -1,13 +1,15 @@
 ---
 name: ea-roles
-description: List, filter, and generate role catalogue entries for EA engagements
+description: List, filter, and generate EA engagement role catalogue entries (ROLE-NNN) — not business operating roles, which live in the Operating Model artifact
 argument-hint: "[ROLE-ID|--domain <domain>|--generate|--update ROLE-ID]"
 allowed-tools: [Read, Write]
 ---
 
 # /ea-roles
 
-Provides access to the canonical role catalogue (`skills/ea-engagement-lifecycle/references/role-catalogue.md`) and generates per-engagement Role Catalogue artifacts.
+Provides access to the canonical **EA engagement role catalogue** (`skills/ea-engagement-lifecycle/references/role-catalogue.md`) and generates per-engagement Role Catalogue artifacts.
+
+> **Boundary:** `ROLE-NNN` entries describe roles in the EA/TOGAF **program** (sponsor, architect, auditor, etc.). Business **operating roles** (who does the work in the target operating model) belong in the **Operating Model** artifact (`/ea-operatingmodel`), not here.
 
 ## Usage
 

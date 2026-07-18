@@ -1,7 +1,7 @@
 ---
 name: ea-business-rules-management
 description: This skill should be used when the user asks to "manage business rules", "add a business rule", "view business rules", "trace a rule to services or motivation", "update the business rules register", or "assess rule impact". Handles the full business-rule lifecycle from capture through traceability and linkage to services, policies, constraints, and motivation elements.
-version: 0.9.87
+version: 0.9.88
 ---
 
 # EA Business Rules Management

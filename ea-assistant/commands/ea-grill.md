@@ -41,6 +41,7 @@ If `--skill` was provided, use that skill. Otherwise, recommend a skill based on
 | Statement of Architecture Work | `grill-me-decision` | A formal commitment — review as a decision memo |
 | Architecture Principles | `grill-me-stress-test` | Each principle needs to survive assumption testing |
 | Business Architecture | `grill-me-design` | Reviews for user needs, incentives, edge cases, and unintended consequences |
+| Operating Model | `grill-me-design` | Reviews execution design: org, decision rights, controls, process orchestration, sourcing, and performance management |
 | Application Architecture | `grill-me-software-design` | Reviews architecture patterns, coupling, API contracts, testability, and scalability |
 | Data Architecture | `grill-me-software-design` | Reviews data model ownership, shared-state risks, access patterns, and quality |
 | Technology Architecture | `grill-me-infra-design` | Reviews topology, resilience, blast radius, cost, security boundaries, and observability |

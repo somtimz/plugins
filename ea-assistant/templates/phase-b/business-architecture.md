@@ -16,8 +16,11 @@ taxonomy:
   audience: Business
   layer: Target
   sensitivity: Internal
-  tags: [capabilities, processes, organisation, phase-b]
-relatedArtifacts: []
+  tags: [capabilities, value-streams, services, business-architecture, phase-b]
+relatedArtifacts:
+  - architecture-vision
+  - operating-model
+  - statement-of-architecture-work
 diagrams: []
 links: []
 ---
@@ -33,6 +36,7 @@ links: []
 | T3-ADR | ⚠️ Pending | |
 | T3-RATIONALE | ⚠️ Pending | |
 | Linked to Architecture Vision | ⚠️ Pending | |
+| Linked to Operating Model | ⚠️ Pending | |
 | Traces to Requirements Register | ⚠️ Pending | |
 
 *This section is for author guidance only. Run `/ea-grill` to validate compliance.*
@@ -42,19 +46,21 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-**Purpose:** The Business Architecture describes the business strategy, governance, organisation, and key business processes — both baseline and target. It is the foundation for the Application and Technology architectures; application and technology decisions made without a completed Business Architecture are frequently misaligned with business intent.
+**Purpose:** The Business Architecture describes the **stable business blueprint** — what the organisation needs to be able to do to deliver value. It is the foundation for the Application and Technology architectures; application and technology decisions made without a completed Business Architecture are frequently misaligned with business intent.
 
-**What to include:** Business capabilities (CAP-NNN), value streams (VS-NNN), operating model description, business processes, organisational model, use cases (UC-NNN), requirements (REQ-NNN), and gap analysis relative to the target. The Business Architecture takes the Architecture Vision as its primary input and must trace directly to the business drivers (DRV-NNN) and goals (G-NNN) established in Phase A.
+**What to include:** Business capabilities (CAP-NNN), value streams (VS-NNN), business services (SVC-NNN), business information/objects, business rules (BR-NNN), business measures, use cases (UC-NNN), requirements (REQ-NNN), and capability/value-stream gap analysis relative to the target. The Business Architecture takes the Architecture Vision as its primary input and must trace directly to the business drivers (DRV-NNN) and goals (G-NNN) established in Phase A.
+
+**What belongs in the Operating Model instead:** Organisation design, business operating roles, decision rights, governance and controls, business process execution context, workforce/locations/channels, sourcing, technology/data enablement, and performance management. See `ea-concepts.md` → **Operating Model** for the full concept-home table and `/ea-operatingmodel` to author the OM artifact.
 
 **Quality indicators:**
 - Capabilities are named at the right granularity — typically 3–5 levels of decomposition; "Manage Customer" is too broad, "Update Customer Address" is too granular
 - Every capability gap traces to a business driver or goal from the Architecture Vision
-- The operating model describes how the business will function, not just how it is currently structured
+- The Business Architecture is a stable blueprint: it changes when business outcomes change, not when org structures or systems change
 
 **Common mistakes:**
 - Describing IT systems or applications in the Business Architecture — capabilities are business functions, not software components
 - Modelling only the current state without defining the target capability model — this produces a description of the problem, not an architecture
-- Org charts presented as the operating model — the operating model is about how work flows across roles, not the hierarchy
+- Putting organisation charts, process step tables, or sourcing decisions in the Business Architecture — those belong in the Operating Model
 
 **TOGAF reference:** TOGAF 10 Part III, Phase B (§26) — Business Architecture. The Phase B gate artifact; required before Phase C (Data and Application Architecture) commences.
 
@@ -107,32 +113,19 @@ Run `/ea-summary refresh` to regenerate this section from current artifact conte
 <details>
 <summary>📋 Guidance</summary>
 
-Describe the business context: industry, operating model, strategic direction.
+Describe the business context: industry, strategic direction, and the scope of the business blueprint.
 Reference the Architecture Vision for strategic goals.
+Execution-design content (org design, processes, controls, sourcing, performance management) belongs in the Operating Model artifact — link to it here rather than duplicating it.
 
 </details>
 
 {{business_context}}
 
----
-
-## 2. Organisation Model
-
-<details>
-<summary>📋 Guidance</summary>
-
-Describe the organisational structure relevant to this architecture.
-Include a diagram reference if available.
-
-</details>
-
-{{organisation_model}}
-
-*Reference diagram:* `../diagrams/{{org_diagram}}`
+*Linked execution artifact:* [[operating-model\|Operating Model]]
 
 ---
 
-## 3. Business Capabilities
+## 2. Business Capabilities
 
 <details>
 <summary>📋 Guidance</summary>
@@ -193,7 +186,7 @@ A capability with no strategic anchor should be flagged for removal or reclassif
 
 ---
 
-## 3a. Value Streams
+## 3. Value Streams
 
 <details>
 <summary>📋 Guidance</summary>
@@ -217,30 +210,7 @@ This section is a **summary-and-link index** into the authoritative Value Stream
 
 ---
 
-## 4. Business Processes
-
-<details>
-<summary>📋 Guidance</summary>
-
-Describe the key business processes in scope. Map each process to the value stream it contributes to (§3a) and the capabilities it exercises (§3).
-
-This section is a **summary-and-link index** into the authoritative Business Processes Register (`../../artifacts/cross-cutting/operations/business-processes-register.md`). Detailed step tables and per-process narratives live in the register and in optional detail files (`artifacts/details/PROC-NNN.md`) created on demand when the user supplies step content. Do not duplicate full step tables here; edit the register with `/ea-processes` and link detail files below.
-
-- Every process must have an owner and a trigger.
-- A process with no parent value stream is an orphan — flag it in §8a Traceability Summary.
-- A process step governed by a business rule should cite the BR-NNN in the register.
-
-</details>
-
-| PROC-NNN | Process | Owner | Trigger | Status | Linked Value Streams (VS-NNN) | Linked Capabilities (CAP-NNN) | Register | Details |
-|---|---|---|---|---|---|---|---|---|
-| [[PROC-001]] | {{process_name}} | {{owner}} | {{trigger}} | {{status}} | {{vs_ids}} | {{cap_ids}} | [Business Processes Register](../../artifacts/cross-cutting/operations/business-processes-register.md) | [[PROC-001\|→]] |
-
-*Generate or refresh the register with `/ea-processes generate`. Add or edit processes with `/ea-processes add` or `/ea-processes update PROC-NNN`. Create a detail file for step-by-step narrative with `/ea-detail PROC-001`.*
-
----
-
-## 4a. Use Case Catalog
+## 4. Use Case Catalog
 
 <details>
 <summary>📋 Guidance</summary>
@@ -290,7 +260,7 @@ A business service is an explicitly defined exposed behaviour.
 <details>
 <summary>📋 Guidance</summary>
 
-Key business information objects used and produced by the business processes.
+Key business information objects used and produced by the business.
 These feed into the Data Architecture in Phase C.
 
 </details>
@@ -332,31 +302,33 @@ List requirements from the Requirements Register that this artifact addresses.
 
 ---
 
-## 8a. Traceability Summary
+## 9. Traceability Summary
 
 <details>
 <summary>📋 Guidance</summary>
 
-The Business Architecture is the bridge between strategic intent and execution. Every element in this artifact must trace forward to requirements and backward to direction. Use this summary to validate completeness:
+The Business Architecture is the bridge between strategic intent and execution design. Every element in this artifact must trace forward to requirements and backward to direction. Use this summary to validate completeness:
 
 - **Every CAP-NNN** links to at least one G-NNN or STR-NNN (via the Supports column). A capability with no strategic anchor is an orphan. Business Capabilities trace primarily through Phase B; Technology Capabilities (Capability Type = Technology Capability) should additionally trace to Phase C/D artifacts (Application Architecture, Technology Architecture).
 - **Every VS-NNN** exercises CAP-NNN capabilities and links to G-NNN/STR-NNN (via the Strategic Link column). A value stream with no linked Goal or Strategy is an orphan.
-- **Every PROC-NNN** contributes to at least one VS-NNN value stream and links to CAP-NNN capabilities it exercises. A process with no parent value stream or capability is an orphan.
-- **Every UC-NNN** consumes processes (PROC-NNN) and capabilities (CAP-NNN), and generates REQ-NNN requirements. A use case with no requirements is a modeling gap.
-- **Every REQ-NNN** traces back through UC/CAP/VS/PROC to G-NNN/OBJ-NNN. A requirement with no upstream trace is an orphan.
+- **Every UC-NNN** consumes capabilities (CAP-NNN) and may consume processes (PROC-NNN) mastered in the Operating Model, and generates REQ-NNN requirements. A use case with no requirements is a modeling gap.
+- **Every REQ-NNN** traces back through UC/CAP/VS to G-NNN/OBJ-NNN. Process-level traceability is maintained in the Operating Model. A requirement with no upstream trace is an orphan.
 
 ```
-G-NNN / STR-NNN ──► CAP-NNN ──► VS-NNN ──► PROC-NNN ──► UC-NNN ──► REQ-NNN
+G-NNN / STR-NNN ──► CAP-NNN ──► VS-NNN ──► UC-NNN ──► REQ-NNN
                               └──────►──────┘
+         └─ Operating Model executes with PROC-NNN, roles, controls, sourcing ─┘
 ```
 
 Flag any orphan or gap in §7 Gap Analysis.
+
+> Process execution detail (PROC-NNN) lives in the Operating Model. The BA traces capabilities and value streams; the OM traces how those value streams are executed through processes, roles, controls, and sourcing.
 
 </details>
 
 ---
 
-## 9. Diagrams
+## 10. Diagrams
 
 <details>
 <summary>📋 Guidance</summary>
@@ -368,8 +340,8 @@ Standard diagrams for the Business Architecture. Diagrams are stored in `diagram
 | Diagram | File | Status |
 |---|---|---|
 | Capability Map | `../../diagrams/business-architecture-capability-map.mmd` | ❌ Missing |
-| Business Process Flow | `../../diagrams/business-architecture-process-flow.mmd` | ❌ Missing |
-| Organisation Map | `../../diagrams/business-architecture-org-map.mmd` | ❌ Missing |
+| Value Stream Map | `../../diagrams/business-architecture-value-stream-map.mmd` | ❌ Missing |
+| Service Blueprint | `../../diagrams/business-architecture-service-blueprint.mmd` | ❌ Missing |
 
 *Use `/ea-diagram` to create. Run `/ea-generate png` to render for export.*
 

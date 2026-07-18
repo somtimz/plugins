@@ -121,6 +121,7 @@ You have existing engagements. Common next steps:
 | `/ea-valuestreams [list\|add\|update\|trace\|generate]` | Value Streams Register — manage VS-NNN value streams (trigger → stages → end outcome), trace to capabilities, goals, and processes | — |
 | `/ea-processes [list\|add\|update\|trace\|generate]` | Business Processes Register — manage PROC-NNN processes (steps, inputs/outputs, actors), trace to value streams, capabilities, use cases, rules, and services | — |
 | `/ea-usecases [list\|add\|update\|trace\|generate]` | Use Cases Register — manage UC-NNN use cases (actor, goal, main/alternative flows), trace to requirements, processes, capabilities, and value streams | — |
+| `/ea-operatingmodel [create\|view\|check\|link\|interview]` | Operating Model — design how the organisation will execute the Business Architecture (org design, roles/decision rights, controls, processes, workforce, sourcing, enablement, performance management) | — |
 | `/ea-target [new\|view\|update]` | Target State Declaration — capture per-domain target states, success criteria, and traceability to goals and objectives | — |
 | `/ea-actions [generate\|view\|update\|status]` | Stakeholder Action Plan — consolidated per-approver action view seeded from SAoW and Target State Declaration; suitable for governance forums and ARB | — |
 | `/ea-finance [list\|add\|update\|trace\|generate]` | Cost Model Register — manage FIN-NNN Cost Entries (capex/opex/TCO/payback with confidence), trace to work packages/ADRs/goals, generate register and roll up the roadmap budget | — |
@@ -234,6 +235,10 @@ Type these at any interview prompt:
   on Completeness + Quality (value stated? strategically anchored? not a process?
   not inflated?); `adopt` seeds from the Architecture Repository's canonical
   capability map. Brainstorm and Phase B interviews now probe capabilities by value.
+• Use `/ea-operatingmodel` once the capability model is draft-stable — it designs
+  the execution system (org design, decision rights, controls, processes, workforce,
+  sourcing, enablement, performance management) that makes the Business Architecture
+  run day after day. OM questions are offered automatically in Phase B interviews.
 • Use `/ea-strategies` to make strategy first-class — the "how" in the
   DRV→G→OBJ→STR→WP chain. Each STR-NNN carries Type (Build/Buy/Partner/
   Consolidate/Modernise/Defend), Horizon, and rationale; `add`/`update` sync

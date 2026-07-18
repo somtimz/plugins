@@ -102,7 +102,7 @@ Written for an executive audience. Avoid technical jargon.
 <summary>📋 Guidance</summary>
 
 Define what is IN and OUT of scope for this engagement.
-Be specific about organisational units, systems, geographies, and time horizons.
+Be specific about organisational units, systems, geographies, and time horizons. Reference the statement of architecture work
 
 </details>
 
