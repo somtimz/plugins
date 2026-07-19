@@ -1,223 +1,22 @@
 # engagement.json Schema Reference
 
-## Full Schema
+This reference describes the `engagement.json` schema used by the EA Assistant. The canonical JSON schema lives in [`engagement-schema/engagement-schema.json`](engagement-schema/engagement-schema.json); this page provides commentary, field history, and usage rules.
 
-```json
-{
-  "name": "Acme Retail Transformation",
-  "slug": "acme-retail-2026",
-  "description": "",
-  "sponsor": "",
-  "organisation": "",
-  "scope": "",
-  "startDate": "YYYY-MM-DD",
-  "targetEndDate": "YYYY-MM-DD or null",
-  "status": "Active",
-  "engagementType": "Greenfield | Brownfield | Assessment-only | Migration",
-  "architectureDomains": ["Business", "Data", "Application", "Technology"],
-  "currentPhase": "Prelim",
-  "requirementsRepoPath": "",
-  "constraintsRepoPath": "",
-  "lastModified": "YYYY-MM-DDTHH:MM:SSZ",
-  "pluginVersion": "0.9.5",
-  "lastMigratedVersion": "0.9.5",
-  "repoPath": null,
-  "direction": {
-    "vision": "",
-    "mission": "",
-    "drivers": [
-      { "id": "DRV-001", "statement": "", "type": "External | Internal", "priority": "High | Medium | Low", "evidence": "", "linkedGoals": ["G-001"] }
-    ],
-    "goals": [
-      { "id": "G-001", "statement": "", "priority": "High | Medium | Low", "stakeholder": "Senior Management | Business Unit Manager | Staff | Ultimate Client | null", "drivers": ["DRV-001"], "rationale": "" }
-    ],
-    "objectives": [
-      { "id": "OBJ-001", "statement": "", "measure": "", "target": "", "deadline": "", "priority": "High | Medium | Low", "linkedGoal": "G-001" }
-    ],
-    "strategies": [
-      { "id": "STR-001", "statement": "", "type": "Build | Buy | Partner | Consolidate | Modernise | Defend | Other", "supports": ["G-001"], "horizon": "Near | Mid | Long", "priority": "High | Medium | Low", "status": "Active | Completed | Superseded", "rationale": "" }
-    ],
-    "issues": [
-      { "id": "ISS-001", "statement": "", "area": "", "threatensGoals": ["G-001"], "evidence": "", "raisedBy": "" }
-    ],
-    "problems": [
-      { "id": "PRB-001", "statement": "", "symptom": "", "blocksObjectives": ["OBJ-001"], "evidence": "", "raisedBy": "" }
-    ],
-    "opportunities": [
-      { "id": "OPP-001", "statement": "", "drivers": ["DRV-001"], "type": "Exploit | Enhance | Emerge", "priority": "High | Medium | Low", "linkedGoals": ["G-001"], "rationale": "" }
-    ],
-    "gaps": [
-      { "id": "GAP-001", "statement": "", "domain": "Business | Data | Application | Technology | Capability | Process", "severity": "Critical | High | Medium | Low", "baseline": "", "target": "", "phase": "Prelim | A | B | C-Data | C-App | D | E | F | G | H | Requirements", "linkedWorkPackages": ["WP-001"], "linkedArtifact": "", "status": "Open | Mitigated | Closed | Accepted" }
-    ]
-  },
-  "metrics": [
-    {
-      "id": "MET-001",
-      "name": "",
-      "type": "outcome | performance | activity | benefit",
-      "description": "",
-      "measure": "",
-      "baseline": "",
-      "baselineSource": "",
-      "target": "",
-      "deadline": "",
-      "frequency": "Daily | Weekly | Monthly | Quarterly",
-      "linkedTo": ["OBJ-001"],
-      "status": "Not Established | On Track | At Risk | Behind | Achieved"
-    }
-  ],
-  "finance": [
-    {
-      "id": "FIN-001",
-      "label": "",
-      "subject": "WorkPackage | ADR | Option | Capability | Engagement",
-      "currency": "EUR",
-      "capex": 0,
-      "opexAnnual": 0,
-      "horizonYears": 3,
-      "tco": 0,
-      "annualBenefit": 0,
-      "benefitNarrative": "",
-      "paybackMonths": null,
-      "confidence": "High | Medium | Low",
-      "confidenceBasis": "",
-      "status": "Estimate | Budgeted | Committed | Actual",
-      "linkedWorkPackages": ["WP-001"],
-      "linkedADRs": [],
-      "linkedGoals": [],
-      "source": ""
-    }
-  ],
-  "policies": [
-    {
-      "id": "POL-001",
-      "title": "",
-      "type": "Security | Procurement | Data Governance | Technology | Compliance | HR | Operational",
-      "issuingAuthority": "",
-      "effectiveDate": "YYYY-MM-DD",
-      "reviewCycle": "YYYY-MM-DD",
-      "scope": "Enterprise | Divisional | Geographic",
-      "status": "Draft | Enacted | Under Review | Superseded | Retired",
-      "supersededBy": "",
-      "linkedConstraints": [],
-      "linkedPrinciples": [],
-      "sourceFile": "policies-register.md"
-    }
-  ],
-  "rules": [
-    {
-      "id": "BR-001",
-      "subject": "",
-      "condition": "",
-      "directive": "Must | Must Not | Should | Should Not",
-      "outcome": "",
-      "authority": "",
-      "source": "Regulatory | Internal | Contractual | Market Practice | Policy-derived",
-      "enforcement": "Manual review | Automated check | Workflow approval | Audit sample | System validation",
-      "scope": "Enterprise | Program",
-      "status": "Active | Draft | Under Review | Superseded | Retired",
-      "supersededBy": "",
-      "admPhase": "Prelim | A | B | C-Data | C-App | D | E | F | G | H | Requirements",
-      "zachmanCell": "",
-      "linkedServices": [],
-      "linkedPolicies": [],
-      "linkedConstraints": [],
-      "linkedMotivation": [],
-      "linkedProcesses": [],
-      "linkedUseCases": [],
-      "sourceFile": "business-rules-register.md"
-    }
-  ],
-  "services": [
-    {
-      "id": "SVC-001",
-      "name": "",
-      "level": "Business | Application | Technology",
-      "purpose": "",
-      "consumer": "",
-      "outcome": "",
-      "interface": "",
-      "owner": "",
-      "sla": "",
-      "deliveryChannel": "Digital | Branch | Phone | Partner | Field | Shared Service | Other",
-      "operatingModelNote": "",
-      "linkedRules": [],
-      "linkedCapabilities": [],
-      "linkedValueStreams": [],
-      "linkedProcesses": [],
-      "linkedABB": [],
-      "linkedSBB": [],
-      "linkedInterfaces": [],
-      "sourceFile": "business-services-register.md"
-    }
-  ],
-  "valueStreams": [
-    {
-      "id": "VS-001",
-      "name": "",
-      "description": "",
-      "trigger": "",
-      "endOutcome": "",
-      "linkedCapabilities": [],
-      "linkedGoals": [],
-      "linkedProcesses": [],
-      "status": "Draft | Active | Under Review | Deprecated | Retired",
-      "sourceFile": "value-streams-register.md"
-    }
-  ],
-  "businessProcesses": [
-    {
-      "id": "PROC-001",
-      "name": "",
-      "purpose": "",
-      "valueStream": "VS-001 | null",
-      "trigger": "",
-      "inputs": "",
-      "outputs": "",
-      "actors": "",
-      "linkedCapabilities": [],
-      "linkedUseCases": [],
-      "linkedRules": [],
-      "linkedServices": [],
-      "status": "Draft | Active | Under Review | Deprecated | Retired",
-      "sourceFile": "business-processes-register.md"
-    }
-  ],
-  "useCases": [
-    {
-      "id": "UC-001",
-      "name": "",
-      "primaryActor": "",
-      "goal": "",
-      "trigger": "",
-      "preconditions": "",
-      "mainScenario": "",
-      "linkedCapabilities": [],
-      "linkedProcesses": [],
-      "linkedRequirements": [],
-      "status": "Draft | Active | Under Review | Deprecated | Retired",
-      "sourceFile": "use-cases-register.md"
-    }
-  ],
-  "phases": {
-    "Prelim":        { "status": "Not Started", "startedAt": null, "completedAt": null },
-    "Requirements":  { "status": "Not Started", "startedAt": null, "completedAt": null },
-    "A":             { "status": "Not Started", "startedAt": null, "completedAt": null },
-    "B":             { "status": "Not Started", "startedAt": null, "completedAt": null },
-    "C-Data":        { "status": "Not Started", "startedAt": null, "completedAt": null },
-    "C-App":         { "status": "Not Started", "startedAt": null, "completedAt": null },
-    "D":             { "status": "Not Started", "startedAt": null, "completedAt": null },
-    "E":             { "status": "Not Started", "startedAt": null, "completedAt": null },
-    "F":             { "status": "Not Started", "startedAt": null, "completedAt": null },
-    "G":             { "status": "Not Started", "startedAt": null, "completedAt": null },
-    "H":             { "status": "Not Started", "startedAt": null, "completedAt": null }
-  },
-  "artifacts": [],
-  "optOuts": []
-}
-```
+---
 
-**Phase status enum:** `Not Started | In Progress | Complete | On Hold | Not Applicable`. `Not Applicable` is set by ADM tailoring at `/ea-new` (recommended phase set derived from `architectureLevel`) and carries an `optOutReason` field on the phase entry. Not-Applicable phases keep their `phases{}` entry but are excluded from picklists and `/ea-status` progress counts (already implemented there); their `artifacts/{phase-folder}/` is not created at seeding. `/ea-phase` offers re-inclusion (restores `Not Started`, clears `optOutReason`, creates the folder). Phase-level tailoring uses this status — not the `optOuts[]` array, which remains for question- and artifact-level opt-outs.
+## Quick Navigation
+
+| Topic | Section |
+|---|---|
+| Full schema example | [`engagement-schema.json`](engagement-schema/engagement-schema.json) |
+| Versioning rules | [Schema Versioning & Source of Truth](#schema-versioning--source-of-truth) |
+| Field history by plugin version | [Field Version History](#field-version-history) |
+| `artifacts[]` entry shape | [Artifact Entry Schema](#artifact-entry-schema) |
+| `optOuts[]` shape | [optOuts Entry Schema](#optouts-entry-schema) |
+| Cross-cutting artifact paths | [Cross-cutting Artifact Paths](#cross-cutting-artifact-paths) |
+| Decision register entry | [Decision Register Entry Schema](#decision-register-entry-schema) |
+
+---
 
 ## Schema Versioning & Source of Truth
 
@@ -228,6 +27,8 @@
 **Source of truth:** `engagement.json` is the single source of truth for the strategic direction (`direction.{vision, mission, drivers, goals, objectives, strategies, issues, problems, opportunities, gaps}`), the top-level governance/measurement registers (`metrics[]`, `policies[]`, `finance[]` — siblings of `direction`, not nested in it), phase state, and the artifact registry. Generated register markdown files (`*-register.md`) are **rendered views** — regenerate them after any change; never edit them to change state (the exceptions are registers whose content lives only in markdown: Risk, Requirements, Constraints, Policies registers, which are file-mastered with `engagement.json` holding metadata). Snapshot files under `snapshots/` are point-in-time archives per the register snapshot convention.
 
 **Operating Model artifact storage:** The Operating Model is an **authored Phase B artifact** (`artifacts/phase-b/operating-model.md`) tracked in `engagement.json → artifacts[]`. It has no dedicated top-level array: structured business processes live in `businessProcesses[]`, service delivery notes in `services[]`, and org design / decision rights / controls / sourcing / workforce content in the artifact body. This keeps the OM artifact free-form while reusing the existing registers for mastered items.
+
+---
 
 ## Field Version History
 
@@ -296,108 +97,15 @@
 
 - `metrics[].type` gains a fourth value `benefit` — tracks realisation of projected financial value (revenue, cost saving, or avoided cost) against a Cost Entry. `linkedTo` for a `benefit` metric may reference a `FIN-NNN` Cost Entry (in addition to `G-NNN`/`OBJ-NNN`). Used in Phase G to answer the implementation-governance question *"did we deliver the expected benefit?"*. Absent in legacy engagements — the three original types remain valid.
 
-**v0.9.85 fields** — `rules` and `services` (flat arrays):
+**v0.9.85 fields** — `rules`, `services`, `valueStreams`, `businessProcesses`, `useCases` (flat arrays):
 
-- `rules[]` — flat array at engagement level (sibling to `metrics[]`, `policies[]`, `finance[]`). Each entry is a **Business Rule** (`BR-NNN`) capturing a declarative governance statement. Managed via `/ea-rules`. See `skills/ea-artifact-templates/references/ea-concepts.md` for the canonical Business Rule definition.
+- `rules[]` — **Business Rules** (`BR-NNN`). Managed via `/ea-rules`. See `skills/ea-artifact-templates/references/ea-concepts.md` for the canonical definition.
+- `services[]` — **Services** (`SVC-NNN`). Managed via `/ea-services`. See `skills/ea-artifact-templates/references/ea-concepts.md` for the canonical definition.
+- `valueStreams[]` — **Value Streams** (`VS-NNN`). Managed via `/ea-valuestreams`.
+- `businessProcesses[]` — **Business Processes** (`PROC-NNN`). Managed via `/ea-processes`.
+- `useCases[]` — **Use Cases** (`UC-NNN`). Managed via `/ea-usecases`.
 
-| Field | Meaning |
-|---|---|
-| `id` | `BR-NNN` canonical ID |
-| `subject` | What the rule governs |
-| `condition` | When the rule applies |
-| `directive` | `Must` / `Must Not` / `Should` / `Should Not` |
-| `outcome` | Business result or action |
-| `authority` | Owner or enacting body |
-| `source` | `Regulatory` / `Internal` / `Contractual` / `Market Practice` / `Policy-derived` |
-| `enforcement` | How compliance is verified |
-| `scope` | `Enterprise` / `Program` |
-| `status` | `Active` / `Draft` / `Under Review` / `Superseded` / `Retired` |
-| `supersededBy` | `BR-NNN` that replaces this rule |
-| `admPhase` | Where identified |
-| `zachmanCell` | Classification |
-| `linkedServices` | `SVC-NNN` operationalising the rule |
-| `linkedPolicies` | `POL-NNN` authorising the rule |
-| `linkedConstraints` | `CST-NNN` enforcing the rule |
-| `linkedMotivation` | `DRV-NNN` / `G-NNN` / `OBJ-NNN` / `STR-NNN` traced |
-| `linkedProcesses` | `PROC-NNN` governed by this rule (v0.9.86) |
-| `linkedUseCases` | `UC-NNN` consuming this rule (v0.9.86) |
-| `sourceFile` | Register file the rule renders into |
-
-- `services[]` — flat array at engagement level. Each entry is a **Service** (`SVC-NNN`) at Business, Application, or Technology level. Managed via `/ea-services`. See `skills/ea-artifact-templates/references/ea-concepts.md` for the canonical Service definition.
-
-| Field | Meaning |
-|---|---|
-| `id` | `SVC-NNN` canonical ID |
-| `name` | Service name |
-| `level` | `Business` / `Application` / `Technology` |
-| `purpose` | Why the service exists |
-| `consumer` | Who uses it |
-| `outcome` | Value delivered |
-| `interface` | Access channel (often `IFC-NNN`) |
-| `owner` | Accountable role |
-| `sla` | Service-level reference |
-| `linkedRules` | `BR-NNN` enacted by Business services |
-| `linkedCapabilities` | `CAP-NNN` realising the service |
-| `linkedValueStreams` | `VS-NNN` this service supports (v0.9.86) |
-| `linkedProcesses` | `PROC-NNN` this service operationalises (v0.9.86) |
-| `linkedABB` | Logical components |
-| `linkedSBB` | Concrete products |
-| `linkedInterfaces` | `IFC-NNN` access points |
-| `sourceFile` | Register file the service renders into |
-
-- `valueStreams[]` — flat array at engagement level. Each entry is a **Value Stream** (`VS-NNN`). Managed via `/ea-valuestreams`.
-
-| Field | Meaning |
-|---|---|
-| `id` | `VS-NNN` canonical ID |
-| `name` | Value stream name |
-| `description` | Short description |
-| `trigger` | What initiates the stream |
-| `endOutcome` | What the stakeholder receives |
-| `linkedCapabilities` | `CAP-NNN` exercised by this stream |
-| `linkedGoals` | `G-NNN` / `STR-NNN` this stream serves |
-| `linkedProcesses` | `PROC-NNN` that compose this stream |
-| `status` | `Draft` / `Active` / `Under Review` / `Deprecated` / `Retired` |
-| `sourceFile` | `value-streams-register.md` |
-
-- `businessProcesses[]` — flat array at engagement level. Each entry is a **Business Process** (`PROC-NNN`). Managed via `/ea-processes`.
-
-| Field | Meaning |
-|---|---|
-| `id` | `PROC-NNN` canonical ID |
-| `name` | Process name |
-| `purpose` | Why the process exists |
-| `valueStream` | Parent `VS-NNN` |
-| `trigger` | What starts it |
-| `inputs` | Key inputs |
-| `outputs` | Key outputs |
-| `actors` | Roles / actors |
-| `linkedCapabilities` | `CAP-NNN` exercised |
-| `linkedUseCases` | `UC-NNN` that consume this process |
-| `linkedRules` | `BR-NNN` applied |
-| `linkedServices` | `SVC-NNN` that operationalise it |
-| `status` | `Draft` / `Active` / `Under Review` / `Deprecated` / `Retired` |
-| `sourceFile` | `business-processes-register.md` |
-
-- `useCases[]` — flat array at engagement level. Each entry is a **Use Case** (`UC-NNN`). Managed via `/ea-usecases`.
-
-| Field | Meaning |
-|---|---|
-| `id` | `UC-NNN` canonical ID |
-| `name` | Use case name |
-| `primaryActor` | Actor role |
-| `goal` | Actor goal |
-| `trigger` | What starts it |
-| `preconditions` | Preconditions |
-| `mainScenario` | One-sentence main success path |
-| `linkedCapabilities` | `CAP-NNN` used |
-| `linkedProcesses` | `PROC-NNN` consumed |
-| `linkedRequirements` | `REQ-NNN` generated |
-| `status` | `Draft` / `Active` / `Under Review` / `Deprecated` / `Retired` |
-| `sourceFile` | `use-cases-register.md` |
-
-- Entries with empty `subject` (rules), empty `name` (services), or empty `name` (value streams/processes/use cases) are placeholders — MUST NOT be displayed in artifacts.
-- IDs are unique across the engagement; do not restart numbering per type.
+For field-level details, see the canonical JSON schema: [`engagement-schema.json`](engagement-schema/engagement-schema.json).
 
 **v0.9.86 fields** — Business Architecture layer + enrichment fields:
 
@@ -417,6 +125,8 @@
 
 **v0.9.31 fields** — absent in legacy engagements; treat as `null` / defaults if missing:
 - `architectureLevel` — Architecture landscape level classification; allowed values: `Strategic`, `Segment`, `Capability`, `Solution`; defaults to `null` in legacy engagements. When `null` or absent, treat as `Segment` for artifact depth and governance forum purposes — this is non-blocking and the plugin continues to operate normally. Prompt the user to set it at the next `/ea-config metadata` interaction.
+
+---
 
 ## Artifact Entry Schema
 
