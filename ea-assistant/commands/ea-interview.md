@@ -76,13 +76,13 @@ Delegate to the `ea-interviewer` agent for the actual interview flow. This comma
    10. Requirements Management
    ```
 
-2. Load the question bank from `skills/ea-artifact-templates/references/phase-interview-questions.md` for the selected phase.
+2. Load the question bank from `skills/ea-artifact-templates/references/phase-questions/{selected-phase-file}` for the selected phase.
 
-   **Phase B — Business Architecture & Operating Model:** Phase B now produces two distinct authored artifacts. Load the **Business Architecture** question bank first. When that section is complete, check whether `artifacts/phase-b/operating-model.md` exists or the user wants to capture operating-model content. If either is true, load the **Operating Model** question bank as a continuation of the same Phase B interview. Route Operating Model answers to `operating-model.md`; do not merge them into `business-architecture.md`.
+   **Phase B — Business Model Canvas, Business Architecture & Operating Model:** Phase B now produces up to three distinct authored artifacts. Load the **Business Model Canvas** question bank first to establish the value model. When that section is complete, load the **Business Architecture** question bank. Finally, check whether `artifacts/phase-b/operating-model.md` exists or the user wants to capture operating-model content. If either is true, load the **Operating Model** question bank as a continuation of the same Phase B interview. Route answers to their respective artifacts (`business-model-canvas.md`, `business-architecture.md`, `operating-model.md`); do not merge Operating Model content into `business-architecture.md`.
 
 2b. **Inject Phase Intent Framing.**
 
-Read `skills/ea-engagement-lifecycle/references/adm-phase-guide.md`. Locate the section for the resolved phase (e.g. `## Phase B` or `## Preliminary Phase`). Extract:
+Read `skills/ea-engagement-lifecycle/references/adm-phases/{selected-phase-file}`. Locate the section for the resolved phase (e.g. `## Phase B` or `## Preliminary Phase`). Extract:
    - The first 3 bullet points from the **Objectives** section (what this phase must deliver)
    - The first 4 bullet points from the **Key Questions** section (what must be answered)
    - The "What to decide now" items from the **Decision Flow** section
@@ -170,7 +170,7 @@ Present the filtered list to the user as: "**Your engagement priorities for this
 
 Capture the full engagement direction in one cross-phase session before any TOGAF phase work begins. Equivalent to Preliminary + Phase A combined, routing all outputs to `engagement.json → direction` only — no phase-specific artifacts are created.
 
-1. **Load question bank.** Read `skills/ea-artifact-templates/references/phase-interview-questions.md`. Merge questions from Preliminary and Phase A into this sequence:
+1. **Load question bank.** Read `skills/ea-artifact-templates/references/phase-questions/preliminary-phase-interview.md` and `skills/ea-artifact-templates/references/phase-questions/phase-a---architecture-vision-interview.md`. Merge questions from Preliminary and Phase A into this sequence:
 
    - **Part 1 — Organisation & Mandate** (Prelim Q1–7): organisation context, engagement type, scope, constraints, assumptions
    - **Part 2 — Stakeholders** (Prelim Q8–11): related programmes, affected internal/external orgs, regulatory bodies

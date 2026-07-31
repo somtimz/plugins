@@ -1,7 +1,7 @@
 ---
 name: ea-constraints-management
 description: This skill should be used when the user asks to "manage architecture constraints", "add a constraint", "view constraints", "trace a constraint to an artifact", "update the constraints register", or "assess constraint impact". Handles the full constraints lifecycle from capture through traceability and sync with a shared constraints repository.
-version: 0.9.88
+version: 0.9.89
 ---
 
 # EA Constraints Management

@@ -202,7 +202,7 @@ Type these at any interview prompt:
 | `e: {statement}` | Economic framing pause — add cost/risk/value analysis to any answer |
 | `d: {statement}` | Decide/Defer pause — 5-factor assessment (evidence, reversibility, impact, urgency, capability); recommends: Decide now / Defer / Guardrails / Premature / Risky commit; offers to create PAD-NNN |
 | `?` / `help` | Show this guide + current artifact context and purpose |
-| `concepts` | Show the EA concepts quick reference (Vision/Mission/Principle/Goal/Objective/Strategy/Plan/Risk/Issue/Problem/Capability Model/Operating Model/Metrics) |
+| `concepts` | Show the EA concepts quick reference (Vision/Mission/Business Context/Business Model Canvas/Business Driver/Principle/Goal/Objective/Strategy/Plan/Risk/Issue/Problem/Capability Model/Operating Model/Metrics) |
 
 **Opt-out vs. Skip:**
 - **Skip** (`s`) means "I'll come back to this" — temporary, does not appear in reports as a concern

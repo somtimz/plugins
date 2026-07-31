@@ -5,7 +5,7 @@ argument-hint: "[list|add|update|trace|generate] [ISS-NNN] [--domain Business|Te
 allowed-tools: [Read, Write, Bash]
 ---
 
-You are executing the `/ea-issues` command. All mode mechanics follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the Issue concept and its distinctions from Problem/Risk/Driver/Gap, read `ea-concepts.md`; do not restate definitions here.
+You are executing the `/ea-issues` command. All mode mechanics follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the Issue concept and its distinctions from Problem/Risk/Driver/Gap, read `skills/ea-artifact-templates/references/concept-families/motivation-concepts.md` (**Issue**); do not restate definitions here.
 
 Issues are systemic concerns threatening goals — present and ongoing, broad, with multiple contributing causes. The **Issues Register** is the management interface; the Architecture Vision (§7) summarises and links to it rather than rendering a live table. The **Engagement** domain covers issues about the EA engagement itself (methodology, governance, team, tooling).
 

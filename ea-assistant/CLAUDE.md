@@ -2,7 +2,7 @@
 
 Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 process backbone, Zachman classification, ArchiMate 3.x notation.
 
-**Current version:** 0.9.88 (plugin.json · docs/PRD.md)
+**Current version:** 0.9.89 (plugin.json · docs/PRD.md)
 
 ---
 
@@ -10,11 +10,11 @@ Plugin for managing Enterprise Architecture engagements end-to-end. TOGAF 10 pro
 
 These rules prevent the most common errors. Check them before writing any agent or skill logic.
 
-- **No inline concept definitions** — never define Capability, Work Package, Goal, etc. in prompts or inline text; always read `ea-concepts.md`
+- **No inline concept definitions** — never define Capability, Work Package, Goal, etc. in prompts or inline text; always read concept definitions from `skills/ea-artifact-templates/references/ea-concepts.md` (concept map) and the relevant `concept-families/{family}-concepts.md` subfile
 - **No invented ID prefixes** — use only the prefixes in the ID Scheme table; never create domain-prefixed IDs (BG-/DG-/AG-/TG- etc.)
 - **Relative paths only** — all artifact paths are relative to `EA-projects/{slug}/`; never assume an absolute path
 - **State changes require engagement.json** — every phase transition, artifact registration, and opt-out must update `engagement.json`
-- **No duplicated logic** — cross-topic detection lives in `cross-topic-detection.md`; A3 governance rules live in `ea-artifact-templates/SKILL.md`; concept definitions live in `ea-concepts.md`; direction-register mode mechanics live in `register-protocol.md` (register commands declare only a Register Spec + unique checks); do not restate these inline
+- **No duplicated logic** — cross-topic detection lives in `cross-topic-detection.md`; A3 governance rules live in `ea-artifact-templates/SKILL.md`; concept definitions live in `skills/ea-artifact-templates/references/ea-concepts.md` (concept map) and the per-family subfiles under `concept-families/`; direction-register mode mechanics live in `register-protocol.md` (register commands declare only a Register Spec + unique checks); do not restate these inline
 - **Engagement discipline rules** — every project follows the 12 rules in `.claude/rules/ea-engagement.md` (seeded from `templates/seeds/engagement-rules.md`). For the canonical reference with citation guidance, see `skills/ea-engagement-lifecycle/references/engagement-rules-reference.md`
 - **Register snapshot convention** — generated registers use stable, undated filenames (e.g. `risk-register.md`); regeneration archives the prior version to a `snapshots/` subfolder. Rules in `skills/ea-artifact-templates/references/register-snapshot-convention.md`; do not restate inline
 - **No bulk empty stubs** — detail files (`artifacts/details/{ID}.md`) are created on demand only, when the user supplies content; never bulk-create empty stub files
@@ -43,7 +43,7 @@ Key entry points: `/ea-new` · `/ea-open` · `/ea-interview` · `/ea-grill` · `
 
 **Persona tailoring:** `/ea-help --persona <role>` and `/ea-publish --persona <role>` tailor the menu and report pack to a stakeholder role (enterprise-architect, cio, ciso, chief-product-officer, chief-privacy-officer, business-architect, data-architect). Persona definitions — interests, command subset, report bundle, audience tags, entry workflow — live in `skills/ea-engagement-lifecycle/references/persona-registry.md` (single source of truth; adding a persona is a data edit). `defaultPersona:` in `.claude/rules/ea-local-config.md` sets the engagement default. Personas map to the `audience` taxonomy (Executive/Business/Architecture/Delivery/Governance) — do not invent a parallel scheme.
 
-**Artifact scoring:** `/ea-score [artifact|--all|--status]` assigns two scores — **Completeness** and **Quality** (0–100 + band) — **per section and overall**, using `skills/ea-engagement-lifecycle/references/grill-scoring-rubric.md` (grounded in `ea-concepts.md` + each section's guidance block + compliance tiers; Quality includes readability). Scoring is carried out by `ea-grill-skills`; `/ea-grill` also emits the two scores and refreshes the Scorecard. Scores render into an author-only `<details>📊 Scorecard</details>` block in the artifact (per-section table + overall) — stripped on export like the Compliance/Guidance blocks. The overall pair is cached on the `engagement.json` artifact entry (`scores`). Command-generated artifacts (registers/matrices/derived) are not scored — **exception:** the six Phase-A motivation registers (`drivers/goals/objectives/strategy/issues/problems-register`) **are** scored, because they are seeded from guidance-rich templates (`templates/phase-a/*-register.md`) and serve as the authoritative motivation artifacts that the Architecture Vision indexes.
+**Artifact scoring:** `/ea-score [artifact|--all|--status]` assigns two scores — **Completeness** and **Quality** (0–100 + band) — **per section and overall**, using `skills/ea-engagement-lifecycle/references/grill-scoring-rubric.md` (grounded in the concept-map index + each section's guidance block + compliance tiers; Quality includes readability). Scoring is carried out by `ea-grill-skills`; `/ea-grill` also emits the two scores and refreshes the Scorecard. Scores render into an author-only `<details>📊 Scorecard</details>` block in the artifact (per-section table + overall) — stripped on export like the Compliance/Guidance blocks. The overall pair is cached on the `engagement.json` artifact entry (`scores`). Command-generated artifacts (registers/matrices/derived) are not scored — **exception:** the six Phase-A motivation registers (`drivers/goals/objectives/strategy/issues/problems-register`) **are** scored, because they are seeded from guidance-rich templates (`templates/phase-a/*-register.md`) and serve as the authoritative motivation artifacts that the Architecture Vision indexes.
 
 ---
 
@@ -138,6 +138,8 @@ These are loaded automatically by `/ea-grill --skill practitioner|maturity|failu
 
 | Prefix | Concept | Example |
 |---|---|---|
+| CTX-NNN | Business Context finding (analysis input to direction/governance) | CTX-001 |
+| BMC-NNN | Business Model Canvas element / assumption | BMC-001 |
 | DRV-NNN | Business Driver | DRV-001 |
 | G-NNN | Goal | G-001 |
 | OBJ-NNN | Objective | OBJ-001 |

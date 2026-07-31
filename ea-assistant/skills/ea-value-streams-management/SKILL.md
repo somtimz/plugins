@@ -1,12 +1,12 @@
 ---
 name: ea-value-streams-management
 description: This skill should be used when the user asks to "manage value streams", "add a value stream", "view value streams", "trace a value stream to capabilities or processes", "update the value streams register", or "assess value stream coverage". Handles the full value-stream lifecycle from capture through traceability and linkage to capabilities, processes, goals, and stakeholders.
-version: 0.9.88
+version: 0.9.89
 ---
 
 # EA Value Streams Management
 
-This skill manages `VS-NNN` entries. Load `skills/ea-artifact-templates/references/ea-concepts.md` for the canonical **Value Stream**, **Capability**, and **Business Process** definitions before prompting for or validating any value stream.
+This skill manages `VS-NNN` entries. Load `skills/ea-artifact-templates/references/concept-families/business-layer-concepts.md` for the canonical **Value Stream**, **Capability**, and **Business Process** definitions before prompting for or validating any value stream.
 
 ## Value Streams Storage
 

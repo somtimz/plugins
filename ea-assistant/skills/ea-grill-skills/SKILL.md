@@ -1,7 +1,7 @@
 ---
 name: ea-grill-skills
 description: Ten grill modes bundled for ea-assistant — stress-test, premortem, decision, design, software-design, infra-design, artifact, diagram, boardroom-strategy, finance. Load this skill and follow the ## Mode section matching the requested short name.
-version: 0.9.88
+version: 0.9.89
 ---
 
 When this skill is loaded, locate the `## Mode: {short-name}` section that matches the mode requested by `/ea-grill` and follow it exclusively. Ignore all other mode sections.
@@ -265,7 +265,7 @@ Then interrogate the content one section at a time using **guidance-driven scori
 
 **Assign the two numeric scores per section** (read `skills/ea-engagement-lifecycle/references/grill-scoring-rubric.md` for the full rubric):
 - **Completeness 0–100** — is everything the guidance calls for present and populated (not placeholder/TBD/empty)? Map the section's Complete/Partial/Empty state to the rubric band.
-- **Quality 0–100** — is what's there good, across four sub-dimensions: definition-correctness (30%, per `ea-concepts.md` — a Goal isn't an Objective, a Strategy isn't a Plan, a Risk needs a real mitigation), guidance adherence (30%), evidence & rigour (20%), and **readability** (20% — clarity, structure, concision, jargon control). Empty sections score Quality `—` and are excluded from the roll-up.
+- **Quality 0–100** — is what's there good, across four sub-dimensions: definition-correctness (30%, per `skills/ea-artifact-templates/references/ea-concepts.md` (concept map) plus `concept-families/*.md` subfiles — a Goal isn't an Objective, a Strategy isn't a Plan, a Risk needs a real mitigation), guidance adherence (30%), evidence & rigour (20%), and **readability** (20% — clarity, structure, concision, jargon control). Empty sections score Quality `—` and are excluded from the roll-up.
 
 Both scores are `0–100` with bands (Comprehensive / Substantial / Partial / Skeletal / Stub).
 
@@ -460,6 +460,7 @@ Your job is to:
 - surface operational, political, financial, and reputational risks
 - identify tradeoffs and second-order effects
 - challenge vague, weak, or overly optimistic reasoning
+- when grilling a Phase B proposal or business-layer artifact, test alignment across the four-concept model: **Business Context (CTX-NNN) → Business Model Canvas (BMC-NNN) → Business Architecture (capabilities/services/value streams/processes) → Operating Model (org design, roles, controls, processes, sourcing, enablement, performance management)**
 
 For each question:
 - state what issue you are testing

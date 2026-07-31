@@ -1,7 +1,7 @@
 ---
 name: ea-arb-council
 description: This skill should be used when the user asks to "convene the ARB council", "council review", "panel review", "review this through the council", or invokes /ea-council or /ea-arb council. Convenes a multi-member architecture review council — each member examines the in-scope subject through one mandate (feasibility, security, budget, design quality, innovation, prudence) and casts a recorded vote, then the skill synthesises a consolidated verdict.
-version: 0.9.88
+version: 0.9.89
 ---
 
 # EA ARB Council
@@ -73,7 +73,7 @@ The roster anchors each member to existing machinery — load these if available
 - `skills/ea-grill-skills/SKILL.md` — load **only** the `## Mode:` section(s) needed by the running member(s): `premortem` (Planner), `design`/`software-design`/`infra-design` (Architect), `finance` (Budget Analyst). Do not load the full file.
 - `skills/ea-engagement-lifecycle/references/grill-scoring-rubric.md` — Quality dimension (Architect).
 - `skills/ea-engagement-lifecycle/references/capability-based-planning.md` — readiness ceiling (Planner).
-- `skills/ea-engagement-lifecycle/references/practitioner-tips.md`, `advanced-patterns.md` — Innovator framing.
+- `skills/ea-engagement-lifecycle/references/practitioner-tips/part-iii-cross-cutting-expert-moves.md`, `advanced-patterns.md` — Innovator framing.
 - `skills/ea-engagement-lifecycle/references/failure-modes.md` — Conservative pattern-matching.
 - `skills/ea-security/SKILL.md` — Security Analyst protocol (or defer to `/ea-security-review` / the `ea-security-auditor` agent for a deep pass).
 

@@ -6,7 +6,7 @@ phase: B
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-templateVersion: 0.9.55
+templateVersion: 0.9.89
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   admPhases: [B]
@@ -16,8 +16,11 @@ taxonomy:
   audience: Executive
   layer: Motivation
   sensitivity: Confidential
-  tags: [business-model, value-proposition, phase-b]
-relatedArtifacts: []
+  tags: [business-model, value-proposition, business-context, phase-b]
+relatedArtifacts:
+  - business-architecture
+  - operating-model
+  - architecture-vision
 diagrams: []
 links: []
 ---
@@ -37,7 +40,7 @@ links: []
 <details>
 <summary>📋 Guidance</summary>
 
-**Purpose:** The Business Model Canvas (BMC) describes how the organisation creates, delivers, and captures value. It is used in Phase B to ground the Business Architecture in the actual operating model before layering in capabilities, processes, and services. It makes business model assumptions explicit, enabling architects to identify which assumptions the target architecture is making.
+**Purpose:** The Business Model Canvas (BMC) describes how the organisation creates, delivers, and captures value. It sits between the strategic direction (Phase A) and the Business Architecture / Operating Model (Phase B) — it is the value model that the blueprint and execution design must realise. Capture significant canvas elements, assumptions, and pivot hypotheses as **BMC-NNN** detail files so they can be traced, challenged, and updated independently of the nine-block summary.
 
 **What to include:** All nine building blocks — Customer Segments, Value Propositions, Channels, Customer Relationships, Revenue Streams, Key Resources, Key Activities, Key Partnerships, Cost Structure. Populate for both baseline (current state) and target (where significant business model change is involved). Note interdependencies between blocks as you populate them.
 

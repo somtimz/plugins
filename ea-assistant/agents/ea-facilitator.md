@@ -88,7 +88,7 @@ For each phase, know the key outputs:
 - **Prelim:** Architecture Principles, Organisation Model, Tailored ADM
 - **Requirements:** Requirements Register, Traceability Matrix
 - **Phase A:** Architecture Vision, Statement of Architecture Work, Stakeholder Map
-- **Phase B:** Business Architecture document
+- **Phase B:** Business Model Canvas, Business Architecture, and Operating Model artifacts
 - **Phase C:** Data Architecture, Application Architecture — outputs include ABB Register (ABB-NNN logical components)
 - **Phase D:** Technology Architecture — outputs include SBB Register (SBB-NNN concrete implementations) linked to ABBs from Phase C
 - **Phase E:** Architecture Roadmap, Transition Architectures, Work Package definitions, Implementation and Migration Strategy — work packages should reference SBBs and decompose into Stories (STY-NNN)

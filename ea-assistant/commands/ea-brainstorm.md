@@ -63,17 +63,17 @@ Capture freeform brainstorm notes for the active EA engagement.
      - **Also extract guidance context:** Scan the same artifact file (or template if not yet created) for all `<details><summary>📋 Guidance</summary>...</details>` blocks. Build a `guidanceContext` map: `{section heading} → {guidance text}` (plain text). For each brainstorm thought category in the pad that maps to a section in this artifact, prepend a quality anchor to the category hint:
        > 📋 **What good looks like in this section:** {first 2 sentences of guidance text}
      This anchors the brainstorm to the artifact's documented quality standard before the user captures thoughts.
-   - **Phase-scoped** (phase argument provided): read `skills/ea-artifact-templates/references/phase-interview-questions.md` for the relevant phase. Extract up to 8 key questions in order.
+   - **Phase-scoped** (phase argument provided): read `skills/ea-artifact-templates/references/phase-questions/{selected-phase-file}` for the relevant phase. Extract up to 8 key questions in order.
    - **Surface recommended matrices.** For phase-scoped sessions (phases Prelim, B, C-Data, C-App, D, E, F): read `skills/ea-artifact-templates/references/matrix-catalogue.md`, filter to entries whose Phase matches (excluding managed-elsewhere entries) and whose matrix file does not yet exist or has no filled cells. For each, add a `prefilled` entry: `{ questionRef: null, questionText: "[Matrix] {name} — {rowEntityLabel} × {columnEntityLabel}", answer: "{first elicitation question from the catalogue entry}", source: "matrix-catalogue", category: "relationships" }`. These hints prompt relationship statements that `/ea-interview` and `/ea-matrix new` later harvest as cell candidates. When any matrix hints were added, also inject a category card so they have a home in the pad: `{ id: "relationships", label: "Relationships", emoji: "🔗", hint: "Cross-element relationships — which application uses which data, who performs which role, what depends on what", suggestions: ["{rowEntityLabel} × {columnEntityLabel} pairs from the offered matrices"] }`.
    - **Filter engagement direction by phase relevance.** After extracting questions, also read `engagement.json → direction` and filter items by phase:
      - Phase A/Prelim: surface all goals and top-3 drivers by priority as context hints in the `goals` category
-     - Phase B: surface goals/objectives linked to business capabilities; strategies; issues and problems. Prompt for capabilities by **value**: "what must the business be able to *do* to achieve these goals, and what outcome does each ability give you?" — capture each as a candidate capability (a noun/outcome, not a process) with its value; flag any capability with no clear value or strategic anchor (capability inflation). Manage these with `/ea-capabilities`.
+     - Phase B: surface goals/objectives linked to business capabilities; strategies; issues and problems. Also surface **Business Context** findings (PESTEL/SWOT/competitor/regulatory/stakeholder) as CTX-NNN candidates and **Business Model Canvas** elements (segments, value propositions, channels, revenue streams, cost structure, partnerships) as BMC-NNN candidates. Prompt for capabilities by **value**: "what must the business be able to *do* to achieve these goals, and what outcome does each ability give you?" — capture each as a candidate capability (a noun/outcome, not a process) with its value; flag any capability with no clear value or strategic anchor (capability inflation). Manage these with `/ea-capabilities`.
      - Phase C-Data/C-App: surface objectives with data or application targets; related strategies
      - Phase D: surface objectives with technology targets; strategies
      - Phase E/F: surface all objectives not yet linked to a work package (if `direction.gaps[]` exists, include top-3 unaddressed Critical/High gaps)
      - Phase G/H: surface objectives with governance targets; open issues
      Add these as additional entries in the `prefilled` list with `source: "direction"` so they appear in the pad as pre-loaded context tagged `[Direction]`.
-   - **Engagement-scoped** (engagement mode): read Preliminary Parts 1–3 and Phase A §2–§6 from `phase-interview-questions.md`. Extract up to 10 key questions covering org context, drivers, goals, issues, and problems.
+   - **Engagement-scoped** (engagement mode): read Preliminary Parts 1–3 and Phase A §2–§6 from `phase-questions/preliminary-phase-interview.md` and `phase-questions/phase-a---architecture-vision-interview.md`. Extract up to 10 key questions covering org context, drivers, goals, issues, and problems.
    - **Unscoped**: omit — leave `questions: null`.
 
    For each question, assign a `category` based on its topic:
@@ -131,7 +131,7 @@ Capture freeform brainstorm notes for the active EA engagement.
 
 3e. **Inject Phase Intent Framing** (chat message only — not pad content).
 
-   Read `skills/ea-engagement-lifecycle/references/adm-phase-guide.md`. Locate the section for the resolved phase. Extract:
+   Read `skills/ea-engagement-lifecycle/references/adm-phases/{selected-phase-file}`. Locate the section for the resolved phase. Extract:
    - First 2–3 bullet points from **Objectives**
    - First 3 bullet points from **Key Questions**
    - "What to decide now" and "What to defer" items from **Decision Flow**
@@ -155,7 +155,7 @@ Capture freeform brainstorm notes for the active EA engagement.
    Defer: {Decision Flow — defer items}
    ---
 
-   If `adm-phase-guide.md` is not found or the phase section is missing, skip this step silently. If engagement mode is active, skip this step silently.
+   If `adm-phases/{selected-phase-file}` is not found or the phase section is missing, skip this step silently. If engagement mode is active, skip this step silently.
 
 4. **Build `BRAINSTORM_DATA` and launch the brainstorm pad.**
 
@@ -317,7 +317,7 @@ Capture freeform brainstorm notes for the active EA engagement.
 
    Set `BRAINSTORM_DATA.phase` to the full phase label (e.g. `"Phase D — Technology Architecture"`). If the phase has no letter prefix (Preliminary, Requirements), use just the name (e.g. `"Preliminary"`).
 
-   Set `BRAINSTORM_DATA.subtitle` to the first Objectives bullet from the `adm-phase-guide.md` section for the resolved phase, prefixed with `"This phase must: "`. If `adm-phase-guide.md` was not readable or engagement mode is active, set `subtitle: null`.
+   Set `BRAINSTORM_DATA.subtitle` to the first Objectives bullet from the `adm-phases/{selected-phase-file}` section for the resolved phase, prefixed with `"This phase must: "`. If `adm-phases/{selected-phase-file}` was not readable or engagement mode is active, set `subtitle: null`.
 
    **Inject domain-specific categories when scoped to a domain phase.** In addition to the six default categories, append extra entries to `BRAINSTORM_DATA.categories` when the resolved phase matches:
    - **Phase B (Business Architecture):** `{ id: "value-streams", label: "Value Streams", emoji: "🌊", hint: "...", suggestions: [...] }`, `{ id: "use-cases", label: "Use Cases", emoji: "🎭", hint: "...", suggestions: [...] }`, `{ id: "processes", label: "Processes", emoji: "⚙️", hint: "...", suggestions: [...] }`
@@ -436,7 +436,7 @@ Capture freeform brainstorm notes for the active EA engagement.
 
    Entries without a recognisable ID are not surfaced — they remain in brainstorm notes for later review during `/ea-interview`.
 
-7. **Prompt for diagrams.** Before confirming, check whether any standard diagrams exist for the active phase by reading `skills/ea-artifact-templates/references/diagram-catalogue.md` (Coverage Table section). Then ask:
+7. **Prompt for diagrams.** Before confirming, check whether any standard diagrams exist for the active phase by reading `skills/ea-artifact-templates/references/diagram-catalogue/coverage-table.md` (and the phase-specific file when known). Then ask:
 
    > "Are there any diagrams or visual models that would help communicate these ideas? Standard diagrams for this phase:"
 
@@ -478,7 +478,7 @@ Capture freeform brainstorm notes for the active EA engagement.
 |---|---|---|
 | `p: {topic}` or `pattern: {topic}` | Pattern discovery | Loads `advanced-patterns.md`, finds the pattern most relevant to `{topic}`, and presents: pattern name, when to use it, how it applies to the current phase/artifact, and one implementation suggestion |
 | `f:` or `failure-mode:` | Failure-mode pre-mortem | Loads `failure-modes.md`, scans the 6 failure modes, and asks: "Which of these symptoms do you see in this engagement?" Present the detection checklist and let the user select |
-| `o:` or `optionality:` | Optionality exploration | Prompts: "What decision in this phase is hardest to reverse? How could you preserve future flexibility?" Reference `practitioner-tips.md` Tip #40 and deep tactic #8 |
+| `o:` or `optionality:` | Optionality exploration | Prompts: "What decision in this phase is hardest to reverse? How could you preserve future flexibility?" Reference `practitioner-tips/part-i-original-50-high-impact-togaf-tips.md` Tip #40 and `practitioner-tips/part-iii-cross-cutting-expert-moves.md` deep tactic #8 |
 | `m:` or `maturity:` | Maturity assessment | Loads `adm-maturity-model.md`, asks: "What would this artifact look like at L3 vs L5?" Present the maturity indicators for the current phase and ask the user to self-assess |
 | `e:` or `economics:` | Economic framing | Prompts: "How would you express this in financial terms — cost, risk, value, or TCO?" Guide the user to quantify the economic dimension of their brainstorm thought |
 

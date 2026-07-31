@@ -1,12 +1,12 @@
 ---
 name: ea-business-rules-management
 description: This skill should be used when the user asks to "manage business rules", "add a business rule", "view business rules", "trace a rule to services or motivation", "update the business rules register", or "assess rule impact". Handles the full business-rule lifecycle from capture through traceability and linkage to services, policies, constraints, and motivation elements.
-version: 0.9.88
+version: 0.9.89
 ---
 
 # EA Business Rules Management
 
-This skill manages `BR-NNN` entries. Load `skills/ea-artifact-templates/references/ea-concepts.md` for the canonical **Business Rule** and **Service** definitions before prompting for or validating any rule.
+This skill manages `BR-NNN` entries. Load `skills/ea-artifact-templates/references/concept-families/governance-and-rules-concepts.md` for the canonical **Business Rule** definition before prompting for or validating any rule.
 
 ## Business Rules Storage
 

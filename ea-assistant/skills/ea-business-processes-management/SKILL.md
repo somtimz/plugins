@@ -1,12 +1,12 @@
 ---
 name: ea-business-processes-management
 description: This skill should be used when the user asks to "manage business processes", "add a business process", "view business processes", "trace a process to value streams or use cases", "update the business processes register", or "assess process coverage". Handles the full business-process lifecycle from capture through traceability and linkage to value streams, capabilities, use cases, services, and rules.
-version: 0.9.88
+version: 0.9.89
 ---
 
 # EA Business Processes Management
 
-This skill manages `PROC-NNN` entries. Load `skills/ea-artifact-templates/references/ea-concepts.md` for the canonical **Business Process**, **Value Stream**, **Use Case**, **Capability**, and **Business Service** definitions before prompting for or validating any process.
+This skill manages `PROC-NNN` entries. Load `skills/ea-artifact-templates/references/concept-families/business-layer-concepts.md` for the canonical **Business Process**, **Value Stream**, **Use Case**, **Capability**, and **Business Service** definitions before prompting for or validating any process.
 
 ## Business Processes Storage
 

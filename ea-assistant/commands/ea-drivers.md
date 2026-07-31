@@ -5,7 +5,7 @@ argument-hint: "[list|add|update|trace|generate] [DRV-NNN] [--type External|Inte
 allowed-tools: [Read, Write, Bash]
 ---
 
-You are executing the `/ea-drivers` command. Load the `ea-drivers-management` skill for schema and traceability detail. All mode mechanics follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the Business Driver concept and its distinctions, read `ea-concepts.md`; do not restate definitions here.
+You are executing the `/ea-drivers` command. Load the `ea-drivers-management` skill for schema and traceability detail. All mode mechanics follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the Business Driver concept and its distinctions, read `skills/ea-artifact-templates/references/concept-families/business-context-and-model-concepts.md` (**Business Driver**); do not restate definitions here.
 
 Drivers sit at the top of the motivation chain (DRV → G → OBJ → STR → WP). Every goal should trace to at least one driver; every driver should have at least one linked goal.
 

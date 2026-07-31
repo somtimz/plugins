@@ -25,7 +25,7 @@ Before executing any mode:
 
 ## Mode: `new [--local]`
 
-Create a new Reference Architecture entry. For the concept — what an RA is and is not, its boundary conditions, failure modes, and the consistency-vs-freedom stress test — read the **Reference Architecture (RA-NNN)** definition in `skills/ea-artifact-templates/references/ea-concepts.md`; do not restate it. The enriched `ra-entry-template.md` carries `<details>📋 Guidance</details>` per section, so a new RA is interview-able (`/ea-interview`), scorable (`/ea-score`), and grillable (`/ea-grill`) like any authored artifact.
+Create a new Reference Architecture entry. For the concept — what an RA is and is not, its boundary conditions, failure modes, and the consistency-vs-freedom stress test — read the **Reference Architecture (RA-NNN)** definition in `skills/ea-artifact-templates/references/concept-families/architecture-products-concepts.md`; do not restate it. The enriched `ra-entry-template.md` carries `<details>📋 Guidance</details>` per section, so a new RA is interview-able (`/ea-interview`), scorable (`/ea-score`), and grillable (`/ea-grill`) like any authored artifact.
 
 ### Steps
 

@@ -12,7 +12,7 @@ You are executing the `/ea-operatingmodel` command. Load the `ea-artifact-templa
 
 The Operating Model is a first-class Phase B artifact that describes **how** the organisation will operate to deliver value: organisation design, decision rights, governance/controls, business process execution context, workforce/locations/channels, sourcing, technology/data enablement, and performance management. It is the execution-design counterpart to the **Business Architecture**, which describes *what* the organisation must be able to do (capabilities, value streams, services, etc.).
 
-Before prompting or validating, read `skills/ea-artifact-templates/references/ea-concepts.md` → **Operating Model** for the canonical definition and the BA/OM concept-home table.
+Before prompting or validating, read `skills/ea-artifact-templates/references/concept-families/business-layer-concepts.md` → **Operating Model** for the canonical definition and the BA/OM concept-home table.
 
 **Modes:**
 - `create` (default if no mode specified and artifact does not exist) — create `artifacts/phase-b/operating-model.md` from the template, seed links to Business Architecture and Architecture Vision, and register it in `engagement.json → artifacts[]`

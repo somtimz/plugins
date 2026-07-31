@@ -9,7 +9,7 @@ You are executing the `/ea-rules` command. Load the `ea-business-rules-managemen
 
 ## Overview
 
-This command manages `BR-NNN` entries. Read `skills/ea-artifact-templates/references/ea-concepts.md` (**Business Rule**) for the canonical definition before prompting or validating. The command aggregates all `BR-NNN` entries into a single Business Rules Register, supports creating or updating individual rules, traces rules to linked services and motivation, and assesses the impact of a rule across the service and capability landscape.
+This command manages `BR-NNN` entries. Read `skills/ea-artifact-templates/references/concept-families/governance-and-rules-concepts.md` (**Business Rule**) for the canonical definition before prompting or validating. The command aggregates all `BR-NNN` entries into a single Business Rules Register, supports creating or updating individual rules, traces rules to linked services and motivation, and assesses the impact of a rule across the service and capability landscape.
 
 **Modes:**
 - `list` (default) — read the Business Rules Register, render a table grouped by Source
