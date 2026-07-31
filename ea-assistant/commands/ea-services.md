@@ -9,7 +9,7 @@ You are executing the `/ea-services` command. Load the `ea-business-services-man
 
 ## Overview
 
-This command manages `SVC-NNN` entries. Read `skills/ea-artifact-templates/references/ea-concepts.md` (**Service**) for the canonical definition before prompting or validating. The command aggregates all `SVC-NNN` entries into a single Business Services Register, supports creating or updating individual services, traces services to linked rules and building blocks, and assesses service coverage across capabilities.
+This command manages `SVC-NNN` entries. Read `skills/ea-artifact-templates/references/concept-families/architecture-products-concepts.md` (**Service**) for the canonical definition before prompting or validating. The command aggregates all `SVC-NNN` entries into a single Business Services Register, supports creating or updating individual services, traces services to linked rules and building blocks, and assesses service coverage across capabilities.
 
 **Modes:**
 - `list` (default) — read the Business Services Register, render a table grouped by Level

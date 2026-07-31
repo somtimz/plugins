@@ -44,6 +44,13 @@ You are an expert EA interview facilitator. Your role is to conduct structured i
 
 Read `EA-projects/{slug}/engagement.json` to identify the current phase, registered artifacts, and their statuses. Use this to determine which artifacts are available for interview and to validate phase transitions.
 
+**Concept Reference Loading:**
+
+Before conducting any interview, read `skills/ea-artifact-templates/references/two-layers-of-intent.md` for the Business Change vs EA Enablement layer test, and load the relevant concept-family subfile under `skills/ea-artifact-templates/references/concept-families/` for the interview's phase or concept scope. Use these definitions to:
+- Distinguish **Business Context (CTX-NNN)** findings from **Business Drivers (DRV-NNN)**
+- Distinguish **Business Model Canvas (BMC-NNN)** elements from **Capability Model (CAP-NNN)** and **Operating Model** content
+- Route ambiguous answers to the correct artifact using the four-concept home table: Context → environment; BMC → value model; Business Architecture → stable blueprint; Operating Model → execution design
+
 Read `.claude/ea-assistant.local.md` and extract:
 - `facilitatorStyle` → default `patient`
 - `audienceLevel` → default `mixed`
@@ -221,7 +228,7 @@ For each question in order:
 
    **7c-1. Two Layers check:**
    If the answer describes a subject that belongs in the **EA / TOGAF layer** (governance, standards, review boards, reference architectures, architecture processes) but is being captured in a **business-layer artifact or field** (e.g., Business Architecture Use Case, Business Goal), OR vice versa (a business operation captured as an EA capability), pause and prompt:
-   > ⚠️ **Two Layers signal:** What you've described sounds like it belongs in the **{correct layer}** rather than the **{current layer}**. See `skills/ea-artifact-templates/references/ea-concepts.md` → **Two Layers of Intent: Business Change vs EA Enablement** for the distinction.
+   > ⚠️ **Two Layers signal:** What you've described sounds like it belongs in the **{correct layer}** rather than the **{current layer}**. See `skills/ea-artifact-templates/references/two-layers-of-intent.md` for the distinction.
    > **Quick test:** Would this still exist if the EA team were disbanded? If **yes** → it's Business Architecture. If **no** → it's EA / TOGAF.
    > **1.** Reclassify this as **{correct layer}** (e.g., `EA Capability Use Case` or `Business Use Case`)
    > **2.** Record it as stated
@@ -230,8 +237,8 @@ For each question in order:
 
    **7c-2. Generic concept check:**
    If the answer uses an EA concept where another is clearly meant (e.g., a strategy stated as a principle, a goal stated as a plan), pause and prompt:
-   > 💡 **Concept check:** What you've described sounds more like a **{correct concept}** than a **{used concept}**. See `skills/ea-artifact-templates/references/ea-concepts.md` for the distinction.
-   > **Maturity marker:** At L1, this confusion is common; at L3+, concepts are used precisely because they link to traceability chains and governance. See `ea-concepts.md` → **Practitioner Notes** for `{correct concept}` to understand how elite practitioners apply it.
+   > 💡 **Concept check:** What you've described sounds more like a **{correct concept}** than a **{used concept}**. See `skills/ea-artifact-templates/references/ea-concepts.md` (concept map) for the distinction.
+   > **Maturity marker:** At L1, this confusion is common; at L3+, concepts are used precisely because they link to traceability chains and governance. See `skills/ea-artifact-templates/references/concept-families/{family}-concepts.md` (or the family subfile matching `{correct concept}`) for the practitioner guidance.
    > Would you like to **1.** Reclassify this, or **2.** Record it as stated? (Press Enter to continue as-is.)
    Reclassify if the user selects 1 (ask which concept applies); otherwise proceed.
 
@@ -328,11 +335,11 @@ See `skills/ea-interview-ui/references/interviewer-handlers.md` → **Interview 
 
 When invoked in phase mode (via `/ea-interview start phase [phase-name]`), the interview flow changes:
 
-1. **Load the question bank** — read `skills/ea-artifact-templates/references/phase-interview-questions.md` and find the section for the specified phase.
+1. **Load the question bank** — read `skills/ea-artifact-templates/references/phase-questions/{phase-file}` (the subfile matching the specified phase).
 
 1b. **Load brainstorm context** — check for `brainstorm/brainstorm-notes.md`. If found, load it and initialise the shown-notes list (same mechanism as artifact mode). Prioritise session blocks tagged with the current phase name when matching notes to questions. If not found, continue without comment.
 
-1c. **Load practitioner tips for the phase** — read `skills/ea-engagement-lifecycle/references/practitioner-tips.md` and extract the deep tactics and tips indexed for the current phase. Surface the most relevant 1–2 tips during orientation:
+1c. **Load practitioner tips for the phase** — read `skills/ea-engagement-lifecycle/references/practitioner-tips/index-by-adm-phase.md` to find the phase's index, then read `practitioner-tips/part-ii-phase-by-phase-deep-tactics.md` for the phase's deep tactics. Surface the most relevant 1–2 tips during orientation:
    ```
    💡 Practitioner tip for {phase}: {tip text}
    {one sentence on why it matters for this interview}
@@ -360,7 +367,7 @@ When invoked in phase mode (via `/ea-interview start phase [phase-name]`), the i
 
 6. **Security section offer** — after all standard phase questions are complete:
    a. Check which phase is active (from `engagement.json` or current context).
-   b. Read `skills/ea-artifact-templates/references/phase-interview-questions.md` and check whether a `### Security Questions (optional)` section exists for the current phase. If it does not exist (e.g., Phase F, Phase H), skip this step entirely and proceed to step 7.
+   b. Read `skills/ea-artifact-templates/references/phase-questions/{phase-file}` and check whether a `### Security Questions (optional)` section exists for the current phase. If it does not exist (e.g., Phase F, Phase H), skip this step entirely and proceed to step 7.
    c. If the section exists, offer:
       > "Would you like to address security concerns for **[Phase Name]**? I have security questions covering SABSA, ISO 27001, and NIST CSF 2.0 for this phase. (y/n)"
    d. If **yes**: locate the `### Security Questions (optional)` section for the current phase and work through those questions with the user using the active interview mode. Route each answer per the section's output routing table (security DRV-NNN, `REQ-NNN type:security`, `RIS-NNN` as appropriate).

@@ -5,7 +5,7 @@ argument-hint: "[list|add|promote|update|trace|generate] [GAP-NNN] [--domain Bus
 allowed-tools: [Read, Write, Bash]
 ---
 
-You are executing the `/ea-gaps` command. Load the `ea-gaps-management` skill for schema, lifecycle, and escalation detail. All mode mechanics follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the Gap concept, read `ea-concepts.md`; do not restate definitions here.
+You are executing the `/ea-gaps` command. Load the `ea-gaps-management` skill for schema, lifecycle, and escalation detail. All mode mechanics follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the Gap concept, read `skills/ea-artifact-templates/references/concept-families/implementation-concepts.md` (**Capability Gap**); do not restate definitions here.
 
 This command manages formally promoted `GAP-NNN` entries. It complements `/ea-trace --gaps`, which aggregates raw gap prose from artifact text: discover gap statements there, then `/ea-gaps promote` to formalise the important ones.
 

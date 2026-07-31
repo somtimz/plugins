@@ -9,7 +9,7 @@ You are executing the `/ea-processes` command. Load the `ea-business-processes-m
 
 ## Overview
 
-This command manages `PROC-NNN` entries. Read `skills/ea-artifact-templates/references/ea-concepts.md` (**Business Process**) for the canonical definition before prompting or validating. The command aggregates all `PROC-NNN` entries into a single Business Processes Register, supports creating or updating individual processes, traces processes to linked items, and regenerates the register artifact.
+This command manages `PROC-NNN` entries. Read `skills/ea-artifact-templates/references/concept-families/business-layer-concepts.md` (**Business Process**) for the canonical definition before prompting or validating. The command aggregates all `PROC-NNN` entries into a single Business Processes Register, supports creating or updating individual processes, traces processes to linked items, and regenerates the register artifact.
 
 **Modes:**
 - `list` (default) — read the Business Processes Register, render a summary table

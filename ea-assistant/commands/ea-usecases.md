@@ -9,7 +9,7 @@ You are executing the `/ea-usecases` command. Load the `ea-use-cases-management`
 
 ## Overview
 
-This command manages `UC-NNN` entries. Read `skills/ea-artifact-templates/references/ea-concepts.md` (**Use Case**) for the canonical definition before prompting or validating. The command aggregates all `UC-NNN` entries into a single Use Cases Register, supports creating or updating individual use cases, traces use cases to linked requirements/processes/capabilities/value streams, and regenerates the register artifact.
+This command manages `UC-NNN` entries. Read `skills/ea-artifact-templates/references/concept-families/business-layer-concepts.md` (**Use Case**) for the canonical definition before prompting or validating. The command aggregates all `UC-NNN` entries into a single Use Cases Register, supports creating or updating individual use cases, traces use cases to linked requirements/processes/capabilities/value streams, and regenerates the register artifact.
 
 **Modes:**
 - `list` (default) — read the Use Cases Register, render a summary table

@@ -204,7 +204,7 @@ A Use Case is a discrete goal pursued by a specific actor (user, system, or exte
 - Not a **User Story** — a user story is a lightweight placeholder ("As a X, I want Y so that Z"); a use case is a structured analysis artifact with flows and exceptions
 - Not a **Value Stream** — a value stream is end-to-end stakeholder delivery; a use case is a discrete actor goal
 - Not a **Requirement** — a requirement is a formalised need ("the system must..."); a use case is the scenario that generates the requirement
-- Not an **EA Capability Use Case** — a use case about "how we govern" or "how we standardize solutions" (e.g., "Define governance process for AI projects") belongs in the Governance Framework or Architecture Principles, not the Business Architecture. See **Two Layers of Intent**.
+- Not an **EA Capability Use Case** — a use case about "how we govern" or "how we standardize solutions" (e.g., "Define governance process for AI projects") belongs in the Governance Framework or Architecture Principles, not the Business Architecture. See [Two Layers of Intent](../two-layers-of-intent.md).
 
 **Common confusions:**
 - "Customer places an order" — this is a **Use Case** ✓ (actor goal, discrete, consumes processes)
@@ -220,7 +220,7 @@ A Use Case is a discrete goal pursued by a specific actor (user, system, or exte
 - Use cases with no linked capability reveal **capability gaps** — the actor's goal cannot be supported.
 - **Maturity marker (L1→L5):** L1 = use cases named but not documented; L3 = use cases documented with actors, preconditions, main flow, and exception flows; L5 = use cases traced to automated test scenarios and real user-journey analytics
 - Use the Use Case Catalog to validate **Requirements completeness** — if a REQ-NNN cannot be traced to a UC-NNN, it may be an orphaned or implicit requirement
-- **Two Layers check:** If the use case subject is "how we govern" or "how we standardize solutions" rather than "what the actor needs," it is an **EA Capability Use Case** — route it to the Governance Framework or Architecture Principles. See **Two Layers of Intent**.
+- **Two Layers check:** If the use case subject is "how we govern" or "how we standardize solutions" rather than "what the actor needs," it is an **EA Capability Use Case** — route it to the Governance Framework or Architecture Principles. See [Two Layers of Intent](../two-layers-of-intent.md).
 
 ---
 

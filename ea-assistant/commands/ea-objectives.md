@@ -5,7 +5,7 @@ argument-hint: "[list|add|update|trace|generate] [OBJ-NNN] [--priority High|Medi
 allowed-tools: [Read, Write, Bash]
 ---
 
-You are executing the `/ea-objectives` command. All mode mechanics (engagement resolution, ID assignment, list/add/update/trace/generate flows, common edge cases) follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the Objective concept and its distinctions from Goal/Metric/Problem, read `ea-concepts.md`; do not restate definitions here.
+You are executing the `/ea-objectives` command. All mode mechanics (engagement resolution, ID assignment, list/add/update/trace/generate flows, common edge cases) follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the Objective concept and its distinctions from Goal/Metric/Problem, read `skills/ea-artifact-templates/references/concept-families/motivation-concepts.md` (**Objective**); do not restate definitions here.
 
 Objectives operationalise goals (DRV → G → **OBJ**): each is a specific, measurable, time-bound result with a unit of measure, a target value, and a deadline. Every objective must link to exactly one goal; Problems block objectives; Metrics (MET-NNN) track them. The **Objectives Register** is the management interface; the Architecture Vision (§10) summarises and links to it rather than rendering a live table.
 

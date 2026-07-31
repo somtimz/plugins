@@ -1,7 +1,7 @@
 ---
 name: ea-architecture-repository
 description: Manages the shared TOGAF Architecture Repository — Standards Information Base (SIB/STD-NNN), Vendor Landscape Register (VDR-NNN), Technology Horizon Register (THR-NNN), and enterprise-level governance artefacts. Supports multi-engagement, multi-project sharing via the EA-Workspace/ sibling-folder layout.
-version: 0.9.88
+version: 0.9.89
 ---
 
 # Architecture Repository Skill
@@ -37,7 +37,7 @@ Technology radar tracking the organisation's position on emerging technologies:
 - See `references/technology-horizon-schema.md` (created in Task 6)
 
 ### Reference Architecture Register (RA-NNN)
-Stores reusable architectural patterns shared across engagements. A reference architecture is a **governed, reusable blueprint** for a *class* of solutions — prescriptive on patterns/constraints/interactions but not a solution architecture. For the full concept (what it is/isn't, boundary conditions, failure modes, the consistency-vs-freedom stress test), read the **Reference Architecture (RA-NNN)** definition in `skills/ea-artifact-templates/references/ea-concepts.md` — the single source of truth; do not restate it here.
+Storable patterns shared across engagements. A reference architecture is a **governed, reusable blueprint** for a *class* of solutions — prescriptive on patterns/constraints/interactions but not a solution architecture. For the full concept (what it is/isn't, boundary conditions, failure modes, the consistency-vs-freedom stress test), read the **Reference Architecture (RA-NNN)** definition in `skills/ea-artifact-templates/references/concept-families/architecture-products-concepts.md` — the single source of truth; do not restate it here.
 
 - Governed blueprint per domain: capability alignment, logical service decomposition (ABB/SBB layer catalogues), **mandatory vs optional components**, approved integration patterns/mechanisms, information flows, **security trust boundaries**, data ownership & sovereignty, technology standards, NFR envelope, **governance checkpoints**, operational responsibilities, key decisions, constraints, and implied principles — per `templates/seeds/ra-entry-template.md` (guidance-driven, so RAs are interview-able, scorable, and grillable)
 - Each RA entry: id, name, domain, status (Draft | Approved | Deprecated), source (internal | industry), linkedCAPs, linkedSTDs, linkedADRs, linkedSBBs
@@ -47,7 +47,7 @@ Stores reusable architectural patterns shared across engagements. A reference ar
 - See `references/reference-architecture-schema.md`
 
 ### Capability Library — Canonical Capability Map
-The organisation's **canonical, reference business capability map** — the authoritative enterprise capability hierarchy that engagements seed and adopt from, so every engagement speaks the same capability language. For the Capability / Capability Model concept (what a capability is, components, attributes, value, map vs knowledge graph), read the **Capability Model** definition in `skills/ea-artifact-templates/references/ea-concepts.md`.
+The organisation's **canonical, reference business capability map** — the authoritative enterprise capability hierarchy that engagements seed and adopt from, so every engagement speaks the same capability language. For the Capability / Capability Model concept (what a capability is, components, attributes, value, map vs knowledge graph), read the **Capability Model** definition in `skills/ea-artifact-templates/references/concept-families/business-layer-concepts.md`.
 
 - A single hierarchical map (L1 domain → L2 capability → L3 sub-capability), box-in-box, non-flow; each canonical capability carries a stable `CAP-C-NNN` id, name, value/outcome, and description (no engagement-specific maturity or Supports — those are assessed per engagement)
 - Stored in: `Architecture-Repository/capability-library/canonical-capability-map.md` (from seed `templates/seeds/canonical-capability-map.md`)

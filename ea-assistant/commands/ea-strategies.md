@@ -5,7 +5,7 @@ argument-hint: "[list|add|update|trace|generate] [STR-NNN] [--type Build|Buy|Par
 allowed-tools: [Read, Write, Bash]
 ---
 
-You are executing the `/ea-strategies` command. All mode mechanics (engagement resolution, ID assignment, list/add/update/trace/generate flows, common edge cases) follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the Strategy concept and its distinctions from Goal / Objective / Plan / Principle, read `ea-concepts.md`; do not restate definitions here.
+You are executing the `/ea-strategies` command. All mode mechanics (engagement resolution, ID assignment, list/add/update/trace/generate flows, common edge cases) follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the Strategy concept and its distinctions from Goal / Objective / Plan / Principle, read `skills/ea-artifact-templates/references/concept-families/motivation-concepts.md` (**Strategy**); do not restate definitions here.
 
 Strategy is the **"how"** in the motivation chain (DRV → G → OBJ → **STR** → WP) — the chosen approach for pursuing goals and objectives. Until now it was the only motivation concept without a register command, so strategies were buried in the direction data. This command surfaces them: every strategy should support at least one goal or objective, and be executed by at least one work package. The **Strategy Register** is the management interface; the Architecture Vision (§11) summarises and links to it rather than rendering a live table. **`trace` (no ID) renders the Strategy Map** — one row per strategy showing the goals it serves and the work packages that execute it.
 

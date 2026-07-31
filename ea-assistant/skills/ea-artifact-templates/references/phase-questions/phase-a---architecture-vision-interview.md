@@ -29,7 +29,7 @@ Assign IDs sequentially within each prefix as responses are confirmed. Record ID
 4. Given those drivers, what are the high-level outcomes this engagement must achieve? Capture each as a goal: a qualitative statement of a desired future state — no numbers or deadlines required at this level. (e.g. "Become a trusted custodian of customer data", "Achieve highly reliable platform operations")
    - If a response includes a specific number or deadline, it is an **Objective** — note it and handle in the next step.
    - If it describes an approach ("adopt cloud-first"), it is a **Strategy** — note it and record separately.
-   - **Layer test:** If the stated goal is about governance, standards, or EA capability (e.g., "Establish AI governance", "Define architecture review process"), it is likely an **EA Goal** — capture it separately for the Governance Framework or Architecture Principles, not as a Business Goal in the Architecture Vision. See `ea-concepts.md` → **Two Layers of Intent**.
+   - **Layer test:** If the stated goal is about governance, standards, or EA capability (e.g., "Establish AI governance", "Define architecture review process"), it is likely an **EA Goal** — capture it separately for the Governance Framework or Architecture Principles, not as a Business Goal in the Architecture Vision. See [Two Layers of Intent](../two-layers-of-intent.md).
    - Assign each confirmed goal a G-NNN ID and note which driver(s) it responds to.
    - For each goal: in one sentence, why is achieving it important for this engagement specifically? What happens if it is not achieved? (This is the goal's Rationale — captures the consequence of failure.)
 

@@ -131,7 +131,7 @@ Worker       …      …      …      …      …      …
 ```
 
 ### Step 9 — Identify gaps and suggest follow-up questions
-List every ADM phase and Zachman cell that has no coverage. For each gap, propose one or two targeted follow-up interview questions. Reference the phase question bank in `skills/ea-artifact-templates/references/phase-interview-questions.md` where relevant. Suggest running `/ea-interview start phase [phase]` for the most critical gaps.
+List every ADM phase and Zachman cell that has no coverage. For each gap, propose one or two targeted follow-up interview questions. Reference the phase question bank in `skills/ea-artifact-templates/references/phase-questions/{phase-file}` where relevant. Suggest running `/ea-interview start phase [phase]` for the most critical gaps.
 
 ### Step 10 — Write outputs (with user confirmation)
 Before writing anything, present a summary:

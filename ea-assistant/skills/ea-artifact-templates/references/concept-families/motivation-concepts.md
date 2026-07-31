@@ -112,7 +112,7 @@ A goal is a qualitative statement of a desired future state. It describes *where
 - Not an **Objective** — an objective is the measurable, time-bound version of a goal ("achieve 99.9% uptime by Q3 2026"); a goal is its qualitative parent
 - Not a **Strategy** — a strategy says how to pursue a goal, not what the goal is
 - Not a **Principle** — a principle governs decisions; a goal defines a destination
-- Not an **EA Goal** — an EA Goal describes architecture capability outcomes (e.g., "Establish AI governance" or "Define architecture standards"), not business outcomes. See **Two Layers of Intent**.
+- Not an **EA Goal** — an EA Goal describes architecture capability outcomes (e.g., "Establish AI governance" or "Define architecture standards"), not business outcomes. See [Two Layers of Intent](../two-layers-of-intent.md).
 
 **Common confusions:**
 - "We want 99.9% uptime" — the number makes this an **Objective**, not a goal. The goal is "Achieve highly reliable platform operations"; the objective is the measurable target
@@ -129,7 +129,7 @@ A goal is a qualitative statement of a desired future state. It describes *where
 - **Maturity marker (L1→L5):** L1 = goals are generic and unmeasured; L3 = goals linked to metrics and value streams; L5 = goals continuously refined based on delivery feedback
 - Focus on **"where to play" and "how to win"** — not just process diagrams
 - **Economic framing:** Every Goal should have a "what happens if not achieved" statement that includes business impact
-- **Two Layers check:** Apply the quick test — *Would this still exist if the EA team were disbanded?* If no, it is an **EA Goal** and belongs in the Governance Framework or Architecture Principles, not the Architecture Vision.
+- **Two Layers check:** Apply the quick test — *Would this still exist if the EA team were disbanded?* If no, it is an **EA Goal** and belongs in the Governance Framework or Architecture Principles, not the Architecture Vision. See [Two Layers of Intent](../two-layers-of-intent.md).
 
 ---
 

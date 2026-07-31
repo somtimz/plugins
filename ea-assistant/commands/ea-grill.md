@@ -75,7 +75,7 @@ The `--skill` argument accepts these short names:
 | `diagram` | `ea-assistant:ea-grill-skills` | Visual design review: topology, missing components, anti-patterns, readability |
 | `boardroom-strategy` | `ea-assistant:ea-grill-skills` | Hybrid: strategic depth + board pressure + pre-mortem (most thorough) |
 | `finance` | `ea-assistant:ea-grill-skills` | Financial & cost critique: cost coverage vs `FIN-NNN`, whole-life TCO, payback/ROI, option economics, funding & cost risk — applies T4-TCO / T4-ECON |
-| `practitioner` | `ea-assistant:ea-grill-skills` | Practitioner-level review: economic framing, decision quality, optionality, complexity reduction — load from `skills/ea-engagement-lifecycle/references/practitioner-tips.md` |
+| `practitioner` | `ea-assistant:ea-grill-skills` | Practitioner-level review: economic framing, decision quality, optionality, complexity reduction — load `skills/ea-engagement-lifecycle/references/practitioner-tips/part-i-original-50-high-impact-togaf-tips.md`, `practitioner-tips/part-ii-phase-by-phase-deep-tactics.md`, and `practitioner-tips/part-iii-cross-cutting-expert-moves.md` |
 | `maturity` | `ea-assistant:ea-grill-skills` | Maturity assessment: evaluates artifact against L1–L5 model and suggests advancement steps — load from `skills/ea-engagement-lifecycle/references/adm-maturity-model.md` |
 | `failure-mode` | `ea-assistant:ea-grill-skills` | Failure-mode pre-mortem: detects symptoms of the 6 failure modes and suggests fixes — load from `skills/ea-engagement-lifecycle/references/failure-modes.md` |
 | `requirements` | `ea-assistant:ea-grill-skills` | Requirements quality: NFR coverage scorecard, measurability, traceability, consistency, feasibility — load from `skills/ea-engagement-lifecycle/references/grill-requirements-skill.md` |
@@ -152,7 +152,7 @@ When grilling an artifact that captures business-layer concepts, actively check 
 - If a Business Architecture Use Case describes a "governance process," "review board," or "architecture standard," challenge: *"This subject is EA / TOGAF governance — it would disappear if the EA team were disbanded. Should this be an EA Capability Use Case in the Governance Framework instead?"*
 - If an Architecture Vision Goal is about "establishing EA governance," "defining architecture standards," or "building EA capability," challenge: *"This is an EA Goal — it belongs in the Governance Framework or Architecture Principles, not the business strategy. Is this a business outcome or an EA enabler?"*
 - If a Requirements Register requirement's subject is governance, standard, or EA process, challenge: *"Is this a Business Requirement (what the business needs) or an Architecture Requirement (how EA governs solutions)?"*
-Reference `ea-concepts.md` → **Two Layers of Intent** for the naming conventions and quick test.
+Reference `skills/ea-artifact-templates/references/two-layers-of-intent.md` for the naming conventions and quick test.
 
 Follow the selected skill's interviewing protocol exactly: one question at a time, with the question framing, recommended answer, and what a board member / critic / red-teamer would worry about.
 
@@ -450,7 +450,7 @@ Then proceed to Step 8.
 
 Check whether the expected diagrams for this artifact type exist and are referenced.
 
-1. **Look up expected diagrams.** Read `skills/ea-artifact-templates/references/diagram-catalogue.md` — find the section for this artifact type and note the expected diagram names and standard filenames.
+1. **Look up expected diagrams.** Read `skills/ea-artifact-templates/references/diagram-catalogue/{phase-or-artifact-file}` — find the section for this artifact type and note the expected diagram names and standard filenames.
 
 2. **Check what is present.** For each expected diagram:
    - Check the artifact frontmatter `diagrams: []` for a matching path

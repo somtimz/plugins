@@ -219,6 +219,19 @@ Confirm options per move: `y / n / skip / edit-destination`. If the user decline
 
 3k moves change populated content, so on an `Approved` artifact warn and require explicit confirmation; moving content out of an Approved artifact should set its `reviewStatus` back to `Needs Revision` (a moved block is a material change) — confirm this with the user before applying.
 
+## 3m — Business Context / Business Model Canvas alignment (introduced v0.9.89)
+
+Scan `artifacts/phase-b/business-architecture.md`, `artifacts/phase-b/business-model-canvas.md`, and `artifacts/phase-b/operating-model.md`:
+
+| Pattern | Gap if… | Severity |
+|---|---|---|
+| `business-architecture.md` §1 references context findings only as free text (no CTX-NNN links) | Context findings are not traceable to direction/governance items | Info |
+| `business-model-canvas.md` is missing while `business-architecture.md` contains value-model content (channels, revenue streams, cost structure, partnerships) | No first-class BMC artifact for the value model | Low |
+| `business-model-canvas.md` Section 11 (Linkage to Business Architecture) is absent or placeholder | BMC is not grounded in the Business Architecture | Info |
+| `operating-model.md` §1 does not link to `business-model-canvas.md` | Operating Model is not explicitly traced to the value model it must realise | Info |
+
+**Remediation:** Offer to create `artifacts/phase-b/business-model-canvas.md` from the current template if it is missing and the Business Architecture contains value-model content; offer to add CTX-NNN/BMC-NNN detail files and links where appropriate. Snapshot affected artifacts before any body change; excluded from `--auto`.
+
 ## Handling Special Cases
 
 **Non-standard artifacts:** If `artifact:` field does not match a known template type, flag `[Info]` — not a migration error. Do not attempt canonical taxonomy. Suggest manual review or `/ea-grill artifact`.

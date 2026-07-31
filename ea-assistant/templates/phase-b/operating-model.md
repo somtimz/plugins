@@ -6,7 +6,7 @@ phase: B
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-templateVersion: 0.9.88
+templateVersion: 0.9.89
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   admPhases: [B]
@@ -19,6 +19,7 @@ taxonomy:
   tags: [operating-model, organisation, processes, controls, sourcing, phase-b]
 relatedArtifacts:
   - business-architecture
+  - business-model-canvas
   - architecture-vision
   - statement-of-architecture-work
 diagrams: []
@@ -126,7 +127,8 @@ Set the context for the operating model:
 {{operating_model_context}}
 
 *Linked artifacts:*
-- [[business-architecture\|Business Architecture]]
+- [[business-model-canvas\|Business Model Canvas]] — value model this OM must realise
+- [[business-architecture\|Business Architecture]] — blueprint this OM executes
 - [[architecture-vision\|Architecture Vision]]
 - [[statement-of-architecture-work\|Statement of Architecture Work]]
 

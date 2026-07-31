@@ -1,8 +1,55 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.88
+**Version:** 0.9.89
 **Status:** Current
 **Author:** Costa Pissaris
+
+---
+
+## v0.9.89 — Business Context and Business Model Canvas as first-class business-layer concepts
+
+### Summary
+Introduces **Business Context (CTX-NNN)** and the **Business Model Canvas (BMC-NNN)** as first-class EA concepts alongside **Business Architecture** and **Operating Model**, completing a four-concept business-layer model. Business Context captures PESTEL, SWOT, competitor, regulatory, and stakeholder findings as traceable analysis inputs to the Motivation Framework (drivers, issues, opportunities, policies, constraints). The Business Model Canvas bridges strategy and execution — it describes how the organisation creates, delivers, and captures value, and its nine blocks map to existing registers (SVC/VS, CAP, FIN, Stakeholder Map). The `ea-concepts.md` reference, ID scheme, README, command references, and Phase B templates are aligned so ambiguous Phase B content routes to the right artifact. No new `engagement.json` top-level arrays are introduced; CTX/BMC items are authored as detail files and linked from the relevant artifacts.
+
+### New
+- **`skills/ea-artifact-templates/references/ea-concepts.md`** — full canonical definitions for Business Context (CTX-NNN) and Business Model Canvas (BMC-NNN); updated Motivation Framework diagram, quick-reference table, disambiguation checklist, and four-concept business-layer routing table.
+- **`decisions/2026-07-18-business-context-bmc-ids.md`** — decision journal entry explaining why CTX-NNN and BMC-NNN were added and why domain-prefixed IDs were rejected.
+- **`ea-assistant/CLAUDE.md`** — ID scheme table now includes `CTX-NNN` and `BMC-NNN`.
+- **`README.md`** — new feature bullets for Business Context analysis, Business Model Canvas, and the four-concept business layer; concepts reference count updated from 33 to 35.
+- **`commands/ea-help.md`** — concepts quick-reference row updated to include Business Context and Business Model Canvas.
+- **`commands/ea-artifact.md`** — naming map for `business-model-canvas`.
+- **`commands/ea-interview.md`** — Phase B flow updated to load the Business Model Canvas interview bank first, then Business Architecture, then optional Operating Model.
+- **`commands/ea-score.md`** — `business-model-canvas` added to the scored authored-artifacts list.
+- **`templates/phase-b/business-architecture.md`** — §1 Business Context guidance now references CTX-NNN detail files and the Business Model Canvas; relatedArtifacts updated.
+- **`templates/phase-b/business-model-canvas.md`** — guidance updated to describe BMC-NNN detail files and the BMC's position as value model; relatedArtifacts updated.
+- **`templates/phase-b/operating-model.md`** — §1 linked artifacts now include the Business Model Canvas; relatedArtifacts updated.
+- **`skills/ea-engagement-lifecycle/references/grill-scoring-rubric.md`** — added Business Model Canvas section weights so `/ea-score` and `/ea-grill` can score the canvas consistently.
+
+### Files
+- `skills/ea-artifact-templates/references/ea-concepts.md`
+- `decisions/2026-07-18-business-context-bmc-ids.md`
+- `ea-assistant/CLAUDE.md`
+- `README.md`
+- `commands/ea-help.md`
+- `commands/ea-artifact.md`
+- `commands/ea-interview.md`
+- `templates/phase-b/business-architecture.md`
+- `templates/phase-b/business-model-canvas.md`
+- `templates/phase-b/operating-model.md`
+- `agents/ea-facilitator.md` — Phase B outputs now include BMC + BA + OM.
+- `agents/ea-interviewer.md` — loads Business Context and BMC concept definitions; routes ambiguous answers using the four-concept home table.
+- `agents/ea-document-analyst.md` — maps uploaded business-model and context documents to BMC/CTX/BA/OM correctly.
+- `skills/ea-engagement-lifecycle/references/adm-phase-guide.md` — Phase B inputs, questions, and artifacts updated for BMC and Business Context.
+- `skills/ea-artifact-templates/references/cross-topic-detection.md` — CTX/BMC cross-topic probes added.
+- `skills/ea-artifact-templates/references/compliance-check.md` — BMC added to T3-A3/A4/A5 lists; new T3-BMC-LINK rule; T4-CTX-EVID aspirational rule.
+- `skills/ea-engagement-lifecycle/references/migration-gap-catalogue.md` — 3m probe for Business Context / BMC alignment.
+- `commands/ea-migrate.md` — 3m scan added for Business Context / BMC alignment.
+- `commands/ea-consistency.md` — ID regex now recognises CTX-NNN and BMC-NNN.
+- `commands/ea-brainstorm.md` — Phase B direction filter surfaces CTX-NNN and BMC-NNN candidates.
+- `skills/ea-grill-skills/SKILL.md` — boardroom-strategy mode tests four-concept business-layer alignment.
+- `skills/ea-engagement-lifecycle/references/grill-scoring-rubric.md` — Business Model Canvas scoring weights added.
+- `skills/ea-engagement-lifecycle/references/persona-registry.md` — entry workflows reference all four business-layer concepts where relevant.
+- `.claude-plugin/plugin.json`, `../.claude-plugin/marketplace.json`, `docs/PRD.md`, `commands/ea-help.md`, `README.md`, `CLAUDE.md`, all `skills/*/SKILL.md` — version + description hygiene.
 
 ---
 
@@ -555,9 +602,9 @@ Requirements Register entries carry a Motivation field that links each requireme
 
 > 📎 Source framework: `skills/ea-artifact-templates/references/ea-concepts-source.pdf` — *Enterprise Architecture Strategic Context: Terms, Concepts, and Relationship Models*
 
-### EA Concepts (32 total)
+### EA Concepts (35 total)
 
-Vision, Mission, Business Driver, Principle, Direction, Goal, Objective, Strategy, Plan, Risk, Issue, Problem, Opportunity, Capability Model, Capability Gap, Value Stream, Business Process, Use Case, Business Scenario, Requirement, Work Package, Opportunity, Operating Model, Metrics, Cost Entry, Constraint, Stakeholder Concern, ADR, ABB, SBB, Reference Architecture, User Story — each with a formal definition, TOGAF phase placement, ArchiMate 3.x element, and a disambiguation checklist. Full definitions in `skills/ea-artifact-templates/references/ea-concepts.md`.
+Vision, Mission, Business Context, Business Model Canvas, Business Driver, Principle, Direction, Goal, Objective, Strategy, Plan, Risk, Issue, Problem, Opportunity, Capability Model, Capability Gap, Work Package, Operating Model, Value Stream, Business Process, Use Case, Business Scenario, Requirement, Constraint, Metrics, Cost Entry, ADR, ABB, SBB, Reference Architecture, User Story, Stakeholder Concern, Business Rule, Service — each with a formal definition, TOGAF phase placement, ArchiMate 3.x element, and a disambiguation checklist. Full definitions in `skills/ea-artifact-templates/references/ea-concepts.md`.
 
 **Disambiguation summary:**
 

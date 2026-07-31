@@ -1,7 +1,7 @@
 ---
 name: ea-architect-lens
 description: This skill should be used when the user asks for an "architect lens", "practitioner review", "seasoned architect review", "engagement health from a practitioner perspective", or invokes /ea-lens. Provides an opinionated engagement-level review from the perspective of a senior EA practitioner focused on what actually matters — not TOGAF compliance theatre.
-version: 0.9.88
+version: 0.9.89
 ---
 
 # EA Architect Lens
@@ -92,7 +92,7 @@ Based on Lenses 1–6, provide 3–5 specific, opinionated, actionable next move
 
 Format as a numbered list. Each item: [Action] — [Why this matters now] — [What weak progress looks like].
 
-Reference `skills/ea-engagement-lifecycle/references/practitioner-tips.md` for move vocabulary and framing if available.
+Reference `skills/ea-engagement-lifecycle/references/practitioner-tips/part-iii-cross-cutting-expert-moves.md` (and `part-i-original-50-high-impact-togaf-tips.md`) for move vocabulary and framing if available.
 
 Example format:
 > 1. Go back to [specific stakeholder] and validate [specific assumption] before writing another artifact — the data architecture may be solving the wrong problem because [specific evidence].
@@ -120,6 +120,6 @@ Label the output: "(Quick mode — based on engagement.json state; run `/ea-lens
 ## Reference Files
 
 Load these if available; proceed without them if not found:
-- `skills/ea-engagement-lifecycle/references/practitioner-tips.md` — move vocabulary for Lens 7
+- `skills/ea-engagement-lifecycle/references/practitioner-tips/part-iii-cross-cutting-expert-moves.md` — move vocabulary for Lens 7
 - `skills/ea-engagement-lifecycle/references/failure-modes.md` — failure pattern matching for Lens 3
-- `skills/ea-engagement-lifecycle/references/adm-phase-guide.md` — phase expectations for Lens 2
+- `skills/ea-engagement-lifecycle/references/adm-phases/{phase-file}` — phase expectations for Lens 2

@@ -73,9 +73,11 @@ When adding logic to an agent or command, check these files before writing anyth
 
 | File | What it owns |
 |---|---|
-| `skills/ea-artifact-templates/references/ea-concepts.md` | All 25 EA concept definitions — **never redefine inline** |
+| `skills/ea-artifact-templates/references/ea-concepts.md` | Concept map index — read for discovery or cross-concept questions; for scoped loads, use the per-family subfiles under `concept-families/` |
+| `skills/ea-artifact-templates/references/concept-families/{family}-concepts.md` | Per-family concept definitions (motivation, business-layer, architecture-products, governance-and-rules, implementation, business-context-and-model) — read these for scoped concept loads |
+| `skills/ea-artifact-templates/references/two-layers-of-intent.md` | Business Change vs EA Enablement layer test (extracted from the concept map) |
 | `skills/ea-artifact-templates/references/compliance-check.md` | All compliance rules (T1/T2/T3) — add new T3 rules here |
-| `skills/ea-artifact-templates/references/phase-interview-questions.md` | All phase question banks and output routing tables |
+| `skills/ea-artifact-templates/references/phase-questions/{phase-file}` | Per-phase question bank and output routing tables |
 | `skills/ea-artifact-templates/references/cross-topic-detection.md` | Signal map for routing answers to the right artifact |
 | `skills/ea-artifact-templates/references/artifact-descriptions.md` | Purpose, audience, contents, phase for every artifact type |
 | `skills/ea-artifact-templates/SKILL.md` | A3 governance states and transition rules |
@@ -132,7 +134,7 @@ When adding logic to an agent or command, check these files before writing anyth
 
 2. Define the agent's **boundary** clearly at the top: what it owns, what it explicitly does NOT do.
 
-3. If the agent references concepts from `ea-concepts.md`, cite them by name — do not redefine them.
+3. If the agent references concepts, cite them by name from `skills/ea-artifact-templates/references/ea-concepts.md` (concept map) or the relevant `concept-families/{family}-concepts.md` subfile — do not redefine them.
 
 4. Add the agent to `docs/PRD.md` §8 agents table.
 
@@ -406,7 +408,7 @@ When adding new fields to `engagement.json`:
 Before committing any change:
 
 - [ ] Frontmatter validated: `~/.bun/bin/bun .github/scripts/validate-frontmatter.ts ea-assistant/`
-- [ ] No concept definitions duplicated inline (reference `ea-concepts.md`)
+- [ ] No concept definitions duplicated inline (reference the concept map and the relevant `concept-families/` subfile in `skills/ea-artifact-templates/references/`)
 - [ ] No style rules duplicated inline (reference `ea-engagement-lifecycle/SKILL.md`)
 - [ ] No cross-topic detection logic duplicated inline (reference `cross-topic-detection.md`)
 - [ ] All new agents have a boundary statement

@@ -6,7 +6,7 @@ phase: B
 status: Draft
 reviewStatus: Not Reviewed
 version: 0.1
-templateVersion: 0.9.86
+templateVersion: 0.9.89
 lastModified: {{YYYY-MM-DD}}
 taxonomy:
   admPhases: [B]
@@ -16,9 +16,10 @@ taxonomy:
   audience: Business
   layer: Target
   sensitivity: Internal
-  tags: [capabilities, value-streams, services, business-architecture, phase-b]
+  tags: [capabilities, value-streams, services, business-architecture, business-context, phase-b]
 relatedArtifacts:
   - architecture-vision
+  - business-model-canvas
   - operating-model
   - statement-of-architecture-work
 diagrams: []
@@ -114,6 +115,8 @@ Run `/ea-summary refresh` to regenerate this section from current artifact conte
 <summary>📋 Guidance</summary>
 
 Describe the business context: industry, strategic direction, and the scope of the business blueprint.
+Record specific PESTEL, SWOT, competitor, regulatory, and stakeholder findings as **CTX-NNN** detail files and link them here. Each CTX finding should state its evidence, conclusion, and the direction/governance items it feeds (DRV-NNN, ISS-NNN, OPP-NNN, POL-NNN, CST-NNN).
+Take the **Business Model Canvas** as the value-model input to this blueprint; link to `[[business-model-canvas\|Business Model Canvas]]` in this section.
 Reference the Architecture Vision for strategic goals.
 Execution-design content (org design, processes, controls, sourcing, performance management) belongs in the Operating Model artifact — link to it here rather than duplicating it.
 

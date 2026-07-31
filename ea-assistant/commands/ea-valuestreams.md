@@ -9,7 +9,7 @@ You are executing the `/ea-valuestreams` command. Load the `ea-value-streams-man
 
 ## Overview
 
-This command manages `VS-NNN` entries. Read `skills/ea-artifact-templates/references/ea-concepts.md` (**Value Stream**) for the canonical definition before prompting or validating. The command aggregates all `VS-NNN` entries into a single Value Streams Register, supports creating or updating individual streams, traces streams to linked capabilities/processes/goals, and regenerates the register artifact.
+This command manages `VS-NNN` entries. Read `skills/ea-artifact-templates/references/concept-families/business-layer-concepts.md` (**Value Stream**) for the canonical definition before prompting or validating. The command aggregates all `VS-NNN` entries into a single Value Streams Register, supports creating or updating individual streams, traces streams to linked capabilities/processes/goals, and regenerates the register artifact.
 
 **Modes:**
 - `list` (default) — read the Value Streams Register, render a summary table

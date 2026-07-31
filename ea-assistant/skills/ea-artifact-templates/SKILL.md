@@ -1,7 +1,7 @@
 ---
 name: ea-artifact-templates
 description: This skill should be used when the user asks to "create an artifact", "generate the architecture vision", "start a new artifact from a template", "what template should I use", "populate this artifact", or when any TOGAF artifact needs to be created or populated. Provides template selection, placeholder conventions, and guidance text marking standards for all EA artifacts.
-version: 0.9.88
+version: 0.9.89
 ---
 
 # EA Artifact Templates
@@ -186,7 +186,7 @@ engagement: {{engagement_name}}
 phase: A
 status: Draft
 reviewStatus: Not Reviewed
-version: 0.9.88
+version: 0.9.89
 lastModified: {{YYYY-MM-DDTHH:MM:SSZ}}
 ---
 ```

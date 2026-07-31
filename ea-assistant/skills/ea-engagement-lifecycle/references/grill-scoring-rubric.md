@@ -95,6 +95,26 @@ Completeness weights by artifact type. Required / compliance-bearing sections ar
 | Appendix A4 — Stakeholder Concerns | 2× | Yes | T3-A4 compliance |
 | Appendix A5 — Related ADRs | 1× | No | T3-ADR compliance |
 
+### Business Model Canvas (`business-model-canvas.md`)
+
+| Section | Weight | Required? | Rationale |
+|---|---|---|---|
+| 1. Customer Segments | 2× | Yes | Core BMC content — who the business serves |
+| 2. Value Propositions | 2× | Yes | Core BMC content — what value is created for each segment |
+| 3. Channels | 1× | No | Required when delivery channels matter to the architecture |
+| 4. Customer Relationships | 1× | No | Required when relationship model affects operations |
+| 5. Revenue Streams | 2× | Yes | Financial grounding — how value is captured |
+| 6. Key Resources | 1× | No | Required when resource choices shape architecture |
+| 7. Key Activities | 1× | No | Required when activity choices shape architecture |
+| 8. Key Partnerships | 1× | No | Required when make/buy/partner choices exist |
+| 9. Cost Structure | 2× | Yes | Financial grounding — what it costs to operate the model |
+| 10. Business Model Summary | 1× | No | Narrative coherence across the nine blocks |
+| 11. Linkage to Business Architecture | 2× | Yes | Prevents the BMC from drifting away from the blueprint |
+| 12. Requirements Addressed | 1× | No | Required when the BMC generates requirements |
+| Appendix A3 — Decision Log | 2× | Yes | T3-A3 compliance |
+| Appendix A4 — Stakeholder Concerns | 2× | Yes | T3-A4 compliance |
+| Appendix A5 — Related ADRs | 1× | No | T3-ADR compliance |
+
 ### Business Architecture (`business-architecture.md`)
 
 | Section | Weight | Required? | Rationale |

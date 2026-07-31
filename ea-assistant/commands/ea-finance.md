@@ -5,7 +5,7 @@ argument-hint: "[list|add|update|trace|generate] [FIN-NNN] [--subject WorkPackag
 allowed-tools: [Read, Write, Bash]
 ---
 
-You are executing the `/ea-finance` command. All mode mechanics (engagement resolution, ID assignment, list/add/update/trace/generate flows, common edge cases) follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the **Cost Entry** concept and its distinctions from Metric / Business Case / Work Package field, read `ea-concepts.md`; do not restate the definition here.
+You are executing the `/ea-finance` command. All mode mechanics (engagement resolution, ID assignment, list/add/update/trace/generate flows, common edge cases) follow `skills/ea-engagement-lifecycle/references/register-protocol.md` — read it, then apply the Register Spec below. For the **Cost Entry** concept and its distinctions from Metric / Business Case / Work Package field, read `skills/ea-artifact-templates/references/concept-families/implementation-concepts.md` (**Cost Entry**); do not restate the definition here.
 
 A Cost Entry makes one subject legible in financial terms (capex, opex, TCO, payback). These are **architecture-grade estimates with explicit confidence**, not finance-grade budgets — see the concept note before adding. Cost Entries feed the Business Case (Phase A), the Architecture Roadmap budget roll-up (Phase E), and the Migration Plan costing (Phase F). The register is the management interface; the Architecture Roadmap is the primary display view.
 

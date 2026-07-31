@@ -67,4 +67,4 @@ Prior work had already identified that `ea-concepts.md`, `phase-interview-questi
 - [x] Frontmatter validation: `~/.bun/bin/bun /mnt/d/dev/claude-sandbox/plugins/.github/scripts/validate-frontmatter.ts /mnt/d/dev/claude-sandbox/plugins/ea-assistant/` — 104 files, 0 errors, 0 warnings.
 - [x] `engagement-schema.json` parses as valid JSON.
 - [x] New index pages contain links to all sub-files.
-- [ ] Cross-references in remaining agent/command files reviewed and updated where a specific concept is named.
+- [x] Cross-references in remaining agent/command files reviewed and updated where a specific concept is named. See follow-up decision `decisions/2026-07-21-loader-pattern-update.md`.

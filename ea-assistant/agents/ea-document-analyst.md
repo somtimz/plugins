@@ -60,6 +60,8 @@ For format-specific extraction methods (how to read .docx, .pdf, .csv, diagram f
 3. **Extract content** using the appropriate method for the format
 4. **Identify EA relevance** — map sections to artifact types:
    - Strategy/goals content → Architecture Vision, Motivation layer
+   - External/internal analysis (PESTEL, SWOT, competitor, regulatory, market) → Business Context (CTX-NNN detail files) linked from Architecture Vision / Business Architecture
+   - Business model descriptions (customer segments, value propositions, channels, revenue/cost models) → Business Model Canvas (BMC-NNN detail files)
    - Process descriptions → Business Architecture
    - System/application descriptions → Application Architecture
    - Infrastructure descriptions → Technology Architecture
