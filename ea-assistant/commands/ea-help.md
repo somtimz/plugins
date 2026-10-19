@@ -147,7 +147,7 @@ You have existing engagements. Common next steps:
 | `/ea-concerns` | Manage CON-NNN stakeholder concerns (Appendix A4) | — |
 | `/ea-roles [ROLE-ID\|--domain\|--generate\|--update]` | Role Catalogue — list, filter, and generate role assignments with RACI, triggers, and calendar | — |
 | `/ea-zachman [mode]` | Manage the Zachman 6×6 classification diagram (generate, review, gap, interview, audit, classify) | — |
-| `/ea-research [mode]` | Research library — add, note, link, list, view, apply findings to artifacts | ea-research |
+| `/ea-research [mode]` | Research a topic (quick, deep) — research library — add, note, link, list, view, apply findings to artifacts | ea-research, ea-researcher, ea-research-writer |
 | `/ea-notes [mode]` | List, view, edit, or delete interview notes, brainstorm notes, and review files | — |
 | `/ea-note [text] [--artifact <id>] \| resolve <path>` | Quick-capture an ad-hoc note with lifecycle (Open/Resolved) — inline annotation or linked note; `resolve` records resolution with rationale and impact | — |
 | `/ea-detail new\|view\|list\|sync\|link\|check\|note resolve\|index` | Create, view, list, sync, cross-link, or integrity-check item detail files; generate index; add and resolve inline notes | — |
@@ -312,7 +312,7 @@ Type these at any interview prompt:
 
 **`ea-research` agent** — EA-aware research intelligence. Use it for:
 - "Quick research: what are the key risks of cloud-first for financial services?" (1-2 search fast lookup with confidence scores)
-- "Deep research: investigate zero-trust architecture options for Phase D" (structured 4-phase investigation — planning, searches, analysis, synthesis report)
+- "Deep research: investigate zero-trust architecture options for Phase D" (returns a research plan and hands off to `/ea-research deep`, which runs researchers in parallel and saves a cited report to the library)
 - "What should I research before Phase D?" (phase research planning — recommends a backlog, no searches)
 - "Synthesise the vendor reports into a comparison matrix" (consolidates existing library items — no searches)
 - "Are there gaps or outdated sources in our research library?" (quality audit)

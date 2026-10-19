@@ -55,6 +55,8 @@ These agents never write `engagement.json` and can be dispatched simultaneously 
 | `ea-advisor` | Read-only |
 | `ea-diagram` | Writes diagram files to unique paths |
 | `ea-research` (list / view / apply modes) | apply mode writes a synthesis report to a unique path |
+| `ea-researcher` | Writes only its own notes file under `research-notes/{slug}/`; dispatched in parallel by `/ea-research deep` |
+| `ea-research-writer` | Writes only the report at `ResearchAndReferences/{slug}.md`; the command registers it in `research-index.md` |
 | `ea-engage-review` | Single `lastModified` write only — safe if it is the only writer |
 
 ### Coordinator pattern — parallel write agents
