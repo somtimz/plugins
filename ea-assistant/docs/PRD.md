@@ -1,10 +1,25 @@
 # EA Assistant — Product Requirements Document
 
-**Version:** 0.9.89
+**Version:** 0.9.90
 **Status:** Current
 **Author:** Costa Pissaris
 
 ---
+
+## v0.9.90 — Deep research with parallel researchers and cited reports
+
+### Summary
+`/ea-research deep <topic>` produces a cited research report using the coordinator pattern from `anthropic-skills:deep-research`. The command clarifies only where the answer changes the research, splits the question into non-overlapping subtopics, dispatches `ea-researcher` subagents in parallel, allows at most one gap round, and has `ea-research-writer` save the report to the library as a new `report` item. `/ea-research quick <topic>` gives a fast lookup through the `ea-research` agent. Every finding carries a URL, and claims without one are dropped. `apply` now writes the `📎 Source:` markers that Impact mode traces.
+
+### New
+- **`agents/ea-researcher.md`** — researches one subtopic with a 15-call budget, fetching full pages rather than relying on snippets, and writes notes (Takeaway / Cited Findings / Inferences / EA Relevance / Gaps).
+- **`agents/ea-research-writer.md`** — writes the report: BLUF, signpost sections, engagement implications, confidence table, next steps, sources.
+- **`decisions/2026-10-19-deep-research-coordinated-by-command.md`** — why the coordinator is a command and not the agent.
+
+### Changed
+- **`commands/ea-research.md`** — `quick` and `deep` modes; `report` item type; `apply` writes `📎 Source:` markers.
+- **`agents/ea-research.md`** — Deep mode returns a plan and hands off to the command; Quick mode fetches before citing and never states an unsourced claim; Quality and Impact modes cover reports.
+- `README.md`, `commands/ea-help.md`, `skills/ea-engagement-lifecycle/references/write-protocol.md` — research modes and the new agents.
 
 ## v0.9.89 — Business Context and Business Model Canvas as first-class business-layer concepts
 
@@ -1060,6 +1075,8 @@ No prompt is shown — diagrams are included by default when they exist.
 The `ResearchAndReferences/` folder is the engagement library for external context: whitepapers, reference architectures, analyst reports, standards documents, repository links, and ad-hoc research notes.
 
 **`/ea-research` modes:**
+- `quick <topic>` — 1-2 searches via the `ea-research` agent; cited bullets with confidence
+- `deep <topic>` — coordinated research: clarify only where it changes the research, decompose into non-overlapping subtopics, `ea-researcher` subagents in parallel writing cited notes to `research-notes/{slug}/`, at most one gap round, then `ea-research-writer` saves a `report` item (BLUF, signpost sections, engagement implications, confidence table, next steps, sources). Follow-up requests build on an earlier report without overwriting it
 - `add` — paste a document; stored as `.md` with frontmatter
 - `note` — write a freeform research observation
 - `link` — add a URL with title, summary, and tags
@@ -1067,7 +1084,7 @@ The `ResearchAndReferences/` folder is the engagement library for external conte
 - `view <item>` — full content + edit/delete/apply options
 - `apply [artifact-id]` — synthesise selected research against an artifact
 
-**Apply workflow:** loads selected research items + target artifact → identifies gaps, contradictions, enhancements → `y/n/edit` per revision → bumps artifact version (patch) → writes synthesis report to `ResearchAndReferences/synthesis-{artifact-id}-{date}.md`
+**Apply workflow:** loads selected research items + target artifact → identifies gaps, contradictions, enhancements → `y/n/edit` per revision, each applied revision marked `📎 Source: ResearchAndReferences/{file}.md` → bumps artifact version (patch) → writes synthesis report to `ResearchAndReferences/synthesis-{artifact-id}-{date}.md`
 
 **Index file:** `ResearchAndReferences/research-index.md` — auto-maintained, tracks type/title/file/date/tags for every item. Created during `/ea-new` scaffolding; created silently by `/ea-open` for legacy engagements.
 
@@ -1710,7 +1727,7 @@ EA-projects/
 | `/ea-concerns` | — | Manage CON-NNN stakeholder concerns (Appendix A4) |
 | `/ea-roles` | `[ROLE-ID] [--domain] [--generate] [--update ROLE-ID]` | Canonical 15-role catalogue — list, filter by domain, generate Role Catalogue artifact, assign named individuals |
 | `/ea-zachman` | `[generate|review|gap|interview|classify <artifact>]` | Manage Zachman 6×6 classification diagram |
-| `/ea-research` | `[add|note|link|list|view <item>|apply [artifact-id]]` | Manage research library; synthesise research against deliverables |
+| `/ea-research` | `[quick <topic>|deep <topic>|add|note|link|list|view <item>|apply [artifact-id]]` | Research topics; manage research library; synthesise research against deliverables |
 | `/ea-notes` | `[list|view|edit|delete]` | List, view, edit, or delete interview notes, brainstorm notes, and review files |
 | `/ea-note` | `[text] [--artifact <id>] \| resolve <path>` | Quick-capture an ad-hoc note with Open/Resolved lifecycle; `resolve` records resolution with rationale and impact |
 | `/ea-detail` | `[new|view|list|sync|link|check|note resolve|index]` | Create, view, list, sync, cross-link, and integrity-check item detail files; generate index; add and resolve inline notes |
@@ -1761,7 +1778,9 @@ EA-projects/
 | `ea-document-converter` | Format conversion — normalises uploaded files (.docx, .xlsx, .drawio, .pdf) to Markdown or Mermaid before EA mapping; invoked automatically by `ea-document-analyst` (no dedicated command) | Ask Claude: "Convert this uploaded document" |
 | `ea-advisor` | Answers EA methodology questions — TOGAF, Zachman, ArchiMate (no dedicated command) | Ask any methodology question in chat |
 | `ea-diagram` | Creates, edits, and interprets architecture diagrams (Mermaid, Graphviz, Draw.io, ArchiMate); standard diagram catalogue per artifact type; offers mmdc render after saving | `/ea-generate mermaid|png|svg`, ask Claude: "Create a diagram for..." |
-| `ea-research` | EA-aware research support — quick lookup (1-2 searches), deep 4-phase investigation (planning → execution → analysis → synthesis), phase research planning, multi-source synthesis, research quality audit, impact tracing | Ask: "Quick research: ...", "Deep research: ...", "What should I research for Phase X?", "Synthesise the vendor reports", "Quality check our research" |
+| `ea-researcher` | Researches one subtopic for `/ea-research deep`; writes cited notes only | Dispatched by `/ea-research deep` |
+| `ea-research-writer` | Synthesises researcher notes into a cited `report` item | Dispatched by `/ea-research deep` |
+| `ea-research` | EA-aware research support — quick lookup (1-2 searches), deep research plans handed to `/ea-research deep`, phase research planning, multi-source synthesis, research quality audit, impact tracing | Ask: "Quick research: ...", "Deep research: ...", "What should I research for Phase X?", "Synthesise the vendor reports", "Quality check our research" |
 | `ea-security-advisor` | Answers security architecture Q&A in engagement context; supports SABSA/ISO 27001/NIST CSF decisions and ADR threshold scoring | Ask any security architecture question in chat |
 | `ea-security-auditor` | Security control gap detection; maps artifacts to SABSA, ISO 27001 Annex A, NIST CSF 2.0; produces prioritised remediation report | `/ea-security-review` |
 
